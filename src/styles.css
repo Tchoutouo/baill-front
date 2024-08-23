@@ -29,7 +29,7 @@
 
 
     /* Police */
-    --main-font: 'Quicksand';
+    --main-font-Quicksand: 'Quicksand';
     --main-font-Mulish: 'Mulish';
     --main-font-Bree-Serif : 'Bree Serif';
 
@@ -44,10 +44,12 @@
     /* font weight  */
     --main-xl-font-weiht : 600;
     --main-md-font-weiht : 400;
-    --main-md-font-weiht : 400;
+    --main-sm-font-weiht : 400;
+    --main-xs-font-weiht : 300;
 
     /* line hight  */
-    --main-md-line-height : 31.25px;
+    --main-lg-line-height : 31.25px;
+    --main-md-line-height : 22.5px;
     --main-sm-line-height : 16.32px;
 
     /* padding bouttons */
@@ -67,6 +69,7 @@
     /* valeur border radius */
     --main-radius-value-30: 30px;
     --main-radius-value-20: 20px;
+    --main-radius-value-8: 8px;
     --main-radius-value-50: 50%;
 
     /* border */
@@ -75,13 +78,29 @@
     /* gap */
     --gap-30 : 30px;
     --gap-15 : 15px;
+    
 }
-
 
 body{
     margin: 0;
     background-color: rgba(255, 255, 255, 1);
     font-size: 14px;
+    font-family: var(--main-font-Quicksand);
     overflow-x: hidden;
     visibility: visible;
 }
+
+.btn_publish{
+    padding: var(--main-btn-sm-padd);
+    background-color: var(--main-color);
+    color: var(--main-color-white);
+    border-radius: var(--main-radius-value-8);
+}
+
+.md_text{
+    font-size: var(--main-h4-font-size);
+    line-height: var(--main-sm-line-height);
+    font-weight: var(--main-md-font-weiht);
+}
+
+

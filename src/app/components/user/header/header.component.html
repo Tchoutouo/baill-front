@@ -1,0 +1,49 @@
+
+<nav class="navbar navbar-light nav_top"  aria-label="true">
+    <div class="container-fluid">
+        <div class="d-flex justify-content-between px-3 align-items-center w-100">
+            <a class="nav-link d-flex align-items-center gap-1 text-white contact" href="#">
+                <i class="fa-regular fa-envelope"></i>
+                {{emailContact}}
+            </a>
+            <div class="icon-list gap-2 d-flex text-white">
+                <i class="fa-regular fa-facebook-f"></i>
+                <i class="fa-regular fa-x-twitter"></i>
+                <i class="fa-regular fa-envelope"></i>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<nav class="navbar shadow navbar-light bg-white navbar-expand-xl sticky-top nav_bottom" aria-label="true">
+    <div class="container-fluid justify-content-between px-md-4  bg-white gap-xl-5">
+        <div class="row">
+            <div class="col-md-3">
+                <a href="#" class="navbar-brand relative d-flex align-items-center">
+                    <img class="brand-logo mx-0" src="../../../../assets/baill-logo.ico" alt="">
+                    <span class="site_name">{{siteName}}</span>
+                </a>
+            </div>
+        </div>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse bg-white justify-content-between ps-xl-5 gap-xl-0 gap-md-3" id="navbarNavDropdown">
+            <form class="d-flex nav_item position-relative w-50">
+                <input class="form-control me-2 py-2 px-5 rounded-pill" id="search_field" type="search" placeholder="Recherche ..." aria-label="Search">
+                <i class="fa-solid fa-magnifying-glass position-absolute search_icon"></i>
+            </form>
+            <div class="d-flex gap-3 two_btn">
+                <a class="nav-link btn_publish nav_item_" href="">
+                    <i class="fas fa-plus "></i>
+                    Publier une annonce
+                </a>
+                <a class="nav-link btn_login nav_item_ md_text d-flex gap-2 align-items-center" href="">
+                    <i class="fas fa-user "></i>
+                    Se connecter
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>

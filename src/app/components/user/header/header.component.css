@@ -1,0 +1,80 @@
+.nav_top{
+    background-color: var(--main-color-blackgreen);
+    height: 39px;
+}
+
+.contact{
+    font-weight: var(--main-xs-font-weiht);
+    font-size: 13px;
+}
+
+.icon-lis{
+    font-size: 17px;
+}
+
+.nav_bottom{
+    height: 89px;
+}
+
+.site_name{
+    font-family: var(--main-font-Mulish);
+    font-size: 32px;
+    color: var(--main-color);
+    user-select: none;
+}
+
+.brand-logo{
+    height: 60px;
+    width: 60px;
+}
+
+#search_field{
+    background-color: var(--main-color-gray-10);
+    font-weight: var(--main-md-font-weiht);
+    font-size: var(--main-h4-font-size );
+}
+
+.search_icon{
+    top: 33.6%;
+    left: 4%;
+}
+
+.btn_publish{
+    padding: var(--main-btn-sm-padd);
+    background-color: var(--main-color);
+    color: var(--main-color-white);
+    border-radius: var(--main-radius-value-8);
+}
+
+.btn_login{
+    padding: var(--main-btn-sm-padd);
+    background-color: var(--main-color-white);
+    color: var(--main-color);
+}
+
+.btn_publish i{
+    font-size: 13px;
+}
+
+
+@media screen and (max-width : 1200px) {
+    .navbar-collapse{
+        width: 100% ;
+    }
+
+    .two_btn{
+        display: block !important;
+    }
+
+    .nav_item{
+        padding: 10px 0px;
+        width: 80% !important;
+    }
+
+    .nav_item_{
+        margin: 10px 0px ;
+        width: fit-content !important;
+    }
+
+
+}
