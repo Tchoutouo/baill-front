@@ -90,6 +90,14 @@ body{
     visibility: visible;
 }
 
+
+.md_text{
+    font-size: var(--main-h4-font-size);
+    line-height: var(--main-sm-line-height);
+    font-weight: var(--main-md-font-weiht);
+}
+
+
 .btn_publish{
     padding: var(--main-btn-sm-padd);
     background-color: var(--main-color);
@@ -97,10 +105,10 @@ body{
     border-radius: var(--main-radius-value-8);
 }
 
-.md_text{
-    font-size: var(--main-h4-font-size);
-    line-height: var(--main-sm-line-height);
-    font-weight: var(--main-md-font-weiht);
+.btn_login{
+    padding: var(--main-btn-sm-padd);
+    background-color: var(--main-color-white);
+    color: var(--main-color);
 }
 
 
