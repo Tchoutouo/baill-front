@@ -1,1 +1,87 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* import font-family */
+
+/* font familly : Mulish */
+@import url('https://fonts.googleapis.com/css?family=Mulish');
+
+/* font familly : Quicksand */
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
+
+/* font familly : Bree Serif */
+@import url('https://fonts.googleapis.com/css?family=Bree Serif');
+
+:root{
+    /* Les Couleurs */
+    --main-color: #5EB21E;
+    --main-color-white: #FFFFFF;
+    --main-color-black: #000000;
+    --main-color-dark: #232323;
+    --main-color-gray: #8F8F8F;
+    --main-color-gray-10: #F2F2F2;
+    --main-color-orange: #FAC84E;
+    --main-color-green-15: #C7FBA0;
+    --main-color-green-5: #DFFCC8;
+    --main-color-blackgreen: #24583F;
+    --main-color-gray-5: #F8F8F8;
+    --main-color-yellow: yellow;
+    --main-color-footer: #212529;
+
+
+    /* Police */
+    --main-font: 'Quicksand';
+    --main-font-Mulish: 'Mulish';
+    --main-font-Bree-Serif : 'Bree Serif';
+
+
+    /* Taille de la police */
+    --main-h1-font-size : 48px;
+    --main-h2-font-size : 36px;
+    --main-h3-font-size : 25px;
+    --main-h4-font-size : 18px;
+    --main-h5-font-size : 15px;
+
+    /* font weight  */
+    --main-xl-font-weiht : 600;
+    --main-md-font-weiht : 400;
+    --main-md-font-weiht : 400;
+
+    /* line hight  */
+    --main-md-line-height : 31.25px;
+    --main-sm-line-height : 16.32px;
+
+    /* padding bouttons */
+    --main-btn-md-padd : 8px 15px 8px 15px;
+    --main-btn-sm-padd : 8px 10px 8px 10px;
+    --main-btn-tag-padd : 6px 15px 6px 15px;    
+
+    /* green shadow */
+    --main-shadow-green : -8px 0 15px -7px rgba(197, 242, 177, 0.82), 
+                            8px 0 15px -7px rgba(197, 242, 177, 0.82), 
+                            0 8px 15px -7px rgba(197, 242, 177, 0.82);
+
+    --main-shadow-black : -8px 0 15px -7px rgba(0, 0, 0, 0.08), 
+                            8px 0 15px -7px rgba(0, 0, 0, 0.08), 
+                            0 8px 15px -7px rgba(0, 0, 0, 0.08);
+
+    /* valeur border radius */
+    --main-radius-value-30: 30px;
+    --main-radius-value-20: 20px;
+    --main-radius-value-50: 50%;
+
+    /* border */
+    --main-border-value-1: 1px;
+
+    /* gap */
+    --gap-30 : 30px;
+    --gap-15 : 15px;
+}
+
+
+body{
+    margin: 0;
+    background-color: rgba(255, 255, 255, 1);
+    font-size: 14px;
+    overflow-x: hidden;
+    visibility: visible;
+}
