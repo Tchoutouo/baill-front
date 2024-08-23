@@ -37,12 +37,18 @@
             <div class="d-flex gap-3 two_btn">
                 <a class="nav-link btn_publish nav_item_" href="">
                     <i class="fas fa-plus "></i>
-                    Publier une annonce
+                    {{'publish-post'| translate}}
                 </a>
                 <a class="nav-link btn_login nav_item_ md_text d-flex gap-2 align-items-center" href="">
                     <i class="fa-regular fa-user"></i>
                     Se connecter
                 </a>
+            </div>
+            <div class="form-group">
+                <select class="form-control" (change)="ChangeLanguage($event)" name="">
+                    <option [selected]="lang==='fr'" value="fr">FR</option>
+                    <option [selected]="lang==='en'" value="en">EN</option>
+                </select>
             </div>
         </div>
     </div>
