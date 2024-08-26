@@ -1,0 +1,98 @@
+.product-image{
+    height: 236px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: var(--main-radius-value-10);
+}
+
+.products-container{
+    background-color: var(--main-color-green-15);
+}
+
+.hightlight-title{
+    font-size: 48px;
+    font-weight: var(--main-xl-font-weiht);
+    line-height: 60px;
+    text-align: left;
+    margin-bottom: 15px;
+    margin-top: 0;
+    color: var(--main-color-blackgreen);
+}
+
+.product-name h3{
+    font-size: var( --main-h3-font-size);
+    font-weight: var(--main-xl-font-weiht);
+    line-height: var(--main-lg-line-height);
+    text-align: left;
+    color: var(--main-color-black);
+    margin: 0;
+}
+
+.product-name h2{
+    font-size: var( --main-h2-font-size);
+    font-weight: var(--main-xl-font-weiht);
+    line-height: var(--main-lg-line-height);
+    text-align: left;
+    color: var(--main-color-dark);
+    margin: 0;
+}       
+
+.product-description h4 {
+    font-size: var(--main-h4-font-size);
+    font-weight: var(--main-md-font-weiht);
+    line-height: 27.5px;
+    text-align: left;
+    color: var(--main-color-dark);
+}
+
+.product-description {
+    height: 115px;
+    overflow: hidden;
+}
+
+.product-phone h5 {
+    font-size: var(--main-h5-font-size);
+    font-weight: var(--main-md-font-weiht);
+    line-height: var(--main-md-2-line-height);
+    text-align: justify;
+    color: var(--main-color-dark);
+}
+
+.product-localisation h5, .others-contacts i{
+    font-size: var(--main-h5-font-size);
+    font-weight: var(--main-md-font-weiht);
+    line-height: var(--main-md-2-line-height);
+    text-align: justify;
+    color: var(--main-color);
+}
+
+.others-contacts i{
+    font-size: var(--main-h5-font-size);
+    font-weight: var(--main-md-font-weiht);
+    line-height: var(--main-md-2-line-height);
+    text-align: justify;
+    color: var( --main-color-blackgreen);
+}
+
+.py-77{
+    padding: 77px 0;
+}
+
+.carousel-control-prev, .carousel-control-next{
+    width: 43px;
+    height: 44px;
+    border-radius: 50%;
+    top: 40%;
+    font-size: var(--main-h4-font-size);
+    color: var(--main-color);
+    background-color: rgba(36, 88, 63, 0.75);
+}
+
+.carousel-control-prev{
+   left: -5%; 
+}
+
+.carousel-control-next{
+    right: -5%;
+}

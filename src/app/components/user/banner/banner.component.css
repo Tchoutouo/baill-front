@@ -1,0 +1,36 @@
+.banner-container{
+    background-image: linear-gradient(180deg, #FDE9B6 36%, rgba(250, 200, 78, 0.56) 100%);
+}
+
+.banner-title{
+    font-size: 48px;
+    font-weight: var(--main-xl-font-weiht);
+    line-height: 60px;
+    text-align: left;
+    margin-bottom: 15px;
+    margin-top: 0;
+    color: var(--main-color-blackgreen);
+}
+
+.banner-description{
+    line-height: var(--main-lg-line-height);
+    font-weight: var(--main-md-font-weiht);
+    font-size: var(--main-h3-font-size);
+    margin-bottom: 29px;
+}
+
+.btn_publish{
+    padding: var(--main-btn-sm-padd);
+    background-color: var(--main-color);
+    color: var(--main-color-white);
+    border-radius: var(--main-radius-value-8);
+    width: fit-content;
+}
+
+.banner-image{
+    height: 309px;
+    background-image: url('../../../../assets/banner-image.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
