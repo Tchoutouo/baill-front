@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { getSiteName } from '../../../helpers/helper';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [],
+  imports: [TranslateModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
@@ -12,10 +13,22 @@ import { getSiteName } from '../../../helpers/helper';
 export class HeaderComponent {
 
   emailContact : string = "contact@gmail.com" ;
-  siteName : string = ""
-  constructor(){}
+  siteName : string = "";
+  lang: string = "";
+
+  constructor(private translateService: TranslateService){
+
+  }
 
   ngOnInit() {
     this.siteName = getSiteName();
+    this.lang = localStorage.getItem('lang') || 'fr';
+  }
+
+  ChangeLanguage(lang: any){
+    const selectedLanguage = lang.target.value;
+    localStorage.setItem('lang',selectedLanguage);
+
+    this.translateService.use(selectedLanguage);
   }
 }
