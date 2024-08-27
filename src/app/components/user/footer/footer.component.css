@@ -16,3 +16,33 @@
     height: 60px;
     width: 60px;
 }
+
+.footer-list{
+    padding-top: 46px;
+}
+
+.title-list h2{
+    margin: 0;
+    font-size: var(--main-h2-font-size);
+    font-weight: var(--main-xl-font-weiht);
+    line-height: 25px;
+    text-align: left;
+    color: var(--main-color);
+}
+
+ul.categories{
+    list-style: none;
+    padding: 20px 0px;
+}
+
+ul.categories li{
+    font-size: var(--main-h4-font-size);
+    font-weight: var(--main-xl-font-weiht);
+    line-height: var(--main-md-line-height);
+    color: var(--main-color-gray-15);
+    text-align: left;
+}
+
+.icon-list{
+    font-size: 17px;
+}
