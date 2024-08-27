@@ -19,6 +19,7 @@
     --main-color-dark: #232323;
     --main-color-gray: #8F8F8F;
     --main-color-gray-10: #F2F2F2;
+    --main-color-gray-7: #C7C7C7;
     --main-color-orange: #FAC84E;
     --main-color-green-15: #C7FBA0;
     --main-color-green-5: #DFFCC8;
@@ -57,11 +58,12 @@
     --main-btn-md-padd : 8px 15px 8px 15px;
     --main-btn-sm-padd : 8px 10px 8px 10px;
     --main-btn-tag-padd : 6px 15px 6px 15px;    
+    --main-btn-sm-tag-padd : 6px 10px 6px 10px;    
 
     /* green shadow */
-    --main-shadow-green : -8px 0 15px -7px rgba(197, 242, 177, 0.82), 
-                            8px 0 15px -7px rgba(197, 242, 177, 0.82), 
-                            0 8px 15px -7px rgba(197, 242, 177, 0.82);
+    --main-shadow-green : -4px 0 10px -8px rgba(197, 242, 177, 0.82), 
+                            4px 0 10px -8px rgba(197, 242, 177, 0.82), 
+                            0 10px 15px -7px rgba(197, 242, 177, 0.82);
 
     --main-shadow-black : -8px 0 15px -7px rgba(0, 0, 0, 0.08), 
                             8px 0 15px -7px rgba(0, 0, 0, 0.08), 
@@ -71,6 +73,7 @@
     --main-radius-value-30: 30px;
     --main-radius-value-20: 20px;
     --main-radius-value-8: 8px;
+    --main-radius-value-3: 3px;
     --main-radius-value-50: 50%;
     --main-radius-value-10: 10px;
 
@@ -80,6 +83,7 @@
     /* gap */
     --gap-30 : 30px;
     --gap-15 : 15px;
+    --gap-10 : 10px;
     
 }
 
