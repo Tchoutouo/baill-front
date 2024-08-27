@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { getSiteName } from '../../../helpers/helper';
 
 @Component({
   selector: 'app-footer',
@@ -7,6 +8,11 @@ import { Component } from '@angular/core';
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.css'
 })
-export class FooterComponent {
+export class FooterComponent implements OnInit {
+  siteName: string ="";
+  
+  ngOnInit(): void {
+    this.siteName = getSiteName();
+  }
 
 }

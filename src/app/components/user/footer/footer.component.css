@@ -1,0 +1,18 @@
+.footer-content{
+    min-height: 282px;
+    width: 100%;
+    background-color: var(--main-color-blackgreen);
+    bottom: 0%;
+}
+
+.site_name{
+    font-family: var(--main-font-Mulish);
+    font-size: 32px;
+    color: var(--main-color);
+    user-select: none;
+}
+
+.brand-logo{
+    height: 60px;
+    width: 60px;
+}
