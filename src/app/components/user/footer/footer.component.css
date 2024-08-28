@@ -3,11 +3,14 @@
     width: 100%;
     background-color: var(--main-color-blackgreen);
     bottom: 0%;
+    z-index: 102;
+    position: relative;
 }
 
 .site_name{
-    font-family: var(--main-font-Mulish);
+    font-family: var(--main-font-Bree-Serif);
     font-size: 32px;
+    font-weight: var(--main-md-font-weiht);
     color: var(--main-color);
     user-select: none;
 }
@@ -21,28 +24,74 @@
     padding-top: 46px;
 }
 
-.title-list h2{
-    margin: 0;
-    font-size: var(--main-h2-font-size);
-    font-weight: var(--main-xl-font-weiht);
-    line-height: 25px;
-    text-align: left;
-    color: var(--main-color);
+.footer-list .element_2, .element_3{
+    padding-left: 144px;
+    padding-top: 15px;
 }
 
-ul.categories{
+ul.categories, ul.icon-list{
     list-style: none;
     padding: 20px 0px;
 }
 
-ul.categories li{
-    font-size: var(--main-h4-font-size);
-    font-weight: var(--main-xl-font-weiht);
+ul.categories li, .all-right{
+    font-size: var(--main-h5-font-size);
+    font-weight: var(--main-md-font-weiht);
+    font-family: var(--main-font-Quicksand);
     line-height: var(--main-md-line-height);
     color: var(--main-color-gray-15);
     text-align: left;
 }
 
-.icon-list{
-    font-size: 17px;
+
+.icon-content .icon-list .icon-item{
+    height: 40px;
+    width: 40px;
+    background-color: var(--main-color);
+    border-radius: 49%;
+    text-align: center;
+}
+
+.icon-content .icon-list .icon-item .icon{
+    padding-top: 10px;
+    color: var(--main-color-blackgreen);
+    height: 24px;
+    width: 24px;
+    font-size: 22px;
+}
+
+.icon-content ul.icon-list > li{
+    margin-right: 6px;
+}
+
+.title-list p{
+    font-size: var(--main-h3-font-size);
+    font-weight: var(--main-xl-font-weiht);
+    font-family: var(--main-font-Quicksand);
+    line-height: var(--main-lg-line-height);
+    color: var(--main-color);
+}
+
+.all-right-line{
+    margin-top: 91px;
+}
+
+@media screen and (max-width: 767px){
+    .footer-list .element_2, .element_3, ul.categories{
+        padding: 0;
+    }
+
+    ul.categories li, .element_2, .all-right{
+        text-align: center;
+    }
+
+    .all-right-line{
+        margin: 20px 0px;
+
+    }
+
+    .label-site{
+        display: flex;
+        justify-content: center;
+    }
 }
