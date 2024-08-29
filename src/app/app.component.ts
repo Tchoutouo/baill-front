@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from "./components/user/header/header.component";
 import { TranslateService } from '@ngx-translate/core';
 import { MainComponent } from "./components/user/main/main.component";
 import { FooterComponent } from './components/user/footer/footer.component';
-import { LoginComponent } from "./components/user/login/login.component";
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, MainComponent, FooterComponent, RouterModule, RouterLink, LoginComponent],
+  imports: [RouterOutlet,RouterLink, HeaderComponent, MainComponent,FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

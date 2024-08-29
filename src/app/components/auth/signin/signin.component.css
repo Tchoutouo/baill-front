@@ -1,0 +1,15 @@
+.signin-content{
+    /* background-image: url('../assets/images/signin-background.jpg'); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.signin{
+    width: 1177px;
+    height: 648px;
+    border-radius: 30px;
+    top: 124px;
+    background-color: blue;
+}
