@@ -2,17 +2,16 @@
     display: grid;
     grid-template-columns: 25% 71%;
     grid-column-gap: 4%;
+    height: fit-content;
 }
 
 .categories-list {
     position: sticky;
     top: 15%;
-    z-index: 100; 
     height: 200px;
     bottom: 5%;
 }
 
 .articles-list {
-    overflow-y: auto; 
     padding-right: 10px; 
 }

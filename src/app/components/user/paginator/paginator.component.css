@@ -1,0 +1,18 @@
+li.active .page-link, li .page-link{
+    height: 41px;
+    width: 41px;
+    text-align: center;
+    padding: 7px;
+    border-radius: 50%;
+    color: var(--main-color-dark);
+}
+
+.paginate-list li a.next, .paginate-list li a.prev {
+    background-color: var(--main-color-orange);
+    border: 1px solid var(--main-color-orange);
+}
+
+.page-item.active .page-link{
+    background-color: var(--main-color-green-15);
+    border: 1px solid var(--main-color-green-15);
+}

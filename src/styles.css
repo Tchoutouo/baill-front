@@ -21,12 +21,15 @@
     --main-color-gray-10: #F2F2F2;
     --main-color-gray-7: #C7C7C7;
     --main-color-orange: #FAC84E;
+    --main-color-orange-opa-: rgba(250, 200, 78, 0.8);
     --main-color-green-15: #C7FBA0;
     --main-color-green-5: #DFFCC8;
     --main-color-blackgreen: #24583F;
     --main-color-gray-5: #F8F8F8;
     --main-color-yellow: yellow;
     --main-color-footer: #212529;
+    --main-color-grenn-opa-53:  rgba(145, 226, 83, 0.53);
+
 
 
     /* Police */
@@ -59,6 +62,7 @@
     --main-btn-sm-padd : 8px 10px 8px 10px;
     --main-btn-tag-padd : 6px 15px 6px 15px;    
     --main-btn-sm-tag-padd : 6px 10px 6px 10px;    
+    --main-btn-pag-padd : 13px 20px 13px 20px;    
 
     /* green shadow */
     --main-shadow-green : -4px 0 10px -8px rgba(197, 242, 177, 0.82), 
@@ -84,6 +88,7 @@
     --gap-30 : 30px;
     --gap-15 : 15px;
     --gap-10 : 10px;
+
     
 }
 

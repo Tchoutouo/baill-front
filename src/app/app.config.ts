@@ -21,7 +21,7 @@ export const appConfig: ApplicationConfig = {
               deps: [HttpClient]
           },
           defaultLanguage: 'fr',
-        })
+        })  
       ]),
       provideRouter(routes),
       provideHttpClient(withInterceptorsFromDi())

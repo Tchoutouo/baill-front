@@ -1,0 +1,26 @@
+.filter-tag{
+    padding: 6px 15px 6px 15px;
+    gap: var(--gap-10);
+    border-radius: var(--main-radius-value-30);
+    border: 1px solid var(--main-color);
+    opacity: 0px;
+    color: var(--main-color);
+    background-color: var(--main-color-white);
+}
+
+.active-tag{
+    background-color: var(--main-color-orange);
+    color: var(--main-color-black);
+    border: 1px solid var(--main-color-orange);
+}
+
+.tag-list{
+    flex-wrap: wrap;
+}
+
+.tag-list button:hover{
+    background-color: var(--main-color-orange);
+    color: var(--main-color-black);
+    border: 1px solid var(--main-color-orange);
+}
+

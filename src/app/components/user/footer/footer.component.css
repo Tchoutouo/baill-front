@@ -3,7 +3,12 @@
     width: 100%;
     background-color: var(--main-color-blackgreen);
     bottom: 0%;
+    left: 0;
+    text-align: center;
+    position: relative; /* Le footer est relatif à l'élément parent */
+    z-index: 1011;
 }
+
 
 .site_name{
     font-family: var(--main-font-Mulish);
