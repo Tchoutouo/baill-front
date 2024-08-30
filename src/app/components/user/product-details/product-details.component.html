@@ -1,1 +1,114 @@
-<p>product-details works!</p>
+<div class="container-fluid">
+    <div class="product-details-container p-5">
+        <div class="row">
+            <div class="col-md-5 p-0">
+                <div class="images-details">
+                    <div class="row">
+                        <div class="col-12 ">
+                            <div class="firs-image" style="background-image: url('{{imagesList[1]}}');">
+                                
+                            </div>
+                        </div>
+                        <div class="col-12 py-3">
+                            <div class="row justify-content-center">
+                                <div class="col-3" *ngFor="let item of imagesList" >
+                                    <div class="image-item" style="background-image: url('{{item}}');">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 offset-md-1 p-0">
+                <div class="produc-info-details">
+                    <div class="category-name">
+                        <h5>Nom categorie</h5>
+                    </div>
+
+                    <div class="product-name">
+                        <h2>
+                            Nom produit
+                        </h2>
+                    </div>
+
+                    <div class="priduct-price">
+                        <h3>
+                            800 000 Frs
+                        </h3>
+                    </div>
+
+                    <div class="product-description">
+                        <span class="title">
+                            Description
+                        </span>
+                        <p>
+                            description du produit choisi dans le catalogue ou a l’acceuil description du produit choisi dans le catalogue ou a l’acceuil description du produit choisi dans le catalogue ou a l’acceuil description du produit choisi dans le catalogue ou a l’acceuil description du produit choisi dans le catalogue ou a l’acceuil description du produit choisi dans le catalogue ou a l’acceuil description du produit choisi dans le catalogue ou a l’acceuil
+                        </p>
+                    </div>
+
+                    <div class="product-caracteristic">
+                        <h6 class="title">
+                            Carateristiques
+                        </h6>
+                        
+                        <ul class="caracteristiques">
+                            <li>carat 1 ,</li>
+                            <li>carat 2 ,</li>
+                            <li>carat 3 ,</li>
+                            <li>carat 4 ,</li>
+                            <li>carat 5 </li>
+                        </ul>
+                        
+                    </div>
+
+                    <div class="publisher-contacts">
+                        <div class="">
+                            <h4 class="title"> Contacts de l’annonceur :  </h4>
+                            <div class="numbers d-flex gap-2">
+                                <div class="label-number">
+                                    tel :
+                                </div>
+                                <ul>
+                                    <li> +237 934 854 534</li>
+                                    <li> +237 934 854 534</li>
+                                </ul>
+                            </div>
+                            <div class="numbers d-flex gap-2">
+                                <div class="label-number">
+                                    mail :
+                                </div>
+                                <ul>
+                                    <li></li>
+                                </ul>
+                            </div>
+                            <div class="numbers d-flex gap-2">
+                                <div class="label-number">
+                                    site web : 
+                                </div>
+                                <ul>
+                                    <li> lesfuries.com</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end" id="button-contact">
+                        <button class="button-details">
+                            Contacter l’annonceur
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="other-producs-list">
+        <div class="row my-5 px-5">
+            <div class="col-md-3" *ngFor="let item of number_limit" >
+                <app-product></app-product>
+            </div> 
+        </div>
+    </div>
+</div>

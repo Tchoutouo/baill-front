@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { getSiteName } from '../../../helpers/helper';
 
 @Component({
   selector: 'app-signup',
@@ -8,5 +9,11 @@ import { Component } from '@angular/core';
   styleUrl: './signup.component.css'
 })
 export class SignupComponent {
+  site_name: string = ""
 
+  constructor(){}
+
+  ngOnInit() {
+    this.site_name = getSiteName();
+  }
 }

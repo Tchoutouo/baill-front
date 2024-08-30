@@ -53,6 +53,7 @@
     --main-xs-font-weiht : 300;
 
     /* line hight  */
+    --main-lg-line-login : 45px;
     --main-lg-line-height : 31.25px;
     --main-md-line-height : 22.5px;
     --main-md-2-line-height : 18.75px;
@@ -63,21 +64,24 @@
     --main-btn-sm-padd : 8px 10px 8px 10px;
     --main-btn-tag-padd : 6px 15px 6px 15px;    
     --main-btn-sm-tag-padd : 6px 10px 6px 10px;    
-    --main-btn-pag-padd : 13px 20px 13px 20px;    
+    --main-btn-pag-padd : 13px 20px 13px 20px;  
+    --main-input-padd : 12px 15px 12px 15px;  
+      
 
     /* green shadow */
     --main-shadow-green : -4px 0 10px -8px rgba(197, 242, 177, 0.82), 
                             4px 0 10px -8px rgba(197, 242, 177, 0.82), 
                             0 10px 15px -7px rgba(197, 242, 177, 0.82);
 
-    --main-shadow-black : -8px 0 15px -7px rgba(0, 0, 0, 0.08), 
-                            8px 0 15px -7px rgba(0, 0, 0, 0.08), 
-                            0 8px 15px -7px rgba(0, 0, 0, 0.08);
+    --main-shadow-black : 4px 0 10px -8px rgba(0, 0, 0, 0.08), 
+                            8px 0 10px -8px rgba(0, 0, 0, 0.08), 
+                            0 10px 15px -7px rgba(0, 0, 0, 0.08);
 
     /* valeur border radius */
     --main-radius-value-30: 30px;
     --main-radius-value-20: 20px;
     --main-radius-value-8: 8px;
+    --main-radius-value-6: 6px;
     --main-radius-value-3: 3px;
     --main-radius-value-50: 50%;
     --main-radius-value-10: 10px;
@@ -89,7 +93,6 @@
     --gap-30 : 30px;
     --gap-15 : 15px;
     --gap-10 : 10px;
-
     
 }
 

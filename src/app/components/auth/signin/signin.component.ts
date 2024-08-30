@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
+import { getSiteName } from '../../../helpers/helper';
 
 @Component({
   selector: 'app-signin',
@@ -9,5 +10,12 @@ import { TranslateModule } from '@ngx-translate/core';
   styleUrl: './signin.component.css'
 })
 export class SigninComponent {
+  site_name: string = ""
 
+  constructor(){}
+
+  ngOnInit() {
+    this.site_name = getSiteName();
+  }
+  
 }

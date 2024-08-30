@@ -2,16 +2,9 @@
     min-height: 282px;
     width: 100%;
     background-color: var(--main-color-blackgreen);
-    bottom: 0%;
-<<<<<<< HEAD
-    left: 0;
-    text-align: center;
-    position: relative; /* Le footer est relatif à l'élément parent */
-    z-index: 1011;
-=======
+    bottom: 0;
     z-index: 102;
     position: relative;
->>>>>>> b275f319c6cbafd1f9c52729328d19101d82562d
 }
 
 

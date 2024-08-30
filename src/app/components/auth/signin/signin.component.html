@@ -1,65 +1,72 @@
-<div class="signin-content">
-    <div class="signin">
-        <div class="row">
-            <div class="col-md-8">
-                <form action="" method="post">
-                    <div class="row">
-                        <div class="title">
-                            <h2>S'insccrire</h2>
-                            <p>Vous avez déjà compte, <a href="">se connecter</a></p>
-                        </div>
+<div class="container">
+    <div class="login-container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <div class="login-text">
+                    <div class="siteName">
+                        <a href="" class="logo ">
+                            <img class="brand_size mx-0" src="../../../../assets/baill-logo.ico" alt="">
+                            <span class="site_name">{{site_name}}</span>
+                        </a>
+                    </div>
+                    <div class="login-description">
+                        <p>Bienvenue chez Bailleurnet, la location à portée de main.</p>
                     </div>
                     <div class="row">
-                        <div class="col-md-6 tab_1">
-                            <div class="form-group">
-                                <label for="username">Nom d'utilisateur</label>
-                                <input id="username" class="form-control" type="text" name="">
+                        <div class="col-6">
+                            <div class="circles-content">
+                                <div class="large-cicle">
+                                    <div class="medium-cicle">
+        
+                                    </div>
+                                </div>
+                                <div class="small-cirle">
+                                    
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="name">Nom</label>
-                                <input id="name" class="form-control" type="text" name="">
-                            </div>
-                            <div class="form-group">
-                                <label for="email">E-mail</label>
-                                <input id="email" class="form-control" type="email" name="">
-                            </div>
-                            <div class="form-group">
-                                <label for="phone">Téléphone(Whatsapp)</label>
-                                <input id="phone" class="form-control" type="number" name="">
-                            </div>
-                        </div>
-                        <div class="col-md-6 tab_2">
-                            <div class="form-group">
-                                <label for="country">Pays</label>
-                                <select name="" id="input" class="form-control" required="required">
-                                    <option value=""></option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="city">Ville</label>
-                                <select name="" id="city" class="form-control" required="required">
-                                    <option value=""></option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Mot de passe</label>
-                                <input id="password" class="form-control" type="password" name="">
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Confirmer le mot de passe</label>
-                                <input id="password" class="form-control" type="password" name="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <button type="submit"> Se connecter</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="col-md-4">
 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-container py-4" id="loginForm">
+                    <h2 class="form-title">
+                        Se connecter
+                    </h2>
+                    <p class="text-login">Si vous n’avez pas de compte <a class="" href="#">s’inscrire</a></p>
+                    <form id="form">
+                        <div class="mb-4">
+                          <label for="exampleInputEmail1" class="form-label">Email </label>
+                          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        </div>
+
+                        <div class="" id="password_field">
+                          <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
+                          <input type="password" class="form-control" id="exampleInputPassword1">
+                          <i class="fa-solid fa-eye" id="icon_eyes"></i>
+                        </div>
+
+                        <div class="d-flex justify-content-center my-5">
+                            <button type="submit" id="submit-button" class="btn btn-primary">Se connecter</button>
+                        </div>
+
+                        <div class="other-login-form">
+                            <div class="d-flex align-items-center justify-content-center gap-2" id="or_underline">
+                                <hr class="w-25"/>ou <hr class="w-25"/>
+                            </div>
+
+                            <div class="medias-login d-flex justify-content-center gap-3 mt-2 mb-0">
+                                <a href="#">
+                                    <img src="../../../../assets/brands/google-brand.png" height="46" width="46" alt="">
+                                </a>
+                                <a href="#">
+                                    <i class="fa-brands fa-facebook text-primary h1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

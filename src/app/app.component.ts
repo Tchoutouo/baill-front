@@ -17,6 +17,7 @@ export class AppComponent {
   constructor(private translateService: TranslateService){
     this.translateService.setDefaultLang('fr');
     this.translateService.use(localStorage.getItem('lang') || 'fr'); 
+
   }
   title = 'baill-front';
 }
