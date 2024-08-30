@@ -50,6 +50,8 @@
     --main-xs-font-weiht : 300;
 
     /* line hight  */
+    --main-3xl-line-height : 65.18px;
+    --main-xxl-line-height : 45px;
     --main-lg-line-height : 31.25px;
     --main-md-line-height : 22.5px;
     --main-md-2-line-height : 18.75px;
