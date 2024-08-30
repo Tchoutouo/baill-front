@@ -1,3 +1,33 @@
 {
-    "publish-post": "Post an ad"
+    "header":{
+        "publish-post": "Post an ad",
+        "login-text":"Log in",
+        "search": "Research ..."
+    },
+    "user": {
+        "signup":{
+            "password":"Password",
+            "confirm-password":"Confirm your password",
+            "username":"User name",
+            "name": "Names",
+            "first-name": "First names",
+            "country":"Country",
+            "city":"City",
+            "email":"Email",
+            "whatsapp-number":"Phone(Whatsapp)",
+            "title":"Register",
+            "text-account":"You already have an account",
+            "login-text":"Log in",
+            "text-line-1":"Join Bailleurnet and ",
+            "text-line-2":"start renting with ",
+            "text-line-3":"simply!"
+        },
+        "signin":{
+            
+        }
+    },
+    "admin":{
+
+    }
+    
 }

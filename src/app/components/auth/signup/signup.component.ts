@@ -1,19 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { getSiteName } from '../../../helpers/helper';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [],
+  imports: [TranslateModule],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })
-export class SignupComponent {
-  site_name: string = ""
-
-  constructor(){}
-
-  ngOnInit() {
-    this.site_name = getSiteName();
+export class SignupComponent implements OnInit{
+  siteName: string ="";
+  
+  ngOnInit(): void {
+    this.siteName = getSiteName();
   }
 }
