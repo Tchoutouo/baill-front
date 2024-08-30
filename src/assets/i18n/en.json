@@ -5,7 +5,7 @@
         "search": "Research ..."
     },
     "user": {
-        "signin":{
+        "signup":{
             "password":"Password",
             "confirm-password":"Confirm your password",
             "username":"User name",
@@ -22,7 +22,7 @@
             "text-line-2":"start renting with ",
             "text-line-3":"simply!"
         },
-        "signup":{
+        "signin":{
             
         }
     },

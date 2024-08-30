@@ -1,1 +1,85 @@
-<p>signup works!</p>
+<div class="signup-content">
+    <div class="content">
+        <div class="row signup ">
+            <div class="col-md-8 content-left">
+                <form action="" method="post">
+                    <div class="row">
+                        <div class="title text-center">
+                            <h2>{{'user.signup.title'|translate}}</h2>
+                            <p>{{'user.signup.text-account'|translate}}, <a href="">{{'user.signup.login-text'|translate}}</a></p>
+                        </div>
+                    </div>
+                    <div class="row tab">
+                        <div class="col-md-6 tab_1">
+                            <div class="form-group">
+                                <label for="username">{{'user.signup.username'|translate}}</label>
+                                <input id="username" class="form-control" type="text" name="">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">{{'user.signup.name'|translate}}</label>
+                                <input id="name" class="form-control" type="text" name="">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">{{'user.signup.email'|translate}}</label>
+                                <input id="email" class="form-control" type="email" name="">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">{{'user.signup.whatsapp-number'|translate}}</label>
+                                <input id="phone" class="form-control" type="number" name="">
+                            </div>
+                        </div>
+                        <div class="col-md-6 tab_2">
+                            <div class="form-group">
+                                <label for="country">{{'user.signup.country'|translate}}</label>
+                                <select name="" id="input" class="form-control" required="required">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="city">{{'user.signup.city'|translate}}</label>
+                                <select name="" id="city" class="form-control" required="required">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">{{'user.signup.password'|translate}}</label>
+                                <input id="password" class="form-control" type="password" name="">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">{{'user.signup.confirm-password'|translate}}</label>
+                                <input id="password" class="form-control" type="password" name="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row signup-button">
+                        <div class="col-12">
+                            <a href="" type="submit" class="btn btn-success text-center d-flex justify-content-center m-auto">
+                                <p class="m-0">{{'user.signup.login-text'|translate}}</p>
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4 content-right">
+                <div class="row label-site">
+                    <div class="col-12 d-flex justify-content-end">
+                        <a href="#" class="navbar-brand relative d-flex align-items-center">
+                            <img class="brand-logo mx-0" src="../../../../assets/baill-logo.ico" alt="">
+                            <span class="site_name">{{siteName}}</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-center signup-text">
+                    <div class="col-md-12">
+                        <P class="text-end signup-text-right">{{'user.signup.text-line-1'|translate}} <br> {{'user.signup.text-line-2'|translate}} <br>{{'user.signup.text-line-3'|translate}}</P>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-start signup-image-content">
+                    <div class="col-md-12 signup-image">
+                        <img class="image mx-0" src="../../../../assets/images/image-signup.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

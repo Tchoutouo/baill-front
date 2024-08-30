@@ -5,7 +5,7 @@
         "search": "Recherche ..."
     },
     "user": {
-        "signin":{
+        "signup":{
             "password":"Mot de passe",
             "confirm-password":"Confirmer votre mot de passe",
             "username":"Nom d'utilisateur",
@@ -22,7 +22,7 @@
             "text-line-2":"commencez à louer en ",
             "text-line-3":"toute simplicité !"
         },
-        "signup":{
+        "signin":{
             
         }
     },
