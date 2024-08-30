@@ -130,7 +130,7 @@ form .form-group .form-control{
     width: 364px;
     height: 265px;
     position: relative;
-    /* top: 10%; */
+    /* / top: 10%; / */
     right: 45%;
 }
 
@@ -144,4 +144,8 @@ form .form-group .form-control{
 
 .content-right{
     padding-right: 55px;
+}
+
+.image-password{
+    color: var(--main-color);
 }
