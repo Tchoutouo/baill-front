@@ -1,3 +1,34 @@
 {
-    "publish-post": "Publier une annonce"
+    "header":{
+        "publish-post": "Publier une annonce",
+        "login-text":"Se connecter",
+        "search": "Recherche ..."
+    },
+    "user": {
+        "signin":{
+            "password":"Mot de passe",
+            "confirm-password":"Confirmer votre mot de passe",
+            "username":"Nom d'utilisateur",
+            "name": "Nom(s)",
+            "first-name": "Prénoms",
+            "country":"Pays",
+            "city":"Ville",
+            "email":"E-mail",
+            "whatsapp-number":"Téléphone(Whatsapp)",
+            "title":"S'inscrire",
+            "text-account":"Vous avez déjà compte",
+            "login-text":"Se connecter",
+            "text-line-1":"Rejoignez Bailleurnet et ",
+            "text-line-2":"commencez à louer en ",
+            "text-line-3":"toute simplicité !"
+        },
+        "signup":{
+            
+        }
+    },
+    "admin":{
+
+    }
+
+
 }
