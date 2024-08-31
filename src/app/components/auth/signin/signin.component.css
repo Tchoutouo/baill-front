@@ -1,7 +1,3 @@
-.login-container{
-    padding: 100px 70px;
-    height: 100vh;
-}
 
 /* foirmulaire debut */
 .form-container{
@@ -173,6 +169,24 @@ input:-internal-autofill-selected {
 
 .image-password{
     color: var(--main-color);
+}
+
+@media screen and (max-width : 900px) {
+    .login-description{
+        padding: 1rem;
+    }
+
+    .form-container{
+        padding: 3rem;
+    }
+
+    .fab-icon{
+        font-size: 40px;
+    }
+
+    #col-text{
+        display: none;
+    }
 }
 
 

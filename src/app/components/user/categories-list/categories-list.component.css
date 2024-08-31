@@ -1,7 +1,8 @@
 .categories-container{
     background-color: var(--main-color-white);
     border-radius: var(--main-radius-value-20);
-    box-shadow: var( --main-shadow-green);
+    /* box-shadow: var( --main-shadow-green); */
+    box-shadow: 0px 8px 15px 0px rgba(197, 242, 177, 0.82);
     height: fit-content;
 }
 

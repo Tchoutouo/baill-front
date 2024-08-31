@@ -98,5 +98,27 @@
 }
 
 
+@media screen and (max-width : 900px) {
+    .carousel-control-prev{
+        left: -3%; 
+     }
+     
+     .carousel-control-next{
+         right: -3%;
+     }
 
+     .banner-container {
+        padding: 0 1rem;
+     }
+}
+
+@media screen and (max-width : 768px) {
+    .carousel-control-prev{
+        left: .5%; 
+     }
+     
+     .carousel-control-next{
+         right: .5%;
+     }
+}
 

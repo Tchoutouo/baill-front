@@ -2,9 +2,35 @@
     <app-banner></app-banner>
     <app-products-hightlight></app-products-hightlight>
     <div class="container-fluid px-5 mb-5">
-        <div class="products-categories-container p-4"  style="height: 200vh;">
+        <div class="products-categories-container p-4">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn_publish my-5 mx-0 d-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Choisir la categoties
+            </button>
+
             <div class="categories-list">
-                <app-categories-list></app-categories-list>
+                <!-- Modal -->
+                <div class="large-sreen">
+                    <app-categories-list></app-categories-list>
+                </div>
+
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <!-- <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1> -->
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <app-categories-list></app-categories-list>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                <button type="button" class="btn btn-success">choisir</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="articles-list">
                 <app-product-list></app-product-list>
@@ -13,9 +39,9 @@
     </div>
 </div>
 
-<div class="container d-block my-5 pb-5">
+<div class="container d-block mb-5 pb-2">
     <div class="row">
-        <div class="col-md-8 offset-md-4 d-flex py-5 justify-content-center">
+        <div class="col-lg-8 offset-lg-4 d-flex pt-2 justify-content-center">
             <app-paginator></app-paginator>
         </div>
     </div>

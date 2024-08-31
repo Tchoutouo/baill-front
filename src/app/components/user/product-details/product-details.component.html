@@ -1,18 +1,19 @@
 <div class="container-fluid">
     <div class="product-details-container p-5">
         <div class="row">
-            <div class="col-md-5 p-0">
+            <div class="col-md-5 p-0 mb-4">
                 <div class="images-details">
                     <div class="row">
                         <div class="col-12 ">
-                            <div class="firs-image" style="background-image: url('{{imagesList[1]}}');">
+                            <div class="firs-image" style="background-image: url('{{fisrtImage}}');">
                                 
                             </div>
                         </div>
                         <div class="col-12 py-3">
-                            <div class="row justify-content-center">
-                                <div class="col-3" *ngFor="let item of imagesList" >
-                                    <div class="image-item" style="background-image: url('{{item}}');">
+                            <div class="row justify-content-center  images-list align-items-center">
+                                <div class="col-4  col-lg-3" *ngFor="let item of imagesList" >
+                                    <div class="image-item" (mouseleave)="reChangeImage()" (mouseover)="changeFirstImage(item)" 
+                                        style="background-image: url('{{item}}');">
                                         
                                     </div>
                                 </div>
@@ -21,7 +22,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 offset-md-1 p-0">
+
+            <div class="col-md-6 offset-md-1 p-0 mb-4">
                 <div class="produc-info-details">
                     <div class="category-name">
                         <h5>Nom categorie</h5>
@@ -105,10 +107,16 @@
     </div>
 
     <div class="other-producs-list">
-        <div class="row my-5 px-5">
-            <div class="col-md-3" *ngFor="let item of number_limit" >
+        <div class="row my-5 px-5 product-list">
+            <div class="col-lg-3 col-md-6" *ngFor="let item of number_limit" >
                 <app-product></app-product>
             </div> 
+        </div>
+
+        <div class="row">
+            <div class="d-flex justify-content-center">
+                <a href="" class="see_more mb-5">Voir tout</a>
+            </div>
         </div>
     </div>
 </div>

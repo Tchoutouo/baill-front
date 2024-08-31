@@ -76,3 +76,9 @@
         width: fit-content !important;
     }
 }
+
+@media screen and (max-width : 1200px) {
+    .padd-md{
+        padding-bottom: 15px;
+    }
+}
