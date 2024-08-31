@@ -170,3 +170,24 @@ input:-internal-autofill-selected {
     background: radial-gradient(51.78% 51.78% at 35.65% 48.22%, #CDF2B1 0%, #FFFFFF 90.5%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
 }
 
+
+.image-password{
+    color: var(--main-color);
+}
+
+
+/* .shadow-grediant{
+    height: 200px;
+    width: 200px;
+    border: 2px solid #2D2D2D;
+    transform: rotate(40deg);
+    background-image: linear-gradient(to bottom right, white, #CDF2B1), 
+    linear-gradient(to top left,  white, #CDF2B1),
+    linear-gradient(to top right,  white, #CDF2B1),
+    linear-gradient(to bottom left, white, #CDF2B1);
+    background-color: white;
+    background-image: linear-gradient(45deg ,rgba(255, 255, 255, .1) 20%, #CDF2B1 50%, rgba(255, 255, 255, .1) 80%), 
+    linear-gradient(-45deg ,rgba(255, 255, 255, .1) 45%, #CDF2B1 50%, rgba(255, 255, 255, .1) 55%);
+    margin: 0px 0px 100px 100px ;
+
+} */
