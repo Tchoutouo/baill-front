@@ -9,8 +9,8 @@
                             <span class="site_name">{{site_name}}</span>
                         </a>
                     </div>
-                    <div class="login-description">
-                        <p>Bienvenue chez Bailleurnet, la location à portée de main.</p>
+                    <div class="login-description py-4">
+                        <p class="">Bienvenue chez Bailleurnet, la location à portée de main.</p>
                     </div>
                     <div class="row">
                         <div class="col-6">
@@ -37,7 +37,7 @@
                     <h2 class="form-title">
                         Se connecter
                     </h2>
-                    <p class="text-login">Si vous n’avez pas de compte <a class="" [routerLink]="['/signup']">s’inscrire</a></p>
+                    <p class="text-login pt-2 pb-4">Si vous n’avez pas de compte <a class="" [routerLink]="['/signup']">s’inscrire</a></p>
                     <form id="form">
                         <div class="mb-4">
                           <label for="exampleInputEmail1" class="form-label">Email </label>
@@ -46,11 +46,11 @@
 
                         <div class="" id="password_field">
                           <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
-                          <input type="password" class="form-control" id="exampleInputPassword1">
-                          <i class="fa-solid fa-eye" id="icon_eyes"></i>
+                          <input type="{{typeField}}" class="form-control" id="exampleInputPassword1">
+                          <i class="fa-solid fa-eye{{icon_eyes}}" (click)="toggleIconClass($event)" id="icon_eyes" ></i>
                         </div>
 
-                        <div class="d-flex justify-content-center my-5">
+                        <div class="d-flex justify-content-center mt-5 mb-4">
                             <button type="submit" id="submit-button" class="btn btn-primary">Se connecter</button>
                         </div>
 
@@ -74,3 +74,7 @@
         </div>
     </div>
 </div>
+<!-- 
+<div class="shadow-grediant">
+    
+</div> -->
