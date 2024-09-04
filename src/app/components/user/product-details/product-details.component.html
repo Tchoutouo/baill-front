@@ -11,10 +11,13 @@
                         </div>
                         <div class="col-12 py-3">
                             <div class="row justify-content-center  images-list align-items-center">
-                                <div class="col-4  col-lg-3" *ngFor="let item of imagesList" >
+                                <div class="col-4 col-lg-3" *ngFor="let item of imagesList track item; let  i = index" >
                                     <div class="image-item" (mouseleave)="reChangeImage()" (mouseover)="changeFirstImage(item)" 
-                                        style="background-image: url('{{item}}');">
-                                        
+                                        style="background-image: url('{{item}}');" *ngIf="i < imageLimit ">
+                                        <div class="more-images-button" *ngIf="displayButtonMore && i == 3 " (click)="showMoreImage($event)" >
+                                            <i class="fas fa-plus "></i>
+                                            <span>{{' '+differenceLimit}} autres</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -22,7 +25,8 @@
                     </div>
                 </div>
             </div>
-
+            
+            <app-image-list *ngIf="ImagesSrcs && displayModal"  [images]="ImagesSrcs"  (closeModal) ="closeModal()"></app-image-list>
             <div class="col-md-6 offset-md-1 p-0 mb-4">
                 <div class="produc-info-details">
                     <div class="category-name">

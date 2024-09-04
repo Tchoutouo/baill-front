@@ -27,6 +27,11 @@
     width: fit-content;
 }
 
+.btn_publish:hover{
+    background: rgba(76, 152, 19, 1);
+}
+
+
 .banner-image{
     height: 309px;
     background-image: url('../../../../assets/banner-image.png');

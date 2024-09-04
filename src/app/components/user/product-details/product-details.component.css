@@ -10,6 +10,7 @@
     background-position-x: center;
     height: 153px;
     border-radius: 4px;
+    position: relative;
 }
 
 .firs-image{
@@ -122,9 +123,30 @@
 
 .image-item:hover{
     box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.63);
-    height: 105px;
+    height: 170px;
 }
 
+.more-images-button{
+    padding: var(--main-more-info-padd);
+    gap: var(--gap-10);
+    border-radius: var(--main-radius-value-6);
+    opacity: 0px;
+    background-color: rgba(255, 255, 255, 0.89);
+    width: fit-content;
+    cursor: pointer;
+    position: absolute;
+    top: 38%;
+    left: 30%;
+    transform: translate(-20%, -2%); /* Centre horizontalement et verticalement */
+}
+
+.more-images-button span{
+    font-family: var(--main-font-Quicksand);
+    font-size: var(--main-small-font-size);
+    font-weight: var(--main-md-font-weiht);
+    line-height: var(--main-sm-line-height);
+    text-align: left;
+}
 
 /* media sreen */
 @media screen and (max-width : 1200px) {

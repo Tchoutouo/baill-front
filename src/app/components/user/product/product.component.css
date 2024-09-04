@@ -67,3 +67,11 @@
 .product-item{
     margin-bottom: 20px;
 }
+
+.product-item:hover{
+    box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.13);
+}
+
+.button-contact button:hover{
+    background: rgba(76, 152, 19, 1);
+}

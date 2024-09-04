@@ -46,10 +46,20 @@
     border-radius: var(--main-radius-value-8);
 }
 
+.btn_publish:hover{
+    background: rgba(76, 152, 19, 1);
+}
+
 .btn_login{
     padding: var(--main-btn-sm-padd);
     background-color: var(--main-color-white);
     color: var(--main-color);
+    padding: var(--main-btn-sm-padd);
+    border-radius: var(--main-radius-value-8);
+}
+
+.btn_login:hover{
+    background-color: var(--main-color-green-15);
 }
 
 .btn_publish i{

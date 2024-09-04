@@ -5,6 +5,7 @@ li.active .page-link, li .page-link{
     padding: 7px;
     border-radius: 50%;
     color: var(--main-color-dark);
+    border: none;
 }
 
 .paginate-list li a.next, .paginate-list li a.prev {
@@ -16,3 +17,13 @@ li.active .page-link, li .page-link{
     background-color: var(--main-color-green-15);
     border: 1px solid var(--main-color-green-15);
 }
+
+.paginate-list li a.next:hover, .paginate-list li a.prev:hover{
+    background-color: var(--main-color-blackgreen);
+    color: var(--main-color-orange);
+    border: 1px solid  var(--main-color-blackgreen);
+}   
+
+li.active .page-link, li .page-link:hover{
+    border: 1px solid  var(--main-color-green-15);
+}   
