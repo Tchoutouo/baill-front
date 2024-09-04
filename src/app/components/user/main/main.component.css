@@ -25,8 +25,31 @@
     width: fit-content;
 }
 
+.btn-close{
+    position: absolute;
+    right: -1%;
+    top: -2%;
+    padding: 15px;
+    gap: 10px;
+    border-radius: 50%;
+    opacity: 0px;
+    background-color:rgba(242, 242, 242, 0.79);
+    color: var(--main-color-gray);
+    z-index: 100;
+}
+
+.btn-close:hover{
+    background-color: rgba(255, 255, 255, 0.85);
+    color: var(--main-color-dark);
+}
+
 .modal-dialog, .modal-body{
+    
     background-color: transparent !important;
+}
+
+.modal-dialog{
+    position: relative;
 }
 
 @media screen and (max-width : 900px) {
@@ -45,5 +68,9 @@
 
     .large-sreen{
         display: none;
+    }
+
+    #staticBackdrop{
+        padding-top: 100px;
     }
 }

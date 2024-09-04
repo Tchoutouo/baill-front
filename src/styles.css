@@ -107,6 +107,7 @@ body{
     font-family: var(--main-font-Quicksand);
     overflow-x: hidden;
     visibility: visible;
+    user-select: none;
 }
 
 
@@ -141,4 +142,5 @@ body{
     margin-bottom: 15px;
     margin-top: 0;
 }
+
 

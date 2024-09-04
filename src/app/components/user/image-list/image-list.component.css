@@ -34,7 +34,13 @@
     color: var(--main-color-gray);
 }
 
+.btn-close:hover{
+    background-color: rgba(255, 255, 255, 0.85);
+    color: var(--main-color-dark);
+}
+
+
 #imageListPreview{
-    margin-top: 100px;
+    padding-top: 100px;
 }
 

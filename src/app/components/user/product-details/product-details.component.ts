@@ -19,7 +19,8 @@ export class ProductDetailsComponent {
     imageLimit : number = 4;
     ImagesSrcs :  any = null;
     displayModal : boolean = false;
-    
+    srcArray: Array<any> = [""];
+    carateristiques: Array<string> = [""];
 
     constructor(){
 
@@ -29,14 +30,14 @@ export class ProductDetailsComponent {
         this.imagesList = ["../../../../assets/products/prodcut-1/1.jpeg", "../../../../assets/products/prodcut-1/2.jpeg", 
            "../../../../assets/products/prodcut-1/3.png",  "../../../../assets/products/prodcut-1/4.jpeg", "../../../../assets/products/prodcut-1/5.jpg",
           "../../../../assets/products/prodcut-1/6.jpg", "../../../../assets/products/prodcut-1/7.jpeg",
+        ];
 
-
-          ];
+        this.carateristiques = ["carat 1", "carat 2", "carat 3", "carat 4", "carat 5"];
 
         this.reChangeImage();
         if (this.imagesList.length > 4) {
-          this.displayButtonMore = true;
-          this.differenceLimit = this.imagesList.length - this.imageLimit;
+            this.displayButtonMore = true;
+            this.differenceLimit = this.imagesList.length - this.imageLimit;
         }
     }
 
@@ -47,12 +48,11 @@ export class ProductDetailsComponent {
     reChangeImage(){
       this.fisrtImage = this.imagesList[0]
     }
-
-   
-    
   
     showMoreImage(event : any){
       this.ImagesSrcs = this.imagesList ;
+      this.srcArray[0] = this.imagesList[3] ;
+      this.srcArray[1] = this.ImagesSrcs.filter((item : string) => item !== this.imagesList[3]) ;
       this.displayModal = true;
     }
 

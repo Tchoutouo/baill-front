@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-
+  
 @Component({
   selector: 'app-image-list',
   standalone: true,
@@ -28,6 +28,7 @@ export class ImageListComponent {
     let wind : any = window      
     this.modalImages = new wind["bootstrap"].Modal("#imageListPreview", {keyboard : false})
     this.modalImages.show() ;
+    console.log(this.images[1]);
   }
 
   handleCloseModal(){
