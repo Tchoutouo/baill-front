@@ -43,8 +43,7 @@ ul.categories li{
 }
 
 .filter-tag:hover{
-    background-color: var(--main-color);
-    color: var(--main-color-white);
+    background-color: var(--main-color-green-5);
 }
 
 .fields-price label{

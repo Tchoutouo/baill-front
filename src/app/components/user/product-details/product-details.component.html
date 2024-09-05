@@ -11,18 +11,24 @@
                         </div>
                         <div class="col-12 py-3">
                             <div class="row justify-content-center  images-list align-items-center">
-                                <div class="col-4  col-lg-3" *ngFor="let item of imagesList" >
-                                    <div class="image-item" (mouseleave)="reChangeImage()" (mouseover)="changeFirstImage(item)" 
-                                        style="background-image: url('{{item}}');">
-                                        
+                                <ng-container *ngFor="let item of imagesList; let i = index" >
+                                    <div class="col-4 col-lg-3"  *ngIf="i < imageLimit">
+                                        <div class="image-item" (mouseleave)="reChangeImage()" (mouseover)="changeFirstImage(item)" 
+                                            [ngStyle]="{'background-image': 'url(' + item + ')'}" >
+                                            <div class="more-images-button" *ngIf="displayButtonMore && i == 3 " (click)="showMoreImage($event)" >
+                                                <i class="fas fa-plus "></i>
+                                                <span>{{' '+differenceLimit}} autres</span>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                </ng-container>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
+            
+            <app-image-list *ngIf="ImagesSrcs && displayModal"  [images]="srcArray"  (closeModal) ="closeModal()"></app-image-list>
             <div class="col-md-6 offset-md-1 p-0 mb-4">
                 <div class="produc-info-details">
                     <div class="category-name">
@@ -55,14 +61,9 @@
                             Carateristiques
                         </h6>
                         
-                        <ul class="caracteristiques">
-                            <li>carat 1 ,</li>
-                            <li>carat 2 ,</li>
-                            <li>carat 3 ,</li>
-                            <li>carat 4 ,</li>
-                            <li>carat 5 </li>
+                        <ul class="caracteristiques gap-10">
+                            <li *ngFor="let itemCaract of carateristiques">{{itemCaract}}</li>
                         </ul>
-                        
                     </div>
 
                     <div class="publisher-contacts">

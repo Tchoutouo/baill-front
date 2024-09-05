@@ -1,0 +1,40 @@
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="imageListPreview" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        
+          <button type="button" class="btn-close" (click)="handleCloseModal()" data-bs-dismiss="modal" aria-label="Close"></button>
+  
+        <div class="modal-body">
+            <div id="carouselExample" class="carousel slide">
+                <div class="carousel-inner">
+                    <div class="carousel-item p-5 active">
+                        <div class="image-item" style="background-image: url('{{images[0]}}');">
+            
+                        </div>
+                    </div>
+                    <div class="carousel-item p-5" *ngFor="let item of images[1] track item; let  i = index">
+                        <div class="image-item" style="background-image: url('{{item}}');">
+                          
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+        <!-- <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Understood</button>
+        </div> -->
+      </div>
+    </div>
+  </div>
