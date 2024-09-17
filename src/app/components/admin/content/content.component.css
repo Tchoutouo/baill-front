@@ -1,7 +1,10 @@
-.nav-content{
-    width: 75%;
+.navbar{
+    position: sticky;
+    top: 0;
 }
 
-.aside-content{
-    width: 25%;
+.side-bar{
+    position: sticky;
+    top: 0;
+    left: 0;
 }

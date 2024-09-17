@@ -1,12 +1,11 @@
 .aside{
     /* width: 284px; */
     width: 100%;
-    height: 100vh;
+    height: 100%;
     gap: 60px;
     border: 0px 1px 0px 0px;
     opacity: 0px;
     border-right: 1px solid #C7C7C7;
-    /* position: fixed; */
 }
 
 .site_name{
@@ -126,10 +125,17 @@
     opacity: 0px;
 }
 
+.content-logout button svg{
+    /* width: 11.48px;
+    height: 5.94px; */
+    opacity: 0px;
+    font-size: var(--main-h2-font-size);
+    font-weight: var(--main-md-font-weiht);
+}
 .content-logout button:hover{
     background-color: var(--main-color-green-5);
 
-    i{
+    svg{
         color: var(--main-color-green-15);
     }
 }

@@ -1,17 +1,24 @@
-<nav class="nav-bar">
-    <!-- <div class="container-fluid"> -->
-        <div class="row nav-content">
-            <div class="col-md-6 float-start">
-                <ul>
-                    <li></li>
-                    <li></li>
-                </ul>
-            </div>
-            <div class="col-md-6">
-                <div class="d-flex justify-content-center">
-                    <button type="submit" id="publish-button" class="btn btn-success"><i class="fa-solid fa-plus  text-white"></i> Se connecter</button>
+<div class="nav-bar bg-white">
+    <div class="row nav-content">
+        <div class="col-md-6 float-start">
+            <h4 class="card-title"> Hello {{userName}}</h4>
+                <p class="card-text"><small class="text-body-secondary">{{email}} </small></p>
+        </div>
+        <div class="col-md-6">
+            <div class="d-flex justify-content-end gap-4">
+                <button type="submit" id="publish-button" class="btn text-white d-flex justify-content-center align-items-center">
+                    <i class="fa-solid fa-plus  text-white"></i> Annonce
+                </button>
+                <a href="" class="notification-button d-flex justify-content-center align-items-center">
+                    <i class="fa-solid fa-bell text-dark"></i>
+                </a>
+                <div class="form-group">
+                    <select class="form-control" (change)="ChangeLanguage($event)" name="">
+                        <option [selected]="lang==='fr'" value="fr">FR</option>
+                        <option [selected]="lang==='en'" value="en">EN</option>
+                    </select>
                 </div>
             </div>
         </div>
-    <!-- </div> -->
-</nav>
+    </div>
+</div>
