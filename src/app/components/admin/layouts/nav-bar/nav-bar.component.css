@@ -1,0 +1,17 @@
+nav{
+    width: auto;
+    height: 87px;
+    /* padding: 14px 30px 14px 30px; */
+    gap: 0px;
+    border: 1px 1px 1px 0px;
+    opacity: 0px;
+    /* border-width: 1px, 1px, 1px, 0px; */
+    border-style: solid;
+    border-color: #E5E5E5;
+    /* position: fixed; */
+
+}
+
+.nav-content{
+    justify: space-between;
+}
