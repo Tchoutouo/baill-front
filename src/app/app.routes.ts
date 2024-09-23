@@ -5,6 +5,7 @@ import { MainComponent } from './components/user/main/main.component';
 import { ProductListComponent } from './components/user/product-list/product-list.component';
 import { ProductDetailsComponent } from './components/user/product-details/product-details.component';
 import { ImageListComponent } from './components/user/image-list/image-list.component';
+import { ContentComponent } from './components/admin/content/content.component';
 
 export const routes: Routes = [
     { 
@@ -27,4 +28,9 @@ export const routes: Routes = [
         path: 'image-list', 
         component: ImageListComponent 
     },
+    { 
+        path: 'admin', 
+        component: ContentComponent 
+    },
+
 ];

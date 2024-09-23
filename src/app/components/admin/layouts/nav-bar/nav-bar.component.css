@@ -1,0 +1,34 @@
+.nav-bar{
+    height: 87px;
+    padding: 14px 30px 14px 30px;
+    opacity: 0px;
+    border-style: solid;
+    border-width: 0px 0px 1px 1px;
+    border-color: #E5E5E5;
+
+}
+
+.nav-content{
+    justify: space-between;
+}
+
+#publish-button{
+    width: 133px;
+    height: 39px;
+    padding: 8px 15px 8px 15px;
+    gap: 10px;
+    border-radius: 30px;
+    opacity: 0px;
+    background-color: var(--main-color);
+}
+
+.notification-button{
+    width: 39px;
+    height: 39px;
+    padding: 10px ;
+    gap: 10px;
+    border-radius: 30px;
+    opacity: 0px;
+    background-color: var(--main-color-green-5);
+    text-decoration: none;
+}
