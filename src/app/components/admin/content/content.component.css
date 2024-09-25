@@ -9,14 +9,23 @@
 } */
 
 .col-main-content{
-    width: calc(100% - 19.72%);
+    width: calc(100% - 5.972%);
 }
 
 .col-aside{
-    width: 19.72%;
+    width: 5.972%;
+    /* width: 19.72%; */
     border: 0px 1px 0px 0px;
     opacity: 0px;
     border-right: 1px solid #C7C7C7;
+}
+
+.sizeSideBar{
+    width: 19.72% !important; 
+}
+
+.sizeExpandMain{
+    width: calc(100% - 19.72%) !important; 
 }
 
 .row > * {

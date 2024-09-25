@@ -1,8 +1,11 @@
 <div class="row m-0">
-    <div class="col-aside p-0 side-bar bg-white" style="min-height: 100vh;">
-        <app-aside></app-aside>
+    <div class="col-aside p-0 side-bar bg-white {{sizeSideBar}}" 
+        (mouseover)="exendSideBar()" 
+        (mouseleave)="reduiseSideBar()" 
+        style="min-height: 100vh;">
+        <app-aside [sideBarIsOpen]="sideBarIsOpen_"></app-aside>
     </div>
-    <div class="col-main-content pl-0">
+    <div class="col-main-content pl-0 {{sizeExpandMain}}">
         <div class="row p-0 w-100 m-0">
             <div class="col-12 sticky-top border-left-0">
                 <app-nav-bar></app-nav-bar>
