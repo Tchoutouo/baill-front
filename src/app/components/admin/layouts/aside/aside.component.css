@@ -171,5 +171,5 @@ i.active, svg.active {
 }
 
 .finger{
-    cursor: pointer;
+    cursor: pointer !important;
 }
