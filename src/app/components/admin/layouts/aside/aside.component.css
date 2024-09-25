@@ -1,6 +1,8 @@
 .aside{
     /* width: 284px; */
-    width: 100%;
+    position: fixed;
+    left: 0;
+    width: 19.72%;
     height: 100%;
     gap: 60px;
     border: 0px 1px 0px 0px;
@@ -55,8 +57,16 @@
     line-height: var(--main-sm-line-height);
     text-align: left;
 }
+.card-text small{
+    font-family: var(--main-font-Quicksand);
+    font-size: 13px;
+    font-weight: var(--main-sm-font-weiht);
+    line-height: var(--main-sm-line-height);
+    text-align: left;
+}
 
 .content-card, .element{
+    padding: 0px 10px;
     margin-bottom: 60px;
 }
 
@@ -66,7 +76,7 @@
 }
 
 .item-list{
-    border-radius: 5px 0px 0px 0px;
+    border-radius: 5px ;
     opacity: 0px;
     margin-bottom: 20px;
 }
@@ -116,8 +126,6 @@
 } */
 
 .content-logout button{
-    width: 136px;
-    height: 35px;
     padding: 8px 10px 8px 10px;
     gap: 6px;
     border-radius: 5px;
@@ -134,9 +142,9 @@
 }
 .content-logout button:hover{
     background-color: var(--main-color-green-5);
-
+    border: 1px solid var(--main-color-green-5);
     svg{
-        color: var(--main-color-green-15);
+        color: var(--main-color);
     }
 }
 
@@ -149,3 +157,19 @@
     margin: 0px;
 }
 
+.img-profile{
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 58px;
+    width: 58px;
+    border-radius: 50%;
+}
+
+i.active, svg.active {
+    color: var(--main-color) !important;
+}
+
+.finger{
+    cursor: pointer !important;
+}

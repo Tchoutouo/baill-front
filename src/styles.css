@@ -22,8 +22,12 @@
     --main-color-gray-15: #E5E5E5;
     --main-color-gray-7: #C7C7C7;
     --main-color-orange: #FAC84E;
+    --main-color-red: rgba(238, 102, 102, 1);
     --main-color-orange-opa-: rgba(250, 200, 78, 0.8);
+    --main-color-orange-K5: rgba(255, 240, 203, 1);
+    --main-color-red-10: rgba(255, 211, 192, 1);
     --main-color-green-15: #C7FBA0;
+    --main-color-green-30: rgba(76, 152, 19, 1);
     --main-color-green-5: #DFFCC8;
     --main-color-blackgreen: #24583F;
     --main-color-gray-5: #F8F8F8;
@@ -46,6 +50,7 @@
     --main-h4-font-size : 18px;
     --main-h5-font-size : 15px;
     --main-small-font-size : 15px;
+    --main-notif-font-size : 13px;
 
     /* font weight  */
     --main-xl-font-weiht : 600;

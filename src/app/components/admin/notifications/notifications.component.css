@@ -1,0 +1,39 @@
+
+.icon-close{
+    height: 24px;
+    width: 24px;
+    border: 1px solid var(--main-color-gray-10);
+    color: rgba(199, 199, 199, 1);
+    border-radius: 3px;
+    text-align: center;
+}
+
+.finger{
+    cursor: pointer;
+}
+
+.border_bottom_gray{
+    border-bottom: 1px solid var(--main-color-gray-15);
+}
+
+span.check-all{
+    font-family: var(--main-font-Quicksand);
+    font-size: var(--main-notif-font-size);
+    font-weight: var(--main-md-font-weiht);
+    line-height: var(--main-sm-line-height);
+    text-align: left;
+    color: var(--main-color);
+}
+
+.text_green{
+    color: var(--main-color);
+}
+
+.check{
+    text-decoration: none;
+}
+
+.check:hover{
+    border-bottom: .9px solid var(--main-color);
+    color: var(--main-color);
+}

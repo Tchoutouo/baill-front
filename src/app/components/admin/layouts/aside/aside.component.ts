@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { getSiteName } from '../../../../helpers/helper';
 import { TranslateModule } from '@ngx-translate/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-aside',
   standalone: true,
-  imports: [TranslateModule, RouterLink],
+  imports: [TranslateModule, RouterLink, CommonModule, RouterModule],
   templateUrl: './aside.component.html',
   styleUrl: './aside.component.css'
 })
