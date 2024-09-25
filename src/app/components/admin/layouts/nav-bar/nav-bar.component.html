@@ -1,5 +1,5 @@
 <div class="nav-bar bg-white">
-    <div class="row nav-content">
+    <div class="row nav-content align-items-center">
         <div class="col-md-6 float-start">
             <h4 class="card-title"> Hello {{userName}}</h4>
                 <p class="card-text"><small class="text-body-secondary">{{email}} </small></p>
@@ -9,7 +9,7 @@
                 <button type="submit" id="publish-button" class="btn text-white d-flex justify-content-center align-items-center">
                     <i class="fa-solid fa-plus  text-white"></i> Annonce
                 </button>
-                <a href="" class="notification-button d-flex justify-content-center align-items-center">
+                <a  (click)="hanndleShowNotifications()" class="notification-button finger d-flex justify-content-center align-items-center">
                     <i class="fa-solid fa-bell text-dark"></i>
                 </a>
                 <div class="form-group">
@@ -21,4 +21,8 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="notification" *ngIf="isDiplayedNotification">
+    <app-notifications (close)="handleClose()"></app-notifications>
 </div>

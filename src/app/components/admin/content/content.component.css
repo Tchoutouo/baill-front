@@ -1,10 +1,31 @@
-.navbar{
+/* .navbar{
     position: sticky;
     top: 0;
 }
 
 .side-bar{
-    position: sticky;
     top: 0;
     left: 0;
+} */
+
+.col-main-content{
+    width: calc(100% - 19.72%);
 }
+
+.col-aside{
+    width: 19.72%;
+    border: 0px 1px 0px 0px;
+    opacity: 0px;
+    border-right: 1px solid #C7C7C7;
+}
+
+.row > * {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.p-relative{
+    position: relative;
+}
+
+

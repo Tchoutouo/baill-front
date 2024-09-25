@@ -1,0 +1,57 @@
+.text_red{
+    color: var(--main-color-red);
+}
+
+.text_green{
+    color: var(--main-color);
+}
+
+.text_orange{
+    color: var(--main-color-orange);
+}
+
+.text_red{
+    color: var(--main-color-red);
+}
+
+
+.notif-description .notif-title{
+    font-family: var(--main-font-Quicksand);
+    font-size: var(--main-notif-font-size);
+    font-weight: 700;
+    line-height: var(--main-sm-line-height);
+    text-align: left;
+}
+
+.notif-description p.notif-text{
+    font-family: var(--main-font-Quicksand);
+    font-size: var(--main-notif-font-size);
+    font-weight: 400;
+    line-height: var(--main-sm-line-height);
+    text-align: left;
+}
+
+.notif-description p.notif-text span{
+    font-family: var(--main-font-Quicksand);
+    font-size: var(--main-notif-font-size);
+    font-weight: 700;
+    line-height: var(--main-sm-line-height);
+    text-align: left;
+}
+
+.notif-footer{
+    font-family: var(--main-font-Quicksand);
+    font-size: var(--main-notif-font-size);
+    font-weight: 700;
+    line-height: var(--main-sm-line-height);
+    text-align: left;
+    color: var(--main-color-gray);
+}
+
+.h7{
+    font-size: 10px;
+}
+
+.bg_gray_notif{
+    background-color: rgba(250, 250, 250, 1);
+}

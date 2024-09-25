@@ -1,15 +1,13 @@
-<div class="row">
-    <div class="col-3 p-0 side-bar bg-white">
+<div class="row m-0">
+    <div class="col-aside p-0 side-bar bg-white" style="min-height: 100vh;">
         <app-aside></app-aside>
     </div>
-    <div class="col-9 p-0">
-        <div class="row navbar p-0">
-            <div class="col-12">
+    <div class="col-main-content pl-0">
+        <div class="row p-0 w-100 m-0">
+            <div class="col-12 sticky-top border-left-0">
                 <app-nav-bar></app-nav-bar>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
+            <div class="col-12 py-3" style="min-height: 100vh;">
                 <router-outlet />
             </div>
         </div>

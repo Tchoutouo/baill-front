@@ -1,0 +1,82 @@
+<div class="container-fluid">
+    <div class="row px-4">
+        <div class="col-md-3 py-4">
+            <div class="item-dash bg-green-15 px-4 py-3">
+                <div class="height-121">
+                    <div class="dash-title">
+                        <h2>Annonces encours</h2>
+                    </div>
+                    <div class="dash-value">
+                        <h1>36<span class="mx-2">KL</span></h1> 
+                    </div>
+                </div>
+                <div class="text-end">
+                    <i class="fa fa-arrow-right text_green h4"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 py-4">
+            <div class="item-dash bg-orange-k5 px-4 py-3">
+                <div class="height-121">
+                    <div class="dash-title">
+                        <h2>Annonces en voie d’expiration</h2>
+                    </div>
+                    <div class="dash-value">
+                        <h1>36<span class="mx-2">KL</span></h1> 
+                    </div>
+                </div>
+                <div class="text-end">
+                    <i class="fa fa-arrow-right text_orange h4"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 py-4">
+            <div class="item-dash bg-red-10 px-4 py-3">
+                <div class="height-121">
+                    <div class="dash-title">
+                        <h2>Annonces expirées</h2>
+                    </div>
+                    <div class="dash-value">
+                        <h1>36<span class="mx-2">KL</span></h1> 
+                    </div>
+                </div>
+                <div class="text-end">
+                    <i class="fa fa-arrow-right text_red h4"></i>
+                </div>
+            </div>
+        </div>
+        <div class="green-side">
+            <div class="relatives-imges">
+                <img src="../../../../assets/dashboard/chariot.png" id="chariot" height="364"  alt="">
+                <img src="../../../../assets/dashboard/voiture.png" id="voiture" height="291"  alt="">
+            </div>
+        </div>
+
+        <div class="row">
+            <h3 class="table-title mb-3 mt-5">
+                Les 5 annonces les plus demandées du mois
+            </h3>
+            <div class="col-7">
+                <!-- tableau -->
+                <table class="table" id="dashboard_table">
+                    <thead>
+                        <tr class="border-bottom-1-green">
+                            <th scope="col">No</th>
+                            <th scope="col " class="bord">Categorie</th>
+                            <th scope="col " class="bord">Nom</th>
+                            <th scope="col " class="bord">Nbr demandes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of anounceList track item; let  i = index">
+                            <th scope="row">{{i + 1 }}</th>
+                            <td class="bord-black">Categorie</td>
+                            <td class="bord-black">Nom</td>
+                            <td class="bord-black">345K</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>    
+</div>
