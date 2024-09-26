@@ -11,5 +11,30 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   styleUrl: './content.component.css'
 })
 export class ContentComponent {
+  
+  sizeExpandMain : string | null = null ;
 
+  sizeSideBar : string | null = null ;
+
+  sideBarIsOpen_ : boolean = false;
+
+  constructor(){
+
+  }
+
+  ngOnInit(){
+
+  }
+
+  exendSideBar(){
+    this.sizeSideBar = "sizeSideBar";
+    this.sizeExpandMain = "sizeExpandMain";
+    this.sideBarIsOpen_ = true ;
+  }
+  
+  reduiseSideBar(){
+    this.sizeSideBar = null;
+    this.sizeExpandMain = null;
+    this.sideBarIsOpen_ = false ;
+  }
 }
