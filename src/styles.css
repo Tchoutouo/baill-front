@@ -140,8 +140,14 @@ body{
     padding: var(--main-btn-sm-padd);
     background-color: var(--main-color-white);
     color: var(--main-color);
+
 }
 
+
+
+.bg_black{
+    background-color: #000000;
+}
 
 .h1-Quicksand{
     /* //styleName: H1-Quicksand-48-semibold; */
@@ -154,4 +160,56 @@ body{
     margin-top: 0;
 }
 
+.title-h2{
+    font-family: var(--main-font-Quicksand);
+    font-size: var(--main-h2-font-size);
+    font-weight: var(--main-xxl-font-weiht);
+    line-height: var(--main-lg-line-login);
+    text-align: left;
+    color: var(--main-color-black);
+}
 
+.label-form{
+    font-family: var(--main-font-Quicksand);
+    font-size: var(--main-h5-font-size);
+    font-weight: var(--main-xl-font-weiht);
+    line-height: var(--main-md-line-height);
+    text-align: left;
+    color: var(--main-color-dark);
+}
+
+input::placeholder{
+    font-family: var(--main-font-Quicksand);
+    font-size: var(--main-h5-font-size);
+    font-weight: var(--main-md-font-weiht);
+    line-height: var(--main-md-line-height);
+    text-align: left;
+    color: rgba(229, 229, 229, 1);
+}
+
+.form_group{
+    display: flex;
+    flex-direction: column;
+}
+
+.input_field{
+    padding: 8px 15px;
+    border: 1px solid rgba(199, 199, 199, 1);
+    border-radius: var(--main-radius-value-3);
+    background-color: rgba(248, 248, 248, 1);
+    color: rgba(143, 143, 143, 1);
+}
+
+.checkbox-input{
+    display: flex;
+}
+
+.profil-user{
+    height: 182px;
+    width: 182px;
+    border-radius: 50%;
+    color: rgba(143, 143, 143, 1);
+    background-color: rgba(229, 229, 229, 1);
+    padding: 42px 47px;
+    font-size: 100px;
+}

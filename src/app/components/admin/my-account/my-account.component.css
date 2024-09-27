@@ -1,0 +1,60 @@
+button.add_caract{
+    padding: var(--main-btn-md-padd);
+    background-color: var(--main-color-green-5);
+    color: var(--main-color-green-30);
+    border: none;
+    border-radius: var(--main-radius-value-5);
+}
+
+.column{
+    flex-direction: column;
+}
+
+.update-picture span{
+    font-family: var(--main-font-Quicksand);
+    font-size: var(--main-h5-font-size);
+    font-weight: var(--main-xxl-line-height);
+    line-height: var(--main-md-line-height);
+    text-align: left;
+
+}
+
+.field-password h3{
+    font-family: var(--main-font-Quicksand);
+    font-size: var(--main-h3-font-size);
+    font-weight: 600;
+    line-height: 31.25px;
+    text-align: left;
+}
+
+.password-profile{
+    background-color: rgba(223, 252, 200, 1);
+    padding: 8px 15px;
+    border: none;
+    border-radius: 6px;
+}
+
+.password-pass{
+    font-family: var(--main-font-Quicksand);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 18.75px;
+    text-align: left;
+    color: rgba(36, 88, 63, 1);
+}
+
+.icon_pass{
+    position: absolute;
+    top: 22%;
+    right: 8%;
+}
+
+.password-input-group{
+    position: relative;
+}
+
+.field-password{
+    border: 1px solid black;
+    border-radius: 20px;
+    width: fit-content;
+}

@@ -25,6 +25,11 @@ span.check-all{
     color: var(--main-color);
 }
 
+.icon-close:hover{
+    background-color: rgba(250, 250, 250, 1);
+}
+
+
 .text_green{
     color: var(--main-color);
 }
