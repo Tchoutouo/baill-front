@@ -1,0 +1,109 @@
+<div class="contaner-fluid px-4">
+    <div class="page-title">
+        <h1>Annonces</h1>
+    </div>
+
+    <div class="title-form py-4">
+        <h4>Formulaire de création d’une annonce</h4>
+    </div>
+
+    <div class="row">
+        <form action="" class="px-5">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form_group gap-1 mb-4">
+                        <label for="title" class="label-form mb-2">Titre<span class="text-danger mx-2">*</span></label> 
+                        <input type="text" class=" form-control input-field" required name="title" id="title" placeholder="voture toyota">
+                    </div>
+
+                    <div class="form_group mb-4">
+                        <label class="label-form mb-2" for="category">Catégorie<span class="text-danger mx-2">*</span></label>
+                        <select name="category" id="category" class="form-control input-field" required="required">
+                            <option value="Services Professionnels">Services Professionnels</option>
+                            <option value="Matériel et Equipements">Matériel et Equipements</option>
+                            <option value="venement et Services">Evenement et Services</option>
+                            <option value="Vehicules et Transport" selected>Vehicules et Transport</option>
+                        </select>
+                    </div>
+
+                    <div class="form_group gap-1 mb-4">
+                        <label for="price" class="label-form mb-2">Prix (FCFA)<span class="text-danger mx-2">*</span></label> 
+                        <input type="number" class=" form-control input-field" required name="price" id="price" placeholder="voture toyota">
+                    </div>
+
+                    <div class="form_group gap-1 mb-4">
+                        <label for="description" class="label-form mb-2">Description<span class="text-danger mx-2">*</span></label> 
+                        <textarea name="description" class="form-control input-field" required id="description" rows="5" cols="10"></textarea>
+                    </div>
+
+                    <div class="form_group gap-1 mb-4">
+                        <label for="country" class="label-form mb-2">Pays<span class="text-danger mx-2">*</span></label> 
+                        <input type="text" class=" form-control input-field" required name="country" id="country" placeholder="voture toyota">
+                    </div>
+                </div>
+
+                <div class="offset-md-2 col-md-5">
+                    <div class="form_group gap-1 mb-4">
+                        <label for="city" class="label-form mb-2">Ville<span class="text-danger mx-2">*</span></label> 
+                        <input type="text" class=" form-control input-field" name="city" required id="city" placeholder="voture toyota">
+                    </div>
+
+                    <div class="form_group gap-1 mb-4">
+                        <label for="address" class="label-form mb-2">Lieu dit<span class="text-danger mx-2">*</span></label> 
+                        <input type="text" class=" form-control input-field" name="address" required id="address" placeholder="Yde, Damas 423">
+                    </div>
+
+                    <div class="form_group gap-1 mb-4">
+                        <label for="caract" class="label-form mb-2">Caractéristiques<span class="text-danger mx-2">*</span></label> 
+                        <div class="cateristics">
+                            <button class="add_caract my-2">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+
+                            <div class="row py-2 align-items-center">
+                                <div class="col-3">
+                                    <div class="tag-caract">
+                                        Taille
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" class="form-control input-field"  name="address" id="address" value="1567 x 123" placeholder="valeur">
+                                </div>
+                                <div class="col-1">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form_group gap-1 mb-4">
+                        <label for="images" class="label-form mb-2">Images<span class="text-danger mx-2">*</span></label> 
+                        <div class="row mx-0 py-2 border-gray-1">
+                            <div class="col-3">
+                                <div class="image-item" style="background-image: url();">
+                                    <i class="fa-solid  fa-xmark"></i>
+                                </div>
+                            </div>
+
+                            <div class="col-3 px-1">
+                                <label class="select-image" for="imagesList">
+                                    <input type="file" name="images[]" class="d-none" id="imagesList">
+                                    <div class="">
+                                        <i class="fa-solid  fa-plus h3"></i>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mx-0 gap-4 py-4">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#forfaitList" class="btn-form bg_green">
+                    Creer & publier
+                    <app-forfait-list></app-forfait-list>
+                </button>
+                <button type="submit" class="btn-form bg_blue">Enregistrer</button>
+            </div>
+        </form>
+    </div>
+</div>

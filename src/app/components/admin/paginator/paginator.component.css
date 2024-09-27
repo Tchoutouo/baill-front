@@ -1,0 +1,8 @@
+.grey-20{
+    color: rgba(143, 143, 143, 1);
+
+}
+
+.bg_grey{
+    background-color: var(--main-color-gray-10);
+}

@@ -1,0 +1,84 @@
+.forfait-item .forfait-title{
+    font-family: var(--main-font-Quicksand);
+    font-size: var(--main-h3-font-size);
+    font-weight: var(--main-xl-font-weiht);
+    line-height: var(--main-lg-line-height);
+    text-align: left;
+    color: var(--main-color);
+}
+
+.forfait-item{
+    border: 1px solid var(--main-color);
+    border-radius: var(--main-radius-value-20);
+}
+
+.price{
+    font-family: var(--main-font-Quicksand);
+    font-weight: var(--main-xl-font-weiht);
+    line-height: var(--main-lg-line-login );
+    text-align: left;
+    color: var(--main-color-dark);
+}
+
+.fs_big{
+    font-size: var(--main-h2-font-size);
+}
+
+.fs_small{
+    font-size: var(--main-h2-font-size);
+}
+
+.reduction{
+    padding: var(--main-more-small-padd);
+    border-radius: var(--main-radius-value-5);
+    background-color: var(--main-color-green-5);
+    font-family: var(--main-font-Quicksand);
+    font-size: var(--main-h4-font-size);
+    font-weight: var(--main-xl-font-weiht);
+    line-height: var(--main-md-line-height);
+    text-align: center;
+    width: fit-content;
+    color: var(--main-color-blackgreen);
+}
+
+.duration{
+    font-family: var(--main-font-Quicksand);
+    font-size: var(--main-h4-font-size);
+    font-weight: var(--main-md-font-weiht);
+    line-height: var(--main-md-line-height);
+    text-align: left;
+    color: var(--main-color-gray-20);
+    width: fit-content;
+}
+
+.btn-form{
+    padding: var(--main-btn-md-padd);
+    border-radius: var(--main-radius-value-30);
+    border: none;
+    font-family: var(--main-font-Quicksand);
+    font-size: var(--main-h4-font-size);
+    font-weight: var(--main-md-font-weiht);
+    line-height: var(--main-md-line-height);
+    text-align: center;
+    color: var(--main-color-white);
+}
+
+.bg_blue{
+    background-color: var(--main-color-blue);
+}
+
+.forfait-item:hover{
+    background-color: var(--main-color-blackgreen);
+
+    .duration{
+        color: var(--main-color-green-15);
+    }
+
+    .price{
+        color: var(--main-color-white);
+    }
+
+    .btn-form{
+        background-color: var(--main-color);
+    }
+}

@@ -18,6 +18,7 @@
     gap: 10px;
     border-radius: 30px;
     opacity: 0px;
+    text-decoration: none;
     background-color: var(--main-color);
 }
 

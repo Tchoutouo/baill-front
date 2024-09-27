@@ -10,6 +10,9 @@ import { DashboardComponent } from './components/admin/dashboard/dashboard.compo
 import { SettingsComponent } from './components/admin/settings/settings.component';
 import { MyAccountComponent } from './components/admin/my-account/my-account.component';
 import { AnnouncesComponent } from './components/admin/announces/announces.component';
+import { FormControlName } from '@angular/forms';
+import { AnnouceIndexComponent } from './components/admin/annouce-index/annouce-index.component';
+import { FormCreateComponent } from './components/admin/form-create/form-create.component';
 
 export const routes: Routes = [
     { 
@@ -52,8 +55,22 @@ export const routes: Routes = [
               component: SettingsComponent
             },
             {
-              path: 'announces',
-              component: AnnouncesComponent
+                path: 'announces',
+                component: AnnouceIndexComponent,
+                children: [
+                    
+
+                    { 
+                        path: 'create',
+                        component: FormCreateComponent,
+                        pathMatch: 'full' 
+                    },
+                    
+                    { 
+                        path: 'announces-list',
+                        component: AnnouncesComponent,
+                    },
+                ]
             },
 
             {

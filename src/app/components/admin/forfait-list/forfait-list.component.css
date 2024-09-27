@@ -1,0 +1,30 @@
+#cancel_btn{
+    padding: var(--main-btn-md-padd);
+    border-radius: var(--main-radius-value-30);
+    border: none;
+    font-family: var(--main-font-Quicksand);
+    font-size: var(--main-h4-font-size);
+    font-weight: var(--main-md-font-weiht);
+    line-height: var(--main-md-line-height);
+    text-align: center;
+    color: var(--main-color-white);
+    width: fit-content;
+}
+
+.bg_grey-15{
+    background-color: rgba(229, 229, 229, 1);
+}
+
+.title-list{
+    font-family: var(--main-font-Quicksand);
+    font-size: var(--main-h3-font-size);
+    font-weight: var(--main-xl-font-weiht);
+    line-height: var(--main-llg-line-height);
+    text-align: left;
+    color: var(--main-color-blackgreen);
+    margin: 0;
+}
+
+#my-model-forfait{
+    --bs-modal-width: 66.80%;
+}
