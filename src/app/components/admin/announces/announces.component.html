@@ -1,1 +1,138 @@
-<p>announces works!</p>
+<div class="contaner-fluid px-4">
+    <div class="page-title">
+        <h1>Annonces</h1>
+    </div>
+
+    <div class="add-annouce py-4">
+        <a [routerLink]="['/admin/announces/create']" id="publish-button" class="d-flex align-items-center">
+            <i class="fa-solid fa-plus mx-1 text-white"></i>
+            Ajouter
+        </a>
+    </div>
+
+    <div class="row">
+        <div class="col-12 d-flex justify-content-end">
+            <form class="d-flex nav_item position-relative w-40">
+                <input class="form-control me-2 py-1 px-5" id="search_field" type="search" placeholder="Recherche ...." aria-label="Search">
+                <i class="fa-solid fa-magnifying-glass position-absolute search_icon"></i>
+            </form>
+        </div>
+        <div class="col-12 d-flex justify-content-start gap-2 align-items-center py-3">
+            <h3 class="label-filter m-0">Afficher par</h3>
+            <div class="dropdown">
+                <button class="btn btn-sm  dropdown-toggle grey-20" id="btn-filter" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  5
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item grey-20" href="#">10</a></li>
+                  <li><a class="dropdown-item grey-20" href="#">15</a></li>
+                  <li><a class="dropdown-item grey-20" href="#">20</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <table class="table px-4 m-auto" id="dashboard_table">
+                <thead>
+                    <tr class="border-bottom-1-green">
+                        <th scope="col" class="border-top-1-gray border-left-1-gray">No</th>
+                        <th scope="col " class="bord">No annonce</th>
+                        <th scope="col " class="bord">Titre</th>
+                        <th scope="col " class="bord">Categorie</th>
+                        <th scope="col " class="bord">date Exp</th>
+                        <th scope="col " class="bord">Statut</th>
+                        <th scope="col " class="bord border-right-1-gray">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row" class="bord-black">1</th>
+                        <td class="bord-black">AN001</td>
+                        <td class="bord-black">Nom</td>
+                        <td class="bord-black">Nom</td>
+                        <td class="bord-black">345K</td>
+                        <td class="bord-black"><div class="watting">En cours</div></td>
+                        <td class="bord-black">
+                            <div class="icon-list d-flex gap-2 justify-content-center">
+                                <a href=" " class=""><i class="fa fa-check bg-green  p-1 radius-3 text-white"></i></a>
+                                <a href=""><i class="fa-solid fa-trash radius-3 bg_red text-white p-1"></i></a>
+                                <!-- <a href=""><i class="fa-solid fa-play bg-white radius-3 text_green p-1 border-top-1-green border-bottom-1-green border-left-1-green border-right-1-green"></i></a>
+                                <a href=""><i class="fa-solid fa-pause bg_grey radius-3 text-dark p-1"></i></a>
+                                <a href=""><i class="fa-solid fa-arrows-rotate bg_blue radius-3 text-white p-1"></i></a> -->
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="bord-black">1</th>
+                        <td class="bord-black">AN001</td>
+                        <td class="bord-black">Nom</td>
+                        <td class="bord-black">Nom</td>
+                        <td class="bord-black">345K</td>
+                        <td class="bord-black"><div class="paused">En pause</div></td>
+                        <td class="bord-black">
+                            <div class="icon-list d-flex gap-2 justify-content-center">
+                                <!-- <a href=" " class=""><i class="fa fa-check bg-green  p-1 radius-3 text-white"></i></a>
+                                <a href=""><i class="fa-solid fa-trash radius-3 bg_red text-white p-1"></i></a> -->
+                                <a href=""><i class="fa-solid fa-play bg-white radius-3 text_green p-1 border-top-1-green border-bottom-1-green border-left-1-green border-right-1-green"></i></a>
+                                <!--<a href=""><i class="fa-solid fa-pause bg_grey radius-3 text-dark p-1"></i></a>
+                                <a href=""><i class="fa-solid fa-arrows-rotate bg_blue radius-3 text-white p-1"></i></a> -->
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="bord-black">1</th>
+                        <td class="bord-black">AN001</td>
+                        <td class="bord-black">Nom</td>
+                        <td class="bord-black">Nom</td>
+                        <td class="bord-black">345K</td>
+                        <td class="bord-black"><div class="expired">Exprié</div></td>
+                        <td class="bord-black">
+                            <div class="icon-list d-flex gap-2 justify-content-center">
+                                <!-- <a href=" " class=""><i class="fa fa-check bg-green  p-1 radius-3 text-white"></i></a>
+                                <a href=""><i class="fa-solid fa-trash radius-3 bg_red text-white p-1"></i></a> -->
+                                <!-- <a href=""><i class="fa-solid fa-play bg-white radius-3 text_green p-1 border-top-1-green border-bottom-1-green border-left-1-green border-right-1-green"></i></a> -->
+                                <!--<a href=""><i class="fa-solid fa-pause bg_grey radius-3 text-dark p-1"></i></a> -->
+                                <a href=""><i class="fa-solid fa-arrows-rotate bg_blue radius-3 text-white p-1"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="bord-black">1</th>
+                        <td class="bord-black">AN001</td>
+                        <td class="bord-black">Nom</td>
+                        <td class="bord-black">Nom</td>
+                        <td class="bord-black">345K</td>
+                        <td class="bord-black"><div class="watting">En cours</div></td>
+                        <td class="bord-black">
+                            <div class="icon-list d-flex gap-2 justify-content-center">
+                                <a href=" " class=""><i class="fa fa-check bg-green  p-1 radius-3 text-white"></i></a>
+                                <a href=""><i class="fa-solid fa-trash radius-3 bg_red text-white p-1"></i></a>
+                                <!-- <a href=""><i class="fa-solid fa-play bg-white radius-3 text_green p-1 border-top-1-green border-bottom-1-green border-left-1-green border-right-1-green"></i></a>
+                                <a href=""><i class="fa-solid fa-pause bg_grey radius-3 text-dark p-1"></i></a>
+                                <a href=""><i class="fa-solid fa-arrows-rotate bg_blue radius-3 text-white p-1"></i></a> -->
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="bord-black">1</th>
+                        <td class="bord-black">AN001</td>
+                        <td class="bord-black">Nom</td>
+                        <td class="bord-black">Nom</td>
+                        <td class="bord-black">345K</td>
+                        <td class="bord-black"><div class="published">Publié</div></td>
+                        <td class="bord-black">
+                            <div class="icon-list d-flex gap-2 justify-content-center">
+                                <a href=""><i class="fa-solid fa-pause bg_grey radius-3 text-dark p-1"></i></a>
+
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-12 py-3 d-flex justify-content-end">
+            <app-paginator></app-paginator>
+        </div>
+    </div>
+</div>

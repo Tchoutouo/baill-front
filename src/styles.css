@@ -31,7 +31,9 @@
     --main-color-green-5: #DFFCC8;
     --main-color-blackgreen: #24583F;
     --main-color-gray-5: #F8F8F8;
+    --main-color-gray-20: rgba(143, 143, 143, 1);
     --main-color-yellow: yellow;
+    --main-color-blue: rgba(23, 151, 255, 1);
     --main-color-footer: #212529;
     --main-color-grenn-opa-53:  rgba(145, 226, 83, 0.53);
 
@@ -75,6 +77,7 @@
     --main-btn-pag-padd : 13px 20px 13px 20px;  
     --main-input-padd : 12px 15px 12px 15px;  
     --main-more-info-padd : 8px 6px 8px 6px;  
+    --main-more-small-padd : 8px 3px 8px 3px;  
       
 
     /* green shadow */
@@ -92,12 +95,14 @@
     --main-radius-value-8: 8px;
     --main-radius-value-6: 6px;
     --main-radius-value-3: 3px;
+    --main-radius-value-5: 5px;
     --main-radius-value-50: 50%;
     --main-radius-value-10: 10px;
+    --main-radius-value-100: 100px;
 
     /* border */
     --main-border-value-1: 1px;
-    --main-border-value-5: 5px
+    --main-border-value-5: 5px;
 
     /* gap */
     --gap-30 : 30px;
