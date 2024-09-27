@@ -58,3 +58,20 @@ button.add_caract{
     border-radius: 20px;
     width: fit-content;
 }
+
+.bg_blue{
+    background-color: var(--main-color-blue);
+}
+
+.btn-form{
+    padding: var(--main-btn-md-padd);
+    border-radius: var(--main-radius-value-30);
+    border: none;
+    font-family: var(--main-font-Quicksand);
+    font-size: var(--main-h4-font-size);
+    font-weight: var(--main-md-font-weiht);
+    line-height: var(--main-md-line-height);
+    text-align: center;
+    color: var(--main-color-white);
+    width: fit-content;
+}
