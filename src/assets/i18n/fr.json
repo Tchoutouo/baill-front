@@ -28,7 +28,12 @@
             "text-line-3":"toute simplicité !"
         },
         "signin":{
-            
+            "login-description": "Bienvenue chez Bailleurnet, la location à portée de main.",
+            "form-title": "Se connecter",
+            "text-login": "Si vous n’avez pas de compte",
+            "title-signup": "s'inscrire",
+            "email": "E-mail",
+            "password": "Mot de passe"
         }
     },
     "admin":{

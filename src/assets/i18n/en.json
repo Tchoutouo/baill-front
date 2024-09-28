@@ -28,7 +28,12 @@
             "text-line-3":"simply!"
         },
         "signin":{
-            
+            "login-description": "Welcome to Bailleurnet, rental at your fingertips.",
+            "form-title": "Log in",
+            "text-login": "If you don't have an account",
+            "title-signup": "Register",
+            "email": "E-mail",
+            "password": "Password"
         }
     },
     "admin":{
