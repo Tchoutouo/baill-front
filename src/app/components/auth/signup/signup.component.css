@@ -67,6 +67,10 @@ form .form-group label{
     margin: 10px 0px;
 }
 
+form .form-group span{
+    color: red;
+}
+
 form .form-group .form-control{
     background-color: var(--main-color-green-5);
     width: 306px;
@@ -74,12 +78,18 @@ form .form-group .form-control{
     border-radius: 6px;
 }
 
+.error p{
+    font-size: 10px;
+    color: red;
+    margin-bottom: 0px;
+}
+
 .signup-button{
     padding-top: 40px;
     text-align: center;
 }
 
-.signup-button div a{
+.signup-button div button{
     width: 256px;
     height: 50px;
     border-radius: var(--main-radius-value-30);
@@ -91,15 +101,15 @@ form .form-group .form-control{
     line-height: var(--main-md-line-height);
 }
 
-.signup-button div a:hover{
+.signup-button div button:hover{
     background-color: var(--main-color-orange);
     border-style: hidden;
 }
 
-.signup-button div a p {
+.signup-button div button p {
     display: flex;
     align-items: center;
-
+    margin-bottom: 0px;
 }
 
 .tab{
@@ -175,7 +185,7 @@ form .form-group .form-control{
         font-size: var(--main-h5-font-size);
     }
 
-    .signup-button div a{
+    .signup-button div button{
         width: 220px;
     }
 
