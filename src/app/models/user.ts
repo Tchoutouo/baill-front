@@ -1,0 +1,20 @@
+export interface User {
+    _id?: BigInteger,
+    username: string,
+    first_name?: string,
+    last_name: string,
+    email: string,
+    email_verified_at?: string,
+    password: string,
+    picture?: string,
+    number?: string,
+    whatsapp_number: string,
+    site_url?: string,
+    neighborhood?: string,
+    city: string,
+    country: string,
+    date_of_birth?: string,
+    place_of_birth?: string,
+    sex?: boolean,
+    passwordConfirm?: string
+}

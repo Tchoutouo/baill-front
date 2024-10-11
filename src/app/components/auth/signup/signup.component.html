@@ -2,60 +2,108 @@
     <div class="content">
         <div class="row signup ">
             <div class="col-md-8 content-left">
-                <form action="" method="post">
+                <form action="" method="post" [formGroup]="signupForm">
                     <div class="row">
                         <div class="title text-center">
                             <h2>{{'user.signup.title'|translate}}</h2>
-                            <p>{{'user.signup.text-account'|translate}}, <a href="">{{'user.signup.login-text'|translate}}</a></p>
+                            <p>{{'user.signup.text-account'|translate}}, <a class="" [routerLink]="['/signin']">{{'user.signup.login-text'|translate}}</a></p>
                         </div>
                     </div>
                     <div class="row tab">
                         <div class="col-md-6 tab_1">
                             <div class="form-group">
-                                <label for="username">{{'user.signup.username'|translate}}</label>
-                                <input id="username" class="form-control" type="text" name="">
+                                <label for="username">{{'user.signup.username'|translate}}</label> <span>*</span>
+                                <input id="username" class="form-control" type="text" [formControl]="username" name="username">
+                            </div>
+                            <div class="error" *ngIf="username.dirty">
+                                <p *ngIf="username.hasError('required')">
+                                    le nom d'utilisateur est requis
+                                </p>
                             </div>
                             <div class="form-group">
-                                <label for="name">{{'user.signup.name'|translate}}</label>
-                                <input id="name" class="form-control" type="text" name="">
+                                <label for="name">{{'user.signup.name'|translate}}</label><span>*</span>
+                                <input id="name" class="form-control" type="text" [formControl]="last_name" name="last_name">
+                            </div>
+                            <div class="error" *ngIf="last_name.dirty">
+                                <p *ngIf="last_name.hasError('required')">
+                                    le nom(s) est requis
+                                </p>
                             </div>
                             <div class="form-group">
-                                <label for="email">{{'user.signup.email'|translate}}</label>
-                                <input id="email" class="form-control" type="email" name="">
+                                <label for="email">{{'user.signup.email'|translate}}</label><span>*</span>
+                                <input id="email" class="form-control" type="email" [formControl]="email" name="email">
+                            </div>
+                            <div class="error" *ngIf="email.dirty && !email.valid">
+                                <p *ngIf="email.hasError('required')">
+                                    L'email est requis
+                                </p>
+                                <p *ngIf="!email.hasError('required')">
+                                    L'email ne respect pas le bon format
+                                </p>
                             </div>
                             <div class="form-group">
-                                <label for="phone">{{'user.signup.whatsapp-number'|translate}}</label>
-                                <input id="phone" class="form-control" type="number" name="">
+                                <label for="phone">{{'user.signup.whatsapp-number'|translate}}</label><span>*</span>
+                                <input id="phone" class="form-control" type="number" [formControl]="whatsapp_number" name="whatsapp_number">
                             </div>
                         </div>
                         <div class="col-md-6 tab_2">
                             <div class="form-group">
-                                <label for="country">{{'user.signup.country'|translate}}</label>
-                                <select name="" id="input" class="form-control" required="required">
-                                    <option value=""></option>
+                                <label for="country">{{'user.signup.country'|translate}}</label><span>*</span>
+                                <select id="country" [(ngModel)]="selectedCountry" (change)="onCountryChange($event)" [formControl]="country" name="country" class="form-control" required="required">
+                                    <option *ngFor="let country of countries" [value]="country.isoCode">{{ country.name }}</option>
                                 </select>
+                            </div>
+                            <div class="error" *ngIf="country.dirty">
+                                <p *ngIf="country.hasError('required')">
+                                    Veuillez choisir un pays.
+                                </p>
                             </div>
                             <div class="form-group">
                                 <label for="city">{{'user.signup.city'|translate}}</label>
-                                <select name="" id="city" class="form-control" required="required">
-                                    <option value=""></option>
+                                <select [(ngModel)]="selectedCity" [formControl]="city" name="city" id="city" class="form-control" required="required">
+                                    <option *ngFor="let city of cities" [value]="city.name">
+                                        {{ city.name }}
+                                    </option>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label for="password">{{'user.signup.password'|translate}}</label>
-                                <input id="password" class="form-control" type="password" name="">
+                            <div class="error" *ngIf="city.dirty">
+                                <p *ngIf="city.hasError('required')">
+                                    Veuillez choisir votre ville.
+                                </p>
                             </div>
                             <div class="form-group">
-                                <label for="confimpassword">{{'user.signup.confirm-password'|translate}}</label>
-                                <input id="confimpassword" class="form-control" type="password" name="">
+                                <label for="password">{{'user.signup.password'|translate}}</label><span>*</span>
+                                <input id="password" class="form-control" type="password" [formControl]="password" name="password">
+                            </div>
+                            <div class="error" *ngIf="password.dirty && !password.valid">
+                                <p *ngIf="passwordConfirm.hasError('required')">
+                                    The password is required
+                                </p>
+                                
+                                <p *ngIf="passwordConfirm.hasError('minlength')">
+                                    The password must be at least 6 characters
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label for="confimpassword">{{'user.signup.confirm-password'|translate}}</label><span>*</span>
+                                <input id="confimpassword" class="form-control" type="password" [formControl]="passwordConfirm" name="passwordConfirm">
+                            </div>
+                            <div class="error" *ngIf="passwordConfirm.dirty && !passwordConfirm.valid">
+                                <p *ngIf="passwordConfirm.hasError('required')">
+                                    The password is required
+                                </p>
+                                
+                                <p *ngIf="passwordConfirm.hasError('minlength')">
+                                    The password must be at least 6 characters
+                                </p>
                             </div>
                         </div>
                     </div>
                     <div class="row signup-button">
                         <div class="col-12">
-                            <a href="" type="submit" class="btn btn-success text-center d-flex justify-content-center m-auto">
+                            <button type="submit" [disabled]="!this.signupForm.valid" (click)="handleSubmit()" class=" text-center d-flex justify-content-center align-items-center m-auto">
                                 <p class="m-0">{{'user.signup.login-text'|translate}}</p>
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </form>

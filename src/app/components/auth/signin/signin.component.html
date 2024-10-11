@@ -10,7 +10,7 @@
                         </a>
                     </div>
                     <div class="login-description py-4">
-                        <p class="">Bienvenue chez Bailleurnet, la location à portée de main.</p>
+                        <p class="">{{'user.signin.login-description'|translate}}</p>
                     </div>
                     <div class="row">
                         <div class="col-6">
@@ -35,23 +35,23 @@
             <div class="col-lg-6 mb-3">
                 <div class="form-container py-4" id="loginForm">
                     <h2 class="form-title">
-                        Se connecter
+                        {{'user.signin.form-title'|translate}}
                     </h2>
-                    <p class="text-login pt-2 pb-4">Si vous n’avez pas de compte <a class="" [routerLink]="['/signup']">s’inscrire</a></p>
+                    <p class="text-login pt-2 pb-4">{{'user.signin.text-login'|translate}} <a class="" [routerLink]="['/signup']">{{'user.signin.title-signup'|translate}}</a></p>
                     <form id="form">
                         <div class="mb-4">
-                          <label for="exampleInputEmail1" class="form-label">Email </label>
+                          <label for="exampleInputEmail1" class="form-label">{{'user.signin.email'|translate}} </label>
                           <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                         </div>
 
                         <div class="" id="password_field">
-                          <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
+                          <label for="exampleInputPassword1" class="form-label">{{'user.signin.password'|translate}}</label>
                           <input type="{{typeField}}" class="form-control" (keyup)="showIcon($event)" id="exampleInputPassword1">
                           <i class="fa-solid fa-eye{{icon_eyes}} d-{{display}}" (click)="toggleIconClass($event)" id="icon_eyes" ></i>
                         </div>
 
                         <div class="d-flex justify-content-center mt-5 mb-4">
-                            <button type="submit" id="submit-button" class="btn btn-primary">Se connecter</button>
+                            <button type="submit" id="submit-button" class="btn btn-primary">{{'user.signin.form-title'|translate}}</button>
                         </div>
 
                         <div class="other-login-form">
