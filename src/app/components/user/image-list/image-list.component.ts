@@ -36,6 +36,5 @@ export class ImageListComponent {
     this.modalImages = new wind["bootstrap"].Modal("#imageListPreview", {keyboard : false})
     this.modalImages.hide() ;
     this.closeModal.emit();
-    
   }
 }

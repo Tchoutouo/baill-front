@@ -13,39 +13,39 @@
                 <div class="col-md-5">
                     <div class="form_group gap-1 mb-4">
                         <label for="title" class="label-form mb-2">Titre<span class="text-danger mx-2">*</span></label> 
-                        <input type="text" class=" form-control input-field" required name="title" id="title" placeholder="voture toyota">
+                        <input type="text" [formControl]="title" class=" form-control input-field" required name="title" id="title" placeholder="voture toyota">
                     </div>
 
                     <div class="form_group mb-4">
                         <label class="label-form mb-2" for="category">Catégorie<span class="text-danger mx-2">*</span></label>
-                        <select name="category" id="category" class="form-control input-field" required="required">
-                            <option value="Services Professionnels">Services Professionnels</option>
-                            <option value="Matériel et Equipements">Matériel et Equipements</option>
-                            <option value="venement et Services">Evenement et Services</option>
-                            <option value="Vehicules et Transport" selected>Vehicules et Transport</option>
+                        <select multiple name="category" id="category" class="form-control input-field" [formControl]="category_id" required="required">
+                            <option value="1">Services Professionnels</option>
+                            <option value="2">Matériel et Equipements</option>
+                            <option value="3">Evenement et Services</option>
+                            <option value="4" selected>Vehicules et Transport</option>
                         </select>
                     </div>
 
                     <div class="form_group gap-1 mb-4">
                         <label for="price" class="label-form mb-2">Prix (FCFA)<span class="text-danger mx-2">*</span></label> 
-                        <input type="number" class=" form-control input-field" required name="price" id="price" placeholder="voture toyota">
+                        <input type="number" class=" form-control input-field"  [formControl]="price" name="price" id="price" placeholder="voture toyota">
                     </div>
 
                     <div class="form_group gap-1 mb-4">
                         <label for="description" class="label-form mb-2">Description<span class="text-danger mx-2">*</span></label> 
-                        <textarea name="description" class="form-control input-field" required id="description" rows="5" cols="10"></textarea>
+                        <textarea name="description"  [formControl]="description" class="form-control input-field" required id="description" rows="5" cols="10"></textarea>
                     </div>
 
                     <div class="form_group gap-1 mb-4">
                         <label for="country" class="label-form mb-2">Pays<span class="text-danger mx-2">*</span></label> 
-                        <input type="text" class=" form-control input-field" required name="country" id="country" placeholder="voture toyota">
+                        <input type="text" class=" form-control input-field"  [formControl]="country" name="country" id="country" placeholder="voture toyota">
                     </div>
                 </div>
 
                 <div class="offset-md-2 col-md-5">
                     <div class="form_group gap-1 mb-4">
                         <label for="city" class="label-form mb-2">Ville<span class="text-danger mx-2">*</span></label> 
-                        <input type="text" class=" form-control input-field" name="city" required id="city" placeholder="voture toyota">
+                        <input type="text" class=" form-control input-field"  name="city" required id="city" placeholder="voture toyota">
                     </div>
 
                     <div class="form_group gap-1 mb-4">
@@ -53,56 +53,49 @@
                         <input type="text" class=" form-control input-field" name="address" required id="address" placeholder="Yde, Damas 423">
                     </div>
 
-                    <div class="form_group gap-1 mb-4">
+                    <!-- <div class="form_group gap-1 mb-4">
                         <label for="caract" class="label-form mb-2">Caractéristiques<span class="text-danger mx-2">*</span></label> 
                         <div class="cateristics">
-                            <button class="add_caract my-2">
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
-
-                            <div class="row py-2 align-items-center">
-                                <div class="col-3">
-                                    <div class="tag-caract">
-                                        Taille
-                                    </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <button class="add_caract my-2" >
+                                        <i class="fa-solid fa-plus"></i>
+                                    </button>
                                 </div>
-                                <div class="col-8">
-                                    <input type="text" class="form-control input-field"  name="address" id="address" value="1567 x 123" placeholder="valeur">
-                                </div>
-                                <div class="col-1">
-                                    <i class="fa-solid fa-xmark"></i>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control input-field my-2 "  name="categories" id="categories"  placeholder="Ajouter une catgorie">
                                 </div>
                             </div>
+
+                            <ng-container *NgFor="category of categoriesList track image; let  i = index">
+                                <div *ngIf="i < 2" class="row py-2 align-items-center category_row">
+                                    <div class="col-3">
+                                        <div class="tag-caract">
+                                            Taille
+                                        </div>
+                                    </div>
+                                    <div class="col-8">
+                                        <input type="text" class="form-control input-field"  name="sub-categories" id="sub-categories" value="1567 x 123" placeholder="valeur">
+                                    </div>
+                                    <div class="col-1">
+                                        <i class="fa-solid fa-xmark"></i>
+                                    </div>
+                                </div>
+                            </ng-container>
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="form_group gap-1 mb-4">
-                        <label for="images" class="label-form mb-2">Images<span class="text-danger mx-2">*</span></label> 
-                        <div class="row mx-0 py-2 border-gray-1">
-                            <div class="col-3">
-                                <div class="image-item" style="background-image: url();">
-                                    <i class="fa-solid  fa-xmark"></i>
-                                </div>
-                            </div>
-
-                            <div class="col-3 px-1">
-                                <label class="select-image" for="imagesList">
-                                    <input type="file" name="images[]" class="d-none" id="imagesList">
-                                    <div class="">
-                                        <i class="fa-solid  fa-plus h3"></i>
-                                    </div>
-                                </label>
-                            </div>
-                        </div>
+                        <app-image-view (imageList_)="getImagesList($event)"></app-image-view >
                     </div>
                 </div>
             </div>
-            <div class="row mx-0 gap-4 py-4">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#forfaitList" class="btn-form bg_green">
+            <div class="row mx-0 gap-4 py-4 align-items-center">
+                <button type="button" class="btn btn-primary" id="create" data-bs-toggle="modal" data-bs-target="#forfaitList" class="btn-form bg_green">
                     Creer & publier
-                    <app-forfait-list></app-forfait-list>
+                    <app-forfait-list (hasSubmit)="handleSubmit($event)"></app-forfait-list>
                 </button>
-                <button type="submit" class="btn-form bg_blue my-4" >Enregistrer</button>
+                <button type="button" (click)="handleSubmit(null)" class="btn-form bg_blue my-4" >Enregistrer</button>
             </div>
         </form>
     </div>

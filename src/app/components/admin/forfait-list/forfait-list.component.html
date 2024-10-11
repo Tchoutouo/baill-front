@@ -6,7 +6,7 @@
             <h4 class="modal-title title-list pb-4 px-3">Choisissez un forfait</h4>
             <div class="row mx-0">
                 <div class="col-md-4" *ngFor = "let item of list_forfati">
-                    <app-forfait-item></app-forfait-item>
+                    <app-forfait-item (click)="sendData(item)"></app-forfait-item>
                 </div>
             </div>
         </div>

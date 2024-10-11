@@ -1,0 +1,48 @@
+.image-item{
+    background-color: transparent;
+    height: calc(115px - 1rem);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    position: relative;
+    border-radius: var(--main-radius-value-3);
+}
+
+.select-image{
+    background-color: var(--main-color-gray-15);
+    border-radius: var(--main-radius-value-3);
+    width: 70%;
+    height: calc(115px - 1rem);
+    position: relative;
+    cursor: pointer;
+}
+
+.select-image i{    
+    position: absolute;
+    color: var(--main-color-gray-20);
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.image-item i{
+    position: absolute;
+    font-size: 10px;
+    right: 2%;
+    top: 2%;
+    padding: 3px 4px;
+    background-color: rgba(35, 35, 35, 0.45);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.border-gray-1{
+    border: 1px solid rgba(199, 199, 199, 1);
+    border-radius: var(--main-radius-value-3);
+}
+
+
+.images-content{
+    height: fit-content;
+}

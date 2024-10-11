@@ -60,47 +60,6 @@ button.add_caract{
     color: var(--main-color-dark);
 }
 
-.image-item{
-    background-color: aqua;
-    height: 115px;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    width: 100%;
-    position: relative;
-    border-radius: var(--main-radius-value-3);
-}
-
-.select-image{
-    background-color: var(--main-color-gray-15);
-    border-radius: var(--main-radius-value-3);
-    width: 65%;
-    height: 115px;
-    position: relative;
-    cursor: pointer;
-}
-
-.select-image i{    
-    position: absolute;
-    color: var(--main-color-gray-20);
-    top: 39%;
-    left: 35%;
-}
-
-.image-item i{
-    position: absolute;
-    font-size: 10px;
-    right: 2%;
-    top: 2%;
-    padding: 3px 4px;
-    background-color: rgba(35, 35, 35, 0.45);
-    border-radius: 50%;
-}
-
-.border-gray-1{
-    border: 1px solid rgba(199, 199, 199, 1);
-    border-radius: var(--main-radius-value-3);
-}
 
 .btn-form{
     padding: var(--main-btn-md-padd);
@@ -120,4 +79,9 @@ button.add_caract{
 }
 .bg_green{
     background-color: var(--main-color);
+}
+
+#create{
+    height: fit-content;
+    
 }

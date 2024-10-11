@@ -27,6 +27,8 @@ export class ProductDetailsComponent {
     }
 
     ngOnInit() {
+      window.scroll(0, 0)
+
         this.imagesList = ["../../../../assets/products/prodcut-1/1.jpeg", "../../../../assets/products/prodcut-1/2.jpeg", 
            "../../../../assets/products/prodcut-1/3.png",  "../../../../assets/products/prodcut-1/4.jpeg", "../../../../assets/products/prodcut-1/5.jpg",
           "../../../../assets/products/prodcut-1/6.jpg", "../../../../assets/products/prodcut-1/7.jpeg",

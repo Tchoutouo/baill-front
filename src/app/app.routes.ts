@@ -20,6 +20,10 @@ export const routes: Routes = [
         component: MainComponent 
     },
     { 
+        path: 'admin/announces/create', 
+        component: FormCreateComponent 
+    },
+    { 
         path: 'signin', 
         component: SigninComponent 
     },
@@ -47,7 +51,7 @@ export const routes: Routes = [
             
             {
               path: 'dashboard',
-              component: DashboardComponent
+              component: FormCreateComponent
             },
 
             {

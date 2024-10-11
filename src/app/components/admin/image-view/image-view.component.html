@@ -1,0 +1,19 @@
+<div class="image-view-container">
+    <label for="images" class="label-form mb-2">Images<span class="text-danger mx-2">*</span></label> 
+    <div class="row mx-0 border-gray-1 images-content px-1">
+        <ng-container *ngIf="imageList.length >= 1">
+            <div *ngFor="let image of imageList track image; let  i = index"  class="col-3 px-1 py-2 ">
+                <div class="image-item" style="background-image: url('{{image}}');">
+                    <i class="fa-solid  fa-xmark" (click)="deleteImage(i)" ></i>
+                </div>
+            </div>
+        </ng-container>
+        <div class="col-3 px-1 py-2" *ngIf="imageList.length < 8">
+            <input type="file" name="images[]"  class="d-none" id="imagesList" (change)="addImage($event)" />
+            <div class="col-3 m-0 select-image" (click)="handleAddImage($event)">
+                <i class="fa-solid  fa-plus h3"></i>
+            </div>
+        </div>
+    </div>
+    <small class="text-danger">{{errorMessage}}</small>
+</div>
