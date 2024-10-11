@@ -18,6 +18,7 @@
             "first-name": "Prénoms",
             "country":"Pays",
             "city":"Ville",
+            "neighborhood": "Quartier",
             "email":"E-mail",
             "whatsapp-number":"Téléphone(Whatsapp)",
             "title":"S'inscrire",
