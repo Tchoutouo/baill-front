@@ -13,8 +13,6 @@ export class DashboardComponent {
 
     anounceList : Array<any> = [];
 
-    message_alert : any  = null;
-
     constructor(){
 
     }
