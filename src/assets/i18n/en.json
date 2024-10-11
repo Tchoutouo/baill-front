@@ -18,6 +18,7 @@
             "first-name": "First names",
             "country":"Country",
             "city":"City",
+            "neighborhood": "Neighborhood",
             "email":"Email",
             "whatsapp-number":"Phone(Whatsapp)",
             "title":"Register",

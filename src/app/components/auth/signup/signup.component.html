@@ -72,23 +72,34 @@
                                 </p>
                             </div>
                             <div class="form-group">
+                                <label for="neighborhood">{{'user.signup.neighborhood'|translate}}</label>
+                                <input id="neighborhood" class="form-control" type="text" [formControl]="neighborhood" name="neighborhood">
+                                
+                            </div>
+                            <div class="error" *ngIf="neighborhood.dirty">
+                                <p *ngIf="city.hasError('required')">
+                                    Veuillez choisir votre quartier.
+                                </p>
+                            </div>
+                            
+                            <div class="form-group">
                                 <label for="password">{{'user.signup.password'|translate}}</label><span>*</span>
                                 <input id="password" class="form-control" type="password" [formControl]="password" name="password">
                             </div>
                             <div class="error" *ngIf="password.dirty && !password.valid">
-                                <p *ngIf="passwordConfirm.hasError('required')">
+                                <p *ngIf="password.hasError('required')">
                                     The password is required
                                 </p>
                                 
-                                <p *ngIf="passwordConfirm.hasError('minlength')">
+                                <p *ngIf="password.hasError('minlength')">
                                     The password must be at least 6 characters
                                 </p>
                             </div>
                             <div class="form-group">
                                 <label for="confimpassword">{{'user.signup.confirm-password'|translate}}</label><span>*</span>
-                                <input id="confimpassword" class="form-control" type="password" [formControl]="passwordConfirm" name="passwordConfirm">
+                                <input id="confimpassword" class="form-control" type="password"  name="">
                             </div>
-                            <div class="error" *ngIf="passwordConfirm.dirty && !passwordConfirm.valid">
+                            <!-- <div class="error" *ngIf="passwordConfirm.dirty && !passwordConfirm.valid">
                                 <p *ngIf="passwordConfirm.hasError('required')">
                                     The password is required
                                 </p>
@@ -96,7 +107,7 @@
                                 <p *ngIf="passwordConfirm.hasError('minlength')">
                                     The password must be at least 6 characters
                                 </p>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="row signup-button">
