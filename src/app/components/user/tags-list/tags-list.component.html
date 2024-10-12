@@ -1,4 +1,4 @@
-<div class="tag-list d-flex gap-3 mb-5">
+<!-- <div class="tag-list d-flex gap-3 mb-5">
     <button class="filter-tag active-tag">Espace agricole </button>
     <button class="filter-tag">Salle de fête </button>
     <button class="filter-tag">Hôtel</button>
@@ -6,4 +6,30 @@
     <button class="filter-tag">Appartement meublé </button>
     <button class="filter-tag">Espace commercial </button>
     <button class="filter-tag">Espace non bâti </button>
+</div> -->
+
+<div class="tag-list mb-5 row">
+    <div class="col-md-3 mb-1">
+        <select name="category" id="category" class="form-control filter-tag">
+            <option value="" selected>Selectionner une categorie</option>
+            <option *ngFor="let category of categories" [value]="category.id"> {{ category.title }} </option>
+        </select>
+    </div>
+    <div class="col-md-3 mb-1">
+        <select id="country" [(ngModel)]="selectedCountry" (change)="onCountryChange($event)" name="country" class="form-control filter-tag" placeholder="Veuillez selectionner un pays">
+            <option value="" selected>Selectionner un pays</option>
+            <option *ngFor="let country of countries" [value]="country.isoCode">{{ country.name }}</option>
+        </select>
+    </div>
+    <div class="col-md-3 mb-1">
+        <select [(ngModel)]="selectedCity" name="city" id="city" class="form-control filter-tag" placeholder="Veuillez selectionner une ville">
+            <option value="" selected>Selectionner une ville</option>
+            <option *ngFor="let city of cities" [value]="city.name">
+                {{ city.name }}
+            </option>
+        </select>
+    </div>
+    <div class="col-md-3">
+        <button class="filter-tag active-tag">All</button>
+    </div>
 </div>

@@ -1,6 +1,6 @@
 {
     "banner":{
-        "title":"Louez, en toute simplicité",
+        "title":"Louer, en toute simplicité",
         "description": "Bailleurnet est La plateforme ultime pour la location de biens et services en toute simplicité",
         "btn-publish": "Publier une annonce"
     },
@@ -33,7 +33,7 @@
             "form-title": "Se connecter",
             "text-login": "Si vous n’avez pas de compte",
             "title-signup": "s'inscrire",
-            "email": "E-mail",
+            "email": "E-mail ou Tel",
             "password": "Mot de passe"
         }
     },

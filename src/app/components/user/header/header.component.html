@@ -29,11 +29,11 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse bg-white justify-content-between ps-xl-5 gap-xl-0 gap-md-3" id="navbarNavDropdown">
-            <form class="d-flex nav_item position-relative w-50">
+        <div class="collapse navbar-collapse bg-white justify-content-end ps-xl-5 gap-xl-0 gap-md-3" id="navbarNavDropdown">
+            <!-- <form class="d-flex nav_item position-relative w-50">
                 <input class="form-control me-2 py-2 px-5 rounded" id="search_field" type="search" placeholder="{{'header.search'| translate}}" aria-label="Search">
                 <i class="fa-solid fa-magnifying-glass position-absolute search_icon"></i>
-            </form>
+            </form> -->
             <div class="d-flex gap-3 two_btn">
                 <a class="nav-link btn_publish nav_item_" href="">
                     <i class="fas fa-plus "></i>
@@ -44,7 +44,7 @@
                     {{'header.login-text'| translate}}
                 </a>
             </div>
-            <div class="form-group">
+            <div class="form-group ms-5">
                 <select class="form-control" (change)="ChangeLanguage($event)" name="">
                     <option [selected]="lang==='fr'" value="fr">FR</option>
                     <option [selected]="lang==='en'" value="en">EN</option>

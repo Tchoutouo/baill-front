@@ -28,11 +28,11 @@
     width: 60px;
 }
 
-#search_field{
+/* #search_field{
     background-color: var(--main-color-gray-10);
     font-weight: var(--main-md-font-weiht);
     font-size: var(--main-h4-font-size );
-}
+} */
 
 .search_icon{
     top: 33.6%;
