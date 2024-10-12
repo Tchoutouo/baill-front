@@ -213,3 +213,23 @@ input::placeholder{
     padding: 42px 47px;
     font-size: 100px;
 }
+
+.p-relative{
+    position: relative;
+}
+
+.orangeK{
+    color: var(--main-color-orange);
+}
+
+.bg-orangeK{
+    background-color: var(--main-color-orange) !important;
+}
+
+.orangeK5{
+    color: var(--main-color-orange-K5);
+}
+
+.bg-orangeK5{
+    background-color: var(--main-color-orange-K5) !important;
+}

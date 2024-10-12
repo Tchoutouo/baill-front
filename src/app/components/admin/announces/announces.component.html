@@ -10,6 +10,10 @@
         </a>
     </div>
 
+    <div class="alert-message">
+        <app-alert *ngIf="display_message" (timeOut) ="closeAlert($event)" [message] = "message_alert"></app-alert>
+    </div>
+
     <div class="row">
         <div class="col-12 d-flex justify-content-end">
             <form class="d-flex nav_item position-relative w-40">

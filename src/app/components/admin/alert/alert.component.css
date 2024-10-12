@@ -1,0 +1,21 @@
+#icon-chek{
+    background-color: var(--main-color);
+    font-size: 19px;
+    border-radius: 50%;
+    height: 36px;
+    width: 36px;
+    color: var(--main-color-white);
+    padding: 10px;
+}
+
+.alert-container{
+    border-radius: 8px;
+    position: absolute;
+    top: 110px;
+    right: 30px;
+}
+
+.w-35{
+    width: 35%;
+}
+

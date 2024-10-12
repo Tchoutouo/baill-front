@@ -51,7 +51,7 @@ export const routes: Routes = [
             
             {
               path: 'dashboard',
-              component: FormCreateComponent
+              component: DashboardComponent
             },
 
             {
