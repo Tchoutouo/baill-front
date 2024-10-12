@@ -160,6 +160,10 @@ input:-internal-autofill-selected {
     background-color: var(--main-color-grenn-opa-53);
 }
 
+.login-container{
+    padding-top: 60px;
+}
+
 .small-cirle{
     margin: 5% 19%;
     width: 23px;
@@ -171,6 +175,8 @@ input:-internal-autofill-selected {
     border-radius: var(--main-radius-value-50);
     background-color: var(--main-color-orange);
 }
+
+
 
 .login-text{
     background: radial-gradient(51.78% 51.78% at 35.65% 48.22%, #CDF2B1 0%, #FFFFFF 90.5%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;

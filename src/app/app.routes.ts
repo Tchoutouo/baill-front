@@ -13,6 +13,7 @@ import { AnnouncesComponent } from './components/admin/announces/announces.compo
 import { FormControlName } from '@angular/forms';
 import { AnnouceIndexComponent } from './components/admin/annouce-index/annouce-index.component';
 import { FormCreateComponent } from './components/admin/form-create/form-create.component';
+import { authGuard } from './guard/auth.guard';
 
 export const routes: Routes = [
     { 
@@ -42,6 +43,7 @@ export const routes: Routes = [
     { 
         path: 'admin', 
         component: ContentComponent,
+        // canActivate: [authGuard],
         children: [
             { 
                 path: '', 
@@ -77,11 +79,13 @@ export const routes: Routes = [
                 ]
             },
 
-            {
-              path: 'myAccount',
-              component: MyAccountComponent
-            }
         ]
     },
+
+    {
+      path: 'myAccount',
+      component: MyAccountComponent,
+        canActivate: [authGuard],
+    }
 
 ];

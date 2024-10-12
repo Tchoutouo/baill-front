@@ -233,3 +233,13 @@ input::placeholder{
 .bg-orangeK5{
     background-color: var(--main-color-orange-K5) !important;
 }
+
+.error{
+    color: rgb(189, 47, 47);
+}
+
+button:disabled
+{
+    cursor: not-allowed;
+    opacity: 0.8;
+}
