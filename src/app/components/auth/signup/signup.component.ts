@@ -17,7 +17,6 @@ import { EntityServiceService } from '../../../services/admin/entity-service.ser
 })
 export class SignupComponent implements OnInit{
   siteName: string ="";
-  // countries: any[] = [];
   countries: ICountry[] | undefined;
   cities: ICity[] | undefined;
   selectedCountry: string = '';
@@ -40,6 +39,7 @@ export class SignupComponent implements OnInit{
   signupForm: FormGroup;
   username: FormControl;
   last_name: FormControl;
+  first_name: FormControl;
   whatsapp_number: FormControl;
   email: FormControl;
   city: FormControl;
@@ -51,6 +51,7 @@ export class SignupComponent implements OnInit{
   constructor(fb: FormBuilder, private entityService : EntityServiceService) {
     this.username = fb.control("",[Validators.required]);
     this.last_name = fb.control("",[Validators.required]);
+    this.first_name = fb.control("",[Validators.required]);
     this.whatsapp_number = fb.control("",[Validators.required]);
     this.city = fb.control("",[Validators.required]);
     this.country = fb.control("",[Validators.required]);
@@ -62,6 +63,7 @@ export class SignupComponent implements OnInit{
     this.signupForm = fb.group({
       username: this.username,
       last_name: this.last_name,
+      first_name: this.first_name,
       whatsapp_number: this.whatsapp_number,
       email: this.email,
       city: this.city,
@@ -83,7 +85,7 @@ export class SignupComponent implements OnInit{
     try{
       const countryCode = event.target.value;
       this.cities = City.getCitiesOfCountry(countryCode);
-      console.log("cities",this.cities);
+      // console.log("cities",this.cities);
 
     } catch (error) {
       console.error('Erreur lors de la récupération des villes:', error);
@@ -92,7 +94,7 @@ export class SignupComponent implements OnInit{
 
   handleSubmit(){
     console.log("formValue",this.signupForm.value)
-    const entity =  "users_back/store";
+    const entity =  "advertiser_back/store";
 
     const datas = this.signupForm.value;
     this.entityService.store(entity, datas).subscribe({
