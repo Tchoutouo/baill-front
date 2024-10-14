@@ -43,7 +43,7 @@ export class TagsListComponent implements OnInit{
       this.entityService.getAll(entity)
       .subscribe({
         next: (categories: any)=>{
-          this.categories = categories
+          this.categories = categories.data
         },
         error: (error: any)=>{
           console.log("error", error)
