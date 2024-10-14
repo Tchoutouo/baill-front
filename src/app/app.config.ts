@@ -2,9 +2,10 @@ import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } fr
 import { provideRouter, withDebugTracing } from '@angular/router';
 
 import { routes } from './app.routes';
-import { HttpClient, HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { LoadingInterceptor } from './interceptors/loading.interceptor';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -14,18 +15,21 @@ export function createTranslateLoader(http: HttpClient) {
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-      importProvidersFrom([
-        TranslateModule.forRoot({
-          loader: {
-              provide: TranslateLoader,
-              useFactory: (createTranslateLoader),
-              deps: [HttpClient]
-          },
-          defaultLanguage: 'fr',
-        })  
-      ]),
-      provideRouter(routes),
-      provideHttpClient(withInterceptorsFromDi())
+    importProvidersFrom([
+      TranslateModule.forRoot({
+        loader: {
+            provide: TranslateLoader,
+            useFactory: (createTranslateLoader),
+            deps: [HttpClient]
+        },
+        defaultLanguage: 'fr',
+      })  
+    ]),
+    provideRouter(routes),
+    provideHttpClient(withInterceptorsFromDi()),
+    {
+      provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true
+    }
   ],
 
 };
