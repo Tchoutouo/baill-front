@@ -8,7 +8,7 @@
 
 .signup{
     width: 1177px;
-    height: 648px;
+    height: 710px;
     border-radius: var(--main-radius-value-30);
     margin: auto;
     box-shadow: 0px 4px 4px 0px #00000040;
@@ -158,6 +158,10 @@ form .form-group .form-control{
     padding-right: 55px;
 }
 
+.alert-message{
+    z-index: 100;
+}
+
 /* mobile */
 
 @media screen and (max-width : 767px) {
@@ -169,8 +173,13 @@ form .form-group .form-control{
     }
 
     .tab{
-        padding: 0px 0px 0px 20px;
+        /* padding: 0px 0px 0px 20px; */
         margin: auto;
+    }
+
+    .tab_1, .tab_2{
+        display: grid;
+        justify-content: center;
     }
 
     .signup-button .col-12{
@@ -178,7 +187,7 @@ form .form-group .form-control{
     }
 
     form .form-group .form-control{
-        width: 250px;
+        width: 290px;
     }
 
     .title p{

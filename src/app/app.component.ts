@@ -5,11 +5,12 @@ import { TranslateService } from '@ngx-translate/core';
 import { MainComponent } from "./components/user/main/main.component";
 import { FooterComponent } from './components/user/footer/footer.component';
 import { CommonModule } from '@angular/common';
+import { SpinnerComponent } from './components/global/spinner/spinner.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,RouterLink, HeaderComponent, MainComponent,FooterComponent],
+  imports: [RouterOutlet,RouterLink, HeaderComponent, MainComponent,FooterComponent,SpinnerComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { getSiteName } from '../../../helpers/helper';
 import { TranslateModule } from '@ngx-translate/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Country, State, City ,ICountry, IState, ICity}  from 'country-state-city';
 import { User } from '../../../models/user';
 import { EntityServiceService } from '../../../services/admin/entity-service.service';
+import { AlertComponent } from '../../admin/alert/alert.component';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [TranslateModule, RouterLink,FormsModule, CommonModule, ReactiveFormsModule],
+  imports: [TranslateModule, RouterLink,FormsModule, CommonModule, ReactiveFormsModule, AlertComponent],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })
@@ -22,6 +23,8 @@ export class SignupComponent implements OnInit{
   selectedCountry: string = '';
   selectedCity: string = '';
   phoneCode: string = '';
+  message_alert : any  = null;
+  display_message: boolean = false;
 
   user: User = {
     username:"",
@@ -46,9 +49,9 @@ export class SignupComponent implements OnInit{
   country: FormControl;
   neighborhood : FormControl;
   password: FormControl;
-  // passwordConfirm: FormControl;
+  passwordConfirm: FormControl;
 
-  constructor(fb: FormBuilder, private entityService : EntityServiceService) {
+  constructor(fb: FormBuilder, private entityService : EntityServiceService, private router: Router) {
     this.username = fb.control("",[Validators.required]);
     this.last_name = fb.control("",[Validators.required]);
     this.first_name = fb.control("",[Validators.required]);
@@ -58,7 +61,7 @@ export class SignupComponent implements OnInit{
     this.neighborhood = fb.control("",[Validators.required]);
     this.email = fb.control("",[Validators.email, Validators.required]);
     this.password = fb.control("",[Validators.required, Validators.minLength(8)]);
-    // this.passwordConfirm = fb.control("",[Validators.required, Validators.minLength(8)]);
+    this.passwordConfirm = fb.control("",[Validators.required]);
     
     this.signupForm = fb.group({
       username: this.username,
@@ -70,16 +73,37 @@ export class SignupComponent implements OnInit{
       country: this.country,
       neighborhood: this.neighborhood,
       password: this.password,
-      // passwordConfirm: this.passwordConfirm,
+      passwordConfirm: this.passwordConfirm,
+      // passwordsDoNotMatch: false
 
+    }
+    ,
+    {
+      validators: this.passwordsMatchValidator
     })
   }
 
   ngOnInit(): void {
+    window.scroll(0,0)
     this.siteName = getSiteName();
     this.countries = Country.getAllCountries();
     console.log("countries",this.countries)
   }
+
+  passwordsMatchValidator(formGroup: FormGroup) {
+    const password = formGroup.get('password')?.value;
+    const passwordConfirm = formGroup.get('passwordConfirm')?.value;
+
+    return password === passwordConfirm ? null : { passwordsDoNotMatch: true };
+  }
+
+  // get password() {
+  //   return this.signupForm.get('password');
+  // }
+
+  // get passwordConfirm() {
+  //   return this.signupForm.get('passwordConfirm');
+  // }
 
   async onCountryChange(event: any) {
     try{
@@ -97,16 +121,33 @@ export class SignupComponent implements OnInit{
     const entity =  "advertiser_back/store";
 
     const datas = this.signupForm.value;
-    this.entityService.store(entity, datas).subscribe({
-      next : (data : any) =>{
-        console.log("data",data);
+    if (this.signupForm.valid) {
+      console.log('Form submitted successfully');
+      this.entityService.store(entity, datas).subscribe({
+        next : (data : any) =>{
+          console.log("data",data);
+          if(data.success){
+            this.message_alert = "Votre compte a été enregistrée avec succès !!";
+            if (this.message_alert) {
+              this.display_message = true;
+            }
+            this.router.navigate(['/signin']);
+          }
+          console.log({success: data});
+        },
+  
+        error: (error : any) => {
+          console.log(error);
+        }
+      })
 
-        console.log({success: data});
-      },
+    } else {
+      alert('Please correct the errors in the form');
+    }
+  }
 
-      error: (error : any) => {
-        console.log(error);
-      }
-    })
+  closeAlert(event : any){
+    event ? this.display_message = false : this.display_message = false ;
+    
   }
 }
