@@ -21,10 +21,6 @@ export const routes: Routes = [
         component: MainComponent 
     },
     { 
-        path: 'admin/announces/create', 
-        component: FormCreateComponent 
-    },
-    { 
         path: 'signin', 
         component: SigninComponent 
     },
@@ -64,12 +60,9 @@ export const routes: Routes = [
                 path: 'announces',
                 component: AnnouceIndexComponent,
                 children: [
-                    
-
                     { 
                         path: 'create',
                         component: FormCreateComponent,
-                        pathMatch: 'full' 
                     },
                     
                     { 
@@ -78,14 +71,14 @@ export const routes: Routes = [
                     },
                 ]
             },
+            {
+              path: 'myAccount',
+              component: MyAccountComponent,
+                // canActivate: [authGuard],
+            }
 
         ]
     },
 
-    {
-      path: 'myAccount',
-      component: MyAccountComponent,
-        canActivate: [authGuard],
-    }
 
 ];

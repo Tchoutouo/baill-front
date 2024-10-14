@@ -42,6 +42,7 @@ export class AuthenticatorService {
       error : (error : any)=>{
         console.log(error);
       }
+
     })
   }
 
@@ -49,7 +50,6 @@ export class AuthenticatorService {
     this.localStorage.removeItem("token");
     this.localStorage.removeItem("user");
     this.authUser = true ;
-
   }
 
   isAuthenticated(): boolean {
