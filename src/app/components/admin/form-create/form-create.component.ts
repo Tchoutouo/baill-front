@@ -79,49 +79,49 @@ export class FormCreateComponent {
   }
 
 
-  handleSubmit  (event : any | null){
+  handleSubmit(event: any | null) {  
+    if (!this.anounces_form_datas.valid || this.images_annouces_list.length < 1) {  
+        alert('Veuillez remplir les champs requis !');  
+    } else {  
+        const entity = "annonce_back/store";  
+        let formData: FormData = new FormData();  
 
-    console.log(this.anounces_form_datas );
-    
-    if (!this.anounces_form_datas.valid || this.images_annouces_list.length < 1) {
-      alert('veuiller remplir les champs requis !')
-    }else {
-      const entity = "annonce_back/store";
-      let datas = this.anounces_form_datas.value;
+        // Collecte des données du formulaire  
+        let datas = this.anounces_form_datas.value;  
 
+        // Ajout des données du formulaire dans FormData  
+        Object.keys(datas).forEach(key => {
+        if (typeof datas[key] === 'object') {
+            formData.append(key, datas[key]);
+          } else {
+            formData.append(key, datas[key]);
+          }
+        });
 
-      const formData = new FormData();
-      this.images_annouces_list.forEach((item)=>{
-        formData.append('images[]', item);  
-      })
+        // Mise à jour de is_published selon l'événement  
+        formData.append('is_published', event ? 'true' : 'false');  
 
-      datas.imageList = formData;
+        // Ajout des images  
+        this.images_annouces_list.forEach((file) => {  
+              formData.append('images[]', file);  // Utiliser append au lieu de set  
+          });
 
-      console.log(formData.get('images[]'));
-      
-      if (event) {
-        datas.is_published = true;
-      }else{
-        datas.is_published = false;
-      }
-      datas.forfait_id =event; //le forfait choisi
-      console.log(datas);
-      
-      this.entityService.store(entity, datas).subscribe({
-        next : (data : any) =>{
-          console.log({success: data});
-        },
-
-        error: (error : any) => {
-          console.log(error);
-        }
-      })
-    }
-  }
+        // Stockage de l'entité  
+        this.entityService.store(entity, formData).subscribe({  
+            next: (data: any) => {  
+                console.log({ success: data });  
+                // Vous pouvez envisager de réinitialiser le formulaire ou d'afficher un message de succès ici  
+            },  
+            error: (error: any) => {  
+                console.log(error);  
+            }  
+        });  
+    }  
+}
 
   getImagesList(event : any){
-    this.images_annouces_list = event ;
-    console.log(this.images_annouces_list);
+
+    this.images_annouces_list = event;
     
   }
 

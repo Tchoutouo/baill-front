@@ -31,31 +31,28 @@ export class ImageViewComponent {
     }
   }
 
-
-  addImage(event : any){
-    const file_image = event.target.files[0];
-    const self : any = this
-
-
-    if (!is_image(file_image)) {
-      this.errorMessage = "Erreur, ceci n'est pas une image  !";
-
-    }
-
-    if (file_image && is_image(file_image)) {
-      
-      this.errorMessage = "";
-      let file_reader = new FileReader() ;
-
-      file_reader.readAsDataURL(file_image)
-      file_reader.onload = function(){
-        self.imageList.push(file_reader.result)
-      }
-      this.list_files_image.push(file_image)
-      this.imageList_.emit(this.list_files_image);
-    }
+  addImage(event: any) {  
+    const files = event.target.files;  
+  
+    for (let i = 0; i < files.length; i++) {  
+      const file_image = files[i];  
+  
+      if (!is_image(file_image)) {  
+        this.errorMessage = "Erreur, ceci n'est pas une image !";  
+        continue; // Passer à l'image suivante  
+      }  
+  
+      this.errorMessage = "";  
+      const file_reader = new FileReader();  
+  
+      file_reader.readAsDataURL(file_image);  
+      file_reader.onload = () => {  
+        this.imageList.push(file_reader.result as string);  
+        this.list_files_image.push(file_image);  
+        this.imageList_.emit(this.list_files_image);  
+      };  
+    }  
   }
-
   deleteImage(index : any){
     this.imageList.splice(index, 1);
     this.list_files_image.splice(index, 1);

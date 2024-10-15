@@ -53,14 +53,14 @@
                         </div>
 
                         <div class="" id="password_field">
-                          <label for="exampleInputPassword1" class="form-label">{{'user.signin.password'|translate}}</label>
-                          <input type="{{typeField}}" formArrayName="password" class="form-control" (keyup)="showIcon($event)" id="exampleInputPassword1">
-                          <i class="fa-solid fa-eye{{icon_eyes}} d-{{display}}" (click)="toggleIconClass($event)" id="icon_eyes" ></i>
-                          <div *ngIf="password.dirty && !password.valid">
+                            <label for="exampleInputPassword1" class="form-label">{{'user.signin.password'|translate}}</label>
+                            <input type="{{typeField}}" formControlName="password" class="form-control" (keyup)="showIcon($event)" id="exampleInputPassword1">
+                            <i class="fa-solid fa-eye{{icon_eyes}} d-{{display}}" (click)="toggleIconClass($event)" id="icon_eyes" ></i>
+                            <div *ngIf="password.dirty && !password.valid">
                                 <div class="error" *ngIf="formControls.password.errors.required">
                                     {{password_error_message}}
                                 </div>
-                          </div>
+                            </div>
                         </div>
 
                         <div class="d-flex justify-content-center mt-5 mb-4">

@@ -9,7 +9,7 @@
             </div>
         </ng-container>
         <div class="col-3 px-1 py-2" *ngIf="imageList.length < 8">
-            <input type="file" name="images[]"  class="d-none" id="imagesList" (change)="addImage($event)" />
+            <input type="file" name="images[]"  class="d-none" id="imagesList" accept="image/*" multiple (change)="addImage($event)" />
             <div class="col-3 m-0 select-image" (click)="handleAddImage($event)">
                 <i class="fa-solid  fa-plus h3"></i>
             </div>

@@ -27,8 +27,7 @@ export class AuthenticatorService {
   }
   
   signin(user : any){
-    alert('inside');
-    this.http.post(environment.apiUrl+"loginn", user).subscribe({
+    this.http.post(environment.apiUrl+"login", user).subscribe({
       next : (result : any )=>{
         if(result.success){
           const data : LoginResponse = result ;
