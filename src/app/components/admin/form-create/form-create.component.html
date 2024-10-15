@@ -17,12 +17,12 @@
                     </div>
 
                     <div class="form_group mb-4">
-                        <label class="label-form mb-2" for="category">Catégorie<span class="text-danger mx-2">*</span></label>
-                        <select multiple name="category" id="category" class="form-control input-field" [formControl]="category_id" required="required">
-                            <option value="1">Services Professionnels</option>
-                            <option value="2">Matériel et Equipements</option>
-                            <option value="3">Evenement et Services</option>
-                            <option value="4" selected>Vehicules et Transport</option>
+                        <label class="label-form mb-2" for="categorie">Catégorie<span class="text-danger mx-2">*</span></label>
+                        <select multiple name="categorie" id="categorie[]" class="form-control input-field" [formControl]="categorie" required="required">
+                            <option [value]="1" value="1">Services Professionnels</option>
+                            <option [value]="2" >Matériel et Equipements</option>
+                            <option [value]="3" >Evenement et Services</option>
+                            <option [value]="4" >Vehicules et Transport</option>
                         </select>
                     </div>
 
@@ -49,8 +49,8 @@
                     </div>
 
                     <div class="form_group gap-1 mb-4">
-                        <label for="address" class="label-form mb-2">Lieu dit<span class="text-danger mx-2">*</span></label> 
-                        <input type="text" class=" form-control input-field" name="address" required id="address" placeholder="Yde, Damas 423">
+                        <label for="neighborhood" class="label-form mb-2">Lieu dit<span class="text-danger mx-2">*</span></label> 
+                        <input type="text" class=" form-control input-field" name="neighborhood" required id="neighborhood" [formControl]="neighborhood" placeholder="Yde, Damas 423">
                     </div>
 
                     <!-- <div class="error" *ngIf="email.dirty && !email.valid">

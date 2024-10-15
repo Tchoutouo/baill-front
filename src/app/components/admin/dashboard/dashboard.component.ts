@@ -17,7 +17,9 @@ export class DashboardComponent {
 
     }
 
+
     ngOnInit(){
+      window.scroll(0, 5)
       this.anounceList = ['mvks', "sf", "ksjdf", "skjfd", "dkhfj"]
     }
 }

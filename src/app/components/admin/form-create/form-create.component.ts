@@ -4,6 +4,11 @@ import { ImageViewComponent } from "../image-view/image-view.component";
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { EntityServiceService } from '../../../services/admin/entity-service.service';
+import {Notification} from '../../../models/notification'
+import { NoficationsService } from '../../../services/nofications.service';
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-form-create',
@@ -32,7 +37,7 @@ export class FormCreateComponent {
     is_published : FormControl
     status : FormControl
     is_forward : FormControl
-    category_id : FormControl
+    categorie : FormControl
 
     announce : any = {
       title: '',
@@ -43,12 +48,15 @@ export class FormCreateComponent {
       neighborhood:  null ,
       is_published: false,
       status: '',
-      category_id: null,
+      categorie: [],
       is_forward: false,
       imageList: [''],
     };
 
-  constructor(private form_b : FormBuilder, private entityService : EntityServiceService){
+  constructor(private form_b : FormBuilder, private entityService : EntityServiceService,
+              private notification : NoficationsService, private router: Router
+          )
+  {
 
     this.title = this.form_b.control('', [Validators.required, Validators.maxLength(256)])
     this.description = this.form_b.control('', [Validators.required])
@@ -59,7 +67,7 @@ export class FormCreateComponent {
     this.is_published = this.form_b.control('', [] );
     this.status = this.form_b.control('',  );
     this.is_forward = this.form_b.control('', [] );
-    this.category_id = this.form_b.control('', [] );
+    this.categorie = this.form_b.control('', [] );
     
     this.anounces_form_datas = this.form_b.group({
       title : this.title,
@@ -70,7 +78,7 @@ export class FormCreateComponent {
       neighborhood : this.neighborhood,
       is_published : this.is_published,
       status : this.status,
-      category_id : this.category_id,
+      categorie : this.categorie,
     })
   }
 
@@ -88,18 +96,27 @@ export class FormCreateComponent {
 
         // Collecte des données du formulaire  
         let datas = this.anounces_form_datas.value;  
-
+        
         // Ajout des données du formulaire dans FormData  
-        Object.keys(datas).forEach(key => {
-        if (typeof datas[key] === 'object') {
-            formData.append(key, datas[key]);
-          } else {
-            formData.append(key, datas[key]);
-          }
+        Object.keys(datas).forEach((key) => {  
+          if (Array.isArray(datas[key])) {  
+            // Si la valeur est un tableau, itérer à travers chaque élément  
+            datas[key].forEach((item) => {  
+              formData.append(key + '[]', item); // Append le tableau avec une notation '[]' pour indiquer que c'est un tableau  
+            });  
+          } else if (typeof datas[key] === 'object' && datas[key] !== null) {  
+            // Si c'est un objet (mais pas null), vous pouvez également itérer à travers ses propriétés  
+            formData.append(key, JSON.stringify(datas[key])); // Convertir l'objet en JSON  
+          } else {  
+            // Pour d'autres types de valeurs (string, number, etc.)  
+            formData.append(key, datas[key]);  
+          }  
         });
 
         // Mise à jour de is_published selon l'événement  
-        formData.append('is_published', event ? 'true' : 'false');  
+        formData.append('is_published', event ? '1' : '0');  
+        formData.append('abonnement_id', '1');  
+        formData.append('user_id', '4');  
 
         // Ajout des images  
         this.images_annouces_list.forEach((file) => {  
@@ -109,7 +126,21 @@ export class FormCreateComponent {
         // Stockage de l'entité  
         this.entityService.store(entity, formData).subscribe({  
             next: (data: any) => {  
-                console.log({ success: data });  
+              console.log(data);
+              
+              const notif = new Notification();
+                if (data.success) {
+                  notif.message = "Annonce crée avec success !"
+                  notif.status = "success"
+                  notif.timeout = 5000
+                  // this.router.navigate(['/admin']);  
+                }else{
+                  notif.message = "erreur lors de l'enregistrement contacter l'administrateur !"
+                  notif.status = "success"
+                  notif.timeout = 5000
+                }
+              
+                this.notification.emitNotification(notif)
                 // Vous pouvez envisager de réinitialiser le formulaire ou d'afficher un message de succès ici  
             },  
             error: (error: any) => {  

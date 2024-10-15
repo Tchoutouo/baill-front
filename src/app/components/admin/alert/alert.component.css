@@ -13,9 +13,14 @@
     position: absolute;
     top: 110px;
     right: 30px;
+    background-color: white;
 }
 
 .w-35{
     width: 35%;
 }
 
+.z-index-200000{
+    z-index: 200000;
+    border-radius: 8px;
+}

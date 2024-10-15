@@ -53,6 +53,7 @@ export class ImageViewComponent {
       };  
     }  
   }
+
   deleteImage(index : any){
     this.imageList.splice(index, 1);
     this.list_files_image.splice(index, 1);

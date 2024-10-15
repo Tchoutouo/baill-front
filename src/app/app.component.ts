@@ -6,11 +6,12 @@ import { MainComponent } from "./components/user/main/main.component";
 import { FooterComponent } from './components/user/footer/footer.component';
 import { CommonModule } from '@angular/common';
 import { SpinnerComponent } from './components/global/spinner/spinner.component';
+import { AlertComponent } from "./components/admin/alert/alert.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,RouterLink, HeaderComponent, MainComponent,FooterComponent,SpinnerComponent],
+  imports: [RouterOutlet, RouterLink, HeaderComponent, MainComponent, FooterComponent, SpinnerComponent, AlertComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

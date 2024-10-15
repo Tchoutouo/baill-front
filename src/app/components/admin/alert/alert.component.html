@@ -1,5 +1,5 @@
-<div class="alert-container w-35 shadow">
-    <div class="p-relative">
+<div *ngIf="message" class="alert-container w-35 shadow">
+    <div class="p-relative bg-white z-index-200000">
         <div class="alert-content d-flex gap-3 px-3 align-items-center py-4">
             <i class="fa-solid fa-check" id="icon-chek"></i>
             <span>{{message}}</span>
