@@ -145,9 +145,10 @@ export class FormCreateComponent {
         // Mise à jour de is_published selon l'événement  
         formData.append('is_published', event ? '1' : '0');  
         formData.append('abonnement_id', event ? event : 1);  
-        const user = this.locaStorage.getItem('user')
+        let user = this.locaStorage.getItem('user')
         formData.append('user_id', user ? user.id : 1);  
-
+        console.log(user.id);
+        
         // Ajout des images  
         this.images_annouces_list.forEach((file) => {  
               formData.append('images[]', file);  // Utiliser append au lieu de set  
@@ -179,9 +180,7 @@ export class FormCreateComponent {
 }
 
   getImagesList(event : any){
-
     this.images_annouces_list = event;
-
   }
 
   get formControls(){

@@ -32,11 +32,12 @@ export class AuthenticatorService {
   signin(user : any){
     this.http.post(environment.apiUrl+"login", user).subscribe({
       next : (result : any )=>{
+        console.log(result);
         
         if(result.success){
-          const data : LoginResponse = result ;
-          this.localStorage.setItem('token', data.token);
-          this.localStorage.setItem('user', data.user);
+          // const data : LoginResponse = result.data ;
+          this.localStorage.setItem('token', result.token);
+          this.localStorage.setItem('user', result.data);
           this.authUser = true ;
           this.router.navigate(['/admin']);  
           this.value = true;
