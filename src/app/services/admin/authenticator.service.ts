@@ -4,6 +4,7 @@ import { User } from '../../models/user';
 import { environment } from '../../../environments/environment.development';
 import { BehaviorSubject } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
+import { Router } from '@angular/router';
 
 interface LoginResponse{
   isSuccess : boolean,
@@ -17,8 +18,10 @@ interface LoginResponse{
 export class AuthenticatorService {
 
   private authUser = false;
+  private value : any = false ;
 
-  constructor(private http : HttpClient, private localStorage : LocalStorageService) { 
+  
+  constructor(private http : HttpClient, private localStorage : LocalStorageService, private router: Router) { 
     const token = this.localStorage.getItem('token')
     const user_ = this.localStorage.getItem('user')
     if (user_ && token) {
@@ -29,13 +32,19 @@ export class AuthenticatorService {
   signin(user : any){
     this.http.post(environment.apiUrl+"login", user).subscribe({
       next : (result : any )=>{
+        console.log(result);
+        
         if(result.success){
           const data : LoginResponse = result ;
           this.localStorage.setItem('token', data.token);
           this.localStorage.setItem('user', data.user);
           this.authUser = true ;
+          this.router.navigate(['/admin']);  
+          this.value = true;
+        }else{
+          this.value = false;
         }
-        console.log(result);
+        
       },
 
       error : (error : any)=>{
@@ -43,6 +52,8 @@ export class AuthenticatorService {
       }
 
     })
+
+    return this.value ;
   }
 
   logOut(){

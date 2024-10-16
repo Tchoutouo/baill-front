@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, SimpleChanges } from '@angular/core';
 import { ForfaitListComponent } from "../forfait-list/forfait-list.component";
 import { ImageViewComponent } from "../image-view/image-view.component";
 import { CommonModule } from '@angular/common';
@@ -22,6 +22,8 @@ export class FormCreateComponent {
   categoriesList : Array<any>  = [] ;
   images_annouces_list : Array<any> = [];
   images_list : Array<any> = [];
+  errorMessages : any = null;
+  valiData : boolean = false ;
   
 
   first_name : string = ""
@@ -87,10 +89,28 @@ export class FormCreateComponent {
   }
 
 
-  handleSubmit(event: any | null) {  
+
+  handleSubmit(event: any = null) {  
+    
     if (!this.anounces_form_datas.valid || this.images_annouces_list.length < 1) {  
-        alert('Veuillez remplir les champs requis !');  
+      if (this.images_annouces_list.length < 1) {  
+        this.errorMessages = 'Veuillez ajouter au moins une image.';  
+      }  
+
+      // // Collecter les messages d'erreur pour chaque contrôle  
+      // Object.keys(this.anounces_form_datas.controls).forEach(key => {  
+      //   const control = this.anounces_form_datas.controls[key];  
+      //   if (control.invalid && (control.dirty || control.touched)) {  
+      //     if (control.errors) {  
+      //       if (control.errors.required) {  
+      //         this.errorMessages.push(`Le champ ${key} est requis.`);  
+      //       }  
+      //       // Vous pouvez ajouter d'autres vérifications d'erreurs ici  
+      //     }  
+      //   }  
+      // });  
     } else {  
+      
         const entity = "annonce_back/store";  
         let formData: FormData = new FormData();  
 
@@ -132,12 +152,10 @@ export class FormCreateComponent {
                 if (data.success) {
                   notif.message = "Annonce crée avec success !"
                   notif.status = "success"
-                  notif.timeout = 5000
-                  // this.router.navigate(['/admin']);  
+                  this.router.navigate(['/admin']);   
                 }else{
                   notif.message = "erreur lors de l'enregistrement contacter l'administrateur !"
                   notif.status = "success"
-                  notif.timeout = 5000
                 }
               
                 this.notification.emitNotification(notif)
@@ -153,7 +171,12 @@ export class FormCreateComponent {
   getImagesList(event : any){
 
     this.images_annouces_list = event;
+
     
+  }
+
+  get formControls(){
+    return this.anounces_form_datas.controls
   }
 
 }

@@ -5,6 +5,7 @@ import { RouterLink } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthenticatorService } from '../../../services/admin/authenticator.service';
 import { CommonModule } from '@angular/common';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -19,20 +20,24 @@ export class SigninComponent {
 
   typeField : string = "password";
 
+  loginResult : any = null
+
   isSubmited : boolean = false
+
+  message_back : any = null
 
   icon_eyes : string = "";
   display : string = "none";
 
   loginForm : any;
-  email : FormControl
+  identifiant : FormControl
   password : FormControl
 
   email_error_message : string = "L'e-mail est obligatoire !"
   password_error_message : string = "Le mot de passe est obligatoire !"
 
   constructor(private authService : AuthenticatorService, private fb: FormBuilder){
-    this.email = fb.control("", [Validators.required , Validators.email] );
+    this.identifiant = fb.control("", [Validators.required] );
     this.password = fb.control("", [Validators.required])
   }
 
@@ -40,9 +45,11 @@ export class SigninComponent {
     this.site_name = getSiteName();
 
     this.loginForm = this.fb.group({
-        email:this.email,
+        identifiant:this.identifiant,
         password:this.password,
     })
+
+    
   }
 
   toggleIconClass(event : any){
@@ -71,13 +78,34 @@ export class SigninComponent {
 
     if (this.loginForm.invalid) {
     }
-
     
     const user = this.loginForm.value ;
 
-    this.authService.signin(user)
+    this.loginResult = this.authService.signin(user)
+    console.log(this.loginResult);
     
+    if (this.loginResult == false) {
+      this.loginResult = false;
+    }else{
+      this.loginResult = true;
+    }
+    this.displayM()
   }
+
+  displayM(){
+    let  messag  = ""
+    if (!this.loginResult) {
+       messag = "Les informations d'identification ne sont pas correctes."
+    }else{
+       messag = ""
+    }
+
+    console.log(messag);
+    this.message_back = messag
+
+  }
+
+  
 
   get formControls(){
     return this.loginForm.controls

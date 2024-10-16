@@ -40,7 +40,7 @@ export class AlertComponent {
     const step = (interval / duration) * this.progress; 
     console.log(step, interval, duration);
 
-    const intervalId = setInterval(() => {  
+    const intervalId = setInterval(() => {    
       this.progress -= step;  
       // Si la progression atteint 0, arrêtez l'intervalle  
       if (this.progress <= 0) {  

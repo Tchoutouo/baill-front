@@ -41,13 +41,18 @@
                     <form id="form" [formGroup]="loginForm" *ngIf="loginForm" (ngSubmit)="handleSubmite()">
                         <div class="mb-4">
                             <label for="exampleInputEmail1" class="form-label">{{'user.signin.email'|translate}} </label>
-                            <input type="email" formControlName="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                            <div *ngIf="email.dirty && !email.valid">
-                                <div class="" class="error" *ngIf="email.hasError('required')">
+                            <input type="identifiant" formControlName="identifiant" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <div *ngIf="identifiant.dirty && !identifiant.valid">
+                                <div class="" class="error" *ngIf="identifiant.hasError('required')">
                                     {{email_error_message}}
                                 </div>
-                                <div class="error" *ngIf="!email.hasError('required')">
+                                <div class="error" *ngIf="!identifiant.hasError('required')">
                                     l'e-mail n'est ne respecte pas le bon format.
+                                </div>
+                            </div>
+                            <div *ngIf="message_back">
+                                <div class="error" >
+                                    {{message_back}}
                                 </div>
                             </div>
                         </div>
@@ -61,6 +66,7 @@
                                     {{password_error_message}}
                                 </div>
                             </div>
+                            
                         </div>
 
                         <div class="d-flex justify-content-center mt-5 mb-4">
