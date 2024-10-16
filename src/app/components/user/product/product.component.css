@@ -57,6 +57,10 @@
     color: var(--main-color);
 } */
 
+.two_icon{
+    margin-bottom: 5px;
+}
+
 .two_icon i{
     color: var(--main-color-blackgreen) !important;
 }

@@ -20,27 +20,38 @@
                 produitDescription courte du produit Description courte du
             </p>
         </div>
-        <div class="phone mt-3 mb-1">
+        <!-- <div class="phone mt-3 mb-1">
             <span>Tel :</span> +237 934 854 534
-        </div>
-        <div class="other-details align-items-center row">
-            <div class="location-address col-xl-12 mb-4">
+        </div> -->
+        <div class="other-details align-items-center row mt-3">
+            
+            <div class="location-address col-xl-12">
                 <div class="two_icon">
-                    <a href="https://www.bailleurnet.com" target="_blank" rel="noopener noreferrer">
-                        <i class="fas fa-globe" style="font-size: 21px;"></i> : www.bailleurnet.com
+                    <a [href]="'tel:'+phone_number" target="_blank">
+                        <i class="fa-solid fa-square-phone-flip" style="font-size: 23px;"></i> : {{phone_number}}
+                    </a> 
+                </div>
+                <div class="two_icon ">
+                    <a [href]="'https://'+siteUser" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-globe" style="font-size: 21px;"></i> : {{siteUser}}
                     </a> 
                 </div>
                 <div class="two_icon">
-                    <a href="https://api.whatsapp.com/send?phone=237600000000&text=Hello Bailleurnet&source=&data=" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-whatsapp" style="font-size: 24px;"></i> : +237 934 854 534
+                    <a [href]="'https://api.whatsapp.com/send?phone='+whatsapp_number+'&text=Hello Bailleurnet&source=&data='" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-whatsapp" style="font-size: 24px;"></i> : {{whatsapp_number}}
                     </a>
+                </div>
+                <div class="two_icon">
+                    <a [href]="'mailto:'+emailUser+'?subject=' + subject + '&body=' + body" target="_blank">
+                        <i class="fa-solid fa-envelope" style="font-size: 21px;"></i> : {{emailUser}}
+                    </a> 
                 </div>
             </div>
         </div>
-        <div class="button-contact col-xl-12 mb-1">
+        <!-- <div class="button-contact col-xl-12 mb-1">
             <a href="https://api.whatsapp.com/send?phone=237694798186&text=Hello Bailleurnet&source=&data=" target="_blank" rel="noopener noreferrer">
                 Contacter
             </a>
-        </div>
+        </div> -->
     </div>
 </div>

@@ -5,26 +5,26 @@
             <div class="col-md-3">
                 <div class="form_group mb-3">
                     <label for="name" class="label-form mb-1">Nom</label>
-                    <input type="text" name="name" class="input_field" value="Laurant" id="name">
+                    <input type="text" name="name" class="input_field" value="{{user?.last_name}}" id="name">
                 </div>
                 <div class="form_group mb-3">
                     <label for="userName" class="label-form mb-1">Nom d’utilisateur</label>
-                    <input type="text" name="userName" class="input_field" value="Laurant steve" id="userName"/>
+                    <input type="text" name="userName" class="input_field" value="{{user?.username}}" id="userName"/>
                 </div>
                 <div class="form_group mb-3">
                     <label for="email" class="label-form mb-1">Email</label>
-                    <input type="email" name="email" class="input_field" value="Laurant steve" id="email"/>
+                    <input type="email" name="email" class="input_field" value="{{user?.email}}" id="email"/>
                 </div>
                 <div class="form_group mb-3">
                     <label for="phone" class="label-form mb-1">Télephone (WhatsApp)</label>
-                    <input type="tel" name="phone" class="input_field" value="657 45 65 56" id="phone"/>
+                    <input type="tel" name="phone" class="input_field" value="{{user?.whatsapp_number}}" id="phone"/>
                 </div>
 
                 <div class="checkbox-input">
                     <label for="" class="label-form mb-1">Sexe</label>
                     <div class="form-check d-flex gap-3">
                         <div class="check-item d-flex gap-1">
-                            <input type="radio" class="form-check rounded-circle" value="H" name="sexe" id="H">
+                            <input type="radio" class="form-check rounded-circle" value="H" name="sexe" id="H" *ngIf="user?.sex == true" checked>
                             <label for="H" class="fs-6" >H</label>
                         </div>
                         <div class="check-item d-flex gap-1">
@@ -38,23 +38,23 @@
             <div class="col-md-3 offset-md-1">
                 <div class="form_group mb-3">
                     <label for="country" class="label-form mb-1">Pay</label>
-                    <input type="text" name="country" class="input_field" value="Cameroun" id="country">
+                    <input type="text" name="country" class="input_field" value="{{user?.country}}" id="country">
                 </div>
                 <div class="form_group mb-3">
                     <label for="city" class="label-form mb-1">Ville</label>
-                    <input type="text" name="city" class="input_field" value="Yaounde" id="city">
+                    <input type="text" name="city" class="input_field" value="{{user?.city}}" id="city">
                 </div>
                 <div class="form_group mb-3">
                     <label for="quater" class="label-form mb-1">Quartier</label>
-                    <input type="text" name="quater" class="input_field" value="Biyem-Assi" id="quater">
+                    <input type="text" name="quater" class="input_field" value="{{user?.neighborhood}}" id="quater">
                 </div>
                 <div class="form_group mb-3">
                     <label for="linkSite" class="label-form mb-1">Lien du site web</label>
-                    <input type="text" name="linkSite" class="input_field" value="Laurant steve" id="linkSite">
+                    <input type="text" name="linkSite" class="input_field" value="{{user?.site_url}}" id="linkSite">
                 </div>
                 <div class="form_group mb-3">
                     <label for="linkSite" class="label-form mb-1">Numero CNI</label>
-                    <input type="text" name="linkSite" class="input_field" value="NUg656c4c4Ohc5" id="linkSite">
+                    <input type="text" name="linkSite" class="input_field" value="{{user?.number}}" id="linkSite">
                 </div>
             </div>
 
