@@ -48,8 +48,6 @@ export class SigninComponent {
         identifiant:this.identifiant,
         password:this.password,
     })
-
-    
   }
 
   toggleIconClass(event : any){
@@ -93,16 +91,16 @@ export class SigninComponent {
   }
 
   displayM(){
+
     let  messag  = ""
+
     if (!this.loginResult) {
-       messag = "Les informations d'identification ne sont pas correctes."
+      messag = "Les informations d'identification ne sont pas correctes." ;
     }else{
-       messag = ""
+      messag = "" ;
     }
 
-    console.log(messag);
     this.message_back = messag
-
   }
 
   
@@ -110,5 +108,7 @@ export class SigninComponent {
   get formControls(){
     return this.loginForm.controls
   }
+
+ 
   
 }

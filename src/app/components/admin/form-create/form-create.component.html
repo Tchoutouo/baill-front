@@ -14,55 +14,52 @@
                     <div class="form_group gap-1 mb-4">
                         <label for="title" class="label-form mb-2">Titre<span class="text-danger mx-2">*</span></label> 
                         <input type="text" [formControl]="title" class=" form-control input-field" required name="title" id="title" placeholder="voture toyota">
-                    </div>
-                    <div *ngIf="title.dirty && !title.valid">
-                        <div class="" class="error" *ngIf="title.hasError('required')">
-                            veuiller renseigner ce champ 
+                        <div *ngIf="title.dirty && !title.valid">
+                            <div class="" class="error" *ngIf="title.hasError('required')">
+                                veuiller renseigner ce champ 
+                            </div>
                         </div>
                     </div>
 
                     <div class="form_group mb-4">
-                        <label class="label-form mb-2" for="categorie">Catégorie<span class="text-danger mx-2">*</span></label>
+                        <label class="label-form mb-2" for="categorie">Catégorie (s)<span class="text-danger mx-2">*</span></label>
                         <select multiple name="categorie" id="categorie[]" class="form-control input-field" [formControl]="categorie" required="required">
-                            <option [value]="1" value="1">Services Professionnels</option>
-                            <option [value]="2" >Matériel et Equipements</option>
-                            <option [value]="3" >Evenement et Services</option>
-                            <option [value]="4" >Vehicules et Transport</option>
+                            <option *ngFor="let cast_item of categoriesList" [value]="cast_item.id">{{cast_item.title}}</option>
                         </select>
-                    </div>
-                    <div *ngIf="categorie.dirty && !categorie.valid">
-                        <div class="" class="error" *ngIf="categorie.hasError('required')">
-                            veuiller renseigner ce champ 
+                        <div *ngIf="categorie.dirty && !categorie.valid">
+                            <div class="" class="error" *ngIf="categorie.hasError('required')">
+                                veuiller renseigner ce champ 
+                            </div>
                         </div>
                     </div>
 
                     <div class="form_group gap-1 mb-4">
                         <label for="price" class="label-form mb-2">Prix (FCFA)<span class="text-danger mx-2">*</span></label> 
                         <input type="number" class=" form-control input-field"  [formControl]="price" name="price" id="price" placeholder="voture toyota">
-                    </div>
-                    <div *ngIf="price.dirty && !price.valid">
-                        <div class="" class="error" *ngIf="price.hasError('required')">
-                            veuiller renseigner ce champ 
+                        <div *ngIf="price.dirty && !price.valid">
+                            <div class="" class="error" *ngIf="price.hasError('required')">
+                                veuiller renseigner ce champ 
+                            </div>
                         </div>
                     </div>
 
                     <div class="form_group gap-1 mb-4">
                         <label for="description" class="label-form mb-2">Description<span class="text-danger mx-2">*</span></label> 
                         <textarea name="description"  [formControl]="description" class="form-control input-field" required id="description" rows="5" cols="10"></textarea>
-                    </div>
-                    <div *ngIf="description.dirty && !description.valid">
-                        <div class="" class="error" *ngIf="description.hasError('required')">
-                            veuiller renseigner ce champ 
+                        <div *ngIf="description.dirty && !description.valid">
+                            <div class="" class="error" *ngIf="description.hasError('required')">
+                                veuiller renseigner ce champ 
+                            </div>
                         </div>
                     </div>
 
                     <div class="form_group gap-1 mb-4">
                         <label for="country" class="label-form mb-2">Pays<span class="text-danger mx-2">*</span></label> 
                         <input type="text" class=" form-control input-field"  [formControl]="country" name="country" id="country" placeholder="voture toyota">
-                    </div>
-                    <div *ngIf="country.dirty && !country.valid">
-                        <div class="" class="error" *ngIf="country.hasError('required')">
-                            veuiller renseigner ce champ 
+                        <div *ngIf="country.dirty && !country.valid">
+                            <div class="" class="error" *ngIf="country.hasError('required')">
+                                veuiller renseigner ce champ 
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -70,21 +67,21 @@
                 <div class="offset-md-2 col-md-5">
                     <div class="form_group gap-1 mb-4">
                         <label for="city" class="label-form mb-2">Ville<span class="text-danger mx-2">*</span></label> 
-                        <input type="text" class=" form-control input-field"  name="city" required id="city" placeholder="voture toyota">
-                    </div>
-                    <div *ngIf="title.dirty && !title.valid">
-                        <div class="" class="error" *ngIf="title.hasError('required')">
-                            veuiller renseigner ce champ 
+                        <input type="text" class=" form-control input-field"  name="city" [formControl]="location" required id="city" placeholder="voture toyota">
+                        <div *ngIf="location.dirty && !location.valid">
+                            <div class="" class="error" *ngIf="location.hasError('required')">
+                                veuiller renseigner ce champ 
+                            </div>
                         </div>
                     </div>
 
                     <div class="form_group gap-1 mb-4">
                         <label for="neighborhood" class="label-form mb-2">Lieu dit<span class="text-danger mx-2">*</span></label> 
                         <input type="text" class=" form-control input-field" name="neighborhood" required id="neighborhood" [formControl]="neighborhood" placeholder="Yde, Damas 423">
-                    </div>
-                    <div *ngIf="neighborhood.dirty && !neighborhood.valid">
-                        <div class="" class="error" *ngIf="neighborhood.hasError('required')">
-                            veuiller renseigner ce champ 
+                        <div *ngIf="neighborhood.dirty && !neighborhood.valid">
+                            <div class="" class="error" *ngIf="neighborhood.hasError('required')">
+                                veuiller renseigner ce champ 
+                            </div>
                         </div>
                     </div>
 
@@ -134,13 +131,12 @@
                         <p class="error" *ngIf="errorMessages">
                             {{errorMessages}}
                         </p>
-                        
                     </div>
 
                 </div>
             </div>
-            <div class="row mx-0 gap-4 py-4 align-items-center">
-                <button type="button" class="btn btn-primary" id="create" [disabled]="!this.anounces_form_datas.valid && !valiData" data-bs-toggle="modal" data-bs-target="#forfaitList" class="btn-form bg_green">
+            <div class="row mx-0 gap-4 py-4 align-items-center fixe_btn_actions">
+                <button type="button" class="btn btn-primary " id="create" data-bs-toggle="modal" [disabled]="!this.anounces_form_datas.valid && !valiData"  data-bs-target="#forfaitList" class="btn-form bg_green">
                     Creer & publier
                     <app-forfait-list (hasSubmit)="handleSubmit($event)"></app-forfait-list>
                 </button>

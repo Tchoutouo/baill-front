@@ -4,9 +4,11 @@
       <div class="modal-content">
         <div class="modal-body py-4">
             <h4 class="modal-title title-list pb-4 px-3">Choisissez un forfait</h4>
-            <div class="row mx-0">
-                <div class="col-md-4" *ngFor = "let item of list_forfati">
-                    <app-forfait-item (click)="sendData(item)"></app-forfait-item>
+            <div class="row mx-0  justify-content-center">
+                <div class="col-md-4" *ngFor = "let item of abonment_list">
+                    <ng-container >
+                        <app-forfait-item (click)="sendData(item.id)" [abonment] = "item"></app-forfait-item>
+                    </ng-container>
                 </div>
             </div>
         </div>

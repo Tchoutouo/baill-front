@@ -15,6 +15,17 @@ export class EntityServiceService {
 
 
   store(entity:string, datas: any){
+    console.log('partir');
+    
     return this.http.post(environment.apiUrl+entity, datas)
+  }
+
+  getAllAnnoucesCategories(){
+    return this.http.get(environment.apiUrl+'categorie_back/');
+  }
+
+
+  getAllAbonnements(){
+    return this.http.get(environment.apiUrl+'abonnement_back/');
   }
 }
