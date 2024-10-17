@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-forfait-item',
@@ -9,4 +9,13 @@ import { Component } from '@angular/core';
 })
 export class ForfaitItemComponent {
 
+  @Input() abonment :any ;
+  duration_abnment : number = 1
+
+  constructor (){
+  }
+
+  ngOnInit(){
+    console.log(this.abonment);
+  }
 }

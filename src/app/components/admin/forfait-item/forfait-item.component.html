@@ -1,22 +1,22 @@
 <div class="forfait-item py-4 px-3">
     <div class="forfait-title pb-0">
-        <h2>Intermédiaire</h2>
+        <h2>{{abonment?.name}}</h2>
     </div>
 
     <div class="row align-items-center pt-3">
-        <div class="col-8">
+        <div class="col-9 p-0">
             <div class="price">
-                <h4 class="fs_big m-0">500 <span class="fs_small">FCFA</span></h4>
+                <h4 class="fs_big m-0">{{abonment?.price}} <span class="fs_small">FCFA</span></h4>
             </div>
         </div>
-        <div class="col-4 d-flex justify-content-end">
+        <div class="col-3 d-flex justify-content-end">
             <div class="reduction">
                 -10%
             </div>
         </div>
     </div>
     <div class="duration mb-3">
-        6 mois
+       {{ abonment?.time}} mois
     </div>
 
     <button type="submit" class="btn-form w-100 bg_blue">Lancer</button>

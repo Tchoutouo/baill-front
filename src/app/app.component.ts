@@ -11,6 +11,7 @@ import { AlertComponent } from "./components/admin/alert/alert.component";
 @Component({
   selector: 'app-root',
   standalone: true,
+  
   imports: [RouterOutlet, RouterLink, HeaderComponent, MainComponent, FooterComponent, SpinnerComponent, AlertComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

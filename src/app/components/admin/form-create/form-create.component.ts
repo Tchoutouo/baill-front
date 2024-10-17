@@ -7,6 +7,8 @@ import { EntityServiceService } from '../../../services/admin/entity-service.ser
 import {Notification} from '../../../models/notification'
 import { NoficationsService } from '../../../services/nofications.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { LocalStorageService } from '../../../services/admin/local-storage.service';
 
 
 
@@ -19,10 +21,12 @@ import { Router } from '@angular/router';
 })
 export class FormCreateComponent {
 
-  categoriesList : Array<any>  = [] ;
+  categoriesList :  Array<any> = [];
+  entServiceSub : Subscription  | undefined;
   images_annouces_list : Array<any> = [];
   images_list : Array<any> = [];
   errorMessages : any = null;
+
   valiData : boolean = false ;
   
 
@@ -40,6 +44,7 @@ export class FormCreateComponent {
     status : FormControl
     is_forward : FormControl
     categorie : FormControl
+    location : FormControl
 
     announce : any = {
       title: '',
@@ -53,10 +58,11 @@ export class FormCreateComponent {
       categorie: [],
       is_forward: false,
       imageList: [''],
+      location : '',
     };
 
   constructor(private form_b : FormBuilder, private entityService : EntityServiceService,
-              private notification : NoficationsService, private router: Router
+              private notification : NoficationsService, private router: Router, private locaStorage  : LocalStorageService
           )
   {
 
@@ -70,6 +76,7 @@ export class FormCreateComponent {
     this.status = this.form_b.control('',  );
     this.is_forward = this.form_b.control('', [] );
     this.categorie = this.form_b.control('', [] );
+    this.location = this.form_b.control('', [] );
     
     this.anounces_form_datas = this.form_b.group({
       title : this.title,
@@ -81,11 +88,13 @@ export class FormCreateComponent {
       is_published : this.is_published,
       status : this.status,
       categorie : this.categorie,
+      location : this.location,
     })
   }
 
   ngOnInit(){
-    window.scroll(0,0);    
+    window.scroll(0,0);   
+    this.getAllCategories() ;
   }
 
 
@@ -135,9 +144,11 @@ export class FormCreateComponent {
 
         // Mise à jour de is_published selon l'événement  
         formData.append('is_published', event ? '1' : '0');  
-        formData.append('abonnement_id', '1');  
-        formData.append('user_id', '4');  
-
+        formData.append('abonnement_id', event ? event : 1);  
+        let user = this.locaStorage.getItem('user')
+        formData.append('user_id', user ? user.id : 1);  
+        console.log(user.id);
+        
         // Ajout des images  
         this.images_annouces_list.forEach((file) => {  
               formData.append('images[]', file);  // Utiliser append au lieu de set  
@@ -169,14 +180,27 @@ export class FormCreateComponent {
 }
 
   getImagesList(event : any){
-
     this.images_annouces_list = event;
-
-    
   }
 
   get formControls(){
     return this.anounces_form_datas.controls
+  }
+
+  getAllCategories(){
+    this.entServiceSub = this.entityService.getAllAnnoucesCategories().subscribe({
+      next: (data: any) => {
+        if (data.success) {
+          const result = data.data
+          this.categoriesList = result  ;
+        }
+      },
+
+      error: (error: any) => { 
+        console.log(error);
+        
+       }
+    })
   }
 
 }

@@ -33,13 +33,11 @@ export class AuthenticatorService {
     this.http.post(environment.apiUrl+"login", user).subscribe({
       next : (result : any )=>{      
         if(result.success){
-
           const data :  LoginResponse = {
-                            isSuccess: true,
-                            token:"",
-                            user: result.data
-                        };
-                        
+              isSuccess: true,
+              token:"",
+              user: result.data
+          };
           this.localStorage.setItem('token', data.token);
           this.localStorage.setItem('user', data.user);
           this.authUser = true ;

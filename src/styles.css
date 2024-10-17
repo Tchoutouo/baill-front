@@ -236,6 +236,8 @@ input::placeholder{
 
 .error{
     color: rgb(189, 47, 47);
+    font-weight: 600;
+    font-size: small;
 }
 
 button:disabled
