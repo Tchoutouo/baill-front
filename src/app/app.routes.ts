@@ -16,69 +16,69 @@ import { FormCreateComponent } from './components/admin/form-create/form-create.
 import { authGuard } from './guard/auth.guard';
 
 export const routes: Routes = [
-        { 
-            path: '', 
-            component: MainComponent 
-        },
-        { 
-            path: 'signin', 
-            component: SigninComponent 
-        },
-        { 
-            path: 'signup', 
-            component: SignupComponent 
-        },
-        { 
-            path: 'product-details', 
-            component: ProductDetailsComponent 
-        },
-        { 
-            path: 'image-list', 
-            component: ImageListComponent 
-        },
-        { 
-            path: 'admin', 
-            component: ContentComponent,
-            // canActivate: [authGuard],
-            children: [
-                { 
-                    path: '', 
-                    redirectTo: 'dashboard',
-                    pathMatch: 'full' 
-                },
-                
-                {
-                    path: 'dashboard',
-                    component: DashboardComponent
-                },
+    { 
+        path: '', 
+        component: MainComponent 
+    },
+    { 
+        path: 'signin', 
+        component: SigninComponent 
+    },
+    { 
+        path: 'signup', 
+        component: SignupComponent 
+    },
+    { 
+        path: 'product-details', 
+        component: ProductDetailsComponent 
+    },
+    { 
+        path: 'image-list', 
+        component: ImageListComponent 
+    },
+    { 
+        path: 'admin', 
+        component: ContentComponent,
+        // canActivate: [authGuard],
+        children: [
+            { 
+                path: '', 
+                redirectTo: 'dashboard',
+                pathMatch: 'full' 
+            },
+            
+            {
+                path: 'dashboard',
+                component: DashboardComponent
+            },
 
-                {
-                    path: 'settings',
-                    component: SettingsComponent
-                },
-                {
-                    path: 'announces',
-                    component: AnnouceIndexComponent,
-                    children: [
-                        { 
-                            path: 'create',
-                            component: FormCreateComponent,
-                        },
-                        
-                        { 
-                            path: 'announces-list',
-                            component: AnnouncesComponent,
-                        },
-                    ]
-                },
-                {
-                    path: 'myAccount',
-                    component: MyAccountComponent,
-                    // canActivate: [authGuard],
-                }
+            {
+                path: 'settings',
+                component: SettingsComponent
+            },
+            {
+                path: 'announces',
+                component: AnnouceIndexComponent,
+                children: [
+                    { 
+                        path: 'create',
+                        component: FormCreateComponent,
+                    },
+                    
+                    { 
+                        path: 'announces-list',
+                        component: AnnouncesComponent,
+                    },
+                ]
+            },
+            {
+                path: 'myAccount',
+                component: MyAccountComponent,
+                // canActivate: [authGuard],
+            }
 
-            ]
-        },
+        ]
+    },
 
 
 ];
