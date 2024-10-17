@@ -1,34 +1,34 @@
 <div class="container-fluid p-0">
-    <form action="" class="px-5">
+    <form action="" (ngSubmit)="UpdateProfil()" class="px-5">
         <div class="row">
             <h2 class="title-h2 mb-4">Mon compte</h2>
             <div class="col-md-3">
                 <div class="form_group mb-3">
                     <label for="name" class="label-form mb-1">Nom</label>
-                    <input type="text" name="name" class="input_field" value="{{user?.last_name}}" id="name">
+                    <input type="text" name="name" class="input_field" [(ngModel)]="user.last_name" id="name">
                 </div>
                 <div class="form_group mb-3">
                     <label for="userName" class="label-form mb-1">Nom d’utilisateur</label>
-                    <input type="text" name="userName" class="input_field" value="{{user?.username}}" id="userName"/>
+                    <input type="text" name="userName" class="input_field" [(ngModel)]="user.username" id="userName"/>
                 </div>
                 <div class="form_group mb-3">
                     <label for="email" class="label-form mb-1">Email</label>
-                    <input type="email" name="email" class="input_field" value="{{user?.email}}" id="email"/>
+                    <input type="email" name="email" class="input_field"  [(ngModel)]="user.email" id="email"/>
                 </div>
                 <div class="form_group mb-3">
                     <label for="phone" class="label-form mb-1">Télephone (WhatsApp)</label>
-                    <input type="tel" name="phone" class="input_field" value="{{user?.whatsapp_number}}" id="phone"/>
+                    <input type="tel" name="phone" class="input_field"  [(ngModel)]="user.whatsapp_number" id="phone"/>
                 </div>
 
                 <div class="checkbox-input">
                     <label for="" class="label-form mb-1">Sexe</label>
                     <div class="form-check d-flex gap-3">
                         <div class="check-item d-flex gap-1">
-                            <input type="radio" class="form-check rounded-circle" value="H" name="sexe" id="H" *ngIf="user?.sex == true" checked>
+                            <input type="radio" class="form-check rounded-circle" [(ngModel)]="user.sex" name="sexe" id="H" [checked]="user?.sex == true">
                             <label for="H" class="fs-6" >H</label>
                         </div>
                         <div class="check-item d-flex gap-1">
-                            <input type="radio"  class="form-check" value="F" name="sexe" id="F">
+                            <input type="radio"  class="form-check" [(ngModel)]="user.sex" name="sexe" id="F" [checked]="user?.sex == false">
                             <label for="F" class="fs-6" >F</label>
                         </div>
                     </div>
@@ -37,24 +37,32 @@
 
             <div class="col-md-3 offset-md-1">
                 <div class="form_group mb-3">
-                    <label for="country" class="label-form mb-1">Pay</label>
-                    <input type="text" name="country" class="input_field" value="{{user?.country}}" id="country">
+                    <label for="country" class="label-form mb-1">Pays</label>
+                    <!-- <input type="text" name="country" class="input_field" value="{{user?.country}}" id="country"> -->
+                    <select id="country" [(ngModel)]="selectedCountry" (change)="onCountryChange($event)" name="country" class="form-control" required="required">
+                        <option *ngFor="let country of countries" [value]="country.isoCode" [selected]="country.isoCode == user.country">{{ country.name }}</option>
+                    </select>
                 </div>
                 <div class="form_group mb-3">
                     <label for="city" class="label-form mb-1">Ville</label>
-                    <input type="text" name="city" class="input_field" value="{{user?.city}}" id="city">
+                    <!-- <input type="text" name="city" class="input_field" value="{{user?.city}}" id="city"> -->
+                    <select [(ngModel)]="selectedCity" name="city" id="city" class="form-control" required="required">
+                        <option *ngFor="let city of cities" [value]="city.name" [selected]="city.name == user.city">
+                            {{ city.name }}
+                        </option>
+                    </select>
                 </div>
                 <div class="form_group mb-3">
                     <label for="quater" class="label-form mb-1">Quartier</label>
-                    <input type="text" name="quater" class="input_field" value="{{user?.neighborhood}}" id="quater">
+                    <input type="text" name="quater" class="input_field" [(ngModel)]="user.neighborhood" id="quater">
                 </div>
                 <div class="form_group mb-3">
                     <label for="linkSite" class="label-form mb-1">Lien du site web</label>
-                    <input type="text" name="linkSite" class="input_field" value="{{user?.site_url}}" id="linkSite">
+                    <input type="text" name="linkSite" class="input_field"[(ngModel)]="user.site_url" id="linkSite">
                 </div>
                 <div class="form_group mb-3">
                     <label for="linkSite" class="label-form mb-1">Numero CNI</label>
-                    <input type="text" name="linkSite" class="input_field" value="{{user?.number}}" id="linkSite">
+                    <input type="text" name="linkSite" class="input_field" [(ngModel)]="user.cni" id="linkSite">
                 </div>
             </div>
 
@@ -76,7 +84,7 @@
                     <label for="password" class="password-pass d-flex justify-content-start mb-2">Mot de pass</label>
                     <div class="d-flex gap-3 pb-1 align-items-center">
                         <div class="password-input-group">
-                            <input type="{{type}}" name="password" value="yuiksljksjfk" class="password-profile" id="password">
+                            <input type="{{type}}" name="password" [(ngModel)]="user.password" class="password-profile" id="password">
                             <i class="fa-solid fa-eye{{icon_eyes}} icon_pass" (click)="chanIcon($event)"></i>
                         </div>
                         <button class="add_caract">

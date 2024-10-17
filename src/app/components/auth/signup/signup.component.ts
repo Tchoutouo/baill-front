@@ -87,7 +87,7 @@ export class SignupComponent implements OnInit{
     window.scroll(0,0)
     this.siteName = getSiteName();
     this.countries = Country.getAllCountries();
-    console.log("countries",this.countries)
+    // console.log("countries",this.countries)
   }
 
   passwordsMatchValidator(formGroup: FormGroup) {

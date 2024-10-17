@@ -16,5 +16,6 @@ export interface User {
     date_of_birth?: string,
     place_of_birth?: string,
     sex?: boolean,
-    passwordConfirm?: string
+    passwordConfirm?: string,
+    cni?: string
 }
