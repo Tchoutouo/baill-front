@@ -30,22 +30,22 @@ export class MyAccountComponent {
     window.scroll(0,0)
     this.user  = this.localStorage.getItem('user');
     this.countries = Country.getAllCountries();
+    this.selectedCountry = this.user.country;
+    this.cities = City.getCitiesOfCountry(this.selectedCountry);
+    this.selectedCity = this.user.city;
+
   }
 
   chanIcon(event : any){
     this.type = (this.type === "password") ?  "text"  : "password" ;
 
     this.icon_eyes = (this.icon_eyes === "") ?  "-slash"  : "" ;
-
-   
   }
 
   async onCountryChange(event: any) {
     try{
       const countryCode = event.target.value;
       this.cities = City.getCitiesOfCountry(countryCode);
-      // console.log("cities",this.cities);
-
     } catch (error) {
       console.error('Erreur lors de la récupération des villes:', error);
     }

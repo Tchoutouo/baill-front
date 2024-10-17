@@ -24,11 +24,11 @@
                     <label for="" class="label-form mb-1">Sexe</label>
                     <div class="form-check d-flex gap-3">
                         <div class="check-item d-flex gap-1">
-                            <input type="radio" class="form-check rounded-circle" [(ngModel)]="user.sex" name="sexe" id="H" [checked]="user?.sex == true">
+                            <input type="radio" class="form-check rounded-circle" [(ngModel)]="user.sex" name="sexe" id="H" [checked]="user.sex == true">
                             <label for="H" class="fs-6" >H</label>
                         </div>
                         <div class="check-item d-flex gap-1">
-                            <input type="radio"  class="form-check" [(ngModel)]="user.sex" name="sexe" id="F" [checked]="user?.sex == false">
+                            <input type="radio"  class="form-check" [(ngModel)]="user.sex" name="sexe" id="F" [checked]="user.sex == false">
                             <label for="F" class="fs-6" >F</label>
                         </div>
                     </div>
@@ -40,8 +40,10 @@
                     <label for="country" class="label-form mb-1">Pays</label>
                     <!-- <input type="text" name="country" class="input_field" value="{{user?.country}}" id="country"> -->
                     <select id="country" [(ngModel)]="selectedCountry" (change)="onCountryChange($event)" name="country" class="form-control" required="required">
-                        <option *ngFor="let country of countries" [value]="country.isoCode" [selected]="country.isoCode == user.country">{{ country.name }}</option>
+                        <option *ngFor="let country of countries" [value]="country.isoCode">{{ country.name }}</option>
                     </select>
+                    <!-- <i class="fa-solid fa-chevron-down text-success"></i> -->
+                    <i class="fa-solid fa-sort-down text-success" style="position:relative; bottom: 22px; left: Opx;"></i>
                 </div>
                 <div class="form_group mb-3">
                     <label for="city" class="label-form mb-1">Ville</label>
@@ -53,16 +55,16 @@
                     </select>
                 </div>
                 <div class="form_group mb-3">
-                    <label for="quater" class="label-form mb-1">Quartier</label>
-                    <input type="text" name="quater" class="input_field" [(ngModel)]="user.neighborhood" id="quater">
+                    <label for="neighborhood" class="label-form mb-1">Quartier</label>
+                    <input type="text" name="neighborhood" class="input_field" [(ngModel)]="user.neighborhood" id="neighborhood">
                 </div>
                 <div class="form_group mb-3">
-                    <label for="linkSite" class="label-form mb-1">Lien du site web</label>
-                    <input type="text" name="linkSite" class="input_field"[(ngModel)]="user.site_url" id="linkSite">
+                    <label for="site_url" class="label-form mb-1">Lien du site web</label>
+                    <input type="text" name="site_url" class="input_field"[(ngModel)]="user.site_url" id="site_url">
                 </div>
                 <div class="form_group mb-3">
-                    <label for="linkSite" class="label-form mb-1">Numero CNI</label>
-                    <input type="text" name="linkSite" class="input_field" [(ngModel)]="user.cni" id="linkSite">
+                    <label for="cni" class="label-form mb-1">Numero CNI</label>
+                    <input type="text" name="cni" class="input_field" [(ngModel)]="user.cni" id="cni">
                 </div>
             </div>
 
