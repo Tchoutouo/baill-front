@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { AsideComponent } from "../layouts/aside/aside.component";
 import { NavBarComponent } from '../layouts/nav-bar/nav-bar.component';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { HeaderComponent } from "../../user/header/header.component";
+import { FooterComponent } from "../../user/footer/footer.component";
 
 @Component({
   selector: 'app-content',
   standalone: true,
-  imports: [NavBarComponent, AsideComponent,RouterOutlet, RouterLink],
+  imports: [NavBarComponent, AsideComponent, RouterOutlet, RouterLink, HeaderComponent, FooterComponent],
   templateUrl: './content.component.html',
   styleUrl: './content.component.css'
 })
