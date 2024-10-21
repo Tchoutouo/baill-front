@@ -22,5 +22,5 @@ export class AppComponent {
     this.translateService.use(localStorage.getItem('lang') || 'fr'); 
 
   }
-  title = 'baill-front';
+  title = 'bailleurnet';
 }
