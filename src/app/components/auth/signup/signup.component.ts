@@ -107,8 +107,8 @@ export class SignupComponent implements OnInit{
 
   async onCountryChange(event: any) {
     try{
-      const countryCode = event.target.value;
-      this.cities = City.getCitiesOfCountry(countryCode);
+      var countryCode = event.target.value;
+      this.cities = City.getCitiesOfCountry(countryCode.isoCode);
       // console.log("cities",this.cities);
 
     } catch (error) {

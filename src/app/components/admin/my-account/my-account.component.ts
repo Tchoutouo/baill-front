@@ -26,7 +26,8 @@ export class MyAccountComponent {
   selectedCity!: any;
   picture: string = "";
   errorMessage : string = "";
-
+  updateUser!: any;
+  images: string ="";
 
   constructor (private localStorage : LocalStorageService, private entityService : EntityServiceService, private router: Router){
 
@@ -60,13 +61,15 @@ export class MyAccountComponent {
 
   UpdateProfil(){
     // console.log(this.User.name);
-    var updateUser = {
+    // let formData: FormData = new FormData();  
+
+    this.updateUser = {
       username: this.user.username,
       last_name: this.user.last_name,
       first_name: this.user.first_name,
       email: this.user.email,
       password: this.user.password,
-      picture: this.user.picture,
+      picture: this.images,
       number: this.user.number,
       whatsapp_number: this.user.whatsapp_number,
       site_url: this.user.site_url,
@@ -76,10 +79,26 @@ export class MyAccountComponent {
       sex: this.user.sex,
       cni: this.user.cni
     }
+    // console.log("firstValue",this.updateUser);
+    // Object.keys(this.updateUser).forEach((key) => {  
+    //   if (typeof this.updateUser[key] === 'object' && this.updateUser[key] !== null) {  
+    //     // Si c'est un objet (mais pas null), vous pouvez également itérer à travers ses propriétés  
+    //     formData.append(key, JSON.stringify(this.updateUser[key])); // Convertir l'objet en JSON  
+    //   } else {  
+    //     // Pour d'autres types de valeurs (string, number, etc.)  
+    //     formData.append(key, this.updateUser[key]);  
+    //   }  
+    // });
+    // console.log("this.picture",this.picture);
+
+    // formData.append("images", this.picture);  
+
+
     const entity = "advertiser_back/update";
     const user_id =  this.user.id;
 
-    this.entityService.update(user_id, updateUser, entity).subscribe({
+    // console.log("this.updateUser",this.updateUser);
+    this.entityService.update(user_id, this.updateUser, entity).subscribe({
       next : (data : any) =>{
         console.log("data",data);
         if(data.success){
@@ -94,7 +113,7 @@ export class MyAccountComponent {
       }
     });
 
-    console.log("updateUser",updateUser);
+    // console.log("updateUser",formData);
   }
 
   handleAddImage(event : any){
@@ -105,8 +124,13 @@ export class MyAccountComponent {
   }
 
   addImage(event: any) {  
-    const files = event.target.files;  
+    const files = event.target.files; 
+    // console.log("files", files); 
     const file_image = files[0];  
+    // const image = files;
+    this.images = files;
+    // console.log("file_image", files); 
+
   
     if (!is_image(file_image)) {  
       this.errorMessage = "Erreur, ceci n'est pas une image !";  
@@ -118,7 +142,10 @@ export class MyAccountComponent {
       
     file_reader.onload = () => {  
       this.picture = file_reader.result as string ;
-      this.user.picture = this.picture ; 
+    // console.log("this.picture",this.picture);
+
+      // this.updateUser.picture = this.picture ;
+
     };  
   }
 
