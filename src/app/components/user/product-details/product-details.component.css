@@ -167,6 +167,23 @@
     text-align: left;
 }
 
+.product-details .phone span{
+    font-weight: var(--main-xl-font-weiht);
+}
+
+.two_icon{
+    margin-bottom: 5px;
+}
+
+.two_icon i{
+    color: var(--main-color-blackgreen) !important;
+}
+
+.two_icon a{
+    text-decoration: none;
+    color: var(--main-color-green-30);
+}
+
 /* media sreen */
 @media screen and (max-width : 1200px) {
     .container-fluid{

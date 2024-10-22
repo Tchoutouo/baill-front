@@ -11,9 +11,9 @@ import { RouterLink, RouterModule } from '@angular/router';
 })
 export class ProductComponent implements OnInit{
   siteUser: string = "www.bailleurnet.com";
-  phone_number: string = "237655447247";
-  whatsapp_number: string = "237655447247";
-  emailUser: string = "nomdecodeyvaltt@gmail";
+  phone_number: string = "237694798186";
+  whatsapp_number: string = "237694798186";
+  emailUser: string = "contact@gmail.com";
   subject: string = "Annonce sur bailleurnet";
   body: string =  "";
 
