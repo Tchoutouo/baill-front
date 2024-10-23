@@ -100,6 +100,7 @@ export class FormCreateComponent {
 
 
   handleSubmit(event: any = null) {  
+    console.log(event);
     
     if (!this.anounces_form_datas.valid || this.images_annouces_list.length < 1) {  
       if (this.images_annouces_list.length < 1) {  
@@ -144,10 +145,10 @@ export class FormCreateComponent {
 
         // Mise à jour de is_published selon l'événement  
         formData.append('is_published', event ? '1' : '0');  
+        formData.append('status', event ? '3' : '1');  
         formData.append('abonnement_id', event ? event : 1);  
-        let user = this.locaStorage.getItem('user')
+        let user = this.locaStorage.getItem('user');
         formData.append('user_id', user ? user.id : 1);  
-        console.log(user.id);
         
         // Ajout des images  
         this.images_annouces_list.forEach((file) => {  

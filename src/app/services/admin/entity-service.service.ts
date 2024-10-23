@@ -30,7 +30,7 @@ export class EntityServiceService {
   }
 
 
-  getUserAnoucesByPages(user_id : number, pageNumber : number, pageLImit :number = 5){
+  getUserAnoucesByPages(user_id : number, pageNumber : number, pageLImit : number = 5){
     return this.http.get(environment.apiUrl+'annonce_back/'+user_id+'/'+pageLImit+'?page='+pageNumber);
   }
 

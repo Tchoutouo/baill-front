@@ -60,9 +60,11 @@ export class AnnouncesComponent {
   
   setPageLimit(event : any){
     const {name, value} = event.target;
-    const pageLimit = parseInt(value);
-    if (!isNaN(pageLimit)) {
-      this.pageLImit = parseInt(value);
+    const pageRange = parseInt(value);
+    console.log(pageRange);
+    
+    if (!isNaN(pageRange)) {
+      this.pageLImit = pageRange;
       this.getDatasByPage();
     }
   }
@@ -71,8 +73,10 @@ export class AnnouncesComponent {
     this.loged = this.auth.isAuthenticated();
     // if (this.loged) {
       const user = this.localStorage.getItem('user')
-      const user_id = 6;
-      // const user_id = user?.id;
+      // const user_id = 6;
+      const user_id = user?.id;
+      console.log({oetit : this.pageLImit});
+      
       this.result_data = this.entytServ.getUserAnoucesByPages(user_id, this.pageNumber ,this.pageLImit).subscribe({
         next: (datas: any) => { 
           console.log(datas);

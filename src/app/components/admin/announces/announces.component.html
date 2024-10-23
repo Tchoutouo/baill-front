@@ -25,7 +25,7 @@
         <div class="col-12 d-flex justify-content-start gap-2 align-items-center py-3">
             <h3 class="label-filter m-0">Afficher par</h3>
             <select class="form-select w-25" id="" aria-label="Floating label select example" (change)="setPageLimit($event)">
-                <option value="1" *ngFor="let itemRange of rangeList">{{itemRange}}</option>
+                <option value="{{itemRange}}" *ngFor="let itemRange of rangeList">{{itemRange}}</option>
             </select>
         </div>
 
@@ -43,16 +43,27 @@
                         <th scope="row" class="bord-black">{{paginationDAtas.allcount - (paginationDAtas.current-1) * pageLImit - index}}</th>
                         <td class="bord-black">AN001</td>
                         <td class="bord-black">{{value_datas.title}}</td>
-                        <td class="bord-black">Nom</td>
+                        <td class="bord-black">
+                           <div class="d-flex gap-2">
+                                <div class="cat-item" *ngFor="let category of value_datas.name_categorie">
+                                    {{category}}
+                                </div>
+                           </div>
+                        </td>
                         <td class="bord-black">345K</td>
-                        <td class="bord-black"><div class="watting">En cours</div></td>
+                        <td class="bord-black">
+                            <div class="watting" *ngIf="value_datas.status == '1'">En cours</div>
+                            <div class="paused" *ngIf="value_datas.status == '2'">En pause</div>
+                            <div class="published" *ngIf="value_datas.status == '3'">Publié</div>
+                            <div class="expired" *ngIf="value_datas.status == '0'">Expiré</div>
+                        </td>
                         <td class="bord-black">
                             <div class="icon-list d-flex gap-2 justify-content-center">
-                                <a href=" " class=""><i class="fa fa-check bg-green  p-1 radius-3 text-white"></i></a>
-                                <a href=""><i class="fa-solid fa-trash radius-3 bg_red text-white p-1"></i></a>
-                                <!-- <a href=""><i class="fa-solid fa-play bg-white radius-3 text_green p-1 border-top-1-green border-bottom-1-green border-left-1-green border-right-1-green"></i></a>
-                                <a href=""><i class="fa-solid fa-pause bg_grey radius-3 text-dark p-1"></i></a>
-                                <a href=""><i class="fa-solid fa-arrows-rotate bg_blue radius-3 text-white p-1"></i></a> -->
+                                <a *ngIf="value_datas.status == '1'"><i class="fa fa-check bg-green  p-1 radius-3 text-white"></i></a>
+                                <a *ngIf="value_datas.status == '1'"><i class="fa-solid fa-trash radius-3 bg_red text-white p-1"></i></a>
+                                <a *ngIf="value_datas.status == '2'"><i class="fa-solid fa-play bg-white radius-3 text_green p-1 border-top-1-green border-bottom-1-green border-left-1-green border-right-1-green"></i></a>
+                                <a *ngIf="value_datas.status == '3'"><i class="fa-solid fa-pause bg_grey radius-3 text-dark p-1"></i></a>
+                                <a *ngIf="value_datas.status == '0'"><i class="fa-solid fa-arrows-rotate bg_blue radius-3 text-white p-1"></i></a> 
                             </div>
                         </td>
                     </tr>

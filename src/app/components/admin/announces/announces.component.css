@@ -142,6 +142,13 @@ table#dashboard_table tbody tr td{
     text-align: center;
 }
 
+.cat-item{
+    background-color: var(--main-color-green-15);
+    width: fit-content;
+    color: var(--main-color);
+    border-radius: var(--main-radius-value-3);
+    padding: 3.5px 10px;
+}
 
 /* status */
 div.watting{

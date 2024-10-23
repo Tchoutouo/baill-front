@@ -18,7 +18,7 @@ export class AlertComponent {
 
   constructor( private alertNotification : NoficationsService){}
 
-  progress: number = 100; 
+  progress: number = 0; 
   notification = new Notification()
 
   ngOnInit() {  
@@ -27,7 +27,6 @@ export class AlertComponent {
         this.notification = alert;
         this.message = this.notification.message
         const timout = this.notification.timeout
-        this.progress = this.notification.timeout
         this.animateProgress(timout)
       },
     })
@@ -35,21 +34,21 @@ export class AlertComponent {
   }  
 
   animateProgress(duration: number) {  
-    const interval = 10; // Intervalle en ms  
-    const steps = duration / interval; // Nombre d'étapes  
-    const step = this.progress / steps; // Montée à chaque intervalle  
+      this.progress = 100;  
+      const interval = 50;  
+      // const interval = 50;  
+      const steps = 100 / (duration / interval);  
 
-    const intervalId = setInterval(() => {  
-      this.progress -= step; // Décrémente la progression  
+      const intervalId = setInterval(() => {  
+          this.progress -= steps;  
       
-      // Vérifier si la progression est inférieure ou égale à 0  
-      if (this.progress <= 0) {  
-        this.progress = 0; // Assurez-vous qu'il ne soit pas négatif  
-        clearInterval(intervalId); // Arrêtez l'intervalle  
-        this.message = null; // Masquer le message  
-      }  
-    }, interval);  
-  }  
+          if (this.progress <= 0) {  
+              this.progress = 0;  
+              clearInterval(intervalId);  
+              this.message = null;  
+          }  
+      }, interval);  
+  }
 
   
 }
