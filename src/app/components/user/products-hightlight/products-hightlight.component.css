@@ -29,6 +29,15 @@
     margin: 0;
 }
 
+.product-name h4{
+    font-size: var( --main-h3-font-size);
+    font-weight: var(--main-xl-font-weiht);
+    line-height: var(--main-lg-line-height);
+    text-align: left;
+    color: var(--main-color-blackgreen);
+    margin: 0;
+}
+
 .product-name h2{
     font-size: var( --main-h2-font-size);
     font-weight: var(--main-xl-font-weiht);
@@ -95,6 +104,23 @@
 
 .carousel-control-next{
     right: -5%;
+}
+
+.product-details .phone span{
+    font-weight: var(--main-xl-font-weiht);
+}
+
+.two_icon{
+    margin-bottom: 5px;
+}
+
+.two_icon i{
+    color: var(--main-color-blackgreen) !important;
+}
+
+.two_icon a{
+    text-decoration: none;
+    color: var(--main-color-green-30);
 }
 
 

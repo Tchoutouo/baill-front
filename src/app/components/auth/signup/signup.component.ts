@@ -87,7 +87,7 @@ export class SignupComponent implements OnInit{
     window.scroll(0,0)
     this.siteName = getSiteName();
     this.countries = Country.getAllCountries();
-    console.log("countries",this.countries)
+    // console.log("countries",this.countries)
   }
 
   passwordsMatchValidator(formGroup: FormGroup) {
@@ -107,8 +107,8 @@ export class SignupComponent implements OnInit{
 
   async onCountryChange(event: any) {
     try{
-      const countryCode = event.target.value;
-      this.cities = City.getCitiesOfCountry(countryCode);
+      var countryCode = event.target.value;
+      this.cities = City.getCitiesOfCountry(countryCode.isoCode);
       // console.log("cities",this.cities);
 
     } catch (error) {

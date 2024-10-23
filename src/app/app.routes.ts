@@ -48,13 +48,13 @@ export const routes: Routes = [
             },
             
             {
-              path: 'dashboard',
-              component: DashboardComponent
+                path: 'dashboard',
+                component: DashboardComponent
             },
 
             {
-              path: 'settings',
-              component: SettingsComponent
+                path: 'settings',
+                component: SettingsComponent
             },
             {
                 path: 'announces',
@@ -72,8 +72,8 @@ export const routes: Routes = [
                 ]
             },
             {
-              path: 'myAccount',
-              component: MyAccountComponent,
+                path: 'myAccount',
+                component: MyAccountComponent,
                 // canActivate: [authGuard],
             }
 

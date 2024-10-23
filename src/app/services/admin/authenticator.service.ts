@@ -7,9 +7,10 @@ import { LocalStorageService } from './local-storage.service';
 import { Router } from '@angular/router';
 
 interface LoginResponse{
-  isSuccess : boolean,
-  token : string,
+  success : boolean,
   user:User,
+  token : string,
+  redirect_url: string
 }
 
 @Injectable({
@@ -34,10 +35,12 @@ export class AuthenticatorService {
       next : (result : any )=>{      
         if(result.success){
           const data :  LoginResponse = {
-              isSuccess: true,
-              token:"",
-              user: result.data
+              success: true,
+              user: result.data,
+              token: result.token,
+              redirect_url: result.redirect_url
           };
+          console.log("redirect_url",result.redirect_url);
           this.localStorage.setItem('token', data.token);
           this.localStorage.setItem('user', data.user);
           this.authUser = true ;

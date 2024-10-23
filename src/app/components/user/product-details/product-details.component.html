@@ -67,7 +67,7 @@
                     </div>
 
                     <div class="publisher-contacts">
-                        <div class="">
+                        <!-- <div class="">
                             <h4 class="title"> Contacts de l’annonceur :  </h4>
                             <div class="numbers d-flex gap-2">
                                 <div class="label-number">
@@ -94,14 +94,39 @@
                                     <li> lesfuries.com</li>
                                 </ul>
                             </div>
+                        </div> -->
+                        <div class="other-details align-items-center row mt-3">
+            
+                            <div class="location-address col-xl-12">
+                                <div class="two_icon">
+                                    <a [href]="'tel:'+phone_number" target="_blank">
+                                        <i class="fa-solid fa-square-phone-flip" style="font-size: 23px;"></i> : {{phone_number}}
+                                    </a> 
+                                </div>
+                                <div class="two_icon ">
+                                    <a [href]="'https://'+siteUser" target="_blank" rel="noopener noreferrer">
+                                        <i class="fas fa-globe" style="font-size: 21px;"></i> : {{siteUser}}
+                                    </a> 
+                                </div>
+                                <div class="two_icon">
+                                    <a [href]="'https://api.whatsapp.com/send?phone='+whatsapp_number+'&text=Hello Bailleurnet&source=&data='" target="_blank" rel="noopener noreferrer">
+                                        <i class="fab fa-whatsapp" style="font-size: 24px;"></i> : {{whatsapp_number}}
+                                    </a>
+                                </div>
+                                <div class="two_icon">
+                                    <a [href]="'mailto:'+emailUser+'?subject=' + subject + '&body=' + body" target="_blank">
+                                        <i class="fa-solid fa-envelope" style="font-size: 21px;"></i> : {{emailUser}}
+                                    </a> 
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="d-flex justify-content-end" id="button-contact">
+                    <!-- <div class="d-flex justify-content-end" id="button-contact">
                         <a href="https://api.whatsapp.com/send?phone=237694798186&text=Bonjour Bailleurnet&source=&data=" class="button-details">
                             Contacter l’annonceur
                         </a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

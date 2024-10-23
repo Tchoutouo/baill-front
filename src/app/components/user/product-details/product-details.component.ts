@@ -21,6 +21,13 @@ export class ProductDetailsComponent {
     displayModal : boolean = false;
     srcArray: Array<any> = [""];
     carateristiques: Array<string> = [""];
+    phone_number: string = "237694798186";
+    whatsapp_number: string = "237694798186";
+    emailUser: string = "contact@gmail.com";
+    subject: string = "Annonce sur bailleurnet";
+    body: string =  "";
+    siteUser: string = "www.bailleurnet.com";
+
 
     constructor(){
 

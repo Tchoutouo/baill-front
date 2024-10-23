@@ -75,3 +75,14 @@ button.add_caract{
     color: var(--main-color-white);
     width: fit-content;
 }
+
+.load-image{
+    background-color: transparent;
+    height: calc(182px - 1rem);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 182px;
+    position: relative;
+    border-radius: 50%;
+}

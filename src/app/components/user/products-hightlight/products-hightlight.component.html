@@ -17,6 +17,10 @@
                             <div class="col-md-5 offset-md-1">
                                 <div class="product-text mb-2">
                                     <div class="product-name">
+                                        <h4>
+                                            <i class="fas fa-map-marker-alt" style="font-size: 22px;"></i>
+                                            Yaoundé
+                                        </h4>
                                         <h3>
                                             Nom du produit
                                         </h3>
@@ -31,7 +35,7 @@
                                             Description du produit,Description du prproduitDescription duproduitDescription duproduitDescription duproduitDescription duproduitDduoduitDescription du produitDescription du produitDescription du produit ....
                                         </h4>
                                     </div>
-                                    <div class="product-phone my-1">
+                                    <!-- <div class="product-phone my-1">
                                         <h5>
                                             tel : +237 934 854 534
                                         </h5>
@@ -47,6 +51,33 @@
                                     <div class="others-contacts d-flex gap-2">
                                         <i class="fas fa-globe"></i>
                                         <i class="fab fa-whatsapp"></i>
+                                    </div> -->
+                                    <div class="other-details align-items-center row mt-3">
+            
+                                        <div class="location-address col-md-6">
+                                            <div class="two_icon">
+                                                <a [href]="'tel:'+phone_number" target="_blank">
+                                                    <i class="fa-solid fa-square-phone-flip" style="font-size: 23px;"></i> : {{phone_number}}
+                                                </a> 
+                                            </div>
+                                            <div class="two_icon ">
+                                                <a [href]="'https://'+siteUser" target="_blank" rel="noopener noreferrer">
+                                                    <i class="fas fa-globe" style="font-size: 21px;"></i> : {{siteUser}}
+                                                </a> 
+                                            </div>
+                                        </div>
+                                        <div class="location-address col-md-6">
+                                            <div class="two_icon">
+                                                <a [href]="'https://api.whatsapp.com/send?phone='+whatsapp_number+'&text=Hello Bailleurnet&source=&data='" target="_blank" rel="noopener noreferrer">
+                                                    <i class="fab fa-whatsapp" style="font-size: 24px;"></i> : {{whatsapp_number}}
+                                                </a>
+                                            </div>
+                                            <div class="two_icon">
+                                                <a [href]="'mailto:'+emailUser+'?subject=' + subject + '&body=' + body" target="_blank">
+                                                    <i class="fa-solid fa-envelope" style="font-size: 21px;"></i> : {{emailUser}}
+                                                </a> 
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
