@@ -25,6 +25,8 @@ export class SignupComponent implements OnInit{
   phoneCode: string = '';
   message_alert : any  = null;
   display_message: boolean = false;
+  country_selected!: any;
+  my_country: string ='';
 
   user: User = {
     username:"",
@@ -108,8 +110,11 @@ export class SignupComponent implements OnInit{
   async onCountryChange(event: any) {
     try{
       var countryCode = event.target.value;
-      this.cities = City.getCitiesOfCountry(countryCode.isoCode);
-      // console.log("cities",this.cities);
+      this.cities = City.getCitiesOfCountry(countryCode);
+      this.country_selected = Country.getCountryByCode(countryCode)
+      this.my_country = this.country_selected.name;
+      this.selectedCountry = this.my_country;
+      // console.log("country",this.my_country);
 
     } catch (error) {
       console.error('Erreur lors de la récupération des villes:', error);
@@ -117,10 +122,13 @@ export class SignupComponent implements OnInit{
   }
 
   handleSubmit(){
-    console.log("formValue",this.signupForm.value)
+    console.log("formValue",this.signupForm.value);
     const entity =  "advertiser_back/store";
 
     const datas = this.signupForm.value;
+    // datas.country =  this.my_country;
+
+    // console.log("datas", datas);
     if (this.signupForm.valid) {
       console.log('Form submitted successfully');
       this.entityService.store(entity, datas).subscribe({
