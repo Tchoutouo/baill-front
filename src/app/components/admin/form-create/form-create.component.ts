@@ -151,8 +151,8 @@ export class FormCreateComponent {
         
         // Ajout des images  
         this.images_annouces_list.forEach((file) => {  
-              formData.append('images[]', file);  // Utiliser append au lieu de set  
-          });
+            formData.append('images[]', file);  // Utiliser append au lieu de set  
+        });
 
         // Stockage de l'entité  
         this.entityService.store(entity, formData).subscribe({  

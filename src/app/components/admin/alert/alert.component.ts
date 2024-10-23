@@ -34,19 +34,19 @@ export class AlertComponent {
     
   }  
 
-  animateProgress(time : any) {  
-    const duration = time; 
-    const interval = time / 100 ; 
-    const step = (interval / duration) * this.progress; 
-    console.log(step, interval, duration);
+  animateProgress(duration: number) {  
+    const interval = 10; // Intervalle en ms  
+    const steps = duration / interval; // Nombre d'étapes  
+    const step = this.progress / steps; // Montée à chaque intervalle  
 
-    const intervalId = setInterval(() => {    
-      this.progress -= step;  
-      // Si la progression atteint 0, arrêtez l'intervalle  
+    const intervalId = setInterval(() => {  
+      this.progress -= step; // Décrémente la progression  
+      
+      // Vérifier si la progression est inférieure ou égale à 0  
       if (this.progress <= 0) {  
-        this.progress = 0;  
-        clearInterval(intervalId);  
-        this.message = null;
+        this.progress = 0; // Assurez-vous qu'il ne soit pas négatif  
+        clearInterval(intervalId); // Arrêtez l'intervalle  
+        this.message = null; // Masquer le message  
       }  
     }, interval);  
   }  
