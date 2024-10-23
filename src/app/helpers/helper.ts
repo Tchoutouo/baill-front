@@ -1,3 +1,5 @@
+import { AnounceEntity } from "../models/admin/nounceEntity";
+
 export const getSiteName = () : string =>{
     let siteName = "Bailleurnet";
 
@@ -25,4 +27,21 @@ export const is_image = (fileName : string) => {
     }
 
     return false;
+}
+
+export const getEntityPoperties = (entity: string) : Array<string> =>{
+
+    let results : any = []
+    let entityClass : any;
+    
+    if (entity == "anouces") {
+        entityClass = new AnounceEntity()
+    }
+
+    if (entityClass) {
+        results = Object.keys(entityClass)
+    }
+
+    return entityClass ;
+
 }
