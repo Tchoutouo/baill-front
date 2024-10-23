@@ -13,7 +13,7 @@ import { RouterLink} from '@angular/router';
 
 export class HeaderComponent {
 
-  emailContact : string = "contact@gmail.com" ;
+  emailContact : string = "contact@bailleurnet.com" ;
   siteName : string = "";
   lang: string = "";
 

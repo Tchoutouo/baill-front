@@ -6,3 +6,13 @@
 .bg_grey{
     background-color: var(--main-color-gray-10);
 }
+
+a{
+    cursor: pointer;
+}
+
+.active a{
+    background-color: var(--main-color);
+    color: white ;
+    border: 1px solid var(--main-color);
+}

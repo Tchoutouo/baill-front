@@ -1,4 +1,4 @@
 export const environment = {
     production : false,
-    apiUrl: "https://www.test-backend.bailleurnet.com/api/"
+    apiUrl: "https://test-backend.bailleurnet.com/api/"
 };  
