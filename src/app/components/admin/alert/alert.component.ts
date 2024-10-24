@@ -34,20 +34,20 @@ export class AlertComponent {
   }  
 
   animateProgress(duration: number) {  
-      this.progress = 100;  
-      const interval = 50;  
-      // const interval = 50;  
-      const steps = 100 / (duration / interval);  
+    this.progress = 100;  
+    const interval = 50;  
+    // const interval = 50;  
+    const steps = 100 / (duration / interval);  
 
-      const intervalId = setInterval(() => {  
-          this.progress -= steps;  
-      
-          if (this.progress <= 0) {  
-              this.progress = 0;  
-              clearInterval(intervalId);  
-              this.message = null;  
-          }  
-      }, interval);  
+    const intervalId = setInterval(() => {  
+        this.progress -= steps;  
+    
+        if (this.progress <= 0) {  
+            this.progress = 0;  
+            clearInterval(intervalId);  
+            this.message = null;  
+        }  
+    }, interval);  
   }
 
   
