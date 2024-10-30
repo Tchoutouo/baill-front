@@ -50,6 +50,9 @@
                             <div class="" class="error" *ngIf="description.hasError('required')">
                                 veuiller renseigner ce champ 
                             </div>
+                            <div class="" class="error" *ngIf="!description.hasError('required')">
+                                la taille maximale de caratère autorisée est de 256. 
+                            </div>
                         </div>
                     </div>
 

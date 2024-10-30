@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ProductComponent } from "../product/product.component";
 import { ImageListComponent } from "../image-list/image-list.component";
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [CommonModule, ProductComponent, ImageListComponent],
+  imports: [CommonModule, ProductComponent, ImageListComponent, HeaderComponent],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.css'
 })

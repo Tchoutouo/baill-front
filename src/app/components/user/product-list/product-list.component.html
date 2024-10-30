@@ -3,9 +3,25 @@
 
     <div class="list-product">
         <div class="row">       
-            <div class="col-md-6 col-lg-4" *ngFor="let item of numbers" >
-                <app-product></app-product>
+            <div class="col-md-6 col-lg-4" *ngFor="let item of products" >
+                <app-product [productItem]="item"></app-product>
             </div> 
+        </div>
+    </div>
+</div>
+<div class="container d-block mb-5 pb-2">
+    <div class="row">
+        <div class="col-lg-12 d-flex pt-2 justify-content-center">
+            <app-paginator *ngIf="pageLimit <= products.length "
+                [currentPage] ="paginationDatas?.current"
+                [total] ="paginationDatas?.total"
+                [next] ="paginationDatas?.next"
+                [previous] ="paginationDatas?.previous"
+                [lastElement] ="paginationDatas?.last"
+                [pageL_limit] = "pageLimit"
+
+                (setPage)="setPageCurrent($event)"
+            ></app-paginator>
         </div>
     </div>
 </div>

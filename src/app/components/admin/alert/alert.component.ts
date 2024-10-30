@@ -30,7 +30,6 @@ export class AlertComponent {
         this.animateProgress(timout)
       },
     })
-    
   }  
 
   animateProgress(duration: number) {  

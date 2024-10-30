@@ -28,10 +28,12 @@ export const routes: Routes = [
         path: 'signup', 
         component: SignupComponent 
     },
+
     { 
-        path: 'product-details', 
+        path: 'product-details/:id', 
         component: ProductDetailsComponent 
     },
+
     { 
         path: 'image-list', 
         component: ImageListComponent 

@@ -4,7 +4,7 @@ import { ImageViewComponent } from "../image-view/image-view.component";
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { EntityServiceService } from '../../../services/admin/entity-service.service';
-import {Notification} from '../../../models/notification'
+import {Notification} from '../../../models/notification';
 import { NoficationsService } from '../../../services/nofications.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -67,7 +67,7 @@ export class FormCreateComponent {
   {
 
     this.title = this.form_b.control('', [Validators.required, Validators.maxLength(256)])
-    this.description = this.form_b.control('', [Validators.required])
+    this.description = this.form_b.control('', [Validators.required, Validators.maxLength(256)])
     this.price = this.form_b.control('', [ Validators.required])
     this.contact = this.form_b.control('', [] );
     this.neighborhood = this.form_b.control('', [] );
@@ -96,7 +96,6 @@ export class FormCreateComponent {
     window.scroll(0,0);   
     this.getAllCategories() ;
   }
-
 
 
   handleSubmit(event: any = null) {  
@@ -197,9 +196,8 @@ export class FormCreateComponent {
         }
       },
 
-      error: (error: any) => { 
-        console.log(error);
-        
+      error: (erreur: any) => { 
+        console.log(erreur);
        }
     })
   }
