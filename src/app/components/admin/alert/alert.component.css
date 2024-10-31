@@ -10,6 +10,11 @@
     padding: 10px;
 }
 
+.progress{
+    border-radius: 0px 0px 8px 8px !important;
+    height: 8px !important;
+}
+
 .text-alert{
     font-family : var(--main-font-Quicksand);
 }

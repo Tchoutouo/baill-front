@@ -23,7 +23,11 @@ export class HomeService {
   }
 
   getAnnouceByID(id : any){
-    return this.http.get(environment.apiUrl+'annonce_back/show/'+id);
+    return this.http.get(environment.apiUrl+'get_annonce/'+id);
+  }
+
+  getAnnoucesOfSameCategoyByIds(array_id_cat : any){
+    return this.http.get(environment.apiUrl+'categorie_back/annonce_by_categ/'+array_id_cat); 
   }
 
 }

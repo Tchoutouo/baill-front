@@ -14,6 +14,7 @@ import { FormControlName } from '@angular/forms';
 import { AnnouceIndexComponent } from './components/admin/annouce-index/annouce-index.component';
 import { FormCreateComponent } from './components/admin/form-create/form-create.component';
 import { authGuard } from './guard/auth.guard';
+import { AnnouceDetailsComponent } from './components/admin/annouce-details/annouce-details.component';
 
 export const routes: Routes = [
     { 
@@ -33,6 +34,7 @@ export const routes: Routes = [
         path: 'product-details/:id', 
         component: ProductDetailsComponent 
     },
+    
 
     { 
         path: 'image-list', 
@@ -70,6 +72,11 @@ export const routes: Routes = [
                     { 
                         path: 'announces-list',
                         component: AnnouncesComponent,
+                    },
+                    
+                    { 
+                        path: 'details/:id',
+                        component: AnnouceDetailsComponent,
                     },
                 ]
             },
