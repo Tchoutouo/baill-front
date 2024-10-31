@@ -4,86 +4,88 @@
     </h1>
     <div class="products-container py-77">
         <div class="container">
-            <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+            <div id="carouselExampleInterval" *ngIf="annouces_high" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
-                  <div class="carousel-item active" data-bs-interval="10000">
-                    <div class="higlight-item">
-                        <div class="row align-items-center px-5">
-                            <div class="col-md-6">
-                                <div class="product-image" style="background-image: url('../../../../assets/hightlights/7070c217b05f4b4ac4e3265bfbfd3388.png');">
-    
-                                </div>
-                            </div>
-                            <div class="col-md-5 offset-md-1">
-                                <div class="product-text mb-2">
-                                    <div class="product-name">
-                                        <h4>
-                                            <i class="fas fa-map-marker-alt" style="font-size: 22px;"></i>
-                                            Yaoundé
-                                        </h4>
-                                        <h3>
-                                            Nom du produit
-                                        </h3>
+                    <ng-container *ngFor="let annouce_item of annouces_high; let  i = index">
+                        <div class="carousel-item"  data-bs-interval="5000" [ngClass]="{'active': i == 0}">
+                            <div class="higlight-item">
+                                <div class="row align-items-center px-5">
+                                    <div class="col-md-6">
+                                        <div class="product-image" style="background-image: url('{{apiRessources}}/{{annouce_item.url_image[0]}}');">
+                                            
+                                        </div>
                                     </div>
-                                    <div class="product-price mb-2">
-                                        <h2>
-                                            30 000 Frs
-                                        </h2>
-                                    </div>
-                                    <div class="product-description mb-3">
-                                        <h4>
-                                            Description du produit,Description du prproduitDescription duproduitDescription duproduitDescription duproduitDescription duproduitDduoduitDescription du produitDescription du produitDescription du produit ....
-                                        </h4>
-                                    </div>
-                                    <!-- <div class="product-phone my-1">
-                                        <h5>
-                                            tel : +237 934 854 534
-                                        </h5>
-                                    </div>
-    
-                                    <div class="product-localisation mt-2 mb-3">
-                                        <h5>
-                                            <i class="fa-solid fa-location-dot"></i>
-                                            localisation
-                                        </h5>
-                                    </div>
-    
-                                    <div class="others-contacts d-flex gap-2">
-                                        <i class="fas fa-globe"></i>
-                                        <i class="fab fa-whatsapp"></i>
-                                    </div> -->
-                                    <div class="other-details align-items-center row mt-3">
+                                    <div class="col-md-5 offset-md-1">
+                                        <div class="product-text mb-2">
+                                            <div class="product-name">
+                                                <h4>
+                                                    <i class="fas fa-map-marker-alt me-2" style="font-size: 30px;"></i>
+                                                    {{annouce_item.location}}
+                                                </h4>
+                                                <h3 class="my-1">
+                                                    {{annouce_item.title}}
+                                                </h3>
+                                            </div>
+                                            <div class="product-price mb-2">
+                                                <h2>
+                                                    {{annouce_item.price}} Frs
+                                                </h2>
+                                            </div>
+                                            <div class="product-description mb-3">
+                                                <h4>
+                                                    {{annouce_item.description}}
+                                                </h4>
+                                            </div>
+                                            <!-- <div class="product-phone my-1">
+                                                <h5>
+                                                    tel : +237 934 854 534
+                                                </h5>
+                                            </div>
             
-                                        <div class="location-address col-md-6">
-                                            <div class="two_icon">
-                                                <a [href]="'tel:'+phone_number" target="_blank">
-                                                    <i class="fa-solid fa-square-phone-flip" style="font-size: 23px;"></i> : {{phone_number}}
-                                                </a> 
+                                            <div class="product-localisation mt-2 mb-3">
+                                                <h5>
+                                                    <i class="fa-solid fa-location-dot"></i>
+                                                    localisation
+                                                </h5>
                                             </div>
-                                            <div class="two_icon ">
-                                                <a [href]="'https://'+siteUser" target="_blank" rel="noopener noreferrer">
-                                                    <i class="fas fa-globe" style="font-size: 21px;"></i> : {{siteUser}}
-                                                </a> 
-                                            </div>
-                                        </div>
-                                        <div class="location-address col-md-6">
-                                            <div class="two_icon">
-                                                <a [href]="'https://api.whatsapp.com/send?phone='+whatsapp_number+'&text=Hello Bailleurnet&source=&data='" target="_blank" rel="noopener noreferrer">
-                                                    <i class="fab fa-whatsapp" style="font-size: 24px;"></i> : {{whatsapp_number}}
-                                                </a>
-                                            </div>
-                                            <div class="two_icon">
-                                                <a [href]="'mailto:'+emailUser+'?subject=' + subject + '&body=' + body" target="_blank">
-                                                    <i class="fa-solid fa-envelope" style="font-size: 21px;"></i> : {{emailUser}}
-                                                </a> 
+            
+                                            <div class="others-contacts d-flex gap-2">
+                                                <i class="fas fa-globe"></i>
+                                                <i class="fab fa-whatsapp"></i>
+                                            </div> -->
+                                            <div class="other-details align-items-center row mt-3">
+                    
+                                                <div class="location-address col-12">
+                                                    <div class="two_icon" *ngIf="annouce_item.users?.whatsapp_number">
+                                                        <a [href]="'tel:'+annouce_item.users?.whatsapp_number" target="_blank">
+                                                            <i class="fa-solid fa-square-phone-flip" style="font-size: 23px;"></i> : +237{{annouce_item.users?.whatsapp_number}}
+                                                        </a> 
+                                                    </div>
+                                                    <div class="two_icon col-12" *ngIf="annouce_item.users?.site_url">
+                                                        <a [href]="'https://'+annouce_item.users?.site_url" target="_blank" rel="noopener noreferrer">
+                                                            <i class="fas fa-globe" style="font-size: 21px;"></i> : {{annouce_item.users?.site_url}}
+                                                        </a> 
+                                                    </div>
+                                                </div>
+                                                <div class="location-address col-12">
+                                                    <div class="two_icon" *ngIf="annouce_item.users?.whatsapp_number">
+                                                        <a [href]="'https://api.whatsapp.com/send?phone='+annouce_item.users?.whatsapp_number+'&text=Hello Bailleurnet&source=&data='" target="_blank" rel="noopener noreferrer">
+                                                            <i class="fab fa-whatsapp" style="font-size: 24px;"></i> : +237{{annouce_item.users?.whatsapp_number}}
+                                                        </a>
+                                                    </div>
+                                                    <div class="two_icon" *ngIf="annouce_item.users?.email">
+                                                        <a [href]="'mailto:'+annouce_item.users?.email+'?subject=' + subject + '&body=' + body" target="_blank">
+                                                            <i class="fa-solid fa-envelope" style="font-size: 21px;"></i> : {{annouce_item.users?.email}}
+                                                        </a> 
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>    
                         </div>
-                    </div>
-                  </div>
+                    </ng-container>
                   <!-- <div class="carousel-item" data-bs-interval="2000">
                     <img src="..." class="d-block w-100" alt="...">
                   </div>

@@ -36,6 +36,13 @@
             </select>
         </div>
 
+        <div class="result-message fw-bold" *ngIf="query.length >= 2 && annouces">
+            Resultat de recherche pour : <span class="search_data">{{query}}</span>
+        </div>
+        <div class="result-message fw-bold" *ngIf="query.length >= 2 && !annouces">
+            Aucun resultat pour : <span class="search_data">{{query}}</span>
+        </div>
+        
         <div class="col-12">
             <table class="table px-4 m-auto" id="dashboard_table">
                 <thead>
@@ -46,44 +53,56 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor=" let value_datas of annouces; let index = index">
-                        <th scope="row" class="bord-black">{{paginationDAtas.allcount - (paginationDAtas.current-1) * pageLImit - index}}</th>
-                        <td class="bord-black">AN001</td>
-                        <td class="bord-black">{{value_datas.title}}</td>
-                        <td class="bord-black">
-                           <div class="d-flex gap-2">
-                                <div class="cat-item" *ngFor="let category of value_datas.name_categorie">
-                                    {{category}}
+                    <ng-container *ngIf="annouces">
+                        <tr *ngFor=" let value_datas of annouces; let index = index" >
+                            <th scope="row" class="bord-black">{{paginationDAtas.allcount - (paginationDAtas.current-1) * pageLImit - index}}</th>
+                            <td class="bord-black">AN001</td>
+                            <td class="bord-black">{{value_datas.title}}</td>
+                            <td class="bord-black">
+                               <div class="d-flex gap-2">
+                                    <div class="cat-item" *ngFor="let category of value_datas.name_categorie">
+                                        {{category}}
+                                    </div>
+                               </div>
+                            </td>
+                            <td class="bord-black">345K</td>
+                            <!-- Les satus -->
+                            <td class="bord-black">
+                                <div class="watting" *ngIf="value_datas.status == '1'">En cours</div>
+                                <div class="paused" *ngIf="value_datas.status == '2'">En pause</div>
+                                <div class="published" *ngIf="value_datas.status == '3'">Publié</div>
+                                <div class="expired" *ngIf="value_datas.status == '0'">Expiré</div>
+                            </td>
+                            <!-- Les actions -->
+                            <td class="bord-black">
+                                <div class="icon-list d-flex gap-2 justify-content-center">
+                                    <a *ngIf="value_datas.status == '1'" title="Publier" id="create" data-bs-toggle="modal"  data-bs-target="#forfaitList" >
+                                        <i class="fa fa-check bg-green  p-1 radius-3 text-white"></i>
+                                        <app-forfait-list (hasSubmit)="handleSubmit($event, value_datas?.id)"></app-forfait-list>
+                                    </a>
+                                    <a *ngIf="value_datas.status == '1'" title="Supprimer" >
+                                        <i class="fa-solid fa-trash radius-3 bg_red text-white p-1"></i>
+                                    </a>
+                                    <a *ngIf="value_datas.status == '2'" title="Republier" (click)="setAnnouceStatus(value_datas?.id, '3')">
+                                        <i class="fa-solid fa-play bg-white radius-3 text_green p-1 border-top-1-green border-bottom-1-green border-left-1-green border-right-1-green">
+                                        </i>
+                                    </a>
+                                    <a *ngIf="value_datas.status == '3'" title="Mettre en pause" (click)="setAnnouceStatus(value_datas?.id, '2')">
+                                        <i class="fa-solid fa-pause bg_grey radius-3 text-dark p-1"></i>
+                                    </a>
+                                    <a *ngIf="value_datas.status == '0'" title="Relancer">
+                                        <i class="fa-solid fa-arrows-rotate bg_blue radius-3 text-white p-1"></i>
+                                    </a> 
                                 </div>
-                           </div>
-                        </td>
-                        <td class="bord-black">345K</td>
-                        <!-- Les satus -->
-                        <td class="bord-black">
-                            <div class="watting" *ngIf="value_datas.status == '1'">En cours</div>
-                            <div class="paused" *ngIf="value_datas.status == '2'">En pause</div>
-                            <div class="published" *ngIf="value_datas.status == '3'">Publié</div>
-                            <div class="expired" *ngIf="value_datas.status == '0'">Expiré</div>
-                        </td>
-                        <!-- Les actions -->
-                        <td class="bord-black">
-                            <div class="icon-list d-flex gap-2 justify-content-center">
-                                <a *ngIf="value_datas.status == '1'" >
-                                    <i class="fa fa-check bg-green  p-1 radius-3 text-white"></i>
-                                </a>
-                                <a *ngIf="value_datas.status == '1'">
-                                    <i class="fa-solid fa-trash radius-3 bg_red text-white p-1"></i>
-                                </a>
-                                <a *ngIf="value_datas.status == '2'" (click)="publishAnnounce(value_datas?.id)">
-                                    <i class="fa-solid fa-play bg-white radius-3 text_green p-1 border-top-1-green border-bottom-1-green border-left-1-green border-right-1-green">
-                                    </i>
-                                </a>
-                                <a *ngIf="value_datas.status == '3'">
-                                    <i class="fa-solid fa-pause bg_grey radius-3 text-dark p-1"></i>
-                                </a>
-                                <a *ngIf="value_datas.status == '0'">
-                                    <i class="fa-solid fa-arrows-rotate bg_blue radius-3 text-white p-1"></i>
-                                </a> 
+                            </td>
+                        </tr>
+                    </ng-container>
+                    <tr class="bord-black" *ngIf="!annouces">
+                        <td [attr.colspan]="headLines.length + 2">
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-center data-not-found">
+                                    Aucune données trouvée.
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -91,7 +110,7 @@
             </table>
         </div>
 
-        <div class="col-12 py-3 d-flex justify-content-end">
+        <div class="col-12 py-3 d-flex justify-content-end" *ngIf="annouces">
             <app-paginator
                 [current] = "paginationDAtas?.current" 
                 [allcount] = "paginationDAtas?.allcount" 

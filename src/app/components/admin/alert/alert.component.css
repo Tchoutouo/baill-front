@@ -1,11 +1,38 @@
 #icon-chek{
-    background-color: var(--main-color);
     font-size: 19px;
     border-radius: 50%;
-    height: 36px;
-    width: 36px;
-    color: var(--main-color-white);
+    font-weight : 700;
+    height: fit-content;
+    width: fit-content;
+}
+
+.pad-icon-greenn_red{
     padding: 10px;
+}
+
+.text-alert{
+    font-family : var(--main-font-Quicksand);
+}
+
+.white_icon{
+    color: var(--main-color-white);
+    padding: 10px 12px;
+}
+
+
+.bg-green-icon{
+    background-color : rgba(145, 226, 83, 1);
+}
+
+
+.red_icon{
+    color: rgba(238, 102, 102, 1);
+    padding: 10px;
+}
+
+.orange_icon{
+    color: rgba(250, 200, 78, 1);
+    padding: 10px 17px;
 }
 
 .alert-container{
@@ -14,6 +41,22 @@
     top: 110px;
     right: 30px;
     background-color: white;
+}
+
+.bg-main-green{
+    background-color:rgba(223, 252, 200, 1) !important;
+}
+
+.bg-main-red{
+    background-color: rgba(255, 211, 192, 1);
+}
+
+.red-progress{
+    background-color: rgba(237, 45, 45, 1);
+}
+
+.green-progress{
+    background-color: var(--main-color);
 }
 
 .w-35{

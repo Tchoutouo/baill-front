@@ -11,12 +11,14 @@ import { EntityServiceService } from '../../../services/admin/entity-service.ser
 import { AuthenticatorService } from '../../../services/admin/authenticator.service';
 import { LocalStorageService } from '../../../services/admin/local-storage.service';
 import { NoficationsService } from '../../../services/nofications.service';
+import { ForfaitListComponent } from '../forfait-list/forfait-list.component';
+
 // import { FormatEntityNamePipe } from '../../../helpers/helper';
 
 @Component({
   selector: 'app-announces',
   standalone: true,
-  imports: [PaginatorComponent, RouterModule, CommonModule, AlertComponent, FormatEntityNamePipe],
+  imports: [ PaginatorComponent, RouterModule, CommonModule, AlertComponent, FormatEntityNamePipe, ForfaitListComponent],
   templateUrl: './announces.component.html',
   styleUrl: './announces.component.css'
 })
@@ -35,10 +37,11 @@ export class AnnouncesComponent {
   loged : boolean = false;
   querySearch : string = "";
   entityName : string = ""
+  query: string = "";
+  resulMessage : string  = '';
 
   constructor(private entytServ : EntityServiceService, private auth : AuthenticatorService, 
     private notification : NoficationsService, private localStorage : LocalStorageService){
-
   }
 
   ngOnInit(){
@@ -51,7 +54,6 @@ export class AnnouncesComponent {
     console.log(this.headLines);
 
     this.initComponent();
-    
   }
 
   closeAlert(event : any){
@@ -73,7 +75,6 @@ export class AnnouncesComponent {
     }
   }
 
-
   getDatasByPage(){
     this.loged = this.auth.isAuthenticated();
     // if (this.loged) {
@@ -81,19 +82,28 @@ export class AnnouncesComponent {
       // const user_id = 6;
       const user_id = user?.id;
       console.log({oetit : this.pageLImit});
-      if (this.querySearch.length >= 2) {
+      console.log(this.query.length);
+      
+      if (this.query.length >= 2) {
         this.result_data = this.entytServ.searchDatasByPage(user_id, this.pageNumber, 
-          this.pageLImit, this.querySearch).subscribe({
-          next: (datas: any) => { 
-            this.annouces = datas.annonces.data;
-            if (datas.success) {
-              this.paginationDAtas = {
-                current : datas.annonces.current_page ,
-                next : datas.annonces.current_page + 1 ,
-                paginateLength : datas.annonces.last_page ,
-                previous : datas.annonces.current_page - 1 ,
-                allcount : datas.annonces.total ,
-              }
+          this.pageLImit, this.query).subscribe({
+          next: (result_search: any) => { 
+            console.log({result : result_search});
+            
+            if (result_search.success == true)  {
+              
+                this.annouces = result_search.annonces.data;
+                this.paginationDAtas = {
+                  current : result_search.annonces?.current_page ,
+                  next : result_search.annonces?.current_page + 1 ,
+                  paginateLength : result_search.annonces?.last_page ,
+                  previous : result_search.annonces?.current_page - 1 ,
+                  allcount : result_search.annonces?.total ,
+                }
+             
+            }else{
+              this.annouces = null;
+              
             }
           },
 
@@ -133,48 +143,62 @@ export class AnnouncesComponent {
     this.getDatasByPage();
   }
 
-  publishAnnounce(ann_id : any){
-    if (!isNaN(ann_id)) {
-      const user = this.localStorage.getItem('user')
-      const user_id = user?.id;
-      const newStatus = '3';
-      
-      let resul = this.entytServ.changeAnnouceStatus(user_id, ann_id, newStatus).subscribe({
-        next: (datas: any) => { 
-          const notif = new Notification();
-          if (datas.success) {
-            notif.message = "Annonce crée avec success !"
-            notif.status = "success"
-          }else{
-            notif.message = "erreur lors de l'enregistrement contacter l'administrateur !"
-            notif.status = "error"
+  setAnnouceStatus(ann_id : any, newStatus :any){
+    try {
+      if (!isNaN(ann_id)) {
+        const user = this.localStorage.getItem('user')
+        
+        const user_id = user?.id;
+        
+        console.log({test : ann_id})
+        let resul = this.entytServ.changeAnnouceStatus(user_id, ann_id, newStatus).subscribe({
+          next: (datas: any) => { 
+            
+            const notif = new Notification();
+            if (datas.success) {
+              notif.message = "Annonce crée avec success !"
+              notif.status = "success";
+            }else{
+              notif.message = "Erreur lors de l'enregistrement contacter l'administrateur !"
+              notif.status = "warning";
+            }
+  
+            this.notification.emitNotification(notif);
+            this.getDatasByPage();
+          },
+  
+          error: (erreur: any) => { 
+            console.log(erreur);
+            
           }
-
-          this.notification.emitNotification(notif)
-        },
-
-        error: (erreur: any) => { 
-          console.log(erreur);
-          
-        }
-      })
+        })
+      }
+    } catch (erreur) {
+      console.log('capture erreur ' , erreur);
     }
   }
 
   searchValue(event : any){
     event.preventDefault()
 
+    this.query = "";
     this.querySearch = "";
-    this.entityName = "annouces"
+    this.entityName = "search"
     if (event) {
       const {name, value} = event.target;
       this.querySearch +=  this.entityName + "=" + value;
+      this.query = value;
       console.log(this.querySearch);
     }else{
 
     }
-
     this.getDatasByPage();
   }
+
+
+
+  handleSubmit(event : any , id : any){
+    console.log(event, id);
+  } 
   
 }

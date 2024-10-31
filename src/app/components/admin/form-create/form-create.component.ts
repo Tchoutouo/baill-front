@@ -95,7 +95,7 @@ export class FormCreateComponent {
   ngOnInit(){
     window.scroll(0,0);   
     this.getAllCategories() ;
-  }
+  } 
 
 
   handleSubmit(event: any = null) {  

@@ -22,8 +22,9 @@ export class ProductListComponent {
   result_datas : any;
   paginationDatas : any ;
   current_page : number=1;
-
+  filterSub : Subscription |undefined ;
   products : any 
+  productFiltered : any ;
 
   constructor(private homeServ : HomeService){}
 
@@ -42,7 +43,7 @@ export class ProductListComponent {
         if (datas.success == true) {
           this.products = datas.data_annonce.data ;
           this.result_datas = datas.data_annonce ;
-          this.current_page = this.result_datas.current_page,  
+          this.current_page = this.result_datas.current_page;  
           this.paginationDatas = {
             current : this.result_datas.current_page,  
             total : this.result_datas.total,
@@ -50,6 +51,8 @@ export class ProductListComponent {
             previous : this.result_datas.current_page - 1, 
             last : this.result_datas.last_page, 
           }
+        }else{
+          this.products = null ;
         }
       },
 
@@ -63,6 +66,42 @@ export class ProductListComponent {
   setPageCurrent(event : any){
       this.current_page = event ;
       this.getAnnoucesList();
+  }
+
+  filterDatas(event : any){
+    try {
+      if (event) {
+        this.productFiltered = this.homeServ.filterDataBy(event).subscribe({
+          next: (datas: any) => {
+            if (datas.success = true && datas.annonces != null) {
+              console.log({filtre : datas});
+                this.products = datas.annonces.data ;
+                this.result_datas = datas.annonces ;
+                this.current_page = this.result_datas.current_page;  
+                this.paginationDatas = {
+                current : this.result_datas.current_page,  
+                total : this.result_datas.total,
+                next : this.result_datas.current_page + 1,    
+                previous : this.result_datas.current_page - 1, 
+                last : this.result_datas.last_page, 
+              }
+            } else {
+              this.products = null ;
+            }
+            
+          },
+
+          error: (erreur: any) => { 
+            console.log(erreur);
+            
+          }
+        })  ;
+      }
+
+    } catch (error) {
+      console.log('erreur : ', error);
+      
+    }    
   }
 
 }

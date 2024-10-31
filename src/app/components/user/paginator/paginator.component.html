@@ -6,13 +6,17 @@
       </a>
     </li>
     
-    <li class="page-item" *ngIf="previous"><a class="page-link" (click)="SetCurrentPage(previous)">{{previous}}</a></li>
+    <li class="page-item" *ngIf="previous">
+      <a class="page-link" (click)="SetCurrentPage(previous)">{{previous}}</a>
+    </li>
     <li class="page-item active" aria-current="page">
       <span class="page-link">{{currentPage}}</span>
     </li>
-    <li class="page-item" *ngIf="next"><a class="page-link" (click)="SetCurrentPage(next)" >{{next}}</a></li>
+    <li class="page-item" *ngIf="next">
+      <a class="page-link" (click)="SetCurrentPage(next)" >{{next}}</a>
+    </li>
     
-    <li class="page-item" *ngIf="next" >
+    <li class="page-item" *ngIf="next">
       <a  class="nav-link next page-link"(click)="SetCurrentPage(currentPage + 1)" >
           <i class="fa-solid fa-arrow-right"></i>
       </a>

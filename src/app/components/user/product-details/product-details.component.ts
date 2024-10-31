@@ -3,6 +3,9 @@ import { Component } from '@angular/core';
 import { ProductComponent } from "../product/product.component";
 import { ImageListComponent } from "../image-list/image-list.component";
 import { HeaderComponent } from '../header/header.component';
+import { ActivatedRoute } from '@angular/router';
+import { HomeService } from '../../../services/guest/home.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-product-details',
@@ -29,26 +32,52 @@ export class ProductDetailsComponent {
     body: string =  "";
     siteUser: string = "www.bailleurnet.com";
 
+    annouce : any ;
+    annouceSub : Subscription | undefined;
 
-    constructor(){
-
+    constructor(private route : ActivatedRoute, private homeServ : HomeService){
+      
     }
 
     ngOnInit() {
       window.scroll(0, 0)
+    
+      this.initComponent();
+        
+      
+    }
 
+    initComponent(){
+      try {
         this.imagesList = ["../../../../assets/products/prodcut-1/1.jpeg", "../../../../assets/products/prodcut-1/2.jpeg", 
-           "../../../../assets/products/prodcut-1/3.png",  "../../../../assets/products/prodcut-1/4.jpeg", "../../../../assets/products/prodcut-1/5.jpg",
+            "../../../../assets/products/prodcut-1/3.png",  "../../../../assets/products/prodcut-1/4.jpeg", "../../../../assets/products/prodcut-1/5.jpg",
           "../../../../assets/products/prodcut-1/6.jpg", "../../../../assets/products/prodcut-1/7.jpeg",
         ];
 
+        const annouce_id = this.route.snapshot.paramMap ? this.route.snapshot.paramMap.get('id') : null;
+        if (annouce_id) {
+          this.annouceSub = this.homeServ.getAnnouceByID(annouce_id).subscribe({
+            next: (datas: any) => {
+              console.log(datas);
+            },
+  
+            error: (erreur: any) => {
+              console.log(erreur);
+            }
+          })
+        }
+        
         this.carateristiques = ["carat 1", "carat 2", "carat 3", "carat 4", "carat 5"];
 
         this.reChangeImage();
         if (this.imagesList.length > 4) {
-            this.displayButtonMore = true;
-            this.differenceLimit = this.imagesList.length - this.imageLimit;
+          this.displayButtonMore = true;
+          this.differenceLimit = this.imagesList.length - this.imageLimit;
         }
+      } catch (error) {
+        console.log(error);
+      }
+
     }
 
     changeFirstImage(event : any){
@@ -74,11 +103,5 @@ export class ProductDetailsComponent {
       
     }
 
-
-    // ngOnChanges(changes: SimpleChanges) {
-    //   if (changes['src'] && this.src) {
-    //     this.showModal();
-    //   }
-    // }
 
 }

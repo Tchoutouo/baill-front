@@ -35,11 +35,12 @@ export class EntityServiceService {
   }
 
   searchDatasByPage(user_id: any , pageNumber: number , pageLImit : number, query: string ){
-    return this.http.get(environment.apiUrl+'annonce_back/'+user_id+'/'+pageLImit+'?page'+pageNumber+'/'+query);
+    // console.log(environment.apiUrl+'annonce_back/'+user_id+'/'+pageLImit+'/'+query+'?page'+pageNumber);
+    return this.http.get(environment.apiUrl+'annonce_back/'+user_id+'/'+pageLImit+'/'+query+'?page='+pageNumber);
   }
 
   changeAnnouceStatus(user_id: any, annouceID: any, newStatus:any){
-    return this.http.get(environment.apiUrl+'annonce_back/'+user_id+'/'+annouceID+'/'+newStatus)
+    return this.http.get(environment.apiUrl+'annonce_back/update_status/'+user_id+'/'+annouceID+'/'+newStatus)
   }
 
   getAllAbonnements(){
