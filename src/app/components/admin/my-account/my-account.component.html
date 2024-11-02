@@ -1,43 +1,65 @@
 <div class="container-fluid p-0">
-    <form action="" (ngSubmit)="UpdateProfil()" class="px-5">
+    <form  class="px-5" #userForm="ngForm">
         <div class="row">
             <h2 class="title-h2 mb-4">Mon compte</h2>
             <div class="col-md-3">
                 <div class="form_group mb-3">
                     <label for="name" class="label-form mb-1">Nom(s)</label>
-                    <input type="text" name="name" class="input_field" [(ngModel)]="user.last_name" id="name">
+                    <input type="text" name="last_name" class="input_field" [(ngModel)]="user.last_name" #lastName="ngModel" id="last_name">
                     <input type="hidden" name="id" class="input_field" [(ngModel)]="user.id" id="_id">
+                    <div *ngIf="lastName.invalid && lastName.touched" class="text-danger">
+                        Le nom est requis.
+                    </div>
                 </div>
+                
                 <div class="form_group mb-3">
                     <label for="name" class="label-form mb-1">Prénom(s)</label>
-                    <input type="text" name="first_name" class="input_field" [(ngModel)]="user.first_name" id="first_name">
+                    <input type="text" name="first_name" class="input_field" [(ngModel)]="user.first_name" #firstName="ngModel" id="first_name">
+                    <div *ngIf="firstName.invalid && firstName.touched" class="text-danger">
+                        Le prénoms est requis.
+                    </div>
                 </div>
                 <div class="form_group mb-3">
                     <label for="userName" class="label-form mb-1">Nom d’utilisateur</label>
-                    <input type="text" name="userName" class="input_field" [(ngModel)]="user.username" id="userName"/>
+                    <input type="text" name="userName" class="input_field" [(ngModel)]="user.username" #userName="ngModel" id="userName"/>
+                    <div *ngIf="userName.invalid && userName.touched" class="text-danger">
+                        Le nom d'utilisateur est requis.
+                    </div>
                 </div>
                 <div class="form_group mb-3">
                     <label for="email" class="label-form mb-1">Email</label>
-                    <input type="email" name="email" class="input_field"  [(ngModel)]="user.email" id="email"/>
+                    <input type="email" name="email" class="input_field"  [(ngModel)]="user.email" #email="ngModel" id="email"/>
+                    <div *ngIf="email.invalid && email.touched" class="text-danger">
+                        Email invalide ou manquant.
+                    </div>
                 </div>
                 <div class="form_group mb-3">
                     <label for="phone" class="label-form mb-1">Télephone</label>
-                    <input type="tel" name="number" class="input_field"  [(ngModel)]="user.number" id="number"/>
+                    <input type="tel" name="number" class="input_field"  [(ngModel)]="user.number" #number="ngModel" id="number"/>
+                    <div *ngIf="number.invalid && number.touched" class="text-danger">
+                        Le numéro de téléphone est requis.
+                    </div>
                 </div>
                 <div class="form_group mb-3">
                     <label for="phone" class="label-form mb-1">Télephone (WhatsApp)</label>
-                    <input type="tel" name="phone" class="input_field"  [(ngModel)]="user.whatsapp_number" id="phone"/>
+                    <input type="tel" name="phone" class="input_field"  [(ngModel)]="user.whatsapp_number" #whatsappNumber="ngModel" id="phone"/>
+                    <div *ngIf="whatsappNumber.invalid && whatsappNumber.touched" class="text-danger">
+                        Le numéro de téléphone whatsapp est requis.
+                    </div>
                 </div>
                 <div class="checkbox-input">
                     <label for="" class="label-form mb-1">Sexe</label>
                     <div class="form-check d-flex gap-3">
                         <div class="check-item d-flex gap-1">
-                            <input type="radio" class="form-check rounded-circle" [(ngModel)]="user.sex" value="1"  name="sex" id="H" [checked]="user.sex == true">
+                            <input type="radio" class="form-check rounded-circle" [(ngModel)]="user.sex" value="1"  #Sex="ngModel" name="sex" id="H" [checked]="user.sex == true">
                             <label for="H" class="fs-6" >H</label>
                         </div>
                         <div class="check-item d-flex gap-1">
-                            <input type="radio"  class="form-check"  name="sex" id="F" [(ngModel)]="user.sex" value="0" [checked]="user.sex == false">
+                            <input type="radio"  class="form-check"  name="sex" id="F" [(ngModel)]="user.sex" value="0" #Sex="ngModel" [checked]="user.sex == false">
                             <label for="F" class="fs-6" >F</label>
+                        </div>
+                        <div *ngIf="Sex.invalid && Sex.touched" class="text-danger">
+                            Veuillez choisir votre sexe
                         </div>
                     </div>
                 </div>
@@ -70,7 +92,10 @@
                 </div>
                 <div class="form_group mb-3">
                     <label for="cni" class="label-form mb-1">Numero CNI</label>
-                    <input type="text" name="cni" class="input_field" [(ngModel)]="user.cni" id="cni">
+                    <input type="text" name="cni" class="input_field" [(ngModel)]="user.cni" #cni="ngModel" id="cni">
+                    <div *ngIf="cni.invalid && cni.touched" class="text-danger">
+                        Veuillez saisir votre numéro d'identifiant
+                    </div>
                 </div>
             </div>
 
@@ -83,6 +108,9 @@
                         <div class="load-image" style="background-image: url('{{picture}}');"></div>
                     </div>
                 </ng-template>
+                <div *ngIf="fileError" class="text-danger">
+                    {{ fileError }}
+                </div>
                 <div class="update-picture justify-content-center d-flex align-items-center gap-2">
                     <span>Photo</span>
                     <label for="picture">
@@ -102,16 +130,16 @@
                             <input type="{{type}}" name="password" [(ngModel)]="user.password" class="password-profile" id="password">
                             <i class="fa-solid fa-eye{{icon_eyes}} icon_pass" (click)="chanIcon($event)"></i>
                         </div>
-                        <button class="add_caract">
+                        <a class="add_caract">
                             <i class="fa-solid fa-pen text-white"></i>
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row mt-5">
             <div class="col-md-12">
-                <button type="submit" class="btn-form bg_blue">Modifier les champs</button>
+                <button (click)="UpdateProfil()" class="btn-form bg_blue" [disabled]="userForm.invalid">Modifier les champs</button>
             </div>
         </div>
     </form>

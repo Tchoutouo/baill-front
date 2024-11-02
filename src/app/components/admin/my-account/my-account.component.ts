@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { LocalStorageService } from '../../../services/admin/local-storage.service';
 import { User } from '../../../models/user';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import { City, Country, ICity, ICountry } from 'country-state-city';
 import { TranslateModule } from '@ngx-translate/core';
 import { EntityServiceService } from '../../../services/admin/entity-service.service';
@@ -28,6 +28,9 @@ export class MyAccountComponent {
   errorMessage : string = "";
   updateUser!: any;
   images: string ="";
+  selectedFile: File | null = null;
+  fileError: string | null = null;
+  userForm!: NgForm
 
   constructor (private localStorage : LocalStorageService, private entityService : EntityServiceService, private router: Router){
 
@@ -60,25 +63,27 @@ export class MyAccountComponent {
   }
 
   UpdateProfil(){
-    // console.log(this.User.name);
-    // let formData: FormData = new FormData();  
-
-    this.updateUser = {
-      username: this.user.username,
-      last_name: this.user.last_name,
-      first_name: this.user.first_name,
-      email: this.user.email,
-      password: this.user.password,
-      picture: this.images,
-      number: this.user.number,
-      whatsapp_number: this.user.whatsapp_number,
-      site_url: this.user.site_url,
-      neighborhood: this.user.neighborhood,
-      city: this.user.city,
-      country: this.user.country,
-      sex: this.user.sex,
-      cni: this.user.cni
-    }
+    alert('hello');
+    // if (this.userForm.invalid || this.fileError) {
+    //   return;
+    // }
+    
+    // this.updateUser = {
+    //   username: this.user.username,
+    //   last_name: this.user.last_name,
+    //   first_name: this.user.first_name,
+    //   email: this.user.email,
+    //   password: this.user.password,
+    //   picture: this.images,
+    //   number: this.user.number,
+    //   whatsapp_number: this.user.whatsapp_number,
+    //   site_url: this.user.site_url,
+    //   neighborhood: this.user.neighborhood,
+    //   city: this.user.city,
+    //   country: this.user.country,
+    //   sex: this.user.sex,
+    //   cni: this.user.cni
+    // }
     // console.log("firstValue",this.updateUser);
     // Object.keys(this.updateUser).forEach((key) => {  
     //   if (typeof this.updateUser[key] === 'object' && this.updateUser[key] !== null) {  
@@ -92,13 +97,33 @@ export class MyAccountComponent {
     // console.log("this.picture",this.picture);
 
     // formData.append("images", this.picture);  
+    // console.log(this.User.name);
+    const  formData = new FormData();
+      console.log('his.user.username', this.user.username);
+      formData.append('username',this.user.username);
+      formData.append('last_name',this.user.last_name? this.user.last_name : '');
+      formData.append('first_name',this.user.first_name? this.user.first_name : '');
+      formData.append('email',this.user.email);
+      formData.append('password',this.user.password);
+      if (this.selectedFile) {
+        formData.append('picture', this.selectedFile, this.selectedFile.name);
+      }
+      formData.append('whatsapp_number',this.user.whatsapp_number? this.user.whatsapp_number : '');
+      formData.append('number',this.user.number? this.user.number : '');
+      formData.append('site_url',this.user.site_url? this.user.site_url : '');
+      formData.append('neighborhood',this.user.neighborhood? this.user.neighborhood : '');
+      formData.append('city',this.user.city? this.user.city : '');
+      formData.append('country',this.user.country? this.user.country : '');
+      // formData.append('sex',this.user.sex? this.user.sex);
+      formData.append('cni',this.user.cni? this.user.cni : '');
 
+        console.log('formData',formData, this.user.id)
 
     const entity = "advertiser_back/update";
     const user_id =  this.user.id;
 
-    // console.log("this.updateUser",this.updateUser);
-    this.entityService.update(user_id, this.updateUser, entity).subscribe({
+    console.log("this.updateUser",this.updateUser);
+    this.entityService.update(user_id, formData, entity).subscribe({
       next : (data : any) =>{
         console.log("data",data);
         if(data.success){
@@ -126,7 +151,19 @@ export class MyAccountComponent {
   addImage(event: any) {  
     const files = event.target.files; 
     // console.log("files", files); 
-    const file_image = files[0];  
+    const file_image = files[0];
+    if (file_image) {
+      if (file_image.size > 2048000) { // Limite à 2MB
+        this.fileError = 'La taille du fichier doit être inférieure à 2MB.';
+        this.selectedFile = null;
+      } else if (!file_image.type.match('image/*')) {
+        this.fileError = 'Le fichier doit être une image.';
+        this.selectedFile = null;
+      } else {
+        this.fileError = null;
+        this.selectedFile = file_image;
+      }
+    }  
     // const image = files;
     this.images = files;
     // console.log("file_image", files); 
