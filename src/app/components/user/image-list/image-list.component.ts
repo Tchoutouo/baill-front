@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { environment } from '../../../../environments/environment.development';
+
   
 @Component({
   selector: 'app-image-list',
@@ -15,6 +17,8 @@ export class ImageListComponent {
   Newimages :   Array<string> = [""];
   @Output() closeModal = new EventEmitter<any>()
   isClose : boolean = false;
+  apiRessources : string = environment.apiUrlRessources;
+
 
   constructor(){
 
@@ -25,10 +29,10 @@ export class ImageListComponent {
   }
 
   showModal(){
-    let wind : any = window      
-    this.modalImages = new wind["bootstrap"].Modal("#imageListPreview", {keyboard : false})
+    let wind : any = window ;   
+    this.modalImages = new wind["bootstrap"].Modal("#imageListPreview", {keyboard : false}) ;
     this.modalImages.show() ;
-    console.log(this.images[1]);
+    console.log(this.images[1]) ;
   }
 
   handleCloseModal(){

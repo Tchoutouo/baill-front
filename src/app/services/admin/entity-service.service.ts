@@ -31,8 +31,17 @@ export class EntityServiceService {
   }
 
 
-  getUserAnoucesByPages(user_id : number, pageNumber : number, pageLImit :number = 5){
+  getUserAnoucesByPages(user_id : any, pageNumber : number, pageLImit : number = 5){
     return this.http.get(environment.apiUrl+'annonce_back/'+user_id+'/'+pageLImit+'?page='+pageNumber);
+  }
+
+  searchDatasByPage(user_id: any , pageNumber: number , pageLImit : number, query: string ){
+    // console.log(environment.apiUrl+'annonce_back/'+user_id+'/'+pageLImit+'/'+query+'?page'+pageNumber);
+    return this.http.get(environment.apiUrl+'annonce_back/'+user_id+'/'+pageLImit+'/'+query+'?page='+pageNumber);
+  }
+
+  changeAnnouceStatus(user_id: any, annouceID: any, newStatus:any){
+    return this.http.get(environment.apiUrl+'annonce_back/update_status/'+user_id+'/'+annouceID+'/'+newStatus)
   }
 
   getAllAbonnements(){

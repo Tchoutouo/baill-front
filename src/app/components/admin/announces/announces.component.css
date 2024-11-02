@@ -142,6 +142,13 @@ table#dashboard_table tbody tr td{
     text-align: center;
 }
 
+.cat-item{
+    background-color: var(--main-color-green-15);
+    width: fit-content;
+    color: var(--main-color);
+    border-radius: var(--main-radius-value-3);
+    padding: 3.5px 10px;
+}
 
 /* status */
 div.watting{
@@ -175,4 +182,34 @@ div.published{
     border-radius: var(--main-radius-value-3);
     background-color: rgba(199, 251, 160, 1);
     color: rgba(94, 178, 30, 1);
+}
+
+.result-message{
+    font-family: var(--main-font-Quicksand);
+    font-size: 16px;
+    margin: 20px 0px;
+}
+
+.data-not-found{
+    font-family: var(--main-font-Quicksand);
+    color: var(--main-color);
+    font-weight: var(--main-xl-font-weiht);
+    
+}
+
+.result-message span.search_data{
+    color: var(--main-color);
+    font-weight: var(--main-xl-font-weiht);
+    letter-spacing: 2px;
+}
+
+.icon-list a i{
+    cursor: pointer ;
+}
+
+.annouce_ref{
+    color: var(--main-color);
+    font-weight: bold;
+    font-family: var(--main-font-Quicksand);
+    text-decoration: none;
 }

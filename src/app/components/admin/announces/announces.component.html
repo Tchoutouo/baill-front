@@ -17,18 +17,32 @@
     <div class="row">
         <div class="col-12 d-flex justify-content-end">
             <form class="d-flex nav_item position-relative w-40">
-                <input class="form-control me-2 py-1 px-5" id="search_field" type="search" placeholder="Recherche ...." aria-label="Search">
-                <i class="fa-solid fa-magnifying-glass position-absolute search_icon"></i>
+                <input class="form-control me-2 py-1 px-5" id="search_field" 
+                    type="search" placeholder="Recherche ...." 
+                    aria-label="chercher"
+                    (keyup)="searchValue($event)"
+                    (search)="searchValue($event)"
+                >
+                <i class="fa-solid fa-magnifying-glass position-absolute search_icon"
+                (click)="searchValue($event)">
+                </i>
             </form>
         </div>
         
         <div class="col-12 d-flex justify-content-start gap-2 align-items-center py-3">
             <h3 class="label-filter m-0">Afficher par</h3>
             <select class="form-select w-25" id="" aria-label="Floating label select example" (change)="setPageLimit($event)">
-                <option value="1" *ngFor="let itemRange of rangeList">{{itemRange}}</option>
+                <option value="{{itemRange}}" *ngFor="let itemRange of rangeList">{{itemRange}}</option>
             </select>
         </div>
 
+        <div class="result-message fw-bold" *ngIf="query.length >= 2 && annouces">
+            Resultat de recherche pour : <span class="search_data">{{query}}</span>
+        </div>
+        <div class="result-message fw-bold" *ngIf="query.length >= 2 && !annouces">
+            Aucun resultat pour : <span class="search_data">{{query}}</span>
+        </div>
+        
         <div class="col-12">
             <table class="table px-4 m-auto" id="dashboard_table">
                 <thead>
@@ -39,20 +53,60 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor=" let value_datas of annouces; let index = index">
-                        <th scope="row" class="bord-black">{{paginationDAtas.allcount - (paginationDAtas.current-1) * pageLImit - index}}</th>
-                        <td class="bord-black">AN001</td>
-                        <td class="bord-black">{{value_datas.title}}</td>
-                        <td class="bord-black">Nom</td>
-                        <td class="bord-black">345K</td>
-                        <td class="bord-black"><div class="watting">En cours</div></td>
-                        <td class="bord-black">
-                            <div class="icon-list d-flex gap-2 justify-content-center">
-                                <a href=" " class=""><i class="fa fa-check bg-green  p-1 radius-3 text-white"></i></a>
-                                <a href=""><i class="fa-solid fa-trash radius-3 bg_red text-white p-1"></i></a>
-                                <!-- <a href=""><i class="fa-solid fa-play bg-white radius-3 text_green p-1 border-top-1-green border-bottom-1-green border-left-1-green border-right-1-green"></i></a>
-                                <a href=""><i class="fa-solid fa-pause bg_grey radius-3 text-dark p-1"></i></a>
-                                <a href=""><i class="fa-solid fa-arrows-rotate bg_blue radius-3 text-white p-1"></i></a> -->
+                    <ng-container *ngIf="annouces">
+                        <tr *ngFor=" let value_datas of annouces; let index = index" >
+                            <th scope="row" class="bord-black">{{paginationDAtas.allcount - (paginationDAtas.current-1) * pageLImit - index}}</th>
+                            <td class="bord-black">
+                                <a class="annouce_ref" [routerLink]="['/admin/announces/details', value_datas.id]">
+                                    AN001
+                                </a>
+                            </td>
+                            <td class="bord-black">{{value_datas.title}}</td>
+                            <td class="bord-black">
+                               <div class="d-flex gap-2 justify-content-center   ">
+                                    <div class="cat-item" *ngFor="let category of value_datas.categories">
+                                        {{category.title}}
+                                    </div>
+                               </div>
+                            </td>
+                            <td class="bord-black">{{value_datas.next_expiration_date}}</td>
+                            <!-- Les satus -->
+                            <td class="bord-black">
+                                <div class="watting" *ngIf="value_datas.status == '1'">En cours</div>
+                                <div class="paused" *ngIf="value_datas.status == '2'">En pause</div>
+                                <div class="published" *ngIf="value_datas.status == '3'">Publié</div>
+                                <div class="expired" *ngIf="value_datas.status == '0'">Expiré</div>
+                            </td>
+                            <!-- Les actions -->
+                            <td class="bord-black">
+                                <div class="icon-list d-flex gap-2 justify-content-center">
+                                    <a *ngIf="value_datas.status == '1'" title="Publier" id="create" data-bs-toggle="modal"  data-bs-target="#forfaitList" >
+                                        <i class="fa fa-check bg-green  p-1 radius-3 text-white"></i>
+                                        <app-forfait-list (hasSubmit)="handleSubmit($event, value_datas?.id)"></app-forfait-list>
+                                    </a>
+                                    <a *ngIf="value_datas.status == '1'" title="Supprimer" >
+                                        <i class="fa-solid fa-trash radius-3 bg_red text-white p-1"></i>
+                                    </a>
+                                    <a *ngIf="value_datas.status == '2'" title="Republier" (click)="setAnnouceStatus(value_datas?.id, '3')">
+                                        <i class="fa-solid fa-play bg-white radius-3 text_green p-1 border-top-1-green border-bottom-1-green border-left-1-green border-right-1-green">
+                                        </i>
+                                    </a>
+                                    <a *ngIf="value_datas.status == '3'" title="Mettre en pause" (click)="setAnnouceStatus(value_datas?.id, '2')">
+                                        <i class="fa-solid fa-pause bg_grey radius-3 text-dark p-1"></i>
+                                    </a>
+                                    <a *ngIf="value_datas.status == '0'" title="Relancer">
+                                        <i class="fa-solid fa-arrows-rotate bg_blue radius-3 text-white p-1"></i>
+                                    </a> 
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                    <tr class="bord-black" *ngIf="!annouces">
+                        <td [attr.colspan]="headLines.length + 2">
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-center data-not-found">
+                                    Aucune données trouvée.
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -60,13 +114,13 @@
             </table>
         </div>
 
-        <div class="col-12 py-3 d-flex justify-content-end">
+        <div class="col-12 py-3 d-flex justify-content-end" *ngIf="annouces">
             <app-paginator
-                [current] = "paginationDAtas.current" 
-                [allcount] = "paginationDAtas.allcount" 
-                [next] = "paginationDAtas.next" 
-                [previous] = "paginationDAtas.previous" 
-                [paginateLength] = "paginationDAtas.paginateLength" 
+                [current] = "paginationDAtas?.current" 
+                [allcount] = "paginationDAtas?.allcount" 
+                [next] = "paginationDAtas?.next" 
+                [previous] = "paginationDAtas?.previous" 
+                [paginateLength] = "paginationDAtas?.paginateLength" 
                 [pageLimit] = "pageLImit"
                 (pageSelected)="setPage($event)"
             >

@@ -30,7 +30,7 @@ export class ForfaitListComponent {
   }
 
   sendData(forfait : any ){
-    console.log(forfait);
+    console.log({steph : forfait});
     this.hasSubmit.emit(forfait)
   }
 
