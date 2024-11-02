@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { Observable } from 'rxjs/internal/Observable';
@@ -8,7 +8,8 @@ import { Observable } from 'rxjs/internal/Observable';
 })
 export class EntityServiceService {
 
-  constructor(private http : HttpClient) { }
+  constructor(private http : HttpClient) { 
+  }
   
   getAll(entity:string){
     return this.http.get(environment.apiUrl+entity)

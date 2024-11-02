@@ -5,6 +5,7 @@ import { City, Country, ICity, ICountry } from 'country-state-city';
 import { Category } from '../../../models/admin/category';
 import { EntityServiceService } from '../../../services/admin/entity-service.service';
 import { Subscription } from 'rxjs';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-tags-list',
@@ -38,6 +39,12 @@ export class TagsListComponent implements OnInit{
   }
 
   async getAllCategories(){
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+
+    console.log("headers",headers);
+
     try{
       const entity= "categorie_back";
       this.entityService.getAll(entity)
