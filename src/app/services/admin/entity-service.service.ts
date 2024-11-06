@@ -23,7 +23,7 @@ export class EntityServiceService {
   }
 
   getAllAnnoucesCategories(){
-    return this.http.get(environment.apiUrl+'categorie_back/');
+    return this.http.get(environment.apiUrl+'categorie_back');
   }
 
   update(id: any, datas: any, entity: string): Observable<any> {
@@ -45,6 +45,6 @@ export class EntityServiceService {
   }
 
   getAllAbonnements(){
-    return this.http.get(environment.apiUrl+'abonnement_back/');
+    return this.http.get(environment.apiUrl+'abonnement_back');
   }
 }
