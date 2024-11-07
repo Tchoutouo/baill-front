@@ -25,11 +25,6 @@
               "glob": "**/*",
               "input": "src/assets",
               "output": "/assets"
-            },
-            {
-              "glob": "**/*",
-              "input": "src/logo.ico",
-              "output": "/"
             }
             ],
             "styles": [
@@ -103,11 +98,6 @@
                 "glob": "**/*",
                 "input": "src/assets",
                 "output": "/assets"
-              },
-              {
-                "glob": "**/*",
-                "input": "src/logo.ico",
-                "output": "/"
               }
             ],
             "styles": [

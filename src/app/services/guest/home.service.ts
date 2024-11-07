@@ -15,7 +15,9 @@ export class HomeService {
   }
 
   getAllAnnoucesPublished(){
-    return this.http.get(environment.apiUrl+'home_back');
+    console.log(this.http.get(environment.apiUrl+'home_back/'));
+
+    return this.http.get(environment.apiUrl+'home_back/');
   }
 
   filterDataBy(data : any){
