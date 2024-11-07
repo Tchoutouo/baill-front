@@ -1,8 +1,9 @@
 export const environment = {
     production : false,
-    // apiUrl: "http://localhost:8000/api/",
-    apiUrl: "http://baill-back.sc1zeucoder.universe.wf/api/",
-    apiUrlRessources: "http://baill-back.sc1zeucoder.universe.wf/public/storage"
+    apiUrl: "http://localhost:8000/api/",
+    // apiUrl: "http://baill-back.sc1zeucoder.universe.wf/api/",
+    apiUrlRessources: "http://127.0.0.1:8000/autres_projets/bailleur/baill-back/public/storage",
+    // apiUrlRessources: "http://baill-back.sc1zeucoder.universe.wf/public/storage",
     // apiUrl: "https://test-backend.bailleurnet.com/api/"
 };  
 // http://localhost:8000/autres_projets/bailleur/baill-back/public/storage/images/tOvffNjuvVWg06Y4gU62qW9fDzl6o19PImKCGwDK.jpg

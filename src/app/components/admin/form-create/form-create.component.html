@@ -56,7 +56,7 @@
                         </div>
                     </div>
 
-                    <div class="form_group gap-1 mb-4">
+                    <!-- <div class="form_group gap-1 mb-4">
                         <label for="country" class="label-form mb-2">Pays<span class="text-danger mx-2">*</span></label> 
                         <input type="text" class=" form-control input-field"  [formControl]="country" name="country" id="country" placeholder="voture toyota">
                         <div *ngIf="country.dirty && !country.valid">
@@ -64,18 +64,41 @@
                                 veuiller renseigner ce champ 
                             </div>
                         </div>
+                    </div> -->
+                    <div class="form_group gap-1 mb-4">
+                        <label for="country" class="label-form mb-2">Pays<span class="text-danger mx-2">*</span></label> 
+                        <select id="country"  (change)="onCountryChange($event)" [(ngModel)]="selectedCountry" [formControl]="country" name="country" class="form-control" required="required">
+                            <option *ngFor="let country of countries" [value]="country.isoCode">{{ country.name }}</option>
+                        </select>
+                        <div *ngIf="country.dirty && !country.valid">
+                            <div class="" class="error" *ngIf="country.hasError('required')">
+                                veuiller renseigner ce champ 
+                            </div>
+                        </div>
                     </div>
+                    <!-- <div class="form-group">
+                        <label for="country">{{'user.signup.country'|translate}}</label><span>*</span>
+                        <select id="country" [(ngModel)]="selectedCountry" (change)="onCountryChange($event)" [formControl]="country" name="country" class="form-control" required="required">
+                            <option *ngFor="let country of countries" [value]="country.isoCode">{{ country.name }}</option>
+                        </select>
+                    </div> -->
                 </div>
 
                 <div class="offset-md-2 col-md-5">
                     <div class="form_group gap-1 mb-4">
-                        <label for="city" class="label-form mb-2">Ville<span class="text-danger mx-2">*</span></label> 
-                        <input type="text" class=" form-control input-field"  name="city" [formControl]="location" required id="city" placeholder="voture toyota">
+                        <label for="location" class="label-form mb-2">Ville<span class="text-danger mx-2">*</span></label> 
+                        <!-- <input type="text" class=" form-control input-field"  name="location" [formControl]="location" required id="location" placeholder="voture toyota"> -->
+                        <select [(ngModel)]="selectedCity" [formControl]="location" name="location" id="location" class="form-control" required="required">
+                            <option *ngFor="let city of cities" [value]="city.name">
+                                {{ city.name }}
+                            </option>
+                        </select>
                         <div *ngIf="location.dirty && !location.valid">
                             <div class="" class="error" *ngIf="location.hasError('required')">
                                 veuiller renseigner ce champ 
                             </div>
                         </div>
+                        
                     </div>
 
                     <div class="form_group gap-1 mb-4">
