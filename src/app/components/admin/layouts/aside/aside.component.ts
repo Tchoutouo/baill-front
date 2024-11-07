@@ -30,6 +30,8 @@ export class AsideComponent implements OnInit{
     this.siteName = getSiteName();  
     this.userName = "Marlane Halle";
     this.email = "halle@gmail.com";
+    this.sizeAside = "";
+    this.sideBarIsOpen = false
   }
 
 
@@ -52,6 +54,17 @@ export class AsideComponent implements OnInit{
       this.list_width = " "
       this.loggout_content = "justify-content-center"
     }
+  }
+
+  closeSideBar(){
+    this.sideBarIsOpen = false
+    this.displayShow = "d-none"
+    this.sizeAside = " "
+    this.card = "col-12 justify-content-center"
+    this.styleImageProf = "shadow-profile"
+    this.width_full =" "
+    this.list_width = " "
+    this.loggout_content = "justify-content-center"
   }
 
   

@@ -4,7 +4,7 @@
         (mouseover)="exendSideBar()" 
         (mouseleave)="reduiseSideBar()" 
         style="min-height: 100vh;">
-        <app-aside [sideBarIsOpen]="sideBarIsOpen_"></app-aside>
+        <app-aside [sideBarIsOpen]="sideBarIsOpen_" (click)="closeSideBar()"></app-aside>
     </div>
     <div class="col-main-content pl-0 {{sizeExpandMain}}">
         <div class="row p-0 w-100 m-0">

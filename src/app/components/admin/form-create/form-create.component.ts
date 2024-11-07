@@ -148,8 +148,11 @@ export class FormCreateComponent {
           }  
         });
 
+        console.log(this.selectedCountry);
+        
         // Mise à jour de is_published selon l'événement  
         formData.append('is_published', event ? '1' : '0');  
+        formData.append('country', this.selectedCountry ? this.selectedCountry : 'Cameroun');  
         formData.append('status', event ? '3' : '1');  
         formData.append('abonnement_id', event ? event : 1);  
         let user = this.locaStorage.getItem('user');

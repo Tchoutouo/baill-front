@@ -368,3 +368,7 @@ button:disabled
 .main-font-quick{
     font-family: var(--main-font-Quicksand);
 }
+
+/* .modal-backdrop{
+    display: none;
+} */

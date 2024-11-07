@@ -14,7 +14,7 @@
         <app-alert *ngIf="display_message" (timeOut) ="closeAlert($event)" [message] = "message_alert"></app-alert>
     </div>
 
-    <div class="row">
+    <div class="row overflow_x_scroll">
         <div class="col-12 d-flex justify-content-end">
             <form class="d-flex nav_item position-relative w-40">
                 <input class="form-control me-2 py-1 px-5" id="search_field" 
@@ -115,7 +115,7 @@
             </table>
         </div>
 
-        <div class="col-12 py-3 d-flex justify-content-end" *ngIf="annouces">
+        <div class="col-12 py-3 d-flex justify-content-end small_z_index" *ngIf="annouces">
             <app-paginator
                 [current] = "paginationDAtas?.current" 
                 [allcount] = "paginationDAtas?.allcount" 
