@@ -18,7 +18,6 @@ export class EntityServiceService {
 
   store(entity:string, datas: any){
     console.log('partir');
-    
     return this.http.post(environment.apiUrl+entity, datas)
   }
 

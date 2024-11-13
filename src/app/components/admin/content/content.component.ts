@@ -25,7 +25,9 @@ export class ContentComponent {
   }
 
   ngOnInit(){
-
+    this.sizeSideBar = null;
+    this.sizeExpandMain = null;
+    this.sideBarIsOpen_ = false ;
   }
 
   exendSideBar(){
@@ -35,6 +37,12 @@ export class ContentComponent {
   }
   
   reduiseSideBar(){
+    this.sizeSideBar = null;
+    this.sizeExpandMain = null;
+    this.sideBarIsOpen_ = false ;
+  }
+
+  closeSideBar(){
     this.sizeSideBar = null;
     this.sizeExpandMain = null;
     this.sideBarIsOpen_ = false ;

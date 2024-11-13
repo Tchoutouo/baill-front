@@ -24,6 +24,7 @@
     width: 19.72% !important; 
 }
 
+
 .sizeExpandMain{
     width: calc(100% - 19.72%) !important; 
 }
@@ -37,4 +38,28 @@
     position: relative;
 }
 
+/* responsive navBar */
+@media screen and (max-width : 900px) {
+    .sizeSideBar{
+        width: 85% !important; 
+    }
 
+    .col-aside{
+        width: 25%;
+        position: fixed !important;
+    }
+
+    .col-main-content{
+        width: calc(100%);
+    }
+
+    .side-bar{
+        top: 80px;
+    }
+
+    .sizeExpandMain{
+        width: calc(100%) !important; 
+    }
+
+}
+/* fin responsive navBar */

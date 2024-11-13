@@ -116,8 +116,6 @@ export class ProductDetailsComponent {
           
         }
         
-        this.carateristiques = ["carat 1", "carat 2", "carat 3", "carat 4", "carat 5"];
-
         
       } catch (error) {
         console.log(error);

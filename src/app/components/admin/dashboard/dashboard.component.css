@@ -151,3 +151,14 @@ table#dashboard_table tbody tr td{
     height: 46px;
     overflow: hidden;
 } */
+
+@media screen and (max-width : 900px) {
+    .green-side{
+        display: none !important;
+    }   
+
+    .pos_relative{
+        position: relative !important;
+        z-index: -1;
+    }
+}

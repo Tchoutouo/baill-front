@@ -9,3 +9,4 @@ export const environment = {
 };  
 // http://localhost:8000/autres_projets/bailleur/baill-back/public/storage/images/tOvffNjuvVWg06Y4gU62qW9fDzl6o19PImKCGwDK.jpg
 // http://localhost/autres_projets/bailleur/baill-back/public/storage/images/1ig3ZTbSU4QE6S3aIvSTsv31vQ5797PVQC5CqUcv.png
+

@@ -213,3 +213,11 @@ div.published{
     font-family: var(--main-font-Quicksand);
     text-decoration: none;
 }
+
+.overflow_x_scroll{
+    overflow-x: scroll;
+}
+
+.small_z_index{
+    z-index: -1;
+}
