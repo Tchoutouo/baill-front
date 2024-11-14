@@ -274,6 +274,13 @@ button:disabled
     line-height: var(--main-md-line-height);
 }
 
+.p-relative{
+    position: relative;
+}
+.p-absolute{
+    position: absolute;
+}
+
 .g-10{
     gap: 10px;
 }
@@ -367,6 +374,14 @@ button:disabled
 
 .main-font-quick{
     font-family: var(--main-font-Quicksand);
+}
+
+.finger{
+    cursor: pointer !important;
+}
+
+.bg-transparent{
+    background-color: transparent;
 }
 
 /* .modal-backdrop{

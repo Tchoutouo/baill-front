@@ -50,22 +50,22 @@
     </button>
   
     <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo02">
-      <div class="d-flex justify-content-end gap-4 navbar-nav mr-auto mt-2 mt-lg-0">
-        <button type="submit" id="publish-button" class="btn text-white d-flex justify-content-center align-items-center">
-            <i class="fa-solid fa-plus  text-white"></i> Annonce
-        </button>
-        <a  (click)="hanndleShowNotifications()" class="nav-item notification-button finger d-flex justify-content-center align-items-center">
-            <i class="fa-solid fa-bell text-dark"></i>
-        </a>
-        <div class="form-group nav-item">
-            <select class="form-control" (change)="ChangeLanguage($event)" name="">
-                <option [selected]="lang==='fr'" value="fr">FR</option>
-                <option [selected]="lang==='en'" value="en">EN</option>
-            </select>
+        <div class="d-flex justify-content-end gap-4 navbar-nav mr-auto mt-2 mt-lg-0">
+            <button type="submit" id="publish-button" class="btn text-white d-flex justify-content-center align-items-center">
+                <i class="fa-solid fa-plus  text-white"></i> Annonce
+            </button>
+            <a  (click)="hanndleShowNotifications()" class="nav-item notification-button finger d-flex justify-content-center align-items-center">
+                <i class="fa-solid fa-bell text-dark"></i>
+            </a>
+            <div class="form-group nav-item">
+                <select class="form-control" (change)="ChangeLanguage($event)" name="">
+                    <option [selected]="lang==='fr'" value="fr">FR</option>
+                    <option [selected]="lang==='en'" value="en">EN</option>
+                </select>
+            </div>
         </div>
     </div>
-    </div>
-  </nav>
+</nav>
 
 <div class="notification" *ngIf="isDiplayedNotification">
     <app-notifications (close)="handleClose()"></app-notifications>

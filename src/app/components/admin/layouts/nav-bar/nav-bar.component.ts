@@ -28,7 +28,7 @@ export class NavBarComponent implements OnInit{
     this.siteName = getSiteName();
     const user = this.localStorage.getItem('user');
     this.userName = user ? user.first_name : null;
-    this.email = user ? user.email : null;;
+    this.email = user ? user.email : null;
     this.lang = localStorage.getItem('lang') || 'fr';
 
   }
