@@ -7,12 +7,13 @@ import { FooterComponent } from './components/user/footer/footer.component';
 import { CommonModule } from '@angular/common';
 import { SpinnerComponent } from './components/global/spinner/spinner.component';
 import { AlertComponent } from "./components/admin/alert/alert.component";
+import { AlertConfirmComponent } from "./components/alert-confirm/alert-confirm.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
   
-  imports: [RouterOutlet, RouterLink, HeaderComponent, MainComponent, FooterComponent, SpinnerComponent, AlertComponent],
+  imports: [RouterOutlet, RouterLink, HeaderComponent, MainComponent, FooterComponent, SpinnerComponent, AlertComponent, AlertConfirmComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

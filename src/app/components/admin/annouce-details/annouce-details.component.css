@@ -15,3 +15,7 @@
     border: 1px solid var(--main-color-gray-7);
 }
 
+.page-link{
+    cursor: pointer;
+}
+

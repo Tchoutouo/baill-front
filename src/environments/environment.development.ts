@@ -1,9 +1,9 @@
 export const environment = {
     production : false,
-    // apiUrl: "http://localhost:8000/api/",
+    apiUrl: "http://localhost:8000/api/",
     // apiUrl: "http://baill-back.sc1zeucoder.universe.wf/api/",
     // apiUrlRessources: "http://baill-back.sc1zeucoder.universe.wf/public/storage"
-    apiUrl: "https://facebook.audiencespub.com/api/",
+    // apiUrl: "https://facebook.audiencespub.com/api/",
     apiUrlRessources: "https://facebook.audiencespub.com/public/storage"
     // apiUrl: "https://test-backend.bailleurnet.com/api/"
 };  

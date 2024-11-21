@@ -64,8 +64,8 @@ export class ProductListComponent {
   }
 
   setPageCurrent(event : any){
-      this.current_page = event ;
-      this.getAnnoucesList();
+    this.current_page = event ;
+    this.getAnnoucesList();
   }
 
   filterDatas(event : any){
@@ -79,16 +79,15 @@ export class ProductListComponent {
                 this.result_datas = datas.annonces ;
                 this.current_page = this.result_datas.current_page;  
                 this.paginationDatas = {
-                current : this.result_datas.current_page,  
-                total : this.result_datas.total,
-                next : this.result_datas.current_page + 1,    
-                previous : this.result_datas.current_page - 1, 
-                last : this.result_datas.last_page, 
-              }
+                  current : this.result_datas.current_page,  
+                  total : this.result_datas.total,
+                  next : this.result_datas.current_page + 1,    
+                  previous : this.result_datas.current_page - 1, 
+                  last : this.result_datas.last_page, 
+                }
             } else {
               this.products = null ;
             }
-            
           },
 
           error: (erreur: any) => { 

@@ -2,7 +2,6 @@
     <div class="page-title">
         <h1>Annonces</h1>
     </div>
-
     <div class="add-annouce py-4">
         <a [routerLink]="['/admin/announces/create']" id="publish-button" class="d-flex align-items-center">
             <i class="fa-solid fa-plus mx-1 text-white"></i>
@@ -14,9 +13,9 @@
         <app-alert *ngIf="display_message" (timeOut) ="closeAlert($event)" [message] = "message_alert"></app-alert>
     </div>
 
-    <div class="row overflow_x_scroll">
-        <div class="col-12 d-flex justify-content-end">
-            <form class="d-flex nav_item position-relative w-40">
+    <div class="row overflow_x_scroll justify-content-end">
+        <div class="col-md-4 d-flex justify-content-end">
+            <form class="d-flex w-100 nav_item position-relative">
                 <input class="form-control me-2 py-1 px-5" id="search_field" 
                     type="search" placeholder="Recherche ...." 
                     aria-label="chercher"
@@ -37,10 +36,10 @@
             </select>
         </div>
 
-        <div class="result-message fw-bold" *ngIf="query.length >= 2 && annouces">
+        <div class="result-message text-center fw-bold" *ngIf="query.length >= 2 && annouces">
             Resultat de recherche pour : <span class="search_data">{{query}}</span>
         </div>
-        <div class="result-message fw-bold" *ngIf="query.length >= 2 && !annouces">
+        <div class="result-message fw-bold text-center" *ngIf="query.length >= 2 && !annouces">
             Aucun resultat pour : <span class="search_data">{{query}}</span>
         </div>
         
@@ -83,10 +82,14 @@
                                 <div class="icon-list d-flex gap-2 justify-content-center">
                                     <a *ngIf="value_datas.status == '1'" title="Publier" id="create" data-bs-toggle="modal"  data-bs-target="#forfaitList" >
                                         <i class="fa fa-check bg-green  p-1 radius-3 text-white"></i>
-                                        <app-forfait-list (hasSubmit)="handleSubmit($event, value_datas?.id)"></app-forfait-list>
+                                        <div class="modal fade" id="forfaitList" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                            <div class="modal-dialog m_auto modal-dialog-centered modal-dialog  modal-xl modal-dialog-centered" id="my-model-forfait">
+                                                <app-forfait-list (hasSubmit)="handleSubmit($event, value_datas)" class="m_auto w-100"></app-forfait-list>
+                                            </div>
+                                        </div>
                                     </a>
-                                    <a *ngIf="value_datas.status == '1'" title="Supprimer" >
-                                        <i class="fa-solid fa-trash radius-3 bg_red text-white p-1"></i>
+                                    <a *ngIf="value_datas.status == '1'" title="Supprimer" (click)="handleConfirmDelete(true)" >
+                                        <i class="fa-solid fa-trash radius-3 bg_red text-white p-1" ></i>
                                     </a>
                                     <a *ngIf="value_datas.status == '2'" title="Republier" (click)="setAnnouceStatus(value_datas?.id, '3')">
                                         <i class="fa-solid fa-play bg-white radius-3 text_green p-1 border-top-1-green border-bottom-1-green border-left-1-green border-right-1-green">
@@ -99,6 +102,7 @@
                                         <i class="fa-solid fa-arrows-rotate bg_blue radius-3 text-white p-1"></i>
                                     </a> 
                                 </div>
+                                <app-alert-confirm (confirmAction)="deleteAnnouce($event , value_datas)"></app-alert-confirm>
                             </td>
                         </tr>
                     </ng-container>
@@ -115,7 +119,7 @@
             </table>
         </div>
 
-        <div class="col-12 py-3 d-flex justify-content-end small_z_index" *ngIf="annouces">
+        <div class="col-12 py-3 d-flex justify_content" *ngIf="annouces">
             <app-paginator
                 [current] = "paginationDAtas?.current" 
                 [allcount] = "paginationDAtas?.allcount" 
@@ -127,5 +131,6 @@
             >
             </app-paginator> 
         </div>
+
     </div>
 </div>

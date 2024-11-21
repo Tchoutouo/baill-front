@@ -9,13 +9,13 @@ import { LocalStorageService } from '../../../services/admin/local-storage.servi
 import { NotificationsComponent } from "../notifications/notifications.component";
 import { CommonModule } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
+import { AlertComponent } from "../alert/alert.component";
 
 @Component({
   selector: 'app-content',
   standalone: true,
   imports: [NavBarComponent, AsideComponent, RouterOutlet, RouterLink, HeaderComponent, FooterComponent, NotificationsComponent,
-    CommonModule, RouterModule
-  ],
+    CommonModule, RouterModule, AlertComponent],
   templateUrl: './content.component.html',
   styleUrl: './content.component.css'
 })
@@ -96,6 +96,7 @@ export class ContentComponent {
       enf?.classList.add('my_acc_shadow_pic')
       prent?.classList.add('my_acc_shadow')
     text_pro?.classList.add('col-md-12')
+    img_prof?.classList.add('col-md-12')
       sideBar?.classList.remove('sideOpen');
       enf?.classList.remove('my_acc_shadow_pic_mob')
       prent?.classList.remove('my_acc_shadow_mob')
@@ -105,11 +106,15 @@ export class ContentComponent {
 
   OpenMobileAside(value : boolean){
     let sideBar = document.getElementById('sideBar');
+    let prent = document.getElementById('pict_parent') ;
+
     if (value) {
       sideBar?.classList.add('mobileSideOpen');
       sideBar?.classList.add('shadow-end');
+      prent?.classList.add('bg-profile_')
     }else{
       sideBar?.classList.remove('mobileSideOpen');
+      prent?.classList.remove('bg-profile_')
       sideBar?.classList.remove('shadow-end');
     }
   }

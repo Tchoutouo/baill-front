@@ -21,7 +21,7 @@ export class AlertComponent {
   constructor( private alertNotification : NoficationsService){}
 
   progress: number = 0; 
-  notification = new Notification()
+  notification = new Notification();
 
   ngOnInit() {  
     this.alertNotification.notification$.subscribe({

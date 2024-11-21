@@ -130,10 +130,31 @@ body{
 
 
 .btn_publish{
+    border: none;
     padding: var(--main-btn-sm-padd);
     background-color: var(--main-color);
+    font-family: var(--main-font-Quicksand);
     color: var(--main-color-white);
     border-radius: var(--main-radius-value-8);
+}
+
+.btn_add{
+    border: none;
+    padding: var(--main-btn-tag-padd);
+    background-color: var(--main-color);
+    font-family: var(--main-font-Quicksand);
+    color: var(--main-color-white);
+    border-radius: var(--main-radius-value-30);
+}
+
+
+.btn_cancel{
+    border: none;
+    padding: var(--main-btn-tag-padd);
+    background-color: var(--main-color-gray-15);
+    font-family: var(--main-font-Quicksand);
+    color: var(--main-color-gray-20);
+    border-radius: var(--main-radius-value-30);
 }
 
 .btn_login{
@@ -321,9 +342,12 @@ button:disabled
     color: #1797FF
 }
 
+
 .main-white{
     color: #FFFFFF;
 }
+
+
 
 .main-gray-wite{
     color: var(--main-color-gray-15);
@@ -383,6 +407,19 @@ button:disabled
 .bg-transparent{
     background-color: transparent;
 }
+
+.modal.fade{
+    z-index: 222222 !important  ;
+}
+
+.modal-backdrop.show {
+    z-index: 11111 !important;
+}
+
+.m_auto{
+    margin: 0 auto;
+}
+
 
 /* .modal-backdrop{
     display: none;

@@ -26,7 +26,9 @@ export class EntityServiceService {
   }
 
   update(id: any, datas: any, entity: string): Observable<any> {
-    return this.http.put(environment.apiUrl+entity+`/${id}`, datas);
+    console.log(environment.apiUrl, entity);
+    
+    return this.http.put(environment.apiUrl+entity+'/'+id, datas);
   }
 
 
@@ -46,4 +48,14 @@ export class EntityServiceService {
   getAllAbonnements(){
     return this.http.get(environment.apiUrl+'abonnement_back');
   }
+
+  deleteAnnouce(annouceID : string | number, catArray : any){
+    return this.http.delete(environment.apiUrl+'annonce_back/delete/'+annouceID+'/'+catArray);
+  }
+
+
+  getDashoardDatas(user_id : number){
+    return this.http.get(environment.apiUrl+'dashboard_advertiser/'+user_id);
+  }
+
 }

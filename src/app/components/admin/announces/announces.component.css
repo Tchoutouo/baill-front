@@ -214,8 +214,18 @@ div.published{
     text-decoration: none;
 }
 
-.overflow_x_scroll{
-    overflow-x: scroll;
+.justify_content{
+    justify-content: end ;
+}
+
+@media screen and (max-width : 900px) {
+    .overflow_x_scroll{
+        overflow-x: scroll;
+    }
+
+    .justify_content{
+        justify-content: center !important;
+    }
 }
 
 .small_z_index{

@@ -105,7 +105,6 @@ export class FormCreateComponent {
 
 
   handleSubmit(event: any = null) {  
-    console.log(event);
     
     if (!this.anounces_form_datas.valid || this.images_annouces_list.length < 1) {  
       if (this.images_annouces_list.length < 1) {  
@@ -148,9 +147,9 @@ export class FormCreateComponent {
           }  
         });
 
-        console.log(this.selectedCountry);
-        
         // Mise à jour de is_published selon l'événement  
+        console.log({country : this.selectedCountry} );
+        
         formData.append('is_published', event ? '1' : '0');  
         formData.append('country', this.selectedCountry ? this.selectedCountry : 'Cameroun');  
         formData.append('status', event ? '3' : '1');  
@@ -162,7 +161,8 @@ export class FormCreateComponent {
         this.images_annouces_list.forEach((file) => {  
             formData.append('images[]', file);  // Utiliser append au lieu de set  
         });
-
+        console.log('ici ');
+        
         // Stockage de l'entité  
         this.entityService.store(entity, formData).subscribe({  
             next: (data: any) => {  
@@ -215,7 +215,7 @@ export class FormCreateComponent {
     try{
       var countryCode = event.target.value;
       this.cities = City.getCitiesOfCountry(countryCode);
-      let country_sel= Country.getCountryByCode(countryCode);
+      this.country_sel= Country.getCountryByCode(countryCode);
       this.selectedCountry  = this.country_sel.name;
       console.log("country",this.selectedCountry);
 
