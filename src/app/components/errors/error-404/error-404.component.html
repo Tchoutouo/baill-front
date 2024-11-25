@@ -1,0 +1,20 @@
+<app-header></app-header>
+<div class="error-container px-3 px-lg-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 text-side">
+                <h1 class="error-title title-h1 main-font-quick green-black">Oups !</h1>
+                <div class="h4 error-description pt-3 main-font-quick title-h1">La page que vous cherchez n’existe pas.</div>
+                <div class="erro-text h4-baill main-font-quick pt-4 pb-5">
+                    On dirait que vous êtes perdu dans les méandres de notre site. Revenons à un endroit plus familier !
+                </div>
+                <a [routerLink]="['/']" class="btn_publish link">Retourner a l’acceuil</a>
+            </div>
+            <div class="col-lg-6 offset-lg-1">
+                <div class="bg-img" style="background-image: url('../../../../assets/404.png');">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

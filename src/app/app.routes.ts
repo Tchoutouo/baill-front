@@ -15,6 +15,7 @@ import { AnnouceIndexComponent } from './components/admin/annouce-index/annouce-
 import { FormCreateComponent } from './components/admin/form-create/form-create.component';
 import { authGuard } from './guard/auth.guard';
 import { AnnouceDetailsComponent } from './components/admin/annouce-details/annouce-details.component';
+import { Error404Component } from './components/errors/error-404/error-404.component';
 
 export const routes: Routes = [
     { 
@@ -48,25 +49,29 @@ export const routes: Routes = [
             { 
                 path: '', 
                 redirectTo: 'dashboard',
-                pathMatch: 'full' 
+                pathMatch: 'full',
             },
             
             {
                 path: 'dashboard',
-                component: DashboardComponent
+                component: DashboardComponent,
+                canActivate: [authGuard], 
             },
 
             {
                 path: 'settings',
-                component: SettingsComponent
+                component: SettingsComponent,
+                canActivate: [authGuard], 
             },
             {
                 path: 'announces',
                 component: AnnouceIndexComponent,
+                canActivate: [authGuard], 
                 children: [
                     { 
                         path: 'create',
                         component: FormCreateComponent,
+                        
                     },
                     
                     { 
@@ -83,11 +88,16 @@ export const routes: Routes = [
             {
                 path: 'myAccount',
                 component: MyAccountComponent,
-                // canActivate: [authGuard],
+                canActivate: [authGuard],
             }
 
         ]
     },
 
+
+    {
+        path: '**',
+        component: Error404Component,
+    },
 
 ];

@@ -21,6 +21,8 @@ export class AlertConfirmService {
   // }  
 
   emitAlert(alert : Alert){
+    console.log({sevice : alert});
+    
     this.alert$.next(alert)
   }
 

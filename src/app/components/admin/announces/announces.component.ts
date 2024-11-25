@@ -48,6 +48,7 @@ export class AnnouncesComponent {
   confirm : any
   deleteSub : Subscription | undefined
   deleteResult : any;
+  showAlert : any;
 
   constructor(private entytServ : EntityServiceService, private auth : AuthenticatorService, 
     private notification : NoficationsService, private localStorage : LocalStorageService, 
@@ -226,31 +227,34 @@ export class AnnouncesComponent {
 
   handleConfirmDelete(value : boolean){
     let alert = new Alert();
+    this.showAlert = true;
     alert.message = "Voulez vous vraiment supprimer cette annonce ?"
     alert.cancel_label = "annuler"
     alert.success_label =  "okay"
     alert.display =  value;
     console.log(alert.display);
-    
     this.alertConfirm.emitAlert(alert);
+
   }
 
   deleteAnnouce(event : any , data: any){
     let alert = new Alert();
+    console.log(event);
+    
     alert.message = " "
     alert.cancel_label = " "
+    this.showAlert = false;
     alert.success_label =  " "
-    alert.display =  false;
-    console.log(alert.display);
+    alert.display =  false; 
+    console.log({ferme:this.showAlert});
     this.alertConfirm.emitAlert(alert);
-    console.log(data?.id && event);
-    // let categories_ann = []
-    // data?.categories.map((item : any) =>{
-    //   categories_ann.push(item.title)
-    // })
+    let categories_ann : any = []
+    data?.categories.map((item : any) =>{
+      categories_ann.push(item.id)
+    })
     
     if (data?.id && event) {
-      this.deleteResult = this.entytServ.deleteAnnouce(data?.id, JSON.stringify(data?.categories)).subscribe({
+      this.deleteResult = this.entytServ.deleteAnnouce(data?.id, JSON.stringify(categories_ann)).subscribe({
         next: (datas: any) => {
           // console.log(datas);
             const notif = new Notification();

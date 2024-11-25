@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../../models/user';
 import { environment } from '../../../environments/environment.development';
@@ -30,41 +30,51 @@ export class AuthenticatorService {
     }
   }
   
-  signin(user : any){
-    this.http.post(environment.apiUrl+"login", user).subscribe({
-      next : (result : any )=>{      
-        if(result.success){
-          const data :  LoginResponse = {
-              success: true,
-              user: result.data,
-              token: result.token,
-              redirect_url: result.redirect_url
-          };
-          console.log("redirect_url",result.redirect_url);
-          this.localStorage.setItem('token', data.token);
-          this.localStorage.setItem('user', data.user);
-          this.authUser = true ;
-          this.router.navigate(['/admin']);  
-          this.value = true;
-        }else{
-          this.value = false;
-        }
-        
-      },
+  signin(user: any) {  
+    // Définir les headers nécessaires  
+    const headers = new HttpHeaders({  
+        'Content-Type': 'application/json',  
+        'Accept': 'application/json'  
+        // Vous pouvez ajouter d'autres headers si nécessaire, par exemple pour l'authentification  
+    });  
 
-      error : (error : any)=>{
-        console.log(error);
-      }
+    this.http.post(environment.apiUrl + "login", user, { headers }).subscribe({  
+        next: (result: any) => {  
+          console.log(result);
+          
+            if (result.success) {  
+                const data: LoginResponse = {  
+                    success: true,  
+                    user: result.data,  
+                    token: result.token,  
+                    redirect_url: result.redirect_url  
+              };  
+                console.log("redirect_url", result.redirect_url);  
+                this.localStorage.setItem('token', data.token);  
+                this.localStorage.setItem('user', result.data);  
+                this.authUser = true;  
+                this.router.navigate(['/admin']);  
+                this.value = true;  
+            } else {  
+                this.value = false;  
+            }  
 
-    })
+        },  
+        error: (error: any) => {  
+            console.log(error);  
+        }  
+    });  
 
-    return this.value ;
+    return this.value;  
   }
+  
+
+ 
 
   logOut(){
     this.localStorage.removeItem("token");
     this.localStorage.removeItem("user");
-    this.authUser = true ;
+    this.authUser = false ;
   }
 
   isAuthenticated(): boolean {

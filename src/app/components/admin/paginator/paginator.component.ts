@@ -38,6 +38,8 @@ export class PaginatorComponent {
     console.log(this.previous, this.pageLimit);
     if (this.current == 1) {
       this.items = [this.min];
+    }else if((this.current > 1) && (this.current >= (this.allcount/this.pageLimit))){
+      this.items = [this.previous, this.current];
     }else{
       this.items = [this.previous, this.current, this.next];
     }

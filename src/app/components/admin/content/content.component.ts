@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AsideComponent } from "../layouts/aside/aside.component";
 import { NavBarComponent } from '../layouts/nav-bar/nav-bar.component';
 import { RouterLink, RouterLinkActive, RouterModule, RouterOutlet } from '@angular/router';
@@ -9,13 +9,19 @@ import { LocalStorageService } from '../../../services/admin/local-storage.servi
 import { NotificationsComponent } from "../notifications/notifications.component";
 import { CommonModule } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 import { AlertComponent } from "../alert/alert.component";
+import { AuthenticatorService } from '../../../services/admin/authenticator.service';
+import { AlertConfirmComponent } from '../../alert-confirm/alert-confirm.component';
+import { Alert } from '../../../models/alert';
+import { AlertConfirmService } from '../../../services/alert-confirm.service';
+import { environment } from '../../../../environments/environment.development';
 
 @Component({
   selector: 'app-content',
   standalone: true,
-  imports: [NavBarComponent, AsideComponent, RouterOutlet, RouterLink, HeaderComponent, FooterComponent, NotificationsComponent,
-    CommonModule, RouterModule, AlertComponent],
+  imports: [RouterOutlet, RouterLink, NotificationsComponent,
+    CommonModule, RouterModule, AlertConfirmComponent],
   templateUrl: './content.component.html',
   styleUrl: './content.component.css'
 })
@@ -28,14 +34,16 @@ export class ContentComponent {
   userName: string ="";
   siteName: string ="";
   email: string ="";
+  user_picture : string = ''
 
   sizeSideBar : string | null = null ;
 
   sideBarIsOpen_ : boolean = false;
   isDiplayedNotification : boolean  = false ;
+  display: any 
 
-  constructor(private localStorage : LocalStorageService, private translateService: TranslateService){
-
+  constructor(private localStorage : LocalStorageService, private route : Router ,
+    private translateService: TranslateService, private authent : AuthenticatorService, private alertConfirm : AlertConfirmService){
   }
 
   ngOnInit(){
@@ -47,6 +55,7 @@ export class ContentComponent {
     this.userName = user ? user.first_name : null;
     this.email = user ? user.email : '';
     this.lang = localStorage.getItem('lang') || 'fr';
+    this.user_picture = user.picture ?  environment.apiUrlRessources + '/' + user.picture : 'false' ;  
 
   }
 
@@ -131,5 +140,32 @@ export class ContentComponent {
     const selectedLanguage = lang.target.value;
     localStorage.setItem('lang',selectedLanguage);
     this.translateService.use(selectedLanguage);
+  }
+
+  logOut(event : any){
+    let alert = new Alert();
+    alert.message = " "
+    alert.cancel_label = " "
+    alert.success_label =  " "
+    alert.display =  false;
+    console.log(alert.display);
+    this.alertConfirm.emitAlert(alert)
+    this.display = true;
+
+    if (event) {
+      this.authent.logOut();
+      return this.route.navigate(['/signin']);
+    }
+    return;
+  }
+
+  handleConfirmLogOut(value : boolean){
+    let alert = new Alert();
+    alert.message = "Voulez-vous vraiment vous déconnecter ?"
+    alert.cancel_label = "non"
+    alert.success_label =  "oui"
+    alert.display =  value;
+    this.display = false;
+    this.alertConfirm.emitAlert(alert);
   }
 }

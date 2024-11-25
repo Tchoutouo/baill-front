@@ -59,6 +59,7 @@
                             <td class="bord-black">
                                 <a class="annouce_ref" [routerLink]="['/admin/announces/details', value_datas.id]">
                                     {{value_datas.reference}}
+                                    
                                 </a>
                             </td>
                             <td class="bord-black">{{value_datas.title}}</td>
@@ -88,8 +89,9 @@
                                             </div>
                                         </div>
                                     </a>
-                                    <a *ngIf="value_datas.status == '1'" title="Supprimer" (click)="handleConfirmDelete(true)" >
-                                        <i class="fa-solid fa-trash radius-3 bg_red text-white p-1" ></i>
+                                    <a *ngIf="value_datas.status == '1'" title="Supprimer" >
+                                        <i class="fa-solid fa-trash radius-3 bg_red text-white p-1"  (click)="handleConfirmDelete(true)" ></i>
+                                        <app-alert-confirm *ngIf="showAlert" (confirmAction)="deleteAnnouce($event , value_datas)"></app-alert-confirm>
                                     </a>
                                     <a *ngIf="value_datas.status == '2'" title="Republier" (click)="setAnnouceStatus(value_datas?.id, '3')">
                                         <i class="fa-solid fa-play bg-white radius-3 text_green p-1 border-top-1-green border-bottom-1-green border-left-1-green border-right-1-green">
@@ -102,9 +104,10 @@
                                         <i class="fa-solid fa-arrows-rotate bg_blue radius-3 text-white p-1"></i>
                                     </a> 
                                 </div>
-                                <app-alert-confirm (confirmAction)="deleteAnnouce($event , value_datas)"></app-alert-confirm>
                             </td>
+                            
                         </tr>
+
                     </ng-container>
                     <tr class="bord-black" *ngIf="!annouces">
                         <td [attr.colspan]="headLines.length + 2">
