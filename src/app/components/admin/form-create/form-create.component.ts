@@ -160,7 +160,6 @@ export class FormCreateComponent {
         this.images_annouces_list.forEach((file) => {  
             formData.append('images[]', file);  // Utiliser append au lieu de set  
         });
-        console.log('ici ');
         
         // Stockage de l'entité  
         this.entityService.store(entity, formData).subscribe({  
@@ -182,6 +181,9 @@ export class FormCreateComponent {
             },  
             error: (error: any) => {  
                 console.log(error);  
+                const notif_error = new Notification();
+                notif_error.message = "erreur lors de l'enregistrement contacter l'administrateur !";
+                notif_error.status = "warning";
             }  
         });  
     }  

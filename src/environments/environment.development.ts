@@ -3,8 +3,10 @@ export const environment = {
     // apiUrl: "http://localhost:8000/api/",
     // apiUrl: "http://baill-back.sc1zeucoder.universe.wf/api/",
     // apiUrlRessources: "http://baill-back.sc1zeucoder.universe.wf/public/storage"
-    apiUrl: "https://facebook.audiencespub.com/api/",
-    apiUrlRessources: "https://facebook.audiencespub.com/public/storage"
+    // apiUrl: "https://facebook.audiencespub.com/api/",
+    apiUrl: "https://www.baill-back-test.mont-pandi.com/api/",
+    // apiUrlRessources: "https://facebook.audiencespub.com/public/storage"
+    apiUrlRessources: "http://baill-back-test.mont-pandi.com/storage/images/tOvffNjuvVWg06Y4gU62qW9fDzl6o19PImKCGwDK.jpg"
     // apiUrlRessources: "http://localhost:8000/autres_projets/bailleur/baill-back/public/storage"
     // apiUrl: "https://test-backend.bailleurnet.com/api/"
 };  

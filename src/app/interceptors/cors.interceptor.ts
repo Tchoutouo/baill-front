@@ -11,12 +11,17 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class CorsInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const token = localStorage.getItem('token'); 
-        
+        // Vérifiez si l'URL est pour login ou inscription
+        if (req.url.includes('/login') || req.url.includes('/advertiser_back/store')) {
+            // alert('inside')
+          // Ne pas ajouter de token pour ces requêtes
+          return next.handle(req);
+        }
+    
+        // Si ce n'est pas une requête de login ou d'inscription, ajoutez l'en-tête Authorization
+        const token = localStorage.getItem('token');
         const clonedRequest = req.clone({
-            headers: req.headers
-            .set('Authorization', `Bearer ${token}`)
-
+          headers: req.headers.set('Authorization', `Bearer ${token}`)
         });
         return next.handle(clonedRequest);
     }

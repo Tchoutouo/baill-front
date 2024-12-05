@@ -52,7 +52,7 @@ export class MyAccountComponent implements OnInit {
       first_name: [''],  
       email: ['', [Validators.required, Validators.email]],  
       // password: ['', Validators.required],  
-      whatsapp_number: ['', [Validators.maxLength(9), Validators.minLength(9)]],  
+      whatsapp_number: ['', [Validators.maxLength(16), Validators.minLength(9)]],  
       number: [''],  
       site_url: [''],  
       neighborhood: [''],  

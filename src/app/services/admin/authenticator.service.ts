@@ -38,7 +38,7 @@ export class AuthenticatorService {
         // Vous pouvez ajouter d'autres headers si nécessaire, par exemple pour l'authentification  
     });  
 
-    this.http.post(environment.apiUrl + "login", user, { headers }).subscribe({  
+    this.http.post(environment.apiUrl + "login", user).subscribe({  
         next: (result: any) => {  
           console.log(result);
           
