@@ -111,6 +111,7 @@
     
 }
 
+
 body{
     margin: 0;
     background-color: rgba(255, 255, 255, 1);
@@ -121,6 +122,10 @@ body{
     user-select: none;
 }
 
+
+.gap-10{
+    gap: 10px;
+}
 
 .md_text{
     font-size: var(--main-h4-font-size);
@@ -136,6 +141,7 @@ body{
     font-family: var(--main-font-Quicksand);
     color: var(--main-color-white);
     border-radius: var(--main-radius-value-8);
+    text-decoration: none;
 }
 
 .btn_add{
@@ -145,6 +151,7 @@ body{
     font-family: var(--main-font-Quicksand);
     color: var(--main-color-white);
     border-radius: var(--main-radius-value-30);
+    text-decoration: none;
 }
 
 
@@ -155,6 +162,7 @@ body{
     font-family: var(--main-font-Quicksand);
     color: var(--main-color-gray-20);
     border-radius: var(--main-radius-value-30);
+    text-decoration: none;
 }
 
 .btn_login{
@@ -292,6 +300,15 @@ button:disabled
     margin: 0;
 }
 
+.icon-close{
+    height: 24px;
+    width: 24px;
+    border: 1px solid var(--main-color-gray-10);
+    color: rgba(199, 199, 199, 1);
+    border-radius: 3px;
+    text-align: center;
+}
+
 .fw-baill-bold{
     font-weight: var(--main-xl-font-weiht);
 }
@@ -305,6 +322,12 @@ button:disabled
     font-size: var(--main-h5-font-size);
     line-height: var(--main-md-2-line-height);
 
+}
+
+.h3-baill{
+    font-family: var(--main-font-Quicksand);
+    font-size: var(--main-h3-font-size);
+    line-height: var(--main-md-2-line-height);
 }
 
 .h4-baill{
@@ -400,6 +423,10 @@ button:disabled
 
 .border-green-1{
     border: 1px solid #91E253;
+}
+
+.border-green-main{
+    border: 1px solid var(--main-color);
 }
 
 .wrap{

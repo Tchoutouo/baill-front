@@ -16,13 +16,14 @@ import { Subscription } from 'rxjs';
 import { AlertConfirmComponent } from '../../alert-confirm/alert-confirm.component';
 import { Alert } from '../../../models/alert';
 import { AlertConfirmService } from '../../../services/alert-confirm.service';
+import { FormCategoryComponent } from "../form-category/form-category.component";
 
 // import { FormatEntityNamePipe } from '../../../helpers/helper';
 
 @Component({
   selector: 'app-announces',
   standalone: true,
-  imports: [PaginatorComponent, RouterModule, CommonModule, AlertComponent, FormatEntityNamePipe, ForfaitListComponent, AlertConfirmComponent],
+  imports: [PaginatorComponent, RouterModule, CommonModule, AlertComponent, FormatEntityNamePipe, ForfaitListComponent, AlertConfirmComponent, FormCategoryComponent],
   templateUrl: './announces.component.html',
   styleUrl: './announces.component.css'
 })
@@ -49,6 +50,7 @@ export class AnnouncesComponent {
   deleteSub : Subscription | undefined
   deleteResult : any;
   showAlert : any;
+  headLinesAdmin : any[] = [];
 
   constructor(private entytServ : EntityServiceService, private auth : AuthenticatorService, 
     private notification : NoficationsService, private localStorage : LocalStorageService, 

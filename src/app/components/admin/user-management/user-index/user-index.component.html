@@ -1,0 +1,132 @@
+<div class="contianer-fluid">
+    <div class="page-title px-3">
+        <h1>Gestion des utilsateurs</h1>
+    </div>
+    <div class="row overflow_x_scroll justify-content-end p-5">
+        <div class="col-md-4 d-flex justify-content-end">
+            <form class="d-flex w-100 nav_item position-relative">
+                <input class="form-control me-2 py-1 px-5" id="search_field" 
+                    type="search" placeholder="Recherche ...." 
+                    aria-label="chercher"
+                >
+                <i class="fa-solid fa-magnifying-glass position-absolute search_icon"></i>
+            </form>
+        </div>
+        
+        <div class="col-12 d-flex justify-content-start gap-2 align-items-center py-3">
+            <h3 class="label-filter m-0">Afficher par</h3>
+            <select class="form-select w-25" id="" aria-label="Floating label select example">
+                <option value="{{itemRange}}" *ngFor="let itemRange of rangeList">{{itemRange}}</option>
+            </select>
+        </div>
+    
+        <div class="result-message text-center fw-bold d-none" >
+            Resultat de recherche pour : <span class="search_data"></span>
+        </div>
+        <div class="result-message fw-bold text-center d-none">
+            Aucun resultat pour : <span class="search_data"></span>
+        </div>
+        
+        <div class="col-12">
+            <table class="table px-4 m-auto" id="dashboard_table">
+                <thead>
+                    <tr class="border-bottom-1-green">
+                        <th scope="col" class="border-top-1-gray border-left-1-gray">No</th>
+                        <th scope="col " class="bord">Nom Utilisateur </th>
+                        <th scope="col " class="bord">Annonces expirées</th>
+                        <th scope="col " class="bord">Annonces publiées</th>
+                        <th scope="col " class="bord border-right-1-gray">Pays</th>
+                        <th scope="col " class="bord">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container>
+                        <tr >
+                            <th scope="row" class="bord-black">1</th>
+                            <td class="bord-black">
+                                Nom
+                            </td>
+                            <td class="bord-black">
+                                Nom
+                            </td>
+                            <td class="bord-black">Nom</td>
+                            <td class="bord-black">Nom</td>
+    
+                            <!-- Les actions -->
+                            <td class="bord-black">
+                                <div class="icon-list d-flex align-items-center gap-2 justify-content-center">
+                                    <div class="bg-danger text-white px-2 py-1 rounded">Bloquer</div>
+
+                                    <i class="fa-solid fa-eye radius-3  green-black " ></i>
+                                </div>
+                            </td>
+                            
+                        </tr>
+                        <tr >
+                            <th scope="row" class="bord-black">1</th>
+                            <td class="bord-black">
+                                Nom
+                            </td>
+                            <td class="bord-black">
+                                Nom
+                            </td>
+                            <td class="bord-black">Nom</td>
+                            <td class="bord-black">Nom</td>
+    
+                            <!-- Les actions -->
+                            <td class="bord-black">
+                                <div class="icon-list d-flex align-items-center gap-2 justify-content-center">
+                                    <div class="bg_blue text-white px-2 py-1 rounded">Débloquer</div>
+                                    <i class="fa-solid fa-eye radius-3  green-black " ></i>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr >
+                            <th scope="row" class="bord-black">1</th>
+                            <td class="bord-black">
+                                Nom
+                            </td>
+                            <td class="bord-black">
+                                Nom
+                            </td>
+                            <td class="bord-black">Nom</td>
+                            <td class="bord-black">Nom</td>
+    
+                            <!-- Les actions -->
+                            <td class="bord-black">
+                                <div class="icon-list d-flex align-items-center gap-2 justify-content-center">
+                                    <div class="bg-danger text-white px-2 py-1 rounded">Bloquer</div>
+                                    <i class="fa-solid fa-eye radius-3  green-black " ></i>
+                                </div>
+                            </td>
+                            
+                        </tr>
+                        <tr >
+                            <th scope="row" class="bord-black">1</th>
+                            <td class="bord-black">
+                                Nom
+                            </td>
+                            <td class="bord-black">
+                                Nom
+                            </td>   
+                            <td class="bord-black">Nom</td>
+                            <td class="bord-black">Nom</td>
+    
+                            <!-- Les actions -->
+                            <td class="bord-black">
+                                <div class="icon-list d-flex align-items-center gap-2 justify-content-center">
+                                    <div class="bg_blue text-white px-2 py-1 rounded">Débloquer</div>
+                                    <i class="fa-solid fa-eye radius-3  green-black " [routerLink]="['/admin/user-management/details', 2]" ></i>
+                                </div>
+                            </td>
+                            
+                        </tr>
+                        
+                    </ng-container>
+                    
+                </tbody>
+            </table>
+    
+        </div>
+    </div>
+</div>

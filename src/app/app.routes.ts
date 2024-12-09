@@ -16,6 +16,12 @@ import { FormCreateComponent } from './components/admin/form-create/form-create.
 import { authGuard } from './guard/auth.guard';
 import { AnnouceDetailsComponent } from './components/admin/annouce-details/annouce-details.component';
 import { Error404Component } from './components/errors/error-404/error-404.component';
+import { ConfigurationComponent } from './components/admin/payment/configuration/configuration.component';
+import { UserIndexComponent } from './components/admin/user-management/user-index/user-index.component';
+import { UserShowComponent } from './components/admin/user-management/user-show/user-show.component';
+import { PackageIndexComponent } from './components/admin/packages/package-index/package-index.component';
+import { PackageEditComponent } from './components/admin/packages/package-edit/package-edit.component';
+import { UsersComponent } from './components/admin/user-management/users/users.component';
 
 export const routes: Routes = [
     { 
@@ -55,7 +61,7 @@ export const routes: Routes = [
             {
                 path: 'dashboard',
                 component: DashboardComponent,
-                canActivate: [authGuard], 
+                // canActivate: [authGuard], 
             },
 
             {
@@ -64,9 +70,55 @@ export const routes: Routes = [
                 canActivate: [authGuard], 
             },
             {
+                path: 'payment',
+                component: ConfigurationComponent,
+                // canActivate: [authGuard], 
+            },
+            {
+                path: 'packages',
+                component: PackageIndexComponent,
+                // canActivate: [authGuard], 
+                children: [
+                    { 
+                        path: '', 
+                        redirectTo: 'packages',
+                        pathMatch: 'full',
+                        
+                    },
+                    { 
+                        path: 'edit/:id',
+                        component: PackageEditComponent,
+                        
+                    },
+                ]
+            },
+            {
+                path: 'user-management',
+                component: UsersComponent,
+                // canActivate: [authGuard], 
+                children: [
+                    { 
+                        path: 'users', 
+                        redirectTo: 'user-management',
+                        pathMatch: 'full',
+                        
+                    },
+                    { 
+                        path: 'users',
+                        component: UserIndexComponent,
+                        
+                    },
+                    { 
+                        path: 'details/:id',
+                        component: UserShowComponent,
+                        
+                    },
+                ]
+            },
+            {
                 path: 'announces',
                 component: AnnouceIndexComponent,
-                canActivate: [authGuard], 
+                // canActivate: [authGuard],
                 children: [
                     { 
                         path: 'create',
