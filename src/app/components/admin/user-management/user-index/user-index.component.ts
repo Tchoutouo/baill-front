@@ -11,5 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
   styleUrl: './user-index.component.css'
 })
 export class UserIndexComponent {
+  rangeList: any[] = [5, 10, 15, 20, 25, 30] ;
+
 
 }
