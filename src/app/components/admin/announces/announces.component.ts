@@ -51,6 +51,8 @@ export class AnnouncesComponent {
   deleteResult : any;
   showAlert : any;
   headLinesAdmin : any[] = [];
+  categoriesSub : Subscription | undefined
+  allCcategories : any;
 
   constructor(private entytServ : EntityServiceService, private auth : AuthenticatorService, 
     private notification : NoficationsService, private localStorage : LocalStorageService, 
@@ -153,8 +155,22 @@ export class AnnouncesComponent {
     // this.result_data = this.entytServ.getAll()
   }
 
+ 
+
   initComponent(){
     this.getDatasByPage();
+    this.getAllCategories();
+  }
+
+  getAllCategories(){
+      this.categoriesSub = this.entytServ.getAllAnnoucesCategories().subscribe({
+        next: (datas: any) => {
+          console.log({categorie : datas});
+        },
+        error: (error: any) => { 
+          console.log('error went get all categories', error);
+        }
+      })
   }
 
   setAnnouceStatus(ann_id : any, newStatus :any){

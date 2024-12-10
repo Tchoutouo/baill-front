@@ -84,7 +84,7 @@
 }
 
 .aside-mobile{
-    right: -3%;
+    right: 5%;
     top: 2%;
 }
 
@@ -349,4 +349,14 @@ i.active, svg.active {
 }
 
 
-/* end profile */
+@media screen and (min-width : 993px) {
+    .p-fixed{
+        position: fixed;
+        left: 0px;
+    }
+}
+
+.row {
+    --bs-gutter-x: 0 !important;
+
+}

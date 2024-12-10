@@ -80,6 +80,7 @@ export class ContentComponent {
   openSideBar(open : boolean){
     let sideBar = document.getElementById('sideBar') ;
     let textsToShow = document.getElementsByClassName('text-hover') ;
+    let sideFixed = document.getElementById('fixedParent') ;
     let text_pro = document.getElementById('profil-text') ;
     let img_prof = document.getElementById('profil-picture') ;
     let prent = document.getElementById('pict_parent') ;
@@ -93,6 +94,7 @@ export class ContentComponent {
       text_pro?.classList.remove('col-md-12')
       img_prof?.classList.remove('col-md-12')
       sideBar?.classList.add('sideOpen');
+      sideFixed?.classList.add('sideOpen');
       enf?.classList.remove('my_acc_shadow_pic')
     prent?.classList.remove('my_acc_shadow')
     enf?.classList.add('my_acc_shadow_pic_mob')
@@ -107,6 +109,7 @@ export class ContentComponent {
     text_pro?.classList.add('col-md-12')
     img_prof?.classList.add('col-md-12')
       sideBar?.classList.remove('sideOpen');
+      sideFixed?.classList.remove('sideOpen');
       enf?.classList.remove('my_acc_shadow_pic_mob')
       prent?.classList.remove('my_acc_shadow_mob')
       prent?.classList.remove('bg-profile_')

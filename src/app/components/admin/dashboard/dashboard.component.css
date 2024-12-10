@@ -162,3 +162,104 @@ table#dashboard_table tbody tr td{
         z-index: -1;
     }
 }
+
+.progress{
+    border-radius: 0px 0px 8px 8px !important;
+    height: 8px !important;
+}
+
+.h-8{
+    height: 8px;
+}
+
+.bg_red_10{
+    background-color: #FFD3C0;
+}
+
+.bg-dark{
+    background-color: #232323;
+}
+
+.radius-left-8{
+    border-radius: 8px 0px 0px 8px;
+}
+
+
+.bg-gray-15{
+    background-color: #E5E5E5;
+}
+
+.text-alert{
+    font-family : var(--main-font-Quicksand);
+}
+
+
+.bg-green-icon{
+    background-color : rgba(145, 226, 83, 1);
+}
+
+.alert-container{
+    border-radius: 8px;
+    background-color: white;
+}
+
+@media screen and (max-width : 900px) { 
+
+    .w-35{
+        width: 80% !important;
+    }
+
+    .scroll_x_table{
+        overflow-x: scroll;
+    }
+    
+}
+
+.bg-main-green{
+    background-color:rgba(223, 252, 200, 1) !important;
+}
+
+.bg-main-red{
+    background-color: rgba(255, 211, 192, 1);
+}
+
+.red-progress{
+    background-color: rgba(237, 45, 45, 1);
+}
+
+.green-progress{
+    background-color: var(--main-color);
+}
+
+.w-35{
+    width: 35%;
+}
+
+.gray-20{
+    color: var(--main-color-gray-20);
+}
+
+.bg-orange-10k{
+    background-color: #FFE7AB;
+}
+
+.orange-30{
+    background-color: #F4B10C !important;
+}
+
+.bg-green-15{
+    background-color: #C7FBA0;
+}
+
+.bg-green-main{
+    background-color: #5EB21E;
+}
+
+
+.small-text{
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 16.25px;
+    text-decoration-skip-ink: none;
+    color: var(--main-color-gray-20);
+}

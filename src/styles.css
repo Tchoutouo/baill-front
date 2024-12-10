@@ -134,6 +134,8 @@ body{
 }
 
 
+
+
 .btn_publish{
     border: none;
     padding: var(--main-btn-sm-padd);
@@ -152,6 +154,10 @@ body{
     color: var(--main-color-white);
     border-radius: var(--main-radius-value-30);
     text-decoration: none;
+}
+
+.bg-blue-new{
+    background-color: #EDF7FF;
 }
 
 
@@ -176,6 +182,10 @@ body{
 
 .bg_black{
     background-color: #000000;
+}
+
+.radius-8{
+    border-radius: 8px;
 }
 
 .h1-Quicksand{
@@ -356,7 +366,7 @@ button:disabled
 }
 
 .bg-blue{
-    background-color: #1797FF
+    background-color: #1797FF !important;
 }
 
 .bg-white{
@@ -383,6 +393,9 @@ button:disabled
     color: #1797FF
 }
 
+.blue-new{
+    color: #0A91FF;
+}
 
 .main-white{
     color: #FFFFFF;
@@ -444,6 +457,7 @@ button:disabled
 .main-font-quick{
     font-family: var(--main-font-Quicksand);
 }
+
 
 .finger{
     cursor: pointer !important;

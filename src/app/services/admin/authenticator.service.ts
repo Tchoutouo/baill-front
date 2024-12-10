@@ -80,5 +80,14 @@ export class AuthenticatorService {
   isAuthenticated(): boolean {
     return this.authUser;
   }
+
+  getUserRole(){
+    const user = this.localStorage.getItem('user')
+    if (user) {
+      return user.profil_name ;
+    }else{
+      return 'false' ;
+    }
+  }
   
 }
