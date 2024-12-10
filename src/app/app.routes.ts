@@ -22,6 +22,7 @@ import { UserShowComponent } from './components/admin/user-management/user-show/
 import { PackageIndexComponent } from './components/admin/packages/package-index/package-index.component';
 import { PackageEditComponent } from './components/admin/packages/package-edit/package-edit.component';
 import { UsersComponent } from './components/admin/user-management/users/users.component';
+import { Error403Component } from './components/errors/error403/error403.component';
 
 export const routes: Routes = [
     { 
@@ -150,6 +151,10 @@ export const routes: Routes = [
     {
         path: '**',
         component: Error404Component,
+    },
+    {
+        path: 'access-interdit',
+        component: Error403Component,
     },
 
 ];
