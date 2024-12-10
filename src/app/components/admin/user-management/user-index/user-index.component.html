@@ -1,6 +1,6 @@
 <div class="contianer-fluid">
     <div class="page-title px-3">
-        <h1>Gestion des utilsateurs</h1>
+        <h1>Gestion des utilisateurs</h1>
     </div>
     <div class="row overflow_x_scroll justify-content-end p-5">
         <div class="col-md-4 d-flex justify-content-end">
@@ -40,86 +40,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <ng-container>
-                        <tr >
-                            <th scope="row" class="bord-black">1</th>
+                    <ng-container *ngIf="userList">
+                        <tr *ngFor="let user of userList, let i = index">
+                            <th scope="row" class="bord-black">{{i}} </th>
                             <td class="bord-black">
-                                Nom
+                                {{user.username}}
                             </td>
-                            <td class="bord-black">
-                                Nom
-                            </td>
-                            <td class="bord-black">Nom</td>
-                            <td class="bord-black">Nom</td>
-    
-                            <!-- Les actions -->
-                            <td class="bord-black">
-                                <div class="icon-list d-flex align-items-center gap-2 justify-content-center">
-                                    <div class="bg-danger text-white px-2 py-1 rounded">Bloquer</div>
+                            <td class="bord-black">{{user.nbre_expired}} </td>
+                            <td class="bord-black">{{user.nbre_publisher}} </td>
+                            <td class="bord-black">{{user.country | getContryByCode}} </td>
 
-                                    <i class="fa-solid fa-eye radius-3  green-black " ></i>
-                                </div>
-                            </td>
-                            
-                        </tr>
-                        <tr >
-                            <th scope="row" class="bord-black">1</th>
-                            <td class="bord-black">
-                                Nom
-                            </td>
-                            <td class="bord-black">
-                                Nom
-                            </td>
-                            <td class="bord-black">Nom</td>
-                            <td class="bord-black">Nom</td>
-    
                             <!-- Les actions -->
                             <td class="bord-black">
                                 <div class="icon-list d-flex align-items-center gap-2 justify-content-center">
-                                    <div class="bg_blue text-white px-2 py-1 rounded">Débloquer</div>
-                                    <i class="fa-solid fa-eye radius-3  green-black " ></i>
+                                    <div class="bg-danger text-white px-2 py-1 rounded" (click)="handleConfirmDisabled(true)">Bloquer</div>
+                                    <app-alert-confirm *ngIf="showAlert" (confirmAction)="disabledUser($event , user)"></app-alert-confirm>
+
+                                    <i class="fa-solid fa-eye radius-3  green-black " [routerLink]="['/admin/user-management/details', user.id]" ></i>
                                 </div>
                             </td>
-                        </tr>
-                        <tr >
-                            <th scope="row" class="bord-black">1</th>
-                            <td class="bord-black">
-                                Nom
-                            </td>
-                            <td class="bord-black">
-                                Nom
-                            </td>
-                            <td class="bord-black">Nom</td>
-                            <td class="bord-black">Nom</td>
-    
-                            <!-- Les actions -->
-                            <td class="bord-black">
-                                <div class="icon-list d-flex align-items-center gap-2 justify-content-center">
-                                    <div class="bg-danger text-white px-2 py-1 rounded">Bloquer</div>
-                                    <i class="fa-solid fa-eye radius-3  green-black " ></i>
-                                </div>
-                            </td>
-                            
-                        </tr>
-                        <tr >
-                            <th scope="row" class="bord-black">1</th>
-                            <td class="bord-black">
-                                Nom
-                            </td>
-                            <td class="bord-black">
-                                Nom
-                            </td>   
-                            <td class="bord-black">Nom</td>
-                            <td class="bord-black">Nom</td>
-    
-                            <!-- Les actions -->
-                            <td class="bord-black">
-                                <div class="icon-list d-flex align-items-center gap-2 justify-content-center">
-                                    <div class="bg_blue text-white px-2 py-1 rounded">Débloquer</div>
-                                    <i class="fa-solid fa-eye radius-3  green-black " [routerLink]="['/admin/user-management/details', 2]" ></i>
-                                </div>
-                            </td>
-                            
+
                         </tr>
                         
                     </ng-container>
