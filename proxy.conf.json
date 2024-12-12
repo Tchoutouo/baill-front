@@ -1,7 +1,8 @@
 {
     "/api": {
-        "target": "https://test-backend.bailleurnet.com",
-        "secure": false,
-        "changeOrigin": true
+    "target": "https://www.baill-back-test.mont-pandi.com",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
     }
 }
