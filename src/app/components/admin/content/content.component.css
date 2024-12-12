@@ -57,9 +57,6 @@
     min-height: 100vh;
 }
 
-.sideOpen{
-    width: calc(2.5*(100%/12));
-}
 
 .mobileSideOpen{
     z-index: 12222;
@@ -354,6 +351,11 @@ i.active, svg.active {
         position: fixed;
         left: 0px;
     }
+
+    .sideOpen{
+        width: calc(2.5*(100%/12));
+    }
+        
 }
 
 .row {

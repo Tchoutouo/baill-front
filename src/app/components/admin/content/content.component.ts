@@ -153,8 +153,8 @@ export class ContentComponent {
     alert.display =  false;
     console.log(alert.display);
     this.alertConfirm.emitAlert(alert)
-    this.display = true;
-
+    this.display = false;
+    console.log(alert, event);
     if (event) {
       this.authent.logOut();
       return this.route.navigate(['/signin']);
@@ -168,7 +168,7 @@ export class ContentComponent {
     alert.cancel_label = "non"
     alert.success_label =  "oui"
     alert.display =  value;
-    this.display = false;
+    this.display = true;
     this.alertConfirm.emitAlert(alert);
   }
 }

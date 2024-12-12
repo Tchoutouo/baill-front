@@ -20,6 +20,7 @@ export class AuthenticatorService {
 
   private authUser = false;
   private value : any = false ;
+  csrfToken: string | null = null;  
 
   
   constructor(private http : HttpClient, private localStorage : LocalStorageService, private router: Router) { 
@@ -32,13 +33,17 @@ export class AuthenticatorService {
   
   signin(user: any) {  
     // Définir les headers nécessaires  
-    const headers = new HttpHeaders({  
-        'Content-Type': 'application/json',  
-        'Accept': 'application/json'  
-        // Vous pouvez ajouter d'autres headers si nécessaire, par exemple pour l'authentification  
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+      }); 
+
+    const test = this.fetchCsrfToken().subscribe(response => {  
+      console.log('CSRF Token:', response);  
     });  
 
-    this.http.post(environment.apiUrl + "login", user).subscribe({  
+    
+    this.http.post(environment.apiUrl + "login", user, { headers }).subscribe({  
         next: (result: any) => {  
           console.log(result);
           
@@ -89,5 +94,14 @@ export class AuthenticatorService {
       return 'false' ;
     }
   }
+
+
+  fetchCsrfToken() {  
+    return this.http.options(environment.apiUrl+'csrf-token');  
+  }  
+
+  saveCsrfToken(token: string) {  
+    this.csrfToken = token;  
+  }  
   
 }

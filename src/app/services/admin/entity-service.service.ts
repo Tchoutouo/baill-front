@@ -70,4 +70,14 @@ export class EntityServiceService {
     return this.http.get(environment.apiUrl+entity+id);
   }
 
+  getAllCategories(pageNumber: any, pageLimit: any, query : any = null){
+    if (query) {
+      console.log(environment.apiUrl+'categorie_back/'+pageLimit+'/'+query+'?page='+pageNumber);
+      return this.http.get(environment.apiUrl+'categorie_back/'+pageLimit+'/'+query+'?page='+pageNumber);
+    }else{
+      console.log(environment.apiUrl+'categorie_back/'+pageLimit+'/'+query+'?page='+pageNumber);
+      return this.http.get(environment.apiUrl+'categorie_back/'+pageLimit+'/'+'?page='+pageNumber);
+    }
+  }
+
 }
