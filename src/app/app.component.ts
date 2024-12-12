@@ -1,19 +1,15 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { HeaderComponent } from "./components/user/header/header.component";
+import { AlertConfirmComponent } from './components/alert-confirm/alert-confirm.component';
 import { TranslateService } from '@ngx-translate/core';
-import { MainComponent } from "./components/user/main/main.component";
-import { FooterComponent } from './components/user/footer/footer.component';
-import { CommonModule } from '@angular/common';
-import { SpinnerComponent } from './components/global/spinner/spinner.component';
-import { AlertComponent } from "./components/admin/alert/alert.component";
-import { AlertConfirmComponent } from "./components/alert-confirm/alert-confirm.component";
+import { AlertComponent } from './components/admin/alert/alert.component';
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
   
-  imports: [RouterOutlet, RouterLink, HeaderComponent, MainComponent, FooterComponent, SpinnerComponent, AlertComponent, AlertConfirmComponent],
+  imports: [RouterOutlet, RouterLink, AlertConfirmComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
