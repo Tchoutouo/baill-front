@@ -53,6 +53,9 @@ export class AnnouncesComponent {
   headLinesAdmin : any[] = [];
   categoriesSub : Subscription | undefined
   allCcategories : any;
+  catQuery : string = '';
+  category_pageLimit : number = 5;
+  category_pageNumber : number = 1;
 
   constructor(private entytServ : EntityServiceService, private auth : AuthenticatorService, 
     private notification : NoficationsService, private localStorage : LocalStorageService, 
@@ -155,22 +158,35 @@ export class AnnouncesComponent {
     // this.result_data = this.entytServ.getAll()
   }
 
- 
-
   initComponent(){
     this.getDatasByPage();
     this.getAllCategories();
   }
 
   getAllCategories(){
-      this.categoriesSub = this.entytServ.getAllAnnoucesCategories().subscribe({
-        next: (datas: any) => {
-          console.log({categorie : datas});
-        },
-        error: (error: any) => { 
-          console.log('error went get all categories', error);
+      try {
+        if (this.catQuery.length >= 2) {
+          this.categoriesSub = this.entytServ.getAllCategories(this.category_pageNumber ,this.category_pageLimit, this.catQuery).subscribe({
+            next: (datas: any) => {
+              console.log({categorie : datas});
+            },
+            error: (error: any) => { 
+              console.log('error went get all categories', error);
+            }
+          })
+        }else{
+          this.categoriesSub = this.entytServ.getAllCategories(this.category_pageNumber ,this.category_pageLimit).subscribe({
+            next: (datas: any) => {
+              console.log({categorie : datas});
+            },
+            error: (error: any) => { 
+              console.log('error went get all categories', error);
+            }
+          })
         }
-      })
+      } catch (error) {
+        
+      }
   }
 
   setAnnouceStatus(ann_id : any, newStatus :any){

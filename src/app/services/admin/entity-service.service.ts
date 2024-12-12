@@ -21,7 +21,7 @@ export class EntityServiceService {
   }
 
   getAllAnnoucesCategories(){
-    return this.http.get(environment.apiUrl+'categorie_back');
+    return this.http.get(environment.apiUrl+'categorie_back_public');
   }
 
   update(id: any, datas: any, entity: string): Observable<any> {
@@ -68,6 +68,16 @@ export class EntityServiceService {
   getAdvertiser(id : number | string, entity: any) : Observable<any>{
     console.log(environment.apiUrl+entity+id);
     return this.http.get(environment.apiUrl+entity+id);
+  }
+
+  getAllCategories(pageNumber: any, pageLimit: any, query : any = null){
+    if (query) {
+      console.log(environment.apiUrl+'categorie_back/'+pageLimit+'/'+query+'?page='+pageNumber);
+      return this.http.get(environment.apiUrl+'categorie_back/'+pageLimit+'/'+query+'?page='+pageNumber);
+    }else{
+      console.log(environment.apiUrl+'categorie_back/'+pageLimit+'/'+query+'?page='+pageNumber);
+      return this.http.get(environment.apiUrl+'categorie_back/'+pageLimit+'/'+'?page='+pageNumber);
+    }
   }
 
 }

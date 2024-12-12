@@ -48,6 +48,14 @@ export class SigninComponent {
         identifiant:this.identifiant,
         password:this.password,
     })
+
+    document.cookie.split(';').forEach(cookie => {
+      console.log(cookie);
+      
+      if (cookie.trim().startsWith('XSRF-TOKEN=')) {
+      console.log('XSRF-TOKEN found:', cookie);
+      }
+    });
   }
 
   toggleIconClass(event : any){

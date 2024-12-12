@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, SimpleChange } from '@angular/core';
 import { AlertConfirmService } from '../../services/alert-confirm.service';
 import { Alert } from '../../models/alert';
 import { CommonModule } from '@angular/common';
@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './alert-confirm.component.html',
   styleUrl: './alert-confirm.component.css'
 })
-export class AlertConfirmComponent {
+export class AlertConfirmComponent implements OnInit {
 
   message : string = '' ;
 
@@ -32,6 +32,7 @@ export class AlertConfirmComponent {
   constructor(private confirm : AlertConfirmService){ 
   }
 
+  
   ngOnInit(){
     this.confirm.alert$.subscribe({
       next : (alert : Alert) =>{
@@ -47,7 +48,6 @@ export class AlertConfirmComponent {
       }
     })
   }
-
   
   submitAction(submite : boolean){
     const submiteData = true;
@@ -55,6 +55,9 @@ export class AlertConfirmComponent {
     console.log('emited');
   }
 
+  ngOnDestroy() {  
+      this.confirm.alert$.unsubscribe(); // Pour éviter les fuites de mémoire  
+  }  
 
 
 }
