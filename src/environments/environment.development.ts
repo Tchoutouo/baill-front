@@ -1,12 +1,12 @@
 export const environment = {
     production : false,
-    // apiUrl: "http://localhost:8000/api/",
-    // apiUrlRessources: "http://localhost:8000/public/storage"
+    apiUrl: "http://localhost:8000/api/",
+    apiUrlRessources: "http://localhost:8000/public/storage"
 
     // apiUrl: "http://baill-back.sc1zeucoder.universe.wf/api/",
     // apiUrlRessources: "http://baill-back.sc1zeucoder.universe.wf/public/storage"
-    apiUrl: "https://www.baill-back-test.mont-pandi.com/api/",
-    apiUrlRessources: "https://www.baill-back-test.mont-pandi.com/public/storage"
+    // apiUrl: "https://www.baill-back-test.mont-pandi.com/api/",
+    // apiUrlRessources: "https://www.baill-back-test.mont-pandi.com/public/storage"
     // apiUrlRessources: "http://localhost:8000/autres_projets/bailleur/baill-back/public/storage"
     // apiUrl: "https://test-backend.bailleurnet.com/api/"
 };  

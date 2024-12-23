@@ -80,4 +80,9 @@ export class EntityServiceService {
     }
   }
 
+  disabledAdvertiser(id: any){
+    console.log(environment.apiUrl+'advertiser_bac/change/'+id);
+    return this.http.get(environment.apiUrl+'advertiser_bac/change/'+id);
+  }
+
 }

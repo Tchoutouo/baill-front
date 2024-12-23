@@ -12,11 +12,13 @@ import { GetContryByCodePipe } from "../../../../pipes/get-contry-by-code.pipe";
 import { AlertConfirmService } from '../../../../services/alert-confirm.service';
 import { Alert } from '../../../../models/alert';
 import { AlertConfirmComponent } from "../../../alert-confirm/alert-confirm.component";
+import { Notification } from '../../../../models/notification';
+import { AlertComponent } from '../../alert/alert.component';
 
 @Component({
   selector: 'app-user-index',
   standalone: true,
-  imports: [RouterModule, TranslateModule, CommonModule, GetContryByCodePipe, AlertConfirmComponent],
+  imports: [RouterModule, TranslateModule, CommonModule, GetContryByCodePipe, AlertConfirmComponent,AlertComponent],
   templateUrl: './user-index.component.html',
   styleUrl: './user-index.component.css'
 })
@@ -28,6 +30,9 @@ export class UserIndexComponent implements OnInit{
   rangeList: any[] = [5, 10, 15, 20, 25, 30] ;
   userList: any[] = [];
   showAlert : any;
+  display_message: boolean = false;
+  message_alert : any  = null;
+
 
 
   constructor(  
@@ -39,7 +44,10 @@ export class UserIndexComponent implements OnInit{
   ){}
   
   ngOnInit(): void {
-    this.getAllAdvertisers()
+    if (this.message_alert) {
+      this.display_message = true;
+    }
+    this.getAllAdvertisers();
     
   }
 
@@ -55,22 +63,59 @@ export class UserIndexComponent implements OnInit{
         }
       },
 
-      error: (error: any) => {  }
+      error: (error: any) => {  
+        console.log("error", error);
+      }
     })
+  }
+
+  closeAlert(event : any){
+    event ? this.display_message = false : this.display_message = false ;
   }
 
   handleConfirmDisabled(value : boolean){
     let alert = new Alert();
     this.showAlert = true;
-    alert.message = "Voulez vous vraiment bloquer cet utilisateur ?"
-    alert.cancel_label = "annuler"
-    alert.success_label =  "okay"
+    alert.message = "Est-vous sûr de vouloir poursuivre cette action ?"
+    alert.cancel_label = "Annuler"
+    alert.success_label =  "Oui"
     alert.display =  value;
-    console.log(alert.display);
     this.alertConfirm.emitAlert(alert);
 
   }
-  disabledUser(event : any , user: any){
 
+  disabledUser(event : any , user: any){
+    let alert = new Alert();
+    alert.message = "";
+    alert.cancel_label = "";
+    this.showAlert = false;
+    alert.success_label = "";
+    alert.display = false;
+    this.alertConfirm.emitAlert(alert);
+
+    if(user && event){
+      this.entityService.disabledAdvertiser(user.id).subscribe({
+        next: (data: any) => {
+          const notif = new Notification();
+          if(data.success === true){
+            if(user.status == 1){
+              notif.message = "Utilisateur bloqué avec success!";
+            }else{
+              notif.message = "Utilisateur débloqué avec success!";
+            }
+            notif.status = "success";
+          }else{
+            notif.message = "Echèc de l'opération!";
+            notif.status = "warning";
+          }
+          this.notification.emitNotification(notif);
+          this.getAllAdvertisers();
+
+        },
+        error: (error: any) => {
+          console.log("Activation & Désactivation utilisateur: ",error);
+        }
+      });
+    }
   }
 }

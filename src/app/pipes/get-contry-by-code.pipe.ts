@@ -11,7 +11,7 @@ export class GetContryByCodePipe implements PipeTransform {
   transform(value: string): string {
     let contry_name: any  = Country.getCountryByCode(value);
 
-    let name = contry_name.name;
+    let name = contry_name.name ? contry_name.name : "";
 
     return name;
   }

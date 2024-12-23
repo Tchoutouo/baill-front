@@ -2,6 +2,10 @@
     <div class="page-title px-3">
         <h1>Gestion des utilisateurs</h1>
     </div>
+    <div class="alert-message">
+        <app-alert *ngIf="display_message" (timeOut) ="closeAlert($event)" [message] = "message_alert"></app-alert>
+    </div>
+    
     <div class="row overflow_x_scroll justify-content-end p-5">
         <div class="col-md-4 d-flex justify-content-end">
             <form class="d-flex w-100 nav_item position-relative">
@@ -53,7 +57,9 @@
                             <!-- Les actions -->
                             <td class="bord-black">
                                 <div class="icon-list d-flex align-items-center gap-2 justify-content-center">
-                                    <div class="bg-danger text-white px-2 py-1 rounded" (click)="handleConfirmDisabled(true)">Bloquer</div>
+                                    <div *ngIf="user.status == 1"  class="bg-danger text-white px-2 py-1 rounded" (click)="handleConfirmDisabled(true)">Bloquer</div>
+                                    <div *ngIf="user.status == 0"  class="bg-secondary text-white px-2 py-1 rounded" (click)="handleConfirmDisabled(true)">Débloquer</div>
+
                                     <app-alert-confirm *ngIf="showAlert" (confirmAction)="disabledUser($event , user)"></app-alert-confirm>
 
                                     <i class="fa-solid fa-eye radius-3  green-black " [routerLink]="['/admin/user-management/details', user.id]" ></i>
