@@ -26,9 +26,7 @@ export class EntityServiceService {
 
   update(id: any, datas: any, entity: string): Observable<any> {
     console.log(environment.apiUrl, datas); 
-    datas.forEach((value : any, key : any) => {  
-      console.log(key, value);  
-    });
+    
     const options = {
       headers: new HttpHeaders({ "Content-Type": "multipart/form-data" }),
     };
@@ -78,6 +76,19 @@ export class EntityServiceService {
       console.log(environment.apiUrl+'categorie_back/'+pageLimit+'/'+query+'?page='+pageNumber);
       return this.http.get(environment.apiUrl+'categorie_back/'+pageLimit+'/'+'?page='+pageNumber);
     }
+  }
+
+  // USER MANAGEMENT SERVICES
+  getAllAdvertisers(pageLImit : number = 5){
+    return this.http.get(environment.apiUrl+'advertiser_back/'+pageLImit);
+  }
+
+  getAdvertiserByPages(pageLImit : number = 5, pageNumber : number){
+    return this.http.get(environment.apiUrl+'advertiser_back/'+pageLImit+'/'+'?page='+pageNumber);
+  }
+
+  searchAdvertiserByPage(pageNumber: number , pageLImit : number, query: string ){
+    return this.http.get(environment.apiUrl+'advertiser_back/'+pageLImit+'/'+query+'?page='+pageNumber);
   }
 
   disabledAdvertiser(id: any){

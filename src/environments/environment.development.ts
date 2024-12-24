@@ -1,7 +1,7 @@
 export const environment = {
     production : false,
-    apiUrl: "http://localhost:8000/api/",
-    apiUrlRessources: "http://localhost:8000/public/storage"
+    apiUrl: "http://127.0.0.1:8000/api/",
+    apiUrlRessources: "http://127.0.0.1:8000/public/storage"
 
     // apiUrl: "http://baill-back.sc1zeucoder.universe.wf/api/",
     // apiUrlRessources: "http://baill-back.sc1zeucoder.universe.wf/public/storage"

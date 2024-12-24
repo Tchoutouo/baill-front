@@ -14,11 +14,14 @@ import { Alert } from '../../../../models/alert';
 import { AlertConfirmComponent } from "../../../alert-confirm/alert-confirm.component";
 import { Notification } from '../../../../models/notification';
 import { AlertComponent } from '../../alert/alert.component';
+// import { PaginatorComponent } from '../../paginator/paginator.component';
+import { PaginatorComponent } from "../../../admin/paginator/paginator.component";
+
 
 @Component({
   selector: 'app-user-index',
   standalone: true,
-  imports: [RouterModule, TranslateModule, CommonModule, GetContryByCodePipe, AlertConfirmComponent,AlertComponent],
+  imports: [RouterModule, TranslateModule, CommonModule, GetContryByCodePipe, AlertConfirmComponent,AlertComponent,PaginatorComponent],
   templateUrl: './user-index.component.html',
   styleUrl: './user-index.component.css'
 })
@@ -28,11 +31,20 @@ export class UserIndexComponent implements OnInit{
   userSub?: Subscription; 
   errorMessage : string = '';
   rangeList: any[] = [5, 10, 15, 20, 25, 30] ;
-  userList: any[] = [];
+  userList: any = [];
   showAlert : any;
   display_message: boolean = false;
   message_alert : any  = null;
-
+  pageNumber : number = 1;
+  pageLImit : number = 5;
+  querySearch : string = "";
+  query: string = "";
+  paginationDAtas : any;
+  result_data : any;
+  loged : boolean = false;
+  entityName : string = "";
+  resulMessage : string  = '';
+  advertises: any;
 
 
   constructor(  
@@ -51,22 +63,84 @@ export class UserIndexComponent implements OnInit{
     
   }
 
+  searchValue(event : any){
+    event.preventDefault()
+    this.query = "";
+    this.querySearch = "";
+    this.entityName = "search"
+    if (event) {
+      const {name, value} = event.target;
+      this.querySearch +=  this.entityName + "=" + value;
+      this.query = value;
+    }else{
+
+    }
+    this.getAllAdvertisers();
+  }
+
+  setPage(page : number){
+    this.pageNumber = page ;
+    this.getAllAdvertisers();
+  }
+  
+  setPageLimit(event : any){
+    const {name, value} = event.target;
+    const pageRange = parseInt(value);
+    if (!isNaN(pageRange)) {
+      this.pageNumber=1;
+      this.pageLImit = pageRange;
+      this.getAllAdvertisers();
+    }
+  }
+
   getAllAdvertisers(){
-    const entity = "advertiser_back/5";
 
-    this.userSub = this.entityService.getAll(entity).subscribe({
-      next: (data: any) => { 
-        console.log("data-set",data.data.data);
+    if (this.query.length >= 2){
+      this.userSub = this.entityService.searchAdvertiserByPage(this.pageNumber, this.pageLImit, this.query).subscribe({
+        next: (result_search: any) => { 
+          console.log({result : result_search});
 
-        if (data.success) {
-          this.userList = data.data.data;
+          if (result_search.success) {
+            this.userList = result_search.data.data;
+
+            this.paginationDAtas = {
+              current : result_search.data?.current_page ,
+              next : result_search.data?.current_page + 1 ,
+              paginateLength : result_search.data?.last_page ,
+              previous : result_search.data?.current_page - 1 ,
+              allcount : result_search.data?.total ,
+            }
+          }else{
+            this.userList = null;
+          }
+        },
+  
+        error: (error: any) => {  
+          console.log("error", error);
         }
-      },
+      })
 
-      error: (error: any) => {  
-        console.log("error", error);
-      }
-    })
+    }else{
+      this.userSub = this.entityService.getAllAdvertisers(this.pageNumber).subscribe({
+        next: (data: any) => { 
+          if (data.success) {
+            this.userList = data.data.data;
+            this.paginationDAtas = {
+              current : data.data?.current_page ,
+              next : data.data?.current_page + 1 ,
+              paginateLength : data.data?.last_page ,
+              previous : data.data?.current_page - 1 ,
+              allcount : data.data?.total ,
+            }
+            console.log("userList", this.userList)
+          }
+        },
+  
+        error: (error: any) => {  
+          console.log("error", error);
+        }
+      })
+    }
   }
 
   closeAlert(event : any){

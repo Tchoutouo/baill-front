@@ -12,14 +12,26 @@
                 <input class="form-control me-2 py-1 px-5" id="search_field" 
                     type="search" placeholder="Recherche ...." 
                     aria-label="chercher"
+                    (keyup)="searchValue($event)"
+           
+                    (search)="searchValue($event)"
                 >
-                <i class="fa-solid fa-magnifying-glass position-absolute search_icon"></i>
+                <i class="fa-solid fa-magnifying-glass position-absolute search_icon"
+                (click)="searchValue($event)">
+                </i>
             </form>
+        </div>
+
+        <div class="result-message text-center fw-bold" *ngIf="query.length >= 2 && userList">
+            Resultat de recherche pour : <span class="search_data">{{query}}</span>
+        </div>
+        <div class="result-message fw-bold text-center" *ngIf="query.length >= 2 && !userList">
+            Aucun resultat pour : <span class="search_data">{{query}}</span>
         </div>
         
         <div class="col-12 d-flex justify-content-start gap-2 align-items-center py-3">
             <h3 class="label-filter m-0">Afficher par</h3>
-            <select class="form-select w-25" id="" aria-label="Floating label select example">
+            <select class="form-select w-25" id="" aria-label="Floating label select example" (change)="setPageLimit($event)">
                 <option value="{{itemRange}}" *ngFor="let itemRange of rangeList">{{itemRange}}</option>
             </select>
         </div>
@@ -65,10 +77,31 @@
                                     <i class="fa-solid fa-eye radius-3  green-black " [routerLink]="['/admin/user-management/details', user.id]" ></i>
                                 </div>
                             </td>
-
                         </tr>
-                        
                     </ng-container>
+
+                    <tr class="bord-black" *ngIf="!userList">
+                        <td>
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-center data-not-found">
+                                    Aucune données trouvée.
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <div class="col-12 py-3 d-flex justify_content" *ngIf="userList">
+                        <app-paginator
+                            [current] = "paginationDAtas?.current" 
+                            [allcount] = "paginationDAtas?.allcount" 
+                            [next] = "paginationDAtas?.next" 
+                            [previous] = "paginationDAtas?.previous" 
+                            [paginateLength] = "paginationDAtas?.paginateLength" 
+                            [pageLimit] = "pageLImit"
+                            (pageSelected)="setPage($event)"
+                        >
+                        </app-paginator> 
+                    </div>
                     
                 </tbody>
             </table>
