@@ -1,455 +1,459 @@
 <div class="contaner-fluid px-4">
-    <div class="page-title">
-        <h1>Annonces</h1>
-    </div>
-    <div class="add-annouce py-4">
-        <a [routerLink]="['/admin/announces/create']" id="publish-button" class="d-flex align-items-center">
-            <i class="fa-solid fa-plus mx-1 text-white"></i>
-            Ajouter
-        </a>
-    </div>
-
-    <div class="alert-message">
-        <app-alert *ngIf="display_message" (timeOut) ="closeAlert($event)" [message] = "message_alert"></app-alert>
-    </div>
-
-    <div class="row overflow_x_scroll justify-content-end">
-        <div class="col-md-4 d-flex justify-content-end">
-            <form class="d-flex w-100 nav_item position-relative">
-                <input class="form-control me-2 py-1 px-5" id="search_field" 
-                    type="search" placeholder="Recherche ...." 
-                    aria-label="chercher"
-                    (keyup)="searchValue($event)"
-           
-                    (search)="searchValue($event)"
-                >
-                <i class="fa-solid fa-magnifying-glass position-absolute search_icon"
-                (click)="searchValue($event)">
-                </i>
-            </form>
+    <div class=" " *ngIf="!isAdmin">    
+        <div class="page-title">
+            <h1>Annonces</h1>
         </div>
-        
-        <div class="col-12 d-flex justify-content-start gap-2 align-items-center py-3">
-            <h3 class="label-filter m-0">Afficher par</h3>
-            <select class="form-select w-25" id="" aria-label="Floating label select example" (change)="setPageLimit($event)">
-                <option value="{{itemRange}}" *ngFor="let itemRange of rangeList">{{itemRange}}</option>
-            </select>
+        <div class="add-annouce py-4">
+            <a [routerLink]="['/admin/announces/create']" id="publish-button" class="d-flex align-items-center">
+                <i class="fa-solid fa-plus mx-1 text-white"></i>
+                Ajouter
+            </a>
         </div>
-
-        <div class="result-message text-center fw-bold" *ngIf="query.length >= 2 && annouces">
-            Resultat de recherche pour : <span class="search_data">{{query}}</span>
+    
+        <div class="alert-message">
+            <app-alert *ngIf="display_message" (timeOut) ="closeAlert($event)" [message] = "message_alert"></app-alert>
         </div>
-        <div class="result-message fw-bold text-center" *ngIf="query.length >= 2 && !annouces">
-            Aucun resultat pour : <span class="search_data">{{query}}</span>
-        </div>
-        
-        <div class="col-12">
-            <table class="table px-4 m-auto" id="dashboard_table">
-                <thead>
-                    <tr class="border-bottom-1-green">
-                        <th scope="col" class="border-top-1-gray border-left-1-gray">No</th>
-                        <th scope="col " class="bord" *ngFor="let itemHead of headLines">{{itemHead | formatEntityName}}</th>
-                        <th scope="col " class="bord border-right-1-gray">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <ng-container *ngIf="annouces">
-                        <tr *ngFor=" let value_datas of annouces; let index = index" >
-                            <th scope="row" class="bord-black">{{paginationDAtas.allcount - (paginationDAtas.current-1) * pageLImit - index}}</th>
-                            <td class="bord-black">
-                                <a class="annouce_ref" [routerLink]="['/admin/announces/details', value_datas.id]">
-                                    {{value_datas.reference}}
-                                    
-                                </a>
-                            </td>
-                            <td class="bord-black">{{value_datas.title}}</td>
-                            <td class="bord-black">
-                               <div class="d-flex gap-2 justify-content-center   ">
-                                    <div class="cat-item" *ngFor="let category of value_datas.categories">
-                                        {{category.title}}
-                                    </div>
-                               </div>
-                            </td>
-                            <td class="bord-black">{{value_datas.next_expiration_date}}</td>
-                            <!-- Les satus -->
-                            <td class="bord-black">
-                                <div class="watting" *ngIf="value_datas.status == '1'">En cours</div>
-                                <div class="paused" *ngIf="value_datas.status == '2'">En pause</div>
-                                <div class="published" *ngIf="value_datas.status == '3'">Publié</div>
-                                <div class="expired" *ngIf="value_datas.status == '0'">Expiré</div>
-                            </td>
-                            <!-- Les actions -->
-                            <td class="bord-black">
-                                <div class="icon-list d-flex gap-2 justify-content-center">
-                                    <a *ngIf="value_datas.status == '1'" title="Publier" id="create" data-bs-toggle="modal"  data-bs-target="#forfaitList" >
-                                        <i class="fa fa-check bg-green  p-1 radius-3 text-white"></i>
-                                        <div class="modal fade" id="forfaitList" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                            <div class="modal-dialog m_auto modal-dialog-centered modal-dialog  modal-xl modal-dialog-centered" id="my-model-forfait">
-                                                <app-forfait-list (hasSubmit)="handleSubmit($event, value_datas)" class="m_auto w-100"></app-forfait-list>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a *ngIf="value_datas.status == '1'" title="Supprimer" >
-                                        <i class="fa-solid fa-trash radius-3 bg_red text-white p-1"  (click)="handleConfirmDelete(true)" ></i>
-                                        <app-alert-confirm *ngIf="showAlert" (confirmAction)="deleteAnnouce($event , value_datas)"></app-alert-confirm>
-                                    </a>
-                                    <a *ngIf="value_datas.status == '2'" title="Republier" (click)="setAnnouceStatus(value_datas?.id, '3')">
-                                        <i class="fa-solid fa-play bg-white radius-3 text_green p-1 border-top-1-green border-bottom-1-green border-left-1-green border-right-1-green">
-                                        </i>
-                                    </a>
-                                    <a *ngIf="value_datas.status == '3'" title="Mettre en pause" (click)="setAnnouceStatus(value_datas?.id, '2')">
-                                        <i class="fa-solid fa-pause bg_grey radius-3 text-dark p-1"></i>
-                                    </a>
-                                    <a *ngIf="value_datas.status == '0'" title="Relancer">
-                                        <i class="fa-solid fa-arrows-rotate bg_blue radius-3 text-white p-1"></i>
-                                    </a> 
-                                </div>
-                            </td>
-                            
+    
+        <div class="row overflow_x_scroll justify-content-end">
+            <div class="col-md-4 d-flex justify-content-end">
+                <form class="d-flex w-100 nav_item position-relative">
+                    <input class="form-control me-2 py-1 px-5" id="search_field" 
+                        type="search" placeholder="Recherche ...." 
+                        aria-label="chercher"
+                        (keyup)="searchValue($event)"
+               
+                        (search)="searchValue($event)"
+                    >
+                    <i class="fa-solid fa-magnifying-glass position-absolute search_icon"
+                    (click)="searchValue($event)">
+                    </i>
+                </form>
+            </div>
+            
+            <div class="col-12 d-flex justify-content-start gap-2 align-items-center py-3">
+                <h3 class="label-filter m-0">Afficher par</h3>
+                <select class="form-select w-25" id="" aria-label="Floating label select example" (change)="setPageLimit($event)">
+                    <option value="{{itemRange}}" *ngFor="let itemRange of rangeList">{{itemRange}}</option>
+                </select>
+            </div>
+    
+            <div class="result-message text-center fw-bold" *ngIf="query.length >= 2 && annouces">
+                Resultat de recherche pour : <span class="search_data">{{query}}</span>
+            </div>
+            <div class="result-message fw-bold text-center" *ngIf="query.length >= 2 && !annouces">
+                Aucun resultat pour : <span class="search_data">{{query}}</span>
+            </div>
+            
+            <div class="col-12">
+                <table class="table px-4 m-auto" id="dashboard_table">
+                    <thead>
+                        <tr class="border-bottom-1-green">
+                            <th scope="col" class="border-top-1-gray border-left-1-gray">No</th>
+                            <th scope="col " class="bord" *ngFor="let itemHead of headLines">{{itemHead | formatEntityName}}</th>
+                            <th scope="col " class="bord border-right-1-gray">Actions</th>
                         </tr>
-
-                    </ng-container>
-                    <tr class="bord-black" *ngIf="!annouces">
-                        <td [attr.colspan]="headLines.length + 2">
-                            <div class="row">
-                                <div class="col-12 d-flex justify-content-center data-not-found">
-                                    Aucune données trouvée.
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="col-12 py-3 d-flex justify_content" *ngIf="annouces">
-            <app-paginator
-                [current] = "paginationDAtas?.current" 
-                [allcount] = "paginationDAtas?.allcount" 
-                [next] = "paginationDAtas?.next" 
-                [previous] = "paginationDAtas?.previous" 
-                [paginateLength] = "paginationDAtas?.paginateLength" 
-                [pageLimit] = "pageLImit"
-                (pageSelected)="setPage($event)"
-            >
-            </app-paginator> 
-        </div>
-
-    </div>
-
-    <ul class="nav nav-tabs mt-2 d-none" id="myTab" role="tablist">
-        <li class="nav-item main-font-quick" role="presentation">
-          <button class="nav-link active h4-baill fw-baill-bold" id="annonce-tab" data-bs-toggle="tab" data-bs-target="#annonce" type="button" role="tab" aria-controls="home" aria-selected="true">Annonces</button>
-        </li>
-        <li class="nav-item main-font-quick " role="presentation">
-          <button class="nav-link h4-baill fw-baill-bold" id="category-tab" data-bs-toggle="tab" data-bs-target="#category" type="button" role="tab" aria-controls="category" aria-selected="false">Catégories</button>
-        </li>
-    </ul>
-    <div class="tab-content px-3 py-4 d-none" id="myTabContent">
-        <div class="tab-pane fade show active" id="annonce" role="tabpanel" aria-labelledby="annonce-tab">
-            <div class="row overflow_x_scroll justify-content-end">
-                <div class="col-md-4 d-flex justify-content-end">
-                    <form class="d-flex w-100 nav_item position-relative">
-                        <input class="form-control me-2 py-1 px-5" id="search_field" 
-                            type="search" placeholder="Recherche ...." 
-                            aria-label="chercher"
-                            (keyup)="searchValue($event)"
-                   
-                            (search)="searchValue($event)"
-                        >
-                        <i class="fa-solid fa-magnifying-glass position-absolute search_icon"
-                        (click)="searchValue($event)">
-                        </i>
-                    </form>
-                </div>
-                
-                <div class="col-12 d-flex justify-content-start gap-2 align-items-center py-3">
-                    <h3 class="label-filter m-0">Afficher par</h3>
-                    <select class="form-select w-25" id="" aria-label="Floating label select example" (change)="setPageLimit($event)">
-                        <option value="{{itemRange}}" *ngFor="let itemRange of rangeList">{{itemRange}}</option>
-                    </select>
-                </div>
-        
-                <div class="result-message text-center fw-bold" *ngIf="query.length >= 2 && annouces">
-                    Resultat de recherche pour : <span class="search_data">{{query}}</span>
-                </div>
-                <div class="result-message fw-bold text-center" *ngIf="query.length >= 2 && !annouces">
-                    Aucun resultat pour : <span class="search_data">{{query}}</span>
-                </div>
-                
-                <div class="col-12">
-                    <table class="table px-4 m-auto" id="dashboard_table">
-                        <thead>
-                            <tr class="border-bottom-1-green">
-                                <th scope="col" class="border-top-1-gray border-left-1-gray">No</th>
-                                <th scope="col " class="bord" *ngFor="let itemHead of headLines">{{itemHead | formatEntityName}}</th>
-                                <th scope="col " class="bord border-right-1-gray">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <ng-container *ngIf="annouces">
-                                <tr *ngFor=" let value_datas of annouces; let index = index" >
-                                    <th scope="row" class="bord-black">{{paginationDAtas.allcount - (paginationDAtas.current-1) * pageLImit - index}}</th>
-                                    <td class="bord-black">
-                                        <a class="annouce_ref" [routerLink]="['/admin/announces/details', value_datas.id]">
-                                            {{value_datas.reference}}
-                                            
-                                        </a>
-                                    </td>
-                                    <td class="bord-black">{{value_datas.title}}</td>
-                                    <td class="bord-black">
-                                       <div class="d-flex gap-2 justify-content-center   ">
-                                            <div class="cat-item" *ngFor="let category of value_datas.categories">
-                                                {{category.title}}
-                                            </div>
-                                       </div>
-                                    </td>
-                                    <td class="bord-black">{{value_datas.next_expiration_date}}</td>
-                                    <!-- Les satus -->
-                                    <td class="bord-black">
-                                        <div class="watting" *ngIf="value_datas.status == '1'">En cours</div>
-                                        <div class="paused" *ngIf="value_datas.status == '2'">En pause</div>
-                                        <div class="published" *ngIf="value_datas.status == '3'">Publié</div>
-                                        <div class="expired" *ngIf="value_datas.status == '0'">Expiré</div>
-                                    </td>
-                                    <!-- Les actions -->
-                                    <td class="bord-black">
-                                        <div class="icon-list d-flex gap-2 justify-content-center">
-                                            <a *ngIf="value_datas.status == '1'" title="Publier" id="create" data-bs-toggle="modal"  data-bs-target="#forfaitList" >
-                                                <i class="fa fa-check bg-green  p-1 radius-3 text-white"></i>
-                                                <div class="modal fade" id="forfaitList" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                                    <div class="modal-dialog m_auto modal-dialog-centered modal-dialog  modal-xl modal-dialog-centered" id="my-model-forfait">
-                                                        <app-forfait-list (hasSubmit)="handleSubmit($event, value_datas)" class="m_auto w-100"></app-forfait-list>
-                                                    </div>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngIf="annouces">
+                            <tr *ngFor=" let value_datas of annouces; let index = index" >
+                                <th scope="row" class="bord-black">{{paginationDAtas.allcount - (paginationDAtas.current-1) * pageLImit - index}}</th>
+                                <td class="bord-black">
+                                    <a class="annouce_ref" [routerLink]="['/admin/announces/details', value_datas.id]">
+                                        {{value_datas.reference}}
+                                        
+                                    </a>
+                                </td>
+                                <td class="bord-black">{{value_datas.title}}</td>
+                                <td class="bord-black">
+                                   <div class="d-flex gap-2 justify-content-center   ">
+                                        <div class="cat-item" *ngFor="let category of value_datas.categories">
+                                            {{category.title}}
+                                        </div>
+                                   </div>
+                                </td>
+                                <td class="bord-black">{{value_datas.next_expiration_date}}</td>
+                                <!-- Les satus -->
+                                <td class="bord-black">
+                                    <div class="watting" *ngIf="value_datas.status == '1'">En cours</div>
+                                    <div class="paused" *ngIf="value_datas.status == '2'">En pause</div>
+                                    <div class="published" *ngIf="value_datas.status == '3'">Publié</div>
+                                    <div class="expired" *ngIf="value_datas.status == '0'">Expiré</div>
+                                </td>
+                                <!-- Les actions -->
+                                <td class="bord-black">
+                                    <div class="icon-list d-flex gap-2 justify-content-center">
+                                        <a *ngIf="value_datas.status == '1'" title="Publier" id="create" data-bs-toggle="modal"  data-bs-target="#forfaitList" >
+                                            <i class="fa fa-check bg-green  p-1 radius-3 text-white"></i>
+                                            <div class="modal fade" id="forfaitList" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog m_auto modal-dialog-centered modal-dialog  modal-xl modal-dialog-centered" id="my-model-forfait">
+                                                    <app-forfait-list (hasSubmit)="handleSubmit($event, value_datas)" class="m_auto w-100"></app-forfait-list>
                                                 </div>
-                                            </a>
-                                            <a *ngIf="value_datas.status == '1'" title="Supprimer" >
-                                                <i class="fa-solid fa-trash radius-3 bg_red text-white p-1"  (click)="handleConfirmDelete(true)" ></i>
-                                                <app-alert-confirm *ngIf="showAlert" (confirmAction)="deleteAnnouce($event , value_datas)"></app-alert-confirm>
-                                            </a>
-                                            <a *ngIf="value_datas.status == '2'" title="Republier" (click)="setAnnouceStatus(value_datas?.id, '3')">
-                                                <i class="fa-solid fa-play bg-white radius-3 text_green p-1 border-top-1-green border-bottom-1-green border-left-1-green border-right-1-green">
-                                                </i>
-                                            </a>
-                                            <a *ngIf="value_datas.status == '3'" title="Mettre en pause" (click)="setAnnouceStatus(value_datas?.id, '2')">
-                                                <i class="fa-solid fa-pause bg_grey radius-3 text-dark p-1"></i>
-                                            </a>
-                                            <a *ngIf="value_datas.status == '0'" title="Relancer">
-                                                <i class="fa-solid fa-arrows-rotate bg_blue radius-3 text-white p-1"></i>
-                                            </a> 
-                                        </div>
-                                    </td>
-                                    
-                                </tr>
-        
-                            </ng-container>
-                            <tr class="bord-black" *ngIf="!annouces">
-                                <td [attr.colspan]="headLines.length + 2">
-                                    <div class="row">
-                                        <div class="col-12 d-flex justify-content-center data-not-found">
-                                            Aucune données trouvée.
-                                        </div>
+                                            </div>
+                                        </a>
+                                        <a *ngIf="value_datas.status == '1'" title="Supprimer" >
+                                            <i class="fa-solid fa-trash radius-3 bg_red text-white p-1"  (click)="handleConfirmDelete(true)" ></i>
+                                            <app-alert-confirm *ngIf="showAlert" (confirmAction)="deleteAnnouce($event , value_datas)"></app-alert-confirm>
+                                        </a>
+                                        <a *ngIf="value_datas.status == '2'" title="Republier" (click)="setAnnouceStatus(value_datas?.id, '3')">
+                                            <i class="fa-solid fa-play bg-white radius-3 text_green p-1 border-top-1-green border-bottom-1-green border-left-1-green border-right-1-green">
+                                            </i>
+                                        </a>
+                                        <a *ngIf="value_datas.status == '3'" title="Mettre en pause" (click)="setAnnouceStatus(value_datas?.id, '2')">
+                                            <i class="fa-solid fa-pause bg_grey radius-3 text-dark p-1"></i>
+                                        </a>
+                                        <a *ngIf="value_datas.status == '0'" title="Relancer">
+                                            <i class="fa-solid fa-arrows-rotate bg_blue radius-3 text-white p-1"></i>
+                                        </a> 
                                     </div>
                                 </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-        
-                <div class="col-12 py-3 d-flex justify_content" *ngIf="annouces">
-                    <app-paginator
-                        [current] = "paginationDAtas?.current" 
-                        [allcount] = "paginationDAtas?.allcount" 
-                        [next] = "paginationDAtas?.next" 
-                        [previous] = "paginationDAtas?.previous" 
-                        [paginateLength] = "paginationDAtas?.paginateLength" 
-                        [pageLimit] = "pageLImit"
-                        (pageSelected)="setPage($event)"
-                    >
-                    </app-paginator> 
-                </div>
-        
-            </div>
-        </div>
-        <div class="tab-pane fade" id="category" role="tabpanel" aria-labelledby="category-tab">
-            <div class="add-annouce py-4">
-                <a id="publish-button" class="d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                    <i class="fa-solid fa-plus mx-1 text-white"></i>
-                    Catégorie
-                </a>
-            </div>
-            <div class="row overflow_x_scroll justify-content-end">
-                <div class="col-md-4 d-flex justify-content-end">
-                    <form class="d-flex w-100 nav_item position-relative">
-                        <input class="form-control me-2 py-1 px-5" id="search_field" 
-                            type="search" placeholder="Recherche ...." 
-                            aria-label="chercher"
-                        >
-                        <i class="fa-solid fa-magnifying-glass position-absolute search_icon"></i>
-                    </form>
-                </div>
-                
-                <div class="col-12 d-flex justify-content-start gap-2 align-items-center py-3">
-                    <h3 class="label-filter m-0">Afficher par</h3>
-                    <select class="form-select w-25" id="" aria-label="Floating label select example">
-                        <option value="{{itemRange}}" *ngFor="let itemRange of rangeList">{{itemRange}}</option>
-                    </select>
-                </div>
-        
-                <div class="result-message text-center fw-bold" *ngIf="query.length >= 2 && annouces">
-                    Resultat de recherche pour : <span class="search_data">{{query}}</span>
-                </div>
-                <div class="result-message fw-bold text-center" *ngIf="query.length >= 2 && !annouces">
-                    Aucun resultat pour : <span class="search_data">{{query}}</span>
-                </div>
-                
-                <div class="col-12">
-                    <table class="table px-4 m-auto" id="dashboard_table">
-                        <thead>
-                            <tr class="border-bottom-1-green">
-                                <th scope="col" class="border-top-1-gray border-left-1-gray">No</th>
-                                <th scope="col " class="bord">Catégorie </th>
-                                <th scope="col " class="bord">Nombre d'users</th>
-                                <th scope="col " class="bord">Date de création</th>
-                                <th scope="col " class="bord border-right-1-gray">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <ng-container>
-                                <tr >
-                                    <th scope="row" class="bord-black">1</th>
-                                    <td class="bord-black">
-                                        Nom
-                                    </td>
-                                    <td class="bord-black">
-                                        Nom
-                                    </td>
-                                    <td class="bord-black">Nom</td>
-    
-                                    <!-- Les actions -->
-                                    <td class="bord-black">
-                                        <div class="icon-list d-flex gap-2 justify-content-center">
-                            
-                                            <a  title="Supprimer" >
-                                                <i class="fa-solid fa-trash radius-3 bg_red text-white p-1"  (click)="handleConfirmDelete(true)" ></i>
-                                            </a>
-                                            
-                                            <a title="Modifier">
-                                                <i class="fa-solid fa-pen bg_blue radius-3 text-white p-1"></i>
-                                            </a> 
-                                        </div>
-                                    </td>
-                                    
-                                </tr>
-                                <tr >
-                                    <th scope="row" class="bord-black">1</th>
-                                    <td class="bord-black">
-                                        Nom
-                                    </td>
-                                    <td class="bord-black">
-                                        Nom
-                                    </td>
-                                    <td class="bord-black">Nom</td>
-    
-                                    <!-- Les actions -->
-                                    <td class="bord-black">
-                                        <div class="icon-list d-flex gap-2 justify-content-center">
-                            
-                                            <a  title="Supprimer" >
-                                                <i class="fa-solid fa-trash radius-3 bg_red text-white p-1"  (click)="handleConfirmDelete(true)" ></i>
-                                            </a>
-                                            
-                                            <a title="Modifier">
-                                                <i class="fa-solid fa-pen bg_blue radius-3 text-white p-1"></i>
-                                            </a> 
-                                        </div>
-                                    </td>
-                                    
-                                </tr>
-                                <tr >
-                                    <th scope="row" class="bord-black">1</th>
-                                    <td class="bord-black">
-                                        Nom
-                                    </td>
-                                    <td class="bord-black">
-                                        Nom
-                                    </td>
-                                    <td class="bord-black">Nom</td>
-    
-                                    <!-- Les actions -->
-                                    <td class="bord-black">
-                                        <div class="icon-list d-flex gap-2 justify-content-center">
-                            
-                                            <a  title="Supprimer" >
-                                                <i class="fa-solid fa-trash radius-3 bg_red text-white p-1"  (click)="handleConfirmDelete(true)" ></i>
-                                            </a>
-                                            
-                                            <a title="Modifier">
-                                                <i class="fa-solid fa-pen bg_blue radius-3 text-white p-1"></i>
-                                            </a> 
-                                        </div>
-                                    </td>
-                                    
-                                </tr>
-                                <tr >
-                                    <th scope="row" class="bord-black">1</th>
-                                    <td class="bord-black">
-                                        Nom
-                                    </td>
-                                    <td class="bord-black">
-                                        Nom
-                                    </td>
-                                    <td class="bord-black">Nom</td>
-    
-                                    <!-- Les actions -->
-                                    <td class="bord-black">
-                                        <div class="icon-list d-flex gap-2 justify-content-center">
-                            
-                                            <a  title="Supprimer" >
-                                                <i class="fa-solid fa-trash radius-3 bg_red text-white p-1"  (click)="handleConfirmDelete(true)" ></i>
-                                            </a>
-                                            
-                                            <a title="Modifier">
-                                                <i class="fa-solid fa-pen bg_blue radius-3 text-white p-1"></i>
-                                            </a> 
-                                        </div>
-                                    </td>
-                                    
-                                </tr>
                                 
-                            </ng-container>
-                            
-                        </tbody>
-                    </table>
-
-                </div>
-                
-                
-  
-                <!-- Modal -->
-                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                    <div class="modal-content">
-                        <app-form-category></app-form-category>
-                    </div>
-                    </div>
-                </div>
-                <!-- pagination -->
-                <!-- <div class="col-12 py-3 d-flex justify_content" *ngIf="annouces">
-                    <app-paginator
-                        [current] = "paginationDAtas?.current" 
-                        [allcount] = "paginationDAtas?.allcount" 
-                        [next] = "paginationDAtas?.next" 
-                        [previous] = "paginationDAtas?.previous" 
-                        [paginateLength] = "paginationDAtas?.paginateLength" 
-                        [pageLimit] = "pageLImit"
-                        (pageSelected)="setPage($event)"
-                    >
-                    </app-paginator> 
-                </div> -->
-        
-
+                            </tr>
+    
+                        </ng-container>
+                        <tr class="bord-black" *ngIf="!annouces">
+                            <td [attr.colspan]="headLines.length + 2">
+                                <div class="row">
+                                    <div class="col-12 d-flex justify-content-center data-not-found">
+                                        Aucune données trouvée.
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+    
+            <div class="col-12 py-3 d-flex justify_content" *ngIf="annouces">
+                <app-paginator
+                    [current] = "paginationDAtas?.current" 
+                    [allcount] = "paginationDAtas?.allcount" 
+                    [next] = "paginationDAtas?.next" 
+                    [previous] = "paginationDAtas?.previous" 
+                    [paginateLength] = "paginationDAtas?.paginateLength" 
+                    [pageLimit] = "pageLImit"
+                    (pageSelected)="setPage($event)"
+                >
+                </app-paginator> 
+            </div>
+    
         </div>
+    </div>
+
+    <div class="" *ngIf="isAdmin">
+        <ul class="nav nav-tabs mt-2" id="myTab" role="tablist">
+            <li class="nav-item main-font-quick" role="presentation">
+              <button class="nav-link active h4-baill fw-baill-bold" id="annonce-tab" data-bs-toggle="tab" data-bs-target="#annonce" type="button" role="tab" aria-controls="home" aria-selected="true">Annonces</button>
+            </li>
+            <li class="nav-item main-font-quick " role="presentation">
+              <button class="nav-link h4-baill fw-baill-bold" id="category-tab" data-bs-toggle="tab" data-bs-target="#category" type="button" role="tab" aria-controls="category" aria-selected="false">Catégories</button>
+            </li>
+        </ul>
+        <div class="tab-content px-3 py-4" id="myTabContent">
+            <div class="tab-pane fade show active" id="annonce" role="tabpanel" aria-labelledby="annonce-tab">
+                <div class="row overflow_x_scroll justify-content-end">
+                    <div class="col-md-4 d-flex justify-content-end">
+                        <form class="d-flex w-100 nav_item position-relative">
+                            <input class="form-control me-2 py-1 px-5" id="search_field" 
+                                type="search" placeholder="Recherche ...." 
+                                aria-label="chercher"
+                                (keyup)="searchValue($event)"
+                       
+                                (search)="searchValue($event)"
+                            >
+                            <i class="fa-solid fa-magnifying-glass position-absolute search_icon"
+                            (click)="searchValue($event)">
+                            </i>
+                        </form>
+                    </div>
+                    
+                    <div class="col-12 d-flex justify-content-start gap-2 align-items-center py-3">
+                        <h3 class="label-filter m-0">Afficher par</h3>
+                        <select class="form-select w-25" id="" aria-label="Floating label select example" (change)="setPageLimit($event)">
+                            <option value="{{itemRange}}" *ngFor="let itemRange of rangeList">{{itemRange}}</option>
+                        </select>
+                    </div>
+            
+                    <div class="result-message text-center fw-bold" *ngIf="query.length >= 2 && annouces">
+                        Resultat de recherche pour : <span class="search_data">{{query}}</span>
+                    </div>
+                    <div class="result-message fw-bold text-center" *ngIf="query.length >= 2 && !annouces">
+                        Aucun resultat pour : <span class="search_data">{{query}}</span>
+                    </div>
+                    
+                    <div class="col-12">
+                        <table class="table px-4 m-auto" id="dashboard_table">
+                            <thead>
+                                <tr class="border-bottom-1-green">
+                                    <th scope="col" class="border-top-1-gray border-left-1-gray">No</th>
+                                    <th scope="col " class="bord" *ngFor="let itemHead of headLines">{{itemHead | formatEntityName}}</th>
+                                    <th scope="col " class="bord border-right-1-gray">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <ng-container *ngIf="annouces">
+                                    <tr *ngFor=" let value_datas of annouces; let index = index" >
+                                        <th scope="row" class="bord-black">{{paginationDAtas.allcount - (paginationDAtas.current-1) * pageLImit - index}}</th>
+                                        <td class="bord-black">
+                                            <a class="annouce_ref" [routerLink]="['/admin/announces/details', value_datas.id]">
+                                                {{value_datas.reference}}
+                                                
+                                            </a>
+                                        </td>
+                                        <td class="bord-black">{{value_datas.title}}</td>
+                                        <td class="bord-black">
+                                           <div class="d-flex gap-2 justify-content-center   ">
+                                                <div class="cat-item" *ngFor="let category of value_datas.categories">
+                                                    {{category.title}}
+                                                </div>
+                                           </div>
+                                        </td>
+                                        <td class="bord-black">{{value_datas.next_expiration_date}}</td>
+                                        <!-- Les satus -->
+                                        <td class="bord-black">
+                                            <div class="watting" *ngIf="value_datas.status == '1'">En cours</div>
+                                            <div class="paused" *ngIf="value_datas.status == '2'">En pause</div>
+                                            <div class="published" *ngIf="value_datas.status == '3'">Publié</div>
+                                            <div class="expired" *ngIf="value_datas.status == '0'">Expiré</div>
+                                        </td>
+                                        <!-- Les actions -->
+                                        <td class="bord-black">
+                                            <div class="icon-list d-flex gap-2 justify-content-center">
+                                                <a *ngIf="value_datas.status == '1'" title="Publier" id="create" data-bs-toggle="modal"  data-bs-target="#forfaitList" >
+                                                    <i class="fa fa-check bg-green  p-1 radius-3 text-white"></i>
+                                                    <div class="modal fade" id="forfaitList" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                        <div class="modal-dialog m_auto modal-dialog-centered modal-dialog  modal-xl modal-dialog-centered" id="my-model-forfait">
+                                                            <app-forfait-list (hasSubmit)="handleSubmit($event, value_datas)" class="m_auto w-100"></app-forfait-list>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                <a *ngIf="value_datas.status == '1'" title="Supprimer" >
+                                                    <i class="fa-solid fa-trash radius-3 bg_red text-white p-1"  (click)="handleConfirmDelete(true)" ></i>
+                                                    <app-alert-confirm *ngIf="showAlert" (confirmAction)="deleteAnnouce($event , value_datas)"></app-alert-confirm>
+                                                </a>
+                                                <a *ngIf="value_datas.status == '2'" title="Republier" (click)="setAnnouceStatus(value_datas?.id, '3')">
+                                                    <i class="fa-solid fa-play bg-white radius-3 text_green p-1 border-top-1-green border-bottom-1-green border-left-1-green border-right-1-green">
+                                                    </i>
+                                                </a>
+                                                <a *ngIf="value_datas.status == '3'" title="Mettre en pause" (click)="setAnnouceStatus(value_datas?.id, '2')">
+                                                    <i class="fa-solid fa-pause bg_grey radius-3 text-dark p-1"></i>
+                                                </a>
+                                                <a *ngIf="value_datas.status == '0'" title="Relancer">
+                                                    <i class="fa-solid fa-arrows-rotate bg_blue radius-3 text-white p-1"></i>
+                                                </a> 
+                                            </div>
+                                        </td>
+                                        
+                                    </tr>
+            
+                                </ng-container>
+                                <tr class="bord-black" *ngIf="!annouces">
+                                    <td [attr.colspan]="headLines.length + 2">
+                                        <div class="row">
+                                            <div class="col-12 d-flex justify-content-center data-not-found">
+                                                Aucune données trouvée.
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            
+                    <div class="col-12 py-3 d-flex justify_content" *ngIf="annouces">
+                        <app-paginator
+                            [current] = "paginationDAtas?.current" 
+                            [allcount] = "paginationDAtas?.allcount" 
+                            [next] = "paginationDAtas?.next" 
+                            [previous] = "paginationDAtas?.previous" 
+                            [paginateLength] = "paginationDAtas?.paginateLength" 
+                            [pageLimit] = "pageLImit"
+                            (pageSelected)="setPage($event)"
+                        >
+                        </app-paginator> 
+                    </div>
+            
+                </div>
+            </div>
+            <div class="tab-pane fade" id="category" role="tabpanel" aria-labelledby="category-tab">
+                <div class="add-annouce py-4">
+                    <a id="publish-button" class="d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        <i class="fa-solid fa-plus mx-1 text-white"></i>
+                        Catégorie
+                    </a>
+                </div>
+                <div class="row overflow_x_scroll justify-content-end">
+                    <div class="col-md-4 d-flex justify-content-end">
+                        <form class="d-flex w-100 nav_item position-relative">
+                            <input class="form-control me-2 py-1 px-5" id="search_field" 
+                                type="search" placeholder="Recherche ...." 
+                                aria-label="chercher"
+                            >
+                            <i class="fa-solid fa-magnifying-glass position-absolute search_icon"></i>
+                        </form>
+                    </div>
+                    
+                    <div class="col-12 d-flex justify-content-start gap-2 align-items-center py-3">
+                        <h3 class="label-filter m-0">Afficher par</h3>
+                        <select class="form-select w-25" id="" aria-label="Floating label select example">
+                            <option value="{{itemRange}}" *ngFor="let itemRange of rangeList">{{itemRange}}</option>
+                        </select>
+                    </div>
+            
+                    <div class="result-message text-center fw-bold" *ngIf="query.length >= 2 && annouces">
+                        Resultat de recherche pour : <span class="search_data">{{query}}</span>
+                    </div>
+                    <div class="result-message fw-bold text-center" *ngIf="query.length >= 2 && !annouces">
+                        Aucun resultat pour : <span class="search_data">{{query}}</span>
+                    </div>
+                    
+                    <div class="col-12">
+                        <table class="table px-4 m-auto" id="dashboard_table">
+                            <thead>
+                                <tr class="border-bottom-1-green">
+                                    <th scope="col" class="border-top-1-gray border-left-1-gray">No</th>
+                                    <th scope="col " class="bord">Catégorie </th>
+                                    <th scope="col " class="bord">Nombre d'users</th>
+                                    <th scope="col " class="bord">Date de création</th>
+                                    <th scope="col " class="bord border-right-1-gray">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <ng-container>
+                                    <tr >
+                                        <th scope="row" class="bord-black">1</th>
+                                        <td class="bord-black">
+                                            Nom
+                                        </td>
+                                        <td class="bord-black">
+                                            Nom
+                                        </td>
+                                        <td class="bord-black">Nom</td>
+        
+                                        <!-- Les actions -->
+                                        <td class="bord-black">
+                                            <div class="icon-list d-flex gap-2 justify-content-center">
+                                
+                                                <a  title="Supprimer" >
+                                                    <i class="fa-solid fa-trash radius-3 bg_red text-white p-1"  (click)="handleConfirmDelete(true)" ></i>
+                                                </a>
+                                                
+                                                <a title="Modifier">
+                                                    <i class="fa-solid fa-pen bg_blue radius-3 text-white p-1"></i>
+                                                </a> 
+                                            </div>
+                                        </td>
+                                        
+                                    </tr>
+                                    <tr >
+                                        <th scope="row" class="bord-black">1</th>
+                                        <td class="bord-black">
+                                            Nom
+                                        </td>
+                                        <td class="bord-black">
+                                            Nom
+                                        </td>
+                                        <td class="bord-black">Nom</td>
+        
+                                        <!-- Les actions -->
+                                        <td class="bord-black">
+                                            <div class="icon-list d-flex gap-2 justify-content-center">
+                                
+                                                <a  title="Supprimer" >
+                                                    <i class="fa-solid fa-trash radius-3 bg_red text-white p-1"  (click)="handleConfirmDelete(true)" ></i>
+                                                </a>
+                                                
+                                                <a title="Modifier">
+                                                    <i class="fa-solid fa-pen bg_blue radius-3 text-white p-1"></i>
+                                                </a> 
+                                            </div>
+                                        </td>
+                                        
+                                    </tr>
+                                    <tr >
+                                        <th scope="row" class="bord-black">1</th>
+                                        <td class="bord-black">
+                                            Nom
+                                        </td>
+                                        <td class="bord-black">
+                                            Nom
+                                        </td>
+                                        <td class="bord-black">Nom</td>
+        
+                                        <!-- Les actions -->
+                                        <td class="bord-black">
+                                            <div class="icon-list d-flex gap-2 justify-content-center">
+                                
+                                                <a  title="Supprimer" >
+                                                    <i class="fa-solid fa-trash radius-3 bg_red text-white p-1"  (click)="handleConfirmDelete(true)" ></i>
+                                                </a>
+                                                
+                                                <a title="Modifier">
+                                                    <i class="fa-solid fa-pen bg_blue radius-3 text-white p-1"></i>
+                                                </a> 
+                                            </div>
+                                        </td>
+                                        
+                                    </tr>
+                                    <tr >
+                                        <th scope="row" class="bord-black">1</th>
+                                        <td class="bord-black">
+                                            Nom
+                                        </td>
+                                        <td class="bord-black">
+                                            Nom
+                                        </td>
+                                        <td class="bord-black">Nom</td>
+        
+                                        <!-- Les actions -->
+                                        <td class="bord-black">
+                                            <div class="icon-list d-flex gap-2 justify-content-center">
+                                
+                                                <a  title="Supprimer" >
+                                                    <i class="fa-solid fa-trash radius-3 bg_red text-white p-1"  (click)="handleConfirmDelete(true)" ></i>
+                                                </a>
+                                                
+                                                <a title="Modifier">
+                                                    <i class="fa-solid fa-pen bg_blue radius-3 text-white p-1"></i>
+                                                </a> 
+                                            </div>
+                                        </td>
+                                        
+                                    </tr>
+                                    
+                                </ng-container>
+                                
+                            </tbody>
+                        </table>
+    
+                    </div>
+                    
+                    
+      
+                    <!-- Modal -->
+                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <app-form-category></app-form-category>
+                        </div>
+                        </div>
+                    </div>
+                    <!-- pagination -->
+                    <!-- <div class="col-12 py-3 d-flex justify_content" *ngIf="annouces">
+                        <app-paginator
+                            [current] = "paginationDAtas?.current" 
+                            [allcount] = "paginationDAtas?.allcount" 
+                            [next] = "paginationDAtas?.next" 
+                            [previous] = "paginationDAtas?.previous" 
+                            [paginateLength] = "paginationDAtas?.paginateLength" 
+                            [pageLimit] = "pageLImit"
+                            (pageSelected)="setPage($event)"
+                        >
+                        </app-paginator> 
+                    </div> -->
+            
+    
+                </div>
+            <!-- </div> -->
+            </div>
     </div>
 </div>

@@ -36,14 +36,11 @@ export class AuthenticatorService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Accept': 'application/json'
-      }); 
+    }); 
 
-    const test = this.fetchCsrfToken().subscribe(response => {  
-      console.log('CSRF Token:', response);  
-    });  
 
     
-    this.http.post(environment.apiUrl + "login", user, { headers }).subscribe({  
+    this.http.post(environment.apiUrl+'login', user, { headers }).subscribe({  
         next: (result: any) => {  
           console.log(result);
           
@@ -97,6 +94,7 @@ export class AuthenticatorService {
 
 
   fetchCsrfToken() {  
+    console.log({cedric : environment.apiUrl+'csrf-token'});
     return this.http.options(environment.apiUrl+'csrf-token');  
   }  
 
