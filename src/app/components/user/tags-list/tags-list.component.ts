@@ -71,14 +71,14 @@ export class TagsListComponent implements OnInit{
   }
 
   async getAllCategories(){
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
+    // const headers = new HttpHeaders({
+    //   'Content-Type': 'application/json',
+    // });
 
-    console.log("headers",headers);
+    // console.log("headers",headers);
 
     try{
-      const entity= "categorie_back";
+      const entity= "categorie_back_public";
       this.entityService.getAll(entity)
       .subscribe({
         next: (categories: any)=>{

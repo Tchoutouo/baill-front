@@ -49,7 +49,6 @@ export class SigninComponent {
         password:this.password,
     })
 
-    
   }
 
   toggleIconClass(event : any){

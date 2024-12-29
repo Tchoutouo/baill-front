@@ -55,9 +55,9 @@ export class AlertConfirmComponent implements OnInit {
     console.log('emited');
   }
 
-  ngOnDestroy() {  
-      this.confirm.alert$.unsubscribe(); // Pour éviter les fuites de mémoire  
-  }  
+  // ngOnDestroy() {  
+  //     this.confirm.alert$.unsubscribe(); // Pour éviter les fuites de mémoire  
+  // }  
 
 
 }
