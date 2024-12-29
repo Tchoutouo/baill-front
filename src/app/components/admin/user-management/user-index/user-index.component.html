@@ -58,7 +58,7 @@
                 <tbody>
                     <ng-container *ngIf="userList">
                         <tr *ngFor="let user of userList, let i = index">
-                            <th scope="row" class="bord-black">{{i}} </th>
+                            <th scope="row" class="bord-black">{{i+1}} </th>
                             <td class="bord-black">
                                 {{user.username}}
                             </td>

@@ -155,7 +155,6 @@ export class UserIndexComponent implements OnInit{
     alert.success_label =  "Oui"
     alert.display =  value;
     this.alertConfirm.emitAlert(alert);
-
   }
 
   disabledUser(event : any , user: any){

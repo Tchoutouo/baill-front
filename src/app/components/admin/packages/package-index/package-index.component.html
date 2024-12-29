@@ -2,6 +2,11 @@
     <div class="page-title px-3">
         <h1>Gestion des forfaits</h1>
     </div>
+
+    <div class="alert-message">
+        <app-alert *ngIf="display_message" (timeOut) ="closeAlert($event)" [message] = "message_alert"></app-alert>
+    </div>
+
     <div class="row overflow_x_scroll justify-content-end p-5">
         <div class="col-md-4 d-flex justify-content-end">
             <form class="d-flex w-100 nav_item position-relative">
@@ -41,19 +46,43 @@
                 </thead>
                 <tbody>
                     <ng-container>
-                        <tr >
-                            <th scope="row" class="bord-black">1</th>
+                        <tr *ngFor="let abonnement of abonment_list, let i = index">
+                            <th scope="row" class="bord-black">{{i+1}} </th>
                             <td class="bord-black">
-                                Nom
+                                {{abonnement.name}}
                             </td>
                             <td class="bord-black">
-                                Nom
+                                {{abonnement.price}}
                             </td>
-                            <td class="bord-black">Nom</td>
-                            <td class="bord-black">Nom</td>
-    
+                            <td class="bord-black">
+                                {{abonnement.time}}
+                            </td>
+                            <td class="bord-black">
+                                {{abonnement.type}}
+                            </td>
                             <!-- Les actions -->
                             <td class="bord-black">
+                                <div class="icon-list d-flex gap-2 justify-content-center">
+                                    <a  title="Mettre en pause" *ngIf="abonnement.is_actived == 1" (click)="handleConfirmDisabled(true)">
+                                        <i class="fa-solid fa-pause bg_grey radius-3 text-dark p-1"></i>
+                                    </a>
+
+                                    <app-alert-confirm *ngIf="showAlert" (confirmAction)="disabledAbonnement($event , abonnement)"></app-alert-confirm>
+
+                                    <a title="Republier" *ngIf="abonnement.is_actived == 0" (click)="handleConfirmDisabled(true)">
+                                        <i class="fa-solid fa-play bg-white radius-3 text_green p-1 border-top-1-green border-bottom-1-green border-left-1-green border-right-1-green">
+                                        </i>
+                                    </a>
+                                    <a  title="Supprimer" (click)="handleConfirmDelete(true)">
+                                        <i class="fa-solid fa-trash radius-3 bg_red text-white p-1" ></i>
+                                    </a>
+                                    
+                                    <a title="Modifier">
+                                        <i class="fa-solid fa-pen bg_blue radius-3 text-white p-1" data-bs-toggle="modal" data-bs-target="#package"></i>
+                                    </a> 
+                                </div>
+                            </td>
+                            <!-- <td class="bord-black">
                                 <div class="icon-list d-flex gap-2 justify-content-center">
                                     <a  title="Mettre en pause" >
                                         <i class="fa-solid fa-pause bg_grey radius-3 text-dark p-1"></i>
@@ -66,93 +95,10 @@
                                         <i class="fa-solid fa-pen bg_blue radius-3 text-white p-1"></i>
                                     </a> 
                                 </div>
-                            </td>
+                            </td> -->
+
                             
-                        </tr>
-                        <tr >
-                            <th scope="row" class="bord-black">1</th>
-                            <td class="bord-black">
-                                Nom
-                            </td>
-                            <td class="bord-black">
-                                Nom
-                            </td>
-                            <td class="bord-black">Nom</td>
-                            <td class="bord-black">Nom</td>
-    
-                            <!-- Les actions -->
-                            <td class="bord-black">
-                                <div class="icon-list d-flex gap-2 justify-content-center">
-                                    <a  title="Mettre en pause" >
-                                        <i class="fa-solid fa-pause bg_grey radius-3 text-dark p-1"></i>
-                                    </a>
-                                    <a  title="Supprimer" >
-                                        <i class="fa-solid fa-trash radius-3 bg_red text-white p-1" ></i>
-                                    </a>
-                                    
-                                    <a title="Modifier">
-                                        <i class="fa-solid fa-pen bg_blue radius-3 text-white p-1"></i>
-                                    </a> 
-                                </div>
-                            </td>
-                            
-                        </tr>
-                        <tr >
-                            <th scope="row" class="bord-black">1</th>
-                            <td class="bord-black">
-                                Nom
-                            </td>
-                            <td class="bord-black">
-                                Nom
-                            </td>
-                            <td class="bord-black">Nom</td>
-                            <td class="bord-black">Nom</td>
-    
-                            <!-- Les actions -->
-                            <td class="bord-black">
-                                <div class="icon-list d-flex gap-2 justify-content-center">
-                                    <a  title="Mettre en pause" >
-                                        <i class="fa-solid fa-pause bg_grey radius-3 text-dark p-1"></i>
-                                    </a>
-                                    <a  title="Supprimer" >
-                                        <i class="fa-solid fa-trash radius-3 bg_red text-white p-1"  ></i>
-                                    </a>
-                                    
-                                    <a title="Modifier">
-                                        <i class="fa-solid fa-pen bg_blue radius-3 text-white p-1"></i>
-                                    </a> 
-                                </div>
-                            </td>
-                            
-                        </tr>
-                        <tr >
-                            <th scope="row" class="bord-black">1</th>
-                            <td class="bord-black">
-                                Nom
-                            </td>
-                            <td class="bord-black">
-                                Nom
-                            </td>
-                            <td class="bord-black">Nom</td>
-                            <td class="bord-black">Nom</td>
-    
-                            <!-- Les actions -->
-                            <td class="bord-black">
-                                <div class="icon-list d-flex gap-2 justify-content-center">
-                                    <a title="Republier">
-                                        <i class="fa-solid fa-play bg-white radius-3 text_green p-1 border-top-1-green border-bottom-1-green border-left-1-green border-right-1-green">
-                                        </i>
-                                    </a>
-                                    <a  title="Supprimer" >
-                                        <i class="fa-solid fa-trash radius-3 bg_red text-white p-1" ></i>
-                                    </a>
-                                    
-                                    <a title="Modifier">
-                                        <i class="fa-solid fa-pen bg_blue radius-3 text-white p-1" data-bs-toggle="modal" data-bs-target="#package"></i>
-                                    </a> 
-                                </div>
-                            </td>
-                        </tr>     
+                        </tr>    
                     </ng-container>
                 </tbody>
             </table>
