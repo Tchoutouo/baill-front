@@ -1,4 +1,7 @@
+import { inject } from "@angular/core";
 import { AnounceEntity } from "../models/admin/nounceEntity";
+import { LocalStorageService } from "../services/admin/local-storage.service";
+import { Route, Router, ROUTES } from "@angular/router";
 
 export const getSiteName = () : string =>{
     let siteName = "Bailleurnet";
@@ -43,5 +46,24 @@ export const getEntityPoperties = (entity: string) : Array<string> =>{
     }
 
     return entityClass ;
+
+}
+
+export const isAdmin = () : any =>{
+
+    let localStorage  = inject(LocalStorageService);
+    let routes = inject(Router)
+
+    const user = localStorage.getItem('user');
+
+    if (user) {
+        if (user.profil_name === 'SUPER_ADMIN') {
+            return true;
+        }
+        return false;
+    } else {
+        routes.navigate(['/admin']);
+        return false;
+    }
 
 }

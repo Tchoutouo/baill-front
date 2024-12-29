@@ -32,18 +32,18 @@ export class AuthenticatorService {
   }
   
   signin(user: any) {  
+    // const csrfToken  = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+    
+    console.log({token : this.getCsrfToken()});
     // Définir les headers nécessaires  
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Accept': 'application/json'
-      }); 
+    }); 
 
-    const test = this.fetchCsrfToken().subscribe(response => {  
-      console.log('CSRF Token:', response);  
-    });  
 
     
-    this.http.post(environment.apiUrl + "login", user, { headers }).subscribe({  
+    this.http.post(environment.apiUrl+'login', user).subscribe({  
         next: (result: any) => {  
           console.log(result);
           
@@ -74,7 +74,6 @@ export class AuthenticatorService {
   }
   
 
- 
 
   logOut(){
     this.localStorage.removeItem("token");
@@ -97,11 +96,30 @@ export class AuthenticatorService {
 
 
   fetchCsrfToken() {  
+    console.log({cedric : environment.apiUrl+'csrf-token'});
     return this.http.options(environment.apiUrl+'csrf-token');  
   }  
 
   saveCsrfToken(token: string) {  
     this.csrfToken = token;  
   }  
+
+  private getCsrfToken(): string {
+    // Méthode pour récupérer le token CSRF depuis le cookie
+    const name = 'XSRF-TOKEN=';
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const ca = decodedCookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) === ' ') {
+    c = c.substring(1);
+    }
+    if (c.indexOf(name) === 0) {
+    return c.substring(name.length, c.length);
+    }
+    }
+    return '';
+    }
+    
   
 }

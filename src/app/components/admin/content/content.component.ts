@@ -4,7 +4,7 @@ import { NavBarComponent } from '../layouts/nav-bar/nav-bar.component';
 import { RouterLink, RouterLinkActive, RouterModule, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from "../../user/header/header.component";
 import { FooterComponent } from "../../user/footer/footer.component";
-import { getSiteName } from '../../../helpers/helper';
+import { getSiteName, isAdmin } from '../../../helpers/helper';
 import { LocalStorageService } from '../../../services/admin/local-storage.service';
 import { NotificationsComponent } from "../notifications/notifications.component";
 import { CommonModule } from '@angular/common';
@@ -40,7 +40,8 @@ export class ContentComponent {
 
   sideBarIsOpen_ : boolean = false;
   isDiplayedNotification : boolean  = false ;
-  display: any 
+  display: any ;
+  isAdmin: boolean = false;
 
   constructor(private localStorage : LocalStorageService, private route : Router ,
     private translateService: TranslateService, private authent : AuthenticatorService, private alertConfirm : AlertConfirmService){
@@ -56,7 +57,7 @@ export class ContentComponent {
     this.email = user ? user.email : '';
     this.lang = localStorage.getItem('lang') || 'fr';
     this.user_picture = user.picture ?  environment.apiUrlRessources + '/' + user.picture : 'false' ;  
-
+    this.isAdmin = isAdmin();
   }
 
   exendSideBar(){

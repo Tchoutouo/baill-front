@@ -6,7 +6,6 @@ import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule, provideHttpClient, wit
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
-import { CorsInterceptor } from './interceptors/cors.interceptor';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -31,7 +30,6 @@ export const appConfig: ApplicationConfig = {
     {
       provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true
     },
-    { provide: HTTP_INTERCEPTORS, useClass: CorsInterceptor, multi: true }
   ],
 
 };

@@ -13,7 +13,9 @@ import { AlertConfirmComponent } from "./components/alert-confirm/alert-confirm.
   selector: 'app-root',
   standalone: true,
   
-  imports: [RouterOutlet, RouterLink, HeaderComponent, MainComponent, FooterComponent, SpinnerComponent, AlertComponent, AlertConfirmComponent],
+  imports: [RouterOutlet, RouterLink, HeaderComponent, MainComponent, FooterComponent, 
+    SpinnerComponent, AlertComponent, AlertConfirmComponent
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

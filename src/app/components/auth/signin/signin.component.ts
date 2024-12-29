@@ -49,13 +49,6 @@ export class SigninComponent {
         password:this.password,
     })
 
-    document.cookie.split(';').forEach(cookie => {
-      console.log(cookie);
-      
-      if (cookie.trim().startsWith('XSRF-TOKEN=')) {
-      console.log('XSRF-TOKEN found:', cookie);
-      }
-    });
   }
 
   toggleIconClass(event : any){
@@ -88,7 +81,6 @@ export class SigninComponent {
     const user = this.loginForm.value ;
 
     this.loginResult = this.authService.signin(user)
-    console.log(this.loginResult);
     
     if (this.loginResult == false) {
       this.loginResult = false;
