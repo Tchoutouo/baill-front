@@ -1,5 +1,5 @@
 export class Notification {
-    status : string = "success"
+    status : string = ""
     message : string = ""
     timeout : number = 5000
 }

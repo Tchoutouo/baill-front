@@ -35,7 +35,7 @@
                 <i class="fa-solid fa-magnifying-glass position-absolute search_icon"></i>
             </form> -->
             <div class="d-flex gap-3 two_btn">
-                <a class="nav-link btn_publish nav_item_" href="">
+                <a [routerLink]="['/admin/announces/create']" class="nav-link btn_publish nav_item_" href="">
                     <i class="fas fa-plus "></i>
                     {{'header.publish-post'| translate}}
                 </a>

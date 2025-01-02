@@ -1,0 +1,104 @@
+
+.page-title h1{
+    font-family: var(--main-font-Quicksand);
+    font-size: var(--main-h2-font-size);
+    font-weight: var(--main-xl-font-weiht);
+    line-height: var(--main-xxl-line-height);
+    text-align: left;
+}
+
+.section-body{
+    margin-top: 86px;
+}
+.card-payment{
+    width: 675px;
+    height: 444px;
+    padding: 52px 52px 60px 52px;
+    gap: var(--gap-10);
+    border-radius: 16px 0px 0px 0px;
+    opacity: 0px;
+    box-shadow: 0px 4px 15px 0px #0000001A;
+}
+
+.card-content{
+    width: 571px;
+    height: 332px;
+    gap: 33px;
+    opacity: 0px;
+}
+
+.card-content .button-active button{
+    width: auto;
+    height: 39px;
+    padding: 8px 15px 8px 15px;
+    gap: var(--gap-10);
+    border-radius: 30px;
+    opacity: 0px;
+    border: var(--main-color);
+    background-color: var(--main-color);
+
+}
+
+.card-content .button-active button h4{
+    font-family: var(--main-font-Quicksand);
+    font-size: 18px;
+    font-weight: var(--main-md-font-weiht);
+    line-height: var(--main-md-line-height);
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: var(--main-color-white);
+}
+
+.payment{
+    margin-bottom: 20px;
+}
+
+.payment-type{
+    width: 485px;
+    height: 71px;
+    padding: 20px 30px 20px 30px;
+    gap: 20px;
+    border-radius: 4px;
+    border: 1px ;
+    opacity: 0px;
+    border: 1px solid #E5E5E5;
+    text-align: center;
+    margin-right: 28px;
+}
+
+.payment-type .icon-payment{
+    width: 66px;
+    height: 29px;
+    gap: 0px;
+    opacity: 0px;
+    margin-right: 20px;
+}
+
+
+.payment-type .icon-payment span{
+    font-family: var(--main-font-Quicksand);
+    font-size: var(--main-h3-font-size);
+    font-weight: var(--main-md-font-weiht);
+    line-height: var(--main-lg-line-height);
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+
+}
+
+.check-box input{
+    width: 58px;
+    height: 29px;
+    padding: 3px 0px 0px 0px;
+    gap: 6px;
+    border-radius: 20px;
+    opacity: 0px;
+    border: 1px solid #C7C7C7;
+    background-color: #FFFFFF;
+
+}
+
+.form-switch .form-check-input:checked{
+    background-color: #C7C7C7;
+}

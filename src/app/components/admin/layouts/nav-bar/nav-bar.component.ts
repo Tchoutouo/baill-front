@@ -4,6 +4,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NotificationsComponent } from "../../notifications/notifications.component";
+import { LocalStorageService } from '../../../../services/admin/local-storage.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -19,14 +20,15 @@ export class NavBarComponent implements OnInit{
   lang: string = "";
   isDiplayedNotification : boolean  = false ;
 
-  constructor(private translateService: TranslateService){
+  constructor(private translateService: TranslateService, private localStorage : LocalStorageService){
 
   }
 
   ngOnInit(): void {
     this.siteName = getSiteName();
-    this.userName = "Marlane";
-    this.email = "halle@gmail.com";
+    const user = this.localStorage.getItem('user');
+    this.userName = user ? user.first_name : null;
+    this.email = user ? user.email : null;
     this.lang = localStorage.getItem('lang') || 'fr';
 
   }

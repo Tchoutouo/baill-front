@@ -6,6 +6,8 @@ import { CategoriesListComponent } from "../categories-list/categories-list.comp
 import { PaginatorComponent } from "../paginator/paginator.component";
 import { HeaderComponent } from "../header/header.component";
 import { FooterComponent } from "../footer/footer.component";
+import { Subscription } from 'rxjs';
+import { HomeService } from '../../../services/guest/home.service';
 
 @Component({
   selector: 'app-main',
@@ -15,5 +17,20 @@ import { FooterComponent } from "../footer/footer.component";
   styleUrl: './main.component.css'
 })
 export class MainComponent {
+  numbers: number[] = [1, 2, 3, 4, 2, 3, 4, 5];
 
+  productLIst : Subscription | null = null;
+  products : Array<any> | null = null;
+  categories : Array<any> = []
+
+
+  constructor(private homeServ : HomeService){}
+
+  ngOnInit(){
+    this.iniComponent()
+  }
+
+  iniComponent(){
+    
+  }
 }

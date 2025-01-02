@@ -2,12 +2,13 @@ import { Component, SimpleChanges } from '@angular/core';
 import { ForfaitListComponent } from "../forfait-list/forfait-list.component";
 import { ImageViewComponent } from "../image-view/image-view.component";
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { EntityServiceService } from '../../../services/admin/entity-service.service';
-import {Notification} from '../../../models/notification'
+import {Notification} from '../../../models/notification';
 import { NoficationsService } from '../../../services/nofications.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Country, State, City ,ICountry, IState, ICity}  from 'country-state-city';
 import { LocalStorageService } from '../../../services/admin/local-storage.service';
 
 
@@ -15,7 +16,7 @@ import { LocalStorageService } from '../../../services/admin/local-storage.servi
 @Component({
   selector: 'app-form-create',
   standalone: true,
-  imports: [ForfaitListComponent, ImageViewComponent, CommonModule, ReactiveFormsModule],
+  imports: [ForfaitListComponent, ImageViewComponent, CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './form-create.component.html',
   styleUrl: './form-create.component.css'
 })
@@ -26,13 +27,16 @@ export class FormCreateComponent {
   images_annouces_list : Array<any> = [];
   images_list : Array<any> = [];
   errorMessages : any = null;
-
+  countries : any;
+  selectedCountry:any;
+  selectedCity:any;
+  cities : any;
   valiData : boolean = false ;
+  country_sel : any = {};
   
 
   first_name : string = ""
     names : string[] = []
-
     anounces_form_datas : FormGroup
     title : FormControl
     description : FormControl
@@ -67,7 +71,7 @@ export class FormCreateComponent {
   {
 
     this.title = this.form_b.control('', [Validators.required, Validators.maxLength(256)])
-    this.description = this.form_b.control('', [Validators.required])
+    this.description = this.form_b.control('', [Validators.required, Validators.maxLength(256)])
     this.price = this.form_b.control('', [ Validators.required])
     this.contact = this.form_b.control('', [] );
     this.neighborhood = this.form_b.control('', [] );
@@ -95,8 +99,8 @@ export class FormCreateComponent {
   ngOnInit(){
     window.scroll(0,0);   
     this.getAllCategories() ;
-  }
-
+    this.countries = Country.getAllCountries();
+  } 
 
 
   handleSubmit(event: any = null) {  
@@ -143,17 +147,20 @@ export class FormCreateComponent {
         });
 
         // Mise à jour de is_published selon l'événement  
+        console.log({country : this.selectedCountry} );
+        
         formData.append('is_published', event ? '1' : '0');  
+        formData.append('country', this.selectedCountry ? this.selectedCountry : 'Cameroun');  
+        formData.append('status', event ? '3' : '1');  
         formData.append('abonnement_id', event ? event : 1);  
-        let user = this.locaStorage.getItem('user')
+        let user = this.locaStorage.getItem('user');
         formData.append('user_id', user ? user.id : 1);  
-        console.log(user.id);
         
         // Ajout des images  
         this.images_annouces_list.forEach((file) => {  
             formData.append('images[]', file);  // Utiliser append au lieu de set  
         });
-
+        
         // Stockage de l'entité  
         this.entityService.store(entity, formData).subscribe({  
             next: (data: any) => {  
@@ -166,7 +173,7 @@ export class FormCreateComponent {
                   this.router.navigate(['/admin']);   
                 }else{
                   notif.message = "erreur lors de l'enregistrement contacter l'administrateur !"
-                  notif.status = "success"
+                  notif.status = "warning"
                 }
               
                 this.notification.emitNotification(notif)
@@ -174,6 +181,9 @@ export class FormCreateComponent {
             },  
             error: (error: any) => {  
                 console.log(error);  
+                const notif_error = new Notification();
+                notif_error.message = "erreur lors de l'enregistrement contacter l'administrateur !";
+                notif_error.status = "warning";
             }  
         });  
     }  
@@ -196,11 +206,23 @@ export class FormCreateComponent {
         }
       },
 
-      error: (error: any) => { 
-        console.log(error);
-        
+      error: (erreur: any) => { 
+        console.log(erreur);
        }
     })
+  }
+
+  onCountryChange(event : any){
+    try{
+      var countryCode = event.target.value;
+      this.cities = City.getCitiesOfCountry(countryCode);
+      this.country_sel= Country.getCountryByCode(countryCode);
+      this.selectedCountry  = this.country_sel.name;
+      console.log("country",this.selectedCountry);
+
+    } catch (error) {
+      console.error('Erreur lors de la récupération des villes:', error);
+    }
   }
 
 }

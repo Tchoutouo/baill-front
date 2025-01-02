@@ -197,3 +197,30 @@ i.active, svg.active {
 .shadow-profile{
     box-shadow: 0px 4px 18px 0px rgba(0, 0, 0, 0.12);
 }
+
+
+/* responsive */
+
+@media screen and (max-width : 900px) {
+    .element{
+        width: fit-content !important;
+    }
+
+    .aside{
+        width: 25%;
+    }
+
+    .label-site{
+        justify-content: center;
+    }
+
+    .image_profile{
+        display: flex;
+        justify-content: center;
+    }
+
+    .onpenAside{
+        width: 85%;  
+    }
+    
+}

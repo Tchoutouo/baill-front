@@ -12,7 +12,6 @@
 .select-image{
     background-color: var(--main-color-gray-15);
     border-radius: var(--main-radius-value-3);
-    width: 70%;
     height: calc(115px - 1rem);
     position: relative;
     cursor: pointer;

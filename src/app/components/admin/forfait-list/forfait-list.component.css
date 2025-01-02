@@ -11,6 +11,14 @@
     width: fit-content;
 }
 
+#forfaitList{
+    z-index: 10
+}
+
+#my-model-forfait{
+    z-index: 1000000000000000000000000;
+}
+
 .bg_grey-15{
     background-color: rgba(229, 229, 229, 1);
 }

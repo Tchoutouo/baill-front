@@ -1,7 +1,7 @@
 <nav aria-label="Page navigation example">
     <ul class="pagination">
-      <li class="page-item">
-        <a class="page-link bg_grey" (click)="handleSetPage('<<')" aria-label="Previous">
+      <li class="page-item direction"  [ngClass]="{bg_grey : previous === 0}">
+        <a class="page-link" (click)="handleSetPage('<<')" aria-label="Previous">
           <span aria-hidden="true" class="grey-20">&laquo;</span>
         </a>
       </li>
@@ -10,8 +10,8 @@
         <a class="page-link grey-20" (click)="handleSetPage(item)" >{{item}}</a>
       </li>
      
-      <li class="page-item">
-        <a class="page-link bg_grey" (click)="handleSetPage('>>')" aria-label="Next">
+      <li class="page-item direction" [ngClass]="{bg_grey : next > allcount}">
+        <a class="page-link" (click)="handleSetPage('>>')" aria-label="Next">
           <span aria-hidden="true" class="grey-20">&raquo;</span>
         </a>
       </li>

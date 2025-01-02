@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { City, Country, ICity, ICountry } from 'country-state-city';
 import { Category } from '../../../models/admin/category';
 import { EntityServiceService } from '../../../services/admin/entity-service.service';
 import { Subscription } from 'rxjs';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-tags-list',
@@ -19,6 +20,13 @@ export class TagsListComponent implements OnInit{
   countries: ICountry[] | undefined;
   cities: ICity[] | undefined;
   categories: Category[] = [] ;
+  
+  @Output() filterParams = new EventEmitter<any>();
+  filterListner : any = {
+    categ : null ,
+    country : null ,
+    city : null 
+  }
 
   constructor(private entityService : EntityServiceService){}
   
@@ -27,19 +35,50 @@ export class TagsListComponent implements OnInit{
     this.getAllCategories();
   }
 
-  async onCountryChange(event: any) {
+  async onFilterChange(event: any, name : string) {
     try{
-      const countryCode = event.target.value;
-      this.cities = City.getCitiesOfCountry(countryCode);
+      if (event) {
+        const value = event.target.value;
+        console.log({valueç:value});
+        
+        if (name === "country") {
+          let array_value = value.split(",")
+          this.cities = City.getCitiesOfCountry(array_value[0]);
+          this.filterListner.country = array_value[1];
+          this.filterListner.city = '';
+        } else if(name === "city"){
+          this.filterListner.city = value;
+
+        }else if(name === "category"){
+          this.filterListner.categ = value;
+
+        }
+        console.log(this.filterListner);
+        
+        this.filterParams.emit(this.filterListner);
+        
+      }
 
     } catch (error) {
       console.error('Erreur lors de la récupération des villes:', error);
     }
   }
 
+
+
+  refrech(){
+    window.location.reload()
+  }
+
   async getAllCategories(){
+    // const headers = new HttpHeaders({
+    //   'Content-Type': 'application/json',
+    // });
+
+    // console.log("headers",headers);
+
     try{
-      const entity= "categorie_back";
+      const entity= "categorie_back_public";
       this.entityService.getAll(entity)
       .subscribe({
         next: (categories: any)=>{
@@ -54,7 +93,7 @@ export class TagsListComponent implements OnInit{
       })
 
     }catch (e){
-      console.error('erreur de recupérer des catégories d\'articles:', e)
+      console.error('erreur de recupérer des catégories d\'annonce:', e)
     }
   }
 

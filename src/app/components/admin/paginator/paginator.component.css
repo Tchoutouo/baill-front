@@ -3,8 +3,12 @@
 
 }
 
-.bg_grey{
-    background-color: var(--main-color-gray-10);
+.bg_grey a{
+    cursor: text !important ;
+}
+
+.bg_grey_15 a{
+    background-color: var(--main-color-gray-15) !important;
 }
 
 a{
@@ -12,7 +16,15 @@ a{
 }
 
 .active a{
-    background-color: var(--main-color);
+    background-color: var(--main-color) !important;
     color: white ;
     border: 1px solid var(--main-color);
+}
+
+.page-item a{
+    background-color: var(--main-color-gray-5);
+}
+
+.page-item a:not(.page-item.active a):hover{
+    background-color: var(--main-color-gray-15) !important;
 }

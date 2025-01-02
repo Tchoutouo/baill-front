@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../../models/user';
 import { environment } from '../../../environments/environment.development';
@@ -20,6 +20,7 @@ export class AuthenticatorService {
 
   private authUser = false;
   private value : any = false ;
+  csrfToken: string | null = null;  
 
   
   constructor(private http : HttpClient, private localStorage : LocalStorageService, private router: Router) { 
@@ -30,45 +31,77 @@ export class AuthenticatorService {
     }
   }
   
-  signin(user : any){
-    this.http.post(environment.apiUrl+"login", user).subscribe({
-      next : (result : any )=>{      
-        if(result.success){
-          const data :  LoginResponse = {
-              success: true,
-              user: result.data,
-              token: result.token,
-              redirect_url: result.redirect_url
-          };
-          console.log("redirect_url",result.redirect_url);
-          this.localStorage.setItem('token', data.token);
-          this.localStorage.setItem('user', data.user);
-          this.authUser = true ;
-          this.router.navigate(['/admin']);  
-          this.value = true;
-        }else{
-          this.value = false;
-        }
-        
-      },
+  signin(user: any) {  
+    // Définir les headers nécessaires  
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+      }); 
 
-      error : (error : any)=>{
-        console.log(error);
-      }
+    const test = this.fetchCsrfToken().subscribe(response => {  
+      console.log('CSRF Token:', response);  
+    });  
 
-    })
+    
+    this.http.post(environment.apiUrl + "login", user, { headers }).subscribe({  
+        next: (result: any) => {  
+          console.log(result);
+          
+            if (result.success) {  
+                const data: LoginResponse = {  
+                    success: true,  
+                    user: result.data,  
+                    token: result.token,  
+                    redirect_url: result.redirect_url  
+              };  
+                console.log("redirect_url", result.redirect_url);  
+                this.localStorage.setItem('token', data.token);  
+                this.localStorage.setItem('user', result.data);  
+                this.authUser = true;  
+                this.router.navigate(['/admin']);  
+                this.value = true;  
+            } else {  
+                this.value = false;  
+            }  
 
-    return this.value ;
+        },  
+        error: (error: any) => {  
+            console.log(error);  
+        }  
+    });  
+
+    return this.value;  
   }
+  
+
+ 
 
   logOut(){
     this.localStorage.removeItem("token");
     this.localStorage.removeItem("user");
-    this.authUser = true ;
+    this.authUser = false ;
   }
 
   isAuthenticated(): boolean {
     return this.authUser;
   }
+
+  getUserRole(){
+    const user = this.localStorage.getItem('user')
+    if (user) {
+      return user.profil_name ;
+    }else{
+      return 'false' ;
+    }
+  }
+
+
+  fetchCsrfToken() {  
+    return this.http.options(environment.apiUrl+'csrf-token');  
+  }  
+
+  saveCsrfToken(token: string) {  
+    this.csrfToken = token;  
+  }  
   
 }

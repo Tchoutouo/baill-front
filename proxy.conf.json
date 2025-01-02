@@ -1,0 +1,7 @@
+{
+    "/api": {
+        "target": "https://www.baill-back-test.mont-pandi.com",
+        "secure": false,
+        "changeOrigin": true
+    }
+}

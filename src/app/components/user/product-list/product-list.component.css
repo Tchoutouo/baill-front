@@ -3,3 +3,11 @@
     overflow-y: hidden;
     overflow-x: hidden;
 }
+
+.annonces-not-found .text{
+    color: var(--main-color);
+    font-size: 48px;
+    font-weight: 500;
+    padding: 100px 0px;
+    font-family: var(--main-font-Quicksand);
+}

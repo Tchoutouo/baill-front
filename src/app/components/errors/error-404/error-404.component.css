@@ -1,0 +1,21 @@
+.error-container{
+    height: 85vh;
+    background-color: none;
+    
+    /* background: linear-gradient(0deg, #FFFFFF, #FFFFFF), linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(121, 234, 35, 0.3) 89.5%); */
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(121, 234, 35, 0.3) 89.5%);
+}
+
+.text-side{
+    padding: 110px 0px; 
+}
+
+.bg-img{
+    height: 600px;
+}
+
+@media screen  and (min-width:992px) {
+    .bg-img{
+        height: 100%;
+    }
+}

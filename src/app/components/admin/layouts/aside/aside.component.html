@@ -11,7 +11,7 @@
     <div class="row p-0 content-card justify-content-center">
         <div class="{{card}}">
             <div class="row g-0 finger align-items-center" [routerLink]="['/admin/myAccount']" aria-current="page" >
-                <div class="col-md-4 p-0">
+                <div class="col-md-4 p-0 image_profile">
                     <div class="image-profile img-profile {{styleImageProf}}" style="background-image: url('../../../../assets/images/image-user.jpeg');">
 
                     </div>
@@ -28,7 +28,7 @@
     </div>
 
     <div class="row d-flex element">
-        <div class="col-md-12 d-flex  justify-content-center mb-4">
+        <div class="col-md-12 d-flex  justify-content-center mb-4" (click)="closeSideBar()">
             <ul class="element-list {{list_width}} p-0">
                 <li class="item-list {{width_full}}" routerLinkActive="active">
                     <a [routerLink]="['/admin/dashboard']" aria-current="page">
@@ -37,6 +37,12 @@
                         </svg> 
                         <p class="{{displayShow}}" >Tableau de bord</p>
                     </a>
+                </li>
+                <li class="item-list {{width_full}}" routerLinkActive="active">
+                    <a  [routerLink]="['/']" aria-current="page">
+                        <i class="fa-solid fa-user-group" routerLinkActive="active"></i>
+                        <p class="{{displayShow}}">Utilisateurs</p>
+                    </a>       
                 </li>
                 <li class="item-list {{width_full}}" routerLinkActive="active">
                     <a [routerLink]="['/admin/announces/announces-list']" aria-current="page">
@@ -52,7 +58,7 @@
                 </li>
             </ul>
         </div>
-        <div class="col-md-12 d-flex {{loggout_content}} mt-5">
+        <div class="col-md-12 d-flex {{loggout_content}} mt-5" >
             <div class="row m-0 p-0 w-fit-content">
                 <div class="col-md-12  d-flex justify-content-end content-logout ">
                     <button type="button" class="btn d-flex align-items-center ">

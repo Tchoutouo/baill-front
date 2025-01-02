@@ -1,27 +1,71 @@
-<div class="nav-bar bg-white">
-    <div class="row nav-content align-items-center">
-        <div class="col-md-6 float-start">
-            <h4 class="card-title"> Hello {{userName}}</h4>
-                <p class="card-text"><small class="text-body-secondary">{{email}} </small></p>
+<!-- <nav class="nav-bar bg-white navbar-light bg-white navbar-expand-xl" aria-label="true">
+    <div class="row nav-content align-items-center container-fluid justify-content-between px-md-4 padd-md bg-white gap-xl-5">
+        <div class="float-start">
+            
         </div>
-        <div class="col-md-6">
-            <div class="d-flex justify-content-end gap-4">
-                <button type="submit" id="publish-button" class="btn text-white d-flex justify-content-center align-items-center">
-                    <i class="fa-solid fa-plus  text-white"></i> Annonce
-                </button>
-                <a  (click)="hanndleShowNotifications()" class="notification-button finger d-flex justify-content-center align-items-center">
-                    <i class="fa-solid fa-bell text-dark"></i>
-                </a>
-                <div class="form-group">
-                    <select class="form-control" (change)="ChangeLanguage($event)" name="">
-                        <option [selected]="lang==='fr'" value="fr">FR</option>
-                        <option [selected]="lang==='en'" value="en">EN</option>
-                    </select>
+
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavBar" aria-controls="adminNavBar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse bg-white justify-content-end ps-xl-5 gap-xl-0 gap-md-3" id="adminNavBar">
+            <div class="">
+                <div class="d-flex justify-content-end gap-4">
+                    <button type="submit" id="publish-button" class="btn text-white d-flex justify-content-center align-items-center">
+                        <i class="fa-solid fa-plus  text-white"></i> Annonce
+                    </button>
+                    <a  (click)="hanndleShowNotifications()" class="notification-button finger d-flex justify-content-center align-items-center">
+                        <i class="fa-solid fa-bell text-dark"></i>
+                    </a>
+                    <div class="form-group">
+                        <select class="form-control" (change)="ChangeLanguage($event)" name="">
+                            <option [selected]="lang==='fr'" value="fr">FR</option>
+                            <option [selected]="lang==='en'" value="en">EN</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</nav>
+
+<nav class="navbar navbar-light bg-light justify-content-between">
+    <a class="navbar-brand">
+        
+    </a>
+    <form class="form-inline">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+</nav> -->
+
+<nav class="navbar navbar-expand-lg justify-content-between navbar-light bg-white px-3">
+    <a class="navbar-brand" href="#">
+        <h4 class="card-title"> Hello {{userName}}</h4>
+        <p class="card-text"><small class="text-body-secondary">{{email}} </small></p>
+    </a>
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo02">
+        <div class="d-flex justify-content-end gap-4 navbar-nav mr-auto mt-2 mt-lg-0">
+            <button type="submit" id="publish-button" class="btn text-white d-flex justify-content-center align-items-center">
+                <i class="fa-solid fa-plus  text-white"></i> Annonce
+            </button>
+            <a  (click)="hanndleShowNotifications()" class="nav-item notification-button finger d-flex justify-content-center align-items-center">
+                <i class="fa-solid fa-bell text-dark"></i>
+            </a>
+            <div class="form-group nav-item">
+                <select class="form-control" (change)="ChangeLanguage($event)" name="">
+                    <option [selected]="lang==='fr'" value="fr">FR</option>
+                    <option [selected]="lang==='en'" value="en">EN</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</nav>
 
 <div class="notification" *ngIf="isDiplayedNotification">
     <app-notifications (close)="handleClose()"></app-notifications>

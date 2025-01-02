@@ -1,0 +1,98 @@
+<div class="annouce-details-container px-4 container">
+    <div class="detail-title mb-30">
+        <h2 class="h2-baill h2-baill fw-baill-bold">Détails de l’annonce</h2>
+    </div>
+
+    <div class="row px-lg-5 mx-3">
+        <div class="col-lg-6 px-0">
+            <ul class="bail-list-ul">
+                <li class="h4-baill">
+                    <span class="green-black fw-baill-bold pe-2 ">Titre : </span>
+                    <span class="black fw-baill-medium-bold pe-3"> {{annouce?.title}}</span>
+                </li>
+                <li class="h4-baill">
+                    <span class="green-black fw-baill-bold pe-2">Prix : </span>
+                    <span class="black fw-baill-medium-bold pe-3"> {{annouce?.price}}</span>
+                </li>
+                <li class="h4-baill">
+                    <span class="green-black fw-baill-bold pe-2">Pays : </span>
+                    <span class="black fw-baill-medium-bold pe-3"> {{annouce?.country}}</span>
+                </li>
+                <li class="h4-baill">
+                    <span class="green-black fw-baill-bold pe-2">Ville : </span>
+                    <span class="black fw-baill-medium-bold pe-3"> {{annouce?.location}}</span>
+                </li>
+                <li class="h4-baill">
+                    <span class="green-black fw-baill-bold pe-2">Lieu dit : </span>
+                    <span class="black fw-baill-medium-bold pe-3"> {{annouce?.neighborhood}}</span>
+                </li>
+                <li class="h4-baill">
+                    <span class="green-black fw-baill-bold pe-2">Description : </span>
+                    <span class="black fw-baill-medium-bold pe-3 "> {{annouce?.description}}</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-lg-6 ps-lg-5">
+            <div class="image-list mb-4">
+                <div class="row">
+                    <h4 class="h4-baill px-0 mb-8 fw-baill-bold green-black">
+                        Images
+                    </h4>
+                </div>
+                <div class="row images-list-fieldset wrap">
+                    <div class="col-lg-3 px-2 py-2" *ngFor="let imageItem of imagesList">
+                        <div class="image-item baill-bg-img"  [ngStyle]="{'background-image': 'url(' +apiRessources+'/'+imageItem +')'}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="categories-list row">
+                <h4 class="h4-baill px-0 fw-baill-bold mb-8 green-black"  >
+                    categories
+                </h4>
+                <div class="d-flex g-10 px-0 wrap">
+                    <!-- <button class="bg-gray-1 balck border-none main-font-quick btn-medium rounded-30 ">Mettre pause</button>
+                    <button class="bg-blue main-white border-none main-font-quick btn-medium rounded-30 ">Republier</button> -->
+                    <button *ngFor="let itemCategory of annouce?.categories" class="bg-white green-main  rounded-30  btn-medium main-font-quick border-green-1">{{itemCategory.title}}</button>
+                    <!-- <button class="bg-red main-white border-none main-font-quick btn-medium rounded-30 ">Supprimer</button> -->
+                    <!-- <button class="bg-green-main main-white border-none main-font-quick btn-medium rounded-30">Publier</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row pt-5">
+        <div class="col-lg-5">
+            <div class="d-flex g-10 px-3 px-lg-0 wrap">
+                <a *ngIf="annouce?.status == '1'" title="Publier" id="create" data-bs-toggle="modal"  data-bs-target="#forfaitList" >
+                    <!-- <i class="fa fa-check bg-green  p-1 radius-3 text-white"></i> -->
+                    <button class="bg-green-main main-white border-none main-font-quick btn-medium rounded-30">Publier</button>
+                    <app-forfait-list (hasSubmit)="handleSubmit($event, annouce?.id)"></app-forfait-list>
+                </a>
+                <a *ngIf="annouce?.status == '1'" title="Supprimer" >
+                    <!-- <i class="fa-solid fa-trash radius-3 bg_red text-white p-1"></i> -->
+                    <button class="bg-red main-white border-none main-font-quick btn-medium rounded-30 ">Supprimer</button>
+                </a>
+                <a *ngIf="annouce?.status == '2'" title="Republier" (click)="setAnnouceStatus(annouce?.id, '3')">
+                    <!-- <i class="fa-solid fa-play bg-white radius-3 text_green p-1 border-top-1-green border-bottom-1-green border-left-1-green border-right-1-green">
+                    </i> -->
+                    <button class="bg-blue main-white border-none main-font-quick btn-medium rounded-30 ">Republier</button>
+                </a>
+                <a *ngIf="annouce?.status == '3'" title="Mettre en pause" (click)="setAnnouceStatus(annouce?.id, '2')">
+                    <!-- <i class="fa-solid fa-pause bg_grey radius-3 text-dark p-1"></i> -->
+                    <button class="bg-gray-1 balck border-none main-font-quick btn-medium rounded-30 ">Mettre pause</button>
+                </a>
+                <a *ngIf="annouce?.status == '0'" title="Relancer">
+                    <!-- <i class="fa-solid fa-arrows-rotate bg_blue radius-3 text-white p-1"></i> -->
+                    <button class="bg-white green-main  rounded-30  btn-medium main-font-quick border-green-1">Relancer</button>
+                </a> 
+                <!-- <button class="bg-gray-1 balck border-none main-font-quick btn-medium rounded-30 ">Mettre pause</button>
+                <button class="bg-blue main-white border-none main-font-quick btn-medium rounded-30 ">Republier</button>
+                <button class="bg-white green-main  rounded-30  btn-medium main-font-quick border-green-1">Relancer</button>
+                <button class="bg-red main-white border-none main-font-quick btn-medium rounded-30 ">Supprimer</button>
+                <button class="bg-green-main main-white border-none main-font-quick btn-medium rounded-30">Publier</button> -->
+            </div>
+        </div>
+    </div>
+</div>

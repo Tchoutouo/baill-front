@@ -14,6 +14,15 @@ import { FormControlName } from '@angular/forms';
 import { AnnouceIndexComponent } from './components/admin/annouce-index/annouce-index.component';
 import { FormCreateComponent } from './components/admin/form-create/form-create.component';
 import { authGuard } from './guard/auth.guard';
+import { AnnouceDetailsComponent } from './components/admin/annouce-details/annouce-details.component';
+import { Error404Component } from './components/errors/error-404/error-404.component';
+import { ConfigurationComponent } from './components/admin/payment/configuration/configuration.component';
+import { UserIndexComponent } from './components/admin/user-management/user-index/user-index.component';
+import { UserShowComponent } from './components/admin/user-management/user-show/user-show.component';
+import { PackageIndexComponent } from './components/admin/packages/package-index/package-index.component';
+import { PackageEditComponent } from './components/admin/packages/package-edit/package-edit.component';
+import { UsersComponent } from './components/admin/user-management/users/users.component';
+import { Error403Component } from './components/errors/error403/error403.component';
 
 export const routes: Routes = [
     { 
@@ -28,10 +37,13 @@ export const routes: Routes = [
         path: 'signup', 
         component: SignupComponent 
     },
+
     { 
-        path: 'product-details', 
-        component: ProductDetailsComponent 
+        path: 'product-details/:id', 
+        component: ProductDetailsComponent , 
     },
+    
+
     { 
         path: 'image-list', 
         component: ImageListComponent 
@@ -44,41 +56,105 @@ export const routes: Routes = [
             { 
                 path: '', 
                 redirectTo: 'dashboard',
-                pathMatch: 'full' 
+                pathMatch: 'full',
             },
             
             {
                 path: 'dashboard',
-                component: DashboardComponent
+                component: DashboardComponent,
+                // canActivate: [authGuard], 
             },
 
             {
                 path: 'settings',
-                component: SettingsComponent
+                component: SettingsComponent,
+                canActivate: [authGuard], 
+            },
+            {
+                path: 'payment',
+                component: ConfigurationComponent,
+                // canActivate: [authGuard], 
+            },
+            {
+                path: 'packages',
+                component: PackageIndexComponent,
+                // canActivate: [authGuard], 
+                children: [
+                    { 
+                        path: '', 
+                        redirectTo: 'packages',
+                        pathMatch: 'full',
+                        
+                    },
+                    { 
+                        path: 'edit/:id',
+                        component: PackageEditComponent,
+                        
+                    },
+                ]
+            },
+            {
+                path: 'user-management',
+                component: UsersComponent,
+                // canActivate: [authGuard], 
+                children: [
+                    { 
+                        path: 'users', 
+                        redirectTo: 'user-management',
+                        pathMatch: 'full',
+                        
+                    },
+                    { 
+                        path: 'users',
+                        component: UserIndexComponent,
+                        
+                    },
+                    { 
+                        path: 'details/:id',
+                        component: UserShowComponent,
+                        
+                    },
+                ]
             },
             {
                 path: 'announces',
                 component: AnnouceIndexComponent,
+                // canActivate: [authGuard],
                 children: [
                     { 
                         path: 'create',
                         component: FormCreateComponent,
+                        
                     },
                     
                     { 
                         path: 'announces-list',
                         component: AnnouncesComponent,
                     },
+                    
+                    { 
+                        path: 'details/:id',
+                        component: AnnouceDetailsComponent,
+                    },
                 ]
             },
             {
                 path: 'myAccount',
                 component: MyAccountComponent,
-                // canActivate: [authGuard],
+                canActivate: [authGuard],
             }
 
         ]
     },
 
+
+    {
+        path: '**',
+        component: Error404Component,
+    },
+    {
+        path: 'access-interdit',
+        component: Error403Component,
+    },
 
 ];

@@ -1,0 +1,15 @@
+<div class="confirm-container" *ngIf="display">
+    <div class="container">
+        <div class="confirm">
+            <div class="confirm-text">
+                <h4 class="">
+                    {{message}}
+                </h4>
+            </div>
+            <div class="alert-btns">
+                <button class="btn_add" (click)="submitAction(true)">{{validate}}</button>
+                <button class="btn_cancel" (click)="submitAction(false)">{{cancel}}</button>
+            </div>
+        </div>
+    </div>
+</div>

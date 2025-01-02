@@ -1,11 +1,12 @@
-<div class="container-fluid">
-    <div class="product-details-container p-5">
+<app-header></app-header>
+<div class="container-fluid" *ngIf="annouce">
+    <div class="product-details-container p-5" >
         <div class="row">
             <div class="col-md-5 p-0 mb-4">
                 <div class="images-details">
                     <div class="row">
                         <div class="col-12 ">
-                            <div class="firs-image" style="background-image: url('{{fisrtImage}}');">
+                            <div class="firs-image" style="background-image: url('{{apiRessources}}/{{fisrtImage}}');">
                                 
                             </div>
                         </div>
@@ -14,14 +15,14 @@
                                 <ng-container *ngFor="let item of imagesList; let i = index" >
                                     <div class="col-4 col-lg-3"  *ngIf="i < imageLimit">
                                         <div class="image-item" (mouseleave)="reChangeImage()" (mouseover)="changeFirstImage(item)" 
-                                            [ngStyle]="{'background-image': 'url(' + item + ')'}" >
+                                            [ngStyle]="{'background-image': 'url(' +apiRessources+'/'+item +')'}" >
                                             <div class="more-images-button" *ngIf="displayButtonMore && i == 3 " (click)="showMoreImage($event)" >
                                                 <i class="fas fa-plus "></i>
-                                                <span>{{' '+differenceLimit}} autres</span>
+                                                <span>{{' '+differenceLimit}} autres </span>
                                             </div>
                                         </div>
                                     </div>
-                                </ng-container>
+                                </ng-container> 
                             </div>
                         </div>
                     </div>
@@ -32,18 +33,22 @@
             <div class="col-md-6 offset-md-1 p-0 mb-4">
                 <div class="produc-info-details">
                     <div class="category-name">
-                        <h5>Nom categorie</h5>
+                        <h5 class="mb-2">
+                            <i class="fas fa-map-marker-alt me-1" style="font-size: 17px;"></i>
+                            {{annouce.location}}
+                        </h5>
                     </div>
+
 
                     <div class="product-name">
                         <h2>
-                            Nom produit
+                            {{annouce.title}}
                         </h2>
                     </div>
 
                     <div class="priduct-price">
                         <h3>
-                            800 000 Frs
+                            {{annouce.price}} Frs
                         </h3>
                     </div>
 
@@ -52,17 +57,17 @@
                             Description
                         </span>
                         <p>
-                            description du produit choisi dans le catalogue ou a l’acceuil description du produit choisi dans le catalogue ou a l’acceuil description du produit choisi dans le catalogue ou a l’acceuil description du produit choisi dans le catalogue ou a l’acceuil description du produit choisi dans le catalogue ou a l’acceuil description du produit choisi dans le catalogue ou a l’acceuil description du produit choisi dans le catalogue ou a l’acceuil
+                            {{annouce.description}}
                         </p>
                     </div>
 
                     <div class="product-caracteristic">
                         <h6 class="title">
-                            Carateristiques
+                            Catégories
                         </h6>
                         
                         <ul class="caracteristiques gap-10">
-                            <li *ngFor="let itemCaract of carateristiques">{{itemCaract}}</li>
+                            <li *ngFor="let itemCategory of annouce.categories">{{itemCategory.title}}</li>
                         </ul>
                     </div>
 
@@ -98,45 +103,43 @@
                         <div class="other-details align-items-center row mt-3">
             
                             <div class="location-address col-xl-12">
-                                <div class="two_icon">
-                                    <a [href]="'tel:'+phone_number" target="_blank">
-                                        <i class="fa-solid fa-square-phone-flip" style="font-size: 23px;"></i> : {{phone_number}}
+                                <div class="two_icon" *ngIf="annouce.users?.whatsapp_number">
+                                    <a [href]="'tel:'+annouce.users?.whatsapp_number" target="_blank">
+                                        <i class="fa-solid fa-square-phone-flip" style="font-size: 23px;"></i> : +237 {{annouce.users?.whatsapp_number}}
                                     </a> 
                                 </div>
-                                <div class="two_icon ">
-                                    <a [href]="'https://'+siteUser" target="_blank" rel="noopener noreferrer">
-                                        <i class="fas fa-globe" style="font-size: 21px;"></i> : {{siteUser}}
+                                <div class="two_icon " *ngIf="annouce.users?.site_url">
+                                    <a [href]="'https://'+annouce.users.site_url" target="_blank" rel="noopener noreferrer">
+                                        <i class="fas fa-globe" style="font-size: 21px;"></i> : {{annouce.users.site_url}}
                                     </a> 
                                 </div>
-                                <div class="two_icon">
-                                    <a [href]="'https://api.whatsapp.com/send?phone='+whatsapp_number+'&text=Hello Bailleurnet&source=&data='" target="_blank" rel="noopener noreferrer">
-                                        <i class="fab fa-whatsapp" style="font-size: 24px;"></i> : {{whatsapp_number}}
+                                <div class="two_icon" *ngIf="annouce.users.whatsapp_number">
+                                    <a [href]="'https://api.whatsapp.com/send?phone='+annouce.users.whatsapp_number+'&text=Hello Bailleurnet&source=&data='" target="_blank" rel="noopener noreferrer">
+                                        <i class="fab fa-whatsapp" style="font-size: 24px;"></i> : +237 {{annouce.users.whatsapp_number}}
                                     </a>
                                 </div>
-                                <div class="two_icon">
-                                    <a [href]="'mailto:'+emailUser+'?subject=' + subject + '&body=' + body" target="_blank">
-                                        <i class="fa-solid fa-envelope" style="font-size: 21px;"></i> : {{emailUser}}
+                                <div class="two_icon" *ngIf="annouce.users.email">
+                                    <a [href]="'mailto:'+annouce.users.email+'?subject=' + subject + '&body=' + body" target="_blank">
+                                        <i class="fa-solid fa-envelope" style="font-size: 21px;"></i> : {{annouce.users.email}}
                                     </a> 
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- <div class="d-flex justify-content-end" id="button-contact">
-                        <a href="https://api.whatsapp.com/send?phone=237694798186&text=Bonjour Bailleurnet&source=&data=" class="button-details">
-                            Contacter l’annonceur
-                        </a>
-                    </div> -->
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="other-producs-list">
-        <div class="row my-5 px-5 product-list">
-            <div class="col-lg-3 col-md-6" *ngFor="let item of number_limit" >
-                <app-product></app-product>
-            </div> 
+    
+
+    <div class="other-producs-list" *ngIf="other_announces">
+        <div class="row my-5 px-5 product-list justify-content-center">
+            <ng-container *ngFor="let item of other_announces ; let  i = index">
+                <div class="col-lg-3 col-md-6"  *ngIf="i <= 3">
+                    <app-product [productItem]="item"></app-product>
+                </div> 
+            </ng-container>
         </div>
 
         <div class="row">
@@ -145,4 +148,17 @@
             </div>
         </div>
     </div>
+    <div class="annonces-not-found row" *ngIf="other_announces">
+        <div class="col-12 d-flex text justify-content-center" style="font-size : 32px !important">
+            Aucune annonces
+        </div>
+    </div>
 </div>
+
+<div class="annonces-not-found row justify-content-center" *ngIf="!annouce">
+    <div class="col-12 d-flex text justify-content-center">
+        Annonce Introuvable
+    </div>
+</div>
+
+<app-footer></app-footer>
