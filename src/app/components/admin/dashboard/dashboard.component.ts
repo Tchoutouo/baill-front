@@ -4,6 +4,7 @@ import { AlertComponent } from "../alert/alert.component";
 import { LocalStorageService } from '../../../services/admin/local-storage.service';
 import { EntityServiceService } from '../../../services/admin/entity-service.service';
 import { Subscription } from 'rxjs';
+import {  isAdmin } from '../../../helpers/helper'; 
 
 @Component({
   selector: 'app-dashboard',
@@ -20,6 +21,7 @@ export class DashboardComponent {
     totalEncours : number = 0;
     totalEnvoiDExp : number = 0;
     totalExpired : number = 0;
+    isAdmin : boolean = false;
 
     constructor(private locaStorage : LocalStorageService, private entityService : EntityServiceService){
 
@@ -29,6 +31,7 @@ export class DashboardComponent {
       window.scroll(0, 5)
       this.anounceList = ['mvks', "sf", "ksjdf", "skjfd", "dkhfj"];
       this.getDashboardData();
+      this.isAdmin = isAdmin();
     }
 
 

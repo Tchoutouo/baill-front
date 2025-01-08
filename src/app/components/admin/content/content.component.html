@@ -67,7 +67,7 @@
                                         <p class="d-md-none d-block text-hover" >Tableau de bord</p>
                                     </a>
                                 </li>
-                                <li class="item-list w-100" routerLinkActive="active">
+                                <li class="item-list w-100" routerLinkActive="active" *ngIf="!isAdmin">
                                     <a  [routerLink]="['/admin/user-management/users']" aria-current="page">
                                         <i class="fa-solid fa-user-group" routerLinkActive="active"></i>
                                         <p class="d-md-none d-block text-hover">Utilisateurs</p>
@@ -79,13 +79,14 @@
                                         <p class="d-md-none d-block text-hover" >Annonces</p>
                                     </a>       
                                 </li> -->
-                                <li class="item-list w-100" routerLinkActive="active">
+                                <li class="item-list w-100" routerLinkActive="active" >
                                     <a [routerLink]="['/admin/announces/announces-list']" aria-current="page">
                                         <i class="fa-sharp-duotone fa-solid fa-bullhorn" routerLinkActive="active"></i>
-                                        <p class="d-md-none d-block text-hover" >Annonces & Catégories</p>
-                                    </a>       
+                                        <p class="d-md-none d-block text-hover" *ngIf="isAdmin">Annonces</p>
+                                        <p class="d-md-none d-block text-hover" *ngIf="!isAdmin" >Annonces & Catégories</p>
+                                    </a>      
                                 </li>
-                                <li class="item-list w-100" routerLinkActive="active">
+                                <li class="item-list w-100" routerLinkActive="active" *ngIf="!isAdmin">
                                     <a  [routerLink]="['/admin/packages']" aria-current="page">
                                         <!-- <i class="fa-solid fa-credit-card" routerLinkActive="active"></i> -->
                                         <svg routerLinkActive="active" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card-fill" viewBox="0 0 16 16">
@@ -94,7 +95,7 @@
                                         <p class="d-md-none d-block text-hover">Forfaits</p>
                                     </a>
                                 </li>
-                                <li class="item-list w-100" routerLinkActive="active">
+                                <li class="item-list w-100" routerLinkActive="active" *ngIf="!isAdmin">
                                     <a  [routerLink]="['/admin/payment']" aria-current="page">
                                         <i class="fa-solid fa-sack-dollar" routerLinkActive="active"></i>
                                         <p class="d-md-none d-block text-hover">Paiement</p>
@@ -156,7 +157,6 @@
                             </a>
                         </li>
                     </ul>
-                   
                     <div class="notif w-fit_content gap-4 d-md-flex d-none">
                         <button type="submit" id="publish-button" [routerLink]="['/admin/announces/create']" class="btn text-white float-rigth d-md-flex d-none justify-content-center align-items-center">
                             <i class="fa-solid fa-plus  text-white"></i> Annonce

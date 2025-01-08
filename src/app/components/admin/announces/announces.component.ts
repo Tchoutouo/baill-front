@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { AlertComponent } from "../alert/alert.component";
 import {Notification} from '../../../models/notification';
 import { AnounceEntity } from '../../../models/admin/nounceEntity';
-import { getEntityPoperties } from '../../../helpers/helper';
+import { getEntityPoperties, isAdmin } from '../../../helpers/helper'; 
 import { FormatEntityNamePipe } from "../../../pipes/format-entity-name.pipe";
 import { EntityServiceService } from '../../../services/admin/entity-service.service';
 import { AuthenticatorService } from '../../../services/admin/authenticator.service';
@@ -56,6 +56,7 @@ export class AnnouncesComponent {
   catQuery : string = '';
   category_pageLimit : number = 5;
   category_pageNumber : number = 1;
+  isAdmin : boolean = false;
 
   constructor(private entytServ : EntityServiceService, private auth : AuthenticatorService, 
     private notification : NoficationsService, private localStorage : LocalStorageService, 
@@ -68,6 +69,7 @@ export class AnnouncesComponent {
       this.display_message = true;
     }
 
+    this.isAdmin = isAdmin();
     this.head_anounces_lines = getEntityPoperties('anouces');
     this.headLines = Object.keys(this.head_anounces_lines);
     console.log(this.headLines);
