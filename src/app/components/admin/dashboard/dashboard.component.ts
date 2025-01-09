@@ -5,6 +5,7 @@ import { LocalStorageService } from '../../../services/admin/local-storage.servi
 import { EntityServiceService } from '../../../services/admin/entity-service.service';
 import { Subscription } from 'rxjs';
 import {  isAdmin } from '../../../helpers/helper'; 
+import { CheckProfilService } from '../../../services/check-profil.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,7 +24,9 @@ export class DashboardComponent {
     totalExpired : number = 0;
     isAdmin : boolean = false;
 
-    constructor(private locaStorage : LocalStorageService, private entityService : EntityServiceService){
+    constructor(private locaStorage : LocalStorageService, private entityService : EntityServiceService,
+                private checkProfil: CheckProfilService
+    ){
 
     }
 
@@ -31,7 +34,9 @@ export class DashboardComponent {
       window.scroll(0, 5)
       this.anounceList = ['mvks', "sf", "ksjdf", "skjfd", "dkhfj"];
       this.getDashboardData();
-      this.isAdmin = isAdmin();
+      // this.isAdmin = isAdmin();
+      this.isAdmin = this.checkProfil.isAdmin();
+
     }
 
 

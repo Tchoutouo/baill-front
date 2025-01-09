@@ -17,6 +17,7 @@ import { AlertConfirmComponent } from '../../alert-confirm/alert-confirm.compone
 import { Alert } from '../../../models/alert';
 import { AlertConfirmService } from '../../../services/alert-confirm.service';
 import { FormCategoryComponent } from "../form-category/form-category.component";
+import { CheckProfilService } from '../../../services/check-profil.service';
 
 // import { FormatEntityNamePipe } from '../../../helpers/helper';
 
@@ -60,7 +61,7 @@ export class AnnouncesComponent {
 
   constructor(private entytServ : EntityServiceService, private auth : AuthenticatorService, 
     private notification : NoficationsService, private localStorage : LocalStorageService, 
-    private alertConfirm : AlertConfirmService){
+    private alertConfirm : AlertConfirmService, private checkProfil: CheckProfilService){
 
   }
 
@@ -69,7 +70,9 @@ export class AnnouncesComponent {
       this.display_message = true;
     }
 
-    this.isAdmin = isAdmin();
+    // this.isAdmin = isAdmin();
+    this.isAdmin = this.checkProfil.isAdmin();
+
     this.head_anounces_lines = getEntityPoperties('anouces');
     this.headLines = Object.keys(this.head_anounces_lines);
     console.log(this.headLines);
