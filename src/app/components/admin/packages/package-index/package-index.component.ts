@@ -89,8 +89,6 @@ export class PackageIndexComponent implements OnInit{
     if (this.query.length >= 2){
       this.entServiceSub = this.entityService.searchAbonnementsByPage(this.pageNumber, this.pageLImit, this.query).subscribe({
         next: (result_search: any) => { 
-          console.log({result : result_search});
-
           if (result_search.success) {
             this.abonment_list = result_search.data.data;
 
@@ -107,7 +105,7 @@ export class PackageIndexComponent implements OnInit{
         },
   
         error: (error: any) => {  
-          console.log("error", error);
+          console.log("error recherche", error);
         }
       })
 
@@ -206,7 +204,6 @@ export class PackageIndexComponent implements OnInit{
     if(abonnement_id && event){
       this.entityService.deleteAbonnement(abonnement_id).subscribe({
         next: (data: any) => {
-          console.log("data",data);
           const notif = new Notification();
           if(data.success === true){
             notif.message = "Forfait supprimé avec success!";
@@ -226,7 +223,6 @@ export class PackageIndexComponent implements OnInit{
   }
 
   updateModal(abonnement: any){
-    console.log( "abonnement", abonnement);
     if(abonnement){
       this.abonnementItem = abonnement;
     }
