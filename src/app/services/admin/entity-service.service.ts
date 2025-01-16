@@ -112,13 +112,16 @@ export class EntityServiceService {
     return this.http.get(environment.apiUrl+'abonnement_back/status/'+id);
   }
 
-  updateAbonnement(id: any, datas: any, entity: string): Observable<any> {
-    console.log(environment.apiUrl, datas); 
-    
+  updateAbonnement(id: any, datas: any, entity: string): Observable<any> {    
     const options = {
       headers: new HttpHeaders({ "Content-Type": "multipart/form-data" }),
     };
     return this.http.put(`${environment.apiUrl+entity}/${id}`, datas);
+  }
+
+  deleteAbonnement(abonnement_id : string){
+    console.log("abonnement_id", abonnement_id);
+    return this.http.delete(environment.apiUrl+'abonnement_back/'+abonnement_id+'/delete');
   }
 
 }

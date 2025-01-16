@@ -194,6 +194,37 @@ export class PackageIndexComponent implements OnInit{
     this.alertConfirm.emitAlert(alert);
   }
 
+  deleteAbonnement(event: any, abonnement_id: any){
+    let alert = new Alert();
+    alert.message = "";
+    alert.cancel_label = "";
+    this.showAlert = false;
+    alert.success_label = "";
+    alert.display = false;
+    this.alertConfirm.emitAlert(alert);
+
+    if(abonnement_id && event){
+      this.entityService.deleteAbonnement(abonnement_id).subscribe({
+        next: (data: any) => {
+          console.log("data",data);
+          const notif = new Notification();
+          if(data.success === true){
+            notif.message = "Forfait supprimé avec success!";
+            notif.status = "success";
+          }else{
+            notif.message = data.message;
+            notif.status = "warning";
+          }
+          this.notification.emitNotification(notif);
+          this.getAbonnement();
+        },
+        error: (error: any) => {
+          console.log("Suppression d'un abonnement: ",error);
+        }
+      });
+    }
+  }
+
   updateModal(abonnement: any){
     console.log( "abonnement", abonnement);
     if(abonnement){

@@ -75,6 +75,8 @@
                                         <i class="fa-solid fa-play bg-white radius-3 text_green p-1 border-top-1-green border-bottom-1-green border-left-1-green border-right-1-green">
                                         </i>
                                     </a>
+                                    <app-alert-confirm *ngIf="showAlert" (confirmAction)="deleteAbonnement($event , abonnement.id)"></app-alert-confirm>
+
                                     <a title="Supprimer" (click)="handleConfirmDelete(true)">
                                         <i class="fa-solid fa-trash radius-3 bg_red text-white p-1" ></i>
                                     </a>
