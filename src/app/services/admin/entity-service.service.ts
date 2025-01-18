@@ -92,8 +92,36 @@ export class EntityServiceService {
   }
 
   disabledAdvertiser(id: any){
-    console.log(environment.apiUrl+'advertiser_bac/change/'+id);
     return this.http.get(environment.apiUrl+'advertiser_bac/change/'+id);
+  }
+
+  // FORFAITS | PACKAGES SERVICES
+  getAllPackages(pageLImit : number = 5){
+    return this.http.get(environment.apiUrl+'abonnement_back/'+pageLImit);
+  }
+
+  getAbonnementsByPages(pageLImit : number = 5, pageNumber : number){
+    return this.http.get(environment.apiUrl+'abonnement_back/'+pageLImit+'/'+'?page='+pageNumber);
+  }
+
+  searchAbonnementsByPage(pageNumber: number , pageLImit : number, query: string ){
+    return this.http.get(environment.apiUrl+'abonnement_back/'+pageLImit+'/'+query+'?page='+pageNumber);
+  }
+
+  changeStatusAbonnements(id: any){
+    return this.http.get(environment.apiUrl+'abonnement_back/status/'+id);
+  }
+
+  updateAbonnement(id: any, datas: any, entity: string): Observable<any> {    
+    const options = {
+      headers: new HttpHeaders({ "Content-Type": "multipart/form-data" }),
+    };
+    return this.http.put(`${environment.apiUrl+entity}/${id}`, datas);
+  }
+
+  deleteAbonnement(abonnement_id : string){
+    console.log("abonnement_id", abonnement_id);
+    return this.http.delete(environment.apiUrl+'abonnement_back/'+abonnement_id+'/delete');
   }
 
 }
