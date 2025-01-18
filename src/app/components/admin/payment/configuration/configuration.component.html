@@ -3,37 +3,58 @@
         <h1>Gestion des modes de paiement</h1>
     </div>
     <div class="row section-body">
-        <div class="col-md-12 card-payment">
-            <div class="row card-content">
-                <div class="button-active">
-                    <button><h4>Activer la modification</h4></button>
+        <div class="col-md-7 card-payment">
+            <div class="card-content ">
+                <div class="mb-4 ps-3">
+                    <button (click)="acitveChange()" class="" [ngClass]="activeUpdate ? 'btn-not-active' : 'button-active'">
+                        Activer la modification
+                    </button>
                 </div>
-                <div class="row">
-                    <div class="col-md-12 d-flex justify-content-center align-items-center payment">
-                        <div class="payment-type">
-                            <img src="../../../../assets/images/logo-om.png" alt="" class="icon-payment"> <span>Orange Money</span>
+                <form [formGroup]="paymentForm" (ngSubmit)="setPayment()">
+    
+                    <div class="row mx-0 align-items-center payment">
+                        <div class="col-10">
+                            <div class="payment-type">
+                                <img src="../../../../assets/images/logo-om.png" alt="" class="icon-payment"> <span>Orange Money</span>
+                            </div>
                         </div>
-                        <div class="form-check form-switch check-box">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                        </div>
-                    </div>
-                    <div class="col-md-12 d-flex justify-content-center align-items-center payment">
-                        <div class="payment-type">
-                            <img src="../../../../assets/images/momo.png" alt="" class="icon-payment"> <span>Mobile Money</span>
-                        </div>
-                        <div class="form-check form-switch check-box">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                        <div class="col-2">
+                            <div class="form-check form-switch check-box">
+                                <input  class="form-check-input"  [disabled]="!activeUpdate"  [ngClass]="activeUpdate ? 'active' : 'not-active'" type="checkbox" formControlName="om"  role="switch" id="flexSwitchCheckDefault">
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-12 d-flex justify-content-center align-items-center payment">
-                        <div class="payment-type">
-                            <img src="../../../../assets/images/stripe.jpg" alt="" class="icon-payment"> <span>Stripe</span>
+                    <div class="row  mx-0 align-items-center payment">
+                        <div class="col-10">
+                            <div class="payment-type">
+                                <img src="../../../../assets/images/momo.png" alt="" class="icon-payment"> <span>Mobile Money</span>
+                            </div>
                         </div>
-                        <div class="form-check form-switch check-box">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" value="1" checked>
+                        <div class="col-2">
+                            <div class="form-check form-switch check-box">
+                                <input class="form-check-input"  [disabled]="!activeUpdate" [ngClass]="activeUpdate ? 'active' : 'not-active'" type="checkbox" formControlName="momo"  role="switch" id="flexSwitchCheckDefault">
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <div class="row mx-0  align-items-center payment">
+                        <div class="col-10">
+                            <div class="payment-type">
+                                <img src="../../../../assets/images/stripe.jpg" alt="" class="icon-payment"> <span>Stripe</span>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-check form-switch check-box">
+                                <input class="form-check-input" [disabled]="!activeUpdate" [ngClass]="activeUpdate ? 'active' : 'not-active'" type="checkbox" formControlName="stripe"  role="switch" id="flexSwitchCheckDefault">
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="d-flex justify-content-center align-items-center">
+                        <div class="btn-save-change" *ngIf="activeUpdate">
+                            <button type="submit">Enregistrer les modifications</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
