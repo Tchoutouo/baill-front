@@ -124,4 +124,9 @@ export class EntityServiceService {
     return this.http.delete(environment.apiUrl+'abonnement_back/'+abonnement_id+'/delete');
   }
 
+  updatePamentMethods(datas : any){
+    console.log('datas in service');
+    return {success :true};
+  }
+
 }

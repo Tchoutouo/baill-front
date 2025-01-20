@@ -148,13 +148,16 @@ export const routes: Routes = [
     },
 
 
-    {
-        path: '**',
-        component: Error404Component,
-    },
+   
+
     {
         path: 'access-interdit',
         component: Error403Component,
+    },
+
+    {
+        path: '**',
+        component: Error404Component,
     },
 
 ];

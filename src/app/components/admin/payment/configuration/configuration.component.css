@@ -11,23 +11,22 @@
     margin-top: 86px;
 }
 .card-payment{
-    width: 675px;
-    height: 444px;
+    /* width: 675px;    height: 444px; */
     padding: 52px 52px 60px 52px;
     gap: var(--gap-10);
-    border-radius: 16px 0px 0px 0px;
+    border-radius: 16px;
     opacity: 0px;
     box-shadow: 0px 4px 15px 0px #0000001A;
 }
 
 .card-content{
-    width: 571px;
-    height: 332px;
+    /* width: 571px;
+    height: 332px; */
     gap: 33px;
     opacity: 0px;
 }
 
-.card-content .button-active button{
+.button-active, .btn-not-active {
     width: auto;
     height: 39px;
     padding: 8px 15px 8px 15px;
@@ -35,8 +34,31 @@
     border-radius: 30px;
     opacity: 0px;
     border: var(--main-color);
-    background-color: var(--main-color);
+}
 
+ .button-active{
+    color: var(--main-color-white);
+    background-color: var(--main-color);
+}
+
+ .btn-not-active{
+    color: var(--main-color-gray-20);
+    background-color: var(--main-color-gray-15);
+}
+
+.btn-save-change button{
+    width: auto;
+    height: 39px;
+    padding: 8px 15px 8px 15px;
+    gap: var(--gap-10);
+    line-height: var(--main-md-line-height);
+    border-radius: 30px;
+    opacity: 0px;
+    color: var(--main-color-white);
+    font-family: var(--main-font-Quicksand);
+    font-size: var(--main-md-font-weiht);
+    border: var(--main-color);
+    background-color: var(--main-color-blue);
 }
 
 .card-content .button-active button h4{
@@ -55,24 +77,16 @@
 }
 
 .payment-type{
-    width: 485px;
-    height: 71px;
+    height: fit-content;
     padding: 20px 30px 20px 30px;
-    gap: 20px;
     border-radius: 4px;
     border: 1px ;
-    opacity: 0px;
     border: 1px solid #E5E5E5;
     text-align: center;
-    margin-right: 28px;
 }
 
 .payment-type .icon-payment{
-    width: 66px;
     height: 29px;
-    gap: 0px;
-    opacity: 0px;
-    margin-right: 20px;
 }
 
 
@@ -87,18 +101,47 @@
 
 }
 
-.check-box input{
+
+.check-box input.not-active, .check-box input.active{
     width: 58px;
     height: 29px;
     padding: 3px 0px 0px 0px;
-    gap: 6px;
     border-radius: 20px;
-    opacity: 0px;
-    border: 1px solid #C7C7C7;
-    background-color: #FFFFFF;
+}
+
+.check-box input.active{
+    border: 1px solid var(--main-color-green-10);
+}
+
+.check-box input.not-active{
+    border: 1px solid var(--main-color-gray-7);
+}
+
+.form-switch .form-check-input:checked:disabled{
+    background-color: var(--main-color-gray-7) !important;
 
 }
 
-.form-switch .form-check-input:checked{
-    background-color: #C7C7C7;
+.form-switch .form-check-input.active{
+    --bs-form-switch-bg: url('../../../../../assets/icons/green-circle.svg') ;
+    background-image: var(--bs-form-switch-bg);
+    /* margin-left: 0 !important; */
+    background-position: 2px 2px; 
+    
+}
+
+.form-switch .form-check-input.active:checked{
+    --bs-form-switch-bg: url('../../../../../assets/icons/white-circle.svg') ;
+    background-image: var(--bs-form-switch-bg) !important;
+    background-position: 30px 2px;
+    background-color: var(--main-color);
+}
+
+.form-check-input:checked {
+    background-color: var(--main-color-gray-7);
+    border: none !important;
+}
+
+.form-switch .form-check-input:focus{
+    box-shadow: none !important;
 }
