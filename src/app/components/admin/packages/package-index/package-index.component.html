@@ -56,7 +56,7 @@
                                 {{abonnement.name}}
                             </td>
                             <td class="bord-black">
-                                {{abonnement.price}}
+                                {{abonnement.price | currency}}
                             </td>
                             <td class="bord-black">
                                 {{abonnement.time}}
@@ -103,10 +103,10 @@
             </table>
             
             <!-- Modal -->
-            <div class="modal fade" id="package" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="packageLabel" aria-hidden="true">
+            <div class="modal fade" *ngIf="isModalOpen" id="package" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="packageLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <app-package-edit [Abonnememt]="abonnementItem"></app-package-edit>
+                        <app-package-edit [Abonnememt]="abonnementItem" (isModalOpenChild)="closeModal($event)"></app-package-edit>
                     </div>
                 </div>
             </div>

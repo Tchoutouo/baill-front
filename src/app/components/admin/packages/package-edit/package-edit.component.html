@@ -42,6 +42,6 @@
         </form>
     </div>
     <div class="modal-footer">
-        <a class="btn_cancel" data-bs-dismiss="modal">Annuler</a>
+        <a class="btn_cancel" data-bs-dismiss="modal" (click)="handleCloseModal()">Annuler</a>
         <button (click)="UpdateAbonnement()" class="btn_add" [disabled]="abonnementForm.invalid">Sauvegarder</button>
     </div> 

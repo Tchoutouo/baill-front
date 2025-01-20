@@ -12,13 +12,14 @@ import { NoficationsService } from '../../../../services/nofications.service';
 import { AlertConfirmService } from '../../../../services/alert-confirm.service';
 import { Notification } from '../../../../models/notification';
 import { PaginatorComponent } from "../../../admin/paginator/paginator.component";
+import { CurrencyFormatterPipe } from "../../../../pipes/currency-formatter.pipe";
 
 
 
 @Component({
   selector: 'app-package-index',
   standalone: true,
-  imports: [RouterModule, TranslateModule, CommonModule, PackageEditComponent, AlertComponent, AlertConfirmComponent,PaginatorComponent],
+  imports: [RouterModule, TranslateModule, CommonModule, PackageEditComponent, AlertComponent, AlertConfirmComponent, PaginatorComponent, CurrencyFormatterPipe],
   templateUrl: './package-index.component.html',
   styleUrl: './package-index.component.css'
 })
@@ -38,6 +39,8 @@ export class PackageIndexComponent implements OnInit{
   paginationDAtas : any;
   result_data : any;
   entityName : string = "";
+  isModalOpen = false;
+  // currencyCode = 'XAF';
 
 
   constructor(private entityService : EntityServiceService,
@@ -223,9 +226,19 @@ export class PackageIndexComponent implements OnInit{
   }
 
   updateModal(abonnement: any){
+    this.isModalOpen = true;
+
     if(abonnement){
       this.abonnementItem = abonnement;
     }
+  }
+
+  closeModal(event: any){
+    console.log("event",event);
+    this.isModalOpen = false;
+    window.location.reload();
+    this.getAbonnement();
+
   }
 
 }

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component,Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component,EventEmitter,Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -19,6 +19,10 @@ export class PackageEditComponent implements OnInit {
 
   @Input() Abonnememt: any = [];
   abonnementForm: FormGroup;
+  @Output()  isModalOpenChild = new EventEmitter<boolean>();
+
+  closeModal : boolean = false;
+
 
   constructor(
         private fb: FormBuilder,  
@@ -65,7 +69,12 @@ export class PackageEditComponent implements OnInit {
     } 
     
     if (this.abonnementForm.valid) {
-      console.log(this.abonnementForm.value);
+      console.log("this.abonnementForm.value",this.abonnementForm.value);
+
+      this.abonnementForm.value.price = this.abonnementForm.value.price - (this.abonnementForm.value.reduction * this.abonnementForm.value.price)/100;
+
+      console.log("this.abonnementForm.value 2",this.abonnementForm.value);
+
 
       const notif = new Notification();  
       const entity = "abonnement_back/update";
@@ -78,8 +87,7 @@ export class PackageEditComponent implements OnInit {
           if(datas.success === true){
             notif.message = "Informations mise à jour avec success"
             notif.status = "success"
-            // this.closeModal();
-            this.router.navigate(['/admin/packages']);
+            this.handleCloseModal();
           }else{
             notif.message = "erreur lors de l'enregistrement des modifications"
             notif.status = "warning"
@@ -95,12 +103,10 @@ export class PackageEditComponent implements OnInit {
     }
   }
 
-  // closeModal() {
-  //   const modalElement = document.getElementById('package');
+  handleCloseModal(){
+    this.closeModal = false;
+    this.isModalOpenChild.emit(this.closeModal);
+  }
 
-  //   if (modalElement) {
-  //     const modalInstance = bootstrap.Modal.getInstance(modalElement);
-  //     modalInstance.hide();
-  //   }
-  // }
+  
 }
