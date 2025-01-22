@@ -8,6 +8,7 @@ import { NoficationsService } from '../../../../services/nofications.service';
 import { Notification } from '../../../../models/notification';  
 
 
+
 @Component({
   selector: 'app-package-edit',
   standalone: true,
@@ -28,7 +29,8 @@ export class PackageEditComponent implements OnInit {
         private fb: FormBuilder,  
         private entityService: EntityServiceService,  
         private router: Router,  
-        private notification: NoficationsService 
+        private notification: NoficationsService,
+
   ) { 
     this.abonnementForm = this.fb.group({  
       name: ['', Validators.required],  
@@ -57,11 +59,12 @@ export class PackageEditComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log("this.Abonnememt", this.Abonnememt);
+    
     if (changes && this.Abonnememt) {
       this.abonnementForm.patchValue(this.Abonnememt);
     }
   }
+
 
   UpdateAbonnement() {  
     if (this.abonnementForm.invalid) {  
@@ -69,12 +72,8 @@ export class PackageEditComponent implements OnInit {
     } 
     
     if (this.abonnementForm.valid) {
-      console.log("this.abonnementForm.value",this.abonnementForm.value);
 
       this.abonnementForm.value.price = this.abonnementForm.value.price - (this.abonnementForm.value.reduction * this.abonnementForm.value.price)/100;
-
-      console.log("this.abonnementForm.value 2",this.abonnementForm.value);
-
 
       const notif = new Notification();  
       const entity = "abonnement_back/update";

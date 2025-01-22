@@ -59,7 +59,7 @@
                                 {{abonnement.price | currency}}
                             </td>
                             <td class="bord-black">
-                                {{abonnement.time}}
+                                {{abonnement.time | formatTime:abonnement.type_time}}
                             </td>
                             <td class="bord-black">
                                 {{abonnement.type}}

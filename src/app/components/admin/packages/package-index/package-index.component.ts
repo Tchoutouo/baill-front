@@ -13,13 +13,14 @@ import { AlertConfirmService } from '../../../../services/alert-confirm.service'
 import { Notification } from '../../../../models/notification';
 import { PaginatorComponent } from "../../../admin/paginator/paginator.component";
 import { CurrencyFormatterPipe } from "../../../../pipes/currency-formatter.pipe";
+import { FormatTimePipe } from "../../../../pipes/format-time.pipe";
 
 
 
 @Component({
   selector: 'app-package-index',
   standalone: true,
-  imports: [RouterModule, TranslateModule, CommonModule, PackageEditComponent, AlertComponent, AlertConfirmComponent, PaginatorComponent, CurrencyFormatterPipe],
+  imports: [RouterModule, TranslateModule, CommonModule, PackageEditComponent, AlertComponent, AlertConfirmComponent, PaginatorComponent, CurrencyFormatterPipe, FormatTimePipe],
   templateUrl: './package-index.component.html',
   styleUrl: './package-index.component.css'
 })
@@ -229,6 +230,21 @@ export class PackageIndexComponent implements OnInit{
     this.isModalOpen = true;
 
     if(abonnement){
+      let time;
+      switch (abonnement.type_time) {
+        case 'S':
+            time = abonnement.time/7;
+            break;
+        case 'M':
+            time = abonnement.time/30;
+            break;
+        case 'A':
+            time = abonnement.time/360;
+            break;
+        default:
+            console.log("Periode invalide");
+      }
+      abonnement.time = time;
       this.abonnementItem = abonnement;
     }
   }
