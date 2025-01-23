@@ -14,9 +14,14 @@ export class CheckProfilService {
 
   isAdmin(): boolean {
     const user = this.localStorage.getItem('user');
+    console.log("user", user)
 
     if (user) {
-      return user.profil_name === 'SUPER_ADMIN';
+      if (user.profil_code === 'SUP_ADMIN') {
+        return true;
+      }else{
+        return false;
+      }
     } else {
       this.router.navigate(['/admin']);
       return false;

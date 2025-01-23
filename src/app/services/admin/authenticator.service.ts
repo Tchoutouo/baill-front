@@ -89,9 +89,9 @@ export class AuthenticatorService {
   getUserRole(){
     const user = this.localStorage.getItem('user')
     if (user) {
-      return user.profil_name ;
+      return user.profil_code ;
     }else{
-      return 'false' ;
+      return 'false';
     }
   }
 

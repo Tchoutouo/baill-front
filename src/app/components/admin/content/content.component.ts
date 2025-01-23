@@ -61,7 +61,7 @@ export class ContentComponent {
     this.user_picture = user.picture ?  environment.apiUrlRessources + '/' + user.picture : 'false' ;  
     // this.isAdmin = isAdmin();
     this.isAdmin = this.checkProfil.isAdmin();
-
+    console.log("this.isAdmin",this.isAdmin)
   }
 
   exendSideBar(){

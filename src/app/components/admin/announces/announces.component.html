@@ -1,5 +1,5 @@
 <div class="contaner-fluid px-4">
-    <div class=" " *ngIf="isAdmin">    
+    <div class=" " *ngIf="isAdmin === false">    
         <div class="page-title">
             <h1>Annonces</h1>
         </div>
@@ -139,7 +139,7 @@
         </div>
     </div>
 
-    <div class="" *ngIf="!isAdmin">
+    <div class="" *ngIf="isAdmin">
         <ul class="nav nav-tabs mt-2" id="myTab" role="tablist">
             <li class="nav-item main-font-quick" role="presentation">
               <button class="nav-link active h4-baill fw-baill-bold" id="annonce-tab" data-bs-toggle="tab" data-bs-target="#annonce" type="button" role="tab" aria-controls="home" aria-selected="true">Annonces</button>

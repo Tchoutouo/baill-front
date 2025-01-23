@@ -67,7 +67,7 @@
                                         <p class="d-md-none d-block text-hover" >Tableau de bord</p>
                                     </a>
                                 </li>
-                                <li class="item-list w-100" routerLinkActive="active" *ngIf="!isAdmin">
+                                <li class="item-list w-100" routerLinkActive="active" *ngIf="isAdmin">
                                     <a  [routerLink]="['/admin/user-management/users']" aria-current="page">
                                         <i class="fa-solid fa-user-group" routerLinkActive="active"></i>
                                         <p class="d-md-none d-block text-hover">Utilisateurs</p>
@@ -82,11 +82,11 @@
                                 <li class="item-list w-100" routerLinkActive="active" >
                                     <a [routerLink]="['/admin/announces/announces-list']" aria-current="page">
                                         <i class="fa-sharp-duotone fa-solid fa-bullhorn" routerLinkActive="active"></i>
-                                        <p class="d-md-none d-block text-hover" *ngIf="isAdmin">Annonces</p>
-                                        <p class="d-md-none d-block text-hover" *ngIf="!isAdmin" >Annonces & Catégories</p>
+                                        <p class="d-md-none d-block text-hover" *ngIf="isAdmin === false">Annonces</p>
+                                        <p class="d-md-none d-block text-hover" *ngIf="isAdmin" >Annonces & Catégories</p>
                                     </a>      
                                 </li>
-                                <li class="item-list w-100" routerLinkActive="active" *ngIf="!isAdmin">
+                                <li class="item-list w-100" routerLinkActive="active" *ngIf="isAdmin">
                                     <a  [routerLink]="['/admin/packages']" aria-current="page">
                                         <!-- <i class="fa-solid fa-credit-card" routerLinkActive="active"></i> -->
                                         <svg routerLinkActive="active" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card-fill" viewBox="0 0 16 16">
@@ -95,7 +95,7 @@
                                         <p class="d-md-none d-block text-hover">Forfaits</p>
                                     </a>
                                 </li>
-                                <li class="item-list w-100" routerLinkActive="active" *ngIf="!isAdmin">
+                                <li class="item-list w-100" routerLinkActive="active" *ngIf="isAdmin">
                                     <a  [routerLink]="['/admin/payment']" aria-current="page">
                                         <i class="fa-solid fa-sack-dollar" routerLinkActive="active"></i>
                                         <p class="d-md-none d-block text-hover">Paiement</p>
