@@ -91,7 +91,7 @@ export class AuthenticatorService {
     if (user) {
       return user.profil_code ;
     }else{
-      return 'false';
+      return 'false' ;
     }
   }
 

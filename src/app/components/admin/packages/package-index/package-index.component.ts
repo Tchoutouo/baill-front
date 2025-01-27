@@ -114,6 +114,9 @@ export class PackageIndexComponent implements OnInit{
       })
 
     }else{
+      // this.entityService.getCsrfCookie().subscribe({
+      //   next: () => {
+      //     console.log('CSRF cookie retrieved successfully');
       this.entServiceSub = this.entityService.getAllPackages(this.pageLImit).subscribe({
         next: (data: any) => { 
           if (data.success) {
@@ -132,7 +135,15 @@ export class PackageIndexComponent implements OnInit{
         error: (error: any) => {  
           console.log("Affichage des abonnements:", error);
         }
-      })
+      });
+      // 
+    //   },
+  
+    //   error: (error: any) => {  
+    //     console.log("testette:", error);
+    //   }
+    // });
+
     }
 
   }

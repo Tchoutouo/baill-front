@@ -57,7 +57,7 @@ export const isAdmin = () : any =>{
     const user = localStorage.getItem('user');
 
     if (user) {
-        if (user.profil_name === 'SUPER_ADMIN') {
+        if (user.profil_code === 'SUP_ADMIN') {
             return true;
         }
         return false;

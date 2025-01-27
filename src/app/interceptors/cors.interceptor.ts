@@ -20,12 +20,15 @@ export class CorsInterceptor implements HttpInterceptor {
               return next.handle(cloned);  
             }  
         }
-        
-        const token = localStorage.getItem('token');
+        var token1: string | null = "";
+            token1 = localStorage.getItem('token');
+        var token = token1?.replace(/['"]+/g, '');
+
         if (token) {
           const cloned = req.clone({
             headers: req.headers.set('Authorization', `Bearer ${token}`)
           });
+          console.log('cloned',cloned);
           return next.handle(cloned);
           } else {
           return next.handle(req);
