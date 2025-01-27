@@ -14,10 +14,8 @@ export class CheckProfilService {
 
   isAdmin(): boolean {
     const user = this.localStorage.getItem('user');
-    console.log("user", user)
-
     if (user) {
-      if (user.profil_code === 'SUP_ADMIN') {
+      if (user.profil_code === 'SUP_ADMIN' || user.profil_code === 'ADMIN') {
         return true;
       }else{
         return false;

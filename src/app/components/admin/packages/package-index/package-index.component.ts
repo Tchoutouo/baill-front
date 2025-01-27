@@ -261,7 +261,6 @@ export class PackageIndexComponent implements OnInit{
   }
 
   closeModal(event: any){
-    console.log("event",event);
     this.isModalOpen = false;
     window.location.reload();
     this.getAbonnement();
