@@ -16,7 +16,7 @@ export class EntityServiceService {
   }
 
   store(entity:string, datas: any){
-    console.log('partir');
+    
     return this.http.post(environment.apiUrl+entity, datas)
   }
 
@@ -34,14 +34,38 @@ export class EntityServiceService {
     return this.http.post(environment.apiUrl+entity+'/'+id, datas); 
   }
 
+  updateCat(id: any, datas: any, entity: string): Observable<any> {
+    
+    // return this.http.put(`${environment.apiUrl+entity}/${id}`, datas, options);
+    return this.http.put(environment.apiUrl+entity+'/'+id, datas); 
+  }
+
 
   getUserAnoucesByPages(user_id : any, pageNumber : number, pageLImit : number = 5){
-    return this.http.get(environment.apiUrl+'annonce_back/'+user_id+'/'+pageLImit+'?page='+pageNumber);
+    let user : any = localStorage.getItem('user');
+    let user_converted : any = JSON.parse(user);
+    let url ;
+    console.log(JSON.parse(user));
+    
+    if (user_converted.profil_code) {
+      if (user_converted.profil_code == 'SUP_ADMIN' || user_converted.profil_code == 'ADMIN') {
+        url = 'annonce_back_admin';
+      }else if(user_converted.profil_code == 'ADVERT'){
+        url = 'annonce_back';
+      }
+    }
+    
+    return this.http.get(environment.apiUrl+url+'/'+user_id+'/'+pageLImit+'?page='+pageNumber);
   }
 
   searchDatasByPage(user_id: any , pageNumber: number , pageLImit : number, query: string ){
     // console.log(environment.apiUrl+'annonce_back/'+user_id+'/'+pageLImit+'/'+query+'?page'+pageNumber);
     return this.http.get(environment.apiUrl+'annonce_back/'+user_id+'/'+pageLImit+'/'+query+'?page='+pageNumber);
+  }
+  
+  searchCatByPage( pageNumber: number , pageLImit : number, query: string ){
+    // console.log(environment.apiUrl+'annonce_back/'+user_id+'/'+pageLImit+'/'+query+'?page'+pageNumber);
+    return this.http.get(environment.apiUrl+'categorie_back/'+pageLImit+'/'+query+'?page='+pageNumber);
   }
 
   changeAnnouceStatus(user_id: any, annouceID: any, newStatus:any){
@@ -52,12 +76,16 @@ export class EntityServiceService {
     return this.http.get(environment.apiUrl+'abonnement_back');
   }
 
+  
   deleteAnnouce(annouceID : string | number, catArray : any){
-    console.log(catArray, annouceID);
     
     return this.http.delete(environment.apiUrl+'annonce_back/delete/'+annouceID+'/'+catArray);
   }
 
+  deleteCat(annouceID : string | number){
+    
+    return this.http.delete(environment.apiUrl+'categorie_back/delete/'+annouceID);
+  }
 
   getDashoardDatas(user_id : number){
     return this.http.get(environment.apiUrl+'dashboard_advertiser/'+user_id);
@@ -76,6 +104,10 @@ export class EntityServiceService {
       console.log(environment.apiUrl+'categorie_back/'+pageLimit+'/'+query+'?page='+pageNumber);
       return this.http.get(environment.apiUrl+'categorie_back/'+pageLimit+'/'+'?page='+pageNumber);
     }
+  }
+
+  storeCategory(datas: any){
+    return this.http.post(environment.apiUrl+'categorie_back/store', datas);
   }
 
   // USER MANAGEMENT SERVICES
