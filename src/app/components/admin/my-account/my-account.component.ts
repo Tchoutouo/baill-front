@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';  
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';  
+import { FormBuilder, FormGroup, FormsModule,ReactiveFormsModule, Validators } from '@angular/forms';  
 import { LocalStorageService } from '../../../services/admin/local-storage.service';  
 import { User } from '../../../models/user';  
 import { CommonModule } from '@angular/common';  
@@ -16,11 +16,11 @@ import { Subscription } from 'rxjs';
 @Component({  
   selector: 'app-my-account',  
   standalone: true,  
-  imports: [CommonModule, ReactiveFormsModule, TranslateModule],  
+  imports: [CommonModule, ReactiveFormsModule, TranslateModule,FormsModule],  
   templateUrl: './my-account.component.html',  
   styleUrls: ['./my-account.component.css'] // Correction de "styleUrl"  
 })  
-export class MyAccountComponent implements OnInit {  
+export class MyAccountComponent implements OnInit {
   profileForm: FormGroup;  
   type : string = "password";
   icon_eyes : string =""
@@ -37,6 +37,7 @@ export class MyAccountComponent implements OnInit {
   errorMessage : string = '';
   user_logged : any;
   user_di_loggged : number = 0;
+  isModalOpen: boolean = false;
 
 
   constructor(  
@@ -94,9 +95,7 @@ export class MyAccountComponent implements OnInit {
     this.cities = City.getCitiesOfCountry(countryCode);  
   }  
 
-  UpdateProfil() {  
-    console.log(this.profileForm.value , this.profileForm.valid);
-    
+  UpdateProfil() {      
     if (this.profileForm.invalid || this.fileError) {  
       return;  
     }  
@@ -113,7 +112,6 @@ export class MyAccountComponent implements OnInit {
     }  
 
     this.user_logged = this.localStorage.getItem('user');  
-    console.log({user_log : this.user_logged});
     
     const user_id = this.user_logged ? this.user_logged.id : '';
     this.user_di_loggged = this.user_logged ? this.user_logged.id : '';
@@ -122,7 +120,6 @@ export class MyAccountComponent implements OnInit {
 
     this.entityService.update(user_id, formData, entity).subscribe({
       next : (datas : any) =>{
-        console.log(datas);
         
         if(datas.success === true){
           this.router.navigate(['/admin/myAccount']);
@@ -147,7 +144,6 @@ export class MyAccountComponent implements OnInit {
         const entyt = 'advertiser_back/show/';
         this.userSub = this.entityService.getAdvertiser(this.user_di_loggged, entyt).subscribe({
           next: (data : any) => {
-            console.log({show: data});
             if (data.success === true) {
               this.localStorage.setItem('user', data.data);
             }
@@ -173,7 +169,6 @@ export class MyAccountComponent implements OnInit {
     // console.log("files", files); 
     const file_image = files[0];
     if (file_image) {
-      console.log(file_image.size > 2048000, file_image.size );
       if (file_image.size > 2048000) { // Limite à 2MB
         this.fileError = 'La taille du fichier doit être inférieure à 2MB.';
         this.selectedFile = null;
@@ -188,7 +183,6 @@ export class MyAccountComponent implements OnInit {
     // const image = files;
     this.images = files;
     
-    // console.log("file_image", files); 
     if (!is_image(file_image)) {  
       this.errorMessage = "Erreur, ceci n'est pas une image !";  
     }  
@@ -199,7 +193,6 @@ export class MyAccountComponent implements OnInit {
       
     file_reader.onload = () => {  
       this.picture = file_reader.result as string ;
-      console.log("this.picture",this.picture);
       // this.user.picture = this.picture ;
 
       //  this.updateUser.picture = this.picture ;
@@ -211,6 +204,21 @@ export class MyAccountComponent implements OnInit {
     this.type = (this.type === "password") ?  "text"  : "password" ;
 
     this.icon_eyes = (this.icon_eyes === "") ?  "-slash"  : "" ;
+  }
+
+  openModalPassword($event: any) {
+    this.isModalOpen = true;
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
+  }  
+
+  changePassword() {
+    setTimeout(() => {
+      console.log('Formulaire soumis avec succès !');
+      this.closeModal(); // Ferme le modal après l'instruction
+    }, 1000);
   }
 
 }
