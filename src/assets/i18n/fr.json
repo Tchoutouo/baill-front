@@ -7,7 +7,8 @@
     "header":{
         "publish-post": "Publier une annonce",
         "login-text":"Se connecter",
-        "search": "Recherche ..."
+        "search": "Recherche ...",
+        "espace-text":"Mon espace"
     },
     "user": {
         "signup":{

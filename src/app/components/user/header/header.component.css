@@ -50,7 +50,7 @@
     background: rgba(76, 152, 19, 1);
 }
 
-.btn_login{
+.btn_login, .btn_space{
     padding: var(--main-btn-sm-padd);
     background-color: var(--main-color-white);
     color: var(--main-color);
@@ -58,7 +58,7 @@
     border-radius: var(--main-radius-value-8);
 }
 
-.btn_login:hover{
+.btn_login:hover, .btn_space:hover{
     background-color: var(--main-color-green-15);
 }
 

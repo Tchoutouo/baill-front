@@ -45,7 +45,6 @@ export class PackageEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("Abonnememt", this.Abonnememt);
     this.abonnementForm.patchValue({ // Remplissage initial du formulaire  
       name: this.Abonnememt.name ? this.Abonnememt.name : '',  
       price: this.Abonnememt.price ?  this.Abonnememt.price : '',  
@@ -80,9 +79,7 @@ export class PackageEditComponent implements OnInit {
       let abonnement_id = this.Abonnememt.id;
   
       this.entityService.updateAbonnement(abonnement_id,this.abonnementForm.value, entity).subscribe({
-        next : (datas : any) =>{
-          console.log("datas",datas);
-          
+        next : (datas : any) =>{          
           if(datas.success === true){
             notif.message = "Informations mise à jour avec success"
             notif.status = "success"

@@ -7,7 +7,8 @@
     "header":{
         "publish-post": "Post an ad",
         "login-text":"Log in",
-        "search": "Research ..."
+        "search": "Research ...",
+        "espace-text":"My space"
     },
     "user": {
         "signup":{
