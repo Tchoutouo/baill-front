@@ -188,8 +188,8 @@ export class PackageIndexComponent implements OnInit{
           }
           this.notification.emitNotification(notif);
           this.getAbonnement();
-
         },
+        
         error: (error: any) => {
           console.log("Activation & Désactivation d'un abonnement: ",error);
         }

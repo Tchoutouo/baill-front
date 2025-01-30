@@ -12,7 +12,7 @@
     <div class="col-md-3 mb-1">
         <select name="category" id="category" class="form-control filter-tag" (change)="onFilterChange($event , 'category')">
             <option value="" selected>Selectionner une categorie</option>
-            <option *ngFor="let category of categories" [value]="category.title"> {{ category.title }} </option>
+            <option *ngFor="let category of categories" [value]="category.title"> {{ category?.title }} </option>
         </select>
     </div>
     <div class="col-md-3 mb-1">

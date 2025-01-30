@@ -52,7 +52,7 @@ export class AlertConfirmComponent implements OnInit {
   submitAction(submite : boolean){
     const submiteData = true;
     this.confirmAction.emit(submite)
-    console.log('emited');
+    
   }
 
   // ngOnDestroy() {  

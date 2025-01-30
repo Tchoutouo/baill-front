@@ -43,9 +43,9 @@ export class ConfigurationComponent {
     this.datas = this.paymentForm.value;
     for (const key in this.datas) {
       if (this.datas[key]) {
-        this.datas[key] = 1
+        this.datas[key] = 1;
       }else{
-        this.datas[key] = 0
+        this.datas[key] = 0;
       }
     }
 

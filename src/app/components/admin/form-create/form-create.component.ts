@@ -147,7 +147,7 @@ export class FormCreateComponent {
         });
 
         // Mise à jour de is_published selon l'événement  
-        console.log({country : this.selectedCountry} );
+        // console.log({country : this.selectedCountry} );
         
         formData.append('is_published', event ? '1' : '0');  
         formData.append('country', this.selectedCountry ? this.selectedCountry : 'Cameroun');  
@@ -164,7 +164,6 @@ export class FormCreateComponent {
         // Stockage de l'entité  
         this.entityService.store(entity, formData).subscribe({  
             next: (data: any) => {  
-              console.log(data);
               
               const notif = new Notification();
                 if (data.success) {

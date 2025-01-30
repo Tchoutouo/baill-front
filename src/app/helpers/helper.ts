@@ -1,5 +1,6 @@
 import { inject } from "@angular/core";
 import { AnounceEntity } from "../models/admin/nounceEntity";
+import { Category } from "../models/admin/category";
 import { LocalStorageService } from "../services/admin/local-storage.service";
 import { Route, Router, ROUTES } from "@angular/router";
 
@@ -39,6 +40,10 @@ export const getEntityPoperties = (entity: string) : Array<string> =>{
     
     if (entity == "anouces") {
         entityClass = new AnounceEntity()
+    }
+
+    if (entity == "categories") {
+        entityClass = new Category()
     }
 
     if (entityClass) {
