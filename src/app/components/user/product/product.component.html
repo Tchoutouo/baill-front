@@ -29,7 +29,7 @@
             <div class="location-address col-xl-12">
                 <div class="two_icon">
                     <a class="g-1" [href]="'tel:'+productItem.users?.whatsapp_number" target="_blank">
-                        <i class="fa-solid fa-square-phone-flip mx-2" style="font-size: 23px;"></i> : +237{{productItem.users?.whatsapp_number }}
+                        <i class="fa-solid fa-square-phone-flip mx-2" style="font-size: 23px;"></i> : +{{productItem.users?.whatsapp_number }}
                     </a> 
                 </div>
                 <div class="two_icon " *ngIf="productItem.users?.site_url">

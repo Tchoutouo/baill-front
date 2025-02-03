@@ -32,7 +32,6 @@ export class ProductsHightlightComponent {
     initComponent(){
       this.annoucesList = this.homeServ.getAllAnnoucesPublished().subscribe({
         next: (result_request: any) => { 
-          console.log({hightlight : result_request});
           if (result_request.success == true)  {
             this.annouces_high = result_request.data_annonce_une ;
           }else{

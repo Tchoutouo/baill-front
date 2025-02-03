@@ -62,7 +62,7 @@ export class ProductDetailsComponent {
           if (annouce_id) {
             this.annouceSub = this.homeServ.getAnnouceByID(annouce_id).subscribe({
               next: (datas: any) => {
-                console.log(datas);
+                console.log("details",datas);
                 if (datas.success == true && datas.data) {
                   this.annouce  = datas.data ;
                   this.imagesList = this.annouce.url_image;

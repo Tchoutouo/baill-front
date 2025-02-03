@@ -18,6 +18,7 @@ export class ForfaitListComponent {
   abonment_list : Array<any> = [];
 
   chousedForf : any = null;
+  pageLImit : number = 5;
 
   @Output() hasSubmit = new EventEmitter<any>() ;
 
@@ -35,10 +36,11 @@ export class ForfaitListComponent {
   }
 
   getAbonnement(){
-    this.entServiceSub = this.entityService.getAllAbonnements().subscribe({
+    this.entServiceSub = this.entityService.getAllPackages(this.pageLImit).subscribe({
       next: (data: any) => { 
         if (data.success) {
-          this.abonment_list = data.data
+          this.abonment_list = data.data.data;
+          console.log("abonnement",  this.abonment_list);
         }
       },
 

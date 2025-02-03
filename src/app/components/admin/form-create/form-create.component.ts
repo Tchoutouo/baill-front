@@ -28,7 +28,7 @@ export class FormCreateComponent {
   images_list : Array<any> = [];
   errorMessages : any = null;
   countries : any;
-  selectedCountry:any;
+  selectedCountry:any = "CM";
   selectedCity:any;
   cities : any;
   valiData : boolean = false ;
@@ -69,7 +69,7 @@ export class FormCreateComponent {
               private notification : NoficationsService, private router: Router, private locaStorage  : LocalStorageService
           )
   {
-
+    this.selectedCountry = "CM";
     this.title = this.form_b.control('', [Validators.required, Validators.maxLength(256)])
     this.description = this.form_b.control('', [Validators.required, Validators.maxLength(256)])
     this.price = this.form_b.control('', [ Validators.required])
@@ -100,6 +100,7 @@ export class FormCreateComponent {
     window.scroll(0,0);   
     this.getAllCategories() ;
     this.countries = Country.getAllCountries();
+    this.onCountryChange({ target: { value: this.selectedCountry } });
   } 
 
 
@@ -150,7 +151,7 @@ export class FormCreateComponent {
         // console.log({country : this.selectedCountry} );
         
         formData.append('is_published', event ? '1' : '0');  
-        formData.append('country', this.selectedCountry ? this.selectedCountry : 'Cameroun');  
+        formData.append('country', this.selectedCountry ? this.selectedCountry : 'CM');  
         formData.append('status', event ? '3' : '1');  
         formData.append('abonnement_id', event ? event : 1);  
         let user = this.locaStorage.getItem('user');
@@ -179,7 +180,7 @@ export class FormCreateComponent {
                 // Vous pouvez envisager de réinitialiser le formulaire ou d'afficher un message de succès ici  
             },  
             error: (error: any) => {  
-                console.log(error);  
+                console.log("Creation d'annonce",error);  
                 const notif_error = new Notification();
                 notif_error.message = "erreur lors de l'enregistrement contacter l'administrateur !";
                 notif_error.status = "warning";
@@ -216,8 +217,7 @@ export class FormCreateComponent {
       var countryCode = event.target.value;
       this.cities = City.getCitiesOfCountry(countryCode);
       this.country_sel= Country.getCountryByCode(countryCode);
-      this.selectedCountry  = this.country_sel.name;
-      console.log("country",this.selectedCountry);
+      this.selectedCountry  = countryCode;
 
     } catch (error) {
       console.error('Erreur lors de la récupération des villes:', error);

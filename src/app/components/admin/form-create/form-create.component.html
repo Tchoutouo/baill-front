@@ -34,7 +34,7 @@
                     </div>
 
                     <div class="form_group gap-1 mb-4">
-                        <label for="price" class="label-form mb-2">Prix (FCFA)<span class="text-danger mx-2">*</span></label> 
+                        <label for="price" class="label-form mb-2">Prix ($)<span class="text-danger mx-2">*</span></label> 
                         <input type="number" class=" form-control input-field"  [formControl]="price" name="price" id="price" placeholder="voture toyota">
                         <div *ngIf="price.dirty && !price.valid">
                             <div class="" class="error" *ngIf="price.hasError('required')">
