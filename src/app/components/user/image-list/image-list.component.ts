@@ -32,7 +32,7 @@ export class ImageListComponent {
     let wind : any = window ;   
     this.modalImages = new wind["bootstrap"].Modal("#imageListPreview", {keyboard : false}) ;
     this.modalImages.show() ;
-    console.log(this.images[1]) ;
+    // console.log(this.images[1]) ;
   }
 
   handleCloseModal(){

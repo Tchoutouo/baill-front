@@ -28,7 +28,6 @@ export class CorsInterceptor implements HttpInterceptor {
           const cloned = req.clone({
             headers: req.headers.set('Authorization', `Bearer ${token}`)
           });
-          console.log('cloned',cloned);
           return next.handle(cloned);
           } else {
           return next.handle(req);

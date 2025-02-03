@@ -60,6 +60,8 @@ export class ProductDetailsComponent {
         const annouce_id = this.route.snapshot.paramMap ? this.route.snapshot.paramMap.get('id') : null;
         try {
           if (annouce_id) {
+        console.log("annonce_id",annouce_id);
+
             this.annouceSub = this.homeServ.getAnnouceByID(annouce_id).subscribe({
               next: (datas: any) => {
                 console.log("details",datas);

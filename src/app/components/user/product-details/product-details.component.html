@@ -6,7 +6,9 @@
                 <div class="images-details">
                     <div class="row">
                         <div class="col-12 ">
-                            <div class="firs-image" style="background-image: url('{{apiRessources}}/{{fisrtImage}}');">
+                            <!-- <div class="firs-image" style="background-image: url('{{apiRessources}}/{{fisrtImage}}');"> -->
+                            <div class="firs-image" style="background-image: url('{{fisrtImage}}');">
+
                                 
                             </div>
                         </div>
@@ -14,8 +16,10 @@
                             <div class="row justify-content-center  images-list align-items-center">
                                 <ng-container *ngFor="let item of imagesList; let i = index" >
                                     <div class="col-4 col-lg-3"  *ngIf="i < imageLimit">
+                                        <!-- <div class="image-item" (mouseleave)="reChangeImage()" (mouseover)="changeFirstImage(item)" 
+                                            [ngStyle]="{'background-image': 'url(' +apiRessources+'/'+item +')'}" > -->
                                         <div class="image-item" (mouseleave)="reChangeImage()" (mouseover)="changeFirstImage(item)" 
-                                            [ngStyle]="{'background-image': 'url(' +apiRessources+'/'+item +')'}" >
+                                            [ngStyle]="{'background-image': 'url('+item+')'}" >
                                             <div class="more-images-button" *ngIf="displayButtonMore && i == 3 " (click)="showMoreImage($event)" >
                                                 <i class="fas fa-plus "></i>
                                                 <span>{{' '+differenceLimit}} autres </span>
@@ -48,7 +52,7 @@
 
                     <div class="priduct-price">
                         <h3>
-                            {{annouce.price}} Frs
+                            {{annouce.price | currency}}
                         </h3>
                     </div>
 
@@ -105,7 +109,7 @@
                             <div class="location-address col-xl-12">
                                 <div class="two_icon" *ngIf="annouce.users?.whatsapp_number">
                                     <a [href]="'tel:'+annouce.users?.whatsapp_number" target="_blank">
-                                        <i class="fa-solid fa-square-phone-flip" style="font-size: 23px;"></i> : +237 {{annouce.users?.whatsapp_number}}
+                                        <i class="fa-solid fa-square-phone-flip" style="font-size: 23px;"></i> : +{{annouce.users?.whatsapp_number}}
                                     </a> 
                                 </div>
                                 <div class="two_icon " *ngIf="annouce.users?.site_url">
@@ -115,7 +119,7 @@
                                 </div>
                                 <div class="two_icon" *ngIf="annouce.users.whatsapp_number">
                                     <a [href]="'https://api.whatsapp.com/send?phone='+annouce.users.whatsapp_number+'&text=Hello Bailleurnet&source=&data='" target="_blank" rel="noopener noreferrer">
-                                        <i class="fab fa-whatsapp" style="font-size: 24px;"></i> : +237 {{annouce.users.whatsapp_number}}
+                                        <i class="fab fa-whatsapp" style="font-size: 24px;"></i> : +{{annouce.users.whatsapp_number}}
                                     </a>
                                 </div>
                                 <div class="two_icon" *ngIf="annouce.users.email">

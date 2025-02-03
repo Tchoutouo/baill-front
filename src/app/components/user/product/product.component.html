@@ -39,7 +39,7 @@
                 </div>
                 <div class="two_icon">
                     <a [href]="'https://api.whatsapp.com/send?phone='+productItem.users?.whatsapp_number+'&text=Hello Bailleurnet&source=&data='" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-whatsapp mx-2"  style="font-size: 24px;"></i> : +237{{productItem.users?.whatsapp_number}}
+                        <i class="fab fa-whatsapp mx-2"  style="font-size: 24px;"></i> : +{{productItem.users?.whatsapp_number}}
                     </a>
                 </div>
                 <div class="two_icon" *ngIf="productItem.users?.email">
