@@ -1,6 +1,6 @@
 {
     "/api": {
-        "target": "https://www.baill-back-test.mont-pandi.com",
+        "target": "https://backend.bailleurnet.com",
         "secure": false,
         "changeOrigin": true
     }

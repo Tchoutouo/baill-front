@@ -27,7 +27,28 @@
             "login-text":"Log in",
             "text-line-1":"Join Bailleurnet and ",
             "text-line-2":"start renting with ",
-            "text-line-3":"simply!"
+            "text-line-3":"simply!",
+            "message":{
+                "error":{
+                    "password":"password is required.",
+                    "password-1":"password must be at least 6 characters long.",
+                    "confirm-password":"password is required.",
+                    "confirm-password-1":"passwords do not match.",
+                    "username":"username is required.",
+                    "name": "last name(s) is required.",
+                    "first-name": "first name is required",
+                    "country":"Please choose a country.",
+                    "city":"Please choose your city.",
+                    "neighborhood": "Please choose your neighborhood.",
+                    "email-1":"Email is required.",
+                    "email-2":"Email is not in the correct format.",
+                    "whatsapp-number":"Phone(Whatsapp)"
+                },
+                "notif":{
+                    "success": "Your account has been successfully registered !!",
+                    "warning": "An error occurred during the operation"
+                }
+            }
         },
         "signin":{
             "login-description": "Welcome to Bailleurnet, rental at your fingertips.",

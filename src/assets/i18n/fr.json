@@ -27,7 +27,28 @@
             "login-text":"Se connecter",
             "text-line-1":"Rejoignez Bailleurnet et ",
             "text-line-2":"commencez à LOUER en ",
-            "text-line-3":"toute simplicité !"
+            "text-line-3":"toute simplicité !",
+            "message":{
+                "error":{
+                    "password":"le mot de passe est requis.",
+                    "password-1":"le mot de passe doit comporter au moins 6 caractères.",
+                    "confirm-password":"le mot de passe est requis.",
+                    "confirm-password-1":"les mots de passe ne correspondent pas.",
+                    "username":"le nom d'utilisateur est requis.",
+                    "name": "le nom(s) est requis.",
+                    "first-name": "le prénom est requis",
+                    "country":"Veuillez choisir un pays.",
+                    "city":"Veuillez choisir votre ville.",
+                    "neighborhood": "Veuillez choisir votre quartier.",
+                    "email-1":"L'email est requis.",
+                    "email-2":"L'email ne respect pas le bon format.",
+                    "whatsapp-number":"Téléphone(Whatsapp)"
+                },
+                "notif":{
+                    "success": "Votre compte a été enregistrée avec succès !!",
+                    "warning": "Une erreur est survenu lors de l'opération"
+                }
+            }
         },
         "signin":{
             "login-description": "Bienvenue chez Bailleurnet, la location à portée de main.",

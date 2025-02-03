@@ -2,15 +2,25 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { Observable } from 'rxjs/internal/Observable';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EntityServiceService {
 
-  constructor(private http : HttpClient) { 
+  constructor(private http : HttpClient, private translate: TranslateService) { 
   }
   
+  getTranslatedText(key: string): string {
+    let translatedText = '';
+    this.translate.get(key).subscribe((res: string) => {
+      console.log("res", res);
+      translatedText = res;
+    });
+    return translatedText;
+  }
+
   getAll(entity:string){
     return this.http.get(environment.apiUrl+entity)
   }

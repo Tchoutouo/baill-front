@@ -87,8 +87,8 @@ export class PackageEditComponent implements OnInit {
           }else{
             notif.message = "erreur lors de l'enregistrement des modifications"
             notif.status = "warning"
-            this.notification.emitNotification(notif)
           }
+          this.notification.emitNotification(notif)
         },
         error: (error : any) => {
           notif.message = "Nous sommes désolé mais le serveur est momentanement indisponible"

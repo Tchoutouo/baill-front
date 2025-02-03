@@ -1,7 +1,7 @@
 <div class="signup-content">
-    <!-- <div class="alert-message">
+    <div class="alert-message">
         <app-alert *ngIf="display_message" (timeOut) ="closeAlert($event)" [message] = "message_alert"></app-alert>
-    </div> -->
+    </div>
     <div class="content">
         <div class="row signup ">
             <div class="col-md-8 content-left">
@@ -20,7 +20,7 @@
                             </div>
                             <div class="error" *ngIf="username.dirty">
                                 <p *ngIf="username.hasError('required')">
-                                    le nom d'utilisateur est requis
+                                    {{'user.signup.message.error.username'|translate}}
                                 </p>
                             </div>
                             <div class="form-group">
@@ -29,7 +29,7 @@
                             </div>
                             <div class="error" *ngIf="last_name.dirty">
                                 <p *ngIf="last_name.hasError('required')">
-                                    le nom(s) est requis
+                                    {{'user.signup.message.error.name'|translate}}
                                 </p>
                             </div>
                             <div class="form-group">
@@ -38,7 +38,7 @@
                             </div>
                             <div class="error" *ngIf="first_name.dirty">
                                 <p *ngIf="last_name.hasError('required')">
-                                    le prénom est requis
+                                    {{'user.signup.message.error.first-name'|translate}}
                                 </p>
                             </div>
                             <div class="form-group">
@@ -47,10 +47,10 @@
                             </div>
                             <div class="error" *ngIf="email.dirty && !email.valid">
                                 <p *ngIf="email.hasError('required')">
-                                    L'email est requis
+                                    {{'user.signup.message.error.email-1'|translate}}
                                 </p>
                                 <p *ngIf="!email.hasError('required')">
-                                    L'email ne respect pas le bon format
+                                    {{'user.signup.message.error.email-2'|translate}}
                                 </p>
                             </div>
                             <div class="form-group">
@@ -70,7 +70,7 @@
                             </div>
                             <div class="error" *ngIf="country.dirty">
                                 <p *ngIf="country.hasError('required')">
-                                    Veuillez choisir un pays.
+                                    {{'user.signup.message.error.country'|translate}}
                                 </p>
                             </div>
                             <div class="form-group">
@@ -83,7 +83,7 @@
                             </div>
                             <div class="error" *ngIf="city.dirty">
                                 <p *ngIf="city.hasError('required')">
-                                    Veuillez choisir votre ville.
+                                    {{'user.signup.message.error.city'|translate}}
                                 </p>
                             </div>
                             <div class="form-group">
@@ -93,7 +93,7 @@
                             </div>
                             <div class="error" *ngIf="neighborhood.dirty">
                                 <p *ngIf="city.hasError('required')">
-                                    Veuillez choisir votre quartier.
+                                    {{'user.signup.message.error.neighborhood'|translate}}
                                 </p>
                             </div>
                             
@@ -103,11 +103,11 @@
                             </div>
                             <div class="error" *ngIf="password.dirty && !password.valid">
                                 <p *ngIf="password.hasError('required')">
-                                    The password is required
+                                    {{'user.signup.message.error.password'|translate}}
                                 </p>
                                 
                                 <p *ngIf="password.hasError('minlength')">
-                                    The password must be at least 6 characters
+                                    {{'user.signup.message.error.password-1'|translate}}
                                 </p>
                             </div>
                             <div class="form-group">
@@ -116,10 +116,10 @@
                             </div>
                             <div class="error" *ngIf="passwordConfirm.dirty && !passwordConfirm.valid">
                                 <p *ngIf="passwordConfirm.hasError('required')">
-                                    The password is required
+                                    {{'user.signup.message.error.confirm-password'|translate}}
                                 </p>
                                 <p *ngIf="signupForm.errors?.['passwordsDoNotMatch'] && passwordConfirm?.touched">
-                                    Passwords do not match.
+                                    {{'user.signup.message.error.confirm-password-1'|translate}}
                                 </p>
                             </div>
                         </div>
