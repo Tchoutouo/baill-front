@@ -111,10 +111,10 @@ export class SignupComponent implements OnInit{
     try{
       var countryCode = event.target.value;
       this.cities = City.getCitiesOfCountry(countryCode);
-      this.country_selected = Country.getCountryByCode(countryCode)
+      this.country_selected = Country.getCountryByCode(countryCode);
+      this.phoneCode = this.country_selected.phonecode;
       this.my_country = this.country_selected.name;
       this.selectedCountry = this.my_country;
-      // console.log("country",this.my_country);
 
     } catch (error) {
       console.error('Erreur lors de la récupération des villes:', error);
@@ -122,18 +122,14 @@ export class SignupComponent implements OnInit{
   }
 
   handleSubmit(){
-    console.log("formValue",this.signupForm.value);
     const entity =  "advertiser_back/store";
-
+    this.signupForm.value.whatsapp_number = this.phoneCode+this.signupForm.value.whatsapp_number;
     const datas = this.signupForm.value;
-    // datas.country =  this.my_country;
 
-    // console.log("datas", datas);
     if (this.signupForm.valid) {
       console.log('Form submitted successfully');
       this.entityService.store(entity, datas).subscribe({
         next : (data : any) =>{
-          console.log("data",data);
           if(data.success){
             this.message_alert = "Votre compte a été enregistrée avec succès !!";
             if (this.message_alert) {
@@ -141,11 +137,10 @@ export class SignupComponent implements OnInit{
             }
             this.router.navigate(['/signin']);
           }
-          console.log({success: data});
         },
   
         error: (error : any) => {
-          console.log(error);
+          console.log("erreur lors de l'enregistrement d'un utilisateur:",error);
         }
       })
 

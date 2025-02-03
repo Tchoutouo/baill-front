@@ -55,7 +55,10 @@
                             </div>
                             <div class="form-group">
                                 <label for="phone">{{'user.signup.whatsapp-number'|translate}}</label><span>*</span>
-                                <input id="phone" class="form-control" type="number" [formControl]="whatsapp_number" name="whatsapp_number">
+                                <div class="d-flex justify-content-center">
+                                    <input type="text" [value]="'+'+phoneCode" disabled style="width: 15%; border-top-right-radius: 0; border-bottom-right-radius: 0; padding: 0px !important;" class="form-control" readonly>
+                                    <input id="phone" class="form-control" type="number" [formControl]="whatsapp_number" name="whatsapp_number" style="width: 85%; border-top-left-radius: 0; border-bottom-left-radius: 0;">
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6 tab_2">
