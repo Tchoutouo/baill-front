@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { EntityServiceService } from '../../../services/admin/entity-service.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-categories-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   templateUrl: './categories-list.component.html',
   styleUrl: './categories-list.component.css'
 })
