@@ -35,7 +35,7 @@ export class EntityServiceService {
   }
 
   update(id: any, datas: any, entity: string): Observable<any> {
-    console.log(environment.apiUrl, datas); 
+    // console.log(environment.apiUrl, datas); 
     
     const options = {
       headers: new HttpHeaders({ "Content-Type": "multipart/form-data" }),
@@ -55,7 +55,7 @@ export class EntityServiceService {
     let user : any = localStorage.getItem('user');
     let user_converted : any = JSON.parse(user);
     let url ;
-    console.log(JSON.parse(user));
+    // console.log(JSON.parse(user));
     
     if (user_converted.profil_code) {
       if (user_converted.profil_code == 'SUP_ADMIN' || user_converted.profil_code == 'ADMIN') {
@@ -102,16 +102,16 @@ export class EntityServiceService {
   }
 
   getAdvertiser(id : number | string, entity: any) : Observable<any>{
-    console.log(environment.apiUrl+entity+id);
+    // console.log(environment.apiUrl+entity+id);
     return this.http.get(environment.apiUrl+entity+id);
   }
 
   getAllCategories(pageNumber: any, pageLimit: any, query : any = null){
     if (query) {
-      console.log(environment.apiUrl+'categorie_back/'+pageLimit+'/'+query+'?page='+pageNumber);
+      // console.log(environment.apiUrl+'categorie_back/'+pageLimit+'/'+query+'?page='+pageNumber);
       return this.http.get(environment.apiUrl+'categorie_back/'+pageLimit+'/'+query+'?page='+pageNumber);
     }else{
-      console.log(environment.apiUrl+'categorie_back/'+pageLimit+'/'+query+'?page='+pageNumber);
+      // console.log(environment.apiUrl+'categorie_back/'+pageLimit+'/'+query+'?page='+pageNumber);
       return this.http.get(environment.apiUrl+'categorie_back/'+pageLimit+'/'+'?page='+pageNumber);
     }
   }

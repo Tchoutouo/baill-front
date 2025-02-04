@@ -26,7 +26,6 @@ export class HeaderComponent {
 
   ngOnInit() {
     this.is_auth = this.authentificator.isAuthenticated();
-    console.log("is_auth", this.is_auth);
     this.siteName = getSiteName();
     this.lang = localStorage.getItem('lang') || 'fr';
   }

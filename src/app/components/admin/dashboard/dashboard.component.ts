@@ -44,6 +44,7 @@ export class DashboardComponent {
       const user = this.locaStorage.getItem('user')
       // const user_id = 6;
       const user_id = user?.id;
+      console.log("user_id", user_id);
       if (user_id) {
         this.dashboardSub = this.entityService.getDashoardDatas(user_id).subscribe({
           next : (datas : any) =>{

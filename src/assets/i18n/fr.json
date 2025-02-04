@@ -10,6 +10,7 @@
     },
     "banner":{
         "title":"LOUER en toute simplicité",
+        "title-2": "LOUER en toute simplicité, des biens et services sur bailleurnet",
         "description": "Bailleurnet est La plateforme ultime pour la location de biens et services en toute simplicité",
         "btn-publish": "Publier une annonce"
     },
@@ -92,7 +93,7 @@
             "cat": "Catégories",
             "description":"Description",
             "others": "autres",
-            "no-announce": "Aucune annonce",
+            "no-announce": "Aucune annonce(s)",
             "no-content": "Annonce introuvable",
             "view-all": "Voir tout"
         }

@@ -39,13 +39,13 @@ export class AuthenticatorService {
       }); 
 
     const test = this.fetchCsrfToken().subscribe(response => {  
-      console.log('CSRF Token:', response);  
+      // console.log('CSRF Token:', response);  
     });  
 
     
     this.http.post(environment.apiUrl + "login", user, { headers }).subscribe({  
         next: (result: any) => {  
-          console.log(result);
+          // console.log(result);
           
             if (result.success) {  
                 const data: LoginResponse = {  
@@ -54,7 +54,7 @@ export class AuthenticatorService {
                     token: result.token,  
                     redirect_url: result.redirect_url  
               };  
-                console.log("redirect_url", result.redirect_url);  
+                // console.log("redirect_url", result.redirect_url);  
                 this.localStorage.setItem('token', data.token);  
                 this.localStorage.setItem('user', result.data);  
                 this.authUser = true;  
