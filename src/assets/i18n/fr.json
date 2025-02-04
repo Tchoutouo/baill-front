@@ -87,6 +87,14 @@
             "title-signup": "s'inscrire",
             "email": "E-mail ou Tel",
             "password": "Mot de passe"
+        },
+        "produit-detail":{
+            "cat": "Catégories",
+            "description":"Description",
+            "others": "autres",
+            "no-announce": "Aucune annonce",
+            "no-content": "Annonce introuvable",
+            "view-all": "Voir tout"
         }
     },
     "admin":{

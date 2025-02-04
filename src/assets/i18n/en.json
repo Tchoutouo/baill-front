@@ -87,6 +87,14 @@
             "title-signup": "Register",
             "email": "E-mail or Phone",
             "password": "Password"
+        },
+        "product-detail":{
+            "cat": "Categories",
+            "description": "Description",
+            "others": "others",
+            "no-announce": "No ad",
+            "no-content": "Ad not found",
+            "view-all": "See all"
         }
     },
     "admin":{

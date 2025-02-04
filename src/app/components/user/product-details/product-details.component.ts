@@ -9,11 +9,12 @@ import { ActivatedRoute } from '@angular/router';
 import { HomeService } from '../../../services/guest/home.service';
 import { Subscription } from 'rxjs';
 import { environment } from '../../../../environments/environment.development';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [CommonModule, ProductComponent, ImageListComponent, HeaderComponent,FooterComponent],
+  imports: [CommonModule, ProductComponent, ImageListComponent, HeaderComponent,FooterComponent, TranslateModule],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.css'
 })

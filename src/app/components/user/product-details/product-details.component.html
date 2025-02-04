@@ -22,7 +22,7 @@
                                             [ngStyle]="{'background-image': 'url('+item+')'}" >
                                             <div class="more-images-button" *ngIf="displayButtonMore && i == 3 " (click)="showMoreImage($event)" >
                                                 <i class="fas fa-plus "></i>
-                                                <span>{{' '+differenceLimit}} autres </span>
+                                                <span>{{' '+differenceLimit}} {{'user.product-detail.others'| translate}} </span>
                                             </div>
                                         </div>
                                     </div>
@@ -58,7 +58,7 @@
 
                     <div class="product-description">
                         <span class="title">
-                            Description
+                            {{'user.product-detail.description'| translate}}
                         </span>
                         <p>
                             {{annouce.description}}
@@ -67,7 +67,7 @@
 
                     <div class="product-caracteristic">
                         <h6 class="title">
-                            Catégories
+                            {{'user.product-detail.cat'| translate}}
                         </h6>
                         
                         <ul class="caracteristiques gap-10">
@@ -148,20 +148,20 @@
 
         <div class="row">
             <div class="d-flex justify-content-center">
-                <a href="" class="see_more mb-5">Voir tout</a>
+                <a href="" class="see_more mb-5">{{'user.product-detail.view-all'| translate}}</a>
             </div>
         </div>
     </div>
     <div class="annonces-not-found row" *ngIf="other_announces">
         <div class="col-12 d-flex text justify-content-center" style="font-size : 32px !important">
-            Aucune annonces
+            {{'user.product-detail.no-announce'| translate}}
         </div>
     </div>
 </div>
 
 <div class="annonces-not-found row justify-content-center" *ngIf="!annouce">
     <div class="col-12 d-flex text justify-content-center">
-        Annonce Introuvable
+        {{'user.product-detail.no-content'| translate}}
     </div>
 </div>
 
