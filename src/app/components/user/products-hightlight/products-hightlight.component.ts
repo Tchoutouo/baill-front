@@ -3,11 +3,12 @@ import { Subscription } from 'rxjs';
 import { HomeService } from '../../../services/guest/home.service';
 import { CommonModule } from '@angular/common';
 import { environment } from '../../../../environments/environment.development';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-products-hightlight',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   templateUrl: './products-hightlight.component.html',
   styleUrl: './products-hightlight.component.css'
 })

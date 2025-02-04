@@ -6,11 +6,12 @@ import { Category } from '../../../models/admin/category';
 import { EntityServiceService } from '../../../services/admin/entity-service.service';
 import { Subscription } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-tags-list',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, TranslateModule],
   templateUrl: './tags-list.component.html',
   styleUrl: './tags-list.component.css'
 })

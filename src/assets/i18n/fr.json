@@ -1,4 +1,13 @@
 {
+    "button":{
+        "next": "Suivant",
+        "previous": "Précédent",
+        "save": "Enregistrer",
+        "cancel": "Annuler",
+        "publish": "Publier",
+        "back": "Retour",
+        "validate":"Valider"
+    },
     "banner":{
         "title":"LOUER en toute simplicité",
         "description": "Bailleurnet est La plateforme ultime pour la location de biens et services en toute simplicité",
@@ -11,6 +20,15 @@
         "espace-text":"Mon espace"
     },
     "user": {
+        "hightlight":{
+            "title": " A la une !",
+            "no-content": "Pas d'annonce à la une pour le moment."
+        },
+        "tags-list":{
+            "cat":"Selectionner une categorie",
+            "country": "Selectionner un pays",
+            "city": "Selectionner une ville"
+        },
         "signup":{
             "password":"Mot de passe",
             "confirm-password":"Confirmer votre mot de passe",

@@ -1,4 +1,13 @@
 {
+    "button":{
+        "next": "Next",
+        "previous": "Previous",
+        "save": "Save",
+        "cancel": "Cancel",
+        "publish": "Publish",
+        "back": "Back",
+        "validate":"Validate"
+    },
     "banner":{
         "title":"Rent with ease",
         "description": "Bailleurnet is the ultimate platform for renting goods and services with ease",
@@ -11,6 +20,15 @@
         "espace-text":"My space"
     },
     "user": {
+        "hightlight":{
+            "title": "On the front page!",
+            "no-content": "No headline announcement at the moment."
+        },
+        "tags-list":{
+            "cat": "Select a category",
+            "country": "Select a country",
+            "city": "Select a city"
+        },
         "signup":{
             "password":"Password",
             "confirm-password":"Confirm your password",
