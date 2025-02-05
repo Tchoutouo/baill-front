@@ -8,7 +8,7 @@ export const environment = {
 
     // apiUrl: "http://baill-back.sc1zeucoder.universe.wf/api/",
     // apiUrlRessources: "http://baill-back.sc1zeucoder.universe.wf/public/storage"
-    apiUrl: "https://www.baill-back-test.mont-pandi.com/api/",
+    // apiUrl: "https://www.baill-back-test.mont-pandi.com/api/",
     // apiUrlRessources: "https://www.baill-back-test.mont-pandi.com/public/storage"
     // apiUrlRessources: "http://localhost:8000/autres_projets/bailleur/baill-back/public/storage"
     // apiUrl: "https://test-backend.bailleurnet.com/api/"
