@@ -68,7 +68,7 @@ export class MyAccountComponent implements OnInit {
   ngOnInit(): void {  
     window.scroll(0, 0);  
     this.user = this.localStorage.getItem('user');  
-    this.picture = this.user.picture ?  environment.apiUrlRessources + '/' + this.user.picture : false ;  
+    this.picture = this.user.picture ? this.user.picture : false ;  
     this.countries = Country.getAllCountries();  
     this.selectedCountry = this.user.country;  
     this.cities = City.getCitiesOfCountry(this.selectedCountry);  

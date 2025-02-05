@@ -30,13 +30,13 @@ export class UserIndexComponent implements OnInit{
   user!: User;  
   userSub?: Subscription; 
   errorMessage : string = '';
-  rangeList: any[] = [5, 10, 15, 20, 25, 30] ;
+  rangeList: any[] = [10, 15, 20, 25, 30] ;
   userList: any = [];
   showAlert : any;
   display_message: boolean = false;
   message_alert : any  = null;
   pageNumber : number = 1;
-  pageLImit : number = 5;
+  pageLImit : number = 10;
   querySearch : string = "";
   query: string = "";
   paginationDAtas : any;
@@ -98,7 +98,6 @@ export class UserIndexComponent implements OnInit{
     if (this.query.length >= 2){
       this.userSub = this.entityService.searchAdvertiserByPage(this.pageNumber, this.pageLImit, this.query).subscribe({
         next: (result_search: any) => { 
-          console.log({result : result_search});
 
           if (result_search.success) {
             this.userList = result_search.data.data;
@@ -121,9 +120,10 @@ export class UserIndexComponent implements OnInit{
       })
 
     }else{
-      this.userSub = this.entityService.getAllAdvertisers(this.pageNumber).subscribe({
+      this.userSub = this.entityService.getAllAdvertisers(this.pageLImit).subscribe({
         next: (data: any) => { 
           if (data.success) {
+            
             this.userList = data.data.data;
             this.paginationDAtas = {
               current : data.data?.current_page ,
@@ -132,7 +132,6 @@ export class UserIndexComponent implements OnInit{
               previous : data.data?.current_page - 1 ,
               allcount : data.data?.total ,
             }
-            console.log("userList", this.userList)
           }
         },
   
