@@ -104,90 +104,253 @@ export class FormCreateComponent {
   } 
 
 
-  handleSubmit(event: any = null) {  
+  /////////////////////////////////// PREMIERE METHODE /////////////////////////////////////
+
+//   handleSubmit(event: any = null) {  
     
-    if (!this.anounces_form_datas.valid || this.images_annouces_list.length < 1) {  
-      if (this.images_annouces_list.length < 1) {  
-        this.errorMessages = 'Veuillez ajouter au moins une image.';  
-      }  
+//     if (!this.anounces_form_datas.valid || this.images_annouces_list.length < 1) {  
+//       if (this.images_annouces_list.length < 1) {  
+//         this.errorMessages = 'Veuillez ajouter au moins une image.';  
+//       }  
 
-      // // Collecter les messages d'erreur pour chaque contrôle  
-      // Object.keys(this.anounces_form_datas.controls).forEach(key => {  
-      //   const control = this.anounces_form_datas.controls[key];  
-      //   if (control.invalid && (control.dirty || control.touched)) {  
-      //     if (control.errors) {  
-      //       if (control.errors.required) {  
-      //         this.errorMessages.push(`Le champ ${key} est requis.`);  
-      //       }  
-      //       // Vous pouvez ajouter d'autres vérifications d'erreurs ici  
-      //     }  
-      //   }  
-      // });  
-    } else {  
+//       // // Collecter les messages d'erreur pour chaque contrôle  
+//       // Object.keys(this.anounces_form_datas.controls).forEach(key => {  
+//       //   const control = this.anounces_form_datas.controls[key];  
+//       //   if (control.invalid && (control.dirty || control.touched)) {  
+//       //     if (control.errors) {  
+//       //       if (control.errors.required) {  
+//       //         this.errorMessages.push(`Le champ ${key} est requis.`);  
+//       //       }  
+//       //       // Vous pouvez ajouter d'autres vérifications d'erreurs ici  
+//       //     }  
+//       //   }  
+//       // });  
+//     } else {  
       
-        const entity = "annonce_back/store";  
-        let formData: FormData = new FormData();  
+//         const entity = "annonce_back/store";  
+//         let formData: FormData = new FormData();  
 
-        // Collecte des données du formulaire  
-        let datas = this.anounces_form_datas.value;  
+//         // Collecte des données du formulaire  
+//         let datas = this.anounces_form_datas.value;  
         
-        // Ajout des données du formulaire dans FormData  
-        Object.keys(datas).forEach((key) => {  
-          if (Array.isArray(datas[key])) {  
-            // Si la valeur est un tableau, itérer à travers chaque élément  
-            datas[key].forEach((item) => {  
-              formData.append(key + '[]', item); // Append le tableau avec une notation '[]' pour indiquer que c'est un tableau  
-            });  
-          } else if (typeof datas[key] === 'object' && datas[key] !== null) {  
-            // Si c'est un objet (mais pas null), vous pouvez également itérer à travers ses propriétés  
-            formData.append(key, JSON.stringify(datas[key])); // Convertir l'objet en JSON  
-          } else {  
-            // Pour d'autres types de valeurs (string, number, etc.)  
-            formData.append(key, datas[key]);  
-          }  
-        });
+//         // Ajout des données du formulaire dans FormData  
+//         Object.keys(datas).forEach((key) => {  
+//           if (Array.isArray(datas[key])) {  
+//             // Si la valeur est un tableau, itérer à travers chaque élément  
+//             datas[key].forEach((item) => {  
+//               formData.append(key + '[]', item); // Append le tableau avec une notation '[]' pour indiquer que c'est un tableau  
+//             });  
+//           } else if (typeof datas[key] === 'object' && datas[key] !== null) {  
+//             // Si c'est un objet (mais pas null), vous pouvez également itérer à travers ses propriétés  
+//             formData.append(key, JSON.stringify(datas[key])); // Convertir l'objet en JSON  
+//           } else {  
+//             // Pour d'autres types de valeurs (string, number, etc.)  
+//             formData.append(key, datas[key]);  
+//           }  
+//         });
 
-        // Mise à jour de is_published selon l'événement  
-        // console.log({country : this.selectedCountry} );
+//         // Mise à jour de is_published selon l'événement  
+//         // console.log({country : this.selectedCountry} );
         
-        formData.append('is_published', event ? '1' : '0');  
-        formData.append('country', this.selectedCountry ? this.selectedCountry : 'CM');  
-        formData.append('status', event ? '3' : '1');  
-        formData.append('abonnement_id', event ? event : 1);  
-        let user = this.locaStorage.getItem('user');
-        formData.append('user_id', user ? user.id : 1);  
+//         formData.append('is_published', event ? '1' : '0');  
+//         formData.append('country', this.selectedCountry ? this.selectedCountry : 'CM');  
+//         formData.append('status', event ? '3' : '1');  
+//         formData.append('abonnement_id', event ? event : 1);  
+//         let user = this.locaStorage.getItem('user');
+//         formData.append('user_id', user ? user.id : 1);  
         
-        // Ajout des images  
-        this.images_annouces_list.forEach((file) => {  
-            formData.append('images[]', file);  // Utiliser append au lieu de set  
-        });
+//         // Ajout des images  
+//         this.images_annouces_list.forEach((file) => {  
+//             formData.append('images[]', file);  // Utiliser append au lieu de set  
+//         });
         
-        // Stockage de l'entité  
-        this.entityService.store(entity, formData).subscribe({  
-            next: (data: any) => {  
+//         // Stockage de l'entité  
+//         this.entityService.store(entity, formData).subscribe({  
+//             next: (data: any) => {  
               
-              const notif = new Notification();
-                if (data.success) {
-                  notif.message = "Annonce crée avec success !"
-                  notif.status = "success"
-                  this.router.navigate(['/admin']);   
-                }else{
-                  notif.message = "erreur lors de l'enregistrement contacter l'administrateur !"
-                  notif.status = "warning"
-                }
+//               const notif = new Notification();
+//                 if (data.success) {
+//                   notif.message = "Annonce crée avec success !"
+//                   notif.status = "success"
+//                   this.router.navigate(['/admin']);   
+//                 }else{
+//                   notif.message = "erreur lors de l'enregistrement contacter l'administrateur !"
+//                   notif.status = "warning"
+//                 }
               
-                this.notification.emitNotification(notif)
-                // Vous pouvez envisager de réinitialiser le formulaire ou d'afficher un message de succès ici  
-            },  
-            error: (error: any) => {  
-                console.log("Creation d'annonce",error);  
-                const notif_error = new Notification();
-                notif_error.message = "erreur lors de l'enregistrement contacter l'administrateur !";
-                notif_error.status = "warning";
-            }  
-        });  
-    }  
-}
+//                 this.notification.emitNotification(notif)
+//                 // Vous pouvez envisager de réinitialiser le formulaire ou d'afficher un message de succès ici  
+//             },  
+//             error: (error: any) => {  
+//                 console.log("Creation d'annonce",error);  
+//                 const notif_error = new Notification();
+//                 notif_error.message = "erreur lors de l'enregistrement contacter l'administrateur !";
+//                 notif_error.status = "warning";
+//             }  
+//         });  
+//     }  
+// }
+
+/////////////////////////////////// DEUXIEME METHODE /////////////////////////////////////
+
+  // async handleSubmit(event: any = null) {
+  //   if (!this.isFormValid()) {
+  //     return;
+  //   }
+
+  //   const formData = this.createFormData(event);
+
+  //   try {
+  //     const response = await this.entityService.store("annonce_back/store", formData).toPromise();
+  //     this.handleResponse(response);
+  //   } catch (error) {
+  //     this.handleError(error);
+  //   }
+  // }
+
+  // private isFormValid(): boolean {
+  //   if (!this.anounces_form_datas.valid || this.images_annouces_list.length < 1) {
+  //     if (this.images_annouces_list.length < 1) {
+  //       this.errorMessages = 'Veuillez ajouter au moins une image.';
+  //     }
+  //     return false;
+  //   }
+  //   return true;
+  // }
+
+  // private createFormData(event: any): FormData {
+  //   const formData = new FormData();
+  //   const datas = this.anounces_form_datas.value;
+
+  //   Object.keys(datas).forEach((key) => {
+  //     const value = datas[key];
+  //     if (Array.isArray(value)) {
+  //       value.forEach(item => formData.append(`${key}[]`, item));
+  //     } else if (typeof value === 'object' && value !== null) {
+  //       formData.append(key, JSON.stringify(value));
+  //     } else {
+  //       formData.append(key, value);
+  //     }
+  //   });
+
+  //   formData.append('is_published', event ? '1' : '0');
+  //   formData.append('country', this.selectedCountry || 'CM');
+  //   formData.append('status', event ? '3' : '1');
+  //   formData.append('abonnement_id', event || 1);
+
+  //   const user = this.locaStorage.getItem('user');
+  //   formData.append('user_id', user ? user.id : 1);
+
+  //   this.images_annouces_list.forEach(file => formData.append('images[]', file));
+
+  //   return formData;
+  // }
+
+  // private handleResponse(data: any) {
+  //   const notif = new Notification();
+  //   if (data.success) {
+  //     notif.message = "Annonce créée avec succès !";
+  //     notif.status = "success";
+  //     this.router.navigate(['/admin']);
+  //   } else {
+  //     notif.message = "Erreur lors de l'enregistrement, contacter l'administrateur !";
+  //     notif.status = "warning";
+  //   }
+  //   this.notification.emitNotification(notif);
+  // }
+
+  // private handleError(error: any) {
+  //   console.log("Création d'annonce", error);
+  //   const notif_error = new Notification();
+  //   notif_error.message = "Erreur lors de l'enregistrement, contacter l'administrateur !";
+  //   notif_error.status = "warning";
+  //   this.notification.emitNotification(notif_error);
+  // }
+
+  /////////////////////////////////// TROISIEME METHODE /////////////////////////////////////
+
+  async handleSubmit(event: any = null) {
+    // Vérification rapide de la validité du formulaire
+    if (!this.anounces_form_datas.valid || this.images_annouces_list.length < 1) {
+      this.errorMessages = this.images_annouces_list.length < 1
+        ? 'Veuillez ajouter au moins une image.'
+        : 'Le formulaire contient des erreurs.';
+      return;
+    }
+  
+    try {
+      // Création de FormData de manière optimisée
+      const formData = this.createFormData(event);
+  
+      // Envoi des données
+      const response = await this.entityService.store("annonce_back/store", formData).toPromise();
+  
+      // Gestion de la réponse
+      this.handleResponse(response);
+    } catch (error) {
+      // Gestion des erreurs
+      this.handleError(error);
+    }
+  }
+  
+  private createFormData(event: any): FormData {
+    const formData = new FormData();
+    const datas = this.anounces_form_datas.value;
+  
+    // Ajout des données du formulaire
+    for (const key in datas) {
+      if (datas.hasOwnProperty(key)) {
+        const value = datas[key];
+        if (Array.isArray(value)) {
+          value.forEach(item => formData.append(`${key}[]`, item));
+        } else if (typeof value === 'object' && value !== null) {
+          formData.append(key, JSON.stringify(value));
+        } else {
+          formData.append(key, value);
+        }
+      }
+    }
+  
+    // Ajout des champs supplémentaires
+    formData.append('is_published', event ? '1' : '0');
+    formData.append('country', this.selectedCountry || 'CM');
+    formData.append('status', event ? '3' : '1');
+    formData.append('abonnement_id', event || 1);
+  
+    // Ajout de l'ID utilisateur
+    const user = this.locaStorage.getItem('user');
+    formData.append('user_id', user?.id || 1);
+  
+    // Ajout des images
+    for (const file of this.images_annouces_list) {
+      formData.append('images[]', file);
+    }
+  
+    return formData;
+  }
+  
+  private handleResponse(data: any) {
+    const notif = new Notification();
+    notif.message = data.success
+      ? "Annonce créée avec succès !"
+      : "Erreur lors de l'enregistrement, contacter l'administrateur !";
+    notif.status = data.success ? "success" : "warning";
+  
+    this.notification.emitNotification(notif);
+  
+    if (data.success) {
+      this.router.navigate(['/admin']);
+    }
+  }
+  
+  private handleError(error: any) {
+    console.error("Création d'annonce", error);
+    const notif = new Notification();
+    notif.message = "Erreur lors de l'enregistrement, contacter l'administrateur !";
+    notif.status = "warning";
+    this.notification.emitNotification(notif);
+  }
+
 
   getImagesList(event : any){
     this.images_annouces_list = event;
