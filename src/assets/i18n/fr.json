@@ -89,7 +89,7 @@
             "email": "E-mail ou Tel",
             "password": "Mot de passe"
         },
-        "produit-detail":{
+        "product-detail":{
             "cat": "Catégories",
             "description":"Description",
             "others": "autres",
