@@ -44,14 +44,15 @@ export class DashboardComponent {
       const user = this.locaStorage.getItem('user')
       // const user_id = 6;
       const user_id = user?.id;
-      console.log("user_id", user_id);
+      // console.log("user_id", user_id);
       if (user_id) {
         this.dashboardSub = this.entityService.getDashoardDatas(user_id).subscribe({
           next : (datas : any) =>{
-            console.log(datas);
+            // console.log(datas);
             
             if (datas.success) {
-              this.totalEncours = datas.annonce_qte_inprogress;
+              // this.totalEncours = datas.annonce_qte_inprogress;
+              this.totalEncours = datas.annonce_qte_publisher;
               this.totalEnvoiDExp = datas.annonce_qte_pause;
               this.totalExpired = datas.annonce_qte_expired;
             }
