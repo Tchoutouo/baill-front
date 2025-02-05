@@ -1,21 +1,53 @@
 {
+    "button":{
+        "next": "Suivant",
+        "previous": "Précédent",
+        "save": "Enregistrer",
+        "cancel": "Annuler",
+        "publish": "Publier",
+        "back": "Retour",
+        "validate":"Valider"
+    },
     "banner":{
         "title":"LOUER en toute simplicité",
+        "title-2": "LOUER en toute simplicité, des biens et services sur bailleurnet",
         "description": "Bailleurnet est La plateforme ultime pour la location de biens et services en toute simplicité",
         "btn-publish": "Publier une annonce"
     },
     "header":{
         "publish-post": "Publier une annonce",
         "login-text":"Se connecter",
-        "search": "Recherche ..."
+        "search": "Recherche ...",
+        "espace-text":"Mon espace"
+    },
+    "footer":{
+        "contact": "Nous contacter",
+        "access-right": "Tous droits réservés"
     },
     "user": {
+        "hightlight":{
+            "title": " A la une !",
+            "no-content": "Pas d'annonce à la une pour le moment."
+        },
+        "tags-list":{
+            "cat":"Selectionner une categorie",
+            "country": "Selectionner un pays",
+            "city": "Selectionner une ville"
+        },
+        "cat-list":{
+            "title": "Catégories",
+            "ascending": "Croissant",
+            "descending": "Décroissant",
+            "price": "Prix",
+            "and": "Et",
+            "between": "Entre"
+        },
         "signup":{
             "password":"Mot de passe",
             "confirm-password":"Confirmer votre mot de passe",
             "username":"Nom d'utilisateur",
             "name": "Nom(s)",
-            "first-name": "Prénoms",
+            "first-name": "Prénom(s)",
             "country":"Pays",
             "city":"Ville",
             "neighborhood": "Quartier",
@@ -26,7 +58,28 @@
             "login-text":"Se connecter",
             "text-line-1":"Rejoignez Bailleurnet et ",
             "text-line-2":"commencez à LOUER en ",
-            "text-line-3":"toute simplicité !"
+            "text-line-3":"toute simplicité !",
+            "message":{
+                "error":{
+                    "password":"le mot de passe est requis.",
+                    "password-1":"le mot de passe doit comporter au moins 6 caractères.",
+                    "confirm-password":"le mot de passe est requis.",
+                    "confirm-password-1":"les mots de passe ne correspondent pas.",
+                    "username":"le nom d'utilisateur est requis.",
+                    "name": "le nom(s) est requis.",
+                    "first-name": "le prénom est requis",
+                    "country":"Veuillez choisir un pays.",
+                    "city":"Veuillez choisir votre ville.",
+                    "neighborhood": "Veuillez choisir votre quartier.",
+                    "email-1":"L'email est requis.",
+                    "email-2":"L'email ne respect pas le bon format.",
+                    "whatsapp-number":"Téléphone(Whatsapp)"
+                },
+                "notif":{
+                    "success": "Votre compte a été enregistrée avec succès !!",
+                    "warning": "Une erreur est survenu lors de l'opération"
+                }
+            }
         },
         "signin":{
             "login-description": "Bienvenue chez Bailleurnet, la location à portée de main.",
@@ -35,6 +88,14 @@
             "title-signup": "s'inscrire",
             "email": "E-mail ou Tel",
             "password": "Mot de passe"
+        },
+        "product-detail":{
+            "cat": "Catégories",
+            "description":"Description",
+            "others": "autres",
+            "no-announce": "Aucune annonce(s)",
+            "no-content": "Annonce introuvable",
+            "view-all": "Voir tout"
         }
     },
     "admin":{

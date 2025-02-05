@@ -1,5 +1,5 @@
 <div class="contaner-fluid px-4">
-    <div class=" " *ngIf="!isAdmin">    
+    <div class=" " *ngIf="isAdmin === false">    
         <div class="page-title">
             <h1>Annonces</h1>
         </div>
@@ -91,7 +91,7 @@
                                             </div>
                                         </a>
                                         <a *ngIf="value_datas.status == '1'" title="Supprimer" >
-                                            <i class="fa-solid fa-trash radius-3 bg_red text-white p-1"  (click)="handleConfirmDelete(true)" ></i>
+                                            <i class="fa-solid fa-trash radius-3 bg_red text-white p-1"  (click)="handleConfirmDelete([true, 'announce'])" ></i>
                                             <app-alert-confirm *ngIf="showAlert" (confirmAction)="deleteAnnouce($event , value_datas)"></app-alert-confirm>
                                         </a>
                                         <a *ngIf="value_datas.status == '2'" title="Republier" (click)="setAnnouceStatus(value_datas?.id, '3')">
@@ -227,7 +227,7 @@
                                                     </div>
                                                 </a>
                                                 <a *ngIf="value_datas.status == '1'" title="Supprimer" >
-                                                    <i class="fa-solid fa-trash radius-3 bg_red text-white p-1"  (click)="handleConfirmDelete(true)" ></i>
+                                                    <i class="fa-solid fa-trash radius-3 bg_red text-white p-1"  (click)="handleConfirmDelete([true, 'announce'])" ></i>
                                                     <app-alert-confirm *ngIf="showAlert" (confirmAction)="deleteAnnouce($event , value_datas)"></app-alert-confirm>
                                                 </a>
                                                 <a *ngIf="value_datas.status == '2'" title="Republier" (click)="setAnnouceStatus(value_datas?.id, '3')">
@@ -287,14 +287,19 @@
                             <input class="form-control me-2 py-1 px-5" id="search_field" 
                                 type="search" placeholder="Recherche ...." 
                                 aria-label="chercher"
+                                (keyup)="searchValueCat($event)"
+               
+                                (search)="searchValueCat($event)"
                             >
-                            <i class="fa-solid fa-magnifying-glass position-absolute search_icon"></i>
+                            <i class="fa-solid fa-magnifying-glass position-absolute search_icon" (keyup)="searchValueCat($event)"></i>
+                            
+               
                         </form>
                     </div>
                     
                     <div class="col-12 d-flex justify-content-start gap-2 align-items-center py-3">
                         <h3 class="label-filter m-0">Afficher par</h3>
-                        <select class="form-select w-25" id="" aria-label="Floating label select example">
+                        <select class="form-select w-25" id="" aria-label="Floating label select example" (change)="setCatPageLimit($event)">
                             <option value="{{itemRange}}" *ngFor="let itemRange of rangeList">{{itemRange}}</option>
                         </select>
                     </div>
@@ -311,110 +316,46 @@
                             <thead>
                                 <tr class="border-bottom-1-green">
                                     <th scope="col" class="border-top-1-gray border-left-1-gray">No</th>
-                                    <th scope="col " class="bord">Catégorie </th>
-                                    <th scope="col " class="bord">Nombre d'users</th>
-                                    <th scope="col " class="bord">Date de création</th>
+                                    <th scope="col " class="bord" *ngFor="let item_head of headLinesCat">{{item_head | formatEntityName}}</th>
                                     <th scope="col " class="bord border-right-1-gray">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <ng-container>
-                                    <tr >
-                                        <th scope="row" class="bord-black">1</th>
+                                    <!-- <tr >
+                                        <th scope="row" class="bord-black">{{1}}</th> -->
+                                    <tr *ngFor=" let category_item of categories_list.data; let ind = index" >
+                                        <th scope="row" class="bord-black">{{datas_paginate.allcount - (datas_paginate.current-1) * category_pageLimit - ind}}</th>
                                         <td class="bord-black">
-                                            Nom
+                                            {{category_item.title}}
                                         </td>
                                         <td class="bord-black">
-                                            Nom
+                                            {{category_item.description}}
                                         </td>
-                                        <td class="bord-black">Nom</td>
+                                        <td class="bord-black">{{category_item.created_at}}</td>
         
                                         <!-- Les actions -->
                                         <td class="bord-black">
                                             <div class="icon-list d-flex gap-2 justify-content-center">
                                 
                                                 <a  title="Supprimer" >
-                                                    <i class="fa-solid fa-trash radius-3 bg_red text-white p-1"  (click)="handleConfirmDelete(true)" ></i>
+                                                    <i class="fa-solid fa-trash radius-3 bg_red text-white p-1" (click)="handleConfirmDeleteCat([true, 'category',category_item])" ></i>
+                                                    <app-alert-confirm *ngIf="showAlert" (confirmAction)="deleteCategory($event , category_item)"></app-alert-confirm>
                                                 </a>
-                                                
-                                                <a title="Modifier">
+                                                <div class="modal fade" id="editCategory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <app-edit-category [category]="selectedCat" 
+                                                            (updated)="CloseFormCategoryModal('editCategory')"
+                                                            (updatedSend)="getAllCategories()"
+                                                        >
+                                                        </app-edit-category>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                <a title="Modifier" (click)="getCategory(category_item)" data-bs-toggle="modal" data-bs-target="#editCategory">
                                                     <i class="fa-solid fa-pen bg_blue radius-3 text-white p-1"></i>
-                                                </a> 
-                                            </div>
-                                        </td>
-                                        
-                                    </tr>
-                                    <tr >
-                                        <th scope="row" class="bord-black">1</th>
-                                        <td class="bord-black">
-                                            Nom
-                                        </td>
-                                        <td class="bord-black">
-                                            Nom
-                                        </td>
-                                        <td class="bord-black">Nom</td>
-        
-                                        <!-- Les actions -->
-                                        <td class="bord-black">
-                                            <div class="icon-list d-flex gap-2 justify-content-center">
-                                
-                                                <a  title="Supprimer" >
-                                                    <i class="fa-solid fa-trash radius-3 bg_red text-white p-1"  (click)="handleConfirmDelete(true)" ></i>
                                                 </a>
-                                                
-                                                <a title="Modifier">
-                                                    <i class="fa-solid fa-pen bg_blue radius-3 text-white p-1"></i>
-                                                </a> 
-                                            </div>
-                                        </td>
-                                        
-                                    </tr>
-                                    <tr >
-                                        <th scope="row" class="bord-black">1</th>
-                                        <td class="bord-black">
-                                            Nom
-                                        </td>
-                                        <td class="bord-black">
-                                            Nom
-                                        </td>
-                                        <td class="bord-black">Nom</td>
-        
-                                        <!-- Les actions -->
-                                        <td class="bord-black">
-                                            <div class="icon-list d-flex gap-2 justify-content-center">
-                                
-                                                <a  title="Supprimer" >
-                                                    <i class="fa-solid fa-trash radius-3 bg_red text-white p-1"  (click)="handleConfirmDelete(true)" ></i>
-                                                </a>
-                                                
-                                                <a title="Modifier">
-                                                    <i class="fa-solid fa-pen bg_blue radius-3 text-white p-1"></i>
-                                                </a> 
-                                            </div>
-                                        </td>
-                                        
-                                    </tr>
-                                    <tr >
-                                        <th scope="row" class="bord-black">1</th>
-                                        <td class="bord-black">
-                                            Nom
-                                        </td>
-                                        <td class="bord-black">
-                                            Nom
-                                        </td>
-                                        <td class="bord-black">Nom</td>
-        
-                                        <!-- Les actions -->
-                                        <td class="bord-black">
-                                            <div class="icon-list d-flex gap-2 justify-content-center">
-                                
-                                                <a  title="Supprimer" >
-                                                    <i class="fa-solid fa-trash radius-3 bg_red text-white p-1"  (click)="handleConfirmDelete(true)" ></i>
-                                                </a>
-                                                
-                                                <a title="Modifier">
-                                                    <i class="fa-solid fa-pen bg_blue radius-3 text-white p-1"></i>
-                                                </a> 
                                             </div>
                                         </td>
                                         
@@ -430,30 +371,36 @@
                     
       
                     <!-- Modal -->
-                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div *ngIf="!closeFormCategory" class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog">
                         <div class="modal-content">
-                            <app-form-category></app-form-category>
+                            <app-form-category 
+                                (isSubmited)="CloseFormCategoryModal('staticBackdrop')"
+                                (requestCompleted)="getAllCategories()"
+                             >
+
+                            </app-form-category>
                         </div>
                         </div>
                     </div>
                     <!-- pagination -->
-                    <!-- <div class="col-12 py-3 d-flex justify_content" *ngIf="annouces">
+
+                    <div class="col-12 py-3 d-flex justify_content" *ngIf="annouces">
                         <app-paginator
-                            [current] = "paginationDAtas?.current" 
-                            [allcount] = "paginationDAtas?.allcount" 
-                            [next] = "paginationDAtas?.next" 
-                            [previous] = "paginationDAtas?.previous" 
-                            [paginateLength] = "paginationDAtas?.paginateLength" 
-                            [pageLimit] = "pageLImit"
-                            (pageSelected)="setPage($event)"
+                            [current] = "datas_paginate?.current" 
+                            [allcount] = "datas_paginate?.allcount" 
+                            [next] = "datas_paginate?.next" 
+                            [previous] = "datas_paginate?.previous" 
+                            [paginateLength] = "datas_paginate?.paginateLength" 
+                            [pageLimit] = "category_pageLimit"
+                            (pageSelected)="setPageCategories($event)"
                         >
                         </app-paginator> 
-                    </div> -->
-            
+                    </div>
     
                 </div>
             <!-- </div> -->
             </div>
+        </div>
     </div>
 </div>

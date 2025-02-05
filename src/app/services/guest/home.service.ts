@@ -11,12 +11,12 @@ export class HomeService {
   constructor(private http : HttpClient) { }
 
   getAllPublishedAnnouces(pageNumber : number){
-    console.log(environment.apiUrl+'home_back?page='+pageNumber);
+    // console.log(environment.apiUrl+'home_back?page='+pageNumber);
     return this.http.get(environment.apiUrl+'home_back?page='+pageNumber);
   }
 
   getAllAnnoucesPublished(){
-    console.log(this.http.get(environment.apiUrl+'home_back/'));
+    // console.log(this.http.get(environment.apiUrl+'home_back/'));
 
     return this.http.get(environment.apiUrl+'home_back/');
   }

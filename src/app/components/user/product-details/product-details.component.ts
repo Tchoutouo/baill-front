@@ -9,11 +9,12 @@ import { ActivatedRoute } from '@angular/router';
 import { HomeService } from '../../../services/guest/home.service';
 import { Subscription } from 'rxjs';
 import { environment } from '../../../../environments/environment.development';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [CommonModule, ProductComponent, ImageListComponent, HeaderComponent,FooterComponent],
+  imports: [CommonModule, ProductComponent, ImageListComponent, HeaderComponent,FooterComponent, TranslateModule],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.css'
 })
@@ -60,9 +61,11 @@ export class ProductDetailsComponent {
         const annouce_id = this.route.snapshot.paramMap ? this.route.snapshot.paramMap.get('id') : null;
         try {
           if (annouce_id) {
+        console.log("annonce_id",annouce_id);
+
             this.annouceSub = this.homeServ.getAnnouceByID(annouce_id).subscribe({
               next: (datas: any) => {
-                console.log(datas);
+                console.log("details",datas);
                 if (datas.success == true && datas.data) {
                   this.annouce  = datas.data ;
                   this.imagesList = this.annouce.url_image;

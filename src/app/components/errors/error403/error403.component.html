@@ -1,1 +1,20 @@
-<p>error403 works!</p>
+<app-header></app-header>
+<div class="error-container px-3 px-lg-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 text-side">
+                <h1 class="error-title title-h1 main-font-quick green-black">Oups !</h1>
+                <div class="h4 error-description pt-3 main-font-quick title-h1">Accès refusé</div>
+                <div class="erro-text h4-baill main-font-quick pt-4 pb-5">
+                    Une erreur 403 empêche l’accès à [préciser la page ou la ressource. Il serait utile de vérifier les permissions associées.
+                </div>
+                <a [routerLink]="['/']" class="btn_publish link">Retourner a l’acceuil</a>
+            </div>
+            <div class="col-lg-6 offset-lg-1">
+                <div class="bg-img" style="background-image: url('../../../../assets/403.svg');">
+
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>

@@ -7,9 +7,17 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class FormatEntityNamePipe implements PipeTransform {
 
   transform(value: string): string {
-    // if(value === "imageUrls"){
-    //   return 'Image';
-    // }
+    if(value === "title"){
+      return 'Categorie';
+    }
+
+    if(value === "nbre_asage"){
+      return "Nombre d'utilisation";
+    }
+
+    if(value === "created_at"){
+      return "Date de création";
+    }
     
      // ex : test_merci
     let newValueArraya : any = value.split("_")

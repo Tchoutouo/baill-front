@@ -5,11 +5,12 @@ import { TagsListComponent } from "../tags-list/tags-list.component";
 import { HomeService } from '../../../services/guest/home.service';
 import { Subscription } from 'rxjs';
 import { PaginatorComponent } from '../paginator/paginator.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [ProductComponent, CommonModule, TagsListComponent, PaginatorComponent],
+  imports: [ProductComponent, CommonModule, TagsListComponent, PaginatorComponent,TranslateModule],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css'
 })
@@ -39,7 +40,6 @@ export class ProductListComponent {
   getAnnoucesList(){
     this.productsList = this.homeServ.getAllPublishedAnnouces(this.current_page).subscribe({
       next: (datas: any) => { 
-        console.log(datas);
         if (datas.success == true) {
           this.products = datas.data_annonce.data ;
           this.result_datas = datas.data_annonce ;

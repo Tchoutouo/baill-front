@@ -13,23 +13,27 @@
                 <input class="form-control me-2 py-1 px-5" id="search_field" 
                     type="search" placeholder="Recherche ...." 
                     aria-label="chercher"
+                    (keyup)="searchValue($event)"
+                    (search)="searchValue($event)"
                 >
-                <i class="fa-solid fa-magnifying-glass position-absolute search_icon"></i>
+                <i class="fa-solid fa-magnifying-glass position-absolute search_icon"
+                (click)="searchValue($event)">
+                </i>
             </form>
         </div>
         
         <div class="col-12 d-flex justify-content-start gap-2 align-items-center py-3">
             <h3 class="label-filter m-0">Afficher par</h3>
-            <select class="form-select w-25" id="" aria-label="Floating label select example">
+            <select class="form-select w-25" id="" aria-label="Floating label select example" (change)="setPageLimit($event)">
                 <option value="{{itemRange}}" *ngFor="let itemRange of rangeList">{{itemRange}}</option>
             </select>
         </div>
     
-        <div class="result-message text-center fw-bold d-none" >
-            Resultat de recherche pour : <span class="search_data"></span>
+        <div class="result-message text-center fw-bold" *ngIf="query.length >= 2 && abonment_list">
+            Resultat de recherche pour : <span class="search_data">{{query}}</span>
         </div>
-        <div class="result-message fw-bold text-center d-none">
-            Aucun resultat pour : <span class="search_data"></span>
+        <div class="result-message fw-bold text-center" *ngIf="query.length >= 2 && !abonment_list">
+            Aucun resultat pour : <span class="search_data">{{query}}</span>
         </div>
         
         <div class="col-12">
@@ -52,10 +56,10 @@
                                 {{abonnement.name}}
                             </td>
                             <td class="bord-black">
-                                {{abonnement.price}}
+                                {{abonnement.price | currency}}
                             </td>
                             <td class="bord-black">
-                                {{abonnement.time}}
+                                {{abonnement.time | formatTime:abonnement.type_time}}
                             </td>
                             <td class="bord-black">
                                 {{abonnement.type}}
@@ -66,48 +70,43 @@
                                     <a  title="Mettre en pause" *ngIf="abonnement.is_actived == 1" (click)="handleConfirmDisabled(true)">
                                         <i class="fa-solid fa-pause bg_grey radius-3 text-dark p-1"></i>
                                     </a>
-
-                                    <app-alert-confirm *ngIf="showAlert" (confirmAction)="disabledAbonnement($event , abonnement)"></app-alert-confirm>
-
+                                    <app-alert-confirm *ngIf="showAlert" (confirmAction)="changeStatusAbonnement($event , abonnement)"></app-alert-confirm>
                                     <a title="Republier" *ngIf="abonnement.is_actived == 0" (click)="handleConfirmDisabled(true)">
                                         <i class="fa-solid fa-play bg-white radius-3 text_green p-1 border-top-1-green border-bottom-1-green border-left-1-green border-right-1-green">
                                         </i>
                                     </a>
-                                    <a  title="Supprimer" (click)="handleConfirmDelete(true)">
+                                    <app-alert-confirm *ngIf="showAlert" (confirmAction)="deleteAbonnement($event , abonnement.id)"></app-alert-confirm>
+
+                                    <a title="Supprimer" (click)="handleConfirmDelete(true)">
                                         <i class="fa-solid fa-trash radius-3 bg_red text-white p-1" ></i>
                                     </a>
-                                    
                                     <a title="Modifier">
-                                        <i class="fa-solid fa-pen bg_blue radius-3 text-white p-1" data-bs-toggle="modal" data-bs-target="#package"></i>
+                                        <i class="fa-solid fa-pen bg_blue radius-3 text-white p-1" (click)="updateModal(abonnement)" data-bs-toggle="modal" data-bs-target="#package"></i>
                                     </a> 
                                 </div>
-                            </td>
-                            <!-- <td class="bord-black">
-                                <div class="icon-list d-flex gap-2 justify-content-center">
-                                    <a  title="Mettre en pause" >
-                                        <i class="fa-solid fa-pause bg_grey radius-3 text-dark p-1"></i>
-                                    </a>
-                                    <a  title="Supprimer" >
-                                        <i class="fa-solid fa-trash radius-3 bg_red text-white p-1"></i>
-                                    </a>
-                                    
-                                    <a title="Modifier">
-                                        <i class="fa-solid fa-pen bg_blue radius-3 text-white p-1"></i>
-                                    </a> 
-                                </div>
-                            </td> -->
-
-                            
-                        </tr>    
+                            </td>        
+                        </tr>
+                        <div class="col-12 py-3 d-flex justify_content" *ngIf="abonment_list">
+                            <app-paginator
+                                [current] = "paginationDAtas?.current" 
+                                [allcount] = "paginationDAtas?.allcount" 
+                                [next] = "paginationDAtas?.next" 
+                                [previous] = "paginationDAtas?.previous" 
+                                [paginateLength] = "paginationDAtas?.paginateLength" 
+                                [pageLimit] = "pageLImit"
+                                (pageSelected)="setPage($event)"
+                            >
+                            </app-paginator> 
+                        </div>    
                     </ng-container>
                 </tbody>
             </table>
             
             <!-- Modal -->
-            <div class="modal fade" id="package" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="packageLabel" aria-hidden="true">
+            <div class="modal fade" *ngIf="isModalOpen" id="package" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="packageLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <app-package-edit></app-package-edit>
+                        <app-package-edit [Abonnememt]="abonnementItem" (isModalOpenChild)="closeModal($event)"></app-package-edit>
                     </div>
                 </div>
             </div>

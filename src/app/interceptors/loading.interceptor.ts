@@ -4,9 +4,9 @@ import { LoaderService } from '../services/loader.service';
 import { finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
-// export const loadingInterceptor: HttpInterceptorFn = (req, next) => {
-//   return next(req);
-// };
+export const loadingInterceptor: HttpInterceptorFn = (req, next) => {
+  return next(req);
+};
 
 @Injectable()
 export class LoadingInterceptor implements HttpInterceptor {

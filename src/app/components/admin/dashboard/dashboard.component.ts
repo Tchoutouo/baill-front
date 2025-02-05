@@ -4,6 +4,8 @@ import { AlertComponent } from "../alert/alert.component";
 import { LocalStorageService } from '../../../services/admin/local-storage.service';
 import { EntityServiceService } from '../../../services/admin/entity-service.service';
 import { Subscription } from 'rxjs';
+import {  isAdmin } from '../../../helpers/helper'; 
+import { CheckProfilService } from '../../../services/check-profil.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,8 +22,11 @@ export class DashboardComponent {
     totalEncours : number = 0;
     totalEnvoiDExp : number = 0;
     totalExpired : number = 0;
+    isAdmin : boolean = false;
 
-    constructor(private locaStorage : LocalStorageService, private entityService : EntityServiceService){
+    constructor(private locaStorage : LocalStorageService, private entityService : EntityServiceService,
+                private checkProfil: CheckProfilService
+    ){
 
     }
 
@@ -29,6 +34,9 @@ export class DashboardComponent {
       window.scroll(0, 5)
       this.anounceList = ['mvks', "sf", "ksjdf", "skjfd", "dkhfj"];
       this.getDashboardData();
+      // this.isAdmin = isAdmin();
+      this.isAdmin = this.checkProfil.isAdmin();
+
     }
 
 
@@ -36,13 +44,15 @@ export class DashboardComponent {
       const user = this.locaStorage.getItem('user')
       // const user_id = 6;
       const user_id = user?.id;
+      // console.log("user_id", user_id);
       if (user_id) {
         this.dashboardSub = this.entityService.getDashoardDatas(user_id).subscribe({
           next : (datas : any) =>{
-            console.log(datas);
+            // console.log(datas);
             
             if (datas.success) {
-              this.totalEncours = datas.annonce_qte_inprogress;
+              // this.totalEncours = datas.annonce_qte_inprogress;
+              this.totalEncours = datas.annonce_qte_publisher;
               this.totalEnvoiDExp = datas.annonce_qte_pause;
               this.totalExpired = datas.annonce_qte_expired;
             }

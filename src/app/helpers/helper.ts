@@ -1,5 +1,6 @@
 import { inject } from "@angular/core";
 import { AnounceEntity } from "../models/admin/nounceEntity";
+import { Category } from "../models/admin/category";
 import { LocalStorageService } from "../services/admin/local-storage.service";
 import { Route, Router, ROUTES } from "@angular/router";
 
@@ -41,6 +42,10 @@ export const getEntityPoperties = (entity: string) : Array<string> =>{
         entityClass = new AnounceEntity()
     }
 
+    if (entity == "categories") {
+        entityClass = new Category()
+    }
+
     if (entityClass) {
         results = Object.keys(entityClass)
     }
@@ -57,7 +62,7 @@ export const isAdmin = () : any =>{
     const user = localStorage.getItem('user');
 
     if (user) {
-        if (user.profil_name === 'SUPER_ADMIN') {
+        if (user.profil_code === 'SUP_ADMIN') {
             return true;
         }
         return false;

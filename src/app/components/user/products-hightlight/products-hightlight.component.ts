@@ -3,11 +3,12 @@ import { Subscription } from 'rxjs';
 import { HomeService } from '../../../services/guest/home.service';
 import { CommonModule } from '@angular/common';
 import { environment } from '../../../../environments/environment.development';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-products-hightlight',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   templateUrl: './products-hightlight.component.html',
   styleUrl: './products-hightlight.component.css'
 })
@@ -32,7 +33,6 @@ export class ProductsHightlightComponent {
     initComponent(){
       this.annoucesList = this.homeServ.getAllAnnoucesPublished().subscribe({
         next: (result_request: any) => { 
-          console.log({hightlight : result_request});
           if (result_request.success == true)  {
             this.annouces_high = result_request.data_annonce_une ;
           }else{

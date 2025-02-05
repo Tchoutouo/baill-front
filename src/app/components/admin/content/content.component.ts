@@ -16,6 +16,7 @@ import { AlertConfirmComponent } from '../../alert-confirm/alert-confirm.compone
 import { Alert } from '../../../models/alert';
 import { AlertConfirmService } from '../../../services/alert-confirm.service';
 import { environment } from '../../../../environments/environment.development';
+import { CheckProfilService } from '../../../services/check-profil.service';
 
 @Component({
   selector: 'app-content',
@@ -44,7 +45,8 @@ export class ContentComponent {
   isAdmin: boolean = false;
 
   constructor(private localStorage : LocalStorageService, private route : Router ,
-    private translateService: TranslateService, private authent : AuthenticatorService, private alertConfirm : AlertConfirmService){
+              private translateService: TranslateService, private authent : AuthenticatorService, 
+              private alertConfirm : AlertConfirmService, private checkProfil: CheckProfilService){
   }
 
   ngOnInit(){
@@ -57,7 +59,9 @@ export class ContentComponent {
     this.email = user ? user.email : '';
     this.lang = localStorage.getItem('lang') || 'fr';
     this.user_picture = user.picture ?  environment.apiUrlRessources + '/' + user.picture : 'false' ;  
-    this.isAdmin = isAdmin();
+    // this.isAdmin = isAdmin();
+    this.isAdmin = this.checkProfil.isAdmin();
+    console.log("this.isAdmin",this.isAdmin)
   }
 
   exendSideBar(){

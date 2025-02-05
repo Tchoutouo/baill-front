@@ -2,31 +2,46 @@
         <h5 class="h3-baill fw-baill-bold green-black" id="packageLabel">Modification d'un forfait</h5>
     </div>
     <div class="modal-body">
-        <form action="">
+        <form action="" [formGroup]="abonnementForm">
             <div class="form_group mb-3 h5-baill main-font-quick balck mb-3">
                 <label for="" class="d-flex mb-2">Nom du forfait</label>
-                <input type="text" class="field_form" value="standard">
+                <input type="text" class="field_form" value="" name="name" formControlName="name" id="name">
+                <div *ngIf="abonnementForm.get('name')?.invalid && abonnementForm.get('name')?.dirty" class="text-danger">
+                    Le nom est requis.
+                </div>
             </div>
             <div class="form_group mb-3 h5-baill main-font-quick balck mb-3">
                 <label for="" class="d-flex mb-2">Prix</label>
-                <input type="number" class="field_form" value="standard">
+                <input type="number" class="field_form" value="" name="price" formControlName="price" id="price">
+                <div *ngIf="abonnementForm.get('price')?.invalid && abonnementForm.get('price')?.touched" class="text-danger">
+                    Le prix est requis.
+                </div>
             </div>
             <div class="form_group mb-3 h5-baill main-font-quick balck mb-3">
                 <label for="" class="d-flex mb-2">Durée</label>
                 <div class="d-flex gap-10">
-                    <input type="text" class="field_form" value="12">
-                    <select class="form-select field_form w-25" id="" aria-label="Floating label select example">
-                        <option value="5">5</option>
+                    <input type="text" class="field_form" name="time" value="12" formControlName="time" id="time">
+                    <div *ngIf="abonnementForm.get('time')?.invalid && abonnementForm.get('time')?.touched" class="text-danger">
+                        Veuillez entrer un nombre valide.
+                    </div>
+                    <select class="form-select field_form w-25" id="" name="type_time" formControlName="type_time" aria-label="Floating label select example">
+                        <option value="M">Mois</option>
+                        <option value="S">Semaine(s)</option>
+                        <option value="A">Année(s)</option>
                     </select>
                 </div>
             </div>
             <div class="form_group mb-3 h5-baill main-font-quick balck mb-3">
                 <label for="" class="d-flex mb-2">Réduction (%)</label>
-                <input type="number" class="field_form" value="10">
+                <input type="number" class="field_form" value="" name="reduction" formControlName="reduction">
             </div>
+            <input type="hidden" class="field_form" value="" name="is_actived" formControlName="is_actived">
+            <input type="hidden" class="field_form" value="" name="hight_lite" formControlName="hight_lite">
+            <input type="hidden" class="field_form" value="" name="type" formControlName="type">
+            <!-- <input type="hidden" class="field_form" value="0" name="is_actived" formControlName="is_actived"> -->
         </form>
     </div>
     <div class="modal-footer">
-        <a  class=" btn_cancel" data-bs-dismiss="modal">Annuler</a>
-        <a  class="  btn_add">Sauvegarder</a>
-    </div>
+        <a class="btn_cancel" data-bs-dismiss="modal" (click)="handleCloseModal()">Annuler</a>
+        <button (click)="UpdateAbonnement()" class="btn_add" [disabled]="abonnementForm.invalid">Sauvegarder</button>
+    </div> 

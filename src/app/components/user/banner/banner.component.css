@@ -3,7 +3,8 @@
 }
 
 .banner-title{
-    font-size: 48px;
+    /* font-size: 48px; */
+    font-size: var(--main-h2-font-size );
     font-weight: var(--main-xl-font-weiht);
     line-height: 60px;
     text-align: left;

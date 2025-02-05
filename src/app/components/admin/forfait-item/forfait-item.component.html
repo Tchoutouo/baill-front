@@ -6,7 +6,7 @@
     <div class="row align-items-center pt-3">
         <div class="col-9 pe-0">
             <div class="price">
-                <h4 class="fs_big m-0">{{abonment?.price}} <span class="fs_small">FCFA</span></h4>
+                <h4 class="fs_big m-0">{{abonment?.price}} $<span class="fs_small"></span></h4>
             </div>
         </div>
         <div class="col-3 d-flex justify-content-end">
@@ -16,7 +16,8 @@
         </div>
     </div>
     <div class="duration mb-3">
-       {{ abonment?.time}} mois
+       <!-- {{ abonment?.time}} mois -->
+       {{abonment?.time | formatTime:abonment?.type_time}}
     </div>
 
     <button type="submit"  class="btn-form w-100 bg_blue">Lancer</button>

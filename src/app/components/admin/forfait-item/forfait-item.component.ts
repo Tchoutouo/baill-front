@@ -1,9 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormatTimePipe } from "../../../pipes/format-time.pipe";
+import { TranslateModule } from '@ngx-translate/core';
+
 
 @Component({
   selector: 'app-forfait-item',
   standalone: true,
-  imports: [],
+  imports: [FormatTimePipe,TranslateModule],
   templateUrl: './forfait-item.component.html',
   styleUrl: './forfait-item.component.css'
 })

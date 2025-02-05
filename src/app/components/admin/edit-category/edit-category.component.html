@@ -1,0 +1,38 @@
+<div class="modal-header align-items-center justify-content-between">
+    <h5 class="h3-baill fw-baill-bold green-black" id="staticBackdropLabel">Modification d’une Catégorie</h5>
+    <a class="icon-close finger" data-bs-dismiss="modal">
+        <i class="fa-solid fa-xmark"></i>
+    </a>
+</div>
+<div class="modal-body">
+    <form action="" class="gap-10 align-items-center" (ngSubmit)="submitData()" [formGroup]="editCategoryForm" >
+        <div class="group-form col-10 mb-3">
+            <label for="categoryName" class="d-flex categoryName h5-baill fw-baill-bold green-black">Nom catétegorie</label>
+            <input type="text" formControlName="title" name="title" class="input-field d-flex w-100 border-green-main">
+            <!-- <div *ngIf="editCategoryForm.get('title')?.invalid && editCategoryForm.get('title')?.dirty" class="text-danger">
+                <div class="" class="error text-start"  *ngIf="editCategoryForm.get('title')?.hasError('required')">
+                    veuillez remplir ce champ 
+                </div>
+                <div  class="text-start error" *ngIf="!editCategoryForm.get('title')?.hasError('required')">
+                    Nombre maximal de carartères autorisés 300 
+                </div>
+            </div> -->
+        </div>
+        <div class="group-form col-10">
+            <label for="categoryName" class="d-flex categoryName h5-baill fw-baill-bold green-black">Description catétegorie</label>
+            <input type="text" formControlName="description" name="description" class="input-field d-flex w-100 border-green-main">
+            <!-- <div *ngIf="editCategoryForm.get('description')?.l && editCategoryForm.get('description')?.dirty" class="text-danger">
+                <div  class="error text-start" >
+                    veuillez remplir ce champ 
+                </div>
+                <div  class="error text-start" *ngIf="!editCategoryForm.get('description')?.hasError('required')">
+                    Nombre maximal de carartères autorisés 300 
+                </div>
+            </div> -->
+        </div>
+                       
+        <div class="d-flex justify-content-center py-3">
+            <button type="submit" class="btn_publish  rounded-pill">OK</button>
+        </div>
+    </form>
+</div>

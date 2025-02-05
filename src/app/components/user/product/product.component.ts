@@ -30,11 +30,12 @@ export class ProductComponent implements OnInit{
   }
   
   initComponent(){
-    console.log(this.productItem)
+    // console.log("annonce",this.productItem)
     this.product = this.productItem;
     this.imagesPath =this.productItem.url_image;
     if (this.productItem.url_image) {
-      this.imageUrl = this.apiRessources+'/'+this.productItem.url_image[0];
+      // this.imageUrl = this.apiRessources+'/'+this.productItem.url_image[0];
+      this.imageUrl = this.productItem.url_image[0];
     }
   };
 }

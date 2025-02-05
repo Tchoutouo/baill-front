@@ -11,19 +11,19 @@
 <div class="tag-list mb-5 row">
     <div class="col-md-3 mb-1">
         <select name="category" id="category" class="form-control filter-tag" (change)="onFilterChange($event , 'category')">
-            <option value="" selected>Selectionner une categorie</option>
-            <option *ngFor="let category of categories" [value]="category.title"> {{ category.title }} </option>
+            <option value="" selected>{{'user.tags-list.cat'| translate}} </option>
+            <option *ngFor="let category of categories" [value]="category.title"> {{ category?.title }} </option>
         </select>
     </div>
     <div class="col-md-3 mb-1">
         <select id="country" [(ngModel)]="selectedCountry" (change)="onFilterChange($event , 'country')" name="country" class="form-control filter-tag" placeholder="Veuillez selectionner un pays">
-            <option value="" selected>Selectionner un pays</option>
+            <option value="" selected>{{'user.tags-list.country'| translate}}</option>
             <option *ngFor="let country of countries" [value]="[country.isoCode, country.name]">{{ country.name }}</option>
         </select>
     </div>
     <div class="col-md-3 mb-1">
         <select [(ngModel)]="selectedCity" name="city" id="city" (change)="onFilterChange($event , 'city')" class="form-control filter-tag" placeholder="Veuillez selectionner une ville">
-            <option value="" selected>Selectionner une ville</option>
+            <option value="" selected>{{'user.tags-list.city'| translate}}</option>
             <option *ngFor="let city of cities" [value]="city.name">
                 {{ city.name }}
             </option>

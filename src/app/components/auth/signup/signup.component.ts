@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { getSiteName } from '../../../helpers/helper';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -8,6 +8,8 @@ import { Country, State, City ,ICountry, IState, ICity}  from 'country-state-cit
 import { User } from '../../../models/user';
 import { EntityServiceService } from '../../../services/admin/entity-service.service';
 import { AlertComponent } from '../../admin/alert/alert.component';
+import { NoficationsService } from '../../../services/nofications.service';
+import { Notification } from '../../../models/notification';  
 
 @Component({
   selector: 'app-signup',
@@ -20,7 +22,7 @@ export class SignupComponent implements OnInit{
   siteName: string ="";
   countries: ICountry[] | undefined;
   cities: ICity[] | undefined;
-  selectedCountry: string = '';
+  selectedCountry: string = 'CM';
   selectedCity: string = '';
   phoneCode: string = '';
   message_alert : any  = null;
@@ -52,8 +54,11 @@ export class SignupComponent implements OnInit{
   neighborhood : FormControl;
   password: FormControl;
   passwordConfirm: FormControl;
+  
 
-  constructor(fb: FormBuilder, private entityService : EntityServiceService, private router: Router) {
+  constructor(fb: FormBuilder, private entityService : EntityServiceService, 
+              private router: Router, private translate: TranslateService,
+              private notification: NoficationsService) {
     this.username = fb.control("",[Validators.required]);
     this.last_name = fb.control("",[Validators.required]);
     this.first_name = fb.control("",[Validators.required]);
@@ -83,13 +88,14 @@ export class SignupComponent implements OnInit{
     {
       validators: this.passwordsMatchValidator
     })
+    this.selectedCountry = 'CM';
   }
 
   ngOnInit(): void {
     window.scroll(0,0)
     this.siteName = getSiteName();
     this.countries = Country.getAllCountries();
-    // console.log("countries",this.countries)
+    this.onCountryChange({ target: { value: this.selectedCountry } });
   }
 
   passwordsMatchValidator(formGroup: FormGroup) {
@@ -99,6 +105,14 @@ export class SignupComponent implements OnInit{
     return password === passwordConfirm ? null : { passwordsDoNotMatch: true };
   }
 
+  // getTranslatedText(key: string): string {
+  //   let translatedText = '';
+  //   this.translate.get(key).subscribe((res: string) => {
+  //     console.log("res", res);
+  //     translatedText = res;
+  //   });
+  //   return translatedText;
+  // }
   // get password() {
   //   return this.signupForm.get('password');
   // }
@@ -111,10 +125,10 @@ export class SignupComponent implements OnInit{
     try{
       var countryCode = event.target.value;
       this.cities = City.getCitiesOfCountry(countryCode);
-      this.country_selected = Country.getCountryByCode(countryCode)
+      this.country_selected = Country.getCountryByCode(countryCode);
+      this.phoneCode = this.country_selected.phonecode;
       this.my_country = this.country_selected.name;
-      this.selectedCountry = this.my_country;
-      // console.log("country",this.my_country);
+      this.selectedCountry = countryCode;
 
     } catch (error) {
       console.error('Erreur lors de la récupération des villes:', error);
@@ -122,30 +136,29 @@ export class SignupComponent implements OnInit{
   }
 
   handleSubmit(){
-    console.log("formValue",this.signupForm.value);
     const entity =  "advertiser_back/store";
-
+    this.signupForm.value.whatsapp_number = this.phoneCode+this.signupForm.value.whatsapp_number;
     const datas = this.signupForm.value;
-    // datas.country =  this.my_country;
+    const notif = new Notification();
 
-    // console.log("datas", datas);
     if (this.signupForm.valid) {
-      console.log('Form submitted successfully');
       this.entityService.store(entity, datas).subscribe({
         next : (data : any) =>{
-          console.log("data",data);
           if(data.success){
-            this.message_alert = "Votre compte a été enregistrée avec succès !!";
+            notif.message = this.entityService.getTranslatedText('user.signup.message.notif.success');
+            notif.status = "success"
             if (this.message_alert) {
               this.display_message = true;
             }
             this.router.navigate(['/signin']);
+          }else{
+            notif.message = this.entityService.getTranslatedText('user.signup.message.notif.error');
+            notif.status = "warning"
           }
-          console.log({success: data});
+          this.notification.emitNotification(notif);
         },
-  
         error: (error : any) => {
-          console.log(error);
+          console.log("erreur lors de l'enregistrement d'un utilisateur:",error);
         }
       })
 
@@ -156,6 +169,5 @@ export class SignupComponent implements OnInit{
 
   closeAlert(event : any){
     event ? this.display_message = false : this.display_message = false ;
-    
   }
 }

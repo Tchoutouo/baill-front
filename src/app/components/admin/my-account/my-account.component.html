@@ -123,16 +123,17 @@
 
                 <div class="field-password py-3 px-5 my-3">
                     <h3 class="text-start py-3">Securité</h3>
-                    <label for="password" class="password-pass d-flex justify-content-start mb-2">Mot de pass</label>
+                    <label for="password" class="password-pass d-flex justify-content-start mb-2">Mot de passe</label>
                     <div class="d-flex gap-3 pb-1 align-items-center">
                         <div class="password-input-group">
                             <input type="{{type}}" name="password"  class="password-profile" id="password">
                             <i class="fa-solid fa-eye{{icon_eyes}} icon_pass" (click)="chanIcon($event)"></i>
                         </div>
-                        <a class="add_caract">
+                        <a class="add_caract" (click)="openModalPassword($event)">
                             <i class="fa-solid fa-pen text-white"></i>
                         </a>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -142,4 +143,26 @@
             </div>
         </div>
     </form>
+
+    <div class="modal-backdrop" *ngIf="isModalOpen">
+        <div class="modal_password">
+            <div class="modal_header">
+                <h3 class="modal_title">Modification du mot de passe</h3>
+                <button type="button" class="close-btn" (click)="closeModal()">×</button>
+            </div>
+            <div class="modal_body">
+                <form (ngSubmit)="changePassword()" #form="ngForm" id="formPassord">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Ancien mot de passe</label>
+                        <input type="password" class="form-control" id="name" name="password" ngModel required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nouveau mot de passe</label>
+                        <input type="password" class="form-control" id="name" name="newPassword" ngModel required>
+                    </div>
+                    <button type="submit" id="submit-button" class="btn btn-primary" [disabled]="form.invalid">Sauvegarder</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
