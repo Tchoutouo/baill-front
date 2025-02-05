@@ -12,11 +12,11 @@
                 </li>
                 <li class="h4-baill">
                     <span class="green-black fw-baill-bold pe-2">Prix : </span>
-                    <span class="black fw-baill-medium-bold pe-3"> {{annouce?.price}}</span>
+                    <span class="black fw-baill-medium-bold pe-3"> {{annouce?.price | currency}}</span>
                 </li>
                 <li class="h4-baill">
                     <span class="green-black fw-baill-bold pe-2">Pays : </span>
-                    <span class="black fw-baill-medium-bold pe-3"> {{annouce?.country}}</span>
+                    <span class="black fw-baill-medium-bold pe-3"> {{annouce?.country | getContryByCode}}</span>
                 </li>
                 <li class="h4-baill">
                     <span class="green-black fw-baill-bold pe-2">Ville : </span>
@@ -42,14 +42,14 @@
                 </div>
                 <div class="row images-list-fieldset wrap">
                     <div class="col-lg-3 px-2 py-2" *ngFor="let imageItem of imagesList">
-                        <div class="image-item baill-bg-img"  [ngStyle]="{'background-image': 'url(' +apiRessources+'/'+imageItem +')'}">
+                        <div class="image-item baill-bg-img"  [ngStyle]="{'background-image': 'url('+imageItem+')'}">
                         </div>
                     </div>
                 </div>
             </div>
             <div class="categories-list row">
                 <h4 class="h4-baill px-0 fw-baill-bold mb-8 green-black"  >
-                    categories
+                    Catégories
                 </h4>
                 <div class="d-flex g-10 px-0 wrap">
                     <!-- <button class="bg-gray-1 balck border-none main-font-quick btn-medium rounded-30 ">Mettre pause</button>

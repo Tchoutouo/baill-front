@@ -10,13 +10,14 @@ import { LocalStorageService } from '../../../services/admin/local-storage.servi
 import { NoficationsService } from '../../../services/nofications.service';
 import { Router } from '@angular/router';
 import { ForfaitListComponent } from '../forfait-list/forfait-list.component';
+import { GetContryByCodePipe } from "../../../pipes/get-contry-by-code.pipe";
 
 
 
 @Component({
   selector: 'app-annouce-details',
   standalone: true,
-  imports: [CommonModule, ForfaitListComponent],
+  imports: [CommonModule, ForfaitListComponent, GetContryByCodePipe],
   templateUrl: './annouce-details.component.html',
   styleUrl: './annouce-details.component.css'
 })
