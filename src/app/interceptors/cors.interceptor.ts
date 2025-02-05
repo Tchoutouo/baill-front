@@ -31,11 +31,14 @@ export class CorsInterceptor implements HttpInterceptor {
           return next.handle(cloned);
           } else {
           return next.handle(req);
+        }
 
         
     }
 
-    
+    private getCsrfToken(): any {
+      return document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');  
+    }
       
 }
 
