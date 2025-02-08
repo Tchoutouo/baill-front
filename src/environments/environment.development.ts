@@ -1,10 +1,10 @@
 export const environment = {
     production : false,
-    apiUrl: "http://127.0.0.1:8000/api/",
-    apiUrlRessources: "http://127.0.0.1:8000/public/storage"
+    // apiUrl: "http://127.0.0.1:8000/api/",
+    // apiUrlRessources: "http://127.0.0.1:8000/public/storage"
 
-    // apiUrl: "https://backend.bailleurnet.com/api/",
-    // apiUrlRessources: "https://backend.bailleurnet.com/public/storage"
+    apiUrl: "https://backend.bailleurnet.com/api/",
+    apiUrlRessources: "https://backend.bailleurnet.com/public/storage"
 
     // apiUrl: "http://baill-back.sc1zeucoder.universe.wf/api/",
     // apiUrlRessources: "http://baill-back.sc1zeucoder.universe.wf/public/storage"
