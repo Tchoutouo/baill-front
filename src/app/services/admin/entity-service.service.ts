@@ -101,6 +101,10 @@ export class EntityServiceService {
     return this.http.get(environment.apiUrl+'dashboard_advertiser/'+user_id);
   }
 
+  getDashoardDatasAdmin(){
+    return this.http.get(environment.apiUrl+'dashboard_admin');
+  }
+
   getAdvertiser(id : number | string, entity: any) : Observable<any>{
     // console.log(environment.apiUrl+entity+id);
     return this.http.get(environment.apiUrl+entity+id);
