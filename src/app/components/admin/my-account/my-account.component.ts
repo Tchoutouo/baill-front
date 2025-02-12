@@ -112,6 +112,7 @@ export class MyAccountComponent implements OnInit {
     }  
 
     this.user_logged = this.localStorage.getItem('user');  
+    console.log({cedric : this.user_logged});
     
     const user_id = this.user_logged ? this.user_logged.id : '';
     this.user_di_loggged = this.user_logged ? this.user_logged.id : '';
@@ -120,6 +121,7 @@ export class MyAccountComponent implements OnInit {
 
     this.entityService.update(user_id, formData, entity).subscribe({
       next : (datas : any) =>{
+        console.log(datas);
         
         if(datas.success === true){
           this.router.navigate(['/admin/myAccount']);
@@ -214,7 +216,31 @@ export class MyAccountComponent implements OnInit {
     this.isModalOpen = false;
   }  
 
-  changePassword() {
+  changePassword(old_ppassword: string, new_password :string) {
+
+    console.log(old_ppassword, new_password);
+    let formPass = new FormData();
+    const id = this.localStorage.getItem('user')?.id;
+
+    formPass.append('password', old_ppassword);
+    formPass.append('newpassword', old_ppassword);
+
+    if (id) {
+      this.entityService.updatePassword(id, formPass).subscribe({
+        next: (data : any) => {
+          console.log({h2O : data});
+          
+          if (data.success === true) {
+            
+          }
+        },
+        error: (error : any) => {
+          console.log(error);
+        }
+      })
+    }else{
+      this.router.navigate(['/signin']);  
+    }
     setTimeout(() => {
       console.log('Formulaire soumis avec succès !');
       this.closeModal(); // Ferme le modal après l'instruction

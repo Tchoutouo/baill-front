@@ -35,11 +35,13 @@ export class EntityServiceService {
   }
 
   update(id: any, datas: any, entity: string): Observable<any> {
-    // console.log(environment.apiUrl, datas); 
+      console.log(environment.apiUrl, datas); 
+      // Pour afficher les données de l'objet FormData
+      datas.forEach((value:any, key:any) => {
+      console.log(`${key}: ${value}`);
+    });
     
-    const options = {
-      headers: new HttpHeaders({ "Content-Type": "multipart/form-data" }),
-    };
+    
     // return this.http.put(`${environment.apiUrl+entity}/${id}`, datas, options);
     return this.http.post(environment.apiUrl+entity+'/'+id, datas); 
   }
@@ -169,6 +171,11 @@ export class EntityServiceService {
   updatePamentMethods(datas : any){
     console.log('datas in service');
     return {success :true};
+  }
+
+  updatePassword(id : number | string, datas : any){
+
+    return this.http.post(environment.apiUrl+'updatePassword/'+id, datas);
   }
 
 }

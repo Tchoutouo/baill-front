@@ -126,7 +126,7 @@
                     <label for="password" class="password-pass d-flex justify-content-start mb-2">Mot de passe</label>
                     <div class="d-flex gap-3 pb-1 align-items-center">
                         <div class="password-input-group">
-                            <input type="{{type}}" name="password"  class="password-profile" id="password">
+                            <input type="{{type}}" readonly name="password" disabled="true" value="5555555"  class="password-profile" id="password">
                             <i class="fa-solid fa-eye{{icon_eyes}} icon_pass" (click)="chanIcon($event)"></i>
                         </div>
                         <a class="add_caract" (click)="openModalPassword($event)">
@@ -151,16 +151,16 @@
                 <button type="button" class="close-btn" (click)="closeModal()">×</button>
             </div>
             <div class="modal_body">
-                <form (ngSubmit)="changePassword()" #form="ngForm" id="formPassord">
+                <form  #form="ngForm" id="formPassord">
                     <div class="mb-3">
                         <label for="name" class="form-label">Ancien mot de passe</label>
-                        <input type="password" class="form-control" id="name" name="password" ngModel required>
+                        <input type="password" class="form-control" id="name" #password name="password" ngModel required>
                     </div>
                     <div class="mb-3">
                         <label for="name" class="form-label">Nouveau mot de passe</label>
-                        <input type="password" class="form-control" id="name" name="newPassword" ngModel required>
+                        <input type="password" class="form-control" id="name" #newPassword name="newPassword" ngModel required>
                     </div>
-                    <button type="submit" id="submit-button" class="btn btn-primary" [disabled]="form.invalid">Sauvegarder</button>
+                    <button type="submit" (click)="changePassword(newPassword.value, password.value)" id="submit-button" class="btn btn-primary" [disabled]="form.invalid">Sauvegarder</button>
                 </form>
             </div>
         </div>
