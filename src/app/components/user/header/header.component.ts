@@ -17,6 +17,7 @@ export class HeaderComponent {
 
   emailContact : string = "contact@bailleurnet.com" ;
   siteName : string = "";
+  isMenuOpen = false;
   lang: string = "";
   is_auth: boolean = true;
 
@@ -34,5 +35,9 @@ export class HeaderComponent {
     const selectedLanguage = lang.target.value;
     localStorage.setItem('lang',selectedLanguage);
     this.translateService.use(selectedLanguage);
+  }
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
   }
 }

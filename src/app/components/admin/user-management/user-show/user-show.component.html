@@ -89,5 +89,11 @@
                 <app-alert-confirm *ngIf="showAlert" (confirmAction)="disabledAdvertiser($event , advertiser)"></app-alert-confirm>
             </div>
         </div> -->
+        <app-alert-confirm *ngIf="showAlert" (confirmAction)="disabledAdvertiser($event , advertiser)"></app-alert-confirm>
+
+        <div class="row mx-0 gap-4 pb-5 align-items-center justify-content-center fixe_btn_actions">
+            <div *ngIf="advertiser?.status == 1"  class="bg-danger text-white w-auto px-2 py-1 rounded btn-lg btn" (click)="handleConfirm(true)">Bloquer</div>
+            <div *ngIf="advertiser?.status == 0"  class="bg-secondary text-white px-2 w-auto py-1 rounded btn-lg btn" (click)="handleConfirm(true)">Débloquer</div>
+        </div>
     </form>
 </div>

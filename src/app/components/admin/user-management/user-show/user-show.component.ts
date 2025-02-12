@@ -71,8 +71,6 @@ export class UserShowComponent implements OnInit{
   }
 
   handleConfirm(value : boolean){
-    console.log("disabled user", this.advertiser);
-
     let alert = new Alert();
     this.showAlert = true;
     alert.message = "Est-vous sûr de vouloir poursuivre cette action ?"
@@ -80,6 +78,7 @@ export class UserShowComponent implements OnInit{
     alert.success_label =  "Oui"
     alert.display =  value;
     this.alertConfirm.emitAlert(alert);
+    
   }
   
   disabledAdvertiser(event : any , advertiser: any){
@@ -96,6 +95,8 @@ export class UserShowComponent implements OnInit{
       this.entityService.disabledAdvertiser(advertiser.id).subscribe({
         next: (data: any) => {
           const notif = new Notification();
+          console.log(data);
+          
           if(data.success === true){
             if(advertiser.status == 1){
               notif.message = "Utilisateur bloqué avec success!";
