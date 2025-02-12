@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Country, State, City ,ICountry, IState, ICity}  from 'country-state-city';
 import { LocalStorageService } from '../../../services/admin/local-storage.service';
+import { PaymentsServiceService } from '../../../services/payments-service.service';
 
 
 
@@ -33,6 +34,14 @@ export class FormCreateComponent {
   cities : any;
   valiData : boolean = false ;
   country_sel : any = {};
+  showStripeForm : boolean = false;
+
+  cardDetails = {
+    number: '',
+    exp_month: '',
+    exp_year: '',
+    cvc: ''
+  };
   
 
   first_name : string = ""
@@ -66,8 +75,8 @@ export class FormCreateComponent {
     };
 
   constructor(private form_b : FormBuilder, private entityService : EntityServiceService,
-              private notification : NoficationsService, private router: Router, private locaStorage  : LocalStorageService
-          )
+              private notification : NoficationsService, private router: Router, private locaStorage  : LocalStorageService,
+            )
   {
     this.selectedCountry = "CM";
     this.title = this.form_b.control('', [Validators.required, Validators.maxLength(256)])
@@ -384,6 +393,26 @@ export class FormCreateComponent {
 
     } catch (error) {
       console.error('Erreur lors de la récupération des villes:', error);
+    }
+  }
+
+  showForm(type : string){
+    if (type === 'stripe') {
+      this.showStripeForm = !this.showStripeForm ;
+    }
+  }
+
+  handlePayment(type : string){
+    if (type === 'stripe') {
+      // this.paymentServ.createPaymentToken(this.cardDetails).subscribe(
+      //   (token) => {
+      //     console.log('Token créé :', token);
+      //     // Envoie du token au serveur pour traitement
+      //   },
+      //   (error) => {
+      //     console.error('Erreur lors de la création du token :', error);
+      //   }
+      // );
     }
   }
 
