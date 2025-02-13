@@ -216,9 +216,9 @@ export class MyAccountComponent implements OnInit {
     this.isModalOpen = false;
   }  
 
-  changePassword(old_ppassword: string, new_password :string) {
+  changePassword( new_password: string, old_ppassword :string) {
 
-    console.log(old_ppassword, new_password);
+    console.log(new_password, old_ppassword);
     let formPass = new FormData();
     const id = this.localStorage.getItem('user')?.id;
 
@@ -228,11 +228,16 @@ export class MyAccountComponent implements OnInit {
     if (id) {
       this.entityService.updatePassword(id, formPass).subscribe({
         next: (data : any) => {
-          console.log({h2O : data});
-          
+            let message = ''
+            let type = ''
           if (data.success === true) {
-            
+             message = 'Mot de passe modifié avec success';
+             type = 'success';
+          }else{
+            message = 'Mot de passe actuel invalide';
+            type = 'warning';
           }
+          this.handleNotification(message, type)
         },
         error: (error : any) => {
           console.log(error);
@@ -245,6 +250,13 @@ export class MyAccountComponent implements OnInit {
       console.log('Formulaire soumis avec succès !');
       this.closeModal(); // Ferme le modal après l'instruction
     }, 1000);
+  }
+
+  private handleNotification(message: any, type:string) {
+    const notif = new Notification();
+    notif.message = message;
+    notif.status = type;
+    this.notification.emitNotification(notif);
   }
 
 }
