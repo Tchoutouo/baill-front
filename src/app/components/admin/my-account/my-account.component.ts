@@ -222,8 +222,8 @@ export class MyAccountComponent implements OnInit {
     let formPass = new FormData();
     const id = this.localStorage.getItem('user')?.id;
 
-    formPass.append('password', old_ppassword);
-    formPass.append('newpassword', old_ppassword);
+    // formPass.append('password', old_ppassword);
+    // formPass.append('newpassword', old_ppassword);
 
     if (id) {
       this.entityService.updatePassword(id, formPass).subscribe({

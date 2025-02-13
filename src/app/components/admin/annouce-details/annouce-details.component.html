@@ -65,28 +65,32 @@
     <div class="row pt-5">
         <div class="col-lg-5">
             <div class="d-flex g-10 px-3 px-lg-0 wrap">
-                <a *ngIf="annouce?.status == '1'" title="Publier" id="create" data-bs-toggle="modal"  data-bs-target="#forfaitList" >
+                <a *ngIf="annouce?.status == '1' && !isAdmin" title="Publier" id="create" data-bs-toggle="modal"  data-bs-target="#forfaitList" >
                     <!-- <i class="fa fa-check bg-green  p-1 radius-3 text-white"></i> -->
                     <button class="bg-green-main main-white border-none main-font-quick btn-medium rounded-30">Publier</button>
                     <app-forfait-list (hasSubmit)="handleSubmit($event, annouce?.id)"></app-forfait-list>
                 </a>
-                <a *ngIf="annouce?.status == '1'" title="Supprimer" >
+                <a *ngIf="annouce?.status == '1' && !isAdmin" title="Supprimer" >
                     <!-- <i class="fa-solid fa-trash radius-3 bg_red text-white p-1"></i> -->
                     <button class="bg-red main-white border-none main-font-quick btn-medium rounded-30 ">Supprimer</button>
                 </a>
-                <a *ngIf="annouce?.status == '2'" title="Republier" (click)="setAnnouceStatus(annouce?.id, '3')">
+                <a *ngIf="annouce?.status == '2' && !isAdmin" title="Republier" (click)="setAnnouceStatus(annouce?.id, '3')">
                     <!-- <i class="fa-solid fa-play bg-white radius-3 text_green p-1 border-top-1-green border-bottom-1-green border-left-1-green border-right-1-green">
                     </i> -->
                     <button class="bg-blue main-white border-none main-font-quick btn-medium rounded-30 ">Republier</button>
                 </a>
-                <a *ngIf="annouce?.status == '3'" title="Mettre en pause" (click)="setAnnouceStatus(annouce?.id, '2')">
+                <a *ngIf="annouce?.status == '3' && !isAdmin" title="Mettre en pause" (click)="setAnnouceStatus(annouce?.id, '2')">
                     <!-- <i class="fa-solid fa-pause bg_grey radius-3 text-dark p-1"></i> -->
                     <button class="bg-gray-1 balck border-none main-font-quick btn-medium rounded-30 ">Mettre pause</button>
                 </a>
-                <a *ngIf="annouce?.status == '0'" title="Relancer">
+                <a *ngIf="annouce?.status == '0' && !isAdmin" title="Relancer">
                     <!-- <i class="fa-solid fa-arrows-rotate bg_blue radius-3 text-white p-1"></i> -->
                     <button class="bg-white green-main  rounded-30  btn-medium main-font-quick border-green-1">Relancer</button>
                 </a> 
+               
+                <div *ngIf="annouce.status !== '-1' && isAdmin"  class="bg-danger text-white px-2 py-1 rounded" (click)="handleConfirmDisabled(true, '1')">Bloquer</div>
+                <div *ngIf="annouce.status == '-1' &&isAdmin"  class="bg-secondary text-white px-2 py-1 rounded" (click)="handleConfirmDisabled(true, '-1')">Débloquer</div>
+                <app-alert-confirm *ngIf="showAlert" (confirmAction)="setAnnouceStatus(annouce?.id, {key : annouce})"></app-alert-confirm>
                 <!-- <button class="bg-gray-1 balck border-none main-font-quick btn-medium rounded-30 ">Mettre pause</button>
                 <button class="bg-blue main-white border-none main-font-quick btn-medium rounded-30 ">Republier</button>
                 <button class="bg-white green-main  rounded-30  btn-medium main-font-quick border-green-1">Relancer</button>

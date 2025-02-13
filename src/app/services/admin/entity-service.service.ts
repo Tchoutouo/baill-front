@@ -57,21 +57,30 @@ export class EntityServiceService {
     let user : any = localStorage.getItem('user');
     let user_converted : any = JSON.parse(user);
     let url ;
-    // console.log(JSON.parse(user));
     
     if (user_converted.profil_code) {
       if (user_converted.profil_code == 'SUP_ADMIN' || user_converted.profil_code == 'ADMIN') {
         url = 'annonce_back_admin';
+        return this.http.get(environment.apiUrl+url+'/'+pageLImit+'?page='+pageNumber);
       }else if(user_converted.profil_code == 'ADVERT'){
         url = 'annonce_back';
       }
     }
-    
+  
     return this.http.get(environment.apiUrl+url+'/'+user_id+'/'+pageLImit+'?page='+pageNumber);
   }
 
   searchDatasByPage(user_id: any , pageNumber: number , pageLImit : number, query: string ){
     // console.log(environment.apiUrl+'annonce_back/'+user_id+'/'+pageLImit+'/'+query+'?page'+pageNumber);
+    let user : any = localStorage.getItem('user');
+    let user_converted : any = JSON.parse(user);
+    let url ;
+    
+    if (user_converted.profil_code) {
+      if (user_converted.profil_code == 'SUP_ADMIN' || user_converted.profil_code == 'ADMIN') {
+        return this.http.get(environment.apiUrl+'annonce_back_admin/'+pageLImit+'/'+query+'?page='+pageNumber);
+      }
+    }
     return this.http.get(environment.apiUrl+'annonce_back/'+user_id+'/'+pageLImit+'/'+query+'?page='+pageNumber);
   }
   
@@ -81,6 +90,15 @@ export class EntityServiceService {
   }
 
   changeAnnouceStatus(user_id: any, annouceID: any, newStatus:any){
+    let user : any = localStorage.getItem('user');
+    let user_converted : any = JSON.parse(user);
+    let url ;
+    
+    if (user_converted.profil_code) {
+      if (user_converted.profil_code == 'SUP_ADMIN' || user_converted.profil_code == 'ADMIN') {
+        return this.http.get(environment.apiUrl+'annonce_back_admin/update_status/'+annouceID+'/'+newStatus);
+      }
+    }
     return this.http.get(environment.apiUrl+'annonce_back/update_status/'+user_id+'/'+annouceID+'/'+newStatus)
   }
 

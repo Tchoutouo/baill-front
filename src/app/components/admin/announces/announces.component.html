@@ -218,28 +218,10 @@
                                         <!-- Les actions -->
                                         <td class="bord-black">
                                             <div class="icon-list d-flex gap-2 justify-content-center">
-                                                <a *ngIf="value_datas.status == '1'" title="Publier" id="create" data-bs-toggle="modal"  data-bs-target="#forfaitList" >
-                                                    <i class="fa fa-check bg-green  p-1 radius-3 text-white"></i>
-                                                    <div class="modal fade" id="forfaitList" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                                        <div class="modal-dialog m_auto modal-dialog-centered modal-dialog  modal-xl modal-dialog-centered" id="my-model-forfait">
-                                                            <app-forfait-list (hasSubmit)="handleSubmit($event, value_datas)" class="m_auto w-100"></app-forfait-list>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                                <a *ngIf="value_datas.status == '1'" title="Supprimer" >
-                                                    <i class="fa-solid fa-trash radius-3 bg_red text-white p-1"  (click)="handleConfirmDelete([true, 'announce'])" ></i>
-                                                    <app-alert-confirm *ngIf="showAlert" (confirmAction)="deleteAnnouce($event , value_datas)"></app-alert-confirm>
-                                                </a>
-                                                <a *ngIf="value_datas.status == '2'" title="Republier" (click)="setAnnouceStatus(value_datas?.id, '3')">
-                                                    <i class="fa-solid fa-play bg-white radius-3 text_green p-1 border-top-1-green border-bottom-1-green border-left-1-green border-right-1-green">
-                                                    </i>
-                                                </a>
-                                                <a *ngIf="value_datas.status == '3'" title="Mettre en pause" (click)="setAnnouceStatus(value_datas?.id, '2')">
-                                                    <i class="fa-solid fa-pause bg_grey radius-3 text-dark p-1"></i>
-                                                </a>
-                                                <a *ngIf="value_datas.status == '0'" title="Relancer">
-                                                    <i class="fa-solid fa-arrows-rotate bg_blue radius-3 text-white p-1"></i>
-                                                </a> 
+                                                <div *ngIf="value_datas.status !== '-1'"  class="bg-danger text-white px-2 py-1 rounded" (click)="handleConfirmDisabled(true, '1')">Bloquer</div>
+                                                <div *ngIf="value_datas.status == '-1'"  class="bg-secondary text-white px-2 py-1 rounded" (click)="handleConfirmDisabled(true, '-1')">Débloquer</div>
+                                                <app-alert-confirm *ngIf="showAlert" (confirmAction)="setAnnouceStatus(value_datas?.id, {key : value_datas})"></app-alert-confirm>
+ 
                                             </div>
                                         </td>
                                         

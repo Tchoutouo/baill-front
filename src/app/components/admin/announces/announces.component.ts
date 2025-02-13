@@ -240,9 +240,25 @@ export class AnnouncesComponent {
         const user = this.localStorage.getItem('user')
         
         const user_id = user?.id;
+
+        if (newStatus.key) {
+          let alert = new Alert();
+          alert.message = "";
+          alert.cancel_label = "";
+          this.showAlert = false;
+          alert.success_label = "";
+          alert.display = false;
+          this.alertConfirm.emitAlert(alert);
+          if (newStatus.key?.status !== -1) {
+            newStatus = 1 ;
+          }else{
+            newStatus = -1;
+          }
+        } 
         
         let resul = this.entytServ.changeAnnouceStatus(user_id, ann_id, newStatus).subscribe({
           next: (datas: any) => { 
+            console.log({petit : datas});
             
             const notif = new Notification();
             if (datas.success) {
@@ -454,6 +470,20 @@ export class AnnouncesComponent {
     }else{
 
     }
-    this.getAllCategories();
+      this.getAllCategories();
+    }
+
+    handleConfirmDisabled(value : boolean, type : string){
+      let alert = new Alert();
+      this.showAlert = true;
+      if (type == '-1') {
+        alert.message = "Est-vous sûr de vouloir débloquer cette annonce ?"
+      }else{
+        alert.message = "Est-vous sûr de vouloir bloquer cette annonce ?"
+      }
+      alert.cancel_label = "Annuler"
+      alert.success_label =  "Oui"
+      alert.display =  value;
+      this.alertConfirm.emitAlert(alert);
     }
 }
