@@ -188,12 +188,20 @@ export class EntityServiceService {
 
   updatePamentMethods(datas : any){
     console.log('datas in service');
-    return {success :true};
+    return this.http.get(environment.apiUrl+'mode_paiement_back/changeStatus/'+datas);
   }
 
   updatePassword(id : number | string, datas : any){
 
     return this.http.post(environment.apiUrl+'updatePassword/'+id, datas);
+  }
+
+  getPaymentMod(){
+    return this.http.get(environment.apiUrl+'mode_paiement_back');
+  }
+
+  getPaymentMethd(){
+    return this.http.get(environment.apiUrl+'mode_paiement_advert');
   }
 
 }

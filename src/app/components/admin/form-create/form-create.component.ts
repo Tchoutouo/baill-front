@@ -25,6 +25,7 @@ export class FormCreateComponent {
 
   categoriesList :  Array<any> = [];
   entServiceSub : Subscription  | undefined;
+  getPaySub :  Subscription  | undefined;
   images_annouces_list : Array<any> = [];
   images_list : Array<any> = [];
   errorMessages : any = null;
@@ -42,6 +43,8 @@ export class FormCreateComponent {
     exp_year: '',
     cvc: ''
   };
+
+  paymentList : any ;
   
 
   first_name : string = ""
@@ -109,6 +112,7 @@ export class FormCreateComponent {
     window.scroll(0,0);   
     this.getAllCategories() ;
     this.countries = Country.getAllCountries();
+    this.getPaymentMethod();
     this.onCountryChange({ target: { value: this.selectedCountry } });
   } 
 
@@ -397,7 +401,9 @@ export class FormCreateComponent {
   }
 
   showForm(type : string){
-    if (type === 'stripe') {
+    console.log(type.toLocaleLowerCase());
+    
+    if (type.toLocaleLowerCase() === 'stripe') {
       this.showStripeForm = !this.showStripeForm ;
     }
   }
@@ -414,6 +420,21 @@ export class FormCreateComponent {
       //   }
       // );
     }
+  }
+
+  getPaymentMethod(){
+    this.getPaySub = this.entityService.getPaymentMethd().subscribe({
+      next: (res_data: any) => {
+        console.log({cedric : res_data});
+        if (res_data.success) {
+          this.paymentList = res_data.data
+          console.log( this.paymentList?.length );
+        }
+      },
+
+      error: (error: any) => { },
+      complete: () => { },
+    })
   }
 
 }

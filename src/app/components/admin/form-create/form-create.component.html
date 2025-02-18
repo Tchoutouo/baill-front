@@ -177,7 +177,7 @@
     </div>
 </div>
 
-<div class="payment-method-container d-none">
+<div class="payment-method-container" *ngIf="paymentList?.length >= 1">
     <div class="container">
         <div class="content">
             <div class="row">
@@ -188,36 +188,38 @@
                         </div>
     
                         <div class="list-body pt-md-4 pt-3">
-                            <div class="payment-item" (click)="showForm('stripe')">
-                                <div class="payment-logo py-2" >
-                                    <img src="../../../../assets/images/stripe.jpg" width="43" alt="" class="img-fluid icon-payment"> <span>Orange Money</span>
+                            <ng-container *ngFor="let itemPay of paymentList">
+                                <div class="payment-item" (click)="showForm(itemPay.title)">
+                                    <div class="payment-logo py-2">
+                                        <img src="../../../../assets/images/stripe.jpg" width="43" alt="" class="img-fluid icon-payment"> <span> {{itemPay.title}} </span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="stripe-form" *ngIf="showStripeForm">
-                                <form>
-                                    <div class="form-group">
-                                      <label for="cardNumber">Numéro de carte</label>
-                                      <input type="text" class="form-control" id="cardNumber"  name="cardNumber" required>
-                                    </div>
-                                  
-                                    <div class="form-group">
-                                      <label for="expMonth">Mois d'expiration</label>
-                                      <input type="text" class="form-control" id="expMonth"  name="expMonth" required>
-                                    </div>
-                                  
-                                    <div class="form-group">
-                                      <label for="expYear">Année d'expiration</label>
-                                      <input type="text" class="form-control" id="expYear" name="expYear" required>
-                                    </div>
-                                  
-                                    <div class="form-group">
-                                      <label for="cvc">CVC</label>
-                                      <input type="text" class="form-control" id="cvc"  name="cvc" required>
-                                    </div>
-                                  
-                                    <button type="submit" class="btn btn-primary mt-2 bg-green">Payer</button>
-                                </form>
-                            </div>
+                                <div class="stripe-form" *ngIf="showStripeForm">
+                                    <form class="w-100">
+                                        <div class="form-group">
+                                          <label for="cardNumber">Numéro de carte</label>
+                                          <input type="text" class="form-control" id="cardNumber"  name="cardNumber" required>
+                                        </div>
+                                      
+                                        <div class="form-group">
+                                          <label for="expMonth">Mois d'expiration</label>
+                                          <input type="text" class="form-control" id="expMonth"  name="expMonth" required>
+                                        </div>
+                                      
+                                        <div class="form-group">
+                                          <label for="expYear">Année d'expiration</label>
+                                          <input type="text" class="form-control" id="expYear" name="expYear" required>
+                                        </div>
+                                      
+                                        <div class="form-group">
+                                          <label for="cvc">CVC</label>
+                                          <input type="text" class="form-control" id="cvc"  name="cvc" required>
+                                        </div>
+                                      
+                                        <button type="submit" class="btn_publish mt-2 ">Payer</button>
+                                    </form>
+                                </div>
+                            </ng-container>
                         </div>
                     </div>
                 </div>

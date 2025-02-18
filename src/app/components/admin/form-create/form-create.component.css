@@ -124,11 +124,15 @@ button.add_caract{
     flex-direction: column;
 }
 
+.stripe-form{
+    width: 80%;
+}
+
 .payment-item{
     display: flex;
     gap: 12px;
     justify-content: center;
-    width: 50%;
+    width: 80%;
     border: 1px solid #E5E5E5;
     border-radius: 4px;
     background-color: var(--main-color-white);
