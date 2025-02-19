@@ -124,7 +124,7 @@ button.add_caract{
     flex-direction: column;
 }
 
-.stripe-form{
+.stripe-form, .om-form, .momo-form{
     width: 80%;
 }
 
@@ -139,6 +139,8 @@ button.add_caract{
     box-shadow: 0px 2px 4px 0px #0000000F;
     cursor: pointer;
 }
+
+
 
 .payment-item:hover{
     box-shadow: 0px 2px 4px 0px #0000000F;
@@ -158,4 +160,12 @@ button.add_caract{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+@media screen and (max-width : 992px){
+    .content{
+        top: 50%;
+        left: 15%;
+        transform: translate(-9%, -50%);
+    }
 }

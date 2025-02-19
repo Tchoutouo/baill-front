@@ -36,6 +36,8 @@ export class FormCreateComponent {
   valiData : boolean = false ;
   country_sel : any = {};
   showStripeForm : boolean = false;
+  showOmForm : boolean = false;
+  showMomoForm: boolean = false;
 
   cardDetails = {
     number: '',
@@ -405,6 +407,30 @@ export class FormCreateComponent {
     
     if (type.toLocaleLowerCase() === 'stripe') {
       this.showStripeForm = !this.showStripeForm ;
+      if (this.showMomoForm) {
+        this.showMomoForm = !this.showMomoForm ;
+      }
+      if (this.showOmForm) {
+        this.showOmForm = !this.showOmForm ;
+      }
+    }
+    if (type.toLocaleLowerCase() === 'mobile money') {
+      this.showMomoForm = !this.showMomoForm ;
+      if (this.showStripeForm) {
+        this.showStripeForm = !this.showStripeForm ;
+      }
+      if (this.showOmForm) {
+        this.showOmForm = !this.showOmForm ;
+      }
+    }
+    if (type.toLocaleLowerCase() === 'orange money') {
+      this.showOmForm = !this.showOmForm ;
+      if (this.showStripeForm) {
+        this.showStripeForm = !this.showStripeForm ;
+      }
+      if (this.showMomoForm) {
+        this.showMomoForm = !this.showMomoForm ;
+      }
     }
   }
 
@@ -425,7 +451,7 @@ export class FormCreateComponent {
   getPaymentMethod(){
     this.getPaySub = this.entityService.getPaymentMethd().subscribe({
       next: (res_data: any) => {
-        console.log({cedric : res_data});
+        console.log({cedr : res_data});
         if (res_data.success) {
           this.paymentList = res_data.data
           console.log( this.paymentList?.length );

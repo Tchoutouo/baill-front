@@ -13,7 +13,7 @@
                 <div class="col-md-5">
                     <div class="form_group gap-1 mb-4">
                         <label for="title" class="label-form mb-2">Titre<span class="text-danger mx-2">*</span></label> 
-                        <input type="text" [formControl]="title" class=" form-control input-field" required name="title" id="title" placeholder="voture toyota">
+                        <input type="text" [formControl]="title" class=" input_field input-field" required name="title" id="title" placeholder="voture toyota">
                         <div *ngIf="title.dirty && !title.valid">
                             <div class="" class="error" *ngIf="title.hasError('required')">
                                 veuiller renseigner ce champ 
@@ -23,7 +23,7 @@
 
                     <div class="form_group mb-4">
                         <label class="label-form mb-2" for="categorie">Catégorie (s)<span class="text-danger mx-2">*</span></label>
-                        <select multiple name="categorie" id="categorie[]" class="form-control input-field" [formControl]="categorie" required="required">
+                        <select multiple name="categorie" id="categorie[]" class="input_field input-field" [formControl]="categorie" required="required">
                             <option *ngFor="let cast_item of categoriesList" [value]="cast_item.id">{{cast_item.title}}</option>
                         </select>
                         <div *ngIf="categorie.dirty && !categorie.valid">
@@ -35,7 +35,7 @@
 
                     <div class="form_group gap-1 mb-4">
                         <label for="price" class="label-form mb-2">Prix ($)<span class="text-danger mx-2">*</span></label> 
-                        <input type="number" class=" form-control input-field"  [formControl]="price" name="price" id="price" placeholder="voture toyota">
+                        <input type="number" class=" input_field input-field"  [formControl]="price" name="price" id="price" placeholder="voture toyota">
                         <div *ngIf="price.dirty && !price.valid">
                             <div class="" class="error" *ngIf="price.hasError('required')">
                                 veuiller renseigner ce champ 
@@ -45,7 +45,7 @@
 
                     <div class="form_group gap-1 mb-4">
                         <label for="description" class="label-form mb-2">Description<span class="text-danger mx-2">*</span></label> 
-                        <textarea name="description"  [formControl]="description" class="form-control input-field" required id="description" rows="5" cols="10"></textarea>
+                        <textarea name="description"  [formControl]="description" class="input_field input-field" required id="description" rows="5" cols="10"></textarea>
                         <div *ngIf="description.dirty && !description.valid">
                             <div class="" class="error" *ngIf="description.hasError('required')">
                                 veuiller renseigner ce champ 
@@ -58,7 +58,7 @@
 
                     <!-- <div class="form_group gap-1 mb-4">
                         <label for="country" class="label-form mb-2">Pays<span class="text-danger mx-2">*</span></label> 
-                        <input type="text" class=" form-control input-field"  [formControl]="country" name="country" id="country" placeholder="voture toyota">
+                        <input type="text" class=" input_field input-field"  [formControl]="country" name="country" id="country" placeholder="voture toyota">
                         <div *ngIf="country.dirty && !country.valid">
                             <div class="" class="error" *ngIf="country.hasError('required')">
                                 veuiller renseigner ce champ 
@@ -67,7 +67,7 @@
                     </div> -->
                     <div class="form_group gap-1 mb-4">
                         <label for="country" class="label-form mb-2">Pays<span class="text-danger mx-2">*</span></label> 
-                        <select id="country"  (change)="onCountryChange($event)" [(ngModel)]="selectedCountry" [formControl]="country" name="country" class="form-control" required="required">
+                        <select id="country"  (change)="onCountryChange($event)" [(ngModel)]="selectedCountry" [formControl]="country" name="country" class="input_field" required="required">
                             <option *ngFor="let country of countries" [value]="country.isoCode">{{ country.name }}</option>
                         </select>
                         <div *ngIf="country.dirty && !country.valid">
@@ -76,9 +76,9 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="form-group">
+                    <!-- <div class="form_group">
                         <label for="country">{{'user.signup.country'|translate}}</label><span>*</span>
-                        <select id="country" [(ngModel)]="selectedCountry" (change)="onCountryChange($event)" [formControl]="country" name="country" class="form-control" required="required">
+                        <select id="country" [(ngModel)]="selectedCountry" (change)="onCountryChange($event)" [formControl]="country" name="country" class="input_field" required="required">
                             <option *ngFor="let country of countries" [value]="country.isoCode">{{ country.name }}</option>
                         </select>
                     </div> -->
@@ -87,8 +87,8 @@
                 <div class="offset-md-2 col-md-5">
                     <div class="form_group gap-1 mb-4">
                         <label for="location" class="label-form mb-2">Ville<span class="text-danger mx-2">*</span></label> 
-                        <!-- <input type="text" class=" form-control input-field"  name="location" [formControl]="location" required id="location" placeholder="voture toyota"> -->
-                        <select [(ngModel)]="selectedCity" [formControl]="location" name="location" id="location" class="form-control" required="required">
+                        <!-- <input type="text" class=" input_field input-field"  name="location" [formControl]="location" required id="location" placeholder="voture toyota"> -->
+                        <select [(ngModel)]="selectedCity" [formControl]="location" name="location" id="location" class="input_field" required="required">
                             <option *ngFor="let city of cities" [value]="city.name">
                                 {{ city.name }}
                             </option>
@@ -103,7 +103,7 @@
 
                     <div class="form_group gap-1 mb-4">
                         <label for="neighborhood" class="label-form mb-2">Lieu dit<span class="text-danger mx-2">*</span></label> 
-                        <input type="text" class=" form-control input-field" name="neighborhood" required id="neighborhood" [formControl]="neighborhood" placeholder="Yde, Damas 423">
+                        <input type="text" class=" input_field input-field" name="neighborhood" required id="neighborhood" [formControl]="neighborhood" placeholder="Yde, Damas 423">
                         <div *ngIf="neighborhood.dirty && !neighborhood.valid">
                             <div class="" class="error" *ngIf="neighborhood.hasError('required')">
                                 veuiller renseigner ce champ 
@@ -130,7 +130,7 @@
                                     </button>
                                 </div>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control input-field my-2 "  name="categories" id="categories"  placeholder="Ajouter une catgorie">
+                                    <input type="text" class="input_field input-field my-2 "  name="categories" id="categories"  placeholder="Ajouter une catgorie">
                                 </div>
                             </div>
 
@@ -142,7 +142,7 @@
                                         </div>
                                     </div>
                                     <div class="col-8">
-                                        <input type="text" class="form-control input-field"  name="sub-categories" id="sub-categories" value="1567 x 123" placeholder="valeur">
+                                        <input type="text" class="input_field input-field"  name="sub-categories" id="sub-categories" value="1567 x 123" placeholder="valeur">
                                     </div>
                                     <div class="col-1">
                                         <i class="fa-solid fa-xmark"></i>
@@ -177,7 +177,7 @@
     </div>
 </div>
 
-<div class="payment-method-container" *ngIf="paymentList?.length >= 1">
+<div class="payment-method-container d-none" *ngIf="paymentList?.length >= 1">
     <div class="container">
         <div class="content">
             <div class="row">
@@ -191,29 +191,60 @@
                             <ng-container *ngFor="let itemPay of paymentList">
                                 <div class="payment-item" (click)="showForm(itemPay.title)">
                                     <div class="payment-logo py-2">
-                                        <img src="../../../../assets/images/stripe.jpg" width="43" alt="" class="img-fluid icon-payment"> <span> {{itemPay.title}} </span>
+                                        <ng-container *ngIf="itemPay.title == 'Stripe'">
+                                            <img src="../../../../assets/images/stripe.jpg" width="43" alt="" class="img-fluid icon-payment"> 
+                                            <span> {{itemPay.title}} </span>
+                                        </ng-container>
+                                        <ng-container *ngIf="itemPay.title == 'Orange Money'">
+                                            <img src="../../../../assets/images/Logo-om.jpg" width="43" alt="" class="img-fluid icon-payment"> 
+                                            <span> {{itemPay.title}}</span>
+                                        </ng-container>
+                                        <ng-container *ngIf="itemPay.title == 'Mobile Money'">
+                                            <img src="../../../../assets/images/momo.png" width="43" alt="" class="img-fluid icon-payment"> 
+                                            <span>{{itemPay.title}} </span>
+                                        </ng-container>
                                     </div>
                                 </div>
-                                <div class="stripe-form" *ngIf="showStripeForm">
+                                <div class="stripe-form" *ngIf="showStripeForm && itemPay.title == 'Stripe'">
                                     <form class="w-100">
-                                        <div class="form-group">
-                                          <label for="cardNumber">Numéro de carte</label>
-                                          <input type="text" class="form-control" id="cardNumber"  name="cardNumber" required>
+                                        <div class="form_group mb-3">
+                                          <label class="label-form mb-1" for="cardNumber">Numéro de carte</label>
+                                          <input type="text" class="input_field input-field" id="cardNumber"  name="cardNumber" required>
                                         </div>
                                       
-                                        <div class="form-group">
-                                          <label for="expMonth">Mois d'expiration</label>
-                                          <input type="text" class="form-control" id="expMonth"  name="expMonth" required>
+                                        <div class="form_group mb-3">
+                                          <label class="label-form mb-1" for="expMonth">Mois d'expiration</label>
+                                          <input type="text" class="input_field input-field" id="expMonth"  name="expMonth" required>
                                         </div>
                                       
-                                        <div class="form-group">
-                                          <label for="expYear">Année d'expiration</label>
-                                          <input type="text" class="form-control" id="expYear" name="expYear" required>
+                                        <div class="form_group mb-3">
+                                          <label class="label-form mb-1" for="expYear">Année d'expiration</label>
+                                          <input type="text" class="input_field input-field" id="expYear" name="expYear" required>
                                         </div>
                                       
-                                        <div class="form-group">
-                                          <label for="cvc">CVC</label>
-                                          <input type="text" class="form-control" id="cvc"  name="cvc" required>
+                                        <div class="form_group mb-3">
+                                          <label class="label-form mb-1" for="cvc">CVC</label>
+                                          <input type="text" class="input_field input-field" id="cvc"  name="cvc" required>
+                                        </div>
+                                      
+                                        <button type="submit" class="btn_publish mt-2 ">Payer</button>
+                                    </form>
+                                </div>
+                                <div class="om-form" *ngIf="showOmForm && itemPay.title == 'Orange Money'">
+                                    <form class="w-100">
+                                        <div class="form_group">
+                                          <label class="label-form mb-2" for="phoneNumber">Numéro de téléphone</label>
+                                          <input type="text" class="input_field input-field" id="phoneNumber"  name="phoneNumber" required>
+                                        </div>
+                                      
+                                        <button type="submit" class="btn_publish mt-2 ">Payer</button>
+                                    </form>
+                                </div>
+                                <div class="momo-form" *ngIf="showMomoForm && itemPay.title == 'Mobile Money'">
+                                    <form class="w-100">
+                                        <div class="form_group">
+                                          <label class="label-form mb-2" for="cardNumber">Numéro de carte</label>
+                                          <input type="text" class="input_field input-field" id="cardNumber"  name="cardNumber" required>
                                         </div>
                                       
                                         <button type="submit" class="btn_publish mt-2 ">Payer</button>

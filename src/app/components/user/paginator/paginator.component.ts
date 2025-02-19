@@ -52,14 +52,13 @@ export class PaginatorComponent {
     let newPage : number = page
 
     if (page === "next") {
-
       this.currentPage = this.currentPage + 1 ;
       if (this.currentPage == this.lastElement) {
         this.next = null; 
       }else if (this.next){
         this.next = this.next + 1
       }
-      
+      newPage = this.currentPage
     }
 
     if (page === "prev") {
@@ -69,9 +68,10 @@ export class PaginatorComponent {
       }else if(this.previous ) {
         this.previous = this.previous - 1
       }
+      newPage = this.currentPage
     }
 
-    newPage = this.currentPage
+
 
     if (newPage >= 1 && newPage <= this.lastElement) {
       this.setPage.emit(newPage)
