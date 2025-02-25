@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-payment-item',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './payment-item.component.html',
   styleUrl: './payment-item.component.css'
 })
@@ -14,7 +15,33 @@ export class PaymentItemComponent {
   showOmForm : boolean = false;
   showMomoForm: boolean = false;
 
+  number : FormControl
+  exp_month : FormControl
+  exp_year : FormControl
+  cvc : FormControl
+
+  paymentForm : FormGroup
+  
+
   @Input() itemPay :any ;
+
+  constructor(private form_build : FormBuilder){
+      this.cvc = this.form_build.control('', [Validators.required, Validators.maxLength(3), Validators.minLength(3)])
+      this.number = this.form_build.control('', [Validators.required, Validators.maxLength(16), Validators.minLength(16)])
+      this.exp_month = this.form_build.control('', [Validators.required, Validators.maxLength(2), Validators.minLength(2)])
+      this.exp_year = this.form_build.control('', [Validators.required, Validators.maxLength(4), Validators.minLength(4)])
+
+      this.paymentForm = this.form_build.group({
+          cvc : this.cvc,
+          number : this.number,
+          exp_month : this.exp_month,
+          exp_year : this.exp_year
+      })
+  }
+
+  ngOnInit(){
+
+  }
 
   
   showForm(type : string){
@@ -49,5 +76,8 @@ export class PaymentItemComponent {
     }
   }
 
+  handleSubmit(){
+    alert('sumited')
+  }
 
 }

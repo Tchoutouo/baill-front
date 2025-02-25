@@ -5,7 +5,7 @@
             <div class="col-md-3">
                 <div class="form_group mb-3">
                     <label for="name" class="label-form mb-1">Nom(s)</label>
-                    <input type="text" name="last_name" class="input_field" formControlName="last_name"   id="last_name">
+                    <input type="text" name="last_name" class="input_field"  formControlName="last_name"   id="last_name">
                     <div *ngIf="profileForm.get('last_name')?.invalid && profileForm.get('last_name')?.dirty" class="text-danger">
                         Le nom est requis.
                     </div>
