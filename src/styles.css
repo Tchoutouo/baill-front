@@ -124,6 +124,14 @@ body{
     user-select: none;
 }
 
+.w-80{
+    width: 80%;
+}
+
+.w-95{
+    width: 95%;
+}
+
 
 .gap-10{
     gap: 10px;

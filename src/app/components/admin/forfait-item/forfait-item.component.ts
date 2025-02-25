@@ -13,7 +13,7 @@ import { TranslateModule } from '@ngx-translate/core';
 export class ForfaitItemComponent {
 
   @Input() abonment :any ;
-  duration_abnment : number = 1
+  duration_abnment : number = 1;
 
   constructor (){
   }
@@ -21,4 +21,6 @@ export class ForfaitItemComponent {
   ngOnInit(){
     console.log(this.abonment);
   }
+
+
 }

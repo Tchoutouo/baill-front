@@ -177,7 +177,7 @@
     </div>
 </div>
 
-<div class="payment-method-container d-none" *ngIf="paymentList?.length >= 1">
+<div class="payment-method-container" [ngClass]="{'d-none' : !showPayForm}" *ngIf="paymentList?.length >= 1">
     <div class="container">
         <div class="content">
             <div class="row">
@@ -189,67 +189,7 @@
     
                         <div class="list-body pt-md-4 pt-3">
                             <ng-container *ngFor="let itemPay of paymentList">
-                                <div class="payment-item" (click)="showForm(itemPay.title)">
-                                    <div class="payment-logo py-2">
-                                        <ng-container *ngIf="itemPay.title == 'Stripe'">
-                                            <img src="../../../../assets/images/stripe.jpg" width="43" alt="" class="img-fluid icon-payment"> 
-                                            <span> {{itemPay.title}} </span>
-                                        </ng-container>
-                                        <ng-container *ngIf="itemPay.title == 'Orange Money'">
-                                            <img src="../../../../assets/images/Logo-om.jpg" width="43" alt="" class="img-fluid icon-payment"> 
-                                            <span> {{itemPay.title}}</span>
-                                        </ng-container>
-                                        <ng-container *ngIf="itemPay.title == 'Mobile Money'">
-                                            <img src="../../../../assets/images/momo.png" width="43" alt="" class="img-fluid icon-payment"> 
-                                            <span>{{itemPay.title}} </span>
-                                        </ng-container>
-                                    </div>
-                                </div>
-                                <div class="stripe-form" *ngIf="showStripeForm && itemPay.title == 'Stripe'">
-                                    <form class="w-100">
-                                        <div class="form_group mb-3">
-                                          <label class="label-form mb-1" for="cardNumber">Numéro de carte</label>
-                                          <input type="text" class="input_field input-field" id="cardNumber"  name="cardNumber" required>
-                                        </div>
-                                      
-                                        <div class="form_group mb-3">
-                                          <label class="label-form mb-1" for="expMonth">Mois d'expiration</label>
-                                          <input type="text" class="input_field input-field" id="expMonth"  name="expMonth" required>
-                                        </div>
-                                      
-                                        <div class="form_group mb-3">
-                                          <label class="label-form mb-1" for="expYear">Année d'expiration</label>
-                                          <input type="text" class="input_field input-field" id="expYear" name="expYear" required>
-                                        </div>
-                                      
-                                        <div class="form_group mb-3">
-                                          <label class="label-form mb-1" for="cvc">CVC</label>
-                                          <input type="text" class="input_field input-field" id="cvc"  name="cvc" required>
-                                        </div>
-                                      
-                                        <button type="submit" class="btn_publish mt-2 ">Payer</button>
-                                    </form>
-                                </div>
-                                <div class="om-form" *ngIf="showOmForm && itemPay.title == 'Orange Money'">
-                                    <form class="w-100">
-                                        <div class="form_group">
-                                          <label class="label-form mb-2" for="phoneNumber">Numéro de téléphone</label>
-                                          <input type="text" class="input_field input-field" id="phoneNumber"  name="phoneNumber" required>
-                                        </div>
-                                      
-                                        <button type="submit" class="btn_publish mt-2 ">Payer</button>
-                                    </form>
-                                </div>
-                                <div class="momo-form" *ngIf="showMomoForm && itemPay.title == 'Mobile Money'">
-                                    <form class="w-100">
-                                        <div class="form_group">
-                                          <label class="label-form mb-2" for="cardNumber">Numéro de carte</label>
-                                          <input type="text" class="input_field input-field" id="cardNumber"  name="cardNumber" required>
-                                        </div>
-                                      
-                                        <button type="submit" class="btn_publish mt-2 ">Payer</button>
-                                    </form>
-                                </div>
+                                <app-payment-item [itemPay] = "itemPay" class="w-95"></app-payment-item>
                             </ng-container>
                         </div>
                     </div>

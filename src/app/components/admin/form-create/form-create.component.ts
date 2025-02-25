@@ -11,13 +11,14 @@ import { Subscription } from 'rxjs';
 import { Country, State, City ,ICountry, IState, ICity}  from 'country-state-city';
 import { LocalStorageService } from '../../../services/admin/local-storage.service';
 import { PaymentsServiceService } from '../../../services/payments-service.service';
+import { PaymentItemComponent } from "../payment-item/payment-item.component";
 
 
 
 @Component({
   selector: 'app-form-create',
   standalone: true,
-  imports: [ForfaitListComponent, ImageViewComponent, CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [ForfaitListComponent, ImageViewComponent, CommonModule, ReactiveFormsModule, FormsModule, PaymentItemComponent],
   templateUrl: './form-create.component.html',
   styleUrl: './form-create.component.css'
 })
@@ -38,6 +39,7 @@ export class FormCreateComponent {
   showStripeForm : boolean = false;
   showOmForm : boolean = false;
   showMomoForm: boolean = false;
+  showPayForm : boolean = false ;
 
   cardDetails = {
     number: '',
@@ -286,6 +288,11 @@ export class FormCreateComponent {
 
   async handleSubmit(event: any = null) {
     // Vérification rapide de la validité du formulaire
+
+    if (event.type === 'Standard' || event.type === 'Premium') {
+        return this.storeAndPayAnnouce(event); 
+    }
+
     if (!this.anounces_form_datas.valid || this.images_annouces_list.length < 1) {
       this.errorMessages = this.images_annouces_list.length < 1
         ? 'Veuillez ajouter au moins une image.'
@@ -402,38 +409,6 @@ export class FormCreateComponent {
     }
   }
 
-  showForm(type : string){
-    console.log(type.toLocaleLowerCase());
-    
-    if (type.toLocaleLowerCase() === 'stripe') {
-      this.showStripeForm = !this.showStripeForm ;
-      if (this.showMomoForm) {
-        this.showMomoForm = !this.showMomoForm ;
-      }
-      if (this.showOmForm) {
-        this.showOmForm = !this.showOmForm ;
-      }
-    }
-    if (type.toLocaleLowerCase() === 'mobile money') {
-      this.showMomoForm = !this.showMomoForm ;
-      if (this.showStripeForm) {
-        this.showStripeForm = !this.showStripeForm ;
-      }
-      if (this.showOmForm) {
-        this.showOmForm = !this.showOmForm ;
-      }
-    }
-    if (type.toLocaleLowerCase() === 'orange money') {
-      this.showOmForm = !this.showOmForm ;
-      if (this.showStripeForm) {
-        this.showStripeForm = !this.showStripeForm ;
-      }
-      if (this.showMomoForm) {
-        this.showMomoForm = !this.showMomoForm ;
-      }
-    }
-  }
-
   handlePayment(type : string){
     if (type === 'stripe') {
       // this.paymentServ.createPaymentToken(this.cardDetails).subscribe(
@@ -461,6 +436,19 @@ export class FormCreateComponent {
       error: (error: any) => { },
       complete: () => { },
     })
+  }
+
+  storeAndPayAnnouce(data:any){
+    try {
+
+      if (data) {
+        this.showPayForm = true;
+        
+      }
+    } catch (error) {
+      
+    }
+
   }
 
 }

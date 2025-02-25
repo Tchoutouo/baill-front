@@ -31,7 +31,6 @@ export class ForfaitListComponent {
   }
 
   sendData(forfait : any ){
-    console.log({steph : forfait});
     this.hasSubmit.emit(forfait)
   }
 
@@ -40,7 +39,6 @@ export class ForfaitListComponent {
       next: (data: any) => { 
         if (data.success) {
           this.abonment_list = data.data.data;
-          console.log("abonnement",  this.abonment_list);
         }
       },
 
