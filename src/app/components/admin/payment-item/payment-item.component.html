@@ -18,22 +18,53 @@
     <form class="w-100 m-auto" (ngSubmit)="handleSubmit()">
         <div class="form_group mb-3">
           <label class="label-form mb-1" for="cardNumber">Numéro de carte</label>
-          <input type="text" class="input_field input-field" [formControl]="number" id="cardNumber"  name="number" required>
+          <input type="number" class="input_field input-field" [formControl]="number" id="cardNumber"  name="number" required>
         </div>
-      
+        <div *ngIf="number.dirty && !number.valid">
+            <div class="" class="error" *ngIf="number.hasError('required')">
+                veuiller renseigner ce champ 
+            </div>
+            <div class="" class="error" *ngIf="!number.hasError('required')">
+              Ce champ doi contenir exactement 16 caractères
+            </div>
+        </div>
         <div class="form_group mb-3">
           <label class="label-form mb-1" for="exp_month">Mois d'expiration</label>
           <input type="text" class="input_field input-field" [formControl]="exp_month" id="exp_month"  name="exp_month" required>
+        </div>
+        <div *ngIf="number.dirty && !number.valid">
+          <div class="" class="error" *ngIf="exp_month.hasError('required')">
+              veuiller renseigner ce champ 
+          </div>
+          <div class="" class="error" *ngIf="!exp_month.hasError('required')">
+            Ce champ doi contenir exactement 2 caractères
+          </div>
         </div>
       
         <div class="form_group mb-3">
           <label class="label-form mb-1" for="exp_year">Année d'expiration</label>
           <input type="text" class="input_field input-field" [formControl]="exp_year" id="exp_year" name="exp_year" required>
         </div>
+        <div *ngIf="number.dirty && !number.valid">
+          <div class="" class="error" *ngIf="exp_year.hasError('required')">
+              veuiller renseigner ce champ 
+          </div>
+          <div class="" class="error" *ngIf="!exp_year.hasError('required')">
+            Ce champ doi contenir exactement 4 caractères
+          </div>
+        </div>
       
         <div class="form_group mb-3">
           <label class="label-form mb-1" for="cvc">CVC</label>
           <input type="text" class="input_field input-field" id="cvc"  name="cvc" required>
+        </div>
+        <div *ngIf="number.dirty && !number.valid">
+          <div class="" class="error" *ngIf="cvc.hasError('required')">
+              veuiller renseigner ce champ 
+          </div>
+          <div class="" class="error" *ngIf="!cvc.hasError('required')">
+            Ce champ doi contenir exactement 3 caractères
+          </div>
         </div>
       
         <button type="submit" class="btn_publish mt-2">Payer</button>

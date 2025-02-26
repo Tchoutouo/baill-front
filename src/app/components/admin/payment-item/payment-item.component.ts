@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
@@ -25,6 +25,8 @@ export class PaymentItemComponent {
 
   @Input() itemPay :any ;
 
+  @Output() payDatas = new  EventEmitter<any>()
+
   constructor(private form_build : FormBuilder){
       this.cvc = this.form_build.control('', [Validators.required, Validators.maxLength(3), Validators.minLength(3)])
       this.number = this.form_build.control('', [Validators.required, Validators.maxLength(16), Validators.minLength(16)])
@@ -45,8 +47,6 @@ export class PaymentItemComponent {
 
   
   showForm(type : string){
-    console.log(type.toLocaleLowerCase());
-    
     if (type.toLocaleLowerCase() === 'stripe') {
       this.showStripeForm = !this.showStripeForm ;
       if (this.showMomoForm) {
@@ -77,7 +77,19 @@ export class PaymentItemComponent {
   }
 
   handleSubmit(){
-    alert('sumited')
+    if (this.paymentForm.valid) {
+      let formValue = this.paymentForm.value();
+      
+       // convertir formValue en un tableau clé-valeur
+      let keyValueArray = Object.entries(formValue);
+
+        // encoder le tableau (par exemple, en JSON)
+      let encodedFormValues = JSON.stringify(keyValueArray);
+
+      console.log(encodedFormValues);
+
+      this.payDatas.emit(encodedFormValues)
+    }
   }
 
 }
