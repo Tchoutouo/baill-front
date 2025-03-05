@@ -15,6 +15,10 @@
     </div>
 </div>
 <div class="stripe-form m-auto pt-3" *ngIf="showStripeForm && itemPay.title == 'Stripe'">
+    <!-- Message d'erreur -->
+    <div *ngIf="errorMessage" class="error mt-3">
+      {{ errorMessage }}
+    </div>
   <!-- Numéro de carte (occupe toute une ligne) -->
   <div class="form-group">
     <label for="card-number-element" class="label-form">Numéro de carte</label>
@@ -38,12 +42,12 @@
   </div>
 
   <!-- Bouton de paiement -->
-  <button class="btn_publish mt-2 mt-3" (click)="handlePayment()">Payer</button>
-
-  <!-- Message d'erreur -->
-  <div *ngIf="errorMessage" class="error mt-3">
-    {{ errorMessage }}
-  </div>
+  <button class="btn_publish mt-2 mt-3 d-flex align-items-center justify-content-between" [disabled]="createPayMeth" (click)="handlePayment()">
+    Payer 
+    <div class="spinner-border text-light ms-2" *ngIf="createPayMeth" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </button>
 </div>
 
   <!-- <form class="w-100 m-auto" (ngSubmit)="handleSubmit()">

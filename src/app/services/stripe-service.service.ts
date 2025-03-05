@@ -17,6 +17,7 @@ export class StripeServiceService {
     this.stripePromise = loadStripe('votre_clé_publique_stripe');
   }
 
+
   async getStripe(): Promise<Stripe | null> {
     return this.stripePromise;
   }
@@ -117,4 +118,5 @@ export class StripeServiceService {
       return null;
     }
   }
+  
 }

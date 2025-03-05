@@ -27,6 +27,7 @@ export class FormCreateComponent {
   categoriesList :  Array<any> = [];
   entServiceSub : Subscription  | undefined;
   getPaySub :  Subscription  | undefined;
+  confirmPaySub :  Subscription  | undefined;
   images_annouces_list : Array<any> = [];
   images_list : Array<any> = [];
   errorMessages : any = null;
@@ -80,6 +81,7 @@ export class FormCreateComponent {
       imageList: [''],
       location : '',
     };
+  currentAnnounce: any = {};
 
   constructor(private form_b : FormBuilder, private entityService : EntityServiceService,
               private notification : NoficationsService, private router: Router, private locaStorage  : LocalStorageService,
@@ -289,15 +291,19 @@ export class FormCreateComponent {
   async handleSubmit(event: any = null) {
     // Vérification rapide de la validité du formulaire
 
-    if (event.type === 'Standard' || event.type === 'Premium') {
-        return this.storeAndPayAnnouce(event); 
-    }
+    
 
     if (!this.anounces_form_datas.valid || this.images_annouces_list.length < 1) {
       this.errorMessages = this.images_annouces_list.length < 1
         ? 'Veuillez ajouter au moins une image.'
         : 'Le formulaire contient des erreurs.';
       return;
+    }
+
+    if (event.type === 'Standard' || event.type === 'Premium') {
+      this.currentAnnounce['announce'] = event ;
+      this.currentAnnounce['amount'] = event.price ;
+      return this.handlePayment(event); 
     }
   
     try {
@@ -409,17 +415,34 @@ export class FormCreateComponent {
     }
   }
 
-  handlePayment(type : string){
-    if (type === 'stripe') {
-      // this.paymentServ.createPaymentToken(this.cardDetails).subscribe(
-      //   (token) => {
-      //     console.log('Token créé :', token);
-      //     // Envoie du token au serveur pour traitement
-      //   },
-      //   (error) => {
-      //     console.error('Erreur lors de la création du token :', error);
-      //   }
-      // );
+  storeAndPayAnnouce(payment : any){
+    try {
+
+      this.showPayForm = false;
+      if (payment.type === 'stripe') {
+        console.log({hello : this.currentAnnounce});
+        
+        // recuperation des données de l'annonce:
+
+        // Création de FormData de manière optimisée
+        if (this.currentAnnounce.length) {
+          let formData = this.createFormData(this.currentAnnounce.forfait);    
+          formData.append('status', '1') ;
+
+          let confirmDatas : any= []
+
+          confirmDatas['anounces_datas'] = formData ;
+          confirmDatas ['payment_datas']['amount'] = this.currentAnnounce?.price;
+          confirmDatas ['payment_datas']['paymen_method'] = payment;
+
+          console.log(confirmDatas);
+          
+        }
+  
+      }
+      
+    } catch (error) {
+      
     }
   }
 
@@ -438,12 +461,10 @@ export class FormCreateComponent {
     })
   }
 
-  storeAndPayAnnouce(data:any){
+  handlePayment(data:any){
     try {
-
       if (data) {
         this.showPayForm = true;
-        
       }
     } catch (error) {
       

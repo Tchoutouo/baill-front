@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, AfterViewChecked, ChangeDetectorRef, Output } from '@angular/core';
+import { Component, EventEmitter, Input, AfterViewChecked, ChangeDetectorRef, Output, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { StripeServiceService } from '../../../services/stripe-service.service';
 import { CommonModule } from '@angular/common';
+import { loadStripe, Stripe, StripeElements, StripeCardElement, StripeCardNumberElement, StripeCardExpiryElement, StripeCardCvcElement } from '@stripe/stripe-js'; // Importez Stripe
 
 @Component({
   selector: 'app-payment-item',
@@ -10,74 +10,156 @@ import { CommonModule } from '@angular/common';
   templateUrl: './payment-item.component.html',
   styleUrls: ['./payment-item.component.css']
 })
-export class PaymentItemComponent implements AfterViewChecked {
+export class PaymentItemComponent implements AfterViewInit {
   showStripeForm: boolean = false;
   showOmForm: boolean = false;
   showMomoForm: boolean = false;
+  createPayMeth : boolean = false
 
-  errorMessage: any;
+  errorMessage: string | null | undefined = null;
 
   @Input() itemPay: any;
   @Output() payDatas = new EventEmitter<any>();
 
+  // Variables pour Stripe
+  stripe: Stripe | null = null;
+  elements: StripeElements | null = null;
+  cardElement: StripeCardElement | null = null;
+  private cardNumberElement: StripeCardNumberElement | null = null;
+  private cardExpiryElement: StripeCardExpiryElement | null = null;
+  private cardCvcElement: StripeCardCvcElement | null = null;
+  
   constructor(
     private form_build: FormBuilder,
-    private stripeService: StripeServiceService,
     private cdr: ChangeDetectorRef // Injectez ChangeDetectorRef
   ) {}
+  ngAfterViewInit(): void {
+    throw new Error('Method not implemented.');
+  }
 
-  async ngAfterViewChecked() {
-    // Vérifiez si le conteneur est dans le DOM et que Stripe Elements n'a pas encore été monté
-    if (this.showStripeForm && this.itemPay.title === 'Stripe' && !this.stripeService.isCardElementMounted()) {
-      await this.stripeService.createCardElements();
-      this.cdr.detectChanges(); // Force la détection des changements
+
+  ngAfterViewChecked() {
+    // Rechercher et afficher les éléments de la carte si nécessaires
+    if (this.showStripeForm && !this.cardElement) {
+      this.initializeStripe();
     }
   }
 
-  async handlePayment(type : string | null = null) {
+   
+
+  async handlePayment(type: string | null = null) {
     if (type) {
-      this.showForm(type)
+      this.showForm(type);
+    }else{
+      this.createPayMeth = true
     }
-    const stripe = await this.stripeService.getStripe();
-    const cardNumberElement = this.stripeService.getCardNumberElement();
-    const cardExpiryElement = this.stripeService.getCardExpiryElement();
-    const cardCvcElement = this.stripeService.getCardCvcElement();
-  
-    if (!stripe || !cardNumberElement || !cardExpiryElement || !cardCvcElement) {
-      this.errorMessage = 'Stripe ou les éléments de carte ne sont pas initialisés.';
+
+
+    if (!this.stripe || !this.cardNumberElement) {
+      this.errorMessage = 'Stripe ou l\'élément de carte n\'est pas initialisé.';
       return;
     }
-  
-    // Créez une intention de paiement côté serveur (exemple avec Laravel)
-    const clientSecret = await this.stripeService.createPaymentIntent(1000, 'eur'); // 10,00 €
-  
-    if (!clientSecret) {
-      this.errorMessage = 'Erreur lors de la création de l\'intention de paiement.';
-      return;
-    }
-  
-    // Confirmez le paiement côté client
-    const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
-      payment_method: {
-        card: cardNumberElement,
-        billing_details: {
-          name: (document.getElementById('cardholder-name') as HTMLInputElement).value,
-        },
-      },
-    });
-  
-    if (error) {
-      this.errorMessage = error.message;
-    } else if (paymentIntent && paymentIntent.status === 'succeeded') {
-      console.log('Paiement réussi!', paymentIntent);
-      // Vous pouvez envoyer les données de confirmation à votre API Laravel ici
+
+    try {
+      // Créez un PaymentMethod avec Stripe
+      const { paymentMethod, error } = await this.stripe.createPaymentMethod({
+        type: 'card',
+        card: this.cardNumberElement,
+      });
+
+      if (error) {
+        this.errorMessage = error.message;
+        this.createPayMeth = false;
+      } else {
+        paymentMethod['type'] = 'stripe';
+        this.payDatas.emit(paymentMethod);
+        this.createPayMeth = true;
+        console.log('Payment method created:', paymentMethod, paymentMethod.type);
+      }
+    } catch (error: any) {
+      this.errorMessage = 'Erreur lors de la création du PaymentMethod: ' + error.message;
     }
   }
-  
 
   showForm(type: string) {
     this.showStripeForm = type.toLowerCase() === 'stripe' && !this.showStripeForm;
     this.showOmForm = type.toLowerCase() === 'orange money' && !this.showOmForm;
     this.showMomoForm = type.toLowerCase() === 'mobile money' && !this.showMomoForm;
   }
+
+  // Simulez la création d'une intention de paiement côté serveur
+  // async createPaymentIntent(amount: number, currency: string): Promise<string | null> {
+  //   // Remplacez ceci par un appel HTTP à votre API Laravel
+  //   // Exemple fictif :
+  //   return new Promise((resolve) => {
+  //     setTimeout(() => {
+  //       resolve('pi_123456789_secret_987654321'); // Simule un clientSecret
+  //     }, 1000);
+  //   });
+  // }
+  async initializeStripe() {
+    if (this.stripe) {
+      return; // Si Stripe est déjà initialisé, ne pas réinitialiser
+    }
+  
+    try {
+      // Chargez Stripe avec votre clé publique
+      this.stripe = await loadStripe('pk_test_51QeaLSQrON1MZ63RYWzjlt0JVdwTLMvfZi4duXNpyeqiP4ENhDsJbjUW4qI6ZqPyMArw6XCyRACLA1gn7Dc0hpjX00tSz8i5wx');
+      
+      if (!this.stripe) {
+        throw new Error('Erreur lors du chargement de Stripe.');
+      }
+  
+      // Créez les éléments Stripe
+      this.elements = this.stripe.elements();
+  
+      // Créer des éléments individuels avec un style personnalisé
+      this.cardNumberElement = this.elements.create('cardNumber', {
+        style: {
+          base: {
+            fontSize: '16px',
+            color: '#32325d',
+            fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+            '::placeholder': {
+              color: '#aab7c4',
+            },
+          },
+          invalid: {
+            color: '#fa755a',
+            iconColor: '#fa755a',
+          },
+        },
+        showIcon: true, // Assurez-vous que cette option est activée pour afficher l'icône de la carte
+      });
+      this.cardNumberElement.mount('#card-number-element');
+  
+      this.cardExpiryElement = this.elements.create('cardExpiry', {
+        style: {
+          base: {
+            fontSize: '16px',
+            color: '#32325d',
+          },
+        },
+      });
+      this.cardExpiryElement.mount('#card-expiry-element');
+  
+      this.cardCvcElement = this.elements.create('cardCvc', {
+        style: {
+          base: {
+            fontSize: '16px',
+            color: '#32325d',
+          },
+        },
+      });
+      this.cardCvcElement.mount('#card-cvc-element');
+      this.errorMessage = null;
+      
+    } catch (error: any) {
+      this.errorMessage = 'Erreur lors de l\'initialisation de Stripe: ' + error.message;
+    }
+  }
+  
+
+
+
 }

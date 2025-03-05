@@ -33,20 +33,24 @@ export class PaymentsServiceService {
     return cardElement;
   }
 
-  async confirmPayment(clientSecret: string): Promise<{ error?: any; paymentIntent?: any }> {
-    const stripe = await this.getStripe();
-    if (!stripe || !this.cardElement) {
-      console.error('Stripe ou l\'élément de carte n\'est pas initialisé.');
-      return { error: 'Stripe non initialisé' };
-    }
+  // async confirmPayment(clientSecret: string): Promise<{ error?: any; paymentIntent?: any }> {
+  //   const stripe = await this.getStripe();
+  //   if (!stripe || !this.cardElement) {
+  //     console.error('Stripe ou l\'élément de carte n\'est pas initialisé.');
+  //     return { error: 'Stripe non initialisé' };
+  //   }
 
-    const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
-      payment_method: {
-        card: this.cardElement,
-      },
-    });
+  //   const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+  //     payment_method: {
+  //       card: this.cardElement,
+  //     },
+  //   });
 
-    return { error, paymentIntent };
+  //   return { error, paymentIntent };
+  // }
+
+  paymentConfirm(datas : any){
+
   }
   
 }

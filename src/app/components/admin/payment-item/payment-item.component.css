@@ -33,14 +33,14 @@
 }
 
 .stripe-form, .om-form, .momo-form{
-    width: 80%;
+    width: 90%;
 }
 
 .payment-item{
     display: flex;
     gap: 12px;
     justify-content: center;
-    width: 80%;
+    width: 90%;
     border: 1px solid #E5E5E5;
     border-radius: 4px;
     background-color: var(--main-color-white);
@@ -71,16 +71,22 @@
     background-color: white;
     width: 100%; /* Assurez-vous que le conteneur a une largeur suffisante */
   }
-  
-  .StripeElement--focus {
+
+.StripeElement--focus {
     border-color: #80bdff;
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-  }
-  
-  .StripeElement--invalid {
+}
+
+.StripeElement--invalid {
     border-color: #fa755a;
-  }
-  
-  .StripeElement--complete {
+}
+
+.StripeElement--complete {
     border-color: #28a745;
-  } 
+} 
+
+.spinner-border{
+    height: 1.5rem !important;
+    width: 1.5rem !important;
+    --bs-spinner-border-width: 0.20em !important;
+}
