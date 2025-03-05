@@ -1,95 +1,83 @@
-import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, AfterViewChecked, ChangeDetectorRef, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { StripeServiceService } from '../../../services/stripe-service.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-payment-item',
   standalone: true,
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './payment-item.component.html',
-  styleUrl: './payment-item.component.css'
+  styleUrls: ['./payment-item.component.css']
 })
-export class PaymentItemComponent {
-
-  showStripeForm : boolean = false;
-  showOmForm : boolean = false;
+export class PaymentItemComponent implements AfterViewChecked {
+  showStripeForm: boolean = false;
+  showOmForm: boolean = false;
   showMomoForm: boolean = false;
 
-  number : FormControl
-  exp_month : FormControl
-  exp_year : FormControl
-  cvc : FormControl
+  errorMessage: any;
 
-  paymentForm : FormGroup
+  @Input() itemPay: any;
+  @Output() payDatas = new EventEmitter<any>();
+
+  constructor(
+    private form_build: FormBuilder,
+    private stripeService: StripeServiceService,
+    private cdr: ChangeDetectorRef // Injectez ChangeDetectorRef
+  ) {}
+
+  async ngAfterViewChecked() {
+    // Vérifiez si le conteneur est dans le DOM et que Stripe Elements n'a pas encore été monté
+    if (this.showStripeForm && this.itemPay.title === 'Stripe' && !this.stripeService.isCardElementMounted()) {
+      await this.stripeService.createCardElements();
+      this.cdr.detectChanges(); // Force la détection des changements
+    }
+  }
+
+  async handlePayment(type : string | null = null) {
+    if (type) {
+      this.showForm(type)
+    }
+    const stripe = await this.stripeService.getStripe();
+    const cardNumberElement = this.stripeService.getCardNumberElement();
+    const cardExpiryElement = this.stripeService.getCardExpiryElement();
+    const cardCvcElement = this.stripeService.getCardCvcElement();
+  
+    if (!stripe || !cardNumberElement || !cardExpiryElement || !cardCvcElement) {
+      this.errorMessage = 'Stripe ou les éléments de carte ne sont pas initialisés.';
+      return;
+    }
+  
+    // Créez une intention de paiement côté serveur (exemple avec Laravel)
+    const clientSecret = await this.stripeService.createPaymentIntent(1000, 'eur'); // 10,00 €
+  
+    if (!clientSecret) {
+      this.errorMessage = 'Erreur lors de la création de l\'intention de paiement.';
+      return;
+    }
+  
+    // Confirmez le paiement côté client
+    const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: cardNumberElement,
+        billing_details: {
+          name: (document.getElementById('cardholder-name') as HTMLInputElement).value,
+        },
+      },
+    });
+  
+    if (error) {
+      this.errorMessage = error.message;
+    } else if (paymentIntent && paymentIntent.status === 'succeeded') {
+      console.log('Paiement réussi!', paymentIntent);
+      // Vous pouvez envoyer les données de confirmation à votre API Laravel ici
+    }
+  }
   
 
-  @Input() itemPay :any ;
-
-  @Output() payDatas = new  EventEmitter<any>()
-
-  constructor(private form_build : FormBuilder){
-      this.cvc = this.form_build.control('', [Validators.required, Validators.maxLength(3), Validators.minLength(3)])
-      this.number = this.form_build.control('', [Validators.required, Validators.maxLength(16), Validators.minLength(16)])
-      this.exp_month = this.form_build.control('', [Validators.required, Validators.maxLength(2), Validators.minLength(2)])
-      this.exp_year = this.form_build.control('', [Validators.required, Validators.maxLength(4), Validators.minLength(4)])
-
-      this.paymentForm = this.form_build.group({
-          cvc : this.cvc,
-          number : this.number,
-          exp_month : this.exp_month,
-          exp_year : this.exp_year
-      })
+  showForm(type: string) {
+    this.showStripeForm = type.toLowerCase() === 'stripe' && !this.showStripeForm;
+    this.showOmForm = type.toLowerCase() === 'orange money' && !this.showOmForm;
+    this.showMomoForm = type.toLowerCase() === 'mobile money' && !this.showMomoForm;
   }
-
-  ngOnInit(){
-
-  }
-
-  
-  showForm(type : string){
-    if (type.toLocaleLowerCase() === 'stripe') {
-      this.showStripeForm = !this.showStripeForm ;
-      if (this.showMomoForm) {
-        this.showMomoForm = !this.showMomoForm ;
-      }
-      if (this.showOmForm) {
-        this.showOmForm = !this.showOmForm ;
-      }
-    }
-    if (type.toLocaleLowerCase() === 'mobile money') {
-      this.showMomoForm = !this.showMomoForm ;
-      if (this.showStripeForm) {
-        this.showStripeForm = !this.showStripeForm ;
-      }
-      if (this.showOmForm) {
-        this.showOmForm = !this.showOmForm ;
-      }
-    }
-    if (type.toLocaleLowerCase() === 'orange money') {
-      this.showOmForm = !this.showOmForm ;
-      if (this.showStripeForm) {
-        this.showStripeForm = !this.showStripeForm ;
-      }
-      if (this.showMomoForm) {
-        this.showMomoForm = !this.showMomoForm ;
-      }
-    }
-  }
-
-  handleSubmit(){
-    if (this.paymentForm.valid) {
-      let formValue = this.paymentForm.value();
-      
-       // convertir formValue en un tableau clé-valeur
-      let keyValueArray = Object.entries(formValue);
-
-        // encoder le tableau (par exemple, en JSON)
-      let encodedFormValues = JSON.stringify(keyValueArray);
-
-      console.log(encodedFormValues);
-
-      this.payDatas.emit(encodedFormValues)
-    }
-  }
-
 }

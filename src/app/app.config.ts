@@ -7,6 +7,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { CorsInterceptor } from './interceptors/cors.interceptor';
+import { provideNgxStripe, STRIPE_PUBLISHABLE_KEY } from 'ngx-stripe';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -31,7 +32,8 @@ export const appConfig: ApplicationConfig = {
     {
       provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true
     },
-    { provide: HTTP_INTERCEPTORS, useClass: CorsInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: CorsInterceptor, multi: true },
+    provideNgxStripe('pk_test_51QydBnP1JVeVCDSKAwmszQbjui4iRexbdPLeWmfYwoXpQayltVXrUXwKUPaxyr9pZQq5Yd6GOYibpoZ54L36g0Id00KKkJF9wH')
   ],
 
 };

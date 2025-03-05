@@ -42,7 +42,10 @@ export class ForfaitListComponent {
         }
       },
 
-      error: (error: any) => {  }
+      error: (error: any) => {
+        console.log('error forfaits', error);
+        
+        }
     })
 
   }

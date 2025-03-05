@@ -1,4 +1,4 @@
-<div class="payment-item m-auto w-100" (click)="showForm(itemPay?.title)">
+<div class="payment-item m-auto w-100" (click)="handlePayment(itemPay?.title)">
     <div class="payment-logo py-2">
         <ng-container *ngIf="itemPay.title == 'Stripe'">
             <img src="../../../../assets/images/stripe.jpg" width="43" alt="" class="img-fluid icon-payment"> 
@@ -15,8 +15,39 @@
     </div>
 </div>
 <div class="stripe-form m-auto pt-3" *ngIf="showStripeForm && itemPay.title == 'Stripe'">
-    <form class="w-100 m-auto" (ngSubmit)="handleSubmit()">
-        <div class="form_group mb-3">
+  <!-- Numéro de carte (occupe toute une ligne) -->
+  <div class="form-group">
+    <label for="card-number-element" class="label-form">Numéro de carte</label>
+    <div id="card-number-element" class="stripe-element"></div>
+  </div>
+
+  <!-- Date d'expiration et CVC (sur la même ligne) -->
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="card-expiry-element" class="label-form">Date d'expiration</label>
+        <div id="card-expiry-element" class="stripe-element"></div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="card-cvc-element" class="label-form">CVC</label>
+        <div id="card-cvc-element" class="stripe-element"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bouton de paiement -->
+  <button class="btn_publish mt-2 mt-3" (click)="handlePayment()">Payer</button>
+
+  <!-- Message d'erreur -->
+  <div *ngIf="errorMessage" class="error mt-3">
+    {{ errorMessage }}
+  </div>
+</div>
+
+  <!-- <form class="w-100 m-auto" (ngSubmit)="handleSubmit()">
+  <div class="form_group mb-3">
           <label class="label-form mb-1" for="cardNumber">Numéro de carte</label>
           <input type="number" class="input_field input-field" [formControl]="number" id="cardNumber"  name="number" required>
         </div>
@@ -68,8 +99,8 @@
         </div>
       
         <button type="submit" class="btn_publish mt-2">Payer</button>
-    </form>
-</div>
+    </form> -->
+
 <div class="om-form" *ngIf="showOmForm && itemPay.title == 'Orange Money'">
     <form class="w-100">
         <div class="form_group">
