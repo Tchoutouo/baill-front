@@ -52,6 +52,8 @@ export class PaymentsServiceService {
   // }
 
   paymentConfirm(datas : any){
+    // console.log({pay_steph: datas});
+    
     return this.http.post(environment.apiUrl+'stripe-payment', datas); 
   }
   

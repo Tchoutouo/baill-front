@@ -301,8 +301,7 @@ export class FormCreateComponent {
     }
 
     if (event.type === 'Standard' || event.type === 'Premium') {
-      this.currentAnnounce['announce'] = event ;
-      this.currentAnnounce['amount'] = event.price ;
+     
       return this.handlePayment(event); 
     }
   
@@ -420,30 +419,27 @@ export class FormCreateComponent {
 
       this.showPayForm = false;
       if (payment.type === 'stripe') {
-        console.log({hello : this.currentAnnounce});
+        // console.log({hello : this.currentAnnounce});
         
         // recuperation des données de l'annonce:
 
         // Création de FormData de manière optimisée
-        console.log(this.currentAnnounce.announce);
-        
         if (this.currentAnnounce.announce) {
-          let formData = this.createFormData(this.currentAnnounce.annonce);    
+          let formData = this.createFormData(this.currentAnnounce?.announce);    
           formData.append('status', '1') ;
 
           let confirmDatas: any = {}; 
-
-          console.log(this.currentAnnounce.price);
+          // console.log();
           
           confirmDatas['anounces_datas'] = formData;
           confirmDatas['payment_datas'] = {}; 
-          confirmDatas['payment_datas']['amount'] = this.currentAnnounce.price;
+          confirmDatas['payment_datas']['amount'] = this.currentAnnounce?.announce.price;
           confirmDatas['payment_datas']['payment_method'] = payment;
 
-          this.confirmPaySub = this.paymentService.paymentConfirm(confirmDatas).subscribe({
+
+          this.confirmPaySub = this.paymentService.paymentConfirm(JSON.stringify(confirmDatas)).subscribe({
             next :(result : any) => {
               console.log({sucess : result});
-              
             },
             error :(error : any) => {
               console.log({error : error});
@@ -483,6 +479,8 @@ export class FormCreateComponent {
     try {
       if (data) {
         this.showPayForm = true;
+        console.log({event : event});
+        this.currentAnnounce['announce'] = data ;
       }
     } catch (error) {
       
