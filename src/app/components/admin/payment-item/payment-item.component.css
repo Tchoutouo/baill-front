@@ -86,7 +86,7 @@
 } 
 
 .spinner-border{
-    height: 1.5rem !important;
-    width: 1.5rem !important;
+    height: 1rem !important;
+    width: 1rem !important;
     --bs-spinner-border-width: 0.20em !important;
 }

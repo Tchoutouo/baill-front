@@ -26,7 +26,6 @@ export class EntityServiceService {
   }
 
   store(entity:string, datas: any){
-    
     return this.http.post(environment.apiUrl+entity, datas)
   }
 

@@ -414,7 +414,7 @@ export class FormCreateComponent {
     }
   }
 
-  storeAndPayAnnouce(payment : any){
+  async storeAndPayAnnouce(payment : any){
     try {
 
       this.showPayForm = false;
@@ -428,27 +428,31 @@ export class FormCreateComponent {
           let formData = this.createFormData(this.currentAnnounce?.announce);    
           formData.append('status', '1') ;
 
-          let confirmDatas: any = {}; 
-          // console.log();
-          
-          confirmDatas['anounces_datas'] = formData;
-          confirmDatas['payment_datas'] = {}; 
-          confirmDatas['payment_datas']['amount'] = this.currentAnnounce?.announce.price;
-          confirmDatas['payment_datas']['payment_method'] = payment;
+          let payment_datas: any = {}; 
 
+          payment_datas['amount'] = this.currentAnnounce?.announce.price;
+          payment_datas['payment_method'] = payment;
 
-          this.confirmPaySub = this.paymentService.paymentConfirm(JSON.stringify(confirmDatas)).subscribe({
-            next :(result : any) => {
-              console.log({sucess : result});
-            },
-            error :(error : any) => {
-              console.log({error : error});
+          formData.append('status', '1') ;
+          formData.append('payment_datas',  payment_datas) ;
+          // Envoi des données
+          const response = await this.entityService.store("annonce_back/store", formData).toPromise();
+      
+          // Gestion de la réponse
+          this.handleResponse(response);
+
+          // this.confirmPaySub = this.paymentService.paymentConfirm(JSON.stringify(confirmDatas)).subscribe({
+          //   next :(result : any) => {
+          //     console.log({sucess : result});
+          //   },
+          //   error :(error : any) => {
+          //     console.log({error : error});
               
-            },
-            complete :() => {
+          //   },
+          //   complete :() => {
 
-            }
-          })
+          //   }
+          // })
           
         }
   
@@ -456,7 +460,7 @@ export class FormCreateComponent {
       
     } catch (error) {
         console.log({error_occur : error});
-        
+        this.handleError(error);
     }
   }
 
