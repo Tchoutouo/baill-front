@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { loadStripe, Stripe, StripeCardElement, StripeElements } from '@stripe/stripe-js';
 import { StripeService } from 'ngx-stripe';
+import { environment } from '../../environments/environment.development';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,7 @@ export class PaymentsServiceService {
   private elements: StripeElements | null = null;
   private cardElement: StripeCardElement | null = null;
 
-  constructor() {
+  constructor(private http : HttpClient) {
     this.stripePromise = loadStripe('pk_test_51QydBnP1JVeVCDSKAwmszQbjui4iRexbdPLeWmfYwoXpQayltVXrUXwKUPaxyr9pZQq5Yd6GOYibpoZ54L36g0Id00KKkJF9wH');
   }
   
@@ -50,7 +52,7 @@ export class PaymentsServiceService {
   // }
 
   paymentConfirm(datas : any){
-
+    return this.http.post(environment.apiUrl+'stripe-payment', datas); 
   }
   
 }

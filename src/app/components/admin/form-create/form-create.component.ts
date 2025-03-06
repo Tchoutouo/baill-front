@@ -83,7 +83,7 @@ export class FormCreateComponent {
     };
   currentAnnounce: any = {};
 
-  constructor(private form_b : FormBuilder, private entityService : EntityServiceService,
+  constructor(private form_b : FormBuilder, private entityService : EntityServiceService, private paymentService : PaymentsServiceService,
               private notification : NoficationsService, private router: Router, private locaStorage  : LocalStorageService,
             )
   {
@@ -425,24 +425,42 @@ export class FormCreateComponent {
         // recuperation des données de l'annonce:
 
         // Création de FormData de manière optimisée
-        if (this.currentAnnounce.length) {
-          let formData = this.createFormData(this.currentAnnounce.forfait);    
+        console.log(this.currentAnnounce.announce);
+        
+        if (this.currentAnnounce.announce) {
+          let formData = this.createFormData(this.currentAnnounce.annonce);    
           formData.append('status', '1') ;
 
-          let confirmDatas : any= []
+          let confirmDatas: any = {}; 
 
-          confirmDatas['anounces_datas'] = formData ;
-          confirmDatas ['payment_datas']['amount'] = this.currentAnnounce?.price;
-          confirmDatas ['payment_datas']['paymen_method'] = payment;
+          console.log(this.currentAnnounce.price);
+          
+          confirmDatas['anounces_datas'] = formData;
+          confirmDatas['payment_datas'] = {}; 
+          confirmDatas['payment_datas']['amount'] = this.currentAnnounce.price;
+          confirmDatas['payment_datas']['payment_method'] = payment;
 
-          console.log(confirmDatas);
+          this.confirmPaySub = this.paymentService.paymentConfirm(confirmDatas).subscribe({
+            next :(result : any) => {
+              console.log({sucess : result});
+              
+            },
+            error :(error : any) => {
+              console.log({error : error});
+              
+            },
+            complete :() => {
+
+            }
+          })
           
         }
   
       }
       
     } catch (error) {
-      
+        console.log({error_occur : error});
+        
     }
   }
 
