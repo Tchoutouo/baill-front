@@ -95,8 +95,14 @@ export class EntityServiceService {
     
     if (user_converted.profil_code) {
       if (user_converted.profil_code == 'SUP_ADMIN' || user_converted.profil_code == 'ADMIN') {
+        if (payment_datas) {
+          return this.http.get(environment.apiUrl+'annonce_back_admin/update_status/'+annouceID+'/'+newStatus+'/'+payment_datas);
+        }
         return this.http.get(environment.apiUrl+'annonce_back_admin/update_status/'+annouceID+'/'+newStatus);
       }
+    }
+    if (payment_datas) {
+      return this.http.get(environment.apiUrl+'annonce_back/update_status/'+user_id+'/'+annouceID+'/'+newStatus+'/'+payment_datas)
     }
     return this.http.get(environment.apiUrl+'annonce_back/update_status/'+user_id+'/'+annouceID+'/'+newStatus)
   }

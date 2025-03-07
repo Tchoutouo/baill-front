@@ -512,7 +512,7 @@ export class AnnouncesComponent {
           this.showPayForm = false;
           const user_id = this.localStorage.getItem('user').id;
           const newStatus = '3';
-          const response = await this.entytServ.changeAnnouceStatus(user_id, value_datas.id ,newStatus, payment.id).toPromise();
+          const response = await this.entytServ.changeAnnouceStatus(user_id, value_datas.id ,newStatus, payment).toPromise();
 
           // Gestion de la réponse
           this.handleResponse(response);
