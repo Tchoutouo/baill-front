@@ -104,7 +104,7 @@ export class PaymentItemComponent implements AfterViewInit {
   
     try {
       // Chargez Stripe avec votre clé publique
-      this.stripe = await loadStripe('pk_test_51QeaLSQrON1MZ63RYWzjlt0JVdwTLMvfZi4duXNpyeqiP4ENhDsJbjUW4qI6ZqPyMArw6XCyRACLA1gn7Dc0hpjX00tSz8i5wx');
+      this.stripe = await loadStripe('pk_test_51QydBnP1JVeVCDSKAwmszQbjui4iRexbdPLeWmfYwoXpQayltVXrUXwKUPaxyr9pZQq5Yd6GOYibpoZ54L36g0Id00KKkJF9wH');
       
       if (!this.stripe) {
         throw new Error('Erreur lors du chargement de Stripe.');

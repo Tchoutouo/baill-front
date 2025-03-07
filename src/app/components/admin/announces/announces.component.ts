@@ -20,13 +20,15 @@ import { AlertConfirmService } from '../../../services/alert-confirm.service';
 import { FormCategoryComponent } from "../form-category/form-category.component";
 import { CheckProfilService } from '../../../services/check-profil.service';
 import { EditCategoryComponent } from "../edit-category/edit-category.component";
+import { Router } from '@angular/router';
+import { PaymentItemComponent } from "../payment-item/payment-item.component";
 
 // import { FormatEntityNamePipe } from '../../../helpers/helper';
 
 @Component({
   selector: 'app-announces',
   standalone: true,
-  imports: [PaginatorComponent, RouterModule, CommonModule, AlertComponent, FormatEntityNamePipe, ForfaitListComponent, AlertConfirmComponent, FormCategoryComponent, EditCategoryComponent],
+  imports: [PaginatorComponent, RouterModule, CommonModule, AlertComponent, FormatEntityNamePipe, ForfaitListComponent, AlertConfirmComponent, FormCategoryComponent, EditCategoryComponent, PaymentItemComponent],
   templateUrl: './announces.component.html',
   styleUrl: './announces.component.css'
 })
@@ -46,12 +48,15 @@ export class AnnouncesComponent {
   datas_paginate : any;
   result_data : any;
   annouces : any;
+  paymentList : any;
+  showPayForm : boolean = false ;
   loged : boolean = false;
   querySearch : string = "";
   entityName : string = ""
   query: string = "";
   resulMessage : string  = '';
   updateSub : Subscription | undefined;
+  getPaySub : Subscription | undefined;
   data_to_update : any
   confirm : any
   headLinesCat : any
@@ -68,10 +73,11 @@ export class AnnouncesComponent {
   selectedCat : any
   selectedCatDelet : any
   deleteCatSub : Subscription | undefined
+  currentAnnounce: any = {};
 
   constructor(private entytServ : EntityServiceService, private auth : AuthenticatorService, 
     private notification : NoficationsService, private localStorage : LocalStorageService, 
-    private alertConfirm : AlertConfirmService, private checkProfil: CheckProfilService){
+    private alertConfirm : AlertConfirmService, private checkProfil: CheckProfilService, private router : Router){
 
   }
 
@@ -90,6 +96,7 @@ export class AnnouncesComponent {
     this.headLinesCat = Object.keys(this.categories_poperties);
 
     this.initComponent();
+    this.getPaymentMethod();
   }
 
   closeAlert(event : any){
@@ -258,9 +265,8 @@ export class AnnouncesComponent {
         
         let resul = this.entytServ.changeAnnouceStatus(user_id, ann_id, newStatus).subscribe({
           next: (datas: any) => { 
-            console.log({petit : datas});
-            
             const notif = new Notification();
+
             if (datas.success) {
               notif.message = "Annonce mise à jour avec success !"
               notif.status = "success";
@@ -304,6 +310,10 @@ export class AnnouncesComponent {
     this.data_to_update  = announce ;
     const entity = 'annonce_back/update';
     if(event && announce){
+      if (event.type === 'Standard' || event.type === 'Premium') {
+     
+        return this.handlePayment(event); 
+      }
       this.data_to_update.abonnement_id= event
       this.data_to_update.status= '3'
 
@@ -318,8 +328,18 @@ export class AnnouncesComponent {
     }
   } 
 
+  handlePayment(data:any){
+    try {
+      if (data) {
+        this.showPayForm = true;
+        this.currentAnnounce['announce'] = data ;
+      }
+    } catch (error) {
+      
+    }
+
+  }
   handleConfirmDelete(value : any){
-    
     let alert = new Alert();
     this.showAlert = true;
    
@@ -485,5 +505,54 @@ export class AnnouncesComponent {
       alert.success_label =  "Oui"
       alert.display =  value;
       this.alertConfirm.emitAlert(alert);
+    }
+
+    async storeAndPayAnnouce(payment : any, value_datas : any){
+      try {
+          this.showPayForm = false;
+          const user_id = this.localStorage.getItem('user').id;
+          const newStatus = '3';
+          const response = await this.entytServ.changeAnnouceStatus(user_id, value_datas.id ,newStatus, payment.id).toPromise();
+
+          // Gestion de la réponse
+          this.handleResponse(response);
+        }catch (error) {
+          this.handleError(error);
+      }
+    }
+
+    private handleResponse(data: any) {
+      const notif = new Notification();
+      notif.message = data.success
+        ? "Annonce créée avec succès !"
+        : "Erreur lors de l'enregistrement, contacter l'administrateur !";
+      notif.status = data.success ? "success" : "warning";
+    
+      this.notification.emitNotification(notif);
+    
+      // if (data.success) {
+      //   this.router.navigate(['/admin']);
+      // }
+    }
+    
+    private handleError(error: any) {
+      console.error("Création d'annonce", error);
+      const notif = new Notification();
+      notif.message = "Erreur lors de l'enregistrement, contacter l'administrateur !";
+      notif.status = "warning";
+      this.notification.emitNotification(notif);
+    }
+
+    getPaymentMethod(){
+      this.getPaySub = this.entytServ.getPaymentMethd().subscribe({
+        next: (res_data: any) => {
+          if (res_data.success) {
+            this.paymentList = res_data.data
+          }
+        },
+  
+        error: (error: any) => { },
+        complete: () => { },
+      })
     }
 }

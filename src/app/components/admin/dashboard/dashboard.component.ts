@@ -76,11 +76,10 @@ export class DashboardComponent {
         }else{
           this.dashboardSub = this.entityService.getDashoardDatas(user_id).subscribe({
             next : (datas : any) =>{
-              console.log("all data bailleur",datas);
               
               if (datas.success) {
-                // this.totalEncours = datas.annonce_qte_inprogress;
-                this.totalEncours = datas.annonce_qte_publisher;
+                this.totalEncours = datas.annonce_qte_inprogress;
+                // this.totalEncours = datas.annonce_qte_publisher;
                 this.totalEnvoiDExp = datas.annonce_qte_pause;
                 this.totalExpired = datas.annonce_qte_expired;
               }

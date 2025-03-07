@@ -88,7 +88,7 @@ export class EntityServiceService {
     return this.http.get(environment.apiUrl+'categorie_back/'+pageLImit+'/'+query+'?page='+pageNumber);
   }
 
-  changeAnnouceStatus(user_id: any, annouceID: any, newStatus:any){
+  changeAnnouceStatus(user_id: any, annouceID: any, newStatus:any, payment_datas : any= null){
     let user : any = localStorage.getItem('user');
     let user_converted : any = JSON.parse(user);
     let url ;

@@ -38,14 +38,11 @@ export class AuthenticatorService {
       'Accept': 'application/json'
       }); 
 
-    const test = this.fetchCsrfToken().subscribe(response => {  
-      // console.log('CSRF Token:', response);  
-    });  
 
     
     this.http.post(environment.apiUrl + "login", user, { headers }).subscribe({  
         next: (result: any) => {  
-          // console.log(result);
+          console.log(result);
           
             if (result.success) {  
                 const data: LoginResponse = {  

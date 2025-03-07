@@ -342,7 +342,7 @@ export class FormCreateComponent {
     formData.append('is_published', event ? '1' : '0');
     formData.append('country', this.selectedCountry || 'CM');
     formData.append('status', event ? '3' : '1');
-    formData.append('abonnement_id', event || 1);
+    formData.append('abonnement_id', event.id ? event.id : 1 );
   
     // Ajout de l'ID utilisateur
     const user = this.locaStorage.getItem('user');
@@ -397,7 +397,7 @@ export class FormCreateComponent {
       },
 
       error: (erreur: any) => { 
-        console.log(erreur);
+        console.log({error_when_get_gategory : erreur});
        }
     })
   }
@@ -425,19 +425,23 @@ export class FormCreateComponent {
 
         // Création de FormData de manière optimisée
         if (this.currentAnnounce.announce) {
-          let formData = this.createFormData(this.currentAnnounce?.announce);    
-          formData.append('status', '1') ;
+          let annDatas = this.createFormData(this.currentAnnounce?.announce);    
+          annDatas.append('status', '1') ;
 
-          let payment_datas: any = {}; 
+          let payment_datas: any = {}; // Utilisation correcte d'un objet
 
+          // Ajout des données
           payment_datas['amount'] = this.currentAnnounce?.announce.price;
-          payment_datas['payment_method'] = payment;
-
-          formData.append('status', '1') ;
-          formData.append('payment_datas',  payment_datas) ;
+          payment_datas['payment_method'] = payment.id;
+          payment_datas['mode_paiement'] = 'Stripe';
+          
+          // Ajout des données à formData
+          annDatas.append('status', '1');
+          annDatas.append('payment_datas', JSON.stringify(payment_datas)); // Convertir en JSON
+          
           // Envoi des données
-          const response = await this.entityService.store("annonce_back/store", formData).toPromise();
-      
+          const response = await this.entityService.store("annonce_back/store", annDatas).toPromise();
+          
           // Gestion de la réponse
           this.handleResponse(response);
 
@@ -459,7 +463,6 @@ export class FormCreateComponent {
       }
       
     } catch (error) {
-        console.log({error_occur : error});
         this.handleError(error);
     }
   }
@@ -467,10 +470,8 @@ export class FormCreateComponent {
   getPaymentMethod(){
     this.getPaySub = this.entityService.getPaymentMethd().subscribe({
       next: (res_data: any) => {
-        console.log({cedr : res_data});
         if (res_data.success) {
           this.paymentList = res_data.data
-          console.log( this.paymentList?.length );
         }
       },
 
@@ -483,7 +484,6 @@ export class FormCreateComponent {
     try {
       if (data) {
         this.showPayForm = true;
-        console.log({event : event});
         this.currentAnnounce['announce'] = data ;
       }
     } catch (error) {
