@@ -101,7 +101,7 @@
                                                 
                                                                     <div class="list-body pt-md-4 pt-3">
                                                                         <ng-container *ngFor="let itemPay of paymentList">
-                                                                            <app-payment-item (payDatas)="storeAndPayAnnouce($event, value_datas)" [itemPay] = "itemPay" class="w-95"></app-payment-item>
+                                                                            <app-payment-item (payDatas)="storeAndPayAnnouce($event, value_datas, itemPay)" [itemPay] = "itemPay" class="w-95"></app-payment-item>
                                                                         </ng-container>
                                                                     </div>
                                                                 </div>

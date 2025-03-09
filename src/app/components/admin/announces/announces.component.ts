@@ -47,6 +47,7 @@ export class AnnouncesComponent {
   categories_poperties : any;
   datas_paginate : any;
   result_data : any;
+  selectedAbonnment : any;
   annouces : any;
   paymentList : any;
   showPayForm : boolean = false ;
@@ -311,7 +312,7 @@ export class AnnouncesComponent {
     const entity = 'annonce_back/update';
     if(event && announce){
       if (event.type === 'Standard' || event.type === 'Premium') {
-     
+        this.selectedAbonnment = event;
         return this.handlePayment(event); 
       }
       this.data_to_update.abonnement_id= event
@@ -507,12 +508,21 @@ export class AnnouncesComponent {
       this.alertConfirm.emitAlert(alert);
     }
 
-    async storeAndPayAnnouce(payment : any, value_datas : any){
+    async storeAndPayAnnouce(payment : any, value_datas : any, payMeth : any){
       try {
           this.showPayForm = false;
           const user_id = this.localStorage.getItem('user').id;
           const newStatus = '3';
-          const response = await this.entytServ.changeAnnouceStatus(user_id, value_datas.id ,newStatus, payment).toPromise();
+          let payment_datas: any = {}; // Utilisation correcte d'un objet
+          
+          
+          // Ajout des données
+          payment_datas['amount'] = this.selectedAbonnment.price;
+          payment_datas['abonnement_id'] = this.selectedAbonnment.id;
+          payment_datas['payment_method'] = payment.id;
+          payment_datas['mode_paiement'] = payMeth.title;
+          
+          const response = await this.entytServ.changeAnnouceStatus(user_id, value_datas.id ,newStatus, JSON.stringify(payment_datas)).toPromise();
 
           // Gestion de la réponse
           this.handleResponse(response);
