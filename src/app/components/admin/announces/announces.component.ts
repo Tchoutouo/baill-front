@@ -381,7 +381,6 @@ export class AnnouncesComponent {
   }
 
   deleteAnnouce(event : any , data: any){
-    
     this.resetAlert();
 
     let categories_ann : any = []
@@ -510,11 +509,13 @@ export class AnnouncesComponent {
 
     async storeAndPayAnnouce(payment : any, value_datas : any, payMeth : any){
       try {
+
           this.showPayForm = false;
           const user_id = this.localStorage.getItem('user').id;
           const newStatus = '3';
           let payment_datas: any = {}; // Utilisation correcte d'un objet
           
+          this.CloseFormCategoryModal('forfaitList');
           
           // Ajout des données
           payment_datas['amount'] = this.selectedAbonnment.price;
@@ -526,6 +527,7 @@ export class AnnouncesComponent {
 
           // Gestion de la réponse
           this.handleResponse(response);
+          this.getDatasByPage();
         }catch (error) {
           this.handleError(error);
       }
@@ -533,9 +535,11 @@ export class AnnouncesComponent {
 
     private handleResponse(data: any) {
       const notif = new Notification();
+      // console.log({success : data.success});
+      
       notif.message = data.success
-        ? "Annonce créée avec succès !"
-        : "Erreur lors de l'enregistrement, contacter l'administrateur !";
+        ? "Annonce publiée avec succès !"
+        : "Erreur lors de la publication, contacter l'administrateur !";
       notif.status = data.success ? "success" : "warning";
     
       this.notification.emitNotification(notif);

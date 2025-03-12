@@ -89,27 +89,7 @@
                                                     <app-forfait-list (hasSubmit)="handleSubmit($event, value_datas)" class="m_auto w-100"></app-forfait-list>
                                                 </div>
                                             </div>
-                                            <div class="payment-method-container" [ngClass]="{'d-none' : !showPayForm}" *ngIf="paymentList?.length >= 1">
-                                                <div class="container">
-                                                    <div class="content">
-                                                        <div class="row">
-                                                            <div class="col-12 mx-auto">
-                                                                <div class="payment-list pb-5">
-                                                                    <div class="title-list">
-                                                                        <h3 class="mb-0 pb-lg-5 pb-md-4 pb-3">Choisissez un mode de paiement</h3>
-                                                                    </div>
-                                                
-                                                                    <div class="list-body pt-md-4 pt-3">
-                                                                        <ng-container *ngFor="let itemPay of paymentList">
-                                                                            <app-payment-item (payDatas)="storeAndPayAnnouce($event, value_datas, itemPay)" [itemPay] = "itemPay" class="w-95"></app-payment-item>
-                                                                        </ng-container>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            
                                         </a>
                                         <a *ngIf="value_datas.status == '1'" title="Supprimer" >
                                             <i class="fa-solid fa-trash radius-3 bg_red text-white p-1"  (click)="handleConfirmDelete([true, 'announce'])" ></i>
@@ -127,8 +107,30 @@
                                         </a> 
                                     </div>
                                 </td>
+
+                                <div class="payment-method-container" [ngClass]="{'d-none' : !showPayForm}" *ngIf="paymentList?.length >= 1">
+                                    <div class="container">
+                                        <div class="content">
+                                            <div class="row">
+                                                <div class="col-12 mx-auto">
+                                                    <div class="payment-list pb-5">
+                                                        <div class="title-list">
+                                                            <h3 class="mb-0 pb-lg-5 pb-md-4 pb-3">Choisissez un mode de paiement</h3>
+                                                        </div>
+                                    
+                                                        <div class="list-body pt-md-4 pt-3">
+                                                            <ng-container *ngFor="let itemPay of paymentList">
+                                                                <app-payment-item (payDatas)="storeAndPayAnnouce($event, value_datas, itemPay)"  [itemPay] = "itemPay" class="w-95" ></app-payment-item>
+                                                            </ng-container>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </tr>
-    
+                            
                         </ng-container>
                         <tr class="bord-black" *ngIf="!annouces">
                             <td [attr.colspan]="headLines.length + 2">

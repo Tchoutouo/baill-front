@@ -300,11 +300,12 @@ export class FormCreateComponent {
       return;
     }
 
-    if (event.type === 'Standard' || event.type === 'Premium') {
-     
-      return this.handlePayment(event); 
+    if (event) {
+      if (event.type === 'Standard' || event.type === 'Premium') {
+        return this.handlePayment(event); 
+      }
     }
-  
+
     try {
       // Création de FormData de manière optimisée
       const formData = this.createFormData(event);
@@ -342,7 +343,7 @@ export class FormCreateComponent {
     formData.append('is_published', event ? '1' : '0');
     formData.append('country', this.selectedCountry || 'CM');
     formData.append('status', event ? '3' : '1');
-    formData.append('abonnement_id', event.id ? event.id : 1 );
+    formData.append('abonnement_id', event ? event.id : 1 );
   
     // Ajout de l'ID utilisateur
     const user = this.locaStorage.getItem('user');
@@ -356,7 +357,7 @@ export class FormCreateComponent {
     return formData;
   }
   
-  private handleResponse(data: any) {
+  private handleResponse(data: any) {    
     const notif = new Notification();
     notif.message = data.success
       ? "Annonce créée avec succès !"
@@ -371,7 +372,7 @@ export class FormCreateComponent {
   }
   
   private handleError(error: any) {
-    console.error("Création d'annonce", error);
+    // console.error("Création d'annonce", error);
     const notif = new Notification();
     notif.message = "Erreur lors de l'enregistrement, contacter l'administrateur !";
     notif.status = "warning";
@@ -397,7 +398,7 @@ export class FormCreateComponent {
       },
 
       error: (erreur: any) => { 
-        console.log({error_when_get_gategory : erreur});
+        // console.log({error_when_get_gategory : erreur});
        }
     })
   }
