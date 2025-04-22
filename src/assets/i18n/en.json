@@ -42,6 +42,28 @@
             "and": "And",
             "between": "Between"
         },
+        "contact-us":{
+            "title":"Contact us",
+            "description": "The best way to contact us is to use our contact form below. Please fill out all of the required fields and we will get back to you as soon as possible.",
+            "fullname": "Full Name",
+            "subject": "Subject",
+            "phone-number": "Phone Number",
+            "button-send":"Send",   
+            "message":{
+                "error":{
+                    "name": "Full Name is required.",
+                    "message": "Please enter a message.",
+                    "subject": "Please fill in this field.",
+                    "email-1": "Email is required.",
+                    "email-2": "Email is not in the correct format.",
+                    "phone-number": "Please enter your phone number"
+                },
+                "notif":{
+                    "success": "Your email has been sent successfully!!",
+                    "warning": "An error occurred during the operation."
+                }
+            }
+        },
         "signup":{
             "password":"Password",
             "confirm-password":"Confirm your password",

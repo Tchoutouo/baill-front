@@ -42,6 +42,28 @@
             "and": "Et",
             "between": "Entre"
         },
+        "contact-us":{
+            "title": "Contactez-nous",
+            "description": "Pour nous contacter, utilisez le formulaire ci-dessous. Veuillez remplir tous les champs obligatoires et nous vous répondrons dans les plus brefs délais.",
+            "fullname": "Nom complet",
+            "subject":"Objet",
+            "phone-number":"Numéro de téléphone",
+            "button-send":"Envoyer",
+            "message":{
+                "error":{
+                    "fullname": "le nom complet est requis.",
+                    "message":"Veuillez entrer un message.",
+                    "subject":"Veuillez remplir ce champs.",
+                    "email-1":"L'email est requis.",
+                    "email-2":"L'email ne respect pas le bon format.",
+                    "phone-number":"Veuillez entrer votre numéro de téléphone"
+                },
+                "notif":{
+                    "success": "Votre mail a été envoyé avec succès !!",
+                    "warning": "Une erreur est survenu lors de l'opération"
+                }
+            }
+        },
         "signup":{
             "password":"Mot de passe",
             "confirm-password":"Confirmer votre mot de passe",

@@ -77,6 +77,10 @@ ul.categories li, .all-right{
     margin-top: 91px;
 }
 
+.link-contact{
+    text-decoration: none;
+}
+
 @media screen and (max-width: 767px){
     .footer-list .element_2, .element_3, ul.categories{
         padding: 0;

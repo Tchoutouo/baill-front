@@ -24,6 +24,7 @@ import { PackageEditComponent } from './components/admin/packages/package-edit/p
 import { UsersComponent } from './components/admin/user-management/users/users.component';
 import { Error403Component } from './components/errors/error403/error403.component';
 import { userRoleGuard } from './guard/user-role.guard';
+import { ContactUsComponent } from './components/user/contact-us/contact-us.component';
 
 export const routes: Routes = [
     { 
@@ -154,6 +155,11 @@ export const routes: Routes = [
                 canActivate: [authGuard],
             }
         ]
+    },
+    {
+        path: 'contact-us',
+        component:  ContactUsComponent,
+        // loadComponent: () => import('./components/errors/error403/error403.component').then(c => c.Error403Component)
     },
     {
         path: 'access-interdit',
