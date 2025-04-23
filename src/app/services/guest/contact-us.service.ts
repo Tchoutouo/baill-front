@@ -10,7 +10,7 @@ export class ContactUsService {
   constructor(private http : HttpClient) { }
 
     sendMailContact(data : any){
-      return this.http.post(environment.apiUrl+'contact-us', data);
+      return this.http.post(environment.apiUrl+'home_back/contact', data);
     }
   
 }

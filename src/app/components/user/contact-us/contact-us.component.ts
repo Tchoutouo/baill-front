@@ -20,9 +20,10 @@ import { AlertComponent } from "../../admin/alert/alert.component";
 })
 export class ContactUsComponent {
     contactUsForm: FormGroup;
-    fullName: FormControl;
+    name: FormControl;
     email: FormControl;
-    subject: FormControl;
+    objet: FormControl;
+    phone: FormControl
     message: FormControl;
     message_alert : any  = null;
     display_message: boolean = false;
@@ -32,16 +33,18 @@ export class ContactUsComponent {
               private entityService : EntityServiceService,
               fb: FormBuilder) {
 
-    this.fullName = fb.control("",[Validators.required]);
-    this.subject = fb.control("",[Validators.required]);
+    this.name = fb.control("",[Validators.required]);
+    this.phone = fb.control("",[Validators.required]);
+    this.objet = fb.control("",[Validators.required]);
     this.message = fb.control("",[Validators.required]);
     this.email = fb.control("",[Validators.email, Validators.required]);
     
     this.contactUsForm = fb.group({
-      fullName: this.fullName,
-      subject: this.subject,
+      name: this.name,
+      objet: this.objet,
       message: this.message,
-      email: this.email
+      email: this.email,
+      phone: this.phone
     });
   }
 
@@ -53,8 +56,6 @@ export class ContactUsComponent {
     const datas = this.contactUsForm.value;
     const notif = new Notification();
 
-    console.log("data form", datas);
-    
     if (this.contactUsForm.valid) {
       this.contactUsService.sendMailContact(datas).subscribe({
         next : (data : any) =>{
@@ -64,9 +65,8 @@ export class ContactUsComponent {
             if (this.message_alert) {
               this.display_message = true;
             }
-            // this.router.navigate(['/signin']);
           }else{
-            notif.message = this.entityService.getTranslatedText('user.contact-us.message.notif.error');
+            notif.message = this.entityService.getTranslatedText('user.contact-us.message.notif.warning');
             notif.status = "warning"
           }
           this.notification.emitNotification(notif);
