@@ -417,7 +417,7 @@ export class FormCreateComponent {
 
   async storeAndPayAnnouce(payment : any){
     try {
-
+      alert(payment.type);
       this.showPayForm = false;
       if (payment.type === 'stripe') {
         // console.log({hello : this.currentAnnounce});
@@ -461,6 +461,27 @@ export class FormCreateComponent {
           
         }
   
+      }else if (payment.type =='mobile_money') {
+        let payment_datas: any = {}; // Utilisation correcte d'un objet
+        const annData = this.createFormData(this.currentAnnounce?.announce);    
+        annData.append('status', '1') ;
+
+          // Ajout des données
+          payment_datas['amount'] = this.currentAnnounce?.announce.price;
+          payment_datas['payment_method'] = payment.type;
+          payment_datas['mode_paiement'] = payment.datas?.operateur;
+          payment_datas['phone_number'] = payment.datas?.phoneNumber;
+          
+          // Ajout des données à formData
+          annData.append('status', '1');
+          annData.append('payment_datas', JSON.stringify(payment_datas)); // Convertir en JSON
+          alert('ntot')
+          // Envoi des données
+          const response = await this.entityService.store("annonce_back/store", annData).toPromise();
+          console.log({op:response})
+          // Gestion de la réponse
+          this.handleResponse(response);
+
       }
       
     } catch (error) {
@@ -471,6 +492,7 @@ export class FormCreateComponent {
   getPaymentMethod(){
     this.getPaySub = this.entityService.getPaymentMethd().subscribe({
       next: (res_data: any) => {
+        console.log({cedric:res_data});
         if (res_data.success) {
           this.paymentList = res_data.data
         }

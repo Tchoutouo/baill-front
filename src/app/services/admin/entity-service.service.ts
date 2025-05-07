@@ -202,10 +202,31 @@ export class EntityServiceService {
   }
 
   getPaymentMod(){
-    return this.http.get(environment.apiUrl+'mode_paiement_back');
+    // return this.http.get(environment.apiUrl+'mode_paiement_back'); 
+    let user : any = localStorage.getItem('user');
+    let user_converted : any = JSON.parse(user);
+    let url ;
+    
+    if (user_converted.profil_code) {
+      if (user_converted.profil_code == 'SUP_ADMIN' || user_converted.profil_code == 'ADMIN') {
+        return this.http.get(environment.apiUrl+'mode_paiement_back');
+      }
+      return this.http.get(environment.apiUrl+'mode_paiement_advert');
+    }
+    return this.http.get(environment.apiUrl+'mode_paiement_advert');
   }
 
   getPaymentMethd(){
+    let user : any = localStorage.getItem('user');
+    let user_converted : any = JSON.parse(user);
+    let url ;
+    
+    if (user_converted.profil_code) {
+      if (user_converted.profil_code == 'SUP_ADMIN' || user_converted.profil_code == 'ADMIN') {
+        return this.http.get(environment.apiUrl+'mode_paiement_back');
+      }
+      return this.http.get(environment.apiUrl+'mode_paiement_advert');
+    }
     return this.http.get(environment.apiUrl+'mode_paiement_advert');
   }
 

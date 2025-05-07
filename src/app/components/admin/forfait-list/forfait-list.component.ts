@@ -30,6 +30,18 @@ export class ForfaitListComponent {
     this.getAbonnement();
   }
 
+  ngAfterViewInit() {
+    const modal = document.getElementById('forfaitList');
+    if (modal) {
+      modal.addEventListener('hidden.bs.modal', () => {
+        // Enlève le focus actif
+        if (document.activeElement instanceof HTMLElement) {
+          document.activeElement.blur();
+        }
+      });
+    }
+  }
+
   sendData(forfait : any ){
     this.hasSubmit.emit(forfait)
   }

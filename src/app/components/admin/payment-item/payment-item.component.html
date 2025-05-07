@@ -105,23 +105,48 @@
         <button type="submit" class="btn_publish mt-2">Payer</button>
     </form> -->
 
-<div class="om-form" *ngIf="showOmForm && itemPay.title == 'Orange Money'">
-    <form class="w-100">
+    <div class="om-form" *ngIf="showOmForm && itemPay.title === 'Orange Money'">
+      <form class="w-100" (submit)="mobilePay('Orange Money', $event)">
         <div class="form_group">
-          <label class="label-form mb-2" for="phoneNumber">Numéro de téléphone</label>
-          <input type="text" class="input_field input-field"  id="phoneNumber"  name="phoneNumber" required>
+          <label class="label-form mb-2" for="omNumber">Numéro de téléphone</label>
+          <input
+            type="text"
+            class="input_field input-field"
+            id="omNumber"
+            name="phoneNumber"
+            [(ngModel)]="phoneNumber"
+            required
+            pattern="^6\d{8}$"
+            #omInput="ngModel"
+          />
+          <div *ngIf="omInput.invalid && omInput.touched" style="color:red; font-size:0.8rem;">
+            Numéro invalide (doit commencer par 6 et contenir 9 chiffres).
+          </div>
         </div>
-      
-        <button type="submit" class="btn_publish mt-2 ">Payer</button>
-    </form>
-</div>
-<div class="momo-form" *ngIf="showMomoForm && itemPay.title == 'Mobile Money'">
-    <form class="w-100">
+        <button type="submit" class="btn_publish mt-2" [disabled]="omInput.invalid">Payer</button>
+      </form>
+    </div>
+    
+    
+    <div class="momo-form" *ngIf="showMomoForm && itemPay.title === 'Mobile Money'">
+      <form class="w-100" (submit)="mobilePay('Mobile Money', $event)">
         <div class="form_group">
-          <label class="label-form mb-2" for="cardNumber">Numéro de carte</label>
-          <input type="text" class="input_field input-field" id="cardNumber"  name="cardNumber" required>
+          <label class="label-form mb-2" for="momoNumber">Numéro de téléphone</label>
+          <input
+            type="text"
+            class="input_field input-field"
+            id="momoNumber"
+            name="phoneNumber"
+            [(ngModel)]="phoneNumber"
+            required
+            pattern="^6\d{8}$"
+            #momoInput="ngModel"
+          />
+          <div *ngIf="momoInput.invalid && momoInput.touched" style="color:red; font-size:0.8rem;">
+            Numéro invalide (doit commencer par 6 et contenir 9 chiffres).
+          </div>
         </div>
-      
-        <button type="submit" class="btn_publish mt-2 ">Payer</button>
-    </form>
-</div>
+        <button type="submit" class="btn_publish mt-2" [disabled]="momoInput.invalid">Payer</button>
+      </form>
+    </div>
+    

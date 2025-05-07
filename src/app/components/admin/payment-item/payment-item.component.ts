@@ -15,6 +15,7 @@ export class PaymentItemComponent implements AfterViewInit {
   showOmForm: boolean = false;
   showMomoForm: boolean = false;
   createPayMeth : boolean = false
+  phoneNumber : string = '';
 
   errorMessage: string | null | undefined = null;
 
@@ -85,6 +86,33 @@ export class PaymentItemComponent implements AfterViewInit {
     this.showStripeForm = type.toLowerCase() === 'stripe' && !this.showStripeForm;
     this.showOmForm = type.toLowerCase() === 'orange money' && !this.showOmForm;
     this.showMomoForm = type.toLowerCase() === 'mobile money' && !this.showMomoForm;
+  }
+
+  
+  mobilePay(operateur: string, event: Event): void {
+    event.preventDefault();
+    console.log({
+      numero: this.phoneNumber,
+      operateur});
+    
+    const regex = /^6\d{8}$/;
+    if (!regex.test(this.phoneNumber)) {
+      alert('Numéro invalide. Il doit commencer par 6 et avoir 9 chiffres.');
+      return;
+    }
+    
+    let paymentInfos: any = {};;
+
+    paymentInfos['type'] = 'mobile_money';
+    paymentInfos['datas'] = {
+      numero: this.phoneNumber,
+      operateur: operateur
+    };
+    this.payDatas.emit(paymentInfos);
+    // this.hasSubmit.emit({
+    //   numero: this.phoneNumber,
+    //   operateur
+    // });
   }
 
   // Simulez la création d'une intention de paiement côté serveur
