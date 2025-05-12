@@ -469,13 +469,14 @@ export class FormCreateComponent {
           // Ajout des données
           payment_datas['amount'] = this.currentAnnounce?.announce.price;
           payment_datas['payment_method'] = payment.type;
-          payment_datas['mode_paiement'] = payment.datas?.operateur;
-          payment_datas['phone_number'] = payment.datas?.phoneNumber;
+          payment_datas['mode_paiement'] = 'Mobile money';
+          payment_datas['phone_number'] = payment.datas.numero;
+          // payment_datas['mode_paiement'] = payment.datas?.operateur;
           
           // Ajout des données à formData
           annData.append('status', '1');
           annData.append('payment_datas', JSON.stringify(payment_datas)); // Convertir en JSON
-          alert('ntot')
+          
           // Envoi des données
           const response = await this.entityService.store("annonce_back/store", annData).toPromise();
           console.log({op:response})
