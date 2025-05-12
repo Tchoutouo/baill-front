@@ -357,12 +357,16 @@ export class FormCreateComponent {
     return formData;
   }
   
-  private handleResponse(data: any) {    
+  private handleResponse(data: any, message : any = null) {    
     const notif = new Notification();
-    notif.message = data.success
-      ? "Annonce créée avec succès !"
-      : "Erreur lors de l'enregistrement, contacter l'administrateur !";
-    notif.status = data.success ? "success" : "warning";
+    if (message) {
+      notif.message = message;
+    }else{
+      notif.message = data.success
+        ? "Annonce créée avec succès !"
+        : "Erreur lors de l'enregistrement, contacter l'administrateur !";
+    }
+      notif.status = data.success ? "success" : "warning";
   
     this.notification.emitNotification(notif);
   
@@ -417,7 +421,7 @@ export class FormCreateComponent {
 
   async storeAndPayAnnouce(payment : any){
     try {
-      alert(payment.type);
+      
       this.showPayForm = false;
       if (payment.type === 'stripe') {
         // console.log({hello : this.currentAnnounce});
@@ -470,7 +474,7 @@ export class FormCreateComponent {
           payment_datas['amount'] = this.currentAnnounce?.announce.price;
           payment_datas['payment_method'] = payment.type;
           payment_datas['mode_paiement'] = 'Mobile money';
-          payment_datas['phone_number'] = payment.datas.numero;
+          payment_datas['payer'] = '237'+payment.datas.numero;
           // payment_datas['mode_paiement'] = payment.datas?.operateur;
           
           // Ajout des données à formData
@@ -478,10 +482,16 @@ export class FormCreateComponent {
           annData.append('payment_datas', JSON.stringify(payment_datas)); // Convertir en JSON
           
           // Envoi des données
-          const response = await this.entityService.store("annonce_back/store", annData).toPromise();
-          console.log({op:response})
+          const response : any = await this.entityService.store("annonce_back/store", annData).toPromise();
+          
+          if (response.success) {
+            const messg = 'Votre annonce a été enregistrée et est en attente de validation. Veuillez la confirmer pour qu\'elle soit publiée sur la plateforme';
+            this.handleResponse(response,messg);
+          }else{
+            const messg = 'Une erreur est survenue lors de l\enregistrement de votre annonce veuillez contacter l\'administrateur.';
+            this.handleResponse(response,messg);
+          }
           // Gestion de la réponse
-          this.handleResponse(response);
 
       }
       
