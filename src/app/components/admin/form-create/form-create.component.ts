@@ -465,7 +465,7 @@ export class FormCreateComponent {
           
         }
   
-      }else if (payment.type =='mobile_money') {
+      }else if (payment.type === 'mobile_money') {
         let payment_datas: any = {}; // Utilisation correcte d'un objet
         const annData = this.createFormData(this.currentAnnounce?.announce);    
         annData.append('status', '1') ;
@@ -526,4 +526,8 @@ export class FormCreateComponent {
 
   }
 
+
+  closePopUp(){
+    this.showPayForm = false;
+  }
 }

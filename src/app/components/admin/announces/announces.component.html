@@ -82,14 +82,13 @@
                                 <!-- Les actions -->
                                 <td class="bord-black">
                                     <div class="icon-list d-flex gap-2 justify-content-center"> 
-                                        <a *ngIf="value_datas.status == '1'" title="Publier" id="create" data-bs-toggle="modal"  data-bs-target="#forfaitList" >
+                                        <a *ngIf="value_datas.status == '1'" title="Publier" id="create" data-bs-toggle="modal"  [attr.data-bs-target]="'#forfaitList' + value_datas.id" >
                                             <i class="fa fa-check bg-green  p-1 radius-3 text-white"></i>
-                                            <div class="modal fade" id="forfaitList" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                            <div class="modal fade" [id]="'forfaitList' + value_datas.id" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                 <div class="modal-dialog m_auto modal-dialog-centered modal-dialog  modal-xl modal-dialog-centered" id="my-model-forfait">
-                                                    <app-forfait-list (hasSubmit)="handleSubmit($event, value_datas)" class="m_auto w-100"></app-forfait-list>
+                                                    <app-forfait-list (hasSubmit)="handleSubmit($event, value_datas)"  class="m_auto w-100"></app-forfait-list>
                                                 </div>
                                             </div>
-                                            
                                         </a>
                                         <a *ngIf="value_datas.status == '1'" title="Supprimer" >
                                             <i class="fa-solid fa-trash radius-3 bg_red text-white p-1"  (click)="handleConfirmDelete([true, 'announce'])" ></i>
@@ -120,7 +119,7 @@
                                     
                                                         <div class="list-body pt-md-4 pt-3">
                                                             <ng-container *ngFor="let itemPay of paymentList">
-                                                                <app-payment-item (payDatas)="storeAndPayAnnouce($event, value_datas, itemPay)"  [itemPay] = "itemPay" class="w-95" ></app-payment-item>
+                                                                <app-payment-item (payDatas)="payAnnouce($event, value_datas, itemPay)"  [itemPay] = "itemPay" class="w-95" ></app-payment-item>
                                                             </ng-container>
                                                         </div>
                                                     </div>

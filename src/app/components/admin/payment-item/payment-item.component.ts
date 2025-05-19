@@ -87,7 +87,6 @@ export class PaymentItemComponent implements AfterViewInit {
     this.showOmForm = type.toLowerCase() === 'orange money' && !this.showOmForm;
     this.showMomoForm = type.toLowerCase() === 'mobile money' && !this.showMomoForm;
   }
-
   
   mobilePay(operateur: string, event: Event): void {
     event.preventDefault();

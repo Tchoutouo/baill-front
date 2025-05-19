@@ -46,6 +46,7 @@ export class AnnouncesComponent {
   categories_list : any;
   categories_poperties : any;
   datas_paginate : any;
+  selectedId : any;
   result_data : any;
   selectedAbonnment : any;
   annouces : any;
@@ -53,6 +54,7 @@ export class AnnouncesComponent {
   showPayForm : boolean = false ;
   loged : boolean = false;
   querySearch : string = "";
+  selectedAnnounce: any = null;
   entityName : string = ""
   query: string = "";
   resulMessage : string  = '';
@@ -310,11 +312,14 @@ export class AnnouncesComponent {
   handleSubmit(event : any , announce : any){
     this.data_to_update  = announce ;
     const entity = 'annonce_back/update';
+    this.selectedAnnounce = announce;
+    
     if(event && announce){
       if (event.type === 'Standard' || event.type === 'Premium') {
         this.selectedAbonnment = event;
         return this.handlePayment(event); 
       }
+
       this.data_to_update.abonnement_id= event
       this.data_to_update.status= '3'
 
@@ -412,18 +417,24 @@ export class AnnouncesComponent {
   }
 
 
-  CloseFormCategoryModal(id : any){
-    const modalElement = document.getElementById(id);  
-    const modal = bootstrap.Modal.getInstance(modalElement ? modalElement : ' ');  
-    modal?.hide(); 
-    let backdropElements = document.getElementsByClassName('modal-backdrop');  
-    if(backdropElements.length) {  
-      Array.from(backdropElements).forEach(element => {  
-        element.classList.remove('show'); // Supprime la classe 'show'  
-        element.classList.add('d-none'); // Supprime la classe 'show'  
-      });  
-    }   
+  CloseFormCategoryModal(id: any) {
+    const modalElement = document.getElementById(id);
+    
+    if (modalElement) {
+      const modal = bootstrap.Modal.getInstance(modalElement);
+      modal?.hide();
+    }
+
+    // Supprimer les backdrop
+    const backdropElements = document.getElementsByClassName('modal-backdrop');
+    if (backdropElements.length) {
+      Array.from(backdropElements).forEach(element => {
+        element.classList.remove('show');
+        element.classList.add('d-none');
+      });
+    }
   }
+
   
   getCategory(categorie : any){
     if (categorie) {
@@ -507,7 +518,7 @@ export class AnnouncesComponent {
       this.alertConfirm.emitAlert(alert);
     }
 
-    async storeAndPayAnnouce(payment : any, value_datas : any, payMeth : any){
+    async payAnnouce(payment : any, value_datas : any, payMeth : any){
       try {
 
           this.showPayForm = false;
@@ -516,57 +527,99 @@ export class AnnouncesComponent {
           let payment_datas: any = {}; // Utilisation correcte d'un objet
           
           this.CloseFormCategoryModal('forfaitList');
+
+          if (payment && typeof payment === 'object' && 'type' in payment && payment.type === 'mobile_money') {
+            // Ajout des données
+            payment_datas['amount'] = this.currentAnnounce?.announce.price;
+            payment_datas['payment_method'] = payment.type;
+            payment_datas['mode_paiement'] = 'Mobile money';
+            payment_datas['payer'] = '237'+payment.datas.numero;
+            const response : any = await this.entytServ.changeAnnouceStatus(user_id, this.selectedAnnounce.id ,newStatus, JSON.stringify(payment_datas)).toPromise();
+
+            if (response.success) {
+              const messg = 'Votre annonce a été enregistrée et est en attente de validation. Veuillez la confirmer pour qu\'elle soit publiée sur la plateforme';
+              this.handleResponse(response,messg);
+            }else{
+              const messg = 'Une erreur est survenue lors de l\enregistrement de votre annonce veuillez contacter l\'administrateur.';
+              this.handleResponse(response,messg);
+            }
+
+          }else if (payment.type === 'stripe') {
+            // Ajout des données
+            payment_datas['amount'] = this.selectedAbonnment.price;
+            payment_datas['abonnement_id'] = this.selectedAbonnment.id;
+            payment_datas['payment_method'] = payment.id;
+            payment_datas['mode_paiement'] = payMeth.title;
+            const response = await this.entytServ.changeAnnouceStatus(user_id, value_datas.id ,newStatus, JSON.stringify(payment_datas)).toPromise();
+            this.handleResponse(response);
+            this.getDatasByPage();
+          }
           
-          // Ajout des données
-          payment_datas['amount'] = this.selectedAbonnment.price;
-          payment_datas['abonnement_id'] = this.selectedAbonnment.id;
-          payment_datas['payment_method'] = payment.id;
-          payment_datas['mode_paiement'] = payMeth.title;
-          
-          const response = await this.entytServ.changeAnnouceStatus(user_id, value_datas.id ,newStatus, JSON.stringify(payment_datas)).toPromise();
+          // const response = await this.entytServ.changeAnnouceStatus(user_id, value_datas.id ,newStatus, JSON.stringify(payment_datas)).toPromise();
 
           // Gestion de la réponse
-          this.handleResponse(response);
-          this.getDatasByPage();
         }catch (error) {
+          console.log(error);
+          
           this.handleError(error);
       }
     }
 
-    private handleResponse(data: any) {
-      const notif = new Notification();
-      // console.log({success : data.success});
+      private handleResponse(data: any, message : any = null) {    
+        const notif = new Notification();
+        if (message) {
+          notif.message = message;
+        }else{
+          notif.message = data.success
+            ? "Annonce créée avec succès !"
+            : "Erreur lors de l'enregistrement, contacter l'administrateur !";
+        }
+          notif.status = data.success ? "success" : "warning";
       
-      notif.message = data.success
-        ? "Annonce publiée avec succès !"
-        : "Erreur lors de la publication, contacter l'administrateur !";
-      notif.status = data.success ? "success" : "warning";
-    
-      this.notification.emitNotification(notif);
-    
-      // if (data.success) {
-      //   this.router.navigate(['/admin']);
-      // }
-    }
-    
+        this.notification.emitNotification(notif);
+      
+        if (data.success) {
+          this.router.navigate(['/admin']);
+        }
+      }
+
     private handleError(error: any) {
-      console.error("Création d'annonce", error);
+      // console.error("Création d'annonce", error);
       const notif = new Notification();
       notif.message = "Erreur lors de l'enregistrement, contacter l'administrateur !";
       notif.status = "warning";
       this.notification.emitNotification(notif);
     }
 
+
     getPaymentMethod(){
-      this.getPaySub = this.entytServ.getPaymentMethd().subscribe({
-        next: (res_data: any) => {
-          if (res_data.success) {
-            this.paymentList = res_data.data
-          }
-        },
-  
-        error: (error: any) => { },
-        complete: () => { },
-      })
-    }
-}
+    this.getPaySub = this.entytServ.getPaymentMethd().subscribe({
+      next: (res_data: any) => {
+        console.log({cedric:res_data});
+        if (res_data.success) {
+          this.paymentList = res_data.data
+        }
+      },
+
+      error: (error: any) => { },
+      complete: () => { },
+    })
+  }
+
+  closePopUp(){
+    this.showPayForm = false;
+  }
+
+  openModalWith(value_datas: any) {
+  this.selectedAnnounce = value_datas;
+
+  // Attendre un tick pour que la modal existe bien avant de l'ouvrir
+  setTimeout(() => {
+      const modalElement = document.getElementById('forfaitListModal');
+      if (modalElement) {
+          const modal = new bootstrap.Modal(modalElement);
+          modal.show();
+        }
+    });
+  }
+  }
