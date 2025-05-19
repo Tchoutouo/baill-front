@@ -10,7 +10,7 @@ import { loadStripe, Stripe, StripeElements, StripeCardElement, StripeCardNumber
   templateUrl: './payment-item.component.html',
   styleUrls: ['./payment-item.component.css']
 })
-export class PaymentItemComponent implements AfterViewInit {
+export class PaymentItemComponent  {
   showStripeForm: boolean = false;
   showOmForm: boolean = false;
   showMomoForm: boolean = false;
@@ -34,9 +34,9 @@ export class PaymentItemComponent implements AfterViewInit {
     private form_build: FormBuilder,
     private cdr: ChangeDetectorRef // Injectez ChangeDetectorRef
   ) {}
-  ngAfterViewInit(): void {
-    throw new Error('Method not implemented.');
-  }
+  // ngAfterViewInit(): void {
+  //   throw new Error('Method not implemented.');
+  // }
 
 
   ngAfterViewChecked() {
@@ -75,7 +75,7 @@ export class PaymentItemComponent implements AfterViewInit {
         paymentMethod['type'] = 'stripe';
         this.payDatas.emit(paymentMethod);
         this.createPayMeth = true;
-        console.log('Payment method created:', paymentMethod, paymentMethod.type);
+        // console.log('Payment method created:', paymentMethod, paymentMethod.type);
       }
     } catch (error: any) {
       this.errorMessage = 'Erreur lors de la création du PaymentMethod: ' + error.message;
@@ -90,9 +90,9 @@ export class PaymentItemComponent implements AfterViewInit {
   
   mobilePay(operateur: string, event: Event): void {
     event.preventDefault();
-    console.log({
-      numero: this.phoneNumber,
-      operateur});
+    // console.log({
+    //   numero: this.phoneNumber,
+    //   operateur});
     
     const regex = /^6\d{8}$/;
     if (!regex.test(this.phoneNumber)) {
