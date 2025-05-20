@@ -496,6 +496,7 @@ export class FormCreateComponent {
       }
       
     } catch (error) {
+        console.log("Erreur de la sauvegarde et du paiement methode storeAndPayAnnonce",error);
         this.handleError(error);
     }
   }
@@ -521,6 +522,7 @@ export class FormCreateComponent {
         this.currentAnnounce['announce'] = data ;
       }
     } catch (error) {
+      console.log("Erreur methode handlePayment",error);
       
     }
 
