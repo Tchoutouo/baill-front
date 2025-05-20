@@ -197,7 +197,6 @@ export class AnnouncesComponent {
               next: (datas: any) => {
                 if(datas.success){
                   this.categories_list = datas.data;
-                 
                   this.datas_paginate = {
                     current : datas.data?.current_page ,
                     next : datas.data?.current_page + 1 ,
@@ -219,8 +218,7 @@ export class AnnouncesComponent {
           this.categoriesSub = this.entytServ.getAllCategories(this.category_pageNumber ,this.category_pageLimit).subscribe({
             next: (datas: any) => {
               if(datas.success){
-                this.categories_list = datas.data;
-               
+                this.categories_list = datas.data;             
                 this.datas_paginate = {
                   current : datas.data?.current_page ,
                   next : datas.data?.current_page + 1 ,
