@@ -266,10 +266,11 @@ export class AnnouncesComponent {
           }
         } 
         
+        
         let resul = this.entytServ.changeAnnouceStatus(user_id, ann_id, newStatus).subscribe({
           next: (datas: any) => { 
             const notif = new Notification();
-
+            
             if (datas.success) {
               notif.message = "Annonce mise à jour avec success !"
               notif.status = "success";
@@ -560,7 +561,6 @@ export class AnnouncesComponent {
           // Gestion de la réponse
         }catch (error) {
           console.log(error);
-          
           this.handleError(error);
       }
     }
