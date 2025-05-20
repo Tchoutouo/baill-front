@@ -38,10 +38,10 @@
             </div>
     
             <div class="result-message text-center fw-bold" *ngIf="query.length >= 2 && annouces">
-                Resultat de recherche pour : <span class="search_data">{{query}}</span>
+                Résultat de recherche pour : <span class="search_data">{{query}}</span>
             </div>
             <div class="result-message fw-bold text-center" *ngIf="query.length >= 2 && !annouces">
-                Aucun resultat pour : <span class="search_data">{{query}}</span>
+                Aucun résultat pour : <span class="search_data">{{query}}</span>
             </div>
             
             <div class="col-12">
@@ -195,10 +195,10 @@
                     </div>
             
                     <div class="result-message text-center fw-bold" *ngIf="query.length >= 2 && annouces">
-                        Resultat de recherche pour : <span class="search_data">{{query}}</span>
+                        Résultat de recherche pour : <span class="search_data">{{query}}</span>
                     </div>
                     <div class="result-message fw-bold text-center" *ngIf="query.length >= 2 && !annouces">
-                        Aucun resultat pour : <span class="search_data">{{query}}</span>
+                        Aucun résultat pour : <span class="search_data">{{query}}</span>
                     </div>
                     
                     <div class="col-12">
@@ -308,10 +308,10 @@
                     </div>
             
                     <div class="result-message text-center fw-bold" *ngIf="query.length >= 2 && annouces">
-                        Resultat de recherche pour : <span class="search_data">{{query}}</span>
+                        Résultat de recherche pour : <span class="search_data">{{query}}</span>
                     </div>
                     <div class="result-message fw-bold text-center" *ngIf="query.length >= 2 && !annouces">
-                        Aucun resultat pour : <span class="search_data">{{query}}</span>
+                        Aucun résultat pour : <span class="search_data">{{query}}</span>
                     </div>
                     
                     <div class="col-12">
@@ -335,7 +335,7 @@
                                         <td class="bord-black">
                                             {{category_item.description}}
                                         </td>
-                                        <td class="bord-black">{{category_item.created_at}}</td>
+                                        <td class="bord-black">{{ category_item.created_at | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
         
                                         <!-- Les actions -->
                                         <td class="bord-black">

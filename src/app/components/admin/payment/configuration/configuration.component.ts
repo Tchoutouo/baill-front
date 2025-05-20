@@ -45,20 +45,19 @@ export class ConfigurationComponent {
   getPaymentModes(){
     this.payModSub = this.entityService.getPaymentMod().subscribe({
       next: (result: any) => {
-        console.log(result);
         if (result.success) {
           this.datas = result.data;
           this.reciecedValue = {
             om : this.datas[1].is_active === 1 ? true : false,
-            momo : this.datas[1].is_active === 1 ? true : false,
+            momo : this.datas[2].is_active === 1 ? true : false,
             stripe : this.datas[0].is_active === 1 ? true : false,
           }
         }
-       },
+      },
 
       error: (error: any) => {
         console.log('error when get Payment mode ', error);
-       },
+      },
 
       complete : () => { 
 
@@ -67,21 +66,22 @@ export class ConfigurationComponent {
   }
 
   setPayment(){
-   let valueD = this.paymentForm.value;
+    let valueD = this.paymentForm.value;
+    console.log("form data modes paiement",valueD);
 
     let formValues= new FormData()
 
     formValues.append('momo', valueD.momo);
-    formValues.append('om', valueD.momo);
-    formValues.append('stripe', valueD.momo);
-    
+    formValues.append('om', valueD.om);
+    formValues.append('stripe', valueD.stripe);
+
     this.paySub = this.entityService.updatePamentMethods(formValues).subscribe({
       next: (result_request: any) => { 
         let message = ''
         let type = ''
         const notif = new Notification();
         if(result_request.success){
-            notif.message =' message';
+            notif.message ='Modification effectué avec success';
             notif.status = 'success';
             this.notification.emitNotification(notif);
           this.getPaymentModes();

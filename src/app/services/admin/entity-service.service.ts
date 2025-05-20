@@ -192,8 +192,10 @@ export class EntityServiceService {
   }
 
   updatePamentMethods(datas : any){
-    console.log('datas in service');
-    return this.http.get(environment.apiUrl+'mode_paiement_back/changeStatus/'+datas);
+    console.log('datas in service', datas);
+    // return this.http.get(environment.apiUrl+'mode_paiement_back/changeStatus/'+datas);
+    return this.http.post(environment.apiUrl+'mode_paiement_back/changeStatus', datas);
+
   }
 
   updatePassword(id : number | string, datas : any){
