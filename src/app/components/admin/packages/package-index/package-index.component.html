@@ -56,7 +56,7 @@
                                 {{abonnement.name}}
                             </td>
                             <td class="bord-black">
-                                {{abonnement.price | currency}}
+                                {{abonnement.price | currency:'XAF':'symbol':'1.0-0':'fr-CM'}}
                             </td>
                             <td class="bord-black">
                                 {{abonnement.time | formatTime:abonnement.type_time}}
