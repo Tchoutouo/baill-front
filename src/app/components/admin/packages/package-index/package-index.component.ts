@@ -95,7 +95,7 @@ export class PackageIndexComponent implements OnInit{
         next: (result_search: any) => { 
           if (result_search.success) {
             this.abonment_list = result_search.data.data;
-
+            console.log("liste des abonnements:", this.abonment_list);
             this.paginationDAtas = {
               current : result_search.data?.current_page ,
               next : result_search.data?.current_page + 1 ,
@@ -121,6 +121,7 @@ export class PackageIndexComponent implements OnInit{
         next: (data: any) => { 
           if (data.success) {
             this.abonment_list = data.data.data;
+            console.log("liste des abonnements 2:", this.abonment_list);
             this.paginationDAtas = {
               current : data.data?.current_page ,
               next : data.data?.current_page + 1 ,
