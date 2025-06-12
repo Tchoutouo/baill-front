@@ -20,6 +20,9 @@ export class FormatTimeSimplePipe implements PipeTransform {
       case 'A':
           time = value/360;
           break;
+      case 'H':
+          time = value;
+          break;
       default:
           console.log("Periode invalide");
     }

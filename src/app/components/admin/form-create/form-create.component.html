@@ -51,7 +51,7 @@
                                 veuiller renseigner ce champ 
                             </div>
                             <div class="" class="error" *ngIf="!description.hasError('required')">
-                                la taille maximale de caratère autorisée est de 256. 
+                                la taille maximale de caractère autorisée est de 256. 
                             </div>
                         </div>
                     </div>
@@ -164,6 +164,9 @@
             <div class="row mx-0 gap-4 py-4 align-items-center fixe_btn_actions">
                 <button type="button" class="btn btn-primary col-6"  [disabled]="!this.anounces_form_datas.valid && !valiData" id="create"  data-bs-toggle="modal"   data-bs-target="#forfaitList" class="btn-form bg_green">
                     Creer & publier
+                <!--<button type="button" class="btn btn-primary col-6"  [disabled]="!this.anounces_form_datas.valid && !valiData" id="create" (ngSubmit)="handleSubmit()" data-bs-toggle="modal"   data-bs-target="#forfaitList" class="btn-form bg_green">-->
+                <button type="button" class="btn btn-primary col-6"  [disabled]="!this.anounces_form_datas.valid && !valiData" id="create" data-bs-toggle="modal"   data-bs-target="#forfaitList" class="btn-form bg_green">
+                    Créer & publier
                 </button>
                 <button type="submit" (click)="handleSubmit(null)"  [disabled]="!this.anounces_form_datas.valid && !valiData" class="btn-form bg_blue my-4 col-6" >Enregistrer</button>
             </div>
