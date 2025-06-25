@@ -7,13 +7,13 @@
         <div class="product-name ">
             <h4 class="">
                 <i class="fas fa-map-marker-alt me-1" style="font-size: 17px;"></i>
-                {{productItem.location}}
+                {{productItem.location}}, {{productItem.neighborhood}}
             </h4>
             <h3 class="m-0">{{productItem.title}}</h3>
             
         </div>
         <div class="product-price">
-            {{productItem.price | currency}}
+            {{productItem.price | currency:'XAF':'symbol':'1.0-0':'fr-CM'}}
         </div>
 
         <div class="product-description">

@@ -121,7 +121,7 @@
                                 <h2>Chiffre d’affaire</h2>
                             </div>
                             <div class="dash-value">
-                                <h1 class="blue-new h1-Quicksand fw-baill-bold">{{total_montant | currency}} <span class="mx-2"></span></h1> 
+                                <h1 class="blue-new h1-Quicksand fw-baill-bold">{{total_montant | currency:'XAF':'symbol':'1.0-0':'fr-CM'}} <span class="mx-2"></span></h1> 
                             </div>
                         </div>
                     </div>
@@ -162,7 +162,7 @@
 
                             <div class="price-duration pb-0 d-flex px-3 gap-10">
                                 <h5 class="h5-baill gray-20">{{abonnement_item?.type_time}}</h5>
-                                <h5 class="h5-baill gray-20">{{abonnement_item?.price | currency}}</h5>
+                                <h5 class="h5-baill gray-20">{{abonnement_item?.price | currency:'XAF':'symbol':'1.0-0':'fr-CM'}}</h5>
                             </div>
 
                             <h6 class="text-end small-text px-3 main-font main-font-quick"> {{abonnement_item?.progress}}%</h6>

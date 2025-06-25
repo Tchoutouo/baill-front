@@ -34,9 +34,30 @@ export class ProductListComponent {
   }
 
   initComponent(){
-    this.getAnnoucesList();
+    // this.getAnnoucesList();
+    this.getAllAnnoncesPublished();
   }
 
+  getAllAnnoncesPublished(){
+    this.productsList = this.homeServ.getAllAnnoucesPublished().subscribe({
+      next: (datas: any) => {
+        if (datas.success == true) {
+          if (datas.data_annonce) {
+            this.products = datas.data_annonce;
+            this.result_datas = datas.data_annonce ;
+          }
+        }else{
+          this.products = null ;
+        }
+      },
+
+      error: (erreur: any) => { 
+        console.log("erreur récupération des données home",erreur);
+      }
+    })
+  }
+
+  // ANCIENNE FONCTION POUR LA PAGINATION, n'est plus utilisée actellement
   getAnnoucesList(){
     this.productsList = this.homeServ.getAllPublishedAnnouces(this.current_page).subscribe({
     
@@ -62,7 +83,7 @@ export class ProductListComponent {
       },
 
       error: (erreur: any) => { 
-        console.log(erreur);
+        console.log("Erreur trie annonces",erreur);
       }
       
     })
@@ -77,26 +98,23 @@ export class ProductListComponent {
     try {
       if (event) {
         this.productFiltered = this.homeServ.filterDataBy(event).subscribe({
-          next: (datas: any) => {
-            console.log(datas);
-            
+          next: (datas: any) => {            
             if (datas.success = true && datas.annonces != null) {
-              console.log({filtre : datas});
+              // console.log({filtre : datas});
                 this.products = datas.annonces.data ;
                 this.result_datas = datas.annonces ;
                 this.current_page = this.result_datas.current_page;  
-                this.paginationDatas = {
-                  current : this.result_datas.current_page,  
-                  total : this.result_datas.total,
-                  next : this.result_datas.current_page + 1,    
-                  previous : this.result_datas.current_page - 1, 
-                  last : this.result_datas.last_page, 
-                }
+                // this.paginationDatas = {
+                //  current : this.result_datas.current_page,  
+                //  total : this.result_datas.total,
+                //  next : this.result_datas.current_page + 1,    
+                //  previous : this.result_datas.current_page - 1, 
+                //  last : this.result_datas.last_page, 
+                //}
             } else {
               this.products = null ;
             }
           },
-
           error: (erreur: any) => { 
             console.log(erreur);
             
