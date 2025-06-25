@@ -101,4 +101,8 @@ export class AuthenticatorService {
     this.csrfToken = token;  
   }  
   
+  isLoggedIn(): any {
+    const user = this.localStorage.getItem('user');
+    return user ? user : false;
+  }
 }
