@@ -37,7 +37,7 @@ export class PackageEditComponent implements OnInit {
       price: ['', Validators.required],  
       time: ['', [Validators.maxLength(3), Validators.minLength(1)]],
       type_time: ['M'],
-      reduction: [''],
+      remise: [''],
       is_actived: [''],
       hight_lite: [''],
       type: [''],
@@ -45,12 +45,13 @@ export class PackageEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
     this.abonnementForm.patchValue({ // Remplissage initial du formulaire  
       name: this.Abonnememt.name ? this.Abonnememt.name : '',  
       price: this.Abonnememt.price ?  this.Abonnememt.price : '',  
       type_time: this.Abonnememt.type_time ? this.Abonnememt.type_time : '',  
       time: this.Abonnememt.time ? this.Abonnememt.time : '',
-      reduction:this.Abonnememt.reduction ? this.Abonnememt.reduction : 0,
+      remise:this.Abonnememt.remise ? this.Abonnememt.remise : 0,
       is_actived:this.Abonnememt.is_actived ? this.Abonnememt.is_actived : 0,
       hight_lite:this.Abonnememt.hight_lite ? this.Abonnememt.hight_lite : 1,
       type:this.Abonnememt.type ? this.Abonnememt.type : 'Standard',
@@ -60,6 +61,8 @@ export class PackageEditComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
     
     if (changes && this.Abonnememt) {
+      console.log(this.Abonnememt, 'test');
+      
       this.abonnementForm.patchValue(this.Abonnememt);
     }
   }
@@ -72,8 +75,8 @@ export class PackageEditComponent implements OnInit {
     
     if (this.abonnementForm.valid) {
 
-      this.abonnementForm.value.price = this.abonnementForm.value.price - (this.abonnementForm.value.reduction * this.abonnementForm.value.price)/100;
-
+      // this.abonnementForm.value.price = this.abonnementForm.value.price - (this.abonnementForm.value.remise * this.abonnementForm.value.price)/100;
+      console.log(this.abonnementForm);
       const notif = new Notification();  
       const entity = "abonnement_back/update";
       let abonnement_id = this.Abonnememt.id;

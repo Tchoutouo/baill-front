@@ -56,8 +56,7 @@ export class ForfaitListComponent {
 
       error: (error: any) => {
         console.log('error forfaits', error);
-        
-        }
+      }
     })
 
   }

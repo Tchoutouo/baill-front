@@ -16,7 +16,7 @@ export class HomeService {
   }
 
   getAllAnnoucesPublished(user_logged : any){
-    // console.log(this.http.get(environment.apiUrl+'home_back/'));
+    console.log(environment.apiUrl+'home_back/'+user_logged);
     return this.http.get(environment.apiUrl+'home_back/'+user_logged);
   }
 

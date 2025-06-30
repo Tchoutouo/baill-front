@@ -64,6 +64,10 @@ export class ProductListComponent {
 
   // ANCIENNE FONCTION POUR LA PAGINATION, n'est plus utilisée actellement
   getAnnoucesList(){
+    const user = this.auth.isLoggedIn();
+    const user_id= user.id ? user.id : null;
+    console.log({user_id: user_id});
+      
     this.productsList = this.homeServ.getAllPublishedAnnouces(this.current_page).subscribe({
     
       next: (datas: any) => { 
