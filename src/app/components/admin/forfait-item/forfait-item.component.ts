@@ -20,7 +20,7 @@ export class ForfaitItemComponent {
   }
 
   ngOnInit(){
-    // console.log(this.abonment);
+    console.log(this.abonment);
   }
 
 

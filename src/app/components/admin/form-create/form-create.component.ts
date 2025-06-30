@@ -504,7 +504,7 @@ export class FormCreateComponent {
   getPaymentMethod(){
     this.getPaySub = this.entityService.getPaymentMethd().subscribe({
       next: (res_data: any) => {
-        console.log({cedric:res_data});
+        // console.log({cedric:res_data});
         if (res_data.success) {
           this.paymentList = res_data.data
         }
