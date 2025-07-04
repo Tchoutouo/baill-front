@@ -6,11 +6,39 @@
         "cancel": "Cancel",
         "publish": "Publish",
         "back": "Back",
-        "validate":"Validate"
+        "validate":"Validate",
+        "create-and-publish": "Create & Publish",
+        "create": "Create",
+        "edit": "Edit",
+        "delete": "Delete",
+        "search": "Search",
+        "view": "View",
+        "view-all": "View All",
+        "close": "Close",
+        "throw": "Send",
+        "add": "Add",
+        "add-category": "Add Category",
+        "lock": "Lock",
+        "unlock": "Unlock",
+        "category": "Categories",
+        "anounce": "Ads"
+    },
+    "status":{
+        "active": "Active",
+        "inactive": "Inactive",
+        "expired": "Expired",
+        "pending": "Pending",
+        "progress": "In Progress",
+        "stop": "On break",
+        "published": "Published",
+        "unpublished": "Unpublished",
+        "draft": "Draft",
+        "deleted": "Deleted"
     },
     "banner":{
         "title":"Rent with ease",
         "title-2": "Renting goods and services on bailleurnet is easy",
+        "title-3": "My pocket compass",
         "description": "Bailleurnet is the ultimate platform for renting goods and services with ease",
         "btn-publish": "Publish an ad"
     },
@@ -78,9 +106,9 @@
             "title":"Register",
             "text-account":"You already have an account",
             "login-text":"Log in",
-            "text-line-1":"Join Bailleurnet and ",
-            "text-line-2":"start renting with ",
-            "text-line-3":"simply!",
+            "text-line-1":"I join Bailleurnet",
+            "text-line-2":"with my pocket compass",
+            "text-line-3":"",
             "message":{
                 "error":{
                     "password":"password is required.",
@@ -121,7 +149,110 @@
         }
     },
     "admin":{
-
+        "profile": {
+            "title": "My Account",
+            "form": {
+                "last_name": "Last Name(s)",
+                "first_name": "First Name(s)",
+                "username": "Username",
+                "email": "Email",
+                "phone": "Phone",
+                "whatsapp": "Phone (WhatsApp)",
+                "sex": "Gender",
+                "country": "Country",
+                "city": "City",
+                "neighborhood": "Neighborhood",
+                "site_url": "Website URL",
+                "photo": "Photo",
+                "password": "Password"
+            },
+            "gender": {
+                "male": "M",
+                "female": "F"
+            },
+            "security": {
+                "title": "Security",
+                "password": "Password"
+            },
+            "button": {
+                "update": "Update Fields",
+                "save": "Save"
+            },
+            "modal": {
+                "title": "Password Change",
+                "old_password": "Old Password",
+                "new_password": "New Password"
+            },
+            "error": {
+                "last_name": "Last name is required.",
+                "first_name": "First name is required.",
+                "username": "Username is required.",
+                "email": "Invalid or missing email.",
+                "phone": "Phone number is required.",
+                "whatsapp": "WhatsApp phone number is required.",
+                "sex": "Please select your gender"
+            }
+        },
+        "ads": {
+            "title": "Ads",
+            "title-2": "Ad creation form",
+            "title-3": "Titre",
+            "no-content": "No ads",
+            "no-announce": "No ads found",
+            "search": "Search for an ad",
+            "search-no-content": "No results found for",
+            "search-result": "Search result for",
+            "search-placeholder": "Search by title, description, category, country or city",
+            "filter": "Filter by category, country or city",
+            "filter-by": "Show by",
+            "filter-placeholder": "Select a category, country or city",
+            "country": "Country",
+            "city": "City",
+            "category": "Category",
+            "location": "Location",
+            "description": "Description",
+            "price": "Price",
+            "picture": "Picture",
+            "error-message": {
+                "title": "Title is required.",
+                "description": "Description is required.",
+                "description-2": "The maximum character size allowed is 256.",
+                "category": "Category is required.",
+                "country": "Country is required.",
+                "city": "City is required.",
+                "price": "Price is required.",
+                "picture": "Picture is required."
+            },
+            "select-payment": "Choose a payment method"
+        },
+        "dashboard": {
+            "title": "Dashboard",
+            "total-ads": "Total ads",
+            "total-ads-published": "Total ads published",
+            "total-ads-inprogress": "Total ads in progress",
+            "total-ads-expired": "Total ads expired",
+            "total-ads-pause": "Total ads on break",
+            "total-users": "Total users",
+            "total-categories": "Total categories",
+            "total-payments": "Total payments",
+            "ads-published": "Ads published",
+            "ads-inprogress": "Ads in progress",
+            "ads-expired": "Ads expired",
+            "ads-pause": "Ads on break",
+            "top-5":"The 5 most requested ads of the month"
+            
+        }
+    },
+    "aside":{
+        "ads": "Ads",
+        "users": "Users",
+        "categories": "Categories",
+        "forfaits": "Packages",
+        "payments": "Payments",
+        "settings": "Settings",
+        "dashboard": "Dashboard",
+        "logout": "Logout",
+        "profile": "My Profile"
     }
     
 }

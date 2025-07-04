@@ -1,10 +1,10 @@
 <div class="contaner-fluid px-4">
     <div class="page-title">
-        <h1>Annonces</h1>
+        <h1>{{'admin.ads.title'|translate}}</h1>
     </div>
 
     <div class="title-form py-4">
-        <h4>Formulaire de création d’une annonce</h4>
+        <h4>{{'admin.ads.title-2'|translate}}</h4>
     </div>
 
     <div class="row">
@@ -12,46 +12,46 @@
             <div class="row">
                 <div class="col-md-5">
                     <div class="form_group gap-1 mb-4">
-                        <label for="title" class="label-form mb-2">Titre<span class="text-danger mx-2">*</span></label> 
+                        <label for="title" class="label-form mb-2">{{'admin.ads.title-3'|translate}}<span class="text-danger mx-2">*</span></label> 
                         <input type="text" [formControl]="title" class=" input_field input-field" required name="title" id="title" placeholder="voture toyota">
                         <div *ngIf="title.dirty && !title.valid">
                             <div class="" class="error" *ngIf="title.hasError('required')">
-                                veuiller renseigner ce champ 
+                                {{'admin.ads.error-message.title'|translate}}
                             </div>
                         </div>
                     </div>
 
                     <div class="form_group mb-4">
-                        <label class="label-form mb-2" for="categorie">Catégorie (s)<span class="text-danger mx-2">*</span></label>
+                        <label class="label-form mb-2" for="categorie">{{'admin.ads.category'|translate}}<span class="text-danger mx-2">*</span></label>
                         <select multiple name="categorie" id="categorie[]" class="input_field input-field" [formControl]="categorie" required="required">
                             <option *ngFor="let cast_item of categoriesList" [value]="cast_item.id">{{cast_item.title}}</option>
                         </select>
                         <div *ngIf="categorie.dirty && !categorie.valid">
                             <div class="" class="error" *ngIf="categorie.hasError('required')">
-                                veuiller renseigner ce champ 
+                                {{'admin.ads.error-message.category'|translate}} 
                             </div>
                         </div>
                     </div>
 
                     <div class="form_group gap-1 mb-4">
-                        <label for="price" class="label-form mb-2">Prix (XAF)<span class="text-danger mx-2">*</span></label> 
+                        <label for="price" class="label-form mb-2">{{'admin.ads.price'|translate}} (XAF)<span class="text-danger mx-2">*</span></label> 
                         <input type="number" class=" input_field input-field"  [formControl]="price" name="price" id="price" placeholder="voture toyota">
                         <div *ngIf="price.dirty && !price.valid">
                             <div class="" class="error" *ngIf="price.hasError('required')">
-                                veuiller renseigner ce champ 
+                                {{'admin.ads.error-message.price'|translate}}
                             </div>
                         </div>
                     </div>
 
                     <div class="form_group gap-1 mb-4">
-                        <label for="description" class="label-form mb-2">Description<span class="text-danger mx-2">*</span></label> 
+                        <label for="description" class="label-form mb-2">{{'admin.ads.description'|translate}}<span class="text-danger mx-2">*</span></label> 
                         <textarea name="description"  [formControl]="description" class="input_field input-field" required id="description" rows="5" cols="10"></textarea>
                         <div *ngIf="description.dirty && !description.valid">
                             <div class="" class="error" *ngIf="description.hasError('required')">
-                                veuiller renseigner ce champ 
+                                {{'admin.ads.error-message.description'|translate}} 
                             </div>
                             <div class="" class="error" *ngIf="!description.hasError('required')">
-                                la taille maximale de caratère autorisée est de 256. 
+                                {{'admin.ads.error-message.description-2'|translate}} 
                             </div>
                         </div>
                     </div>
@@ -66,13 +66,13 @@
                         </div>
                     </div> -->
                     <div class="form_group gap-1 mb-4">
-                        <label for="country" class="label-form mb-2">Pays<span class="text-danger mx-2">*</span></label> 
+                        <label for="country" class="label-form mb-2">{{'admin.ads.country'|translate}}<span class="text-danger mx-2">*</span></label> 
                         <select id="country"  (change)="onCountryChange($event)" [(ngModel)]="selectedCountry" [formControl]="country" name="country" class="input_field" required="required">
                             <option *ngFor="let country of countries" [value]="country.isoCode">{{ country.name }}</option>
                         </select>
                         <div *ngIf="country.dirty && !country.valid">
                             <div class="" class="error" *ngIf="country.hasError('required')">
-                                veuiller renseigner ce champ 
+                                {{'admin.ads.error-message.country'|translate}} 
                             </div>
                         </div>
                     </div>
@@ -86,7 +86,7 @@
 
                 <div class="offset-md-2 col-md-5">
                     <div class="form_group gap-1 mb-4">
-                        <label for="location" class="label-form mb-2">Ville<span class="text-danger mx-2">*</span></label> 
+                        <label for="location" class="label-form mb-2">{{'admin.ads.city'|translate}}<span class="text-danger mx-2">*</span></label> 
                         <!-- <input type="text" class=" input_field input-field"  name="location" [formControl]="location" required id="location" placeholder="voture toyota"> -->
                         <select [(ngModel)]="selectedCity" [formControl]="location" name="location" id="location" class="input_field" required="required">
                             <option *ngFor="let city of cities" [value]="city.name">
@@ -95,18 +95,18 @@
                         </select>
                         <div *ngIf="location.dirty && !location.valid">
                             <div class="" class="error" *ngIf="location.hasError('required')">
-                                veuiller renseigner ce champ 
+                                {{'admin.ads.error-message.city'|translate}} 
                             </div>
                         </div>
                         
                     </div>
 
                     <div class="form_group gap-1 mb-4">
-                        <label for="neighborhood" class="label-form mb-2">Lieu dit<span class="text-danger mx-2">*</span></label> 
+                        <label for="neighborhood" class="label-form mb-2">{{'admin.ads.location'|translate}}<span class="text-danger mx-2">*</span></label> 
                         <input type="text" class=" input_field input-field" name="neighborhood" required id="neighborhood" [formControl]="neighborhood" placeholder="Yde, Damas 423">
                         <div *ngIf="neighborhood.dirty && !neighborhood.valid">
                             <div class="" class="error" *ngIf="neighborhood.hasError('required')">
-                                veuiller renseigner ce champ 
+                                {{'admin.ads.error-message.location'|translate}} 
                             </div>
                         </div>
                     </div>
@@ -162,15 +162,16 @@
                 </div>
             </div>
             <div class="row mx-0 gap-4 py-4 align-items-center fixe_btn_actions">
-                <button type="button" class="btn btn-primary col-6"  [disabled]="!this.anounces_form_datas.valid && !valiData" id="create"  data-bs-toggle="modal"   data-bs-target="#forfaitList" class="btn-form bg_green">
-                    Creer & publier
+                <!--<button type="button" class="btn btn-primary col-6"  [disabled]="!this.anounces_form_datas.valid && !valiData" id="create" (ngSubmit)="handleSubmit()" data-bs-toggle="modal"   data-bs-target="#forfaitList" class="btn-form bg_green">-->
+                <button type="button" class="btn btn-primary col-6"  [disabled]="!this.anounces_form_datas.valid && !valiData" id="create" data-bs-toggle="modal"   data-bs-target="#forfaitList" class="btn-form bg_green">
+                    {{'button.create-and-publish'|translate}}
                 </button>
-                <button type="submit" (click)="handleSubmit(null)"  [disabled]="!this.anounces_form_datas.valid && !valiData" class="btn-form bg_blue my-4 col-6" >Enregistrer</button>
+                <button type="submit" (click)="handleSubmit(null)"  [disabled]="!this.anounces_form_datas.valid && !valiData" class="btn-form bg_blue my-4 col-6" >{{'button.save'|translate}}</button>
             </div>
         </form>
     </div>
-</div><!-- Button trigger modal -->
-
+</div>
+<!-- Button trigger modal -->
 <div class="modal fade" id="forfaitList" data-bs-backdrop="static"  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" >
     <div class="modal-dialog m_auto modal-dialog-centered modal-dialog  modal-xl modal-dialog-centered" id="my-model-forfait">
         <app-forfait-list (hasSubmit)="handleSubmit($event)" class="m_auto w-100"></app-forfait-list>
@@ -184,11 +185,11 @@
                 <div class="col-12 mx-auto">
                     <div class="payment-list pb-5">
                         <div class="title-list">
-                            <h3 class="mb-0 pb-lg-5 pb-md-4 pb-3 text-secondary">Choisissez un mode de paiement</h3>
+                            <h3 class="mb-0 pb-lg-5 pb-md-4 pb-3 text-secondary">{{'admin.ads.select-payment'|translate}}</h3>
                         </div>
 
                         <div class="title-list">
-                            <h3 class="mb-0 pb-lg-5 pb-md-4 pb-3">Choisissez un mode de paiement</h3>
+                            <h3 class="mb-0 pb-lg-5 pb-md-4 pb-3">{{'admin.ads.select-payment'|translate}}</h3>
                         </div>
     
                         <div class="list-body pt-md-4 pt-3">

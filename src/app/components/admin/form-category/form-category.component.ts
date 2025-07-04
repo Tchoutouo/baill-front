@@ -5,12 +5,13 @@ import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import {Notification} from '../../../models/notification';
 import { NoficationsService } from '../../../services/nofications.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
   selector: 'app-form-category',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, TranslateModule],
   templateUrl: './form-category.component.html',
   styleUrl: './form-category.component.css'
 })

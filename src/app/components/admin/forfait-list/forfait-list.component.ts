@@ -3,11 +3,12 @@ import { ForfaitItemComponent } from "../forfait-item/forfait-item.component";
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { EntityServiceService } from '../../../services/admin/entity-service.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-forfait-list',
   standalone: true,
-  imports: [ForfaitItemComponent, CommonModule],
+  imports: [ForfaitItemComponent, CommonModule, TranslateModule],
   templateUrl: './forfait-list.component.html',
   styleUrl: './forfait-list.component.css'
 })
