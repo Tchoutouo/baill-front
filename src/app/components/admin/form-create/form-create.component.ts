@@ -291,9 +291,6 @@ export class FormCreateComponent {
 
   async handleSubmit(event: any = null) {
     // Vérification rapide de la validité du formulaire
-
-    
-
     if (!this.anounces_form_datas.valid || this.images_annouces_list.length < 1) {
       this.errorMessages = this.images_annouces_list.length < 1
         ? 'Veuillez ajouter au moins une image.'
@@ -301,8 +298,8 @@ export class FormCreateComponent {
       return;
     }
 
-    if (event) {
-      if (event.type === 'Standard' || event.type === 'Premium') {
+    if (event) {      
+      if (event.name != 'Free') {
         return this.handlePayment(event); 
       }
     }
@@ -438,6 +435,7 @@ export class FormCreateComponent {
 
           // Ajout des données
           payment_datas['amount'] = this.currentAnnounce?.announce.price;
+          payment_datas['quantity_selected'] = this.currentAnnounce?.announce.selectedQuantity;
           payment_datas['payment_method'] = payment.id;
           payment_datas['mode_paiement'] = 'Stripe';
           
@@ -475,6 +473,7 @@ export class FormCreateComponent {
           payment_datas['amount'] = this.currentAnnounce?.announce.price;
           payment_datas['payment_method'] = payment.type;
           payment_datas['mode_paiement'] = 'Mobile money';
+           payment_datas['quantity_selected'] = this.currentAnnounce?.announce.selectedQuantity;
           payment_datas['payer'] = '237'+payment.datas.numero;
           // payment_datas['mode_paiement'] = payment.datas?.operateur;
           
@@ -524,7 +523,7 @@ export class FormCreateComponent {
       }
     } catch (error) {
       console.log("Erreur methode handlePayment",error);
-      
+  
     }
 
   }
