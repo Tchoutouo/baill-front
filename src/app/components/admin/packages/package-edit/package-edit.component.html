@@ -5,7 +5,7 @@
         <form action="" [formGroup]="abonnementForm">
             <div class="form_group mb-3 h5-baill main-font-quick balck mb-3">
                 <label for="" class="d-flex mb-2">Nom du forfait</label>
-                <input type="text" class="field_form" value="" name="name" formControlName="name" id="name">
+                <input type="text" readonly class="field_form disabled" value="" name="name" formControlName="name" id="name">
                 <div *ngIf="abonnementForm.get('name')?.invalid && abonnementForm.get('name')?.dirty" class="text-danger">
                     Le nom est requis.
                 </div>
@@ -24,7 +24,7 @@
                     <div *ngIf="abonnementForm.get('time')?.invalid && abonnementForm.get('time')?.touched" class="text-danger">
                         Veuillez entrer un nombre valide.
                     </div>
-                    <select class="form-select field_form w-25" id="" name="type_time" formControlName="type_time" aria-label="Floating label select example">
+                    <select readonly class="form-select disabled field_form w-25" id="" name="type_time" formControlName="type_time" aria-label="Floating label select example">
                         <option value="M">Mois</option>
                         <!-- <option value="S">Semaine(s)</option> -->
                         <option value="A">Année(s)</option>
