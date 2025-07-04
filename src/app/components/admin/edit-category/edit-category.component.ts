@@ -5,12 +5,13 @@ import {Notification} from '../../../models/notification';
 import { Subscription } from 'rxjs';
 import { EntityServiceService } from '../../../services/admin/entity-service.service';
 import { NoficationsService } from '../../../services/nofications.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
   selector: 'app-edit-category',
   standalone: true,
-  imports: [FormsModule, CommonModule, ReactiveFormsModule],
+  imports: [FormsModule, CommonModule, ReactiveFormsModule, TranslateModule],
   templateUrl: './edit-category.component.html',
   styleUrl: './edit-category.component.css'
 })

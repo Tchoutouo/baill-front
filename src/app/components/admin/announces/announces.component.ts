@@ -22,13 +22,14 @@ import { CheckProfilService } from '../../../services/check-profil.service';
 import { EditCategoryComponent } from "../edit-category/edit-category.component";
 import { Router } from '@angular/router';
 import { PaymentItemComponent } from "../payment-item/payment-item.component";
+import { TranslateModule } from '@ngx-translate/core';
 
 // import { FormatEntityNamePipe } from '../../../helpers/helper';
 
 @Component({
   selector: 'app-announces',
   standalone: true,
-  imports: [PaginatorComponent, RouterModule, CommonModule, AlertComponent, FormatEntityNamePipe, ForfaitListComponent, AlertConfirmComponent, FormCategoryComponent, EditCategoryComponent, PaymentItemComponent],
+  imports: [PaginatorComponent, RouterModule, CommonModule, AlertComponent, FormatEntityNamePipe, ForfaitListComponent, AlertConfirmComponent, FormCategoryComponent, EditCategoryComponent, PaymentItemComponent, TranslateModule],
   templateUrl: './announces.component.html',
   styleUrl: './announces.component.css'
 })

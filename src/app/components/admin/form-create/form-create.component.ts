@@ -12,13 +12,14 @@ import { Country, State, City ,ICountry, IState, ICity}  from 'country-state-cit
 import { LocalStorageService } from '../../../services/admin/local-storage.service';
 import { PaymentsServiceService } from '../../../services/payments-service.service';
 import { PaymentItemComponent } from "../payment-item/payment-item.component";
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
 @Component({
   selector: 'app-form-create',
   standalone: true,
-  imports: [ForfaitListComponent, ImageViewComponent, CommonModule, ReactiveFormsModule, FormsModule, PaymentItemComponent],
+  imports: [ForfaitListComponent, ImageViewComponent, CommonModule, ReactiveFormsModule, FormsModule, PaymentItemComponent, TranslateModule],
   templateUrl: './form-create.component.html',
   styleUrl: './form-create.component.css'
 })

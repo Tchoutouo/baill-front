@@ -5,12 +5,13 @@ import { LocalStorageService } from '../../../services/admin/local-storage.servi
 import { EntityServiceService } from '../../../services/admin/entity-service.service';
 import { Subscription } from 'rxjs';
 import { CheckProfilService } from '../../../services/check-profil.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, AlertComponent],
+  imports: [CommonModule, AlertComponent, TranslateModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
@@ -75,11 +76,10 @@ export class DashboardComponent {
           
         }else{
           this.dashboardSub = this.entityService.getDashoardDatas(user_id).subscribe({
-            next : (datas : any) =>{
-              
+            next : (datas : any) =>{              
               if (datas.success) {
-                this.totalEncours = datas.annonce_qte_inprogress;
-                // this.totalEncours = datas.annonce_qte_publisher;
+                // this.totalEncours = datas.annonce_qte_inprogress;
+                this.totalEncours = datas.annonce_qte_publisher;
                 this.totalEnvoiDExp = datas.annonce_qte_pause;
                 this.totalExpired = datas.annonce_qte_expired;
               }
