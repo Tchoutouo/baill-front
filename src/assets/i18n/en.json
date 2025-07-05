@@ -21,7 +21,8 @@
         "lock": "Lock",
         "unlock": "Unlock",
         "category": "Categories",
-        "anounce": "Ads"
+        "anounce": "Ads",
+        "pay": "Pay"
     },
     "status":{
         "active": "Active",
@@ -241,6 +242,13 @@
             "ads-pause": "Ads on break",
             "top-5":"The 5 most requested ads of the month"
             
+        },
+        "payment":{
+            "number": "Phone number",
+            "card-number": "Card number",
+            "date-expired": "Expiration date",
+            "cvv": "CVV",
+            "error-number": "Invalid number (must start with 6 and contain 9 digits)."
         }
     },
     "aside":{

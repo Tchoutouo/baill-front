@@ -2,11 +2,12 @@ import { Component, EventEmitter, Input, AfterViewChecked, ChangeDetectorRef, Ou
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { loadStripe, Stripe, StripeElements, StripeCardElement, StripeCardNumberElement, StripeCardExpiryElement, StripeCardCvcElement } from '@stripe/stripe-js'; // Importez Stripe
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-payment-item',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, TranslateModule],
   templateUrl: './payment-item.component.html',
   styleUrls: ['./payment-item.component.css']
 })

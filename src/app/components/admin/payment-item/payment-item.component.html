@@ -21,7 +21,7 @@
     </div>
   <!-- Numéro de carte (occupe toute une ligne) -->
   <div class="form-group text-start">
-    <label for="card-number-element" class="label-form">Numéro de carte</label>
+    <label for="card-number-element" class="label-form">{{'admin.payment.card-number'|translate}}</label>
     <div id="card-number-element" class="stripe-element"></div>
   </div>
 
@@ -29,7 +29,7 @@
   <div class="row">
     <div class="col-md-6">
       <div class="form-group text-start">
-        <label for="card-expiry-element" class="label-form">Date d'expiration</label>
+        <label for="card-expiry-element" class="label-form">{{'admin.payment.date-expired'|translate}}</label>
         <div id="card-expiry-element" class="stripe-element"></div>
       </div>
     </div>
@@ -108,7 +108,7 @@
     <div class="om-form" *ngIf="showOmForm && itemPay.title === 'Orange Money'">
       <form class="w-100" (submit)="mobilePay('Orange Money', $event)">
         <div class="form_group">
-          <label class="label-form mb-2" for="omNumber">Numéro de téléphone</label>
+          <label class="label-form mb-2" for="omNumber">{{'admin.payment.number'|translate}}</label>
           <input
             type="text"
             class="input_field input-field"
@@ -120,10 +120,10 @@
             #omInput="ngModel"
           />
           <div *ngIf="omInput.invalid && omInput.touched" style="color:red; font-size:0.8rem;">
-            Numéro invalide (doit commencer par 6 et contenir 9 chiffres).
+            {{'admin.payment.error-number'|translate}}
           </div>
         </div>
-        <button type="submit" class="btn_publish mt-2" [disabled]="omInput.invalid">Payer</button>
+        <button type="submit" class="btn_publish mt-2" [disabled]="omInput.invalid">{{'button.pay'|translate}}</button>
       </form>
     </div>
     
@@ -131,7 +131,7 @@
     <div class="momo-form" *ngIf="showMomoForm && itemPay.title === 'Mobile Money'">
       <form class="w-100" (submit)="mobilePay('Mobile Money', $event)">
         <div class="form_group">
-          <label class="label-form mb-2" for="momoNumber">Numéro de téléphone</label>
+          <label class="label-form mb-2" for="momoNumber">{{'admin.payment.number'|translate}}</label>
           <input
             type="text"
             class="input_field input-field"
@@ -143,10 +143,10 @@
             #momoInput="ngModel"
           />
           <div *ngIf="momoInput.invalid && momoInput.touched" style="color:red; font-size:0.8rem;">
-            Numéro invalide (doit commencer par 6 et contenir 9 chiffres).
+            {{'admin.payment.error-number'|translate}}
           </div>
         </div>
-        <button type="submit" class="btn_publish mt-2" [disabled]="momoInput.invalid">Payer</button>
+        <button type="submit" class="btn_publish mt-2" [disabled]="momoInput.invalid">{{'button.pay'|translate}}</button>
       </form>
     </div>
     

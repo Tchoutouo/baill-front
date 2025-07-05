@@ -21,7 +21,8 @@
         "lock": "Bloquer",
         "unlock": "Débloquer",
         "category": "Catégories",
-        "anounce": "Annonces"
+        "anounce": "Annonces",
+        "pay": "Payer"
     },
     "status":{
         "active": "Actif",
@@ -241,6 +242,13 @@
             "ads-expired": "Annonces expirées",
             "ads-pause": "Annonces en pause",
             "top-5":"Les 5 annonces les plus demandées du mois"
+        },
+        "payment":{
+            "number": "Numéro de téléphone",
+            "card-number": "Numéro de carte",
+            "date-expired": "Date d'expiration",
+            "cvv": "CVV",
+            "error-number": "Numéro invalide (doit commencer par 6 et contenir 9 chiffres)."
         }
     },
     "aside":{
