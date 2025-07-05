@@ -40,7 +40,19 @@
             </div> -->
             <div class="col-lg-4 col-lg-4 col-md-4 col-sm-12 element_3 text-center">
                 <div class="title-list">
-                    <a href="#" [routerLink]="['/contact-us']" class="link-contact"><p>{{'footer.contact'| translate}} </p></a> 
+                    <a href="#"  class="link-contact"><p>{{'footer.contact'| translate}} </p></a> 
+                </div>
+                <div class="row">
+                    <div class="col-7 ">
+                        <a href="#" [routerLink]="['/contact-us']" class="fs-4 fw-bold text-white "><p> Courriel </p></a> 
+                        
+                        <a [href]="'https://api.whatsapp.com/send?phone='+237694798186+'&text=Hello Bailleurnet&source=&data='" class="fs-4 fw-bold text-white" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-whatsapp" style="font-size: 24px;"></i> : + 237 694 798 186
+                        </a>
+                    </div>
+                    <div class="col-5">
+                        <p class="contact-email"></p>
+                    </div>
                 </div>
                 <div class="icon-content gap-2 d-flex text-white justify-content-center">
                     <ul class="icon-list d-flex gap-2">
