@@ -42,16 +42,54 @@
                 <div class="title-list">
                     <a href="#"  class="link-contact"><p>{{'footer.contact'| translate}} </p></a> 
                 </div>
-                <div class="row">
-                    <div class="col-7 ">
+                <div class="row align-items-center">
+                    <div class="col-7 text-start ps-4">
                         <a href="#" [routerLink]="['/contact-us']" class="fs-4 fw-bold text-white "><p> Courriel </p></a> 
                         
-                        <a [href]="'https://api.whatsapp.com/send?phone='+237694798186+'&text=Hello Bailleurnet&source=&data='" class="fs-4 fw-bold text-white" target="_blank" rel="noopener noreferrer">
+                        <a [href]="'https://api.whatsapp.com/send?phone='+237694798186+'&text=Hello Bailleurnet&source=&data='" class="fs-5 fw-bold text-white" target="_blank" rel="noopener noreferrer">
                             <i class="fab fa-whatsapp" style="font-size: 24px;"></i> : + 237 694 798 186
                         </a>
                     </div>
                     <div class="col-5">
-                        <p class="contact-email"></p>
+                        <div #canvas id="canvas"></div>
+                        <!--<div class="container">
+                            <h2>Générateur de QR Code Personnalisé</h2>
+                            <div class="form-group">
+                                <label for="qrInput">Lien du site :</label>
+                                <input id="qrInput" [(ngModel)]="qrCodeData" placeholder="https://bailleurnet.com" (input)="updateQRCode()">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="dotColor">Couleur des points :</label>
+                                <input id="dotColor" type="color" [(ngModel)]="dotColor" (change)="updateQRCode()">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="backgroundColor">Couleur de fond :</label>
+                                <input id="backgroundColor" type="color" [(ngModel)]="backgroundColor" (change)="updateQRCode()">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="dotType">Forme des points :</label>
+                                <select id="dotType" [(ngModel)]="dotType" (change)="updateQRCode()">
+                                <option value="square">Carré</option>
+                                <option value="rounded">Arrondi</option>
+                                <option value="dots">Points</option>
+                                <option value="classy">Classique</option>
+                                <option value="classy-rounded">Classique arrondi</option>
+                                <option value="extra-rounded">Extra arrondi</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="logoUrl">URL du logo :</label>
+                                <input id="logoUrl" [(ngModel)]="logoUrl" placeholder="URL du logo" (input)="updateQRCode()">
+                            </div>
+                            
+                            <button (click)="downloadQRCode()">Télécharger le QR Code</button>
+                            
+                        </div>-->
+
                     </div>
                 </div>
                 <div class="icon-content gap-2 d-flex text-white justify-content-center">
