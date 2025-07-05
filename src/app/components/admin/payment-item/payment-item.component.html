@@ -42,7 +42,7 @@
   </div>
 
   <!-- Bouton de paiement -->
-  <button class="btn_publish mt-2 mt-3 d-flex align-items-center justify-content-between" [disabled]="createPayMeth" (click)="handlePayment()">
+  <button type="submit" class="btn_publish mt-2 mt-3 d-flex align-items-center justify-content-between" [disabled]="createPayMeth" (click)="handlePayment()">
     Payer 
     <div class="spinner-border text-light ms-2" *ngIf="createPayMeth" role="status">
       <span class="visually-hidden">Loading...</span>
@@ -118,6 +118,7 @@
             required
             pattern="^6\d{8}$"
             #omInput="ngModel"
+            (click)="$event.stopPropagation()"
           />
           <div *ngIf="omInput.invalid && omInput.touched" style="color:red; font-size:0.8rem;">
             {{'admin.payment.error-number'|translate}}
@@ -141,6 +142,7 @@
             required
             pattern="^6\d{8}$"
             #momoInput="ngModel"
+            (click)="$event.stopPropagation()"
           />
           <div *ngIf="momoInput.invalid && momoInput.touched" style="color:red; font-size:0.8rem;">
             {{'admin.payment.error-number'|translate}}

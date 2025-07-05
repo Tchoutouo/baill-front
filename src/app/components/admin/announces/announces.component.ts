@@ -268,8 +268,7 @@ export class AnnouncesComponent {
         
         let resul = this.entytServ.changeAnnouceStatus(user_id, ann_id, newStatus).subscribe({
           next: (datas: any) => { 
-            const notif = new Notification();
-            
+            const notif = new Notification();            
             if (datas.success) {
               notif.message = "Annonce mise à jour avec success !"
               notif.status = "success";
@@ -315,8 +314,12 @@ export class AnnouncesComponent {
     this.selectedAnnounce = announce;
     
     if(event && announce){
-      if (event.type === 'Standard' || event.type === 'Premium') {
-        this.selectedAbonnment = event;
+      // if (event.type === 'Standard' || event.type === 'Premium') {
+      //   this.selectedAbonnment = event;
+      //   return this.handlePayment(event); 
+      // }
+
+      if (event.name != 'Free') {
         return this.handlePayment(event); 
       }
 
@@ -520,7 +523,6 @@ export class AnnouncesComponent {
 
     async payAnnouce(payment : any, value_datas : any, payMeth : any){
       try {
-
           this.showPayForm = false;
           const user_id = this.localStorage.getItem('user').id;
           const newStatus = '3';
@@ -533,6 +535,7 @@ export class AnnouncesComponent {
             payment_datas['amount'] = this.currentAnnounce?.announce.price;
             payment_datas['payment_method'] = payment.type;
             payment_datas['mode_paiement'] = 'Mobile money';
+            payment_datas['validity_period'] = this.currentAnnounce?.announce.selectedQuantity;
             payment_datas['payer'] = '237'+payment.datas.numero;
             const response : any = await this.entytServ.changeAnnouceStatus(user_id, this.selectedAnnounce.id ,newStatus, JSON.stringify(payment_datas)).toPromise();
 
@@ -549,6 +552,7 @@ export class AnnouncesComponent {
             payment_datas['amount'] = this.selectedAbonnment.price;
             payment_datas['abonnement_id'] = this.selectedAbonnment.id;
             payment_datas['payment_method'] = payment.id;
+            payment_datas['validity_period'] = this.currentAnnounce?.announce.selectedQuantity;
             payment_datas['mode_paiement'] = payMeth.title;
             const response = await this.entytServ.changeAnnouceStatus(user_id, value_datas.id ,newStatus, JSON.stringify(payment_datas)).toPromise();
             this.handleResponse(response);
@@ -594,7 +598,7 @@ export class AnnouncesComponent {
     getPaymentMethod(){
     this.getPaySub = this.entytServ.getPaymentMethd().subscribe({
       next: (res_data: any) => {
-        // console.log({cedric:res_data});
+        console.log({cedric:res_data});
         if (res_data.success) {
           this.paymentList = res_data.data
         }

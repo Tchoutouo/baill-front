@@ -101,9 +101,27 @@
                                         <a *ngIf="value_datas.status == '3'" title="Mettre en pause" (click)="setAnnouceStatus(value_datas?.id, '2')">
                                             <i class="fa-solid fa-pause bg_grey radius-3 text-dark p-1"></i>
                                         </a>
-                                        <a *ngIf="value_datas.status == '0'" title="Relancer">
-                                            <i class="fa-solid fa-arrows-rotate bg_blue radius-3 text-white p-1"></i>
-                                        </a> 
+                                        <a *ngIf="value_datas.status == '0'" 
+                                            title="Relancer" 
+                                            data-bs-toggle="modal" 
+                                            [attr.data-bs-target]="'#forfaitList' + value_datas.id">
+                                                <i class="fa-solid fa-arrows-rotate bg_blue radius-3 text-white p-1"></i>
+                                        </a>
+
+                                        <!-- Place le modal en dehors de <a>, pour éviter les erreurs HTML -->
+                                        <div class="modal fade"
+                                            [id]="'forfaitList' + value_datas.id"
+                                            data-bs-backdrop="static"
+                                            data-bs-keyboard="false"
+                                            tabindex="-1"
+                                            aria-labelledby="staticBackdropLabel"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-xl modal-dialog-centered">
+                                                <app-forfait-list 
+                                                (hasSubmit)="handleSubmit($event, value_datas)" 
+                                                class="w-100"></app-forfait-list>
+                                            </div>
+                                        </div>
                                     </div>
                                 </td>
 
@@ -114,9 +132,13 @@
                                                 <div class="col-12 mx-auto">
                                                     <div class="payment-list pb-5">
                                                         <div class="title-list">
+                                                            <h3 class="mb-0 pb-lg-5 pb-md-4 pb-3 text-secondary">{{'admin.ads.select-payment'|translate}}</h3>
+                                                        </div>
+                                                        <!--
+                                                        <div class="title-list">
                                                             <h3 class="mb-0 pb-lg-5 pb-md-4 pb-3">{{'admin.ads.select-payment'|translate}}</h3>
                                                         </div>
-                                    
+                                                        -->
                                                         <div class="list-body pt-md-4 pt-3">
                                                             <ng-container *ngFor="let itemPay of paymentList">
                                                                 <app-payment-item (payDatas)="payAnnouce($event, value_datas, itemPay)"  [itemPay] = "itemPay" class="w-95" ></app-payment-item>

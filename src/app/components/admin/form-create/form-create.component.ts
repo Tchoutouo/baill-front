@@ -441,7 +441,7 @@ export class FormCreateComponent {
           
           // Ajout des données à formData
           annDatas.append('status', '1');
-          annDatas.append('validity_period', this.currentAnnounce?.announce.selectedQuantity);
+            
           annDatas.append('payment_datas', JSON.stringify(payment_datas)); // Convertir en JSON
           
           // Envoi des données

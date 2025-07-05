@@ -49,13 +49,20 @@ export class PaymentItemComponent  {
 
    
 
-  async handlePayment(type: string | null = null) {
+  async handlePayment(type: string | null = null, event?: MouseEvent) {
+        // 💡 1. Si un event est fourni, vérifier s'il vient d'un input (pour ignorer)
+    if (event) {
+      const tagName = (event.target as HTMLElement).tagName.toLowerCase();
+      if (['input', 'button', 'select', 'textarea', 'label'].includes(tagName)) {
+        return; // Ignore les clics dans les champs de formulaire
+      }
+    }
+
     if (type) {
       this.showForm(type);
     }else{
       this.createPayMeth = true
     }
-
 
     if (!this.stripe || !this.cardNumberElement) {
       this.errorMessage = 'Stripe ou l\'élément de carte n\'est pas initialisé.';
