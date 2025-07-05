@@ -435,12 +435,13 @@ export class FormCreateComponent {
 
           // Ajout des données
           payment_datas['amount'] = this.currentAnnounce?.announce.price;
-          payment_datas['quantity_selected'] = this.currentAnnounce?.announce.selectedQuantity;
+          // payment_datas['quantity_selected'] = this.currentAnnounce?.announce.selectedQuantity;
           payment_datas['payment_method'] = payment.id;
           payment_datas['mode_paiement'] = 'Stripe';
           
           // Ajout des données à formData
           annDatas.append('status', '1');
+          annDatas.append('validity_period', this.currentAnnounce?.announce.selectedQuantity);
           annDatas.append('payment_datas', JSON.stringify(payment_datas)); // Convertir en JSON
           
           // Envoi des données
@@ -473,12 +474,13 @@ export class FormCreateComponent {
           payment_datas['amount'] = this.currentAnnounce?.announce.price;
           payment_datas['payment_method'] = payment.type;
           payment_datas['mode_paiement'] = 'Mobile money';
-           payment_datas['quantity_selected'] = this.currentAnnounce?.announce.selectedQuantity;
+          //  payment_datas['quantity_selected'] = this.currentAnnounce?.announce.selectedQuantity;
           payment_datas['payer'] = '237'+payment.datas.numero;
           // payment_datas['mode_paiement'] = payment.datas?.operateur;
           
           // Ajout des données à formData
           annData.append('status', '1');
+          annData.append('validity_period', this.currentAnnounce?.announce.selectedQuantity);
           annData.append('payment_datas', JSON.stringify(payment_datas)); // Convertir en JSON
           
           // Envoi des données
