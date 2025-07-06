@@ -8,12 +8,12 @@ export const environment = {
     // apiUrlRessources: "https://test-backend.bailleurnet.com/public/storage"
 
     // ENV for testing
-    apiUrl: "https://backend.bailleurnet.com/api/",
-    apiUrlRessources: "https://backend.bailleurnet.com/public/storage"
+    // apiUrl: "https://backend.bailleurnet.com/api/",
+    //apiUrlRessources: "https://backend.bailleurnet.com/public/storage"
  
     //ENV for production
-    // apiUrl: "https://backend-prod.bailleurnet.com/api/",S
-    // apiUrlRessources: "https://backend-prod.bailleurnet.com/public/storage"
+    apiUrl: "https://backend-prod.bailleurnet.com/api/",
+    apiUrlRessources: "https://backend-prod.bailleurnet.com/public/storage"
     
     // apiUrl: "http://baill-back.sc1zeucoder.universe.wf/api/",
     // apiUrlRessources: "http://baill-back.sc1zeucoder.universe.wf/public/storage"
