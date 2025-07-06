@@ -12,13 +12,14 @@ import { Country, State, City ,ICountry, IState, ICity}  from 'country-state-cit
 import { LocalStorageService } from '../../../services/admin/local-storage.service';
 import { PaymentsServiceService } from '../../../services/payments-service.service';
 import { PaymentItemComponent } from "../payment-item/payment-item.component";
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
 @Component({
   selector: 'app-form-create',
   standalone: true,
-  imports: [ForfaitListComponent, ImageViewComponent, CommonModule, ReactiveFormsModule, FormsModule, PaymentItemComponent],
+  imports: [ForfaitListComponent, ImageViewComponent, CommonModule, ReactiveFormsModule, FormsModule, PaymentItemComponent, TranslateModule],
   templateUrl: './form-create.component.html',
   styleUrl: './form-create.component.css'
 })
@@ -290,9 +291,6 @@ export class FormCreateComponent {
 
   async handleSubmit(event: any = null) {
     // Vérification rapide de la validité du formulaire
-
-    
-
     if (!this.anounces_form_datas.valid || this.images_annouces_list.length < 1) {
       this.errorMessages = this.images_annouces_list.length < 1
         ? 'Veuillez ajouter au moins une image.'
@@ -300,8 +298,8 @@ export class FormCreateComponent {
       return;
     }
 
-    if (event) {
-      if (event.type === 'Standard' || event.type === 'Premium') {
+    if (event) {      
+      if (event.name != 'Free') {
         return this.handlePayment(event); 
       }
     }
@@ -437,11 +435,13 @@ export class FormCreateComponent {
 
           // Ajout des données
           payment_datas['amount'] = this.currentAnnounce?.announce.price;
+          // payment_datas['quantity_selected'] = this.currentAnnounce?.announce.selectedQuantity;
           payment_datas['payment_method'] = payment.id;
           payment_datas['mode_paiement'] = 'Stripe';
           
           // Ajout des données à formData
           annDatas.append('status', '1');
+            
           annDatas.append('payment_datas', JSON.stringify(payment_datas)); // Convertir en JSON
           
           // Envoi des données
@@ -474,11 +474,13 @@ export class FormCreateComponent {
           payment_datas['amount'] = this.currentAnnounce?.announce.price;
           payment_datas['payment_method'] = payment.type;
           payment_datas['mode_paiement'] = 'Mobile money';
+          //  payment_datas['quantity_selected'] = this.currentAnnounce?.announce.selectedQuantity;
           payment_datas['payer'] = '237'+payment.datas.numero;
           // payment_datas['mode_paiement'] = payment.datas?.operateur;
           
           // Ajout des données à formData
           annData.append('status', '1');
+          annData.append('validity_period', this.currentAnnounce?.announce.selectedQuantity);
           annData.append('payment_datas', JSON.stringify(payment_datas)); // Convertir en JSON
           
           // Envoi des données
@@ -504,7 +506,7 @@ export class FormCreateComponent {
   getPaymentMethod(){
     this.getPaySub = this.entityService.getPaymentMethd().subscribe({
       next: (res_data: any) => {
-        console.log({cedric:res_data});
+        // console.log({cedric:res_data});
         if (res_data.success) {
           this.paymentList = res_data.data
         }
@@ -523,7 +525,7 @@ export class FormCreateComponent {
       }
     } catch (error) {
       console.log("Erreur methode handlePayment",error);
-      
+  
     }
 
   }

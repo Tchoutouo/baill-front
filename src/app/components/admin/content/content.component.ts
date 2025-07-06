@@ -8,7 +8,7 @@ import { getSiteName, isAdmin } from '../../../helpers/helper';
 import { LocalStorageService } from '../../../services/admin/local-storage.service';
 import { NotificationsComponent } from "../notifications/notifications.component";
 import { CommonModule } from '@angular/common';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { AlertComponent } from "../alert/alert.component";
 import { AuthenticatorService } from '../../../services/admin/authenticator.service';
@@ -22,7 +22,7 @@ import { CheckProfilService } from '../../../services/check-profil.service';
   selector: 'app-content',
   standalone: true,
   imports: [RouterOutlet, RouterLink, NotificationsComponent,
-    CommonModule, RouterModule, AlertConfirmComponent],
+    CommonModule, RouterModule, AlertConfirmComponent, TranslateModule],
   templateUrl: './content.component.html',
   styleUrl: './content.component.css'
 })

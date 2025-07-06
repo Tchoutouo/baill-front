@@ -3,6 +3,7 @@ import { AnounceEntity } from "../models/admin/nounceEntity";
 import { Category } from "../models/admin/category";
 import { LocalStorageService } from "../services/admin/local-storage.service";
 import { Route, Router, ROUTES } from "@angular/router";
+import { AuthenticatorService } from "../services/admin/authenticator.service";
 
 export const getSiteName = () : string =>{
     let siteName = "Bailleurnet";
@@ -71,4 +72,17 @@ export const isAdmin = () : any =>{
         return false;
     }
 
+}
+
+
+export const isLoggedIn = () : any =>{
+     let localStorage  = inject(LocalStorageService);
+    let routes = inject(Router)
+
+    const user = localStorage.getItem('user');
+    if (user) {
+        return user;
+    }else{
+        return false;
+    }
 }

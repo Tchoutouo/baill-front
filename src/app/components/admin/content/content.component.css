@@ -355,10 +355,15 @@ i.active, svg.active {
     .sideOpen{
         width: calc(2.5*(100%/12));
     }
+
+    .height-60-scroll-auto{
+        height: 55vh;
+        overflow-y: auto;
+    }
         
 }
 
 .row {
     --bs-gutter-x: 0 !important;
-
 }
+

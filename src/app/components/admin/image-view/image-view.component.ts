@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { is_image } from '../../../helpers/helper';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-image-view',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   templateUrl: './image-view.component.html',
   styleUrl: './image-view.component.css'
 })

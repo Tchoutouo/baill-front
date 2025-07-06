@@ -2,11 +2,12 @@ import { Component, EventEmitter, Input, AfterViewChecked, ChangeDetectorRef, Ou
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { loadStripe, Stripe, StripeElements, StripeCardElement, StripeCardNumberElement, StripeCardExpiryElement, StripeCardCvcElement } from '@stripe/stripe-js'; // Importez Stripe
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-payment-item',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, TranslateModule],
   templateUrl: './payment-item.component.html',
   styleUrls: ['./payment-item.component.css']
 })
@@ -48,13 +49,20 @@ export class PaymentItemComponent  {
 
    
 
-  async handlePayment(type: string | null = null) {
+  async handlePayment(type: string | null = null, event?: MouseEvent) {
+        // 💡 1. Si un event est fourni, vérifier s'il vient d'un input (pour ignorer)
+    if (event) {
+      const tagName = (event.target as HTMLElement).tagName.toLowerCase();
+      if (['input', 'button', 'select', 'textarea', 'label'].includes(tagName)) {
+        return; // Ignore les clics dans les champs de formulaire
+      }
+    }
+
     if (type) {
       this.showForm(type);
     }else{
       this.createPayMeth = true
     }
-
 
     if (!this.stripe || !this.cardNumberElement) {
       this.errorMessage = 'Stripe ou l\'élément de carte n\'est pas initialisé.';

@@ -6,11 +6,40 @@
         "cancel": "Annuler",
         "publish": "Publier",
         "back": "Retour",
-        "validate":"Valider"
+        "validate":"Valider",
+        "create-and-publish": "Créer & publier",
+        "create": "Créer",
+        "edit": "Modifier",
+        "delete": "Supprimer",
+        "search": "Rechercher",
+        "view": "Voir",
+        "view-all": "Voir tout",
+        "close": "Fermer",
+        "throw": "Lancer",
+        "add": "Ajouter",
+        "add-category": "Ajouter une catégorie",
+        "lock": "Bloquer",
+        "unlock": "Débloquer",
+        "category": "Catégories",
+        "anounce": "Annonces",
+        "pay": "Payer"
+    },
+    "status":{
+        "active": "Actif",
+        "inactive": "Inactif",
+        "expired": "Expiré",
+        "pending": "En attente",
+        "progress": "En cours",
+        "stop": "En pause",
+        "published": "Publié",
+        "unpublished": "Non publié",
+        "draft": "Brouillon",
+        "deleted": "Supprimé"
     },
     "banner":{
         "title":"LOUER en toute simplicité",
         "title-2": "LOUER en toute simplicité, des biens et services sur bailleurnet",
+        "title-3": "Ma boussole de poche",
         "description": "Bailleurnet est La plateforme ultime pour la location de biens et services en toute simplicité",
         "btn-publish": "Publier une annonce"
     },
@@ -78,9 +107,9 @@
             "title":"S'inscrire",
             "text-account":"Vous avez déjà compte",
             "login-text":"Se connecter",
-            "text-line-1":"Rejoignez Bailleurnet et ",
-            "text-line-2":"commencez à LOUER en ",
-            "text-line-3":"toute simplicité !",
+            "text-line-1":"Je rejoins Bailleurnet",
+            "text-line-2":"ma boussole de poche",
+            "text-line-3":"",
             "message":{
                 "error":{
                     "password":"le mot de passe est requis.",
@@ -121,8 +150,117 @@
         }
     },
     "admin":{
-
+        "profile": {
+            "title": "Mon compte",
+            "form": {
+                "last_name": "Nom(s)",
+                "first_name": "Prénom(s)",
+                "username": "Nom d'utilisateur",
+                "email": "Email",
+                "phone": "Téléphone",
+                "whatsapp": "Téléphone (WhatsApp)",
+                "sex": "Sexe",
+                "country": "Pays",
+                "city": "Ville",
+                "neighborhood": "Quartier",
+                "site_url": "Lien du site web",
+                "photo": "Photo",
+                "password": "Mot de passe"
+            },
+            "gender": {
+                "male": "H",
+                "female": "F"
+            },
+            "security": {
+                "title": "Sécurité",
+                "password": "Mot de passe"
+            },
+            "button": {
+                "update": "Modifier les champs",
+                "save": "Sauvegarder"
+            },
+            "modal": {
+                "title": "Modification du mot de passe",
+                "old_password": "Ancien mot de passe",
+                "new_password": "Nouveau mot de passe"
+            },
+            "error": {
+                "last_name": "Le nom est requis.",
+                "first_name": "Le prénom est requis.",
+                "username": "Le nom d'utilisateur est requis.",
+                "email": "Email invalide ou manquant.",
+                "phone": "Le numéro de téléphone est requis.",
+                "whatsapp": "Le numéro de téléphone whatsapp est requis.",
+                "sex": "Veuillez choisir votre sexe"
+            }
+        },
+        "ads":{
+            "title": "Annonces",
+            "title-2": "Formulaire de création d'une annonce",
+            "title-3": "Titre",
+            "no-content": "Aucune annonce(s)",
+            "no-announce": "Aucune annonce trouvée",
+            "search": "Rechercher une annonce",
+            "search-no-content": "Aucun résultat trouvé pour",
+            "search-result": "Résultat de la recherche pour",
+            "search-placeholder": "Rechercher par titre, description, catégorie, pays ou ville",
+            "filter": "Filtrer par catégorie, pays ou ville",
+            "filter-by": "Afficher par",
+            "filter-placeholder": "Sélectionner une catégorie, un pays ou une ville",
+            "country": "Pays",
+            "city": "Ville",
+            "category": "Catégorie(s)",
+            "location": "Lieu dit",
+            "description": "Description",
+            "price": "Prix",
+            "picture": "Images",
+            "error-message": {
+                "title": "Le titre est requis.",
+                "description": "La description est requise.",
+                "description-2": "La taille maximale de caractère autorisée est de 256.",
+                "category": "La catégorie est requise.",
+                "country": "Le pays est requis.",
+                "city": "La ville est requise.",
+                "price": "Le prix est requis.",
+                "picture": "L'image est requise."
+            },
+            "select-payment": "Choisissez un mode de paiement",
+            "select-package": "Choisissez un forfait"
+        },
+        "dashboard":{
+            "title": "Tableau de bord",
+            "total-ads": "Total des annonces",
+            "total-ads-published": "Total des annonces publiées",
+            "total-ads-inprogress": "Total des annonces en cours",
+            "total-ads-expired": "Total des annonces expirées",
+            "total-ads-pause": "Total des annonces en pause",
+            "total-users": "Total des utilisateurs",
+            "total-payments": "Total des paiements",
+            "total-packages": "Total des forfaits",
+            "ads-published": "Annonces publiées",
+            "ads-inprogress": "Annonces en cours",
+            "ads-expired": "Annonces expirées",
+            "ads-pause": "Annonces en pause",
+            "top-5":"Les 5 annonces les plus demandées du mois"
+        },
+        "payment":{
+            "number": "Numéro de téléphone",
+            "card-number": "Numéro de carte",
+            "date-expired": "Date d'expiration",
+            "cvv": "CVV",
+            "error-number": "Numéro invalide (doit commencer par 6 et contenir 9 chiffres)."
+        }
+    },
+    "aside":{
+        "ads": "Annonce",
+        "dashboard": "Tableau de bord",
+        "categories": "Catégories",
+        "users": "Utilisateurs",
+        "payments": "Paiements",
+        "forfaits": "Forfaits",
+        "settings": "Paramètres",
+        "logout": "Se déconnecter",
+        "profile": "Mon profil"
     }
-
 
 }

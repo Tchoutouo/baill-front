@@ -4,7 +4,7 @@
             <div class="item-dash bg-green-15 px-4 py-3">
                 <div class="height-121">
                     <div class="dash-title">
-                        <h2>Annonces encours</h2>
+                        <h2>{{'admin.dashboard.ads-inprogress'|translate}}</h2>
                     </div>
                     <div class="dash-value">
                         <h1>{{totalEncours}}<span class="mx-2"></span></h1> 
@@ -21,7 +21,7 @@
                 <div class="height-121">
                     <div class="dash-title">
                         <!-- <h2>Annonces en voie d’expiration</h2> -->
-                        <h2>Annonces en pause</h2>
+                        <h2>{{'admin.dashboard.ads-pause'|translate}}</h2>
                     </div>
                     <div class="dash-value">
                         <h1>{{totalEnvoiDExp}}<span class="mx-2"></span></h1> 
@@ -36,7 +36,7 @@
             <div class="item-dash bg-red-10 px-4 py-3">
                 <div class="height-121">
                     <div class="dash-title">
-                        <h2>Annonces expirées</h2>
+                        <h2>{{'admin.dashboard.ads-expired'|translate}}</h2>
                     </div>
                     <div class="dash-value">
                         <h1>{{totalExpired}}
@@ -58,10 +58,10 @@
 
         <div class="row">
             <h3 class="table-title mb-3 mt-5">
-                Les 5 annonces les plus demandées du mois
+                {{'admin.dashboard.top-5'|translate}}
             </h3>
             <div class="col-7">
-                <!-- tableau -->
+                <!-- tableau
                 <table class="table" id="dashboard_table">
                     <thead>
                         <tr class="border-bottom-1-green">
@@ -80,6 +80,7 @@
                         </tr>
                     </tbody>
                 </table>
+                -->
             </div>
         </div>
     </div> 

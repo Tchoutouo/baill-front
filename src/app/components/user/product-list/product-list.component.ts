@@ -6,6 +6,8 @@ import { HomeService } from '../../../services/guest/home.service';
 import { Subscription } from 'rxjs';
 import { PaginatorComponent } from '../paginator/paginator.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { isLoggedIn } from '../../../helpers/helper';
+import { AuthenticatorService } from '../../../services/admin/authenticator.service';
 
 @Component({
   selector: 'app-product-list',
@@ -27,7 +29,7 @@ export class ProductListComponent {
   products : any 
   productFiltered : any ;
 
-  constructor(private homeServ : HomeService){}
+  constructor(private homeServ : HomeService,  private auth: AuthenticatorService){}
 
   ngOnInit(){
     this.initComponent()
@@ -39,7 +41,10 @@ export class ProductListComponent {
   }
 
   getAllAnnoncesPublished(){
-    this.productsList = this.homeServ.getAllAnnoucesPublished().subscribe({
+
+    const user = this.auth.isLoggedIn();
+    const user_id= user.id ? user.id : null;
+    this.productsList = this.homeServ.getAllAnnoucesPublished(user_id).subscribe({
       next: (datas: any) => {
         if (datas.success == true) {
           if (datas.data_annonce) {
@@ -59,6 +64,10 @@ export class ProductListComponent {
 
   // ANCIENNE FONCTION POUR LA PAGINATION, n'est plus utilisée actellement
   getAnnoucesList(){
+    const user = this.auth.isLoggedIn();
+    const user_id= user.id ? user.id : null;
+    console.log({user_id: user_id});
+      
     this.productsList = this.homeServ.getAllPublishedAnnouces(this.current_page).subscribe({
     
       next: (datas: any) => { 
@@ -100,8 +109,7 @@ export class ProductListComponent {
         this.productFiltered = this.homeServ.filterDataBy(event).subscribe({
           next: (datas: any) => {            
             if (datas.success = true && datas.annonces != null) {
-              // console.log({filtre : datas});
-                this.products = datas.annonces.data ;
+                this.products = datas.annonces;
                 this.result_datas = datas.annonces ;
                 this.current_page = this.result_datas.current_page;  
                 // this.paginationDatas = {
