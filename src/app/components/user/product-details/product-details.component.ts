@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProductComponent } from "../product/product.component";
 import { ImageListComponent } from "../image-list/image-list.component";
 import { FooterComponent } from "../footer/footer.component";
@@ -10,6 +10,7 @@ import { HomeService } from '../../../services/guest/home.service';
 import { Subscription } from 'rxjs';
 import { environment } from '../../../../environments/environment.development';
 import { TranslateModule } from '@ngx-translate/core';
+import { ListStateServiceService } from '../../../services/guest/list-state-service.service';
 
 @Component({
   selector: 'app-product-details',
@@ -18,7 +19,7 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.css'
 })
-export class ProductDetailsComponent {
+export class ProductDetailsComponent implements OnInit, OnDestroy {
     imagesList : Array<string> = ['']; 
     number_limit : Array<number> = [1, 3, 4, 5] ;
     fisrtImage : string = '';
@@ -44,7 +45,7 @@ export class ProductDetailsComponent {
     annouce : any ;
     annouceSub : Subscription | undefined;
 
-    constructor(private route : ActivatedRoute, private homeServ : HomeService){
+    constructor(private route : ActivatedRoute, private homeServ : HomeService,  private navigationService: ListStateServiceService){
       
     }
 
@@ -53,7 +54,7 @@ export class ProductDetailsComponent {
     
       this.initComponent();
         
-      
+      this.navigationService.setShowBackButton(true);
     }
 
     initComponent(){
@@ -149,5 +150,8 @@ export class ProductDetailsComponent {
       console.log(this.ImagesSrcs, this.displayModal);
     }
 
-
+    ngOnDestroy() {
+      // Cacher le bouton retour quand le composant est détruit
+      this.navigationService.setShowBackButton(false);
+    }
 }

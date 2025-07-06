@@ -25,14 +25,14 @@ export class FooterComponent implements OnInit, AfterViewInit {
   @ViewChild('canvas') canvas!: ElementRef<HTMLDivElement>;
 
   public qrCodeData: string = 'https://bailleurnet.com'; // Lien de votre site
-  public qrWidth: number = 120;
-  public qrHeight: number = 120;
+  public qrWidth: number = 70;
+  public qrHeight: number = 70;
   public dotColor: string = '#24583F'; // Couleur des points
   public backgroundColor: string = '#ffffff'; // Couleur de fond
   public dotType: string = 'rounded'; // Forme des points (rounded, dots, square, etc.)
   public logoUrl: string = '../../../../assets/baill-logo.ico'; // URL du logo
   public imageSize: number = 0.4; // Taille relative du logo (0 à 1)
-  public imageMargin: number = 1; // Marge autour du logo
+  public imageMargin: number = 0.5; // Marge autour du logo
 
 
   private qrCode: QRCodeStyling | undefined;

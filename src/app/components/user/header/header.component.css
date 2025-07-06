@@ -66,6 +66,24 @@
     font-size: 13px;
 }
 
+.back-button {
+    background: none;
+    border: none;
+    color: var(--main-color);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: var(--main-xl-font-weiht);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+    
+.back-button:hover {
+    background-color: var(--main-color-orange-opa-);
+}
 
 @media screen and (max-width : 1200px) {
     .navbar-collapse{

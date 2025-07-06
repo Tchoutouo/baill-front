@@ -109,8 +109,7 @@ export class ProductListComponent {
         this.productFiltered = this.homeServ.filterDataBy(event).subscribe({
           next: (datas: any) => {            
             if (datas.success = true && datas.annonces != null) {
-              // console.log({filtre : datas});
-                this.products = datas.annonces.data ;
+                this.products = datas.annonces;
                 this.result_datas = datas.annonces ;
                 this.current_page = this.result_datas.current_page;  
                 // this.paginationDatas = {
