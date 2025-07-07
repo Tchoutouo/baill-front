@@ -43,15 +43,15 @@
                     <a href="#"  class="link-contact"><p>{{'footer.contact'| translate}} </p></a> 
                 </div>
                 <div class="row align-items-center">
-                    <div class="col-7 text-start ps-4">
+                    <div class="col-8 text-start ps-4">
                         <a href="#" [routerLink]="['/contact-us']" class="fs-4 fw-bold text-white "><p> Courriel </p></a> 
                         
                         <a [href]="'https://api.whatsapp.com/send?phone='+237694798186+'&text=Hello Bailleurnet&source=&data='" class="fs-5 fw-bold text-white" target="_blank" rel="noopener noreferrer">
                             <i class="fab fa-whatsapp" style="font-size: 24px;"></i> : + 237 694 798 186
                         </a>
                     </div>
-                    <div class="col-5">
-                        <div #canvas id="canvas"></div>
+                    <div class="col-4">
+                        <div #canvas id="canvas" class="float-end"></div>
                         <!--<div class="container">
                             <h2>Générateur de QR Code Personnalisé</h2>
                             <div class="form-group">
