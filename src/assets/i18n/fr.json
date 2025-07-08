@@ -34,7 +34,8 @@
         "published": "Publié",
         "unpublished": "Non publié",
         "draft": "Brouillon",
-        "deleted": "Supprimé"
+        "deleted": "Supprimé",
+        "consulted": "Récemment consulté"
     },
     "banner":{
         "title":"LOUER en toute simplicité",

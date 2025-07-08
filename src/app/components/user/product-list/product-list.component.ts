@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { ProductComponent } from "../product/product.component";
+import { Component, OnInit, OnDestroy, AfterViewInit, HostListener } from '@angular/core';
+import { ProductClickEvent, ProductComponent } from "../product/product.component";
 import { CommonModule } from '@angular/common';
 import { TagsListComponent } from "../tags-list/tags-list.component";
 import { HomeService } from '../../../services/guest/home.service';
@@ -8,6 +8,8 @@ import { PaginatorComponent } from '../paginator/paginator.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { isLoggedIn } from '../../../helpers/helper';
 import { AuthenticatorService } from '../../../services/admin/authenticator.service';
+import { ViewportScroller } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -16,30 +18,71 @@ import { AuthenticatorService } from '../../../services/admin/authenticator.serv
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css'
 })
-export class ProductListComponent {
+export class ProductListComponent  implements OnInit, OnDestroy, AfterViewInit{
 
   numbers: number[] = [1, 2, 3, 4, 2, 3, 4, 5];
 
-  productsList : any;
+  //productsList : any;
   pageLimit : number = 12;
   result_datas : any;
   paginationDatas : any ;
   current_page : number=1;
   filterSub : Subscription |undefined ;
   products : any 
-  productFiltered : any ;
-
-  constructor(private homeServ : HomeService,  private auth: AuthenticatorService){}
+  //productFiltered : any ;
+  private listStateSubscription?: Subscription;
+  private productsList?: Subscription;
+  private productFiltered?: Subscription;
+  
+  constructor(private homeServ : HomeService,  private auth: AuthenticatorService,private router : Router, private viewportScroller: ViewportScroller){}
 
   ngOnInit(){
+    // S'abonner aux changements d'état
+    this.listStateSubscription = this.homeServ.getListState().subscribe(state => {
+      //console.log("state", state);
+      if (state.products.length > 0) {
+        this.products = state.products;
+        this.result_datas = state.products;
+      }
+    });
     this.initComponent()
   }
+
 
   initComponent(){
     // this.getAnnoucesList();
     this.getAllAnnoncesPublished();
   }
 
+  ngAfterViewInit() {
+    // Restaurer la position de scroll après le rendu
+    setTimeout(() => {
+      this.restoreScrollPosition();
+    }, 100);
+  }
+
+  ngOnDestroy() {
+    // Sauvegarder la position de scroll avant de quitter
+    // this.saveCurrentScrollPosition();
+    
+    // Nettoyer les abonnements
+    if (this.productsList) {
+      this.productsList.unsubscribe();
+    }
+    if (this.productFiltered) {
+      this.productFiltered.unsubscribe();
+    }
+    if (this.listStateSubscription) {
+      this.listStateSubscription.unsubscribe();
+    }
+  }
+
+  // Sauvegarder la position de scroll lors du défilement
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    this.homeServ.saveScrollPosition(scrollPosition);
+  }
   getAllAnnoncesPublished(){
 
     const user = this.auth.isLoggedIn();
@@ -66,12 +109,12 @@ export class ProductListComponent {
   getAnnoucesList(){
     const user = this.auth.isLoggedIn();
     const user_id= user.id ? user.id : null;
-    console.log({user_id: user_id});
+    //console.log({user_id: user_id});
       
     this.productsList = this.homeServ.getAllPublishedAnnouces(this.current_page).subscribe({
     
       next: (datas: any) => { 
-        console.log(datas);
+        //console.log(datas);
         
         if (datas.success == true) {
           if (datas.data_annonce.data) {
@@ -136,4 +179,43 @@ export class ProductListComponent {
     }    
   }
 
+  // Méthode pour naviguer vers les détails d'une annonce
+  goToAnnouncementDetails(item: any, index: number) {
+
+    this.homeServ.markAnnouncementAsViewed(index);
+    
+    // Sauvegarder la position de scroll actuelle
+    this.saveCurrentScrollPosition();
+    
+    // Naviguer vers les détails
+    this.router.navigate(['/product-details', item.id], {
+      queryParams: { returnIndex: index }
+    });
+  }
+
+  onProductClick(event: ProductClickEvent) {
+    switch(event.action) {
+      case 'view_details':
+        this.goToAnnouncementDetails(event.product, event.index);
+        break;
+      default:
+        console.log('Action non reconnue:', event.action);
+    }
+  }
+
+  // Sauvegarder la position de scroll actuelle
+  private saveCurrentScrollPosition() {
+    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    this.homeServ.saveScrollPosition(scrollPosition);
+  }
+
+  // Restaurer la position de scroll
+  private restoreScrollPosition() {
+    const savedPosition = this.homeServ.getScrollPosition();
+    if (savedPosition > 0) {
+      window.scrollTo(0, savedPosition);
+    }
+  }
+
+  
 }

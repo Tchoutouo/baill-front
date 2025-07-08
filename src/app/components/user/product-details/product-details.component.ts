@@ -5,12 +5,14 @@ import { ImageListComponent } from "../image-list/image-list.component";
 import { FooterComponent } from "../footer/footer.component";
 
 import { HeaderComponent } from '../header/header.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HomeService } from '../../../services/guest/home.service';
 import { Subscription } from 'rxjs';
 import { environment } from '../../../../environments/environment.development';
 import { TranslateModule } from '@ngx-translate/core';
 import { ListStateServiceService } from '../../../services/guest/list-state-service.service';
+import { Location } from '@angular/common';
+import { AuthenticatorService } from '../../../services/admin/authenticator.service';
 
 @Component({
   selector: 'app-product-details',
@@ -44,17 +46,27 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     announcesSub : Subscription | undefined
     annouce : any ;
     annouceSub : Subscription | undefined;
+    public returnIndex: number = -1;
 
-    constructor(private route : ActivatedRoute, private homeServ : HomeService,  private navigationService: ListStateServiceService){
+    constructor(private route : ActivatedRoute, private homeServ : HomeService,  
+      private navigationService: ListStateServiceService,
+      private location: Location, private router : Router,
+      private auth: AuthenticatorService){
       
     }
 
     ngOnInit() {
-      window.scroll(0, 0)
+      //window.scroll(0, 0)
     
       this.initComponent();
         
       this.navigationService.setShowBackButton(true);
+
+      this.route.queryParams.subscribe(params => {
+        if (params['returnIndex']) {
+          this.returnIndex = parseInt(params['returnIndex'], 10);
+        }
+      });
     }
 
     initComponent(){
@@ -62,11 +74,11 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
         const annouce_id = this.route.snapshot.paramMap ? this.route.snapshot.paramMap.get('id') : null;
         try {
           if (annouce_id) {
-        console.log("annonce_id",annouce_id);
+        //console.log("annonce_id",annouce_id);
 
             this.annouceSub = this.homeServ.getAnnouceByID(annouce_id).subscribe({
               next: (datas: any) => {
-                console.log("details",datas);
+                //console.log("details",datas);
                 if (datas.success == true && datas.data) {
                   this.annouce  = datas.data ;
                   this.imagesList = this.annouce.url_image;
@@ -96,6 +108,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
                   
                   this.announcesSub = this.homeServ.getAnnoucesOfSameCategoyByIds(JSON.stringify(this.catgories_id_array)).subscribe({
                     next: (datas: any) => {
+                      console.log("annonces de la meme categorie", datas);
                       if (datas.success = true && datas.data.length >= 1) {
                         this.other_announces = datas.data;
                       } else {
@@ -153,5 +166,20 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
       // Cacher le bouton retour quand le composant est détruit
       this.navigationService.setShowBackButton(false);
+      if (this.annouceSub) {
+        this.annouceSub.unsubscribe();
+      }
+      if (this.announcesSub) {
+        this.announcesSub.unsubscribe();
+      }
+    }
+
+    goBack() {
+      this.router.navigate(['/'], {
+        queryParams: { 
+          restored: 'true',
+          lastViewed: this.returnIndex 
+        }
+      });
     }
 }

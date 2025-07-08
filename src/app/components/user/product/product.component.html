@@ -1,7 +1,11 @@
 
-<div class="product-item p-3">
-    <div  [routerLink]="['/product-details', productItem.id]" class="product-image mb-3" style="background-image: url('{{imageUrl}}');">
-    
+<div class="product-item p-3"  [class.recently-viewed]="isRecentlyViewed(productIndex)">
+    <!-- Indicateur visuel pour l'annonce récemment vue -->
+    <div *ngIf="isRecentlyViewed(productIndex)" class="recently-viewed-indicator">
+        <span class="indicator-text">{{'status.consulted'| translate}}</span>
+    </div>
+    <!--<div  [routerLink]="['/product-details', productItem.id]" class="product-image mb-3" style="background-image: url('{{imageUrl}}');"> -->
+    <div (click)="onProductClick()" class="product-image mb-3" style="background-image: url('{{imageUrl}}');">
     </div>
     <div class="product-details">
         <div class="product-name ">

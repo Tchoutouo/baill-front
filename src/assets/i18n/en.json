@@ -34,7 +34,8 @@
         "published": "Published",
         "unpublished": "Unpublished",
         "draft": "Draft",
-        "deleted": "Deleted"
+        "deleted": "Deleted",
+        "consulted": "Recently Viewed"
     },
     "banner":{
         "title":"Rent with ease",

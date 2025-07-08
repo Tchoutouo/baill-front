@@ -71,7 +71,7 @@
     border: none;
     color: var(--main-color);
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 0.8rem;
     font-weight: var(--main-xl-font-weiht);
     display: flex;
     align-items: center;
@@ -83,6 +83,10 @@
     
 .back-button:hover {
     background-color: var(--main-color-orange-opa-);
+}
+
+.back-button i {
+    font-size: 1.2rem;
 }
 
 @media screen and (max-width : 1200px) {

@@ -5,8 +5,16 @@
 
     <div class="list-product" *ngIf="products">
         <div class="row">       
-            <div class="col-md-6 col-lg-4" *ngFor="let item of products">
-                <app-product [productItem]="item"></app-product>
+            <div class="col-md-6 col-lg-4" *ngFor="let item of products; let i = index"
+            [id]="'product-' + i"
+            
+            >
+
+                <app-product 
+                    [productItem]="item"
+                    [productIndex]="i"
+                    (productClick)="onProductClick($event)">
+                </app-product>
             </div> 
         </div>
     </div>

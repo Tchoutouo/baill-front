@@ -1,8 +1,17 @@
-<app-header></app-header>
+<app-header [productIndex]="returnIndex"></app-header>
+
 <div class="container-fluid" *ngIf="annouce">
+    
     <div class="product-details-container p-5" >
         <div class="row">
             <div class="col-md-5 p-0 mb-4">
+                <!--<button 
+                    class="rtback-button bg-blue text-white d-flex align-items-center gap-2"
+                    (click)="goBack()"
+                    aria-label="Retour à l'accueil">
+                    <i class="fa fa-arrow-left"></i>
+                    {{'button.back'| translate}}
+                </button> -->
                 <div class="images-details">
                     <div class="row">
                         <div class="col-12 ">

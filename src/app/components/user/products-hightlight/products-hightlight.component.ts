@@ -38,7 +38,7 @@ export class ProductsHightlightComponent {
       
       this.annoucesList = this.homeServ.getAllAnnoucesPublished(user_id).subscribe({
         next: (result_request: any) => { 
-          console.log({datas: result_request});
+          //console.log({datas: result_request});
           if (result_request.success == true)  {
             this.annouces_high = result_request.data_annonce_une ;
           }else{

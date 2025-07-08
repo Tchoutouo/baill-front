@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { getSiteName } from '../../../helpers/helper';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Router, RouterLink} from '@angular/router';
@@ -23,6 +23,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   lang: string = "";
   is_auth: boolean = true;
   showBackButton = false;
+  @Input() productIndex: number = -1;
+  
   private subscription: Subscription = new Subscription();
 
   constructor( private router: Router, private translateService: TranslateService,private authentificator : AuthenticatorService, private navigationService: ListStateServiceService){
@@ -56,6 +58,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   goBack() {
-    this.router.navigate(['/']); // ou la route de votre page d'accueil
+    this.router.navigate(['/'], {
+      queryParams: { 
+        restored: 'true',
+        lastViewed: this.productIndex 
+      }
+    });
   }
 }
