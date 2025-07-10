@@ -29,36 +29,36 @@ import { ContactUsComponent } from './components/user/contact-us/contact-us.comp
 export const routes: Routes = [
     { 
         path: '', 
-        component: MainComponent,
-        // loadComponent: () => import('./components/user/main/main.component').then(c => c.MainComponent)
+        // component: MainComponent,
+        loadComponent: () => import('./components/user/main/main.component').then(c => c.MainComponent)
     },
 
     { 
         path: 'signin', 
-        component: SigninComponent,
-        // loadComponent: () => import('./components/auth/signin/signin.component').then(c => c.SigninComponent)
+        // component: SigninComponent,
+        loadComponent: () => import('./components/auth/signin/signin.component').then(c => c.SigninComponent)
     },
     { 
         path: 'signup', 
-        component: SignupComponent,
-        // loadComponent: () => import('./components/auth/signup/signup.component').then(c => c.SignupComponent)
+        // component: SignupComponent,
+        loadComponent: () => import('./components/auth/signup/signup.component').then(c => c.SignupComponent)
     },
 
     { 
         path: 'product-details/:id', 
-        component: ProductDetailsComponent,
-        // loadComponent: () => import('./components/user/product-details/product-details.component').then(c => c.ProductDetailsComponent)
+        // component: ProductDetailsComponent,
+        loadComponent: () => import('./components/user/product-details/product-details.component').then(c => c.ProductDetailsComponent)
     },
     { 
         path: 'image-list', 
-        component: ImageListComponent,
-        // loadComponent: () => import('./components/user/image-list/image-list.component').then(c => c.ImageListComponent)
+        // component: ImageListComponent,
+        loadComponent: () => import('./components/user/image-list/image-list.component').then(c => c.ImageListComponent)
     },
 
     { 
         path: 'admin', 
-        component: ContentComponent,
-        // loadComponent: () => import('./components/admin/content/content.component').then(c => c.ContentComponent),
+        // component: ContentComponent,
+        loadComponent: () => import('./components/admin/content/content.component').then(c => c.ContentComponent),
         canActivate: [authGuard],
         children: [
             { 
@@ -68,26 +68,26 @@ export const routes: Routes = [
             },
             {
                 path: 'dashboard',
-                component: DashboardComponent,
-                // loadComponent: () => import('./components/admin/dashboard/dashboard.component').then(c => c.DashboardComponent),
+                // component: DashboardComponent,
+                loadComponent: () => import('./components/admin/dashboard/dashboard.component').then(c => c.DashboardComponent),
                 canActivate: [authGuard], 
             },
             {
                 path: 'settings',
-                component: SettingsComponent,
-                // loadComponent: () => import('./components/admin/settings/settings.component').then(c => c.SettingsComponent),
+                // component: SettingsComponent,
+                loadComponent: () => import('./components/admin/settings/settings.component').then(c => c.SettingsComponent),
                 canActivate: [authGuard], 
             },
             {
                 path: 'payment',
-                component: ConfigurationComponent,
-                // loadComponent: () => import('./components/admin/payment/configuration/configuration.component').then(c => c.ConfigurationComponent),
+                // component: ConfigurationComponent,
+                loadComponent: () => import('./components/admin/payment/configuration/configuration.component').then(c => c.ConfigurationComponent),
                 canActivate: [authGuard,userRoleGuard], 
             },
             {
                 path: 'packages',
-                component: PackageIndexComponent,
-                // loadComponent: () => import('./components/admin/packages/package-index/package-index.component').then(c => c.PackageIndexComponent),
+                // component: PackageIndexComponent,
+                loadComponent: () => import('./components/admin/packages/package-index/package-index.component').then(c => c.PackageIndexComponent),
                 canActivate: [authGuard,userRoleGuard], 
                 children: [
                     { 
@@ -97,15 +97,15 @@ export const routes: Routes = [
                     },
                     { 
                         path: 'edit/:id',
-                        component: PackageEditComponent,
-                        // loadComponent: () => import('./components/admin/packages/package-edit/package-edit.component').then(c => c.PackageEditComponent),
+                        // component: PackageEditComponent,
+                        loadComponent: () => import('./components/admin/packages/package-edit/package-edit.component').then(c => c.PackageEditComponent),
                     },
                 ]
             },
             {
                 path: 'user-management',
-                component: UsersComponent,
-                // loadComponent: () => import('./components/admin/user-management/users/users.component').then(c => c.UsersComponent),
+                // component: UsersComponent,
+                loadComponent: () => import('./components/admin/user-management/users/users.component').then(c => c.UsersComponent),
                 canActivate: [authGuard,userRoleGuard],
                 children: [
                     { 
@@ -115,61 +115,61 @@ export const routes: Routes = [
                     },
                     { 
                         path: 'users',
-                        component: UserIndexComponent,
-                        // loadComponent: () => import('./components/admin/user-management/user-index/user-index.component').then(c => c.UserIndexComponent),
+                        // component: UserIndexComponent,
+                        loadComponent: () => import('./components/admin/user-management/user-index/user-index.component').then(c => c.UserIndexComponent),
                     },
                     { 
                         path: 'details/:id',
-                        component: UserShowComponent,
-                        // loadComponent: () => import('./components/admin/user-management/user-show/user-show.component').then(c => c.UserShowComponent),
+                        // component: UserShowComponent,
+                        loadComponent: () => import('./components/admin/user-management/user-show/user-show.component').then(c => c.UserShowComponent),
                     },
                 ]
             },
             {
                 path: 'announces',
-                component: AnnouceIndexComponent,
-                // loadComponent: () => import('./components/admin/annouce-index/annouce-index.component').then(c => c.AnnouceIndexComponent),
+                // component: AnnouceIndexComponent,
+                loadComponent: () => import('./components/admin/annouce-index/annouce-index.component').then(c => c.AnnouceIndexComponent),
                 canActivate: [authGuard],
                 children: [
                     { 
                         path: 'create',
-                        component: FormCreateComponent,
-                        // loadComponent: () => import('./components/admin/form-create/form-create.component').then(c => c.FormCreateComponent),
+                        // component: FormCreateComponent,
+                        loadComponent: () => import('./components/admin/form-create/form-create.component').then(c => c.FormCreateComponent),
                     },         
                     { 
                         path: 'announces-list',
-                        component: AnnouncesComponent,
-                        // loadComponent: () => import('./components/admin/announces/announces.component').then(c => c.AnnouncesComponent),
+                        // component: AnnouncesComponent,
+                        loadComponent: () => import('./components/admin/announces/announces.component').then(c => c.AnnouncesComponent),
                     },
                     { 
                         path: 'details/:id',
-                        component: AnnouceDetailsComponent,
-                        // loadComponent: () => import('./components/admin/annouce-details/annouce-details.component').then(c => c.AnnouceDetailsComponent),
+                        // component: AnnouceDetailsComponent,
+                        loadComponent: () => import('./components/admin/annouce-details/annouce-details.component').then(c => c.AnnouceDetailsComponent),
                     },
                 ]
             },
             {
                 path: 'myAccount',
-                component: MyAccountComponent,
-                // loadComponent: () => import('./components/admin/my-account/my-account.component').then(c => c.MyAccountComponent),
+                // component: MyAccountComponent,
+                loadComponent: () => import('./components/admin/my-account/my-account.component').then(c => c.MyAccountComponent),
                 canActivate: [authGuard],
             }
         ]
     },
     {
         path: 'contact-us',
-        component:  ContactUsComponent,
-        // loadComponent: () => import('./components/errors/error403/error403.component').then(c => c.Error403Component)
+        // component:  ContactUsComponent,
+        loadComponent: () => import('./components/errors/error403/error403.component').then(c => c.Error403Component)
     },
     {
         path: 'access-interdit',
-        component: Error403Component,
-        // loadComponent: () => import('./components/errors/error403/error403.component').then(c => c.Error403Component)
+        // component: Error403Component,
+        loadComponent: () => import('./components/errors/error403/error403.component').then(c => c.Error403Component)
     },
     {
         path: '**',
-        component: Error404Component,
-        // loadComponent: () => import('./components/errors/error-404/error-404.component').then(c => c.Error404Component)
+        // component: Error404Component,
+        loadComponent: () => import('./components/errors/error-404/error-404.component').then(c => c.Error404Component)
     },
 
 ];

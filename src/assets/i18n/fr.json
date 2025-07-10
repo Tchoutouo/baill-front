@@ -95,7 +95,7 @@
             }
         },
         "signup":{
-            "password":"Mot de passe",
+            "password-1":"Mot de passe",
             "confirm-password":"Confirmer votre mot de passe",
             "username":"Nom d'utilisateur",
             "name": "Nom(s)",
@@ -105,32 +105,106 @@
             "neighborhood": "Quartier",
             "email":"E-mail",
             "whatsapp-number":"Téléphone(Whatsapp)",
-            "title":"S'inscrire",
+            "whatsapp-placeholder": "Entrez votre numéro",
+            "title":"Créer un compte",
             "text-account":"Vous avez déjà compte",
             "login-text":"Se connecter",
             "text-line-1":"Je rejoins Bailleurnet",
             "text-line-2":"ma boussole de poche",
             "text-line-3":"",
+            "select-country": "Sélectionner un pays",
+            "select-city": "Sélectionner une ville",
+            "submit-button": "S'inscrire",
+            "submitting": "Inscription en cours...",
+            "form-errors-title": "Veuillez corriger les erreurs suivantes :",
             "message":{
                 "error":{
-                    "password":"le mot de passe est requis.",
+                   
                     "password-1":"le mot de passe doit comporter au moins 6 caractères.",
                     "confirm-password":"le mot de passe est requis.",
                     "confirm-password-1":"les mots de passe ne correspondent pas.",
-                    "username":"le nom d'utilisateur est requis.",
+                   
                     "name": "le nom(s) est requis.",
                     "first-name": "le prénom est requis",
-                    "country":"Veuillez choisir un pays.",
-                    "city":"Veuillez choisir votre ville.",
-                    "neighborhood": "Veuillez choisir votre quartier.",
+                    
+                    
                     "email-1":"L'email est requis.",
                     "email-2":"L'email ne respect pas le bon format.",
-                    "whatsapp-number":"Téléphone(Whatsapp)"
+                    "whatsapp-number":"Téléphone(Whatsapp)",
+                    "username": {
+                        "required": "Le nom d'utilisateur est requis",
+                        "exists": "Ce nom d'utilisateur est déjà utilisé"
+                    },
+                    "last_name": {
+                        "required": "Le nom de famille est requis"
+                    },
+                    "first_name": {
+                        "required": "Le prénom est requis"
+                    },
+                    "email": {
+                        "required": "L'adresse email est requise",
+                        "invalid": "L'adresse email n'est pas valide",
+                        "exists": "Cette adresse email est déjà utilisée"
+                    },
+                    "whatsapp_number": {
+                        "required": "Le numéro WhatsApp est requis"
+                    },
+                    "phone": {
+                        "invalid": "Le numéro de téléphone n'est pas valide",
+                        "exists": "Ce numéro de téléphone est déjà utilisé"
+                    },
+                    "country": {
+                        "required": "Le pays est requis"
+                    },
+                    "city": {
+                        "required": "La ville est requise"
+                    },
+                    "neighborhood": {
+                        "required": "Le quartier est requis"
+                    },
+                    "password": {
+                        "required": "Le mot de passe est requis",
+                        "minlength": "Le mot de passe doit contenir au moins 8 caractères",
+                        "strength": "Le mot de passe doit contenir au moins une minuscule, une majuscule, un chiffre et un caractère spécial",
+                        "mismatch": "Les mots de passe ne correspondent pas"
+                    },
+                    "passwordConfirm": {
+                        "required": "La confirmation du mot de passe est requise"
+                    }
+                },
+                "success": {
+                    "username": "Nom d'utilisateur disponible",
+                    "email": "Adresse email disponible",
+                    "phone": "Numéro de téléphone disponible",
+                    "password-match": "Les mots de passe correspondent"
                 },
                 "notif":{
                     "success": "Votre compte a été enregistrée avec succès !!",
-                    "warning": "Une erreur est survenu lors de l'opération"
+                    "warning": "Une erreur est survenu lors de l'opération",
+                    "error": "Une erreur inattendue est survenue"
+                },
+                "form": {
+                    "invalid": "Veuillez corriger les erreurs dans le formulaire"
                 }
+            },
+            "password": {
+                "strength": {
+                "weak": "Faible",
+                "medium": "Moyen",
+                "strong": "Fort"
+                }
+            },
+            "fields": {
+                "username": "Nom d'utilisateur",
+                "last_name": "Nom de famille",
+                "first_name": "Prénom",
+                "email": "Email",
+                "whatsapp_number": "Numéro WhatsApp",
+                "country": "Pays",
+                "city": "Ville",
+                "neighborhood": "Quartier",
+                "password": "Mot de passe",
+                "passwordConfirm": "Confirmation du mot de passe"
             }
         },
         "signin":{

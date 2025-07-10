@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { Observable } from 'rxjs/internal/Observable';
 import { TranslateService } from '@ngx-translate/core';
-
+import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
@@ -231,4 +231,18 @@ export class EntityServiceService {
     return this.http.get(environment.apiUrl+'mode_paiement_advert');
   }
 
+  checkEmailExists(email: string): Observable<boolean> {
+    return this.http.post<{exists: boolean}>(environment.apiUrl+'check-email', { email })
+      .pipe(map(response => response.exists));
+  }
+
+  checkUsernameExists(username: string): Observable<boolean> {
+    return this.http.post<{exists: boolean}>(environment.apiUrl+'check-username', { username })
+      .pipe(map(response => response.exists));
+  }
+
+  checkPhoneExists(whatsapp_number: string): Observable<boolean> {
+    return this.http.post<{exists: boolean}>(environment.apiUrl+'check-phone', { whatsapp_number })
+      .pipe(map(response => response.exists));
+  }
 }
