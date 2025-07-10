@@ -1,5 +1,6 @@
 import { ApplicationConfig, importProvidersFrom, LOCALE_ID, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter, withDebugTracing } from '@angular/router';
+import { provideRouter, withDebugTracing, withInMemoryScrolling, withPreloading } from '@angular/router';
+import { PreloadAllModules } from '@angular/router';
 
 import { routes } from './app.routes';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
@@ -31,7 +32,10 @@ export const appConfig: ApplicationConfig = {
         defaultLanguage: 'fr',
       })  
     ]),
-    provideRouter(routes),
+    provideRouter(routes, 
+      withPreloading(PreloadAllModules),
+      withInMemoryScrolling({ scrollPositionRestoration: 'top' })
+    ),
     provideHttpClient(withInterceptorsFromDi()),
     {
       provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true
@@ -41,3 +45,4 @@ export const appConfig: ApplicationConfig = {
   ],
 
 };
+

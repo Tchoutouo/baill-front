@@ -29,8 +29,8 @@ import { ContactUsComponent } from './components/user/contact-us/contact-us.comp
 export const routes: Routes = [
     { 
         path: '', 
-        // component: MainComponent,
-        loadComponent: () => import('./components/user/main/main.component').then(c => c.MainComponent)
+        component: MainComponent,
+        // loadComponent: () => import('./components/user/main/main.component').then(c => c.MainComponent)
     },
 
     { 
@@ -159,7 +159,7 @@ export const routes: Routes = [
     {
         path: 'contact-us',
         // component:  ContactUsComponent,
-        loadComponent: () => import('./components/errors/error403/error403.component').then(c => c.Error403Component)
+        loadComponent: () => import('./components/user/contact-us/contact-us.component').then(c => c.ContactUsComponent)
     },
     {
         path: 'access-interdit',
