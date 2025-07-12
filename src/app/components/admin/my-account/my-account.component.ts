@@ -18,7 +18,7 @@ import { Subscription } from 'rxjs';
   standalone: true,  
   imports: [CommonModule, ReactiveFormsModule, TranslateModule,FormsModule],  
   templateUrl: './my-account.component.html',  
-  styleUrls: ['./my-account.component.css'] // Correction de "styleUrl"  
+  styleUrl: './my-account.component.css' // Correction de "styleUrl"  
 })  
 export class MyAccountComponent implements OnInit {
   profileForm: FormGroup;  
@@ -39,6 +39,9 @@ export class MyAccountComponent implements OnInit {
   user_logged : any;
   user_di_loggged : number = 0;
   isModalOpen: boolean = false;
+  password: string = '';
+  new_password: string = '';
+  confirm_password: string = '';
 
 
   constructor(  
@@ -93,7 +96,7 @@ export class MyAccountComponent implements OnInit {
       sex: this.user.sex ? this.user.sex : ''  
     });  
 
-    console.log(this.picture,  this.user, 'yoo');
+    console.log(this.user, 'yoo');
     
   }  
 
@@ -130,26 +133,27 @@ export class MyAccountComponent implements OnInit {
     this.user_di_loggged = this.user_logged ? this.user_logged.id : '';
     const notif = new Notification();  
     const entity = "advertiser_back/update";  
-
+    let message;
+    let type;
     this.entityService.update(user_id, formData, entity).subscribe({
       next : (datas : any) =>{
-        console.log(datas);
+        // console.log(datas);
         
-        if(datas.success === true){
+        if (datas.success === true) {
           this.router.navigate(['/admin/myAccount']);
-          notif.message = "Informations mise à jour avec success"
-          notif.status = "success"
-          // this.router.navigate(['/admin']);   
+          message = 'Profil mis à jour avec succeès';
+          type = 'success';
         }else{
-          notif.message = "erreur lors de l'enregistrement des modifications"
-          notif.status = "warning"
-          this.notification.emitNotification(notif)
+          message = 'Erreur lors de la mise à jour de votre profil veuillez contacter l\administrateur';
+          type = 'warning';
         }
+        this.handleNotification(message, type)
+        
       },
 
       error: (error : any) => {
-        notif.message = "Nous sommes désolé mais le serveur est momentanement indisponible"
-        notif.status = "warning"
+        message = 'Erreur lors de la mise à jour de votre profil veuillez contacter l\administrateur';
+        type = 'warning';
         this.notification.emitNotification(notif);
       },
 
@@ -163,7 +167,9 @@ export class MyAccountComponent implements OnInit {
             }
           },
           error: (error : any) => {
-            console.log(error);
+
+            console.log('error inside complete after update user', error);
+         
           }
         })
       }
@@ -181,7 +187,7 @@ export class MyAccountComponent implements OnInit {
   addImage(event: any) {  
     const files = event.target.files; 
     const file_image = files[0];
-    console.log(file_image);
+    // console.log(file_image);
     
     if (file_image) {
       if (file_image.size > 2048000) { // Limite à 2MB
@@ -227,41 +233,88 @@ export class MyAccountComponent implements OnInit {
 
   closeModal() {
     this.isModalOpen = false;
+    this.password = '';
+    this.new_password = '';
+    this.confirm_password = '';
   }  
 
-  changePassword( new_password: string, old_ppassword :string) {
+  // changePassword( new_password: string, old_ppassword :string) {
 
-    console.log(new_password, old_ppassword);
-    let formPass = new FormData();
+  //   // Étape 1 : créer un tableau ou un objet avec les deux valeurs
+  //   const passwords = {
+  //     new_password: new_password,
+  //     password: old_ppassword
+  //   };
+
+  //   // Étape 2 : encoder en JSON
+  //   const encodedDatas = JSON.stringify(passwords);
+  
+  //   const id = this.localStorage.getItem('user')?.id;
+
+
+  //   if (id) {
+  //     this.entityService.updatePassword(id, encodedDatas).subscribe({
+  //       next: (data : any) => {
+  //           let message = ''
+  //           let type = ''
+  //           console.log(data);
+            
+  //         if (data.success === true) {
+  //            message = 'Mot de passe modifié avec success';
+  //            type = 'success';
+  //         }else{
+  //           message = 'Mot de passe actuel invalide';
+  //           type = 'warning';
+  //         }
+  //         this.handleNotification(message, type)
+  //       },
+  //       error: (error : any) => {
+  //         console.log(error);
+  //       }
+  //     })
+  //   }else{
+  //     this.router.navigate(['/signin']);  
+  //   }
+  //   setTimeout(() => {
+  //     console.log('Formulaire soumis avec succès !');
+  //     this.closeModal(); // Ferme le modal après l'instruction
+  //   }, 1000);
+  // }
+
+  changePassword() {
+    if (!this.password || !this.new_password || this.new_password !== this.confirm_password) {
+      // Optionnel : message d'erreur
+      return;
+    }
+
+    const passwords = {
+      password: this.password,
+      new_password: this.new_password,
+      confirm_password: this.confirm_password
+    };
+
     const id = this.localStorage.getItem('user')?.id;
-
-    // formPass.append('password', old_ppassword);
-    // formPass.append('newpassword', old_ppassword);
+    // const encodedDatas = JSON.stringify(passwords);
 
     if (id) {
-      this.entityService.updatePassword(id, formPass).subscribe({
-        next: (data : any) => {
-            let message = ''
-            let type = ''
-          if (data.success === true) {
-             message = 'Mot de passe modifié avec success';
-             type = 'success';
-          }else{
-            message = 'Mot de passe actuel invalide';
-            type = 'warning';
-          }
-          this.handleNotification(message, type)
+      this.entityService.updatePassword(id, passwords).subscribe({
+        
+        next: (data: any) => {
+          // console.log(data);
+          const type = data.success ? 'success' : 'warning';
+          const message = data.message ? data.message : 'erreur lors de la mise à jour de votre mot de passe veuilez contacter l\'administrateur';
+          this.handleNotification(message, type);
         },
-        error: (error : any) => {
-          console.log(error);
-        }
-      })
-    }else{
-      this.router.navigate(['/signin']);  
+        error: (err) => console.log(err)
+      });
+    } else {
+      this.router.navigate(['/signin']);
     }
+
     setTimeout(() => {
-      console.log('Formulaire soumis avec succès !');
-      this.closeModal(); // Ferme le modal après l'instruction
+      this.closeModal();
+
+      this.router.navigate(['/admin/myAccount']);
     }, 1000);
   }
 
@@ -272,4 +325,11 @@ export class MyAccountComponent implements OnInit {
     this.notification.emitNotification(notif);
   }
 
+  private handleError(error: any) {
+    // console.error("Création d'annonce", error);
+    const notif = new Notification();
+    notif.message = "Erreur lors de l'enregistrement, contacter l'administrateur !";
+    notif.status = "warning";
+    this.notification.emitNotification(notif);
+  }
 }

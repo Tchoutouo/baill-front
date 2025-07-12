@@ -509,3 +509,15 @@ a.link{
 /* .modal-backdrop{
     display: none;
 } */
+
+ #formPassord .form-control{
+    background-color:  var(--main-color-green-5) !important;
+    border-radius: var(--main-radius-value-6);
+    font-family: var(--main-font-Quicksand);
+    color: var(--main-color-dark);
+    font-size: var(--main-h5-font-size);
+    font-weight: var(--main-lg-font-weiht);
+    line-height: var(--main-md-2-line-height);
+    padding: var(--main-input-padd );
+    border: none;
+}

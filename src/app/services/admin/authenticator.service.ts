@@ -42,7 +42,7 @@ export class AuthenticatorService {
     
     this.http.post(environment.apiUrl + "login", user, { headers }).subscribe({  
         next: (result: any) => {  
-          console.log(result);
+          // console.log(result);
           
             if (result.success) {  
                 const data: LoginResponse = {  
@@ -85,7 +85,7 @@ export class AuthenticatorService {
     
     const token = this.localStorage.getItem('token');
     const user = this.localStorage.getItem('user');
-    console.log(token ,user);
+    // console.log(token ,user);
     
     if (token && user.username) {
       this.authUser = true; // remettre à jour en mémoire

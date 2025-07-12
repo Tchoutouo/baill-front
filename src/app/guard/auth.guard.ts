@@ -5,7 +5,7 @@ import { inject } from "@angular/core";
 export const authGuard: CanActivateFn = (route, state) => {
   const myService = inject(AuthenticatorService);
   const router = inject(Router);
-  console.log(myService.isAuthenticated());
+  // console.log(myService.isAuthenticated());
   
   if(!myService.isAuthenticated()) {
     router.navigateByUrl('/signin')

@@ -34,10 +34,10 @@ export class EntityServiceService {
   }
 
   update(id: any, datas: any, entity: string): Observable<any> {
-      console.log(environment.apiUrl, datas); 
+      // console.log(environment.apiUrl, datas); 
       // Pour afficher les données de l'objet FormData
       datas.forEach((value:any, key:any) => {
-      console.log(`${key}: ${value}`);
+      // console.log(`${key}: ${value}`);
     });
     // console.log(environment.apiUrl+entity+'/'+id);
     
@@ -204,7 +204,8 @@ export class EntityServiceService {
 
   updatePassword(id : number | string, datas : any){
 
-    return this.http.post(environment.apiUrl+'updatePassword/'+id, datas);
+    return this.http.put(environment.apiUrl+'updatePassword/'+id, datas);
+    // return this.http.post(environment.apiUrl+'updatePassword/'+id, datas);
   }
 
   getPaymentMod(){
