@@ -6,6 +6,7 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 import { AuthenticatorService } from '../../../services/admin/authenticator.service';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -36,7 +37,7 @@ export class SigninComponent {
   email_error_message : string = "L'e-mail est obligatoire !"
   password_error_message : string = "Le mot de passe est obligatoire !"
 
-  constructor(private authService : AuthenticatorService, private fb: FormBuilder){
+  constructor(private authService : AuthenticatorService, private fb: FormBuilder, private router: Router){
     this.identifiant = fb.control("", [Validators.required] );
     this.password = fb.control("", [Validators.required])
   }
@@ -78,25 +79,34 @@ export class SigninComponent {
     }
   }
   
-  handleSubmite(){
-    
-    this.isSubmited = true ;
+  handleSubmite() {
+    this.isSubmited = true;
 
     if (this.loginForm.invalid) {
+      return;
     }
-    
-    const user = this.loginForm.value ;
 
-    this.loginResult = this.authService.signin(user)
-    console.log(this.loginResult);
-    
-    if (this.loginResult == false) {
-      this.loginResult = false;
-    }else{
-      this.loginResult = true;
-    }
-    this.displayM()
+    const user = this.loginForm.value;
+
+    this.authService.signin(user).subscribe({
+      next: (result) => {
+        if (result.success) {
+          this.loginResult = true;
+          this.message_back = '';
+          this.router.navigate(['/admin']);
+        } else {
+          this.loginResult = false;
+          this.message_back = 'Les informations d\'identification ne sont pas correctes.';
+        }
+      },
+      error: (err) => {
+        console.error(err);
+        this.loginResult = false;
+        this.message_back = 'Erreur lors de la connexion. Veuillez réessayer plus tard.';
+      }
+    });
   }
+
 
   displayM(){
 

@@ -2,13 +2,13 @@ import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../../models/user';
 import { environment } from '../../../environments/environment.development';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
 import { Router } from '@angular/router';
 
 interface LoginResponse{
   success : boolean,
-  user:User,
+  data:User,
   token : string,
   redirect_url: string
 }
@@ -31,7 +31,7 @@ export class AuthenticatorService {
     }
   }
   
-  signin(user: any) {  
+  signin_old(user: any) {  
     // Définir les headers nécessaires  
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ export class AuthenticatorService {
             if (result.success) {  
                 const data: LoginResponse = {  
                     success: true,  
-                    user: result.data,  
+                    data: result.data,  
                     token: result.token,  
                     redirect_url: result.redirect_url  
               };  
@@ -69,6 +69,28 @@ export class AuthenticatorService {
 
     return this.value;  
   }
+
+  signin(user: any): Observable<LoginResponse> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    });
+
+    return this.http.post<LoginResponse>(`${environment.apiUrl}login`, user, { headers }).pipe(
+      tap((result) => {
+        console.log(result);
+        
+        if (result.success) {
+          this.localStorage.setItem('token', result.token);
+          this.localStorage.setItem('user', result.data);
+          this.authUser = true;
+        } else {
+          this.authUser = false;
+        }
+      })
+    );
+  }
+
   
 
   logOut(){
@@ -85,9 +107,8 @@ export class AuthenticatorService {
     
     const token = this.localStorage.getItem('token');
     const user = this.localStorage.getItem('user');
-    // console.log(token ,user);
     
-    if (token && user.username) {
+    if (token && user && user.username) {
       this.authUser = true; // remettre à jour en mémoire
       return true;
     }
