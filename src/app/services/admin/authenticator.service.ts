@@ -71,22 +71,35 @@ export class AuthenticatorService {
   }
   
 
- 
-
   logOut(){
     this.localStorage.removeItem("token");
     this.localStorage.removeItem("user");
     this.authUser = false ;
   }
 
+  // isAuthenticated(): boolean {
+  //   return this.authUser;
+  // }
+
   isAuthenticated(): boolean {
-    return this.authUser;
+    
+    const token = this.localStorage.getItem('token');
+    const user = this.localStorage.getItem('user');
+    console.log(token ,user);
+    
+    if (token && user.username) {
+      this.authUser = true; // remettre à jour en mémoire
+      return true;
+    }
+
+    return false;
   }
+
 
   getUserRole(){
     const user = this.localStorage.getItem('user')
     if (user) {
-      return user.profil_code ;
+      return user.profil_code ? user.profil_code : false  ;
     }else{
       return 'false' ;
     }

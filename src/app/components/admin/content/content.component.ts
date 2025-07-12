@@ -24,18 +24,17 @@ import { CheckProfilService } from '../../../services/check-profil.service';
   imports: [RouterOutlet, RouterLink, NotificationsComponent,
     CommonModule, RouterModule, AlertConfirmComponent, TranslateModule],
   templateUrl: './content.component.html',
-  styleUrl: './content.component.css'
+  styleUrl: './content.component.css',
 })
 export class ContentComponent {
   
   sizeExpandMain : string | null = null ;
-    
   lang: string = "";
 
   userName: string ="";
   siteName: string ="";
   email: string ="";
-  user_picture : string = ''
+  user_picture : string = '../../../../assets/baill-logo.ico'
 
   sizeSideBar : string | null = null ;
 
@@ -58,7 +57,7 @@ export class ContentComponent {
     this.userName = user ? user.first_name : null;
     this.email = user ? user.email : '';
     this.lang = localStorage.getItem('lang') || 'fr';
-    this.user_picture = user.picture ?  environment.apiUrlRessources + '/' + user.picture : 'false' ;  
+    this.user_picture = user.picture ?  environment.apiUrlRessources + '/' + user.picture : this.user_picture ;  
     // this.isAdmin = isAdmin();
     this.isAdmin = this.checkProfil.isAdmin();
     console.log("this.isAdmin",this.isAdmin)

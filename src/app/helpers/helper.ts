@@ -12,14 +12,14 @@ export const getSiteName = () : string =>{
 }
 
 export const getExtension = (fileName : any )=> {
-    console.log(fileName);
+    // console.log(fileName);
     var parts = fileName.name.split('.');
     return parts[parts.length - 1];
 }
 
 export const is_image = (fileName : string) => {
     var ext = getExtension(fileName) ;
-    console.log(ext);
+    // console.log(ext);
     
     switch (ext.toLowerCase()) {
         case 'jpg':
@@ -86,3 +86,20 @@ export const isLoggedIn = () : any =>{
         return false;
     }
 }
+
+
+export const requireLogin = (): any | false => {
+  const localStorage = inject(LocalStorageService);
+  const router = inject(Router);
+
+  const userJson = localStorage.getItem('user');
+  const user: any | null = userJson ? JSON.parse(userJson) : null;
+console.log(user);
+
+  if (!user) {
+    router.navigate(['/admin']); // redirection vers login
+    return false;
+  }
+
+  return user;
+};

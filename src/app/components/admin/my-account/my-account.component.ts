@@ -8,7 +8,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { EntityServiceService } from '../../../services/admin/entity-service.service';  
 import { Router } from '@angular/router';  
 import { Notification } from '../../../models/notification';  
-import { is_image } from '../../../helpers/helper';  
+import { is_image, requireLogin } from '../../../helpers/helper';  
 import { NoficationsService } from '../../../services/nofications.service';  
 import { environment } from '../../../../environments/environment.development';  
 import { Subscription } from 'rxjs';  
@@ -33,6 +33,7 @@ export class MyAccountComponent implements OnInit {
   fileError: string | null = null;  
   user!: User;  
   userSub?: Subscription; 
+  apiRessources : string = environment.apiUrlRessources;
   images : any = false;
   errorMessage : string = '';
   user_logged : any;
@@ -61,14 +62,17 @@ export class MyAccountComponent implements OnInit {
       city: [''],  
       // cni: [''],  
       // picture: [''] ,
-      sex: ['']  
+      sex: ['', Validators.required]  
     });  
   }  
 
   ngOnInit(): void {  
     window.scroll(0, 0);  
     this.user = this.localStorage.getItem('user');  
-    this.picture = this.user.picture ? this.user.picture : false ;  
+    // this.user = requireLogin();  
+    // const user = requireLogin();
+    if (!this.user) return;
+    this.picture = this.user.picture ? environment.apiUrlRessources + '/' + this.user.picture : '' ;  
     this.countries = Country.getAllCountries();  
     this.selectedCountry = this.user.country;  
     this.cities = City.getCitiesOfCountry(this.selectedCountry);  
@@ -79,8 +83,8 @@ export class MyAccountComponent implements OnInit {
       last_name: this.user.last_name ?  this.user.last_name : '',  
       first_name: this.user.first_name ? this.user.first_name : '',  
       email: this.user.email ? this.user.email : '',  
-      whatsapp_number: this.user.whatsapp_number,  
-      number: this.user.number ? this.user.whatsapp_number : '' ,  
+      whatsapp_number: this.user.whatsapp_number ? this.user.whatsapp_number.toString() : '',
+      number: this.user.number ? this.user.number.toString() : '',
       site_url: this.user.site_url ?this.user.site_url : '',  
       neighborhood: this.user.neighborhood ? this.user.neighborhood : '',  
       city: this.user.city ? this.user.city : '',  
@@ -88,6 +92,9 @@ export class MyAccountComponent implements OnInit {
       // cni: this.user.cni ? this.user.cni : '',
       sex: this.user.sex ? this.user.sex : ''  
     });  
+
+    console.log(this.picture,  this.user, 'yoo');
+    
   }  
 
   async onCountryChange(event: any) {  
@@ -103,16 +110,21 @@ export class MyAccountComponent implements OnInit {
     const formData = new FormData();  
     const formValues = this.profileForm.value;  
 
-    for (const field in formValues) {  
-      formData.append(field, formValues[field] || ''); // Ajouter les données du formulaire  
-    }  
+    for (const field in formValues) {
+      const value = formValues[field];
+
+      if (field === 'whatsapp_number') {
+        formData.append(field, value !== undefined && value !== null ? value.toString() : '');
+      } else {
+        formData.append(field, value !== undefined && value !== null ? value : '');
+      }
+    }
 
     if (this.selectedFile) {  
       formData.append('picture', this.selectedFile);  
     }  
 
     this.user_logged = this.localStorage.getItem('user');  
-    console.log({cedric : this.user_logged});
     
     const user_id = this.user_logged ? this.user_logged.id : '';
     this.user_di_loggged = this.user_logged ? this.user_logged.id : '';
@@ -162,14 +174,15 @@ export class MyAccountComponent implements OnInit {
   handleAddImage(event : any){
     const input_file : any = document.querySelector("#images")
     if (input_file) {
-      input_file.click()
+      input_file.click();
     }
   }
 
   addImage(event: any) {  
     const files = event.target.files; 
-    // console.log("files", files); 
     const file_image = files[0];
+    console.log(file_image);
+    
     if (file_image) {
       if (file_image.size > 2048000) { // Limite à 2MB
         this.fileError = 'La taille du fichier doit être inférieure à 2MB.';

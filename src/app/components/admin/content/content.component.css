@@ -284,6 +284,10 @@
     color: var(--main-color-dark);
 }
 
+.h-fit-content{
+    height: fit-content;
+}
+
 .item-list a i,.item-list a svg{
     /* margin: 0 auto; */
     width: 24px;

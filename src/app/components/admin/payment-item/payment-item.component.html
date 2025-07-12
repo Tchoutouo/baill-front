@@ -117,7 +117,7 @@
             [(ngModel)]="phoneNumber"
             required
             pattern="^6\d{8}$"
-            #omInput="ngModel"
+            #omInput="ngModel" 
             (click)="$event.stopPropagation()"
           />
           <div *ngIf="omInput.invalid && omInput.touched" style="color:red; font-size:0.8rem;">

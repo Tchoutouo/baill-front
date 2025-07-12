@@ -39,9 +39,9 @@ export class EntityServiceService {
       datas.forEach((value:any, key:any) => {
       console.log(`${key}: ${value}`);
     });
+    // console.log(environment.apiUrl+entity+'/'+id);
     
-    
-    // return this.http.put(`${environment.apiUrl+entity}/${id}`, datas, options);
+    // return this.http.put(`${environment.apiUrl+entity}/${id}`, datas);
     return this.http.post(environment.apiUrl+entity+'/'+id, datas); 
   }
 
@@ -49,6 +49,11 @@ export class EntityServiceService {
     
     // return this.http.put(`${environment.apiUrl+entity}/${id}`, datas, options);
     return this.http.put(environment.apiUrl+entity+'/'+id, datas); 
+  }
+
+  getUser(user_id : number | string){
+    const url = 'advertiser_back/show/'
+    return this.http.get(environment.apiUrl+url+user_id);
   }
 
 
