@@ -332,4 +332,31 @@ export class MyAccountComponent implements OnInit {
     notif.status = "warning";
     this.notification.emitNotification(notif);
   }
+
+
+getPasswordStrength(): string {
+  const password = this.new_password;
+  if (!password) return 'weak';
+
+  let score = 0;
+  if (password.length >= 8) score++;
+  if (/[a-z]/.test(password)) score++;
+  if (/[A-Z]/.test(password)) score++;
+  if (/[0-9]/.test(password)) score++;
+  if (/[^A-Za-z0-9]/.test(password)) score++;
+
+  if (score >= 5) return 'strong';
+  if (score >= 3) return 'medium';
+  return 'weak';
+}
+
+getPasswordStrengthPercentage(): number {
+  switch (this.getPasswordStrength()) {
+    case 'weak': return 33;
+    case 'medium': return 66;
+    case 'strong': return 100;
+    default: return 0;
+  }
+}
+
 }
