@@ -65,9 +65,9 @@
             "no-content": "Pas d'annonce à la une pour le moment."
         },
         "tags-list":{
-            "cat":"Selectionner une categorie",
-            "country": "Selectionner un pays",
-            "city": "Selectionner une ville"
+            "cat":"Sélectionner une catégorie",
+            "country": "Sélectionner un pays",
+            "city": "Sélectionner une ville"
         },
         "cat-list":{
             "title": "Catégories",
