@@ -15,7 +15,6 @@ export class EntityServiceService {
   getTranslatedText(key: string): string {
     let translatedText = '';
     this.translate.get(key).subscribe((res: string) => {
-      console.log("res", res);
       translatedText = res;
     });
     return translatedText;
@@ -251,4 +250,13 @@ export class EntityServiceService {
     return this.http.post<{exists: boolean}>(environment.apiUrl+'check-phone', { whatsapp_number })
       .pipe(map(response => response.exists));
   }
+
+  sendPasswordResetEmail(email: any) {
+    return this.http.post(environment.apiUrl+'forget-password', { email });
+  }
+
+  resetPassword(datas: any) {
+    return this.http.post(environment.apiUrl+'reset-password', datas);
+  }
+
 }

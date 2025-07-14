@@ -22,7 +22,12 @@
         "unlock": "Débloquer",
         "category": "Catégories",
         "anounce": "Annonces",
-        "pay": "Payer"
+        "pay": "Payer",
+        "reset-password": "Réinitialiser le mot de passe",
+        "recive-link": "Envoyer l'email de récupération",
+        "send": "Envoyer",
+        "reset": "Réinitialiser",
+        "traitement-en-cours": "Traitement en cours..."
     },
     "status":{
         "active": "Actif",
@@ -213,7 +218,45 @@
             "text-login": "Si vous n’avez pas de compte",
             "title-signup": "s'inscrire",
             "email": "E-mail ou Tel",
-            "password": "Mot de passe"
+            "password": "Mot de passe",
+            "forgot-password": "Mot de passe oublié ?",
+            "message":{
+                "error":{
+                    "email-tel": "L'email ou le N° de téléphone est requis.",
+                    "email-format": "L'email n'est pas au bon format.",
+                    "password": "Le mot de passe est requis.",
+                    "invalid-credentials": "Les informations d'identification ne sont pas correctes.",
+                    "error-connection": "Erreur de connexion. Veuillez réessayer plus tard.",
+                    "account-locked": "Votre compte est bloqué. Veuillez contacter l'administrateur."
+                }
+            }
+        },
+        "reset-password":{
+            "title": "Réinitialiser le mot de passe",
+            "description": "Veuillez entrer votre adresse e-mail pour recevoir un lien de réinitialisation du mot de passe.",
+            "email": "E-mail",
+            "button-send": "Envoyer",
+            "new-password": "Nouveau mot de passe",
+            "confirm-new-password": "Confirmer le nouveau mot de passe",
+            "back-to-login": "Retour à la page de connexion",
+            "message":{
+                "success-title": "Réinitialisation du mot de passe réussie",
+                "error-title": "Erreur de réinitialisation du mot de passe",
+                "email-required": "L'adresse e-mail est requise.",
+                "email-invalid": "L'adresse e-mail n'est pas valide.",
+                "success": "Un lien de réinitialisation du mot de passe a été envoyé à votre adresse e-mail. Vérifiez votre boîte de réception.",
+                "error": "Une erreur est survenue lors de l'envoi du lien de réinitialisation.",
+                "token-invalid": "Le lien de réinitialisation du mot de passe est invalide ou a expiré.",
+                "invalid-link": "Le lien de réinitialisation du mot de passe est invalide.",
+                "verification-email": "Vérificationv de l'email...",
+                "verification": "Vérification...",
+                "email-yes": "E-mail trouvé",
+                "no-email": " Aucun compte associé à cet email",
+                "mail-send-recove": "Envoi de l'email de récupération...",
+                "mail-send-recove-erreur": "Erreur lors de l'envoi de l'email de récupération",
+                "error-validation": "Erreur de validation"
+            }
+
         },
         "product-detail":{
             "cat": "Catégories",

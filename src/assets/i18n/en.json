@@ -22,7 +22,12 @@
         "unlock": "Unlock",
         "category": "Categories",
         "anounce": "Ads",
-        "pay": "Pay"
+        "pay": "Pay",
+        "reset-password": "Reset Password",
+        "recive-link": "Send Recovery Email",
+        "send": "Send",
+        "reset": "Reset",
+        "traitement-en-cours": "Processing..."
     },
     "status":{
         "active": "Active",
@@ -214,7 +219,45 @@
             "text-login": "If you don't have an account",
             "title-signup": "Register",
             "email": "E-mail or Phone",
-            "password": "Password"
+            "password": "Password",
+            "forgot-password": "Forgot password?",
+            "message": {
+                "error": {
+                    "email-tel": "Email or phone number is required.",
+                    "email-format": "Email format is not valid.",
+                    "password": "Password is required.",
+                    "invalid-credentials": "The credentials are incorrect.",
+                    "error-connection": "Connection error. Please try again later.",
+                    "account-locked": "Your account is locked. Please contact the administrator."
+                }
+            }
+            
+        },
+        "reset-password": {
+            "title": "Reset Password",
+            "description": "Please enter your email address to receive a password reset link.",
+            "email": "Email",
+            "button-send": "Send",
+            "new-password": "New Password",
+            "confirm-new-password": "Confirm New Password",
+            "back-to-login": "Back to Login",
+            "message": {
+                "success-title": "Password Reset Successful",
+                "error-title": "Password Reset Error",
+                "email-required": "Email address is required.",
+                "email-invalid": "Email address is not valid.",
+                "success": "A password reset link has been sent to your email address. Please check your inbox.",
+                "error": "An error occurred while sending the reset link.",
+                "token-invalid": "The password reset link is invalid or has expired.",
+                "invalid-link": "The password reset link is invalid.",
+                "verification-email": "Verifying email...",
+                "verification": "Verifying...",
+                "email-yes": "Email found",
+                "no-email": "No account associated with this email",
+                "mail-send-recove": "Sending recovery email...",
+                "mail-send-recove-erreur": "Error sending recovery email",
+                "error-validation": "Validation error"
+            }
         },
         "product-detail":{
             "cat": "Categories",

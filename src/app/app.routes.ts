@@ -25,6 +25,8 @@ import { UsersComponent } from './components/admin/user-management/users/users.c
 import { Error403Component } from './components/errors/error403/error403.component';
 import { userRoleGuard } from './guard/user-role.guard';
 import { ContactUsComponent } from './components/user/contact-us/contact-us.component';
+import { SendMailForgotPasswordComponent } from './components/auth/send-mail-forgot-password/send-mail-forgot-password.component';
+import { ResetPasswordComponent } from './components/auth/reset-password/reset-password.component';
 
 export const routes: Routes = [
     { 
@@ -37,6 +39,16 @@ export const routes: Routes = [
         path: 'signin', 
         // component: SigninComponent,
         loadComponent: () => import('./components/auth/signin/signin.component').then(c => c.SigninComponent)
+    },
+    { 
+        path: 'send-mail-forget-password',
+        // component: SendMailForgotPasswordComponent,
+        loadComponent: () => import('./components/auth/send-mail-forgot-password/send-mail-forgot-password.component').then(c => c.SendMailForgotPasswordComponent),
+    },
+    { 
+        path: 'reset-password/:token/:email',
+        // component: ResetPasswordComponent,
+        loadComponent: () => import('./components/auth/reset-password/reset-password.component').then(c => c.ResetPasswordComponent),
     },
     { 
         path: 'signup', 
