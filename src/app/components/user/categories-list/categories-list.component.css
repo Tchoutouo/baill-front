@@ -42,7 +42,7 @@ ul.categories li{
     background-color: var(--main-color-white);
 }
 
-.filter-tag:hover{
+.filter-tag:hover, .filter-tag.active{
     background-color: var(--main-color-green-5);
 }
 
@@ -58,7 +58,15 @@ ul.categories li{
     padding:  var(--main-btn-sm-tag-padd);
     border-radius: var(--main-radius-value-3);
     background-color: rgba(242, 242, 242, 0.39);
-    color: var(--main-color-gray-7);
+    color: var(--main-color-dark);
     border: 1px solid rgba(242, 242, 242, 1);
+}
+
+.sm-input-field::placeholder{
+    color: var(--main-color-gray-7);;
+}
+
+.w_fit_conent{
+    width: fit-content;
 }
 

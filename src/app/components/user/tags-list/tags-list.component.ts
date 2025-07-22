@@ -6,7 +6,7 @@ import { Category } from '../../../models/admin/category';
 import { EntityServiceService } from '../../../services/admin/entity-service.service';
 import { Subscription } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-tags-list',
@@ -29,7 +29,7 @@ export class TagsListComponent implements OnInit{
     city : null 
   }
 
-  constructor(private entityService : EntityServiceService){}
+  constructor(private entityService : EntityServiceService, private translate: TranslateService){}
   
   ngOnInit(): void {
     this.countries = Country.getAllCountries();
@@ -45,8 +45,8 @@ export class TagsListComponent implements OnInit{
         if (name === "country") {
           let array_value = value.split(",")
           this.cities = City.getCitiesOfCountry(array_value[0]);
-          this.filterListner.country = array_value[1];
-          this.filterListner.city = '';
+          this.filterListner.country = array_value[0];
+          this.filterListner.city = null;
         } else if(name === "city"){
           this.filterListner.city = value;
 
@@ -79,7 +79,8 @@ export class TagsListComponent implements OnInit{
     // console.log("headers",headers);
 
     try{
-      const entity= "categorie_back_public";
+      const currentLang = this.translate.currentLang; 
+      const entity= "categorie_back_public/"+currentLang;
       this.entityService.getAll(entity)
       .subscribe({
         next: (categories: any)=>{

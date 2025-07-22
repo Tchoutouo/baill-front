@@ -17,7 +17,7 @@
             <div class="categories-list">
                 <!-- Modal -->
                 <div class="large-sreen pt-3 position-sticky">
-                    <app-categories-list></app-categories-list>
+                    <app-categories-list (filterDatas)="onFilterChanged($event)"></app-categories-list>
                 </div>
 
                 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -28,7 +28,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <app-categories-list [category_list]="categories"></app-categories-list>
+                                <app-categories-list (filterDatas)="onFilterChanged($event)" [category_list]="categories"></app-categories-list>
                             </div>
                             <div class="modal-footer">  
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
@@ -38,9 +38,20 @@
                     </div>
                 </div>
             </div>
+            <!-- array:8 [ 
+                "categ" => "Healtyness"
+                "lang" => "en"
+                "amount_min" => 10
+                "amount_max" => 25000
+                "asc" => 1
+                "user_id" => "4"
+                "country" => "4"
+                "city" => "4"
+            ] -->
+
             <div class="articles-list ">
-                <app-product-list ></app-product-list>
-            </div>
+                <app-product-list [filters]="productFilters"></app-product-list>
+            </div>  
         </div>
     </div>
 </div>

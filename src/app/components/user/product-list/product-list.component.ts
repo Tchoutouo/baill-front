@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy, AfterViewInit, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, HostListener, input, Input, SimpleChanges } from '@angular/core';
 import { ProductClickEvent, ProductComponent } from "../product/product.component";
 import { CommonModule } from '@angular/common';
 import { TagsListComponent } from "../tags-list/tags-list.component";
 import { HomeService } from '../../../services/guest/home.service';
 import { Subscription } from 'rxjs';
 import { PaginatorComponent } from '../paginator/paginator.component';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { isLoggedIn } from '../../../helpers/helper';
 import { AuthenticatorService } from '../../../services/admin/authenticator.service';
 import { ViewportScroller } from '@angular/common';
@@ -21,7 +21,18 @@ import { Router } from '@angular/router';
 export class ProductListComponent  implements OnInit, OnDestroy, AfterViewInit{
 
   numbers: number[] = [1, 2, 3, 4, 2, 3, 4, 5];
+  // @Input() filters : any ;
+    @Input()
+  set filters(value: any) {
+    this._filters = value ?? {};
+    console.log('Filtres reçus via setter:', this._filters);
+    this.handleFilterChange(this._filters);
+  }
 
+  get filters() {
+    return this._filters;
+  }
+  private _filters: any = {};
   //productsList : any;
   pageLimit : number = 12;
   result_datas : any;
@@ -34,7 +45,7 @@ export class ProductListComponent  implements OnInit, OnDestroy, AfterViewInit{
   private productsList?: Subscription;
   private productFiltered?: Subscription;
   
-  constructor(private homeServ : HomeService,  private auth: AuthenticatorService,private router : Router, private viewportScroller: ViewportScroller){}
+  constructor(private homeServ : HomeService,  private auth: AuthenticatorService,private router : Router, private viewportScroller: ViewportScroller, private translate: TranslateService){}
 
   ngOnInit(){
     // S'abonner aux changements d'état
@@ -45,7 +56,10 @@ export class ProductListComponent  implements OnInit, OnDestroy, AfterViewInit{
         this.result_datas = state.products;
       }
     });
-    this.initComponent()
+    this.initComponent();
+    // if (!this.filters) {
+    //   this.filters = {};
+    // }
   }
 
 
@@ -149,28 +163,10 @@ export class ProductListComponent  implements OnInit, OnDestroy, AfterViewInit{
   filterDatas(event : any){
     try {
       if (event) {
-        this.productFiltered = this.homeServ.filterDataBy(event).subscribe({
-          next: (datas: any) => {            
-            if (datas.success = true && datas.annonces != null) {
-                this.products = datas.annonces;
-                this.result_datas = datas.annonces ;
-                this.current_page = this.result_datas.current_page;  
-                // this.paginationDatas = {
-                //  current : this.result_datas.current_page,  
-                //  total : this.result_datas.total,
-                //  next : this.result_datas.current_page + 1,    
-                //  previous : this.result_datas.current_page - 1, 
-                //  last : this.result_datas.last_page, 
-                //}
-            } else {
-              this.products = null ;
-            }
-          },
-          error: (erreur: any) => { 
-            console.log(erreur);
-            
-          }
-        })  ;
+          this.filters = {
+            ...(this.filters ?? {}),  // si this.filters null/undefined, on prend un objet vide
+            ...(event ?? {})          // idem pour event
+          };
       }
 
     } catch (error) {
@@ -217,5 +213,53 @@ export class ProductListComponent  implements OnInit, OnDestroy, AfterViewInit{
     }
   }
 
-  
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   if (changes['filters']) {
+  //     const current = changes['filters'].currentValue;
+  //     console.log('Filtres mis à jour :', current);
+  //     // this.handleFilterChange(current);
+  //   }
+  // }
+
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['filters']) {
+      this.handleFilterChange(changes['filters'].currentValue);
+    }
+  }
+
+  handleFilterChange(filters: any) {
+    const user = this.auth.isLoggedIn();
+    const user_id= user.id ? user.id : null;
+    const currentLang = this.translate.currentLang; 
+    filters.user_id = user_id;
+    filters.lang = currentLang;
+    const formData = new FormData();
+    // formData.append('data', filters);
+    formData.append('data', JSON.stringify(filters)); // serialize l'objet
+    
+    this.productFiltered = this.homeServ.filterDataBy(formData).subscribe({
+      next: (datas: any) => {            
+        if (datas.success = true && datas.annonces != null) {
+            this.products = datas.annonces;
+            this.result_datas = datas.annonces ;
+            this.current_page = this.result_datas.current_page;  
+            // this.paginationDatas = {
+            //  current : this.result_datas.current_page,  
+            //  total : this.result_datas.total,
+            //  next : this.result_datas.current_page + 1,    
+            //  previous : this.result_datas.current_page - 1, 
+            //  last : this.result_datas.last_page, 
+            //}
+        } else {
+          this.products = null ;
+        }
+      },
+      error: (erreur: any) => { 
+        console.log(erreur);
+        
+      }
+    }) ;
+    // Ici tu mets la logique pour, par exemple, appeler une API, filtrer localement, etc.
+  }
 }
