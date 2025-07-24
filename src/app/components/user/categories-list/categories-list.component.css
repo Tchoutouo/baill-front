@@ -63,7 +63,7 @@ ul.categories li{
 }
 
 .sm-input-field::placeholder{
-    color: var(--main-color-gray-7);;
+    color: var(--main-color-gray-7);
 }
 
 .w_fit_conent{

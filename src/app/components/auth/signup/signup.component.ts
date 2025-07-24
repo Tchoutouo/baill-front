@@ -58,8 +58,8 @@ export class SignupComponent implements OnInit{
   city: FormControl;
   country: FormControl;
   neighborhood : FormControl;
-  password: FormControl;
-  passwordConfirm: FormControl;
+  // password: FormControl;
+  // passwordConfirm: FormControl;
   
 
   constructor(
@@ -77,8 +77,8 @@ export class SignupComponent implements OnInit{
     this.country = fb.control("", [Validators.required]);
     this.neighborhood = fb.control("", [Validators.required]);
     this.email = fb.control("", [Validators.email, Validators.required], [this.emailAsyncValidator.bind(this)]);
-    this.password = fb.control("", [Validators.required, Validators.minLength(8), this.passwordStrengthValidator]);
-    this.passwordConfirm = fb.control("", [Validators.required]);
+    // this.password = fb.control("", [Validators.required, Validators.minLength(8), this.passwordStrengthValidator]);
+    // this.passwordConfirm = fb.control("", [Validators.required]);
 
     this.signupForm = fb.group({
       username: this.username,
@@ -89,10 +89,10 @@ export class SignupComponent implements OnInit{
       city: this.city,
       country: this.country,
       neighborhood: this.neighborhood,
-      password: this.password,
-      passwordConfirm: this.passwordConfirm,
+      // password: this.password,
+      // passwordConfirm: this.passwordConfirm,
     }, {
-      validators: this.passwordsMatchValidator
+      // validators: this.passwordsMatchValidator
     });
 
     this.selectedCountry = 'CM';
@@ -208,12 +208,12 @@ export class SignupComponent implements OnInit{
     });
   }
 
-  passwordsMatchValidator(formGroup: FormGroup) {
-    const password = formGroup.get('password')?.value;
-    const passwordConfirm = formGroup.get('passwordConfirm')?.value;
+  // passwordsMatchValidator(formGroup: FormGroup) {
+  //   const password = formGroup.get('password')?.value;
+  //   const passwordConfirm = formGroup.get('passwordConfirm')?.value;
 
-    return password === passwordConfirm ? null : { passwordsDoNotMatch: true };
-  }
+  //   return password === passwordConfirm ? null : { passwordsDoNotMatch: true };
+  // }
 
   async onCountryChange(event: any) {
     try {
@@ -245,7 +245,7 @@ export class SignupComponent implements OnInit{
     formData.country = this.my_country;
     
     // Supprimer la confirmation du mot de passe
-    delete formData.passwordConfirm;
+    // delete formData.passwordConfirm;
 
     const notif = new Notification();
 
@@ -397,9 +397,9 @@ export class SignupComponent implements OnInit{
     }
 
     // Erreur de correspondance des mots de passe
-    if (fieldName === 'passwordConfirm' && this.signupForm.errors?.['passwordsDoNotMatch']) {
-      return this.entityService.getTranslatedText('user.signup.message.error.password.mismatch');
-    }
+    // if (fieldName === 'passwordConfirm' && this.signupForm.errors?.['passwordsDoNotMatch']) {
+    //   return this.entityService.getTranslatedText('user.signup.message.error.password.mismatch');
+    // }
 
     return null;
   }
@@ -414,32 +414,32 @@ export class SignupComponent implements OnInit{
   }
 
   // Obtenir la force du mot de passe
-  getPasswordStrength(): string {
-    const password = this.password.value;
-    if (!password) return 'weak';
+  // getPasswordStrength(): string {
+  //   const password = this.password.value;
+  //   if (!password) return 'weak';
 
-    let score = 0;
-    if (password.length >= 8) score++;
-    if (/[a-z]/.test(password)) score++;
-    if (/[A-Z]/.test(password)) score++;
-    if (/[0-9]/.test(password)) score++;
-    if (/[^A-Za-z0-9]/.test(password)) score++;
+  //   let score = 0;
+  //   if (password.length >= 8) score++;
+  //   if (/[a-z]/.test(password)) score++;
+  //   if (/[A-Z]/.test(password)) score++;
+  //   if (/[0-9]/.test(password)) score++;
+  //   if (/[^A-Za-z0-9]/.test(password)) score++;
 
-    if (score >= 4) return 'strong';
-    if (score >= 3) return 'medium';
-    return 'weak';
-  }
+  //   if (score >= 4) return 'strong';
+  //   if (score >= 3) return 'medium';
+  //   return 'weak';
+  // }
 
   // Obtenir le pourcentage de force du mot de passe
-  getPasswordStrengthPercentage(): number {
-    const strength = this.getPasswordStrength();
-    switch (strength) {
-      case 'weak': return 33;
-      case 'medium': return 66;
-      case 'strong': return 100;
-      default: return 0;
-    }
-  }
+  // getPasswordStrengthPercentage(): number {
+  //   const strength = this.getPasswordStrength();
+  //   switch (strength) {
+  //     case 'weak': return 33;
+  //     case 'medium': return 66;
+  //     case 'strong': return 100;
+  //     default: return 0;
+  //   }
+  // }
 
   // Obtenir la liste des erreurs du formulaire
   getFormErrors(): string[] {

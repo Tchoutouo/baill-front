@@ -88,7 +88,7 @@
                             </div>
 
                             <!-- WhatsApp Number -->
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="whatsapp_number">{{'user.signup.whatsapp-number'|translate}}</label><span>*</span>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -112,7 +112,7 @@
                                 <small class="text-muted" *ngIf="whatsapp_number.pending">
                                     <i class="fa fa-spinner fa-spin"></i> {{'user.signup.message.checking'|translate}}
                                 </small>
-                            </div>
+                            </div> -->
                         </div>
 
                         <div class="col-md-6 tab_2">
@@ -172,8 +172,8 @@
                             </div>
 
                             <!-- Password -->
-                            <div class="form-group">
-                                <label for="password">{{'user.signup.password-1'|translate}}</label><span>*</span>
+                            <!-- <div class="form-group"> -->
+                                <!-- <label for="password">{{'user.signup.password-1'|translate}}</label><span>*</span>
                                 <input id="password" 
                                     class="form-control" 
                                     [class.is-invalid]="hasFieldError('password')"
@@ -182,9 +182,9 @@
                                     name="password">
                                 <div class="invalid-feedback" *ngIf="hasFieldError('password')">
                                     {{ getFieldError('password') }}
-                                </div>
+                                </div> -->
                                 <!-- Indicateur de force du mot de passe -->
-                                <div class="password-strength" *ngIf="password.value && password.value.length > 0">
+                                <!-- <div class="password-strength" *ngIf="password.value && password.value.length > 0">
                                     <div class="progress" style="height: 5px;">
                                         <div class="progress-bar" 
                                             [class.bg-danger]="getPasswordStrength() === 'weak'"
@@ -196,11 +196,11 @@
                                     <small class="text-muted">
                                         {{'user.signup.password.strength.' + getPasswordStrength()|translate}}
                                     </small>
-                                </div>
-                            </div>
+                                </div> -->
+                            <!-- </div> -->
 
                             <!-- Confirm Password -->
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="passwordConfirm">{{'user.signup.confirm-password'|translate}}</label><span>*</span>
                                 <input id="passwordConfirm" 
                                     class="form-control" 
@@ -215,6 +215,33 @@
                                 <div class="valid-feedback" *ngIf="!hasFieldError('passwordConfirm') && passwordConfirm.valid && passwordConfirm.dirty">
                                     {{'user.signup.message.success.password-match'|translate}}
                                 </div>
+                            </div> -->
+
+                            <!-- WhatsApp Number -->
+                            <div class="form-group">
+                                <label for="whatsapp_number">{{'user.signup.whatsapp-number'|translate}}</label><span>*</span>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">+{{phoneCode}}</span>
+                                    </div>
+                                    <input id="whatsapp_number" 
+                                        class="form-control" 
+                                        [class.is-invalid]="hasFieldError('whatsapp_number')"
+                                        [class.is-valid]="!hasFieldError('whatsapp_number') && whatsapp_number.valid && whatsapp_number.dirty"
+                                        type="tel" 
+                                        formControlName="whatsapp_number" 
+                                        name="whatsapp_number"
+                                        placeholder="{{'user.signup.whatsapp-placeholder'|translate}}">
+                                </div>
+                                <div class="invalid-feedback" *ngIf="hasFieldError('whatsapp_number')">
+                                    {{ getFieldError('whatsapp_number') }}
+                                </div>
+                                <div class="valid-feedback" *ngIf="!hasFieldError('whatsapp_number') && whatsapp_number.valid && whatsapp_number.dirty">
+                                    {{'user.signup.message.success.phone'|translate}}
+                                </div>
+                                <small class="text-muted" *ngIf="whatsapp_number.pending">
+                                    <i class="fa fa-spinner fa-spin"></i> {{'user.signup.message.checking'|translate}}
+                                </small>
                             </div>
                         </div>
                     </div>
@@ -224,7 +251,7 @@
                         <div class="col-12">
                             <button type="submit" 
                                     [disabled]="!signupForm.valid || isSubmitting"
-                                    class="btn btn-primary btn-block text-center d-flex justify-content-center align-items-center m-auto">
+                                    class="btn btn-primary border-0 btn-block text-center d-flex justify-content-center align-items-center m-auto">
                                 <span *ngIf="isSubmitting" class="spinner-border spinner-border-sm me-2" role="status"></span>
                                 <span *ngIf="!isSubmitting">{{'user.signup.submit-button'|translate}}</span>
                                 <span *ngIf="isSubmitting">{{'user.signup.submitting'|translate}}</span>
