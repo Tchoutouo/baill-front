@@ -23,7 +23,7 @@
 
                     <div class="form_group mb-4">
                         <label class="label-form mb-2" for="categorie">{{'admin.ads.category'|translate}}<span class="text-danger mx-2">*</span></label>
-                        <select multiple name="categorie" id="categorie[]" class="input_field input-field" [formControl]="categorie" required="required">
+                        <select multiple name="categorie" id="categorie[]" class="input_field h-100px input-field" [formControl]="categorie" required="required">
                             <option *ngFor="let cast_item of categoriesList" [value]="cast_item.id">{{cast_item.title}}</option>
                         </select>
                         <div *ngIf="categorie.dirty && !categorie.valid">

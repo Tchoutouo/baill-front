@@ -12,7 +12,7 @@ import { Country, State, City ,ICountry, IState, ICity}  from 'country-state-cit
 import { LocalStorageService } from '../../../services/admin/local-storage.service';
 import { PaymentsServiceService } from '../../../services/payments-service.service';
 import { PaymentItemComponent } from "../payment-item/payment-item.component";
-import { TranslateModule } from '@ngx-translate/core';
+import { LangChangeEvent, TranslateModule, TranslateService } from '@ngx-translate/core';
 
 
 
@@ -83,9 +83,10 @@ export class FormCreateComponent {
       location : '',
     };
   currentAnnounce: any = {};
+    langChangeSub!: Subscription;
 
   constructor(private form_b : FormBuilder, private entityService : EntityServiceService, private paymentService : PaymentsServiceService,
-              private notification : NoficationsService, private router: Router, private locaStorage  : LocalStorageService,
+              private notification : NoficationsService, private router: Router, private locaStorage  : LocalStorageService, private translate: TranslateService,
             )
   {
     this.selectedCountry = "CM";
@@ -121,6 +122,13 @@ export class FormCreateComponent {
     this.countries = Country.getAllCountries();
     this.getPaymentMethod();
     this.onCountryChange({ target: { value: this.selectedCountry } });
+
+    
+    // changement de langue
+    this.langChangeSub = this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      // console.log('Langue changée :', event.lang);
+      this.getAllCategories();
+    });
   } 
 
 
@@ -391,7 +399,9 @@ export class FormCreateComponent {
   }
 
   getAllCategories(){
-    this.entServiceSub = this.entityService.getAllAnnoucesCategories().subscribe({
+    const currentLang = this.translate.currentLang; 
+    const entity= "categorie_back_public/"+currentLang;
+    this.entServiceSub = this.entityService.getAll(entity).subscribe({
       next: (data: any) => {
         if (data.success) {
           const result = data.data

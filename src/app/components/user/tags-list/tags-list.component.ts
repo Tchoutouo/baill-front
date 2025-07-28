@@ -6,7 +6,7 @@ import { Category } from '../../../models/admin/category';
 import { EntityServiceService } from '../../../services/admin/entity-service.service';
 import { Subscription } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { LangChangeEvent, TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-tags-list',
@@ -20,6 +20,8 @@ export class TagsListComponent implements OnInit{
   selectedCity: string = '';
   countries: ICountry[] | undefined;
   cities: ICity[] | undefined;
+
+  langChangeSub!: Subscription;
   categories: Category[] = [] ;
   
   @Output() filterParams = new EventEmitter<any>();
@@ -31,9 +33,15 @@ export class TagsListComponent implements OnInit{
 
   constructor(private entityService : EntityServiceService, private translate: TranslateService){}
   
-  ngOnInit(): void {
+ ngOnInit(): void {
     this.countries = Country.getAllCountries();
     this.getAllCategories();
+
+    // 🔁 Réagir au changement de langue
+    this.langChangeSub = this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      console.log('Langue changée :', event.lang);
+      this.getAllCategories();
+    });
   }
 
   async onFilterChange(event: any, name : string) {
