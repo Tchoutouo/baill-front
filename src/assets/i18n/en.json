@@ -186,6 +186,7 @@
                 },
                 "notif":{
                     "success": "Your account has been successfully registered !!",
+                    "send-identification-mail": " Your login credentials have been sent to your email address. Please check your inbox.", 
                     "warning": "An error occurred during the operation",
                     "error": "An unexpected error occurred"
                 },

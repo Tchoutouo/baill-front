@@ -257,7 +257,7 @@ export class SignupComponent implements OnInit{
           this.isSubmitting = false;
           
           if (data.success) {
-            notif.message = this.entityService.getTranslatedText('user.signup.message.notif.success');
+            notif.message = this.entityService.getTranslatedText('user.signup.message.notif.send-identification-mail');
             notif.status = "success";
             this.notification.emitNotification(notif);
             this.router.navigate(['/signin']);

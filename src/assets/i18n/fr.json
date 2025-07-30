@@ -185,6 +185,7 @@
                 },
                 "notif":{
                     "success": "Votre compte a été enregistrée avec succès !!",
+                    "send-identification-mail": " Vos identifiants ont été envoyés à votre adresse e-mail. Vérifiez votre boîte de réception.", 
                     "warning": "Une erreur est survenu lors de l'opération",
                     "error": "Une erreur inattendue est survenue"
                 },
