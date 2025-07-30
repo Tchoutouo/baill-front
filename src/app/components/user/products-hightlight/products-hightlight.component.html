@@ -1,4 +1,12 @@
-<div class="products-hightlight-container mb-5">
+<div *ngIf="log_user.id == null" class="row signup-button">
+    <div class="col-12">
+        <button [routerLink]="['/signup']"
+                class="btn btn-primary border-0 btn-block text-center d-flex justify-content-center align-items-center m-auto">
+            <span >{{'user.signup.submit-button'|translate}}</span>
+        </button>
+    </div>
+</div>
+<div class="products-hightlight-container mb-3">
     <h1 class="hightlight-title px-5 pt-3 my-4">
         {{'user.hightlight.title'| translate}}
     </h1>
