@@ -14,8 +14,17 @@
     border: 1px solid var(--main-color-orange);
 }
 
+
+
 .tag-list{
     flex-wrap: wrap;
+}
+
+@media screen and (max-width:676px) {
+    .tag-list{
+        height: 7vh;
+        overflow-x: auto;
+    }
 }
 
 .tag-list select:hover{
