@@ -7,6 +7,7 @@ import { AuthenticatorService } from '../../../services/admin/authenticator.serv
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { EntityServiceService } from '../../../services/admin/entity-service.service';
 
 
 @Component({
@@ -37,7 +38,10 @@ export class SigninComponent {
   email_error_message : string = "L'e-mail est obligatoire !"
   password_error_message : string = "Le mot de passe est obligatoire !"
 
-  constructor(private authService : AuthenticatorService, private fb: FormBuilder, private router: Router){
+  constructor(private authService : AuthenticatorService, 
+    private fb: FormBuilder, 
+    private router: Router,
+    private entityService: EntityServiceService){
     this.identifiant = fb.control("", [Validators.required] );
     this.password = fb.control("", [Validators.required])
   }
@@ -96,13 +100,13 @@ export class SigninComponent {
           this.router.navigate(['/admin']);
         } else {
           this.loginResult = false;
-          this.message_back = 'Les informations d\'identification ne sont pas correctes.';
+          this.message_back = this.entityService.getTranslatedText('user.signin.message.error.invalid-credentials');
         }
       },
       error: (err) => {
         console.error(err);
         this.loginResult = false;
-        this.message_back = 'Erreur lors de la connexion. Veuillez réessayer plus tard.';
+        this.message_back = this.entityService.getTranslatedText('user.signin.message.error.error-connection');
       }
     });
   }
@@ -113,7 +117,7 @@ export class SigninComponent {
     let  messag  = ""
 
     if (!this.loginResult) {
-      messag = "Les informations d'identification ne sont pas correctes." ;
+      messag = this.entityService.getTranslatedText('user.signin.message.error.invalid-credentials') ;
     }else{
       messag = "" ;
     }
@@ -126,7 +130,5 @@ export class SigninComponent {
   get formControls(){
     return this.loginForm.controls
   }
-
- 
   
 }

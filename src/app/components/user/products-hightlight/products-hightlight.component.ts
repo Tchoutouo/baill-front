@@ -6,11 +6,12 @@ import { environment } from '../../../../environments/environment.development';
 import { TranslateModule } from '@ngx-translate/core';
 import { isLoggedIn } from '../../../helpers/helper';
 import { AuthenticatorService } from '../../../services/admin/authenticator.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-products-hightlight',
   standalone: true,
-  imports: [CommonModule, TranslateModule],
+  imports: [CommonModule, TranslateModule, RouterLink],
   templateUrl: './products-hightlight.component.html',
   styleUrl: './products-hightlight.component.css'
 })
@@ -21,7 +22,7 @@ export class ProductsHightlightComponent {
     subject: string = "Annonce sur bailleurnet";
     body: string =  "";
     siteUser: string = "www.bailleurnet.com";
-
+    log_user: any = isLoggedIn();
     apiRessources : string = environment.apiUrlRessources;
     annoucesList : Subscription | undefined;
     annouces_high : any ;
@@ -29,11 +30,13 @@ export class ProductsHightlightComponent {
     constructor ( private homeServ : HomeService, private auth: AuthenticatorService) { }
 
     ngOnInit(){
+      console.log("log_user", this.log_user);
       this.initComponent()
     }
 
     initComponent(){
       const user = this.auth.isLoggedIn();
+      console.log("user", user);
       const user_id= user.id ? user.id : null;
       
       this.annoucesList = this.homeServ.getAllAnnoucesPublished(user_id).subscribe({

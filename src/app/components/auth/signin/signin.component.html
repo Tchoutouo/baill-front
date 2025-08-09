@@ -44,10 +44,10 @@
                             <input type="identifiant" formControlName="identifiant" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                             <div *ngIf="identifiant.dirty && !identifiant.valid">
                                 <div class="" class="error" *ngIf="identifiant.hasError('required')">
-                                    {{email_error_message}}
+                                    {{'user.signin.message.error.email-tel'|translate}}
                                 </div>
                                 <div class="error" *ngIf="!identifiant.hasError('required')">
-                                    l'e-mail n'est ne respecte pas le bon format.
+                                    {{'user.signin.message.error.email-format'|translate}} 
                                 </div>
                             </div>
                             <div *ngIf="message_back">
@@ -63,12 +63,12 @@
                             <i class="fa-solid fa-eye{{icon_eyes}} d-{{display}}" (click)="toggleIconClass($event)" id="icon_eyes" ></i>
                             <div *ngIf="password.dirty && !password.valid">
                                 <div class="error" *ngIf="formControls.password.errors.required">
-                                    {{password_error_message}}
+                                    {{'user.signin.message.error.password'|translate}}
                                 </div>
                             </div>
                             
                         </div>
-
+                        <p class="text-center mt-3"><a class="" [routerLink]="['/send-mail-forget-password']">{{'user.signin.forgot-password'|translate}}</a></p>
                         <div class="d-flex justify-content-center mt-5 mb-4">
                             <button type="submit" id="submit-button" class="btn btn-primary">{{'user.signin.form-title'|translate}}</button>
                         </div>
