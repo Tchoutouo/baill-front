@@ -20,10 +20,14 @@
     flex-wrap: wrap;
 }
 
-@media screen and (max-width:676px) {
+@media screen and (max-width:767px) {
     .tag-list{
         height: 8vh;
         overflow-x: auto;
+    }
+
+    .form-control{
+        font-size: .75rem;
     }
 }
 
