@@ -22,7 +22,7 @@
 
 @media screen and (max-width:676px) {
     .tag-list{
-        height: 7vh;
+        height: 8vh;
         overflow-x: auto;
     }
 }
