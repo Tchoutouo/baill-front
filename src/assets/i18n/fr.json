@@ -22,7 +22,12 @@
         "unlock": "Débloquer",
         "category": "Catégories",
         "anounce": "Annonces",
-        "pay": "Payer"
+        "pay": "Payer",
+        "reset-password": "Réinitialiser le mot de passe",
+        "recive-link": "Envoyer l'email de récupération",
+        "send": "Envoyer",
+        "reset": "Réinitialiser",
+        "traitement-en-cours": "Traitement en cours..."
     },
     "status":{
         "active": "Actif",
@@ -60,9 +65,9 @@
             "no-content": "Pas d'annonce à la une pour le moment."
         },
         "tags-list":{
-            "cat":"Selectionner une categorie",
-            "country": "Selectionner un pays",
-            "city": "Selectionner une ville"
+            "cat":"Sélectionner une catégorie",
+            "country": "Sélectionner un pays",
+            "city": "Sélectionner une ville"
         },
         "cat-list":{
             "title": "Catégories",
@@ -95,7 +100,7 @@
             }
         },
         "signup":{
-            "password":"Mot de passe",
+            "password-1":"Mot de passe",
             "confirm-password":"Confirmer votre mot de passe",
             "username":"Nom d'utilisateur",
             "name": "Nom(s)",
@@ -105,32 +110,107 @@
             "neighborhood": "Quartier",
             "email":"E-mail",
             "whatsapp-number":"Téléphone(Whatsapp)",
-            "title":"S'inscrire",
+            "whatsapp-placeholder": "Entrez votre numéro",
+            "title":"Créer un compte",
             "text-account":"Vous avez déjà compte",
             "login-text":"Se connecter",
             "text-line-1":"Je rejoins Bailleurnet",
             "text-line-2":"ma boussole de poche",
             "text-line-3":"",
+            "select-country": "Sélectionner un pays",
+            "select-city": "Sélectionner une ville",
+            "submit-button": "S'inscrire",
+            "submitting": "Inscription en cours...",
+            "form-errors-title": "Veuillez corriger les erreurs suivantes :",
             "message":{
                 "error":{
-                    "password":"le mot de passe est requis.",
+                   
                     "password-1":"le mot de passe doit comporter au moins 6 caractères.",
                     "confirm-password":"le mot de passe est requis.",
                     "confirm-password-1":"les mots de passe ne correspondent pas.",
-                    "username":"le nom d'utilisateur est requis.",
+                   
                     "name": "le nom(s) est requis.",
                     "first-name": "le prénom est requis",
-                    "country":"Veuillez choisir un pays.",
-                    "city":"Veuillez choisir votre ville.",
-                    "neighborhood": "Veuillez choisir votre quartier.",
+                    
+                    
                     "email-1":"L'email est requis.",
                     "email-2":"L'email ne respect pas le bon format.",
-                    "whatsapp-number":"Téléphone(Whatsapp)"
+                    "whatsapp-number":"Téléphone(Whatsapp)",
+                    "username": {
+                        "required": "Le nom d'utilisateur est requis",
+                        "exists": "Ce nom d'utilisateur est déjà utilisé"
+                    },
+                    "last_name": {
+                        "required": "Le nom de famille est requis"
+                    },
+                    "first_name": {
+                        "required": "Le prénom est requis"
+                    },
+                    "email": {
+                        "required": "L'adresse email est requise",
+                        "invalid": "L'adresse email n'est pas valide",
+                        "exists": "Cette adresse email est déjà utilisée"
+                    },
+                    "whatsapp_number": {
+                        "required": "Le numéro WhatsApp est requis"
+                    },
+                    "phone": {
+                        "invalid": "Le numéro de téléphone n'est pas valide",
+                        "exists": "Ce numéro de téléphone est déjà utilisé"
+                    },
+                    "country": {
+                        "required": "Le pays est requis"
+                    },
+                    "city": {
+                        "required": "La ville est requise"
+                    },
+                    "neighborhood": {
+                        "required": "Le quartier est requis"
+                    },
+                    "password": {
+                        "required": "Le mot de passe est requis",
+                        "minlength": "Le mot de passe doit contenir au moins 8 caractères",
+                        "strength": "Le mot de passe doit contenir au moins une minuscule, une majuscule, un chiffre et un caractère spécial",
+                        "mismatch": "Les mots de passe ne correspondent pas"
+                    },
+                    "passwordConfirm": {
+                        "required": "La confirmation du mot de passe est requise"
+                    }
+                },
+                "success": {
+                    "username": "Nom d'utilisateur disponible",
+                    "email": "Adresse email disponible",
+                    "phone": "Numéro de téléphone disponible",
+                    "password-match": "Les mots de passe correspondent"
                 },
                 "notif":{
                     "success": "Votre compte a été enregistrée avec succès !!",
-                    "warning": "Une erreur est survenu lors de l'opération"
+                    "send-identification-mail": " Vos identifiants ont été envoyés à votre adresse e-mail. Vérifiez votre boîte de réception.", 
+                    "warning": "Une erreur est survenu lors de l'opération",
+                    "error": "Une erreur inattendue est survenue"
+                },
+                "form": {
+                    "invalid": "Veuillez corriger les erreurs dans le formulaire"
                 }
+            },
+            "password": {
+                "strength": {
+                "weak": "Faible",
+                "medium": "Moyen",
+                "strong": "Fort"
+                }
+            },
+            "fields": {
+                "username": "Nom d'utilisateur",
+                "last_name": "Nom de famille",
+                "first_name": "Prénom",
+                "email": "Email",
+                "whatsapp_number": "Numéro WhatsApp",
+                "country": "Pays",
+                "city": "Ville",
+                "neighborhood": "Quartier",
+                "password": "Mot de passe",
+                "passwordConfirm": "Confirmation du mot de passe"
             }
         },
         "signin":{
@@ -139,7 +219,45 @@
             "text-login": "Si vous n’avez pas de compte",
             "title-signup": "s'inscrire",
             "email": "E-mail ou Tel",
-            "password": "Mot de passe"
+            "password": "Mot de passe",
+            "forgot-password": "Mot de passe oublié ?",
+            "message":{
+                "error":{
+                    "email-tel": "L'email ou le N° de téléphone est requis.",
+                    "email-format": "L'email n'est pas au bon format.",
+                    "password": "Le mot de passe est requis.",
+                    "invalid-credentials": "Les informations d'identification ne sont pas correctes.",
+                    "error-connection": "Erreur de connexion. Veuillez réessayer plus tard.",
+                    "account-locked": "Votre compte est bloqué. Veuillez contacter l'administrateur."
+                }
+            }
+        },
+        "reset-password":{
+            "title": "Réinitialiser le mot de passe",
+            "description": "Veuillez entrer votre adresse e-mail pour recevoir un lien de réinitialisation du mot de passe.",
+            "email": "E-mail",
+            "button-send": "Envoyer",
+            "new-password": "Nouveau mot de passe",
+            "confirm-new-password": "Confirmer le nouveau mot de passe",
+            "back-to-login": "Retour à la page de connexion",
+            "message":{
+                "success-title": "Réinitialisation du mot de passe réussie",
+                "error-title": "Erreur de réinitialisation du mot de passe",
+                "email-required": "L'adresse e-mail est requise.",
+                "email-invalid": "L'adresse e-mail n'est pas valide.",
+                "success": "Un lien de réinitialisation du mot de passe a été envoyé à votre adresse e-mail. Vérifiez votre boîte de réception.",
+                "error": "Une erreur est survenue lors de l'envoi du lien de réinitialisation.",
+                "token-invalid": "Le lien de réinitialisation du mot de passe est invalide ou a expiré.",
+                "invalid-link": "Le lien de réinitialisation du mot de passe est invalide.",
+                "verification-email": "Vérificationv de l'email...",
+                "verification": "Vérification...",
+                "email-yes": "E-mail trouvé",
+                "no-email": " Aucun compte associé à cet email",
+                "mail-send-recove": "Envoi de l'email de récupération...",
+                "mail-send-recove-erreur": "Erreur lors de l'envoi de l'email de récupération",
+                "error-validation": "Erreur de validation"
+            }
+
         },
         "product-detail":{
             "cat": "Catégories",

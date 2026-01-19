@@ -52,7 +52,6 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
       private navigationService: ListStateServiceService,
       private location: Location, private router : Router,
       private auth: AuthenticatorService){
-      
     }
 
     ngOnInit() {
@@ -78,7 +77,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
             this.annouceSub = this.homeServ.getAnnouceByID(annouce_id).subscribe({
               next: (datas: any) => {
-                //console.log("details",datas);
+                console.log("details",datas);
                 if (datas.success == true && datas.data) {
                   this.annouce  = datas.data ;
                   this.imagesList = this.annouce.url_image;

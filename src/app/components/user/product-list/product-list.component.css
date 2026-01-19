@@ -1,8 +1,8 @@
 
-.list-product{
+/* .list-product{
     overflow-y: hidden;
     overflow-x: hidden;
-}
+} */
 
 .annonces-not-found .text{
     color: var(--main-color);
@@ -10,4 +10,16 @@
     font-weight: 500;
     padding: 100px 0px;
     font-family: var(--main-font-Quicksand);
+}
+
+.tags-sticky {
+  top: 10%; 
+  position: sticky;
+  background-color: white;
+  z-index: 3;
+  padding: .875rem 0;
+}
+
+.product-list{
+    background-color: white;
 }

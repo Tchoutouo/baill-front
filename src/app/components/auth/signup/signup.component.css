@@ -8,7 +8,7 @@
 
 .signup{
     width: 1177px;
-    height: 710px;
+    /* height: 710px; */
     border-radius: var(--main-radius-value-30);
     margin: auto;
     box-shadow: 0px 4px 4px 0px #00000040;
@@ -74,6 +74,17 @@ form .form-group span{
 form .form-group .form-control{
     background-color: var(--main-color-green-5);
     width: 306px;
+    height: 43px;
+    border-radius: 6px;
+}
+form .form-group .input-group-prepend .input-group-text{
+    background-color: var(--main-color-green-5);
+    height: 43px;
+}
+
+form .form-group #whatsapp_number{
+    background-color: var(--main-color-green-5);
+    width: 245px;
     height: 43px;
     border-radius: 6px;
 }
@@ -161,7 +172,58 @@ form .form-group .form-control{
 .alert-message{
     z-index: 100;
 }
+.password-strength {
+    margin-top: 5px;
+}
 
+.input-group-text {
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+}
+
+.is-invalid {
+    border-color: #dc3545;
+}
+
+.is-valid {
+    border-color: #28a745;
+}
+
+.invalid-feedback {
+    display: block;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 0.875em;
+    color: #dc3545;
+}
+
+.valid-feedback {
+    display: block;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 0.875em;
+    color: #28a745;
+}
+
+.spinner-border-sm {
+    width: 1rem;
+    height: 1rem;
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    border-color: #ffeaa7;
+    color: #856404;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label span {
+    color: #dc3545;
+    font-weight: bold;
+}
 /* mobile */
 
 @media screen and (max-width : 767px) {
@@ -188,6 +250,10 @@ form .form-group .form-control{
 
     form .form-group .form-control{
         width: 290px;
+    }
+
+    form .form-group #whatsapp_number{
+        width: 190px;
     }
 
     .title p{

@@ -126,8 +126,8 @@
                     <label for="password" class="password-pass d-flex justify-content-start mb-2">{{ 'admin.profile.security.password' | translate }}</label>
                     <div class="d-flex gap-3 pb-1 align-items-center">
                         <div class="password-input-group">
-                            <input type="{{type}}" readonly name="password" disabled="true" value="5555555"  class="password-profile" id="password">
-                            <i class="fa-solid fa-eye{{icon_eyes}} icon_pass" (click)="chanIcon($event)"></i>
+                            <input type="{{type}}" readonly name="password" disabled="true" value="33333333"  class="password-profile" id="password">
+                            <!-- <i class="fa-solid fa-eye{{icon_eyes}} icon_pass" (click)="chanIcon($event)"></i> -->
                         </div>
                         <a class="add_caract" (click)="openModalPassword($event)">
                             <i class="fa-solid fa-pen text-white"></i>
@@ -139,7 +139,7 @@
         </div>
         <div class="row mt-5">
             <div class="col-md-12">
-                <button (click)="UpdateProfil()" class="btn-form bg_blue" [disabled]="profileForm.invalid">{{ 'admin.profile.button.update' | translate }}</button>
+                <button (click)="UpdateProfil()" class="btn-form btn_publish" [disabled]="profileForm.invalid">{{ 'admin.profile.button.update' | translate }}</button>
             </div>
         </div>
     </form>
@@ -151,18 +151,87 @@
                 <button type="button" class="close-btn" (click)="closeModal()">×</button>
             </div>
             <div class="modal_body">
+                <form #form="ngForm" (ngSubmit)="changePassword()" id="formPassord ">
+                    <div class="mb-3">
+                        <label for="password" class="form-label">{{ 'admin.profile.modal.old_password' | translate }}</label>
+                        <input type="password" id="password" class="form-control" name="password" [(ngModel)]="password" required #old="ngModel">
+                        <div *ngIf="old.invalid && old.touched" class="text-danger">Champ requis</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="new_password" class="form-label">{{ 'admin.profile.modal.new_password' | translate }}</label>
+                        <input type="password" id="new_password" class="form-control"
+                                name="new_password"
+                                [(ngModel)]="new_password"
+                                required minlength="8"
+                                #newPass="ngModel">
+                                
+                        <div *ngIf="newPass.errors?.['minlength'] && newPass.touched" class="text-danger">
+                            Le mot de passe doit faire au moins 8 caractères.
+                        </div>
+
+                        <!-- Barre de force -->
+                        <div class="password-strength" *ngIf="new_password && new_password.length > 0">
+                            <div class="progress" style="height: 5px;">
+                            <div class="progress-bar"
+                                [class.bg-danger]="getPasswordStrength() === 'weak'"
+                                [class.bg-warning]="getPasswordStrength() === 'medium'"
+                                [class.bg-success]="getPasswordStrength() === 'strong'"
+                                [style.width.%]="getPasswordStrengthPercentage()">
+                            </div>
+                            </div>
+                            <small class="text-muted">
+                            {{ 'user.signup.password.strength.' + getPasswordStrength() | translate }}
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="confirm_password">Confirmation mot de passe</label>
+                        <input type="password" id="confirm_password" class="form-control"
+                                name="confirm_password"
+                                [(ngModel)]="confirm_password"
+                                required
+                            #confirm="ngModel"
+                        >
+                            
+                        <div *ngIf="confirm.touched && confirm_password !== new_password" class="text-danger">
+                            Les mots de passe ne correspondent pas.
+                        </div>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-primary" id="submit-button" [disabled]="form.invalid || new_password !== confirm_password">
+                        {{ 'button.save' | translate }}
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <!-- <div class="modal-backdrop" *ngIf="isModalOpen">
+        <div class="modal_password">
+            <div class="modal_header">
+                <h3 class="modal_title">{{ 'admin.profile.modal.title' | translate }}</h3>
+                <button type="button" class="close-btn" (click)="closeModal()">×</button>
+            </div>
+            <div class="modal_body">
                 <form  #form="ngForm" id="formPassord">
                     <div class="mb-3">
-                        <label for="name" class="form-label">{{ 'admin.profile.modal.old_password' | translate }}</label>
+                        <label for="name" class="form-label">{{ 'admin.profile.modal.password' | translate }}</label>
                         <input type="password" class="form-control" id="name" #password name="password" ngModel required>
                     </div>
                     <div class="mb-3">
                         <label for="name" class="form-label">{{ 'admin.profile.modal.new_password' | translate }}</label>
                         <input type="password" class="form-control" id="name" #newPassword name="newPassword" ngModel required>
                     </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Confirmation mot de passe</label>
+                        <input type="password" class="form-control" id="name" #newPassword name="newPassword" ngModel required>
+                    </div>
                     <button type="submit" (click)="changePassword(newPassword.value, password.value)" id="submit-button" class="btn btn-primary" [disabled]="form.invalid">{{ 'button.save' | translate }}</button>
                 </form>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>

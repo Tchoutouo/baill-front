@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { Observable } from 'rxjs/internal/Observable';
 import { TranslateService } from '@ngx-translate/core';
-
+import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +15,6 @@ export class EntityServiceService {
   getTranslatedText(key: string): string {
     let translatedText = '';
     this.translate.get(key).subscribe((res: string) => {
-      console.log("res", res);
       translatedText = res;
     });
     return translatedText;
@@ -34,14 +33,14 @@ export class EntityServiceService {
   }
 
   update(id: any, datas: any, entity: string): Observable<any> {
-      console.log(environment.apiUrl, datas); 
+      // console.log(environment.apiUrl, datas); 
       // Pour afficher les données de l'objet FormData
       datas.forEach((value:any, key:any) => {
-      console.log(`${key}: ${value}`);
+      // console.log(`${key}: ${value}`);
     });
+    // console.log(environment.apiUrl+entity+'/'+id);
     
-    
-    // return this.http.put(`${environment.apiUrl+entity}/${id}`, datas, options);
+    // return this.http.put(`${environment.apiUrl+entity}/${id}`, datas);
     return this.http.post(environment.apiUrl+entity+'/'+id, datas); 
   }
 
@@ -49,6 +48,11 @@ export class EntityServiceService {
     
     // return this.http.put(`${environment.apiUrl+entity}/${id}`, datas, options);
     return this.http.put(environment.apiUrl+entity+'/'+id, datas); 
+  }
+
+  getUser(user_id : number | string){
+    const url = 'advertiser_back/show/'
+    return this.http.get(environment.apiUrl+url+user_id);
   }
 
 
@@ -199,7 +203,8 @@ export class EntityServiceService {
 
   updatePassword(id : number | string, datas : any){
 
-    return this.http.post(environment.apiUrl+'updatePassword/'+id, datas);
+    return this.http.put(environment.apiUrl+'updatePassword/'+id, datas);
+    // return this.http.post(environment.apiUrl+'updatePassword/'+id, datas);
   }
 
   getPaymentMod(){
@@ -229,6 +234,29 @@ export class EntityServiceService {
       return this.http.get(environment.apiUrl+'mode_paiement_advert');
     }
     return this.http.get(environment.apiUrl+'mode_paiement_advert');
+  }
+
+  checkEmailExists(email: string): Observable<boolean> {
+    return this.http.post<{exists: boolean}>(environment.apiUrl+'check-email', { email })
+      .pipe(map(response => response.exists));
+  }
+
+  checkUsernameExists(username: string): Observable<boolean> {
+    return this.http.post<{exists: boolean}>(environment.apiUrl+'check-username', { username })
+      .pipe(map(response => response.exists));
+  }
+
+  checkPhoneExists(whatsapp_number: string): Observable<boolean> {
+    return this.http.post<{exists: boolean}>(environment.apiUrl+'check-phone', { whatsapp_number })
+      .pipe(map(response => response.exists));
+  }
+
+  sendPasswordResetEmail(email: any) {
+    return this.http.post(environment.apiUrl+'forget-password', { email });
+  }
+
+  resetPassword(datas: any) {
+    return this.http.post(environment.apiUrl+'reset-password', datas);
   }
 
 }

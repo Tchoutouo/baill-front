@@ -6,6 +6,8 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 import { AuthenticatorService } from '../../../services/admin/authenticator.service';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import { EntityServiceService } from '../../../services/admin/entity-service.service';
 
 
 @Component({
@@ -36,7 +38,10 @@ export class SigninComponent {
   email_error_message : string = "L'e-mail est obligatoire !"
   password_error_message : string = "Le mot de passe est obligatoire !"
 
-  constructor(private authService : AuthenticatorService, private fb: FormBuilder){
+  constructor(private authService : AuthenticatorService, 
+    private fb: FormBuilder, 
+    private router: Router,
+    private entityService: EntityServiceService){
     this.identifiant = fb.control("", [Validators.required] );
     this.password = fb.control("", [Validators.required])
   }
@@ -78,32 +83,41 @@ export class SigninComponent {
     }
   }
   
-  handleSubmite(){
-    
-    this.isSubmited = true ;
+  handleSubmite() {
+    this.isSubmited = true;
 
     if (this.loginForm.invalid) {
+      return;
     }
-    
-    const user = this.loginForm.value ;
 
-    this.loginResult = this.authService.signin(user)
-    console.log(this.loginResult);
-    
-    if (this.loginResult == false) {
-      this.loginResult = false;
-    }else{
-      this.loginResult = true;
-    }
-    this.displayM()
+    const user = this.loginForm.value;
+
+    this.authService.signin(user).subscribe({
+      next: (result) => {
+        if (result.success) {
+          this.loginResult = true;
+          this.message_back = '';
+          this.router.navigate(['/admin']);
+        } else {
+          this.loginResult = false;
+          this.message_back = this.entityService.getTranslatedText('user.signin.message.error.invalid-credentials');
+        }
+      },
+      error: (err) => {
+        console.error(err);
+        this.loginResult = false;
+        this.message_back = this.entityService.getTranslatedText('user.signin.message.error.error-connection');
+      }
+    });
   }
+
 
   displayM(){
 
     let  messag  = ""
 
     if (!this.loginResult) {
-      messag = "Les informations d'identification ne sont pas correctes." ;
+      messag = this.entityService.getTranslatedText('user.signin.message.error.invalid-credentials') ;
     }else{
       messag = "" ;
     }
@@ -116,7 +130,5 @@ export class SigninComponent {
   get formControls(){
     return this.loginForm.controls
   }
-
- 
   
 }

@@ -1,9 +1,13 @@
 <div class="product-list" >
-    <ng-container>
-        <app-tags-list (filterParams) = "filterDatas($event)"></app-tags-list>
-    </ng-container>
 
-    <div class="list-product" *ngIf="products">
+    <!-- <ng-container>
+        <app-tags-list (filterParams) = "filterDatas($event)"></app-tags-list>
+    </ng-container> -->
+    <div class="tags-sticky sticky-top bg-white z-3 py-2">
+        <app-tags-list (filterParams)="filterDatas($event)"></app-tags-list>
+    </div>
+
+    <div class="list-product pt-3" *ngIf="products">
         <div class="row">       
             <div class="col-md-6 col-lg-4" *ngFor="let item of products; let i = index"
             [id]="'product-' + i"

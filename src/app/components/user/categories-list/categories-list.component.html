@@ -1,27 +1,33 @@
 <div class="categories-container p-4">
-    <div class="title-list">
+    <!-- <div class="title-list">
         <h2>Categories</h2>
-    </div>
+    </div> -->
 
-    <ul class="categories mb-4">
+    <!-- <ul class="categories mb-4">
         <li class="category-item  py-2" *ngFor="let category of categories">
-        <!-- <li class="category-item active_category py-2" *ngFor="let category of categories"> -->
             {{category.title}}
         </li>
-    </ul>
+    </ul> -->
 
     <div class="about-price">
         <div class="title-list mb-3">
             <h2>
-                {{'user.cat-list.price' | translate}}
+                {{ 'user.cat-list.price' | translate }}
             </h2>
         </div>
-        <div class="d-flex justify-content-start row">
-            <div class="col-xl-4 mb-3">
-                <button class="filter-tag">{{'user.cat-list.ascending' | translate}} </button>
+        <div class="d-flex justify-content-start gap-3">
+            <div class="w_fit_conent">
+                <button class="filter-tag" (click)="setSort('asc')" 
+                [class.active]="selectedSort === 'asc'"
+                >{{'user.cat-list.ascending' | translate }} </button>
             </div>
-            <div class="col-xl-4 mb-3">
-                <button class="filter-tag">{{'user.cat-list.descending' | translate}}</button>
+            <div class="w_fit_conent">
+                <button class="filter-tag"
+                    (click)="setSort('desc')" 
+                    [class.active]="selectedSort === 'desc'"
+                >
+                    {{'user.cat-list.descending' | translate }}
+                </button>
             </div>
         </div>
     </div>
@@ -30,13 +36,15 @@
         <label for="#pice_value" class="pt-3 pb-2">{{'user.cat-list.between' | translate}}</label>
         <div class="row bg-white gap-1 pb-2 align-items-center">
             <div class="col-md-5">
-                <input type="number" class="sm-input-field w-100" placeholder="500 frs">
+                <!-- <input type="number" class="sm-input-field w-100" placeholder="500 frs"> -->
+                <input type="number" [(ngModel)]="amount_min" id="amountMin" class="sm-input-field w-100" placeholder="500 frs" (change)="emitFilter()">
             </div>
             <div class="col-md-1 p-0 text-center">
-                <span class="text-center">{{'user.cat-list.and' | translate}}</span>
+                <span class="text-center" name="max_price">{{'user.cat-list.and' | translate}}</span>
             </div>
             <div class="col-md-5">
-                <input type="number" class="sm-input-field w-100" placeholder="10 000 frs">
+                <!-- <input type="number" name="max_price" class="sm-input-field w-100" placeholder="10 000 frs"> -->
+                <input type="number" [(ngModel)]="amount_max" id="amountMax" class="sm-input-field w-100" placeholder="10 000 frs" (change)="emitFilter()">
             </div>
         </div>
     </div>

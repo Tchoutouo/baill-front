@@ -1,138 +1,279 @@
 <div class="signup-content">
     <div class="alert-message">
-        <app-alert *ngIf="display_message" (timeOut) ="closeAlert($event)" [message] = "message_alert"></app-alert>
+        <app-alert *ngIf="display_message" (timeOut)="closeAlert($event)" [message]="message_alert"></app-alert>
     </div>
     <div class="content">
-        <div class="row signup ">
+        <div class="row signup">
             <div class="col-md-8 content-left">
-                <form action="" method="post" [formGroup]="signupForm">
+                <form [formGroup]="signupForm" (ngSubmit)="handleSubmit()" autocomplete="off" novalidate>
+                    <input type="password" 
+                        style="display: none;" 
+                        autocomplete="new-password">
                     <div class="row">
                         <div class="title text-center">
                             <h2>{{'user.signup.title'|translate}}</h2>
-                            <p>{{'user.signup.text-account'|translate}}, <a class="" [routerLink]="['/signin']">{{'user.signup.login-text'|translate}}</a></p>
+                            <p>{{'user.signup.text-account'|translate}}, 
+                                <a [routerLink]="['/signin']">{{'user.signup.login-text'|translate}}</a>
+                            </p>
                         </div>
                     </div>
                     <div class="row tab">
                         <div class="col-md-6 tab_1">
+                            <!-- Username -->
                             <div class="form-group">
                                 <label for="username">{{'user.signup.username'|translate}}</label> <span>*</span>
-                                <input id="username" class="form-control" type="text" [formControl]="username" name="username">
-                            </div>
-                            <div class="error" *ngIf="username.dirty">
-                                <p *ngIf="username.hasError('required')">
-                                    {{'user.signup.message.error.username'|translate}}
-                                </p>
-                            </div>
-                            <div class="form-group">
-                                <label for="name">{{'user.signup.name'|translate}}</label><span>*</span>
-                                <input id="name" class="form-control" type="text" [formControl]="last_name" name="last_name">
-                            </div>
-                            <div class="error" *ngIf="last_name.dirty">
-                                <p *ngIf="last_name.hasError('required')">
-                                    {{'user.signup.message.error.name'|translate}}
-                                </p>
-                            </div>
-                            <div class="form-group">
-                                <label for="first_name">{{'user.signup.first-name'|translate}}</label><span>*</span>
-                                <input id="first_name" class="form-control" type="text" [formControl]="first_name" name="first_name">
-                            </div>
-                            <div class="error" *ngIf="first_name.dirty">
-                                <p *ngIf="last_name.hasError('required')">
-                                    {{'user.signup.message.error.first-name'|translate}}
-                                </p>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">{{'user.signup.email'|translate}}</label><span>*</span>
-                                <input id="email" class="form-control" type="email" [formControl]="email" name="email">
-                            </div>
-                            <div class="error" *ngIf="email.dirty && !email.valid">
-                                <p *ngIf="email.hasError('required')">
-                                    {{'user.signup.message.error.email-1'|translate}}
-                                </p>
-                                <p *ngIf="!email.hasError('required')">
-                                    {{'user.signup.message.error.email-2'|translate}}
-                                </p>
-                            </div>
-                            <div class="form-group">
-                                <label for="phone">{{'user.signup.whatsapp-number'|translate}}</label><span>*</span>
-                                <div class="d-flex justify-content-center">
-                                    <input type="text" [value]="'+'+phoneCode" disabled style="width: 15%; border-top-right-radius: 0; border-bottom-right-radius: 0; padding: 0px !important;" class="form-control" readonly>
-                                    <input id="phone" class="form-control" type="number" [formControl]="whatsapp_number" name="whatsapp_number" style="width: 85%; border-top-left-radius: 0; border-bottom-left-radius: 0;">
+                                <input id="username" 
+                                        class="form-control" 
+                                        [class.is-invalid]="hasFieldError('username')"
+                                        [class.is-valid]="!hasFieldError('username') && username.valid && username.dirty"
+                                        type="text" 
+                                        formControlName="username" 
+                                        name="username">
+                                <div class="invalid-feedback" *ngIf="hasFieldError('username')">
+                                    {{ getFieldError('username') }}
+                                </div>
+                                <div class="valid-feedback" *ngIf="!hasFieldError('username') && username.valid && username.dirty">
+                                    {{'user.signup.message.success.username'|translate}}
                                 </div>
                             </div>
+
+                            <!-- Last Name -->
+                            <div class="form-group">
+                                <label for="last_name">{{'user.signup.name'|translate}}</label><span>*</span>
+                                <input id="last_name" 
+                                        class="form-control" 
+                                        [class.is-invalid]="hasFieldError('last_name')"
+                                        type="text" 
+                                        formControlName="last_name" 
+                                        name="last_name">
+                                <div class="invalid-feedback" *ngIf="hasFieldError('last_name')">
+                                    {{ getFieldError('last_name') }}
+                                </div>
+                            </div>
+
+                            <!-- First Name -->
+                            <div class="form-group">
+                                <label for="first_name">{{'user.signup.first-name'|translate}}</label><span>*</span>
+                                <input id="first_name" 
+                                    class="form-control" 
+                                    [class.is-invalid]="hasFieldError('first_name')"
+                                    type="text" 
+                                    formControlName="first_name" 
+                                    name="first_name">
+                                <div class="invalid-feedback" *ngIf="hasFieldError('first_name')">
+                                    {{ getFieldError('first_name') }}
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="form-group">
+                                <label for="email">{{'user.signup.email'|translate}}</label><span>*</span>
+                                <input id="email" 
+                                    class="form-control" 
+                                    [class.is-invalid]="hasFieldError('email')"
+                                    [class.is-valid]="!hasFieldError('email') && email.valid && email.dirty"
+                                    type="email" 
+                                    formControlName="email" 
+                                    name="email">
+                                <div class="invalid-feedback" *ngIf="hasFieldError('email')">
+                                    {{ getFieldError('email') }}
+                                </div>
+                                <div class="valid-feedback" *ngIf="!hasFieldError('email') && email.valid && email.dirty">
+                                    {{'user.signup.message.success.email'|translate}}
+                                </div>
+                                <!-- Indicateur de vérification -->
+                                <small class="text-muted" *ngIf="email.pending">
+                                    <i class="fa fa-spinner fa-spin"></i> {{'user.signup.message.checking'|translate}}
+                                </small>
+                            </div>
+
+                            <!-- WhatsApp Number -->
+                            <!-- <div class="form-group">
+                                <label for="whatsapp_number">{{'user.signup.whatsapp-number'|translate}}</label><span>*</span>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">+{{phoneCode}}</span>
+                                    </div>
+                                    <input id="whatsapp_number" 
+                                        class="form-control" 
+                                        [class.is-invalid]="hasFieldError('whatsapp_number')"
+                                        [class.is-valid]="!hasFieldError('whatsapp_number') && whatsapp_number.valid && whatsapp_number.dirty"
+                                        type="tel" 
+                                        formControlName="whatsapp_number" 
+                                        name="whatsapp_number"
+                                        placeholder="{{'user.signup.whatsapp-placeholder'|translate}}">
+                                </div>
+                                <div class="invalid-feedback" *ngIf="hasFieldError('whatsapp_number')">
+                                    {{ getFieldError('whatsapp_number') }}
+                                </div>
+                                <div class="valid-feedback" *ngIf="!hasFieldError('whatsapp_number') && whatsapp_number.valid && whatsapp_number.dirty">
+                                    {{'user.signup.message.success.phone'|translate}}
+                                </div>
+                                <small class="text-muted" *ngIf="whatsapp_number.pending">
+                                    <i class="fa fa-spinner fa-spin"></i> {{'user.signup.message.checking'|translate}}
+                                </small>
+                            </div> -->
                         </div>
+
                         <div class="col-md-6 tab_2">
+                            <!-- Country -->
                             <div class="form-group">
                                 <label for="country">{{'user.signup.country'|translate}}</label><span>*</span>
-                                <select id="country" [(ngModel)]="selectedCountry" (change)="onCountryChange($event)" [formControl]="country" name="country" class="form-control" required="required">
-                                    <option *ngFor="let country of countries" [value]="country.isoCode">{{ country.name }}</option>
+                                <select id="country" 
+                                        [(ngModel)]="selectedCountry" 
+                                        (change)="onCountryChange($event)" 
+                                        formControlName="country" 
+                                        name="country" 
+                                        class="form-control"
+                                        [class.is-invalid]="hasFieldError('country')"
+                                        required>
+                                    <option value="">{{'user.signup.select-country'|translate}}</option>
+                                    <option *ngFor="let country of countries" [value]="country.isoCode">
+                                        {{ country.name }}
+                                    </option>
                                 </select>
+                                <div class="invalid-feedback" *ngIf="hasFieldError('country')">
+                                    {{ getFieldError('country') }}
+                                </div>
                             </div>
-                            <div class="error" *ngIf="country.dirty">
-                                <p *ngIf="country.hasError('required')">
-                                    {{'user.signup.message.error.country'|translate}}
-                                </p>
-                            </div>
+
+                            <!-- City -->
                             <div class="form-group">
-                                <label for="city">{{'user.signup.city'|translate}}</label>
-                                <select [(ngModel)]="selectedCity" [formControl]="city" name="city" id="city" class="form-control" required="required">
+                                <label for="city">{{'user.signup.city'|translate}}</label><span>*</span>
+                                <select [(ngModel)]="selectedCity" 
+                                        formControlName="city" 
+                                        name="city" 
+                                        id="city" 
+                                        class="form-control"
+                                        [class.is-invalid]="hasFieldError('city')"
+                                        required>
+                                    <option value="">{{'user.signup.select-city'|translate}}</option>
                                     <option *ngFor="let city of cities" [value]="city.name">
                                         {{ city.name }}
                                     </option>
                                 </select>
+                                <div class="invalid-feedback" *ngIf="hasFieldError('city')">
+                                    {{ getFieldError('city') }}
+                                </div>
                             </div>
-                            <div class="error" *ngIf="city.dirty">
-                                <p *ngIf="city.hasError('required')">
-                                    {{'user.signup.message.error.city'|translate}}
-                                </p>
-                            </div>
+
+                            <!-- Neighborhood -->
                             <div class="form-group">
-                                <label for="neighborhood">{{'user.signup.neighborhood'|translate}}</label>
-                                <input id="neighborhood" class="form-control" type="text" [formControl]="neighborhood" name="neighborhood">
-                                
+                                <label for="neighborhood">{{'user.signup.neighborhood'|translate}}</label><span>*</span>
+                                <input id="neighborhood" 
+                                    class="form-control" 
+                                    [class.is-invalid]="hasFieldError('neighborhood')"
+                                    type="text" 
+                                    formControlName="neighborhood" 
+                                    name="neighborhood">
+                                <div class="invalid-feedback" *ngIf="hasFieldError('neighborhood')">
+                                    {{ getFieldError('neighborhood') }}
+                                </div>
                             </div>
-                            <div class="error" *ngIf="neighborhood.dirty">
-                                <p *ngIf="city.hasError('required')">
-                                    {{'user.signup.message.error.neighborhood'|translate}}
-                                </p>
-                            </div>
-                            
+
+                            <!-- Password -->
+                            <!-- <div class="form-group"> -->
+                                <!-- <label for="password">{{'user.signup.password-1'|translate}}</label><span>*</span>
+                                <input id="password" 
+                                    class="form-control" 
+                                    [class.is-invalid]="hasFieldError('password')"
+                                    type="password" 
+                                    formControlName="password" 
+                                    name="password">
+                                <div class="invalid-feedback" *ngIf="hasFieldError('password')">
+                                    {{ getFieldError('password') }}
+                                </div> -->
+                                <!-- Indicateur de force du mot de passe -->
+                                <!-- <div class="password-strength" *ngIf="password.value && password.value.length > 0">
+                                    <div class="progress" style="height: 5px;">
+                                        <div class="progress-bar" 
+                                            [class.bg-danger]="getPasswordStrength() === 'weak'"
+                                            [class.bg-warning]="getPasswordStrength() === 'medium'"
+                                            [class.bg-success]="getPasswordStrength() === 'strong'"
+                                            [style.width.%]="getPasswordStrengthPercentage()">
+                                        </div>
+                                    </div>
+                                    <small class="text-muted">
+                                        {{'user.signup.password.strength.' + getPasswordStrength()|translate}}
+                                    </small>
+                                </div> -->
+                            <!-- </div> -->
+
+                            <!-- Confirm Password -->
+                            <!-- <div class="form-group">
+                                <label for="passwordConfirm">{{'user.signup.confirm-password'|translate}}</label><span>*</span>
+                                <input id="passwordConfirm" 
+                                    class="form-control" 
+                                    [class.is-invalid]="hasFieldError('passwordConfirm')"
+                                    [class.is-valid]="!hasFieldError('passwordConfirm') && passwordConfirm.valid && passwordConfirm.dirty"
+                                    type="password" 
+                                    formControlName="passwordConfirm" 
+                                    name="passwordConfirm">
+                                <div class="invalid-feedback" *ngIf="hasFieldError('passwordConfirm')">
+                                    {{ getFieldError('passwordConfirm') }}
+                                </div>
+                                <div class="valid-feedback" *ngIf="!hasFieldError('passwordConfirm') && passwordConfirm.valid && passwordConfirm.dirty">
+                                    {{'user.signup.message.success.password-match'|translate}}
+                                </div>
+                            </div> -->
+
+                            <!-- WhatsApp Number -->
                             <div class="form-group">
-                                <label for="password">{{'user.signup.password'|translate}}</label><span>*</span>
-                                <input id="password" class="form-control" type="password" [formControl]="password" formControlName="password"name="password">
-                            </div>
-                            <div class="error" *ngIf="password.dirty && !password.valid">
-                                <p *ngIf="password.hasError('required')">
-                                    {{'user.signup.message.error.password'|translate}}
-                                </p>
-                                
-                                <p *ngIf="password.hasError('minlength')">
-                                    {{'user.signup.message.error.password-1'|translate}}
-                                </p>
-                            </div>
-                            <div class="form-group">
-                                <label for="confimpassword">{{'user.signup.confirm-password'|translate}}</label><span>*</span>
-                                <input id="confimpassword" class="form-control" type="password" [formControl]="passwordConfirm" formControlName="passwordConfirm" name="passwordConfirm">
-                            </div>
-                            <div class="error" *ngIf="passwordConfirm.dirty && !passwordConfirm.valid">
-                                <p *ngIf="passwordConfirm.hasError('required')">
-                                    {{'user.signup.message.error.confirm-password'|translate}}
-                                </p>
-                                <p *ngIf="signupForm.errors?.['passwordsDoNotMatch'] && passwordConfirm?.touched">
-                                    {{'user.signup.message.error.confirm-password-1'|translate}}
-                                </p>
+                                <label for="whatsapp_number">{{'user.signup.whatsapp-number'|translate}}</label><span>*</span>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">+{{phoneCode}}</span>
+                                    </div>
+                                    <input id="whatsapp_number" 
+                                        class="form-control" 
+                                        [class.is-invalid]="hasFieldError('whatsapp_number')"
+                                        [class.is-valid]="!hasFieldError('whatsapp_number') && whatsapp_number.valid && whatsapp_number.dirty"
+                                        type="tel" 
+                                        formControlName="whatsapp_number" 
+                                        name="whatsapp_number"
+                                        placeholder="{{'user.signup.whatsapp-placeholder'|translate}}">
+                                </div>
+                                <div class="invalid-feedback" *ngIf="hasFieldError('whatsapp_number')">
+                                    {{ getFieldError('whatsapp_number') }}
+                                </div>
+                                <div class="valid-feedback" *ngIf="!hasFieldError('whatsapp_number') && whatsapp_number.valid && whatsapp_number.dirty">
+                                    {{'user.signup.message.success.phone'|translate}}
+                                </div>
+                                <small class="text-muted" *ngIf="whatsapp_number.pending">
+                                    <i class="fa fa-spinner fa-spin"></i> {{'user.signup.message.checking'|translate}}
+                                </small>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Submit Button -->
                     <div class="row signup-button mb-3">
                         <div class="col-12">
-                            <button type="submit" [disabled]="!this.signupForm.valid" (click)="handleSubmit()" class=" text-center d-flex justify-content-center align-items-center m-auto">
-                                <p class="m-0">{{'user.signup.login-text'|translate}}</p>
+                            <button type="submit" 
+                                    [disabled]="!signupForm.valid || isSubmitting"
+                                    class="btn btn-primary border-0 btn-block text-center d-flex justify-content-center align-items-center m-auto">
+                                <span *ngIf="isSubmitting" class="spinner-border spinner-border-sm me-2" role="status"></span>
+                                <span *ngIf="!isSubmitting">{{'user.signup.submit-button'|translate}}</span>
+                                <span *ngIf="isSubmitting">{{'user.signup.submitting'|translate}}</span>
                             </button>
                         </div>
                     </div>
+
+                    <!-- Form Summary 
+                    <div class="row" *ngIf="signupForm.invalid && signupForm.touched">
+                        <div class="col-12">
+                            <div class="alert alert-warning">
+                                <h6>{{'user.signup.form-errors-title'|translate}}</h6>
+                                <ul class="mb-0">
+                                    <li *ngFor="let error of getFormErrors()">{{ error }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>-->
                 </form>
             </div>
+
+            <!-- Right Content -->
             <div class="col-md-4 content-right">
                 <div class="row label-site">
                     <div class="col-12 d-flex justify-content-end">
@@ -144,7 +285,11 @@
                 </div>
                 <div class="row d-flex justify-content-center signup-text">
                     <div class="col-md-12">
-                        <P class="text-end signup-text-right">{{'user.signup.text-line-1'|translate}} <br> {{'user.signup.text-line-2'|translate}} <br>{{'user.signup.text-line-3'|translate}}</P>
+                        <p class="text-end signup-text-right">
+                            {{'user.signup.text-line-1'|translate}} <br>
+                            {{'user.signup.text-line-2'|translate}} <br>
+                            {{'user.signup.text-line-3'|translate}}
+                        </p>
                     </div>
                 </div>
                 <div class="row d-flex justify-content-start signup-image-content">

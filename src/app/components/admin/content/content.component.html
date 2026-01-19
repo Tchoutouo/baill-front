@@ -42,14 +42,14 @@
                         <div class="">
                             <div class="row g-0 finger align-items-center my_acc_shadow" id="pict_parent" [routerLink]="['/admin/myAccount']" aria-current="page" >
                                 <div class="col-md-12 p col-4 p-0 image_profile" id="profil-picture">
-                                    <div class="image-profile img-profile my_acc_shadow_pic" id="picture_child" style="background-image: url('../../../../assets/images/image-user.jpeg');">
+                                    <div class="image-profile img-profile my_acc_shadow_pic" id="picture_child" style="background-image: url('{{user_picture}}');">
                 
                                     </div>
                                 </div>
                                 <div class="col-md-12 col-8 d-block  d-md-none text-hover" id="profil-text">
                                     <div class="py-2 pe-3">
                                         <h4 class="card-title text-dark">{{userName}}</h4>
-                                        <p class=""><small class="d-block d-md-none text-dark text-hover wrap-text">{{email}}</small></p>
+                                        <p class="m-0"><small class="d-block d-md-none text-dark text-hover wrap-text">{{email}}</small></p>
                                     </div>
                                 </div>
                             </div>
@@ -112,7 +112,7 @@
                         <div class="col-md-12 d-flex justify-content-center mt-5" >
                             <div class="row m-0 p-0 w-fit-content">
                                 <div class="col-md-12  d-flex justify-content-end content-logout ">
-                                    <button type="button" class="btn d-flex align-items-center " (click)="handleConfirmLogOut(true)">
+                                    <button type="button" class="btn d-flex align-items-center h-fit-content" (click)="handleConfirmLogOut(true)">
                                         <p class="d-md-none d-block text-hover" >{{'aside.logout'|translate}}</p>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-left  fw-bolder" viewBox="0 0 16 16">
                                             <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z"/>

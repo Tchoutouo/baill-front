@@ -48,47 +48,39 @@ export class PaymentItemComponent  {
   }
 
    
-
-  async handlePayment(type: string | null = null, event?: MouseEvent) {
-        // 💡 1. Si un event est fourni, vérifier s'il vient d'un input (pour ignorer)
-    if (event) {
-      const tagName = (event.target as HTMLElement).tagName.toLowerCase();
-      if (['input', 'button', 'select', 'textarea', 'label'].includes(tagName)) {
-        return; // Ignore les clics dans les champs de formulaire
-      }
-    }
-
+async handlePayment(type: string | null = null, event?: Event) {
+    // Si c'est un clic pour choisir le mode de paiement
     if (type) {
-      this.showForm(type);
-    }else{
-      this.createPayMeth = true
+        this.showForm(type);
+        return; // On sort après avoir affiché le formulaire
     }
 
+    // Le reste ne concerne que Stripe
     if (!this.stripe || !this.cardNumberElement) {
-      this.errorMessage = 'Stripe ou l\'élément de carte n\'est pas initialisé.';
-      return;
+        this.errorMessage = 'Stripe ou l\'élément de carte n\'est pas initialisé.';
+        return;
     }
 
+    this.createPayMeth = true;
+    
     try {
-      // Créez un PaymentMethod avec Stripe
-      const { paymentMethod, error } = await this.stripe.createPaymentMethod({
-        type: 'card',
-        card: this.cardNumberElement,
-      });
+        const { paymentMethod, error } = await this.stripe.createPaymentMethod({
+            type: 'card',
+            card: this.cardNumberElement,
+        });
 
-      if (error) {
-        this.errorMessage = error.message;
-        this.createPayMeth = false;
-      } else {
-        paymentMethod['type'] = 'stripe';
-        this.payDatas.emit(paymentMethod);
-        this.createPayMeth = true;
-        // console.log('Payment method created:', paymentMethod, paymentMethod.type);
-      }
+        if (error) {
+            this.errorMessage = error.message;
+            this.createPayMeth = false;
+        } else {
+            paymentMethod['type'] = 'stripe';
+            this.payDatas.emit(paymentMethod);
+        }
     } catch (error: any) {
-      this.errorMessage = 'Erreur lors de la création du PaymentMethod: ' + error.message;
+        this.errorMessage = 'Erreur lors de la création du PaymentMethod: ' + error.message;
+        this.createPayMeth = false;
     }
-  }
+}
 
   showForm(type: string) {
     this.showStripeForm = type.toLowerCase() === 'stripe' && !this.showStripeForm;

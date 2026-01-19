@@ -1,4 +1,5 @@
 export interface User {
+    profil_code?: string ;
     id?: number,
     username: string,
     first_name?: string,

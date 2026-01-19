@@ -17,7 +17,6 @@ export class ImageViewComponent {
   errorMessage : string = "";
 
   @Output() imageList_ = new EventEmitter<any>()
-
   
   constructor (){}
 

@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { HomeService } from '../../../services/guest/home.service';
+
+// Components
 import { BannerComponent } from "../banner/banner.component";
 import { ProductsHightlightComponent } from "../products-hightlight/products-hightlight.component";
 import { ProductListComponent } from "../product-list/product-list.component";
@@ -6,31 +10,59 @@ import { CategoriesListComponent } from "../categories-list/categories-list.comp
 import { PaginatorComponent } from "../paginator/paginator.component";
 import { HeaderComponent } from "../header/header.component";
 import { FooterComponent } from "../footer/footer.component";
-import { Subscription } from 'rxjs';
-import { HomeService } from '../../../services/guest/home.service';
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [BannerComponent, ProductsHightlightComponent, ProductListComponent, CategoriesListComponent, PaginatorComponent, HeaderComponent, FooterComponent],
+  imports: [
+    BannerComponent,
+    ProductsHightlightComponent,
+    ProductListComponent,
+    CategoriesListComponent,
+    PaginatorComponent,
+    HeaderComponent,
+    FooterComponent
+  ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })
 export class MainComponent {
-  numbers: number[] = [1, 2, 3, 4, 2, 3, 4, 5];
 
-  productLIst : Subscription | null = null;
-  products : Array<any> | null = null;
-  categories : Array<any> = []
+  // Liste des produits & catégories
+  productListSub: Subscription | null = null;
+  products: Array<any> | null = null;
+  categories: Array<any> = [];
 
+  // Filtres envoyés à <app-product-list>
+  productFilters = {
+    categ: null,
+    lang: 'fr ',
+    amount_min: null,
+    amount_max: null,
+    asc: null,
+    user_id: null,
+    country: null,
+    city: null
+  };
 
-  constructor(private homeServ : HomeService){}
+  constructor(private homeServ: HomeService) {}
 
-  ngOnInit(){
-    this.iniComponent()
+  ngOnInit() {
+    this.initComponent();
   }
 
-  iniComponent(){
-    
+  initComponent() {
+   
+  }
+
+  // Reçoit les données depuis <app-categories-list>
+  onFilterChanged(data: any) {
+    this.productFilters = {
+      ...this.productFilters,
+      categ: data.categ ?? this.productFilters.categ,
+      amount_min: data.amount_min ?? null,
+      amount_max: data.amount_max ?? null,
+      asc: data.asc ?? null
+    };
   }
 }

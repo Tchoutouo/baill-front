@@ -22,7 +22,12 @@
         "unlock": "Unlock",
         "category": "Categories",
         "anounce": "Ads",
-        "pay": "Pay"
+        "pay": "Pay",
+        "reset-password": "Reset Password",
+        "recive-link": "Send Recovery Email",
+        "send": "Send",
+        "reset": "Reset",
+        "traitement-en-cours": "Processing..."
     },
     "status":{
         "active": "Active",
@@ -95,7 +100,7 @@
             }
         },
         "signup":{
-            "password":"Password",
+            "password-1":"Password",
             "confirm-password":"Confirm your password",
             "username":"User name",
             "name": "Names",
@@ -105,12 +110,18 @@
             "neighborhood": "Neighborhood",
             "email":"Email",
             "whatsapp-number":"Phone(Whatsapp)",
-            "title":"Register",
+            "whatsapp-placeholder": "Enter your number",
+            "title":"Create an account",
             "text-account":"You already have an account",
             "login-text":"Log in",
             "text-line-1":"I join Bailleurnet",
-            "text-line-2":"with my pocket compass",
+            "text-line-2":"my pocket compass",
             "text-line-3":"",
+            "select-country": "Select a country",
+            "select-city": "Select a city",
+            "submit-button": "Sign up",
+            "submitting": "Registration in progress...",
+            "form-errors-title": "Please correct the following errors:",
             "message":{
                 "error":{
                     "password":"password is required.",
@@ -125,12 +136,82 @@
                     "neighborhood": "Please choose your neighborhood.",
                     "email-1":"Email is required.",
                     "email-2":"Email is not in the correct format.",
-                    "whatsapp-number":"Phone(Whatsapp)"
+                    "whatsapp-number":"Phone(Whatsapp)",
+                    "username": {
+                        "required": "Username is required",
+                        "exists": "This username is already taken"
+                    },
+                    "last_name": {
+                        "required": "Last name is required"
+                    },
+                    "first_name": {
+                        "required": "First name is required"
+                    },
+                    "email": {
+                        "required": "Email address is required",
+                        "invalid": "Email address is not valid",
+                        "exists": "This email address is already in use"
+                    },
+                    "whatsapp_number": {
+                        "required": "WhatsApp number is required"
+                    },
+                    "phone": {
+                        "invalid": "Phone number is not valid",
+                        "exists": "This phone number is already in use"
+                    },
+                    "country": {
+                        "required": "Country is required"
+                    },
+                    "city": {
+                        "required": "City is required"
+                    },
+                    "neighborhood": {
+                        "required": "Neighborhood is required"
+                    },
+                    "password": {
+                        "required": "Password is required",
+                        "minlength": "Password must contain at least 8 characters",
+                        "strength": "Password must contain at least one lowercase letter, one uppercase letter, one digit and one special character",
+                        "mismatch": "Passwords do not match"
+                    },
+                    "passwordConfirm": {
+                        "required": "Password confirmation is required"
+                    }
+                },
+                "success": {
+                    "username": "Username available",
+                    "email": "Email address available",
+                    "phone": "Phone number available",
+                    "password-match": "Passwords match"
                 },
                 "notif":{
                     "success": "Your account has been successfully registered !!",
-                    "warning": "An error occurred during the operation"
+                    "send-identification-mail": " Your login credentials have been sent to your email address. Please check your inbox.", 
+                    "warning": "An error occurred during the operation",
+                    "error": "An unexpected error occurred"
+                },
+                "form": {
+                    "invalid": "Please correct the errors in the form"
                 }
+            },
+            "password": {
+                "strength": {
+                    "weak": "Weak",
+                    "medium": "Medium",
+                    "strong": "Strong"
+                }
+            },
+            "fields": {
+                "username": "Username",
+                "last_name": "Last name",
+                "first_name": "First name",
+                "email": "Email",
+                "whatsapp_number": "WhatsApp number",
+                "country": "Country",
+                "city": "City",
+                "neighborhood": "Neighborhood",
+                "password": "Password",
+                "passwordConfirm": "Password confirmation"
             }
         },
         "signin":{
@@ -139,7 +220,45 @@
             "text-login": "If you don't have an account",
             "title-signup": "Register",
             "email": "E-mail or Phone",
-            "password": "Password"
+            "password": "Password",
+            "forgot-password": "Forgot password?",
+            "message": {
+                "error": {
+                    "email-tel": "Email or phone number is required.",
+                    "email-format": "Email format is not valid.",
+                    "password": "Password is required.",
+                    "invalid-credentials": "The credentials are incorrect.",
+                    "error-connection": "Connection error. Please try again later.",
+                    "account-locked": "Your account is locked. Please contact the administrator."
+                }
+            }
+            
+        },
+        "reset-password": {
+            "title": "Reset Password",
+            "description": "Please enter your email address to receive a password reset link.",
+            "email": "Email",
+            "button-send": "Send",
+            "new-password": "New Password",
+            "confirm-new-password": "Confirm New Password",
+            "back-to-login": "Back to Login",
+            "message": {
+                "success-title": "Password Reset Successful",
+                "error-title": "Password Reset Error",
+                "email-required": "Email address is required.",
+                "email-invalid": "Email address is not valid.",
+                "success": "A password reset link has been sent to your email address. Please check your inbox.",
+                "error": "An error occurred while sending the reset link.",
+                "token-invalid": "The password reset link is invalid or has expired.",
+                "invalid-link": "The password reset link is invalid.",
+                "verification-email": "Verifying email...",
+                "verification": "Verifying...",
+                "email-yes": "Email found",
+                "no-email": "No account associated with this email",
+                "mail-send-recove": "Sending recovery email...",
+                "mail-send-recove-erreur": "Error sending recovery email",
+                "error-validation": "Validation error"
+            }
         },
         "product-detail":{
             "cat": "Categories",
