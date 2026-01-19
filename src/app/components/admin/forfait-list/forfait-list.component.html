@@ -1,22 +1,24 @@
- <!-- Modal -->
-
-      <div class="modal-content m_auto">
-        <div class="modal-body py-4">
-            <h4 class="modal-title title-list pb-4 px-3">Choisissez un forfait</h4>
-            <div class="row mx-0 justify-content-center">
-                <div class="col-md-4 mb-md-0 mb-3" data-bs-dismiss="modal" *ngFor = "let item of abonment_list">
-                    <ng-container >
-                        <app-forfait-item (click)="sendData(item.id)" [abonment] = "item"></app-forfait-item>
-                    </ng-container>
-                </div>
+<!-- Modal -->
+<div class="modal-content m_auto">
+    <div class="modal-body py-4">
+        <h4 class="modal-title title-list pb-4 px-3">{{'admin.ads.select-package'|translate}}</h4>
+        <div class="row mx-0 justify-content-center">
+            <div class="col-md-4 mb-md-0 mb-3" *ngFor = "let item of abonment_list">
+                <ng-container>
+                    <!-- <app-forfait-item (click)="sendData(item)"  [abonment] = "item"></app-forfait-item> -->
+                    <app-forfait-item
+                        [abonment]="item"
+                        (selectForfait)="sendData($event.forfait, $event.quantity)">
+                    </app-forfait-item>
+                </ng-container>
             </div>
         </div>
-        
-        <div class="d-flex justify-content-end pe-4 pb-4 ">
-            <button type="button" class="btn bg_grey-15 text-white" id="cancel_btn" data-bs-dismiss="modal">Annuler</button>
-        </div>
-        
-      </div>
+    </div>
+    
+    <div class="d-flex justify-content-end pe-4 pb-4 ">
+        <button type="button" class="btn bg_grey-15 text-white" id="cancel_btn" data-bs-dismiss="modal">{{'button.cancel'|translate}}</button>
+    </div>
+</div>
   
 
 

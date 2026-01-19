@@ -10,13 +10,18 @@ import { LocalStorageService } from '../../../services/admin/local-storage.servi
 import { NoficationsService } from '../../../services/nofications.service';
 import { Router } from '@angular/router';
 import { ForfaitListComponent } from '../forfait-list/forfait-list.component';
+import { GetContryByCodePipe } from "../../../pipes/get-contry-by-code.pipe";
+import { CheckProfilService } from '../../../services/check-profil.service';
+import { AlertConfirmService } from '../../../services/alert-confirm.service';
+import { Alert } from '../../../models/alert';
+import { AlertConfirmComponent } from "../../alert-confirm/alert-confirm.component";
 
 
 
 @Component({
   selector: 'app-annouce-details',
   standalone: true,
-  imports: [CommonModule, ForfaitListComponent],
+  imports: [CommonModule, ForfaitListComponent, GetContryByCodePipe, AlertConfirmComponent],
   templateUrl: './annouce-details.component.html',
   styleUrl: './annouce-details.component.css'
 })
@@ -29,6 +34,8 @@ export class AnnouceDetailsComponent {
   other_announces : any = [];
   announcesSub : Subscription | undefined
   annouce : any ;
+  showAlert : any;
+  isAdmin : boolean = false ;
   annouceSub : Subscription | undefined;
   imagesList : Array<string> = ['']; 
   data_annouce : any[] = [];
@@ -36,13 +43,15 @@ export class AnnouceDetailsComponent {
   poperty_names : string[] = ['title','price', 'country', 'location', 'neighborhood', 'description']
    
   constructor(private route : ActivatedRoute, private homeServ : HomeService, private entytServ : EntityServiceService,
-    private localStorage : LocalStorageService, private notification : NoficationsService, private router: Router
-  ){
+    private localStorage : LocalStorageService, private notification : NoficationsService, private router: Router, private checkProfil: CheckProfilService
+    ,private alertConfirm : AlertConfirmService,){
       
   }
 
   ngOnInit(){
     this.initComponent();
+    this.isAdmin = this.checkProfil.isAdmin();
+
   }
 
   initComponent(){
@@ -91,21 +100,35 @@ export class AnnouceDetailsComponent {
         const user = this.localStorage.getItem('user')
         
         const user_id = user?.id;
+
+        if (newStatus.key) {
+          let alert = new Alert();
+          alert.message = "";
+          alert.cancel_label = "";
+          this.showAlert = false;
+          alert.success_label = "";
+          alert.display = false;
+          this.alertConfirm.emitAlert(alert);
+          if (newStatus.key?.status !== -1) {
+            newStatus = 1 ;
+          }else{
+            newStatus = -1;
+          }
+        } 
         
         console.log({test : ann_id})
         let resul = this.entytServ.changeAnnouceStatus(user_id, ann_id, newStatus).subscribe({
           next: (datas: any) => { 
+            console.log(datas);
             
             const notif = new Notification();
             if (datas.success) {
-              notif.message = "Annonce crée avec success !"
+              notif.message = "Annonce mise à jour avec success !"
               notif.status = "success";
             }else{
-              notif.message = "Erreur lors de l'enregistrement contacter l'administrateur !"
+              notif.message = "Erreur lors de la mise à jour contacter l'administrateur !"
               notif.status = "warning";
             }
-            this.router.navigate(['/admin']);   
-            
             this.notification.emitNotification(notif);
             
           },
@@ -124,4 +147,18 @@ export class AnnouceDetailsComponent {
   handleSubmit(event : any , id : any){
     console.log(event, id);
   } 
+
+  handleConfirmDisabled(value : boolean, type : string){
+    let alert = new Alert();
+    this.showAlert = true;
+    if (type == '-1') {
+      alert.message = "Est-vous sûr de vouloir débloquer cette annonce ?"
+    }else{
+      alert.message = "Est-vous sûr de vouloir bloquer cette annonce ?"
+    }
+    alert.cancel_label = "Annuler"
+    alert.success_label =  "Oui"
+    alert.display =  value;
+    this.alertConfirm.emitAlert(alert);
+  }
 }

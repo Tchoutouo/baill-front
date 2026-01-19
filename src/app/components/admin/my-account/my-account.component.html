@@ -1,64 +1,64 @@
 <div class="container-fluid p-0">
     <form  class="px-5" [formGroup]="profileForm">
         <div class="row">
-            <h2 class="title-h2 mb-4">Mon compte</h2>
+            <h2 class="title-h2 mb-4">{{ 'admin.profile.title' | translate }}</h2>
             <div class="col-md-3">
                 <div class="form_group mb-3">
-                    <label for="name" class="label-form mb-1">Nom(s)</label>
-                    <input type="text" name="last_name" class="input_field" formControlName="last_name"   id="last_name">
+                    <label for="name" class="label-form mb-1">{{ 'admin.profile.form.last_name' | translate }}</label>
+                    <input type="text" name="last_name" class="input_field"  formControlName="last_name"   id="last_name">
                     <div *ngIf="profileForm.get('last_name')?.invalid && profileForm.get('last_name')?.dirty" class="text-danger">
-                        Le nom est requis.
+                        {{ 'admin.profile.error.last_name' | translate }}
                     </div>
                 </div>
                 
                 <div class="form_group mb-3">
-                    <label for="name" class="label-form mb-1">Prénom(s)</label>
+                    <label for="name" class="label-form mb-1">{{ 'admin.profile.form.first_name' | translate }}</label>
                     <input type="text" name="first_name" class="input_field" formControlName="first_name" id="first_name">
                     <div *ngIf="profileForm.get('first_name')?.invalid && profileForm.get('first_name')?.dirty" class="text-danger">
-                        Le prénoms est requis.
+                        {{ 'admin.profile.error.first_name' | translate }}
                     </div>
                 </div>
                 <div class="form_group mb-3">
-                    <label for="userName" class="label-form mb-1">Nom d’utilisateur</label>
+                    <label for="userName" class="label-form mb-1">{{ 'admin.profile.form.username' | translate }}</label>
                     <input type="text" name="username" class="input_field" formControlName="username" id="userName"/>
                     <div *ngIf="profileForm.get('username')?.invalid && profileForm.get('username')?.dirty" class="text-danger">
-                        Le nom d'utilisateur est requis.
+                        {{ 'admin.profile.error.username' | translate }}
                     </div>
                 </div>
                 <div class="form_group mb-3">
-                    <label for="email" class="label-form mb-1">Email</label>
+                    <label for="email" class="label-form mb-1">{{ 'admin.profile.form.email' | translate }}</label>
                     <input type="email" name="email" class="input_field" formControlName="email"   id="email"/>
                     <div *ngIf="profileForm.get('email')?.invalid && profileForm.get('email')?.touched" class="text-danger">
-                        Email invalide ou manquant.
+                        {{ 'admin.profile.error.email' | translate }}
                     </div>
                 </div>
                 <div class="form_group mb-3">
-                    <label for="phone" class="label-form mb-1">Télephone</label>
+                    <label for="phone" class="label-form mb-1">{{ 'admin.profile.form.phone' | translate }}</label>
                     <input type="tel" name="number" class="input_field" formControlName="number"  id="number"/>
                     <div *ngIf="profileForm.get('number')?.invalid && profileForm.get('number')?.touched" class="text-danger">
-                        Le numéro de téléphone est requis.
+                        {{ 'admin.profile.error.phone' | translate }}
                     </div>
                 </div>
                 <div class="form_group mb-3">
-                    <label for="phone" class="label-form mb-1">Télephone (WhatsApp)</label>
+                    <label for="phone" class="label-form mb-1">{{ 'admin.profile.form.whatsapp' | translate }}</label>
                     <input type="tel" name="phone" class="input_field" formControlName="whatsapp_number" id="phone"/>
                     <div *ngIf="profileForm.get('whatsapp_number')?.invalid && profileForm.get('whatsapp_number')?.touched" class="text-danger">
-                        Le numéro de téléphone whatsapp est requis.
+                        {{ 'admin.profile.error.whatsapp' | translate }}
                     </div>
                 </div>
                 <div class="checkbox-input">
-                    <label for="" class="label-form mb-1">Sexe</label>
+                    <label for="" class="label-form mb-1">{{ 'admin.profile.form.sex' | translate }}</label>
                     <div class="form-check d-flex gap-3">
                         <div class="check-item d-flex gap-1">
                             <input type="radio" class="form-check rounded-circle" formControlName="sex" value="1"  name="sex" id="H" [checked]="user.sex == true">
-                            <label for="H" class="fs-6" >H</label>
+                            <label for="H" class="fs-6" >{{ 'admin.profile.gender.male' | translate }}</label>
                         </div>
                         <div class="check-item d-flex gap-1">
                             <input type="radio"  class="form-check"  name="sex" id="F" formControlName="sex"  value="0"[checked]="user.sex == false">
-                            <label for="F" class="fs-6" >F</label>
+                            <label for="F" class="fs-6" >{{ 'admin.profile.gender.female' | translate }}</label>
                         </div>
                         <div *ngIf="profileForm.get('sex')?.invalid && profileForm.get('sex')?.touched" class="text-danger">
-                            Veuillez choisir votre sexe
+                            {{ 'admin.profile.error.sex' | translate }}
                         </div>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
 
             <div class="col-md-3 offset-md-1">
                 <div class="form_group mb-3">
-                    <label for="country" class="label-form mb-1">Pays</label>
+                    <label for="country" class="label-form mb-1">{{ 'admin.profile.form.country' | translate }}</label>
                     <select id="country" formControlName="country"(change)="onCountryChange($event)" name="country" class="form-control" required="required">
                         <option *ngFor="let country of countries" [value]="country.isoCode">{{ country.name }}</option>
                     </select>
@@ -74,7 +74,7 @@
                     <!-- <i class="fa-solid fa-sort-down text-success" style="position:relative; bottom: 22px; left: Opx;"></i> -->
                 </div>
                 <div class="form_group mb-3">
-                    <label for="city" class="label-form mb-1">Ville</label>
+                    <label for="city" class="label-form mb-1">{{ 'admin.profile.form.city' | translate }}</label>
                     <select formControlName="city" name="city" id="city" class="form-control" required="required">
                         <option *ngFor="let city of cities" [value]="city.name" [selected]="city.name == user.city">
                             {{ city.name }}
@@ -82,11 +82,11 @@
                     </select>
                 </div>
                 <div class="form_group mb-3">
-                    <label for="neighborhood" class="label-form mb-1">Quartier</label>
+                    <label for="neighborhood" class="label-form mb-1">{{ 'admin.profile.form.neighborhood' | translate }}</label>
                     <input type="text" name="neighborhood" class="input_field" formControlName="neighborhood"  id="neighborhood">
                 </div>
                 <div class="form_group mb-3">
-                    <label for="site_url" class="label-form mb-1">Lien du site web</label>
+                    <label for="site_url" class="label-form mb-1">{{ 'admin.profile.form.site_url' | translate }}</label>
                     <input type="text" name="site_url" class="input_field" formControlName="site_url" id="site_url">
                 </div>
                 <!-- <div class="form_group mb-3">
@@ -111,7 +111,7 @@
                     {{ fileError }}
                 </div>
                 <div class="update-picture justify-content-center d-flex align-items-center gap-2">
-                    <span>Photo</span>
+                    <span>{{ 'admin.profile.form.photo' | translate }}</span>
                     <label for="picture">
                         <input type="file" name="picture"  (change)="addImage($event)" class="d-none" id="images" accept="image/*"/>
 
@@ -121,12 +121,12 @@
                     </label>
                 </div>
 
-                <div class="field-password py-3 px-5 my-3">
-                    <h3 class="text-start py-3">Securité</h3>
-                    <label for="password" class="password-pass d-flex justify-content-start mb-2">Mot de passe</label>
+                <div class="field-password py-3 px-lg-5 px-3 my-3 my-lg-3">
+                    <h3 class="text-start py-3">{{ 'admin.profile.security.title' | translate }}</h3>
+                    <label for="password" class="password-pass d-flex justify-content-start mb-2">{{ 'admin.profile.security.password' | translate }}</label>
                     <div class="d-flex gap-3 pb-1 align-items-center">
                         <div class="password-input-group">
-                            <input type="{{type}}" name="password"  class="password-profile" id="password">
+                            <input type="{{type}}" readonly name="password" disabled="true" value="5555555"  class="password-profile" id="password">
                             <i class="fa-solid fa-eye{{icon_eyes}} icon_pass" (click)="chanIcon($event)"></i>
                         </div>
                         <a class="add_caract" (click)="openModalPassword($event)">
@@ -139,7 +139,7 @@
         </div>
         <div class="row mt-5">
             <div class="col-md-12">
-                <button (click)="UpdateProfil()" class="btn-form bg_blue" [disabled]="profileForm.invalid">Modifier les champs</button>
+                <button (click)="UpdateProfil()" class="btn-form bg_blue" [disabled]="profileForm.invalid">{{ 'admin.profile.button.update' | translate }}</button>
             </div>
         </div>
     </form>
@@ -147,20 +147,20 @@
     <div class="modal-backdrop" *ngIf="isModalOpen">
         <div class="modal_password">
             <div class="modal_header">
-                <h3 class="modal_title">Modification du mot de passe</h3>
+                <h3 class="modal_title">{{ 'admin.profile.modal.title' | translate }}</h3>
                 <button type="button" class="close-btn" (click)="closeModal()">×</button>
             </div>
             <div class="modal_body">
-                <form (ngSubmit)="changePassword()" #form="ngForm" id="formPassord">
+                <form  #form="ngForm" id="formPassord">
                     <div class="mb-3">
-                        <label for="name" class="form-label">Ancien mot de passe</label>
-                        <input type="password" class="form-control" id="name" name="password" ngModel required>
+                        <label for="name" class="form-label">{{ 'admin.profile.modal.old_password' | translate }}</label>
+                        <input type="password" class="form-control" id="name" #password name="password" ngModel required>
                     </div>
                     <div class="mb-3">
-                        <label for="name" class="form-label">Nouveau mot de passe</label>
-                        <input type="password" class="form-control" id="name" name="newPassword" ngModel required>
+                        <label for="name" class="form-label">{{ 'admin.profile.modal.new_password' | translate }}</label>
+                        <input type="password" class="form-control" id="name" #newPassword name="newPassword" ngModel required>
                     </div>
-                    <button type="submit" id="submit-button" class="btn btn-primary" [disabled]="form.invalid">Sauvegarder</button>
+                    <button type="submit" (click)="changePassword(newPassword.value, password.value)" id="submit-button" class="btn btn-primary" [disabled]="form.invalid">{{ 'button.save' | translate }}</button>
                 </form>
             </div>
         </div>

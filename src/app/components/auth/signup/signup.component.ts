@@ -152,12 +152,13 @@ export class SignupComponent implements OnInit{
             }
             this.router.navigate(['/signin']);
           }else{
-            notif.message = this.entityService.getTranslatedText('user.signup.message.notif.error');
+            notif.message = this.entityService.getTranslatedText('user.signup.message.notif.warning');
             notif.status = "warning"
           }
           this.notification.emitNotification(notif);
         },
         error: (error : any) => {
+          this.phoneCode = "";
           console.log("erreur lors de l'enregistrement d'un utilisateur:",error);
         }
       })

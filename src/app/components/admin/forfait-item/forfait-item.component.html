@@ -1,4 +1,4 @@
-<div class="forfait-item py-4 px-3">
+<div class="forfait-item py-4 d-flex flex-column h-100 justify-content-between px-3">
     <div class="forfait-title pb-0">
         <h2>{{abonment?.name}}</h2>
     </div>
@@ -6,19 +6,41 @@
     <div class="row align-items-center pt-3">
         <div class="col-9 pe-0">
             <div class="price">
-                <h4 class="fs_big m-0">{{abonment?.price}} $<span class="fs_small"></span></h4>
+                <h4 class="fs_big m-0">{{ this.abonnment_price | currency:'XAF':'symbol':'1.0-0':'fr-CM'}}<span class="fs_small"></span></h4>
             </div>
         </div>
         <div class="col-3 d-flex justify-content-end">
             <div class="reduction">
-                -10%
+                {{abonment?.remise}} %
             </div>
         </div>
     </div>
+
+    <div class="form_group" *ngIf="abonment?.type_time === 'M'">
+        <label for="fortait_quantity" class="label-form fs-6 mt-2">Selectioner le nombre de mois souhaité<span class="text-danger mx-2">*</span></label> 
+        <select
+            id="forfait_quantity"
+            class="form-select w-25 mb-2"
+            (change)="onQuantityChange($event)"
+            [value]="quantity">
+            <option *ngFor="let v of monList" [value]="v">{{ v }}</option>
+        </select>
+        <div *ngIf="abonment?.name === '' " class="text-danger">
+            Veuillez entrer un nombre valide.
+        </div>
+    </div>
+    
     <div class="duration mb-3">
-       <!-- {{ abonment?.time}} mois -->
-       {{abonment?.time | formatTime:abonment?.type_time}}
+        {{ abonment?.type_value}} 
+        <!-- {{abonment?.time | formatTime:abonment?.type_time}} -->
+        <!-- {{abonment?.time | formatTime:abonment?.type_time}} -->
     </div>
 
-    <button type="submit"  class="btn-form w-100 bg_blue">Lancer</button>
+    <!-- <button type="submit"  class="btn-form w-100 bg_blue">{{'button.throw'|translate}}</button> -->
+    <button
+        type="button"
+        class="btn-form w-100 bg_blue"
+        (click)="onSelectClick()">
+        {{ 'button.throw' | translate }}
+    </button>
 </div>

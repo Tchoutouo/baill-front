@@ -68,7 +68,7 @@ export class MyAccountComponent implements OnInit {
   ngOnInit(): void {  
     window.scroll(0, 0);  
     this.user = this.localStorage.getItem('user');  
-    this.picture = this.user.picture ?  environment.apiUrlRessources + '/' + this.user.picture : false ;  
+    this.picture = this.user.picture ? this.user.picture : false ;  
     this.countries = Country.getAllCountries();  
     this.selectedCountry = this.user.country;  
     this.cities = City.getCitiesOfCountry(this.selectedCountry);  
@@ -112,6 +112,7 @@ export class MyAccountComponent implements OnInit {
     }  
 
     this.user_logged = this.localStorage.getItem('user');  
+    console.log({cedric : this.user_logged});
     
     const user_id = this.user_logged ? this.user_logged.id : '';
     this.user_di_loggged = this.user_logged ? this.user_logged.id : '';
@@ -120,6 +121,7 @@ export class MyAccountComponent implements OnInit {
 
     this.entityService.update(user_id, formData, entity).subscribe({
       next : (datas : any) =>{
+        console.log(datas);
         
         if(datas.success === true){
           this.router.navigate(['/admin/myAccount']);
@@ -214,11 +216,47 @@ export class MyAccountComponent implements OnInit {
     this.isModalOpen = false;
   }  
 
-  changePassword() {
+  changePassword( new_password: string, old_ppassword :string) {
+
+    console.log(new_password, old_ppassword);
+    let formPass = new FormData();
+    const id = this.localStorage.getItem('user')?.id;
+
+    // formPass.append('password', old_ppassword);
+    // formPass.append('newpassword', old_ppassword);
+
+    if (id) {
+      this.entityService.updatePassword(id, formPass).subscribe({
+        next: (data : any) => {
+            let message = ''
+            let type = ''
+          if (data.success === true) {
+             message = 'Mot de passe modifié avec success';
+             type = 'success';
+          }else{
+            message = 'Mot de passe actuel invalide';
+            type = 'warning';
+          }
+          this.handleNotification(message, type)
+        },
+        error: (error : any) => {
+          console.log(error);
+        }
+      })
+    }else{
+      this.router.navigate(['/signin']);  
+    }
     setTimeout(() => {
       console.log('Formulaire soumis avec succès !');
       this.closeModal(); // Ferme le modal après l'instruction
     }, 1000);
+  }
+
+  private handleNotification(message: any, type:string) {
+    const notif = new Notification();
+    notif.message = message;
+    notif.status = type;
+    this.notification.emitNotification(notif);
   }
 
 }

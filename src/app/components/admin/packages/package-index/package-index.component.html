@@ -13,7 +13,7 @@
                 <input class="form-control me-2 py-1 px-5" id="search_field" 
                     type="search" placeholder="Recherche ...." 
                     aria-label="chercher"
-                    (keyup)="searchValue($event)"
+                    (keyup)="searchValue($event)" 
                     (search)="searchValue($event)"
                 >
                 <i class="fa-solid fa-magnifying-glass position-absolute search_icon"
@@ -44,7 +44,7 @@
                         <th scope="col " class="bord">Nom forfait </th>
                         <th scope="col " class="bord">Prix</th>
                         <th scope="col " class="bord">Durée</th>
-                        <th scope="col " class="bord border-right-1-gray">Utilisation (1%)</th>
+                        <!-- <th scope="col " class="bord border-right-1-gray">Utilisation</th> -->
                         <th scope="col " class="bord">Actions</th>
                     </tr>
                 </thead>
@@ -56,14 +56,15 @@
                                 {{abonnement.name}}
                             </td>
                             <td class="bord-black">
-                                {{abonnement.price | currency}}
+                                {{abonnement.price | currency:'XAF':'symbol':'1.0-0':'fr-CM'}}
                             </td>
                             <td class="bord-black">
-                                {{abonnement.time | formatTime:abonnement.type_time}}
+                                {{abonnement.type_value}}
+                                <!-- {{abonnement.time | formatTime:abonnement.type_time}} -->
                             </td>
-                            <td class="bord-black">
+                            <!-- <td class="bord-black">
                                 {{abonnement.type}}
-                            </td>
+                            </td> -->
                             <!-- Les actions -->
                             <td class="bord-black">
                                 <div class="icon-list d-flex gap-2 justify-content-center">
@@ -103,10 +104,14 @@
             </table>
             
             <!-- Modal -->
-            <div class="modal fade" *ngIf="isModalOpen" id="package" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="packageLabel" aria-hidden="true">
+            <div class="modal fade" id="package" data-bs-backdrop="static" data-bs-keyboard="false"
+                tabindex="-1" aria-labelledby="packageLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <app-package-edit [Abonnememt]="abonnementItem" (isModalOpenChild)="closeModal($event)"></app-package-edit>
+                    <app-package-edit
+                        [Abonnememt]="abonnementItem"
+                        (isModalOpenChild)="closeModal($event)">
+                    </app-package-edit>
                     </div>
                 </div>
             </div>

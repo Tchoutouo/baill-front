@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { EntityServiceService } from '../../../../services/admin/entity-service.service';
 import { Subscription } from 'rxjs';
+import { Modal } from 'bootstrap';
 import { PackageEditComponent } from "../package-edit/package-edit.component";
 import { AlertComponent } from '../../alert/alert.component';
 import { AlertConfirmComponent } from '../../../alert-confirm/alert-confirm.component';
@@ -95,7 +96,7 @@ export class PackageIndexComponent implements OnInit{
         next: (result_search: any) => { 
           if (result_search.success) {
             this.abonment_list = result_search.data.data;
-
+            console.log("liste des abonnements:", this.abonment_list);
             this.paginationDAtas = {
               current : result_search.data?.current_page ,
               next : result_search.data?.current_page + 1 ,
@@ -121,6 +122,7 @@ export class PackageIndexComponent implements OnInit{
         next: (data: any) => { 
           if (data.success) {
             this.abonment_list = data.data.data;
+            console.log("liste des abonnements 2:", this.abonment_list);
             this.paginationDAtas = {
               current : data.data?.current_page ,
               next : data.data?.current_page + 1 ,
@@ -237,34 +239,87 @@ export class PackageIndexComponent implements OnInit{
     }
   }
 
-  updateModal(abonnement: any){
+  updateModal_old(abonnement: any){
     this.isModalOpen = true;
 
     if(abonnement){
       let time;
-      switch (abonnement.type_time) {
-        case 'S':
-            time = abonnement.time/7;
-            break;
-        case 'M':
-            time = abonnement.time/30;
-            break;
-        case 'A':
-            time = abonnement.time/360;
-            break;
-        default:
-            console.log("Periode invalide");
-      }
+      // switch (abonnement.type_time) {
+      //   case 'S':
+      //       time = abonnement.time/7;
+      //       break;
+      //   case 'M':
+      //       time = abonnement.time/30;
+      //       break;
+      //   case 'A':
+      //       time = abonnement.time/360;
+      //       break;
+      //   default:
+      //       console.log("Periode invalide");
+      // }
       abonnement.time = time;
       this.abonnementItem = abonnement;
     }
   }
 
-  closeModal(event: any){
+  closeModal_old(event: any){
     this.isModalOpen = false;
     window.location.reload();
     this.getAbonnement();
 
   }
 
+  updateModal(abonnement: any): void {
+    // Prépare les données de l'abonnement pour le formulaire
+      if(abonnement){
+      let time;
+      // switch (abonnement.type_time) {
+      //   case 'S':
+      //       time = abonnement.time/7;
+      //       break;
+      //   case 'M':
+      //       time = abonnement.time/30;
+      //       break;
+      //   case 'A':
+      //       time = abonnement.time/360;
+      //       break;
+      //   default:
+      //       console.log("Periode invalide");
+      // }
+      // abonnement.time = time;
+      this.abonnementItem = abonnement;
+    }
+
+    // Ouvre le modal Bootstrap si l'élément existe
+    const modalEl = document.getElementById('package');
+    if (modalEl) {
+      const bsModal = Modal.getOrCreateInstance(modalEl);
+      bsModal.show();
+    } else {
+      console.error('Modal #package introuvable dans le DOM.');
+    }
+  }
+
+  closeModal(event: any): void {
+    // Ferme le modal Bootstrap si l'élément existe
+    const modalEl = document.getElementById('package');
+    if (modalEl) {
+      const bsModal = Modal.getOrCreateInstance(modalEl);
+      bsModal.hide();
+    } else {
+      console.error('Modal #package introuvable dans le DOM.');
+    }
+
+    // Nettoyage avant ouverture
+    this.clearBackdrops();
+
+    // Recharge la liste sans recharger toute la page
+    this.getAbonnement();
+  }
+
+  private clearBackdrops(): void {
+    document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
+    document.body.classList.remove('modal-open');
+    location.reload();
+  }
 }

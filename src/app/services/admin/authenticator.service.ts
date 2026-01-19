@@ -41,14 +41,11 @@ export class AuthenticatorService {
       'Accept': 'application/json'
     }); 
 
-    const test = this.fetchCsrfToken().subscribe(response => {  
-      // console.log('CSRF Token:', response);  
-    });  
 
     
     this.http.post(environment.apiUrl+'login', user).subscribe({  
         next: (result: any) => {  
-          // console.log(result);
+          console.log(result);
           
             if (result.success) {  
                 const data: LoginResponse = {  
@@ -125,4 +122,8 @@ export class AuthenticatorService {
     }
     
   
+  isLoggedIn(): any {
+    const user = this.localStorage.getItem('user');
+    return user ? user : false;
+  }
 }

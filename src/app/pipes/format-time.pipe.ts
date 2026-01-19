@@ -23,6 +23,10 @@ export class FormatTimePipe implements PipeTransform {
           time = value/360;
           time = time + ' ' + ' année(s)';
           break;
+      case 'H':
+          time = value;
+          time = time + ' ' + ' heure(s)';
+          break;
       default:
           console.log("Periode invalide");
     }

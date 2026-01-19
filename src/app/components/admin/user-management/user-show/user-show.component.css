@@ -1,0 +1,9 @@
+.fixe_btn_actions{
+    position: sticky;
+    bottom: -3px;
+    background: white;
+}
+
+.fixe_btn_actions .rounded{
+    cursor: pointer;
+}

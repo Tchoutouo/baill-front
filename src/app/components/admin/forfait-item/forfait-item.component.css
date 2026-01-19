@@ -1,10 +1,19 @@
-.forfait-item .forfait-title{
+    .forfait-item .forfait-title{
     font-family: var(--main-font-Quicksand);
     font-size: var(--main-h3-font-size);
     font-weight: var(--main-xl-font-weiht);
     line-height: var(--main-lg-line-height);
     text-align: left;
     color: var(--main-color);
+}
+
+.label-form{
+    font-family: var(--main-font-Quicksand);
+    font-size: var(--main-h4-font-size);
+    font-weight: var(--main-xl-font-weiht);
+    line-height: var(--main-md-line-height);
+    text-align: left;
+    color: var(--main-color-dark);
 }
 
 .forfait-item{
@@ -74,11 +83,15 @@
         color: var(--main-color-green-15);
     }
 
-    .price{
+    .price, .form_group label{
         color: var(--main-color-white);
     }
 
     .btn-form{
         background-color: var(--main-color);
     }
+}
+
+.form_group label{
+    font-size: 12px !important;
 }

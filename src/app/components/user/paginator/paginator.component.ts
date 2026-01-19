@@ -34,7 +34,7 @@ export class PaginatorComponent {
   }
 
   initComponent(){
-    console.log(this.currentPage);
+    // console.log();
     
     if (this.currentPage == 1) {
       this.previous = null ;
@@ -46,13 +46,37 @@ export class PaginatorComponent {
       this.next = null;
     }
     
-    // this.items = [this.previous, this.currentPage, this.next];
   }
 
   SetCurrentPage(page : any){
-    if (page) {
-      this.setPage.emit(page)
+    let newPage : number = page
+
+    if (page === "next") {
+      this.currentPage = this.currentPage + 1 ;
+      if (this.currentPage == this.lastElement) {
+        this.next = null; 
+      }else if (this.next){
+        this.next = this.next + 1
+      }
+      newPage = this.currentPage
     }
+
+    if (page === "prev") {
+      this.currentPage = this.currentPage  - 1 ;
+      if (this.currentPage == 1) {
+        this.previous = null; 
+      }else if(this.previous ) {
+        this.previous = this.previous - 1
+      }
+      newPage = this.currentPage
+    }
+
+
+
+    if (newPage >= 1 && newPage <= this.lastElement) {
+      this.setPage.emit(newPage)
+    }
+
   }
 }
 

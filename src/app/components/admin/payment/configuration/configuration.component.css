@@ -44,6 +44,7 @@
  .btn-not-active{
     color: var(--main-color-gray-20);
     background-color: var(--main-color-gray-15);
+    cursor: not-allowed !important;
 }
 
 .btn-save-change button{
@@ -115,11 +116,22 @@
 
 .check-box input.not-active{
     border: 1px solid var(--main-color-gray-7);
+    cursor: not-allowed !important;
 }
 
 .form-switch .form-check-input:checked:disabled{
     background-color: var(--main-color-gray-7) !important;
+}
 
+.disabled {
+    cursor: not-allowed !important;
+    opacity: 0.5; /* Optionnel, pour montrer visuellement que l'élément est désactivé */
+    pointer-events: none; /* Pour désactiver les événements de souris */
+}
+  
+
+.form-switch .form-check-input:disabled{
+    cursor: not-allowed !important;
 }
 
 .form-switch .form-check-input.active{

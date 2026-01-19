@@ -26,7 +26,6 @@ export class EntityServiceService {
   }
 
   store(entity:string, datas: any){
-    
     return this.http.post(environment.apiUrl+entity, datas)
   }
 
@@ -35,11 +34,13 @@ export class EntityServiceService {
   }
 
   update(id: any, datas: any, entity: string): Observable<any> {
-    // console.log(environment.apiUrl, datas); 
+      console.log(environment.apiUrl, datas); 
+      // Pour afficher les données de l'objet FormData
+      datas.forEach((value:any, key:any) => {
+      console.log(`${key}: ${value}`);
+    });
     
-    const options = {
-      headers: new HttpHeaders({ "Content-Type": "multipart/form-data" }),
-    };
+    
     // return this.http.put(`${environment.apiUrl+entity}/${id}`, datas, options);
     return this.http.post(environment.apiUrl+entity+'/'+id, datas); 
   }
@@ -55,21 +56,30 @@ export class EntityServiceService {
     let user : any = localStorage.getItem('user');
     let user_converted : any = JSON.parse(user);
     let url ;
-    // console.log(JSON.parse(user));
     
     if (user_converted.profil_code) {
       if (user_converted.profil_code == 'SUP_ADMIN' || user_converted.profil_code == 'ADMIN') {
         url = 'annonce_back_admin';
+        return this.http.get(environment.apiUrl+url+'/'+pageLImit+'?page='+pageNumber);
       }else if(user_converted.profil_code == 'ADVERT'){
         url = 'annonce_back';
       }
     }
-    
+  
     return this.http.get(environment.apiUrl+url+'/'+user_id+'/'+pageLImit+'?page='+pageNumber);
   }
 
   searchDatasByPage(user_id: any , pageNumber: number , pageLImit : number, query: string ){
     // console.log(environment.apiUrl+'annonce_back/'+user_id+'/'+pageLImit+'/'+query+'?page'+pageNumber);
+    let user : any = localStorage.getItem('user');
+    let user_converted : any = JSON.parse(user);
+    let url ;
+    
+    if (user_converted.profil_code) {
+      if (user_converted.profil_code == 'SUP_ADMIN' || user_converted.profil_code == 'ADMIN') {
+        return this.http.get(environment.apiUrl+'annonce_back_admin/'+pageLImit+'/'+query+'?page='+pageNumber);
+      }
+    }
     return this.http.get(environment.apiUrl+'annonce_back/'+user_id+'/'+pageLImit+'/'+query+'?page='+pageNumber);
   }
   
@@ -78,7 +88,22 @@ export class EntityServiceService {
     return this.http.get(environment.apiUrl+'categorie_back/'+pageLImit+'/'+query+'?page='+pageNumber);
   }
 
-  changeAnnouceStatus(user_id: any, annouceID: any, newStatus:any){
+  changeAnnouceStatus(user_id: any, annouceID: any, newStatus:any, payment_datas : any= null){
+    let user : any = localStorage.getItem('user');
+    let user_converted : any = JSON.parse(user);
+    let url ;
+    
+    if (user_converted.profil_code) {
+      if (user_converted.profil_code == 'SUP_ADMIN' || user_converted.profil_code == 'ADMIN') {
+        if (payment_datas) {
+          return this.http.get(environment.apiUrl+'annonce_back_admin/update_status/'+annouceID+'/'+newStatus+'/'+payment_datas);
+        }
+        return this.http.get(environment.apiUrl+'annonce_back_admin/update_status/'+annouceID+'/'+newStatus);
+      }
+    }
+    if (payment_datas) {
+      return this.http.get(environment.apiUrl+'annonce_back/update_status/'+user_id+'/'+annouceID+'/'+newStatus+'/'+payment_datas)
+    }
     return this.http.get(environment.apiUrl+'annonce_back/update_status/'+user_id+'/'+annouceID+'/'+newStatus)
   }
 
@@ -99,6 +124,10 @@ export class EntityServiceService {
 
   getDashoardDatas(user_id : number){
     return this.http.get(environment.apiUrl+'dashboard_advertiser/'+user_id);
+  }
+
+  getDashoardDatasAdmin(){
+    return this.http.get(environment.apiUrl+'dashboard_admin');
   }
 
   getAdvertiser(id : number | string, entity: any) : Observable<any>{
@@ -163,8 +192,43 @@ export class EntityServiceService {
   }
 
   updatePamentMethods(datas : any){
-    console.log('datas in service');
-    return {success :true};
+    // return this.http.get(environment.apiUrl+'mode_paiement_back/changeStatus/'+datas);
+    return this.http.post(environment.apiUrl+'mode_paiement_back/changeStatus', datas);
+
+  }
+
+  updatePassword(id : number | string, datas : any){
+
+    return this.http.post(environment.apiUrl+'updatePassword/'+id, datas);
+  }
+
+  getPaymentMod(){
+    // return this.http.get(environment.apiUrl+'mode_paiement_back'); 
+    let user : any = localStorage.getItem('user');
+    let user_converted : any = JSON.parse(user);
+    let url ;
+    
+    if (user_converted.profil_code) {
+      if (user_converted.profil_code == 'SUP_ADMIN' || user_converted.profil_code == 'ADMIN') {
+        return this.http.get(environment.apiUrl+'mode_paiement_back');
+      }
+      return this.http.get(environment.apiUrl+'mode_paiement_advert');
+    }
+    return this.http.get(environment.apiUrl+'mode_paiement_advert');
+  }
+
+  getPaymentMethd(){
+    let user : any = localStorage.getItem('user');
+    let user_converted : any = JSON.parse(user);
+    let url ;
+    
+    if (user_converted.profil_code) {
+      if (user_converted.profil_code == 'SUP_ADMIN' || user_converted.profil_code == 'ADMIN') {
+        return this.http.get(environment.apiUrl+'mode_paiement_back');
+      }
+      return this.http.get(environment.apiUrl+'mode_paiement_advert');
+    }
+    return this.http.get(environment.apiUrl+'mode_paiement_advert');
   }
 
 }

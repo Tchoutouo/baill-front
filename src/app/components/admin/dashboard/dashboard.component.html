@@ -4,7 +4,7 @@
             <div class="item-dash bg-green-15 px-4 py-3">
                 <div class="height-121">
                     <div class="dash-title">
-                        <h2>Annonces encours</h2>
+                        <h2>{{'admin.dashboard.ads-inprogress'|translate}}</h2>
                     </div>
                     <div class="dash-value">
                         <h1>{{totalEncours}}<span class="mx-2"></span></h1> 
@@ -21,7 +21,7 @@
                 <div class="height-121">
                     <div class="dash-title">
                         <!-- <h2>Annonces en voie d’expiration</h2> -->
-                        <h2>Annonces en pause</h2>
+                        <h2>{{'admin.dashboard.ads-pause'|translate}}</h2>
                     </div>
                     <div class="dash-value">
                         <h1>{{totalEnvoiDExp}}<span class="mx-2"></span></h1> 
@@ -36,7 +36,7 @@
             <div class="item-dash bg-red-10 px-4 py-3">
                 <div class="height-121">
                     <div class="dash-title">
-                        <h2>Annonces expirées</h2>
+                        <h2>{{'admin.dashboard.ads-expired'|translate}}</h2>
                     </div>
                     <div class="dash-value">
                         <h1>{{totalExpired}}
@@ -58,10 +58,10 @@
 
         <div class="row">
             <h3 class="table-title mb-3 mt-5">
-                Les 5 annonces les plus demandées du mois
+                {{'admin.dashboard.top-5'|translate}}
             </h3>
             <div class="col-7">
-                <!-- tableau -->
+                <!-- tableau
                 <table class="table" id="dashboard_table">
                     <thead>
                         <tr class="border-bottom-1-green">
@@ -80,6 +80,7 @@
                         </tr>
                     </tbody>
                 </table>
+                -->
             </div>
         </div>
     </div> 
@@ -94,7 +95,7 @@
                                 <h2>Nombre d’utilisateur</h2>
                             </div>
                             <div class="dash-value">
-                                <h1 class="green-main">{{totalEncours}}<span class="mx-2"></span></h1> 
+                                <h1 class="green-main">{{total_users}}<span class="mx-2"></span></h1> 
                             </div>
                         </div>
                     </div>
@@ -106,7 +107,7 @@
                                 <h2>Total d’annonces</h2>
                             </div>
                             <div class="dash-value">
-                                <h1 class="green-main">{{totalEncours}}<span class="mx-2"></span></h1> 
+                                <h1 class="green-main">{{total_annonces}}<span class="mx-2"></span></h1> 
                             </div>
                         </div>
                     </div>
@@ -121,7 +122,7 @@
                                 <h2>Chiffre d’affaire</h2>
                             </div>
                             <div class="dash-value">
-                                <h1 class="blue-new h1-Quicksand fw-baill-bold">12 000 000 FCFA<span class="mx-2"></span></h1> 
+                                <h1 class="blue-new h1-Quicksand fw-baill-bold">{{total_montant | currency:'XAF':'symbol':'1.0-0':'fr-CM'}} <span class="mx-2"></span></h1> 
                             </div>
                         </div>
                     </div>
@@ -133,16 +134,16 @@
                 <table class="table" id="dashboard_table">
                     <thead>
                         <tr class="border-bottom-1-green">
-                            <th scope="col " class="bord">Categorie</th>
+                            <th scope="col " class="bord">Catégorie(s)</th>
                             <th scope="col " class="bord">Nombre d'utilisation</th>
-                            <th scope="col " class="bord">Nombre d'utilisateur</th>
+                            <th scope="col " class="bord">Nombre d'annonces</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let item of anounceList track item; let  i = index">
-                            <td class="bord-black">Categorie</td>
-                            <td class="bord-black">Nom</td>
-                            <td class="bord-black">345K</td>
+                        <tr *ngFor="let item of popular_categories track item; let  i = index">
+                            <td class="bord-black">{{item?.nom}} </td>
+                            <td class="bord-black">{{item?.total_users}}</td>
+                            <td class="bord-black">{{item?.total_annonces}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -152,7 +153,34 @@
         <div class="col-lg-5 offset-lg-1">
             <div class="row px-4">
                 <h1 class="h3-baill black fw-baill-bold mb-4 pt-4 pt-lg-0">Popularite des forfaits</h1>
-                <div class="col-12 my-2">
+                <div class="col-12 my-2" *ngFor="let abonnement_item of progress_abonnement track abonnement_item; let  i = index">
+                    <div  class="alert-container shadow">
+                        <div class="p-relative bg-white radius-8">
+                            <div class="alert-content d-flex gap-4 px-3 align-items-center pt-2 pb-1">
+                                <span class="text-alert black title-h4 fw-baill-bold">{{abonnement_item?.name}} </span>
+
+                            </div>
+
+                            <div class="price-duration pb-0 d-flex px-3 gap-10">
+                                <h5 class="h5-baill gray-20">{{abonnement_item?.type_time}}</h5>
+                                <h5 class="h5-baill gray-20">{{abonnement_item?.price | currency:'XAF':'symbol':'1.0-0':'fr-CM'}}</h5>
+                            </div>
+
+                            <h6 class="text-end small-text px-3 main-font main-font-quick"> {{abonnement_item?.progress}}%</h6>
+                            <div *ngIf="abonnement_item.type == 'Free'" class="progress bg-orange-k5" role="progressbar" aria-label="Warning example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar orange-30 w-25" ></div>
+                            </div>
+                            <div *ngIf="abonnement_item.type == 'Standard'" class="progress bg-blue-new" role="progressbar" aria-label="Warning example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar bg-blue w-25" ></div>
+                            </div>
+                            <div *ngIf="abonnement_item.type == 'Premium'" class="progress bg-green-15" role="progressbar" aria-label="Warning example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar bg-green-main w-50 radius-left-8" ></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- <div class="col-12 my-2">
                     <div  class="alert-container shadow">
                         <div class="p-relative bg-white radius-8">
                             <div class="alert-content d-flex gap-4 px-3 align-items-center pt-2 pb-1">
@@ -211,17 +239,17 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <div class="row px-3">
-                <h1 class="h3-baill  pb-4 pt-5  black fw-baill-bold">Annonce par statuts</h1>
+                <h1 class="h3-baill  pb-4 pt-5  black fw-baill-bold">Annonces par statuts</h1>
 
                 <div class="status-item">
                     <h4 class="title-h4 green-main fw-baill-bold"> Publiées </h4>
                     
                     <h6 class="text-end small-text main-font-quick px-3">50%</h6>
-                    <div class="h-8 radius-8 bg-green-15" role="progressbar" aria-label="Warning example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                    <div class="h-8 radius-8 bg-green-15" role="progressbar" aria-label="Warning example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
                         <div class="progress-bar h-8 bg-green-main w-50 radius-left-8" ></div>
                     </div>
                 </div>
@@ -270,9 +298,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let item of anounceList track item; let  i = index">
-                            <td class="bord-black">leo</td>
-                            <td class="bord-black">il y’a 3 mois</td>
+                        <tr *ngFor="let user of tab_user_lock track user; let  i = index">
+                            <td class="bord-black">{{user?.username}} </td>
+                            <td class="bord-black">{{user?.time_lock}}</td>
                             <td class="bord-black px-5">
                                 <div class="bg-blue text-white px-2 py-1 rounded">Débloquer</div>
                             </td>

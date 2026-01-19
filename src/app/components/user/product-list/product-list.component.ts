@@ -6,6 +6,8 @@ import { HomeService } from '../../../services/guest/home.service';
 import { Subscription } from 'rxjs';
 import { PaginatorComponent } from '../paginator/paginator.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { isLoggedIn } from '../../../helpers/helper';
+import { AuthenticatorService } from '../../../services/admin/authenticator.service';
 
 @Component({
   selector: 'app-product-list',
@@ -27,29 +29,27 @@ export class ProductListComponent {
   products : any 
   productFiltered : any ;
 
-  constructor(private homeServ : HomeService){}
+  constructor(private homeServ : HomeService,  private auth: AuthenticatorService){}
 
   ngOnInit(){
     this.initComponent()
   }
 
   initComponent(){
-    this.getAnnoucesList();
+    // this.getAnnoucesList();
+    this.getAllAnnoncesPublished();
   }
 
-  getAnnoucesList(){
-    this.productsList = this.homeServ.getAllPublishedAnnouces(this.current_page).subscribe({
-      next: (datas: any) => { 
+  getAllAnnoncesPublished(){
+
+    const user = this.auth.isLoggedIn();
+    const user_id= user.id ? user.id : null;
+    this.productsList = this.homeServ.getAllAnnoucesPublished(user_id).subscribe({
+      next: (datas: any) => {
         if (datas.success == true) {
-          this.products = datas.data_annonce.data ;
-          this.result_datas = datas.data_annonce ;
-          this.current_page = this.result_datas.current_page;  
-          this.paginationDatas = {
-            current : this.result_datas.current_page,  
-            total : this.result_datas.total,
-            next : this.result_datas.current_page + 1,    
-            previous : this.result_datas.current_page - 1, 
-            last : this.result_datas.last_page, 
+          if (datas.data_annonce) {
+            this.products = datas.data_annonce;
+            this.result_datas = datas.data_annonce ;
           }
         }else{
           this.products = null ;
@@ -57,7 +57,42 @@ export class ProductListComponent {
       },
 
       error: (erreur: any) => { 
-        console.log(erreur);
+        console.log("erreur récupération des données home",erreur);
+      }
+    })
+  }
+
+  // ANCIENNE FONCTION POUR LA PAGINATION, n'est plus utilisée actellement
+  getAnnoucesList(){
+    const user = this.auth.isLoggedIn();
+    const user_id= user.id ? user.id : null;
+    console.log({user_id: user_id});
+      
+    this.productsList = this.homeServ.getAllPublishedAnnouces(this.current_page).subscribe({
+    
+      next: (datas: any) => { 
+        console.log(datas);
+        
+        if (datas.success == true) {
+          if (datas.data_annonce.data) {
+            this.products = datas.data_annonce.data ;
+            this.result_datas = datas.data_annonce ;
+            this.current_page = this.result_datas.current_page;  
+            this.paginationDatas = {
+              current : this.result_datas.current_page,  
+              total : this.result_datas.total,
+              next : this.result_datas.current_page + 1,    
+              previous : this.result_datas.current_page - 1, 
+              last : this.result_datas.last_page, 
+            }
+          }
+        }else{
+          this.products = null ;
+        }
+      },
+
+      error: (erreur: any) => { 
+        console.log("Erreur trie annonces",erreur);
       }
       
     })
@@ -72,24 +107,22 @@ export class ProductListComponent {
     try {
       if (event) {
         this.productFiltered = this.homeServ.filterDataBy(event).subscribe({
-          next: (datas: any) => {
+          next: (datas: any) => {            
             if (datas.success = true && datas.annonces != null) {
-              console.log({filtre : datas});
-                this.products = datas.annonces.data ;
+                this.products = datas.annonces;
                 this.result_datas = datas.annonces ;
                 this.current_page = this.result_datas.current_page;  
-                this.paginationDatas = {
-                  current : this.result_datas.current_page,  
-                  total : this.result_datas.total,
-                  next : this.result_datas.current_page + 1,    
-                  previous : this.result_datas.current_page - 1, 
-                  last : this.result_datas.last_page, 
-                }
+                // this.paginationDatas = {
+                //  current : this.result_datas.current_page,  
+                //  total : this.result_datas.total,
+                //  next : this.result_datas.current_page + 1,    
+                //  previous : this.result_datas.current_page - 1, 
+                //  last : this.result_datas.last_page, 
+                //}
             } else {
               this.products = null ;
             }
           },
-
           error: (erreur: any) => { 
             console.log(erreur);
             
