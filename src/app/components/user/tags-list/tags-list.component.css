@@ -24,3 +24,13 @@
     border: 1px solid var(--main-color-orange);
 }
 
+
+@media only screen and (max-width: 768px) {
+  .tag-list .filter-tag {
+    font-size: 10px;
+  }
+  /* .tag-list .col-6 select{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  } */
+}
