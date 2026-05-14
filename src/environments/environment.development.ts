@@ -13,7 +13,7 @@ export const environment = {
     //apiUrlRessources: "https://backend.bailleurnet.com/public/storage"
  
     //ENV for production
-    apiUrl: "https://backend-prod.bailleurnet.com/api/",
+    apiUrl: "https://backend-prod.bailleurnet.com/api/v1/",
     apiUrlRessources: "https://backend-prod.bailleurnet.com/public/storage"
     
     // apiUrl: "http://baill-back.sc1zeucoder.universe.wf/api/",

@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-notification-item',
   standalone: true,
   imports: [],
   templateUrl: './notification-item.component.html',
-  styleUrl: './notification-item.component.css'
+  styleUrl: './notification-item.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NotificationItemComponent {
 

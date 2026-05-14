@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormatTimePipe } from "../../../pipes/format-time.pipe";
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
@@ -9,7 +9,8 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [FormatTimePipe,TranslateModule, CommonModule],
   templateUrl: './forfait-item.component.html',
-  styleUrl: './forfait-item.component.css'
+  styleUrl: './forfait-item.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ForfaitItemComponent {
 

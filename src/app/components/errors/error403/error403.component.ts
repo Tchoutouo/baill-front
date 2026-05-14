@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { HeaderComponent } from "../../user/header/header.component";
 import { RouterLink } from '@angular/router';
 
@@ -7,7 +7,8 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   imports: [HeaderComponent, RouterLink],
   templateUrl: './error403.component.html',
-  styleUrl: './error403.component.css'
+  styleUrl: './error403.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Error403Component {
 

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AlertComponent } from "../alert/alert.component";
 import { LocalStorageService } from '../../../services/admin/local-storage.service';
 import { EntityServiceService } from '../../../services/admin/entity-service.service';
@@ -13,39 +13,38 @@ import { TranslateModule } from '@ngx-translate/core';
   standalone: true,
   imports: [CommonModule, AlertComponent, TranslateModule],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  styleUrl: './dashboard.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
 
     anounceList : Array<any> = [];
-    dashboardSub : Subscription |undefined;
+    dashboardSub : Subscription | undefined;
     total_users: number = 0;
     total_annonces : number = 0;
     total_montant: number = 0;
-    progress_abonnement : any ;
+    progress_abonnement : any;
     progress_status: any;
     tab_user_lock: Array<any> = [];
     popular_categories : Array<any> = [];
-
 
     totalEncours : number = 0;
     totalEnvoiDExp : number = 0;
     totalExpired : number = 0;
     isAdmin : boolean = false;
 
-    constructor(private locaStorage : LocalStorageService, private entityService : EntityServiceService,
-                private checkProfil: CheckProfilService
-    ){
-
-    }
+    constructor(
+        private readonly locaStorage : LocalStorageService,
+        private readonly entityService : EntityServiceService,
+        private readonly checkProfil: CheckProfilService,
+        private readonly cdr: ChangeDetectorRef,
+    ){}
 
     ngOnInit(){
       window.scroll(0, 5)
       this.isAdmin = this.checkProfil.isAdmin();
       this.getDashboardData();
-
     }
-
 
     getDashboardData(){
       const user = this.locaStorage.getItem('user')
@@ -54,8 +53,6 @@ export class DashboardComponent {
         if(this.isAdmin){
           this.dashboardSub = this.entityService.getDashoardDatasAdmin().subscribe({
             next : (datas : any) =>{
-              console.log("all data",datas);
-              
               if (datas.success) {
                 this.total_users = datas.total_users;
                 this.total_annonces = datas.total_annonces;
@@ -64,64 +61,26 @@ export class DashboardComponent {
                 this.progress_status = datas.progress_status;
                 this.tab_user_lock = datas.tab_user_lock;
                 this.popular_categories = datas.tab_categ_popular;
+                this.cdr.markForCheck();
               }
             },
-  
-            error : (error : any) =>{
-              console.log('error occur : ', error);
-            },
-  
-            complete : ( ) =>{},
+            error : () => {},
+            complete : () => {},
           })
-          
         }else{
           this.dashboardSub = this.entityService.getDashoardDatas(user_id).subscribe({
-            next : (datas : any) =>{              
+            next : (datas : any) =>{
               if (datas.success) {
-                // this.totalEncours = datas.annonce_qte_inprogress;
                 this.totalEncours = datas.annonce_qte_publisher;
                 this.totalEnvoiDExp = datas.annonce_qte_pause;
                 this.totalExpired = datas.annonce_qte_expired;
+                this.cdr.markForCheck();
               }
             },
-  
-            error : (error : any) =>{
-              console.log('error occur : ', error);
-              
-            },
-  
-            complete : ( ) =>{},
+            error : () => {},
+            complete : () => {},
           })
-
         }
-        
       }
     }
-
-    getDashboardDataAdmin(){
-      const user = this.locaStorage.getItem('user')
-      const user_id = user?.id;
-      if (user_id) {
-        this.dashboardSub = this.entityService.getDashoardDatas(user_id).subscribe({
-          next : (datas : any) =>{
-            console.log("all data",datas);
-            
-            if (datas.success) {
-              // this.totalEncours = datas.annonce_qte_inprogress;
-              this.totalEncours = datas.annonce_qte_publisher;
-              this.totalEnvoiDExp = datas.annonce_qte_pause;
-              this.totalExpired = datas.annonce_qte_expired;
-            }
-          },
-
-          error : (error : any) =>{
-            console.log('error occur : ', error);
-            
-          },
-
-          complete : ( ) =>{},
-        })
-      }
-    }
-
 }
