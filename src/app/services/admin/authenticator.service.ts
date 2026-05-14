@@ -12,13 +12,12 @@ import { Router } from '@angular/router';
 export class AuthenticatorService {
 
   private authUser = false;
-  csrfToken: string | null = null;
 
   constructor(private http : HttpClient, private localStorage : LocalStorageService, private router: Router) {
-    const token = this.localStorage.getItem('token')
-    const user_ = this.localStorage.getItem('user')
-    if (user_ && token) {
-      this.authUser = true ;
+    // Auth state is maintained via HttpOnly cookie — check user info only
+    const user_ = this.localStorage.getItem('user');
+    if (user_) {
+      this.authUser = true;
     }
   }
 
@@ -31,7 +30,7 @@ export class AuthenticatorService {
     return this.http.post<any>(environment.apiUrl + 'login', user, { headers }).pipe(
       tap((result) => {
         if (result.success) {
-          this.localStorage.setItem('token', result.token);
+          // Token is stored in HttpOnly cookie by the backend — not in localStorage
           this.localStorage.setItem('user', result.data);
           this.authUser = true;
           this.router.navigate(['/admin']);
@@ -41,31 +40,22 @@ export class AuthenticatorService {
     );
   }
 
-  logOut(){
-    this.localStorage.removeItem("token");
-    this.localStorage.removeItem("user");
-    this.authUser = false ;
+  logOut(): Observable<any> {
+    return this.http.post(environment.apiUrl + 'logout', {}).pipe(
+      tap(() => {
+        this.localStorage.removeItem('user');
+        this.authUser = false;
+      })
+    );
   }
 
   isAuthenticated(): boolean {
     return this.authUser;
   }
 
-  getUserRole(){
-    const user = this.localStorage.getItem('user')
-    if (user) {
-      return user.profil_code ;
-    }else{
-      return 'false' ;
-    }
-  }
-
-  fetchCsrfToken() {
-    return this.http.options(environment.apiUrl+'csrf-token');
-  }
-
-  saveCsrfToken(token: string) {
-    this.csrfToken = token;
+  getUserRole(): string {
+    const user = this.localStorage.getItem('user');
+    return user ? user.profil_code : 'false';
   }
 
   isLoggedIn(): any {

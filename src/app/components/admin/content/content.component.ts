@@ -161,8 +161,11 @@ export class ContentComponent {
     this.display = false;
     console.log(alert, event);
     if (event) {
-      this.authent.logOut();
-      return this.route.navigate(['/signin']);
+      this.authent.logOut().subscribe({
+        error: () => this.route.navigate(['/signin']),
+        complete: () => this.route.navigate(['/signin']),
+      });
+      return;
     }
     return;
   }
