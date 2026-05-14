@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { getSiteName } from '../../../helpers/helper';
 import { RouterLink } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthenticatorService } from '../../../services/admin/authenticator.service';
 import { CommonModule } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
@@ -15,108 +15,70 @@ import { Subscription } from 'rxjs';
   templateUrl: './signin.component.html',
   styleUrl: './signin.component.css'
 })
-export class SigninComponent {
-  site_name: string = ""
+export class SigninComponent implements OnInit {
+  site_name: string = '';
 
-  typeField : string = "password";
+  typeField: string = 'password';
+  loginResult: boolean | null = null;
+  isSubmited: boolean = false;
+  message_back: string = '';
+  icon_eyes: string = '';
+  display: string = 'none';
 
-  loginResult : any = null
+  loginForm: any;
+  identifiant: FormControl;
+  password: FormControl;
 
-  isSubmited : boolean = false
-
-  message_back : any = null
-
-  icon_eyes : string = "";
-  display : string = "none";
-
-  loginForm : any;
-  identifiant : FormControl
-  password : FormControl
-
-  email_error_message : string = "L'e-mail est obligatoire !"
-  password_error_message : string = "Le mot de passe est obligatoire !"
-
-  constructor(private authService : AuthenticatorService, private fb: FormBuilder){
-    this.identifiant = fb.control("", [Validators.required] );
-    this.password = fb.control("", [Validators.required])
+  constructor(private readonly authService: AuthenticatorService, private readonly fb: FormBuilder) {
+    this.identifiant = fb.control('', [Validators.required]);
+    this.password = fb.control('', [Validators.required]);
   }
 
   ngOnInit() {
     this.site_name = getSiteName();
 
     this.loginForm = this.fb.group({
-        identifiant:this.identifiant,
-        password:this.password,
-    })
+      identifiant: this.identifiant,
+      password: this.password,
+    });
+  }
 
-    document.cookie.split(';').forEach(cookie => {
-      console.log(cookie);
-      
-      if (cookie.trim().startsWith('XSRF-TOKEN=')) {
-      console.log('XSRF-TOKEN found:', cookie);
+  toggleIconClass() {
+    this.typeField = this.typeField === 'password' ? 'text' : 'password';
+    this.icon_eyes = this.icon_eyes === '' ? '-slash' : '';
+  }
+
+  showIcon(event: any) {
+    const { value } = event.target;
+    this.display = value.length >= 1 ? '' : 'none';
+  }
+
+  handleSubmite() {
+    this.isSubmited = true;
+
+    if (this.loginForm.invalid) {
+      return;
+    }
+
+    this.authService.signin(this.loginForm.value).subscribe({
+      next: (success: boolean) => {
+        this.loginResult = success;
+        this.displayM();
+      },
+      error: () => {
+        this.loginResult = false;
+        this.displayM();
       }
     });
   }
 
-  toggleIconClass(event : any){
-    this.typeField = (this.typeField === "password") ?  "text"  : "password" ;
-
-    this.icon_eyes = (this.icon_eyes === "") ?  "-slash"  : "" ;
-
-    console.log(event);
+  displayM() {
+    this.message_back = this.loginResult
+      ? ''
+      : "Les informations d'identification ne sont pas correctes.";
   }
 
-  showIcon(event : any){
-    const {name, value} = event.target
-    
-    if (value.length >= 1) {
-      this.display = "";
-    }
-
-    if(value.length == 0){
-      this.display = "none";
-    }
+  get formControls() {
+    return this.loginForm.controls;
   }
-  
-  handleSubmite(){
-    
-    this.isSubmited = true ;
-
-    if (this.loginForm.invalid) {
-    }
-    
-    const user = this.loginForm.value ;
-
-    this.loginResult = this.authService.signin(user)
-    console.log(this.loginResult);
-    
-    if (this.loginResult == false) {
-      this.loginResult = false;
-    }else{
-      this.loginResult = true;
-    }
-    this.displayM()
-  }
-
-  displayM(){
-
-    let  messag  = ""
-
-    if (!this.loginResult) {
-      messag = "Les informations d'identification ne sont pas correctes." ;
-    }else{
-      messag = "" ;
-    }
-
-    this.message_back = messag
-  }
-
-  
-
-  get formControls(){
-    return this.loginForm.controls
-  }
-
- 
-  
 }

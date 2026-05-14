@@ -7,15 +7,14 @@ export const userRoleGuard: CanActivateFn = (route, state) => {
   const myService = inject(AuthenticatorService);
   const router = inject(Router);
 
-  if(myService.isAuthenticated()) {
-    if (myService.getUserRole() === 'ADVERT') {
-      router.navigateByUrl('/access-interdit')
-        return false;
-    }else{
-      return true ;
-    }
-  }else{
-    router.navigateByUrl('/signin')
+  if (!myService.isAuthenticated()) {
+    router.navigateByUrl('/signin');
+    return false;
+  }
+
+  if (myService.getUserRole() === 'ADVERT') {
+    router.navigateByUrl('/access-interdit');
+    return false;
   }
 
   return true;

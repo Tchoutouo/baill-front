@@ -1,14 +1,15 @@
 import { ApplicationConfig, importProvidersFrom, LOCALE_ID, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter, withDebugTracing } from '@angular/router';
+import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { CorsInterceptor } from './interceptors/cors.interceptor';
-import { provideNgxStripe, STRIPE_PUBLISHABLE_KEY } from 'ngx-stripe';
+import { provideNgxStripe } from 'ngx-stripe';
 import { registerLocaleData } from '@angular/common';
+import { environment } from '../environments/environment.development';
 
 import localeFrCM from '@angular/common/locales/fr-CM';
 
@@ -29,7 +30,7 @@ export const appConfig: ApplicationConfig = {
             deps: [HttpClient]
         },
         defaultLanguage: 'fr',
-      })  
+      })
     ]),
     provideRouter(routes),
     provideHttpClient(withInterceptorsFromDi()),
@@ -37,7 +38,7 @@ export const appConfig: ApplicationConfig = {
       provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true
     },
     { provide: HTTP_INTERCEPTORS, useClass: CorsInterceptor, multi: true },
-    provideNgxStripe('pk_test_51QydBnP1JVeVCDSKAwmszQbjui4iRexbdPLeWmfYwoXpQayltVXrUXwKUPaxyr9pZQq5Yd6GOYibpoZ54L36g0Id00KKkJF9wH')
+    provideNgxStripe(environment.stripePublishableKey)
   ],
 
 };

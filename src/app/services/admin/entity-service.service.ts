@@ -96,15 +96,15 @@ export class EntityServiceService {
     if (user_converted.profil_code) {
       if (user_converted.profil_code == 'SUP_ADMIN' || user_converted.profil_code == 'ADMIN') {
         if (payment_datas) {
-          return this.http.get(environment.apiUrl+'annonce_back_admin/update_status/'+annouceID+'/'+newStatus+'/'+payment_datas);
+          return this.http.patch(environment.apiUrl+'annonce_back_admin/update_status/'+annouceID+'/'+newStatus+'/'+payment_datas, {});
         }
-        return this.http.get(environment.apiUrl+'annonce_back_admin/update_status/'+annouceID+'/'+newStatus);
+        return this.http.patch(environment.apiUrl+'annonce_back_admin/update_status/'+annouceID+'/'+newStatus, {});
       }
     }
     if (payment_datas) {
-      return this.http.get(environment.apiUrl+'annonce_back/update_status/'+user_id+'/'+annouceID+'/'+newStatus+'/'+payment_datas)
+      return this.http.patch(environment.apiUrl+'annonce_back/update_status/'+user_id+'/'+annouceID+'/'+newStatus+'/'+payment_datas, {});
     }
-    return this.http.get(environment.apiUrl+'annonce_back/update_status/'+user_id+'/'+annouceID+'/'+newStatus)
+    return this.http.patch(environment.apiUrl+'annonce_back/update_status/'+user_id+'/'+annouceID+'/'+newStatus, {});
   }
 
   getAllAbonnements(){
@@ -163,7 +163,7 @@ export class EntityServiceService {
   }
 
   disabledAdvertiser(id: any){
-    return this.http.get(environment.apiUrl+'advertiser_bac/change/'+id);
+    return this.http.patch(environment.apiUrl+'advertiser_bac/change/'+id, {});
   }
 
   // FORFAITS | PACKAGES SERVICES
@@ -180,7 +180,7 @@ export class EntityServiceService {
   }
 
   changeStatusAbonnements(id: any){
-    return this.http.get(environment.apiUrl+'abonnement_back/status/'+id);
+    return this.http.patch(environment.apiUrl+'abonnement_back/status/'+id, {});
   }
 
   updateAbonnement(id: any, datas: any, entity: string): Observable<any> {    

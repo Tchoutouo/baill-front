@@ -1,5 +1,6 @@
 export const environment = {
     production : false,
+    stripePublishableKey: 'pk_test_51QydBnP1JVeVCDSKAwmszQbjui4iRexbdPLeWmfYwoXpQayltVXrUXwKUPaxyr9pZQq5Yd6GOYibpoZ54L36g0Id00KKkJF9wH',
     //apiUrl: "http://127.0.0.1:8000/api/",
     //apiUrlRessources: "http://127.0.0.1:8000/public/storage"
 
