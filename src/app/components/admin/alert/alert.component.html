@@ -1,8 +1,8 @@
-<div *ngIf="message" class="alert-container w-35 shadow">
+<div *ngIf="displayText" class="alert-container w-35 shadow">
     <div class="p-relative bg-white z-index-200000">
         <div class="alert-content d-flex gap-4 px-3 align-items-center py-4">
             <i class="fa-solid {{icon_alert}}" id="icon-chek"></i>
-            <span class="text-alert">{{message}}</span>
+            <span class="text-alert">{{displayText}}</span>
         </div>
 
         <div class="progress {{bg_alert}}" role="progressbar" aria-label="Warning example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">

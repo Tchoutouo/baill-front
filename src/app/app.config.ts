@@ -7,6 +7,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { CorsInterceptor } from './interceptors/cors.interceptor';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { provideNgxStripe } from 'ngx-stripe';
 import { registerLocaleData } from '@angular/common';
 import { environment } from '../environments/environment';
@@ -38,6 +39,7 @@ export const appConfig: ApplicationConfig = {
       provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true
     },
     { provide: HTTP_INTERCEPTORS, useClass: CorsInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     provideNgxStripe(environment.stripePublishableKey)
   ],
 

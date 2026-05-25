@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 import { getSiteName } from '../../../helpers/helper';
 import { LocalStorageService } from '../../../services/admin/local-storage.service';
@@ -32,6 +32,7 @@ export class ContentComponent implements OnInit {
   isDiplayedNotification = false;
   display: any;
   isAdmin = false;
+  mobileSideIsOpen = false;
 
   constructor(
     private readonly localStorage: LocalStorageService,
@@ -87,15 +88,23 @@ export class ContentComponent implements OnInit {
   }
 
   OpenMobileAside(value: boolean): void {
+    this.mobileSideIsOpen = value;
+    document.body.style.overflow = value ? 'hidden' : '';
     const sideBar = document.getElementById('sideBar');
     const parent = document.getElementById('pict_parent');
     if (value) {
-      sideBar?.classList.add('mobileSideOpen', 'shadow-end');
+      sideBar?.classList.add('mobileSideOpen');
       parent?.classList.add('bg-profile_');
     } else {
-      sideBar?.classList.remove('mobileSideOpen', 'shadow-end');
+      sideBar?.classList.remove('mobileSideOpen');
       parent?.classList.remove('bg-profile_');
     }
+  }
+
+  @HostListener('document:keydown.escape')
+  onEscapeKey(): void {
+    if (this.mobileSideIsOpen) this.OpenMobileAside(false);
+    if (this.isDiplayedNotification) this.isDiplayedNotification = false;
   }
 
   hanndleShowNotifications(): void {

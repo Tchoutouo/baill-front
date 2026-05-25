@@ -1,38 +1,49 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class LocalStorageService {
 
-  constructor() { }
+  private readonly USER_KEY = 'user';
 
-  setItem(key:string , value:any) : void{
-    if (window?.localStorage) {
-      localStorage.setItem(key, JSON.stringify(value))
-    }
+  // Source de vérité unique pour l'utilisateur courant
+  private readonly userSubject = new BehaviorSubject<any>(this._read(this.USER_KEY));
+  readonly user$ = this.userSubject.asObservable();
+
+  /** Retourne l'utilisateur courant de façon synchrone */
+  get currentUser(): any {
+    return this.userSubject.value;
   }
 
-  getItem(key:string):any{
-    if (window?.localStorage) {
-      try {
-        const item : any = localStorage.getItem(key);
-        return JSON.parse(item)
-      } catch (error) {
-        return null
-      }
-    }
+  setItem(key: string, value: any): void {
+    if (!globalThis?.localStorage) return;
+    localStorage.setItem(key, JSON.stringify(value));
+    if (key === this.USER_KEY) this.userSubject.next(value);
   }
 
-  removeItem(key:string){
-    if (window?.localStorage) {
-      localStorage.removeItem(key)
-    }
+  getItem(key: string): any {
+    return this._read(key);
   }
 
-  clear(){
-    if (window?.localStorage) {
-      localStorage.clear()
+  removeItem(key: string): void {
+    if (!globalThis?.localStorage) return;
+    localStorage.removeItem(key);
+    if (key === this.USER_KEY) this.userSubject.next(null);
+  }
+
+  clear(): void {
+    if (!globalThis?.localStorage) return;
+    localStorage.clear();
+    this.userSubject.next(null);
+  }
+
+  private _read(key: string): any {
+    if (!globalThis?.localStorage) return null;
+    try {
+      return JSON.parse(localStorage.getItem(key) as string);
+    } catch (e) {
+      console.warn(`LocalStorageService: impossible de lire la clé "${key}"`, e);
+      return null;
     }
   }
 }
