@@ -42,8 +42,9 @@
                         <div class="">
                             <div class="row g-0 finger align-items-center my_acc_shadow" id="pict_parent" [routerLink]="['/admin/myAccount']" aria-current="page" >
                                 <div class="col-md-12 p col-4 p-0 image_profile" id="profil-picture">
-                                    <div class="image-profile img-profile my_acc_shadow_pic" id="picture_child" style="background-image: url('../../../../assets/images/image-user.jpeg');">
-                
+                                    <div class="image-profile img-profile my_acc_shadow_pic" id="picture_child"
+                                         [style.backgroundImage]="user_picture && user_picture !== 'false' ? 'url(' + user_picture + ')' : null">
+                                        <i *ngIf="!user_picture || user_picture === 'false'" class="fa-solid fa-user side-avatar-icon"></i>
                                     </div>
                                 </div>
                                 <div class="col-md-12 col-8 d-block  d-md-none text-hover" id="profil-text">

@@ -1,19 +1,45 @@
-<div class="image-view-container">
-    <label for="images" class="label-form mb-2">{{'admin.ads.picture'|translate}} <span class="text-danger mx-2">*</span></label> 
-    <div class="row mx-0 border-gray-1 images-content px-1">
-        <ng-container *ngIf="imageList.length >= 1">
-            <div *ngFor="let image of imageList track image; let  i = index"  class="col-lg-3 px-1 py-2 ">
-                <div class="image-item" style="background-image: url('{{image}}');">
-                    <i class="fa-solid  fa-xmark" (click)="deleteImage(i)" ></i>
-                </div>
-            </div>
-        </ng-container>
-        <div class="col-lg-3  px-1 py-2" *ngIf="imageList.length < 8">
-            <input type="file" name="images[]"  class="d-none" id="imagesList" accept="image/*" multiple (change)="addImage($event)" />
-            <div class="col-lg-3 m-0 select-image w-md-75 w-100" (click)="handleAddImage($event)">
-                <i class="fa-solid  fa-plus h3"></i>
+<div class="iv-container">
+    <label for="imagesList" class="label-form mb-2">
+        {{'admin.ads.picture' | translate}} <span class="iv-req">*</span>
+    </label>
+
+    <div class="iv-grid">
+        <!-- Vignettes existantes -->
+        <div *ngFor="let image of imageList; let i = index" class="iv-thumb">
+            <div class="iv-thumb-img" [style.backgroundImage]="'url(' + image + ')'">
+                <button type="button" class="iv-delete-btn" (click)="deleteImage(i)" [title]="'button.delete' | translate">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
             </div>
         </div>
+
+        <!-- Bouton ajout -->
+        <div class="iv-add-cell" *ngIf="imageList.length < 8">
+            <input type="file" name="images[]" class="d-none" id="imagesList"
+                   accept="image/jpeg,image/png,image/webp,image/gif" multiple
+                   (change)="addImage($event)" />
+            <button type="button" class="iv-add-btn" (click)="handleAddImage()" [disabled]="isChecking">
+                <ng-container *ngIf="!isChecking">
+                    <i class="fa-solid fa-plus iv-add-icon"></i>
+                    <span class="iv-add-label">{{'admin.ads.add-photo' | translate}}</span>
+                </ng-container>
+                <ng-container *ngIf="isChecking">
+                    <i class="fa-solid fa-spinner fa-spin iv-add-icon"></i>
+                    <span class="iv-add-label">{{'admin.ads.checking-photo' | translate}}</span>
+                </ng-container>
+            </button>
+        </div>
     </div>
-    <small class="text-danger">{{errorMessage}}</small>
+
+    <!-- Contraintes -->
+    <div class="iv-hints">
+        <span><i class="fa-solid fa-circle-info"></i> {{'admin.ads.image-hint.count' | translate}}</span>
+        <span><i class="fa-solid fa-weight-hanging"></i> {{'admin.ads.image-hint.size' | translate}}</span>
+        <span><i class="fa-solid fa-expand"></i> {{'admin.ads.image-hint.dimension' | translate}}</span>
+    </div>
+
+    <!-- Message d'erreur -->
+    <div *ngIf="errorMessage" class="iv-error">
+        <i class="fa-solid fa-triangle-exclamation"></i> {{errorMessage}}
+    </div>
 </div>

@@ -1,74 +1,57 @@
+/* ═══════════════════════════════════════
+   PAGE PRINCIPALE
+═══════════════════════════════════════ */
+.main-container {
+    background: var(--main-color-gray-5);
+    min-height: 100vh;
+}
+
+/* ── Layout sidebar + articles ── */
 .products-categories-container {
     display: grid;
-    grid-template-columns: 25% 71%;
-    grid-column-gap: 4%;
-    
+    grid-template-columns: 260px 1fr;
+    gap: 28px;
+    padding: 0 0 60px;
 }
 
 .categories-list {
     position: sticky;
-    top: 15%;
+    top: 80px;
     height: fit-content;
-    bottom: 5%;
+    align-self: start;
 }
 
 .articles-list {
-    padding-right: 10px; 
-    padding-bottom: 100px;
+    min-width: 0;
 }
 
-.btn_publish{
-    padding: var(--main-btn-sm-padd);
-    background-color: var(--main-color);
-    color: var(--main-color-white);
-    border-radius: var(--main-radius-value-8);
-    width: fit-content;
-}
-
-.btn-close{
-    position: absolute;
-    right: -1%;
-    top: -2%;
-    padding: 15px;
-    gap: 10px;
-    border-radius: 50%;
-    opacity: 0px;
-    background-color:rgba(242, 242, 242, 0.79);
-    color: var(--main-color-gray);
-    z-index: 100;
-}
-
-.btn-close:hover{
-    color: var(--main-color-dark);
-}
-
-.modal-dialog, .modal-body{
-    background-color: transparent !important;
-}
-
-.modal-dialog{
-    position: relative;
-}
-
-@media screen and (max-width : 900px) {
+/* ═══════════════════════════════════════
+   TABLETTE (≤ 900px)
+═══════════════════════════════════════ */
+@media (max-width: 900px) {
     .products-categories-container {
-        all: unset;
+        grid-template-columns: 1fr;
+        padding: 0 0 40px;
     }
 
+    /* La sidebar disparaît : filtres accessibles via la barre tags */
     .categories-list {
-        z-index: 900000000;
-    }
-
-
-    .btn_publish{
-        display: flex !important;
-    }
-
-    .large-sreen{
         display: none;
     }
+}
 
-    #staticBackdrop{
-        padding-top: 100px;
+/* ═══════════════════════════════════════
+   MOBILE (≤ 576px)
+═══════════════════════════════════════ */
+@media (max-width: 576px) {
+    .products-categories-container {
+        padding: 0 0 32px;
+    }
+
+    /* Conteneur principal sans padding horizontal excessif */
+    .main-container .container,
+    .main-container [class*="container"] {
+        padding-left: 12px;
+        padding-right: 12px;
     }
 }

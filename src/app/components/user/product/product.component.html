@@ -1,58 +1,52 @@
+<div class="product-card">
 
-<div class="product-item p-3">
-    <div  [routerLink]="['/product-details', productItem.id]" class="product-image mb-3" style="background-image: url('{{imageUrl}}');">
-    
+    <!-- Image -->
+    <div class="card-image" [routerLink]="['/product-details', productItem.id]">
+        <img class="card-img" [src]="imageUrl" alt="" loading="lazy" width="280" height="200">
+        <span class="card-location-badge">
+            <i class="fas fa-map-marker-alt"></i>
+            {{productItem.location}}
+            <ng-container *ngIf="productItem.neighborhood">, {{productItem.neighborhood}}</ng-container>
+        </span>
     </div>
-    <div class="product-details">
-        <div class="product-name ">
-            <h4 class="">
-                <i class="fas fa-map-marker-alt me-1" style="font-size: 17px;"></i>
-                {{productItem.location}}, {{productItem.neighborhood}}
-            </h4>
-            <h3 class="m-0">{{productItem.title}}</h3>
-            
-        </div>
-        <div class="product-price">
+
+    <!-- Body -->
+    <div class="card-body">
+        <h3 class="card-title">{{productItem.title}}</h3>
+
+        <p class="card-price">
             {{productItem.price | currency:'XAF':'symbol':'1.0-0':'fr-CM'}}
-        </div>
+        </p>
 
-        <div class="product-description">
-            <p class="m-0">
-                {{productItem.description}}
-            </p>
-        </div>
-        <!-- <div class="phone mt-3 mb-1">
-            <span>Tel :</span> +237 934 854 534
-        </div> -->
-        <div class="other-details align-items-center row mt-3">
-            
-            <div class="location-address col-xl-12">
-                <div class="two_icon">
-                    <a class="g-1" [href]="'tel:'+productItem.users?.whatsapp_number" target="_blank">
-                        <i class="fa-solid fa-square-phone-flip mx-2" style="font-size: 23px;"></i> : +{{productItem.users?.whatsapp_number }}
-                    </a> 
-                </div>
-                <div class="two_icon " *ngIf="productItem.users?.site_url">
-                    <a class="gap-1" [href]="'https://'+siteUser" target="_blank" rel="noopener noreferrer">
-                        <i class="fas fa-globe mx-2" style="font-size: 21px;"> </i> : {{productItem.users?.site_url}}
-                    </a> 
-                </div>
-                <div class="two_icon">
-                    <a [href]="'https://api.whatsapp.com/send?phone='+productItem.users?.whatsapp_number+'&text=Hello Bailleurnet&source=&data='" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-whatsapp mx-2"  style="font-size: 24px;"></i> : +{{productItem.users?.whatsapp_number}}
-                    </a>
-                </div>
-                <div class="two_icon" *ngIf="productItem.users?.email">
-                    <a [href]="'mailto:'+productItem.users?.email+'?subject=' + subject + '&body=' + body" target="_blank">
-                        <i class="fa-solid fa-envelope mx-2" style="font-size: 21px;"></i> : {{productItem.users?.email}}
-                    </a> 
-                </div>
-            </div>
-        </div>
-        <!-- <div class="button-contact col-xl-12 mb-1">
-            <a href="https://api.whatsapp.com/send?phone=237694798186&text=Hello Bailleurnet&source=&data=" target="_blank" rel="noopener noreferrer">
-                Contacter
+        <p class="card-desc">{{productItem.description}}</p>
+
+        <!-- Contact actions -->
+        <div class="card-contacts">
+            <a *ngIf="productItem.users?.whatsapp_number"
+                [href]="'tel:' + productItem.users?.whatsapp_number"
+                class="contact-btn contact-phone"
+                title="Appeler">
+                <i class="fa-solid fa-phone"></i>
             </a>
-        </div> -->
+            <a *ngIf="productItem.users?.whatsapp_number"
+                [href]="'https://api.whatsapp.com/send?phone=' + productItem.users?.whatsapp_number + '&text=Hello Bailleurnet&source=&data='"
+                target="_blank" rel="noopener noreferrer"
+                class="contact-btn contact-wa"
+                title="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a *ngIf="productItem.users?.email"
+                [href]="'mailto:' + productItem.users?.email + '?subject=' + subject + '&body=' + body"
+                class="contact-btn contact-mail"
+                title="Envoyer un email">
+                <i class="fa-solid fa-envelope"></i>
+            </a>
+            <a [routerLink]="['/product-details', productItem.id]"
+                class="contact-btn contact-view"
+                title="Voir l'annonce">
+                <i class="fa-solid fa-eye"></i>
+            </a>
+        </div>
     </div>
+
 </div>

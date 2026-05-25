@@ -4,8 +4,7 @@
     </div>
 
     <ul class="categories mb-4">
-        <li class="category-item  py-2" *ngFor="let category of categories">
-        <!-- <li class="category-item active_category py-2" *ngFor="let category of categories"> -->
+        <li class="category-item py-2" *ngFor="let category of categories; trackBy: trackByCategory">
             {{category.title}}
         </li>
     </ul>

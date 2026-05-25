@@ -3,17 +3,15 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-5 text-side">
-                <h1 class="error-title title-h1 main-font-quick green-black">Oups !</h1>
-                <div class="h4 error-description pt-3 main-font-quick title-h1">La page que vous cherchez n’existe pas.</div>
+                <h1 class="error-title title-h1 main-font-quick green-black">{{'error.page-404.oops-title' | translate}}</h1>
+                <div class="h4 error-description pt-3 main-font-quick title-h1">{{'error.page-404.not-found-message' | translate}}</div>
                 <div class="erro-text h4-baill main-font-quick pt-4 pb-5">
-                    On dirait que vous êtes perdu dans les méandres de notre site. Revenons à un endroit plus familier !
+                    {{'error.page-404.lost-in-site-description' | translate}}
                 </div>
-                <a [routerLink]="['/']" class="btn_publish link">Retourner a l’acceuil</a>
+                <a [routerLink]="['/']" class="btn_publish link">{{'error.page-404.back-to-home-button' | translate}}</a>
             </div>
             <div class="col-lg-6 offset-lg-1">
-                <div class="bg-img" style="background-image: url('../../../../assets/404.png');">
-
-                </div>
+                <div class="bg-img" style="background-image: url('../../../../assets/404.png');"></div>
             </div>
         </div>
     </div>

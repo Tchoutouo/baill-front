@@ -1,0 +1,93 @@
+.baill-loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 24px;
+}
+
+.loader-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(255, 255, 255, .88);
+    z-index: 9999;
+}
+
+/* ── Rings container ───────────────────── */
+.loader-rings {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.size-sm .loader-rings { width: 32px;  height: 32px; }
+.size-md .loader-rings { width: 56px;  height: 56px; }
+.size-lg .loader-rings { width: 80px;  height: 80px; }
+
+/* ── Rings ─────────────────────────────── */
+.ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 3px solid transparent;
+}
+
+/* Outer: green top + right, light green bottom + left */
+.ring-outer {
+    inset: 0;
+    border-top-color:   var(--main-color);
+    border-right-color: var(--main-color-green-15);
+    animation: spin-cw 1.1s cubic-bezier(.6, .2, .4, .8) infinite;
+}
+
+/* Inner: green bottom + left, inverted rotation */
+.ring-inner {
+    inset: 10px;
+    border-bottom-color: var(--main-color);
+    border-left-color:   var(--main-color-green-15);
+    animation: spin-ccw .85s cubic-bezier(.6, .2, .4, .8) infinite;
+}
+
+/* Core dot — pulsing green */
+.ring-core {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--main-color);
+    animation: pulse-core 1.1s ease-in-out infinite;
+}
+
+/* sm overrides */
+.size-sm .ring      { border-width: 2px; }
+.size-sm .ring-inner { inset: 7px; }
+.size-sm .ring-core { width: 7px; height: 7px; }
+
+/* lg overrides */
+.size-lg .ring       { border-width: 4px; }
+.size-lg .ring-inner  { inset: 14px; }
+.size-lg .ring-core   { width: 14px; height: 14px; }
+
+/* ── Label ─────────────────────────────── */
+.loader-text {
+    font-family:  var(--main-font-Quicksand);
+    font-size:    var(--main-h5-font-size);
+    font-weight:  var(--main-xl-font-weiht);
+    color:        var(--main-color);
+    margin: 0;
+    letter-spacing: .3px;
+    animation: fade-text 1.1s ease-in-out infinite;
+}
+
+/* ── Keyframes ─────────────────────────── */
+@keyframes spin-cw  { to { transform: rotate(360deg);  } }
+@keyframes spin-ccw { to { transform: rotate(-360deg); } }
+
+@keyframes pulse-core {
+    0%, 100% { transform: scale(.65); opacity: .55; }
+    50%       { transform: scale(1.25); opacity: 1;  }
+}
+
+@keyframes fade-text {
+    0%, 100% { opacity: .55; }
+    50%       { opacity: 1;   }
+}

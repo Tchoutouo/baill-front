@@ -1,35 +1,27 @@
-<!-- <div class="tag-list d-flex gap-3 mb-5">
-    <button class="filter-tag active-tag">Espace agricole </button>
-    <button class="filter-tag">Salle de fête </button>
-    <button class="filter-tag">Hôtel</button>
-    <button class="filter-tag">Habitation</button>
-    <button class="filter-tag">Appartement meublé </button>
-    <button class="filter-tag">Espace commercial </button>
-    <button class="filter-tag">Espace non bâti </button>
-</div> -->
+<div class="filter-bar">
 
-<div class="tag-list mb-5 row">
-    <div class="col-md-3 col-6 mb-md-1 mb-3">
-        <select name="category" id="category" class="form-control filter-tag text-center" (change)="onFilterChange($event , 'category')">
-            <option value="" selected>{{'user.tags-list.cat'| translate}} </option>
-            <option *ngFor="let category of categories" [value]="category.title"> {{ category?.title }} </option>
-        </select>
-    </div>
-    <div class="col-md-3 col-6 mb-md-1 mb-3">
-        <select id="country" [(ngModel)]="selectedCountry" (change)="onFilterChange($event , 'country')" name="country" class="form-control filter-tag text-center" placeholder="Veuillez selectionner un pays">
-            <option value="" selected>{{'user.tags-list.country'| translate}}</option>
-            <option *ngFor="let country of countries" [value]="[country.isoCode, country.name]">{{ country.name }}</option>
-        </select>
-    </div>
-    <div class="col-md-3 col-6 mb-md-1 mb-3">
-        <select [(ngModel)]="selectedCity" name="city" id="city" (change)="onFilterChange($event , 'city')" class="form-control filter-tag text-center" placeholder="Veuillez selectionner une ville">
-            <option value="" selected>{{'user.tags-list.city'| translate}}</option>
-            <option *ngFor="let city of cities" [value]="city.name">
-                {{ city.name }}
-            </option>
-        </select>
-    </div>
-    <div class="col-md-3 col-6 text-center">
-        <button class="filter-tag active-tag w-100 text-center"(click)="refrech()">All</button>
-    </div>
+    <select name="category" id="category" class="filter-select" (change)="onFilterChange($event, 'category')">
+        <option value="" selected>{{'user.tags-list.cat' | translate}}</option>
+        <option *ngFor="let category of categories" [value]="category.title">{{ category?.title }}</option>
+    </select>
+
+    <select id="country" [(ngModel)]="selectedCountry"
+        (change)="onFilterChange($event, 'country')"
+        name="country" class="filter-select">
+        <option value="" selected>{{'user.tags-list.country' | translate}}</option>
+        <option *ngFor="let country of countries" [value]="[country.isoCode, country.name]">{{ country.name }}</option>
+    </select>
+
+    <select [(ngModel)]="selectedCity" name="city" id="city"
+        (change)="onFilterChange($event, 'city')"
+        class="filter-select">
+        <option value="" selected>{{'user.tags-list.city' | translate}}</option>
+        <option *ngFor="let city of cities" [value]="city.name">{{ city.name }}</option>
+    </select>
+
+    <button class="btn-reset" type="button" (click)="refrech()">
+        <i class="fa-solid fa-rotate-right"></i>
+        {{'user.tags-list.reset-filter' | translate}}
+    </button>
+
 </div>

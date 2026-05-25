@@ -1,111 +1,150 @@
-<div class="contianer-fluid">
-    <div class="page-title px-3">
-        <h1>Gestion des utilisateurs</h1>
-    </div>
-    <div class="alert-message">
-        <app-alert *ngIf="display_message" (timeOut) ="closeAlert($event)" [message] = "message_alert"></app-alert>
-    </div>
-    
-    <div class="row overflow_x_scroll justify-content-end p-5">
-        <div class="col-md-4 d-flex justify-content-end">
-            <form class="d-flex w-100 nav_item position-relative">
-                <input class="form-control me-2 py-1 px-5" id="search_field" 
-                    type="search" placeholder="Recherche ...." 
-                    aria-label="chercher"
-                    (keyup)="searchValue($event)"
-           
-                    (search)="searchValue($event)"
-                >
-                <i class="fa-solid fa-magnifying-glass position-absolute search_icon"
-                (click)="searchValue($event)">
-                </i>
-            </form>
-        </div>
+<div class="page-wrapper">
 
-        <div class="result-message text-center fw-bold" *ngIf="query.length >= 2 && userList">
-            Resultat de recherche pour : <span class="search_data">{{query}}</span>
+    <!-- ── Alertes ──────────────────────────────────── -->
+    <div class="alert-zone" *ngIf="display_message">
+        <app-alert (timeOut)="closeAlert($event)" [message]="message_alert"></app-alert>
+    </div>
+
+    <!-- ── En-tête de page ──────────────────────────── -->
+    <div class="page-header">
+        <div class="page-header-left">
+            <h1 class="page-title">{{'admin.user-index.page-title' | translate}}</h1>
+            <span class="count-badge" *ngIf="paginationDAtas?.allcount">
+                {{paginationDAtas?.allcount}} {{'admin.user-index.total-count' | translate}}
+            </span>
         </div>
-        <div class="result-message fw-bold text-center" *ngIf="query.length >= 2 && !userList">
-            Aucun resultat pour : <span class="search_data">{{query}}</span>
+        <div class="page-header-right">
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input
+                    type="search"
+                    class="search-input"
+                    [placeholder]="'admin.user-index.search-placeholder' | translate"
+                    (keyup)="searchValue($event)"
+                    (search)="searchValue($event)"
+                />
+            </div>
+            <div class="per-page-wrap">
+                <select class="per-page-select" (change)="setPageLimit($event)">
+                    <option [value]="n" *ngFor="let n of rangeList">{{n}} {{'admin.user-index.per-page-suffix' | translate}}</option>
+                </select>
+            </div>
         </div>
-        
-        <div class="col-12 d-flex justify-content-start gap-2 align-items-center py-3">
-            <h3 class="label-filter m-0">Afficher par</h3>
-            <select class="form-select w-25" id="" aria-label="Floating label select example" (change)="setPageLimit($event)">
-                <option value="{{itemRange}}" *ngFor="let itemRange of rangeList">{{itemRange}}</option>
-            </select>
-        </div>
-    
-        <div class="result-message text-center fw-bold d-none" >
-            Resultat de recherche pour : <span class="search_data"></span>
-        </div>
-        <div class="result-message fw-bold text-center d-none">
-            Aucun resultat pour : <span class="search_data"></span>
-        </div>
-        
-        <div class="col-12">
-            <table class="table px-4 m-auto" id="dashboard_table">
+    </div>
+
+    <!-- Message de recherche -->
+    <div class="search-feedback" *ngIf="query.length >= 2">
+        <i class="fa-solid fa-filter"></i>
+        <span *ngIf="userList?.length">{{'admin.user-index.search-results-for' | translate}} <strong>«&nbsp;{{query}}&nbsp;»</strong></span>
+        <span *ngIf="!userList?.length">{{'admin.user-index.no-results-for' | translate}} <strong>«&nbsp;{{query}}&nbsp;»</strong></span>
+        <button class="clear-search" type="button" (click)="clearSearch()">
+            <i class="fa-solid fa-xmark"></i> {{'admin.user-index.clear-search' | translate}}
+        </button>
+    </div>
+
+    <!-- ── Tableau ──────────────────────────────────── -->
+    <div class="table-card">
+        <div class="table-responsive">
+            <table class="users-table">
                 <thead>
-                    <tr class="border-bottom-1-green">
-                        <th scope="col" class="border-top-1-gray border-left-1-gray">No</th>
-                        <th scope="col " class="bord">Nom Utilisateur </th>
-                        <th scope="col " class="bord">Annonces expirées</th>
-                        <th scope="col " class="bord">Annonces publiées</th>
-                        <th scope="col " class="bord border-right-1-gray">Pays</th>
-                        <th scope="col " class="bord">Actions</th>
+                    <tr>
+                        <th class="th-avatar"></th>
+                        <th>{{'admin.user-index.column.advertiser' | translate}}</th>
+                        <th class="th-hide-md">{{'admin.user-index.column.email' | translate}}</th>
+                        <th>{{'admin.user-index.column.status' | translate}}</th>
+                        <th class="th-hide-md">{{'admin.user-index.column.country' | translate}}</th>
+                        <th class="th-center">{{'admin.user-index.column.published-ads' | translate}}</th>
+                        <th class="th-center">{{'admin.user-index.column.expired-ads' | translate}}</th>
+                        <th class="th-center">{{'admin.user-index.column.actions' | translate}}</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <ng-container *ngIf="userList">
-                        <tr *ngFor="let user of userList, let i = index">
-                            <th scope="row" class="bord-black">{{i+1}} </th>
-                            <td class="bord-black">
-                                {{user.username}}
-                            </td>
-                            <td class="bord-black">{{user.nbre_expired}} </td>
-                            <td class="bord-black">{{user.nbre_publisher}} </td>
-                            <td class="bord-black">{{user.country | getContryByCode}} </td>
-
-                            <!-- Les actions -->
-                            <td class="bord-black">
-                                <div class="icon-list d-flex align-items-center gap-2 justify-content-center">
-                                    <div *ngIf="user.status == 1"  class="bg-danger text-white px-2 py-1 rounded" (click)="handleConfirmDisabled(true)">Bloquer</div>
-                                    <div *ngIf="user.status == 0"  class="bg-secondary text-white px-2 py-1 rounded" (click)="handleConfirmDisabled(true)">Débloquer</div>
-
-                                    <app-alert-confirm *ngIf="showAlert" (confirmAction)="disabledUser($event , user)"></app-alert-confirm>
-
-                                    <i class="fa-solid fa-eye radius-3  green-black " [routerLink]="['/admin/user-management/details', user.id]" ></i>
+                    <ng-container *ngIf="userList && userList.length > 0">
+                        <tr *ngFor="let user of userList; let i = index" class="user-row">
+                            <!-- Avatar -->
+                            <td class="td-avatar">
+                                <div class="avatar-circle" [style.background]="avatarColor(user.username)">
+                                    {{initials(user.username)}}
                                 </div>
+                            </td>
+                            <!-- Nom -->
+                            <td class="td-name">
+                                <span class="user-name">{{user.username}}</span>
+                            </td>
+                            <!-- Email -->
+                            <td class="td-email th-hide-md">
+                                <span class="user-email">{{user.email}}</span>
+                            </td>
+                            <!-- Statut -->
+                            <td>
+                                <span class="status-chip" [class.chip-active]="user.status == 1" [class.chip-blocked]="user.status == 0">
+                                    <i class="fa-solid" [class.fa-circle-check]="user.status == 1" [class.fa-ban]="user.status == 0"></i>
+                                    {{user.status == 1 ? ('status.active' | translate) : ('status.blocked' | translate)}}
+                                </span>
+                            </td>
+                            <!-- Pays -->
+                            <td class="th-hide-md">
+                                <span class="country-text">{{user.country | getContryByCode}}</span>
+                            </td>
+                            <!-- Annonces publiées -->
+                            <td class="td-center">
+                                <span class="ann-badge ann-published">{{user.nbre_publisher ?? 0}}</span>
+                            </td>
+                            <!-- Annonces expirées -->
+                            <td class="td-center">
+                                <span class="ann-badge ann-expired">{{user.nbre_expired ?? 0}}</span>
+                            </td>
+                            <!-- Actions -->
+                            <td class="td-actions">
+                                <div class="action-group">
+                                    <button class="btn-action btn-view"
+                                        [title]="'admin.user-index.action.view-profile' | translate"
+                                        [routerLink]="['/admin/user-management/details', user.id]">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                    <button class="btn-action"
+                                        [class.btn-block]="user.status == 1"
+                                        [class.btn-unblock]="user.status == 0"
+                                        [title]="user.status == 1 ? ('admin.user-index.action.block' | translate) : ('admin.user-index.action.unblock' | translate)"
+                                        (click)="handleConfirmDisabled(true)">
+                                        <i class="fa-solid" [class.fa-lock]="user.status == 1" [class.fa-lock-open]="user.status == 0"></i>
+                                    </button>
+                                </div>
+                                <app-alert-confirm *ngIf="showAlert" (confirmAction)="disabledUser($event, user)"></app-alert-confirm>
                             </td>
                         </tr>
                     </ng-container>
 
-                    <tr class="bord-black" *ngIf="!userList">
-                        <td>
-                            <div class="row">
-                                <div class="col-12 d-flex justify-content-center data-not-found">
-                                    Aucune données trouvée.
+                    <!-- État vide -->
+                    <tr *ngIf="!userList || userList.length === 0">
+                        <td colspan="8">
+                            <div class="empty-state">
+                                <div class="empty-icon">
+                                    <i class="fa-solid fa-users-slash"></i>
                                 </div>
+                                <p class="empty-title">{{'admin.user-index.no-advertiser-found' | translate}}</p>
+                                <p class="empty-sub" *ngIf="query.length >= 2">
+                                    {{'admin.user-index.try-different-search' | translate}}
+                                </p>
                             </div>
                         </td>
                     </tr>
-
-                    <div class="col-12 py-3 d-flex justify_content" *ngIf="userList">
-                        <app-paginator
-                            [current] = "paginationDAtas?.current" 
-                            [allcount] = "paginationDAtas?.allcount" 
-                            [next] = "paginationDAtas?.next" 
-                            [previous] = "paginationDAtas?.previous" 
-                            [paginateLength] = "paginationDAtas?.paginateLength" 
-                            [pageLimit] = "pageLImit"
-                            (pageSelected)="setPage($event)"
-                        >
-                        </app-paginator> 
-                    </div>
-                    
                 </tbody>
             </table>
-    
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-wrap" *ngIf="userList && userList.length > 0">
+            <app-paginator
+                [current]="paginationDAtas?.current"
+                [allcount]="paginationDAtas?.allcount"
+                [next]="paginationDAtas?.next"
+                [previous]="paginationDAtas?.previous"
+                [paginateLength]="paginationDAtas?.paginateLength"
+                [pageLimit]="pageLImit"
+                (pageSelected)="setPage($event)">
+            </app-paginator>
         </div>
     </div>
+
 </div>

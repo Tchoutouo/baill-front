@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../../../environments/environment.development';
+import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs/internal/Observable';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -163,7 +163,7 @@ export class EntityServiceService {
   }
 
   disabledAdvertiser(id: any){
-    return this.http.patch(environment.apiUrl+'advertiser_bac/change/'+id, {});
+    return this.http.patch(environment.apiUrl+'advertiser_back/change/'+id, {});
   }
 
   // FORFAITS | PACKAGES SERVICES

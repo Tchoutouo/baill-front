@@ -14,14 +14,18 @@ import { Alert } from '../../../../models/alert';
 import { AlertConfirmComponent } from "../../../alert-confirm/alert-confirm.component";
 import { Notification } from '../../../../models/notification';
 import { AlertComponent } from '../../alert/alert.component';
-// import { PaginatorComponent } from '../../paginator/paginator.component';
 import { PaginatorComponent } from "../../../admin/paginator/paginator.component";
+import { LoaderComponent } from '../../loader/loader.component';
 
+const AVATAR_COLORS = [
+  '#5EB21E','#4C9813','#24583F','#1797FF',
+  '#FAC84E','#EE6666','#8F8F8F','#232323',
+];
 
 @Component({
   selector: 'app-user-index',
   standalone: true,
-  imports: [RouterModule, TranslateModule, CommonModule, GetContryByCodePipe, AlertConfirmComponent,AlertComponent,PaginatorComponent],
+  imports: [RouterModule, TranslateModule, CommonModule, GetContryByCodePipe, AlertConfirmComponent, AlertComponent, PaginatorComponent, LoaderComponent],
   templateUrl: './user-index.component.html',
   styleUrl: './user-index.component.css'
 })
@@ -154,6 +158,26 @@ export class UserIndexComponent implements OnInit{
     alert.success_label =  "Oui"
     alert.display =  value;
     this.alertConfirm.emitAlert(alert);
+  }
+
+  clearSearch(): void {
+    this.query = '';
+    this.querySearch = '';
+    this.getAllAdvertisers();
+  }
+
+  initials(username: string): string {
+    if (!username) return '?';
+    const parts = username.trim().split(/\s+/);
+    return parts.length >= 2
+      ? (parts[0][0] + parts[1][0]).toUpperCase()
+      : username.slice(0, 2).toUpperCase();
+  }
+
+  avatarColor(username: string): string {
+    if (!username) return AVATAR_COLORS[0];
+    const idx = username.charCodeAt(0) % AVATAR_COLORS.length;
+    return AVATAR_COLORS[idx];
   }
 
   disabledUser(event : any , user: any){

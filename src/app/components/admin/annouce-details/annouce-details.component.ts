@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { environment } from '../../../../environments/environment.development';
+import { environment } from '../../../../environments/environment';
 import { ActivatedRoute } from '@angular/router';
 import { HomeService } from '../../../services/guest/home.service';
 import { CommonModule } from '@angular/common';
@@ -15,13 +15,14 @@ import { CheckProfilService } from '../../../services/check-profil.service';
 import { AlertConfirmService } from '../../../services/alert-confirm.service';
 import { Alert } from '../../../models/alert';
 import { AlertConfirmComponent } from "../../alert-confirm/alert-confirm.component";
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
 @Component({
   selector: 'app-annouce-details',
   standalone: true,
-  imports: [CommonModule, ForfaitListComponent, GetContryByCodePipe, AlertConfirmComponent],
+  imports: [CommonModule, TranslateModule, ForfaitListComponent, GetContryByCodePipe, AlertConfirmComponent],
   templateUrl: './annouce-details.component.html',
   styleUrl: './annouce-details.component.css'
 })

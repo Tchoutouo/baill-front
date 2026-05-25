@@ -12,12 +12,17 @@ import { Alert } from '../../../../models/alert';
 import { AlertConfirmService } from '../../../../services/alert-confirm.service';
 import { Notification } from '../../../../models/notification';
 import { AlertComponent } from "../../alert/alert.component";
+import { LoaderComponent } from "../../loader/loader.component";
 
+const AVATAR_COLORS = [
+  '#5EB21E','#4C9813','#24583F','#1797FF',
+  '#FAC84E','#EE6666','#8F8F8F','#232323',
+];
 
 @Component({
   selector: 'app-user-show',
   standalone: true,
-  imports: [CommonModule, TranslateModule, GetContryByCodePipe, AlertConfirmComponent, AlertComponent],
+  imports: [CommonModule, TranslateModule, GetContryByCodePipe, AlertConfirmComponent, AlertComponent, LoaderComponent],
   templateUrl: './user-show.component.html',
   styleUrl: './user-show.component.css'
 })
@@ -81,6 +86,19 @@ export class UserShowComponent implements OnInit{
     
   }
   
+  initials(username: string): string {
+    if (!username) return '?';
+    const parts = username.trim().split(/\s+/);
+    return parts.length >= 2
+      ? (parts[0][0] + parts[1][0]).toUpperCase()
+      : username.slice(0, 2).toUpperCase();
+  }
+
+  avatarBg(username: string): string {
+    if (!username) return AVATAR_COLORS[0];
+    return AVATAR_COLORS[username.charCodeAt(0) % AVATAR_COLORS.length];
+  }
+
   disabledAdvertiser(event : any , advertiser: any){
     console.log("disabled user", advertiser, event);
     let alert = new Alert();

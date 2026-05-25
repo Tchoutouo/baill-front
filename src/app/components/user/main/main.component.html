@@ -1,44 +1,22 @@
 <app-header></app-header>
+
 <div class="main-container">
     <app-banner></app-banner>
-    <app-products-hightlight></app-products-hightlight>
-    <div class="container-fluid px-5 mb-5">
-        <div class="products-categories-container p-4">
-            <!-- Button trigger modal -->
-            <!-- <button type="button" class="btn btn_publish my-5 mx-0 d-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                Choisir la categoties
-            </button> -->
+    <app-products-hightlight [highlights]="highlights"></app-products-hightlight>
 
-            <div class="categories-list">
-                <!-- Modal -->
-                <div class="large-sreen">
-                    <app-categories-list></app-categories-list>
-                </div>
+    <div class="container px-md-4">
+        <div class="products-categories-container">
 
-                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <!-- <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1> -->
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <app-categories-list [category_list]="categories"></app-categories-list>
-                            </div>
-                            <div class="modal-footer">  
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                                <button type="button" class="btn btn-success">choisir</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="articles-list ">
-                <app-product-list ></app-product-list>
-            </div>
+            <aside class="categories-list">
+                <app-categories-list></app-categories-list>
+            </aside>
+
+            <section class="articles-list">
+                <app-product-list [initialProducts]="products"></app-product-list>
+            </section>
+
         </div>
     </div>
 </div>
-
 
 <app-footer></app-footer>

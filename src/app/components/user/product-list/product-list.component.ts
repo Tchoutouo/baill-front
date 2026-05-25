@@ -1,139 +1,59 @@
-import { Component, Input } from '@angular/core';
-import { ProductComponent } from "../product/product.component";
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  DestroyRef,
+  inject,
+  Input,
+  OnChanges,
+  SimpleChanges
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
-import { TagsListComponent } from "../tags-list/tags-list.component";
-import { HomeService } from '../../../services/guest/home.service';
-import { Subscription } from 'rxjs';
+import { ProductComponent } from '../product/product.component';
+import { TagsListComponent } from '../tags-list/tags-list.component';
 import { PaginatorComponent } from '../paginator/paginator.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { isLoggedIn } from '../../../helpers/helper';
-import { AuthenticatorService } from '../../../services/admin/authenticator.service';
+import { HomeService } from '../../../services/guest/home.service';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [ProductComponent, CommonModule, TagsListComponent, PaginatorComponent,TranslateModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [ProductComponent, CommonModule, TagsListComponent, PaginatorComponent, TranslateModule],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css'
 })
-export class ProductListComponent {
+export class ProductListComponent implements OnChanges {
+  @Input() initialProducts: any[] = [];
 
-  numbers: number[] = [1, 2, 3, 4, 2, 3, 4, 5];
+  products: any[] = [];
 
-  productsList : any;
-  pageLimit : number = 12;
-  result_datas : any;
-  paginationDatas : any ;
-  current_page : number=1;
-  filterSub : Subscription |undefined ;
-  products : any 
-  productFiltered : any ;
+  private readonly cdr        = inject(ChangeDetectorRef);
+  private readonly homeServ   = inject(HomeService);
+  private readonly destroyRef = inject(DestroyRef);
 
-  constructor(private homeServ : HomeService,  private auth: AuthenticatorService){}
-
-  ngOnInit(){
-    this.initComponent()
+  ngOnChanges(changes: SimpleChanges): void {
+    const next = changes['initialProducts']?.currentValue;
+    if (next?.length) {
+      this.products = next;
+    }
   }
 
-  initComponent(){
-    // this.getAnnoucesList();
-    this.getAllAnnoncesPublished();
+  filterDatas(event: any): void {
+    if (!event) return;
+    this.homeServ.filterDataBy(event)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (datas: any) => {
+          this.products = (datas.success && datas.annonces) ? datas.annonces : [];
+          this.cdr.markForCheck();
+        },
+        error: (err: any) => console.error('Erreur filtre', err)
+      });
   }
 
-  getAllAnnoncesPublished(){
-
-    const user = this.auth.isLoggedIn();
-    const user_id= user.id ? user.id : null;
-    this.productsList = this.homeServ.getAllAnnoucesPublished(user_id).subscribe({
-      next: (datas: any) => {
-        if (datas.success == true) {
-          if (datas.data_annonce) {
-            this.products = datas.data_annonce;
-            this.result_datas = datas.data_annonce ;
-          }
-        }else{
-          this.products = null ;
-        }
-      },
-
-      error: (erreur: any) => { 
-        console.log("erreur récupération des données home",erreur);
-      }
-    })
+  trackByAnnounce(_index: number, item: any): number {
+    return item?.id ?? _index;
   }
-
-  // ANCIENNE FONCTION POUR LA PAGINATION, n'est plus utilisée actellement
-  getAnnoucesList(){
-    const user = this.auth.isLoggedIn();
-    const user_id= user.id ? user.id : null;
-    console.log({user_id: user_id});
-      
-    this.productsList = this.homeServ.getAllPublishedAnnouces(this.current_page).subscribe({
-    
-      next: (datas: any) => { 
-        console.log(datas);
-        
-        if (datas.success == true) {
-          if (datas.data_annonce.data) {
-            this.products = datas.data_annonce.data ;
-            this.result_datas = datas.data_annonce ;
-            this.current_page = this.result_datas.current_page;  
-            this.paginationDatas = {
-              current : this.result_datas.current_page,  
-              total : this.result_datas.total,
-              next : this.result_datas.current_page + 1,    
-              previous : this.result_datas.current_page - 1, 
-              last : this.result_datas.last_page, 
-            }
-          }
-        }else{
-          this.products = null ;
-        }
-      },
-
-      error: (erreur: any) => { 
-        console.log("Erreur trie annonces",erreur);
-      }
-      
-    })
-  }
-
-  setPageCurrent(event : any){
-    this.current_page = event ;
-    this.getAnnoucesList();
-  }
-
-  filterDatas(event : any){
-    try {
-      if (event) {
-        this.productFiltered = this.homeServ.filterDataBy(event).subscribe({
-          next: (datas: any) => {            
-            if (datas.success = true && datas.annonces != null) {
-                this.products = datas.annonces;
-                this.result_datas = datas.annonces ;
-                this.current_page = this.result_datas.current_page;  
-                // this.paginationDatas = {
-                //  current : this.result_datas.current_page,  
-                //  total : this.result_datas.total,
-                //  next : this.result_datas.current_page + 1,    
-                //  previous : this.result_datas.current_page - 1, 
-                //  last : this.result_datas.last_page, 
-                //}
-            } else {
-              this.products = null ;
-            }
-          },
-          error: (erreur: any) => { 
-            console.log(erreur);
-            
-          }
-        })  ;
-      }
-
-    } catch (error) {
-      console.log('erreur : ', error);
-      
-    }    
-  }
-
 }

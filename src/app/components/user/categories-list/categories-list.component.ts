@@ -1,44 +1,43 @@
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  inject
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
-import { Component, Input, SimpleChanges } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { EntityServiceService } from '../../../services/admin/entity-service.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { EntityServiceService } from '../../../services/admin/entity-service.service';
 
 @Component({
   selector: 'app-categories-list',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, TranslateModule],
   templateUrl: './categories-list.component.html',
   styleUrl: './categories-list.component.css'
 })
 export class CategoriesListComponent {
+  categories: any[] = [];
 
-  @Input() category_list : any;
-  categories : any[] = [] ;
-  categoryList : Subscription | undefined
+  private readonly cdr       = inject(ChangeDetectorRef);
+  private readonly entitServ = inject(EntityServiceService);
 
-  constructor(private entitServ : EntityServiceService){
-
+  constructor() {
+    this.entitServ.getAllAnnoucesCategories()
+      .pipe(takeUntilDestroyed())
+      .subscribe({
+        next: (data: any) => {
+          if (data.success) {
+            this.categories = data.data;
+            this.cdr.markForCheck();
+          }
+        },
+        error: (err: any) => console.error('Erreur catégories', err)
+      });
   }
 
-  // ngOnChanges(changes: SimpleChanges) {
-  //   this.categories = this.category_list
-  //   console.log(this.category_list);
-  // }
-
-  ngOnInit(){
-    this.categoryList = this.entitServ.getAllAnnoucesCategories().subscribe({
-      next: (data: any) => {
-        if (data.success) {
-          const result = data.data
-          this.categories = result  ;
-        }
-      },
-
-      error: (erreur: any) => { 
-        console.log(erreur);
-       }
-    });
-    this.categories = this.category_list
+  trackByCategory(_index: number, item: any): number {
+    return item?.id ?? _index;
   }
 }

@@ -1,158 +1,137 @@
-.product-image{
-    height: 236px;
+/* ═══════════════════════════════════════
+   PRODUCTS HIGHLIGHT (CAROUSEL)
+═══════════════════════════════════════ */
+.products-hightlight-container {
+    margin-bottom: 40px;
+}
+
+.hightlight-title {
+    font-family: var(--main-font-Quicksand);
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: var(--main-xl-font-weiht);
+    line-height: 1.25;
+    color: var(--main-color-blackgreen);
+    margin: 0 0 16px;
+}
+
+/* ── Carousel band ── */
+.products-container {
+    background: var(--main-color-green-15);
+    padding: 48px 0;
+}
+
+/* ── Highlight slide ── */
+.product-image {
+    height: 260px;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     border-radius: var(--main-radius-value-10);
 }
 
-.products-container{
-    background-color: var(--main-color-green-15);
-}
-
-.hightlight-title{
-    font-size: 48px;
-    font-weight: var(--main-xl-font-weiht);
-    line-height: 60px;
-    text-align: left;
-    margin-bottom: 15px;
-    margin-top: 0;
-    color: var(--main-color-blackgreen);
-}
-
-.product-name h3{
+.product-name h3 {
     font-family: var(--main-font-Quicksand);
-    font-size: var( --main-h3-font-size);
+    font-size: var(--main-h3-font-size);
     font-weight: var(--main-xl-font-weiht);
-    line-height: var(--main-lg-line-height);
-    text-align: left;
-    color: var(--main-color-black);
-    margin: 0;
-}
-
-.product-name h4{
-    font-family: var(--main-font-Quicksand);
-    font-size: var( --main-h3-font-size);
-    font-weight: var(--main-xl-font-weiht);
-    line-height: var(--main-lg-line-height);
-    text-align: left;
-    color: var(--main-color-blackgreen);
-    margin: 0;
-}
-
-.product-name h2{
-    font-family: var(--main-font-Quicksand);
-    font-size: var( --main-h2-font-size);
-    font-weight: var(--main-xl-font-weiht);
-    line-height: var(--main-lg-line-height);
-    text-align: left;
     color: var(--main-color-dark);
-    margin: 0;
-}       
+    margin: 0 0 4px;
+}
 
-.product-description h4 {
+.product-name h4 {
     font-family: var(--main-font-Quicksand);
     font-size: var(--main-h4-font-size);
     font-weight: var(--main-md-font-weiht);
-    line-height: 27.5px;
-    text-align: left;
-    color: var(--main-color-dark);
+    color: var(--main-color-blackgreen);
+    margin: 0 0 8px;
+}
+
+.product-price h2 {
+    font-family: var(--main-font-Quicksand);
+    font-size: var(--main-h2-font-size);
+    font-weight: var(--main-xl-font-weiht);
+    color: var(--main-color-blackgreen);
+    margin: 0 0 8px;
 }
 
 .product-description {
-    max-height: 115px;
+    max-height: 90px;
     overflow: hidden;
 }
 
-.product-phone h5 {
+.product-description h4 {
+    font-family: var(--main-font-Quicksand);
     font-size: var(--main-h5-font-size);
     font-weight: var(--main-md-font-weiht);
-    line-height: var(--main-md-2-line-height);
-    text-align: justify;
     color: var(--main-color-dark);
+    line-height: 1.5;
+    margin: 0;
 }
 
-.product-localisation h5, .others-contacts i{
-    font-size: var(--main-h5-font-size);
-    font-weight: var(--main-md-font-weiht);
-    line-height: var(--main-md-2-line-height);
-    text-align: justify;
-    color: var(--main-color);
+/* ── Contact links ── */
+.two_icon {
+    margin-bottom: 6px;
 }
 
-.others-contacts i{
-    font-size: var(--main-h5-font-size);
-    font-weight: var(--main-md-font-weiht);
-    line-height: var(--main-md-2-line-height);
-    text-align: justify;
-    color: var( --main-color-blackgreen);
-}
-
-.py-77{
-    padding: 77px 0;
-}
-
-.carousel-control-prev, .carousel-control-next{
-    width: 43px;
-    height: 44px;
-    border-radius: 50%;
-    top: 40%;
-    font-size: var(--main-h4-font-size);
-    color: var(--main-color);
-    background-color: rgba(36, 88, 63, 0.75);
-}
-
-.carousel-control-prev{
-   left: -5%; 
-}
-
-.carousel-control-next{
-    right: -5%;
-}
-
-.product-details .phone span{
-    font-weight: var(--main-xl-font-weiht);
-}
-
-.two_icon{
-    margin-bottom: 5px;
-}
-
-.two_icon i{
+.two_icon i {
     color: var(--main-color-blackgreen) !important;
 }
 
-.two_icon a{
+.two_icon a {
     text-decoration: none;
     color: var(--main-color-green-30);
+    font-size: var(--main-h5-font-size);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
 }
 
-.product-price{
+.two_icon a:hover {
+    color: var(--main-color-blackgreen);
+}
+
+/* ── Carousel controls ── */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #fff;
+    background: rgba(36, 88, 63, .75);
+    opacity: 1;
+}
+
+.carousel-control-prev { left: -20px; }
+.carousel-control-next { right: -20px; }
+
+/* ── No content ── */
+.h2-baill {
     font-family: var(--main-font-Quicksand);
 }
 
+.green-black { color: var(--main-color-blackgreen); }
+.fw-baill-bold { font-weight: var(--main-xl-font-weiht); }
 
-@media screen and (max-width : 900px) {
-    .carousel-control-prev{
-        left: -3%; 
-     }
-     
-     .carousel-control-next{
-         right: -3%;
-     }
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media (max-width: 900px) {
+    .products-container {
+        padding: 32px 0;
+    }
 
-     .banner-container {
-        padding: 0 1rem;
-     }
+    .carousel-control-prev { left: 4px; }
+    .carousel-control-next { right: 4px; }
 }
 
-@media screen and (max-width : 768px) {
-    .carousel-control-prev{
-        left: .5%; 
-     }
-     
-     .carousel-control-next{
-         right: .5%;
-     }
-}
+@media (max-width: 768px) {
+    .product-image {
+        height: 200px;
+        margin-bottom: 20px;
+    }
 
+    .carousel-control-prev { left: 2px; }
+    .carousel-control-next { right: 2px; }
+}

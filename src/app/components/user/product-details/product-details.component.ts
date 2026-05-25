@@ -8,7 +8,7 @@ import { HeaderComponent } from '../header/header.component';
 import { ActivatedRoute } from '@angular/router';
 import { HomeService } from '../../../services/guest/home.service';
 import { Subscription } from 'rxjs';
-import { environment } from '../../../../environments/environment.development';
+import { environment } from '../../../../environments/environment';
 import { TranslateModule } from '@ngx-translate/core';
 import { ListStateServiceService } from '../../../services/guest/list-state-service.service';
 

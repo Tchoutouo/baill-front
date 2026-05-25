@@ -1,33 +1,33 @@
 <div class="annouce-details-container px-4 container">
     <div class="detail-title mb-30">
-        <h2 class="h2-baill h2-baill fw-baill-bold">Détails de l’annonce</h2>
+        <h2 class="h2-baill h2-baill fw-baill-bold">{{'admin.annouce-details.page-title' | translate}}</h2>
     </div>
 
     <div class="row px-lg-5 mx-3">
         <div class="col-lg-6 px-0">
             <ul class="bail-list-ul">
                 <li class="h4-baill">
-                    <span class="green-black fw-baill-bold pe-2 ">Titre : </span>
+                    <span class="green-black fw-baill-bold pe-2 ">{{'admin.annouce-details.field.title' | translate}} : </span>
                     <span class="black fw-baill-medium-bold pe-3"> {{annouce?.title}}</span>
                 </li>
                 <li class="h4-baill">
-                    <span class="green-black fw-baill-bold pe-2">Prix : </span>
+                    <span class="green-black fw-baill-bold pe-2">{{'admin.annouce-details.field.price' | translate}} : </span>
                     <span class="black fw-baill-medium-bold pe-3"> {{annouce?.price | currency:'XAF':'symbol':'1.0-0':'fr-CM'}}</span>
                 </li>
                 <li class="h4-baill">
-                    <span class="green-black fw-baill-bold pe-2">Pays : </span>
+                    <span class="green-black fw-baill-bold pe-2">{{'admin.annouce-details.field.country' | translate}} : </span>
                     <span class="black fw-baill-medium-bold pe-3"> {{annouce?.country | getContryByCode}}</span>
                 </li>
                 <li class="h4-baill">
-                    <span class="green-black fw-baill-bold pe-2">Ville : </span>
+                    <span class="green-black fw-baill-bold pe-2">{{'admin.annouce-details.field.city' | translate}} : </span>
                     <span class="black fw-baill-medium-bold pe-3"> {{annouce?.location}}</span>
                 </li>
                 <li class="h4-baill">
-                    <span class="green-black fw-baill-bold pe-2">Lieu dit : </span>
+                    <span class="green-black fw-baill-bold pe-2">{{'admin.annouce-details.field.location' | translate}} : </span>
                     <span class="black fw-baill-medium-bold pe-3"> {{annouce?.neighborhood}}</span>
                 </li>
                 <li class="h4-baill">
-                    <span class="green-black fw-baill-bold pe-2">Description : </span>
+                    <span class="green-black fw-baill-bold pe-2">{{'admin.annouce-details.field.description' | translate}} : </span>
                     <span class="black fw-baill-medium-bold pe-3 "> {{annouce?.description}}</span>
                 </li>
             </ul>
@@ -37,7 +37,7 @@
             <div class="image-list mb-4">
                 <div class="row">
                     <h4 class="h4-baill px-0 mb-8 fw-baill-bold green-black">
-                        Images
+                        {{'admin.annouce-details.section.images' | translate}}
                     </h4>
                 </div>
                 <div class="row images-list-fieldset wrap">
@@ -48,15 +48,11 @@
                 </div>
             </div>
             <div class="categories-list row">
-                <h4 class="h4-baill px-0 fw-baill-bold mb-8 green-black"  >
-                    Catégories
+                <h4 class="h4-baill px-0 fw-baill-bold mb-8 green-black">
+                    {{'admin.annouce-details.section.categories' | translate}}
                 </h4>
                 <div class="d-flex g-10 px-0 wrap">
-                    <!-- <button class="bg-gray-1 balck border-none main-font-quick btn-medium rounded-30 ">Mettre pause</button>
-                    <button class="bg-blue main-white border-none main-font-quick btn-medium rounded-30 ">Republier</button> -->
                     <button *ngFor="let itemCategory of annouce?.categories" class="bg-white green-main  rounded-30  btn-medium main-font-quick border-green-1">{{itemCategory.title}}</button>
-                    <!-- <button class="bg-red main-white border-none main-font-quick btn-medium rounded-30 ">Supprimer</button> -->
-                    <!-- <button class="bg-green-main main-white border-none main-font-quick btn-medium rounded-30">Publier</button> -->
                 </div>
             </div>
         </div>
@@ -65,37 +61,26 @@
     <div class="row pt-5">
         <div class="col-lg-5">
             <div class="d-flex g-10 px-3 px-lg-0 wrap">
-                <a *ngIf="annouce?.status == '1' && !isAdmin" title="Publier" id="create" data-bs-toggle="modal"  data-bs-target="#forfaitList" >
-                    <!-- <i class="fa fa-check bg-green  p-1 radius-3 text-white"></i> -->
-                    <button class="bg-green-main main-white border-none main-font-quick btn-medium rounded-30">Publier</button>
+                <a *ngIf="annouce?.status == '1' && !isAdmin" [title]="'admin.annouce-details.action.publish' | translate" id="create" data-bs-toggle="modal" data-bs-target="#forfaitList">
+                    <button class="bg-green-main main-white border-none main-font-quick btn-medium rounded-30">{{'admin.annouce-details.action.publish' | translate}}</button>
                     <app-forfait-list (hasSubmit)="handleSubmit($event, annouce?.id)"></app-forfait-list>
                 </a>
-                <a *ngIf="annouce?.status == '1' && !isAdmin" title="Supprimer" >
-                    <!-- <i class="fa-solid fa-trash radius-3 bg_red text-white p-1"></i> -->
-                    <button class="bg-red main-white border-none main-font-quick btn-medium rounded-30 ">Supprimer</button>
+                <a *ngIf="annouce?.status == '1' && !isAdmin" [title]="'admin.annouce-details.action.delete' | translate">
+                    <button class="bg-red main-white border-none main-font-quick btn-medium rounded-30 ">{{'admin.annouce-details.action.delete' | translate}}</button>
                 </a>
-                <a *ngIf="annouce?.status == '2' && !isAdmin" title="Republier" (click)="setAnnouceStatus(annouce?.id, '3')">
-                    <!-- <i class="fa-solid fa-play bg-white radius-3 text_green p-1 border-top-1-green border-bottom-1-green border-left-1-green border-right-1-green">
-                    </i> -->
-                    <button class="bg-blue main-white border-none main-font-quick btn-medium rounded-30 ">Republier</button>
+                <a *ngIf="annouce?.status == '2' && !isAdmin" [title]="'admin.annouce-details.action.republish' | translate" (click)="setAnnouceStatus(annouce?.id, '3')">
+                    <button class="bg-blue main-white border-none main-font-quick btn-medium rounded-30 ">{{'admin.annouce-details.action.republish' | translate}}</button>
                 </a>
-                <a *ngIf="annouce?.status == '3' && !isAdmin" title="Mettre en pause" (click)="setAnnouceStatus(annouce?.id, '2')">
-                    <!-- <i class="fa-solid fa-pause bg_grey radius-3 text-dark p-1"></i> -->
-                    <button class="bg-gray-1 balck border-none main-font-quick btn-medium rounded-30 ">Mettre pause</button>
+                <a *ngIf="annouce?.status == '3' && !isAdmin" [title]="'admin.annouce-details.action.pause' | translate" (click)="setAnnouceStatus(annouce?.id, '2')">
+                    <button class="bg-gray-1 balck border-none main-font-quick btn-medium rounded-30 ">{{'admin.annouce-details.action.pause' | translate}}</button>
                 </a>
-                <a *ngIf="annouce?.status == '0' && !isAdmin" title="Relancer">
-                    <!-- <i class="fa-solid fa-arrows-rotate bg_blue radius-3 text-white p-1"></i> -->
-                    <button class="bg-white green-main  rounded-30  btn-medium main-font-quick border-green-1">Relancer</button>
-                </a> 
-               
-                <div *ngIf="annouce.status !== '-1' && isAdmin"  class="bg-danger text-white px-2 py-1 rounded" (click)="handleConfirmDisabled(true, '1')">Bloquer</div>
-                <div *ngIf="annouce.status == '-1' &&isAdmin"  class="bg-secondary text-white px-2 py-1 rounded" (click)="handleConfirmDisabled(true, '-1')">Débloquer</div>
+                <a *ngIf="annouce?.status == '0' && !isAdmin" [title]="'admin.annouce-details.action.relaunch' | translate">
+                    <button class="bg-white green-main  rounded-30  btn-medium main-font-quick border-green-1">{{'admin.annouce-details.action.relaunch' | translate}}</button>
+                </a>
+
+                <div *ngIf="annouce.status !== '-1' && isAdmin" class="bg-danger text-white px-2 py-1 rounded" (click)="handleConfirmDisabled(true, '1')">{{'admin.annouce-details.action.block' | translate}}</div>
+                <div *ngIf="annouce.status == '-1' && isAdmin" class="bg-secondary text-white px-2 py-1 rounded" (click)="handleConfirmDisabled(true, '-1')">{{'admin.annouce-details.action.unblock' | translate}}</div>
                 <app-alert-confirm *ngIf="showAlert" (confirmAction)="setAnnouceStatus(annouce?.id, {key : annouce})"></app-alert-confirm>
-                <!-- <button class="bg-gray-1 balck border-none main-font-quick btn-medium rounded-30 ">Mettre pause</button>
-                <button class="bg-blue main-white border-none main-font-quick btn-medium rounded-30 ">Republier</button>
-                <button class="bg-white green-main  rounded-30  btn-medium main-font-quick border-green-1">Relancer</button>
-                <button class="bg-red main-white border-none main-font-quick btn-medium rounded-30 ">Supprimer</button>
-                <button class="bg-green-main main-white border-none main-font-quick btn-medium rounded-30">Publier</button> -->
             </div>
         </div>
     </div>

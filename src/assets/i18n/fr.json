@@ -1,12 +1,13 @@
 {
-    "button":{
+    "button": {
         "next": "Suivant",
         "previous": "Précédent",
         "save": "Enregistrer",
+        "save-changes": "Enregistrer les modifications",
         "cancel": "Annuler",
         "publish": "Publier",
         "back": "Retour",
-        "validate":"Valider",
+        "validate": "Valider",
         "create-and-publish": "Créer & publier",
         "create": "Créer",
         "edit": "Modifier",
@@ -15,17 +16,20 @@
         "view": "Voir",
         "view-all": "Voir tout",
         "close": "Fermer",
-        "throw": "Lancer",
+        "send": "Envoyer",
         "add": "Ajouter",
         "add-category": "Ajouter une catégorie",
         "lock": "Bloquer",
         "unlock": "Débloquer",
         "category": "Catégories",
         "anounce": "Annonces",
-        "pay": "Payer"
+        "pay": "Payer",
+        "enable-editing": "Activer la modification",
+        "ok": "OK"
     },
-    "status":{
+    "status": {
         "active": "Actif",
+        "blocked": "Bloqué",
         "inactive": "Inactif",
         "expired": "Expiré",
         "pending": "En attente",
@@ -36,34 +40,55 @@
         "draft": "Brouillon",
         "deleted": "Supprimé"
     },
-    "banner":{
-        "title":"LOUER en toute simplicité",
-        "title-2": "LOUER en toute simplicité, des biens et services sur bailleurnet",
+    "banner": {
+        "title": "LOUER en toute simplicité",
+        "title-2": "LOUER en toute simplicité, des biens et services sur bailleurnet",
         "title-3": "Ma boussole de poche",
         "description": "Bailleurnet est La plateforme ultime pour la location de biens et services en toute simplicité",
         "btn-publish": "Publier une annonce"
     },
-    "header":{
+    "header": {
         "publish-post": "Publier une annonce",
-        "login-text":"Se connecter",
+        "login-text": "Se connecter",
         "search": "Recherche ...",
-        "espace-text":"Mon espace"
+        "espace-text": "Mon espace",
+        "home-aria-label": "Accueil",
+        "language-label": "Langue",
+        "lang-french": "Français",
+        "lang-english": "English"
     },
-    "footer":{
+    "footer": {
         "contact": "Nous contacter",
-        "access-right": "Tous droits réservés"
+        "access-right": "Tous droits réservés",
+        "contact-by-email": "Courriel",
+        "follow-us": "Suivez-nous"
+    },
+    "error": {
+        "page-404": {
+            "oops-title": "Oups !",
+            "not-found-message": "La page que vous cherchez n'existe pas.",
+            "lost-in-site-description": "On dirait que vous êtes perdu dans les méandres de notre site. Revenons à un endroit plus familier !",
+            "back-to-home-button": "Retourner à l'accueil"
+        },
+        "page-403": {
+            "oops-title": "Oups !",
+            "access-denied-message": "Accès refusé",
+            "permission-check-description": "Une erreur 403 empêche l'accès à cette ressource. Veuillez vérifier les permissions associées.",
+            "back-to-home-button": "Retourner à l'accueil"
+        }
     },
     "user": {
-        "hightlight":{
-            "title": " A la une !",
+        "hightlight": {
+            "title": "À la une !",
             "no-content": "Pas d'annonce à la une pour le moment."
         },
-        "tags-list":{
-            "cat":"Selectionner une categorie",
-            "country": "Selectionner un pays",
-            "city": "Selectionner une ville"
+        "tags-list": {
+            "cat": "Sélectionner une catégorie",
+            "country": "Sélectionner un pays",
+            "city": "Sélectionner une ville",
+            "reset-filter": "Tout"
         },
-        "cat-list":{
+        "cat-list": {
             "title": "Catégories",
             "ascending": "Croissant",
             "descending": "Décroissant",
@@ -71,85 +96,105 @@
             "and": "Et",
             "between": "Entre"
         },
-        "contact-us":{
+        "product-card": {
+            "action": {
+                "call-title": "Appeler",
+                "send-email-title": "Envoyer un email",
+                "view-ad-title": "Voir l'annonce"
+            }
+        },
+        "product-detail": {
+            "cat": "Catégories",
+            "description": "Description",
+            "no-announce": "Aucune annonce",
+            "no-content": "Annonce introuvable",
+            "view-all": "Voir tout",
+            "advertiser": "Annonceur",
+            "similar-ads": "Annonces similaires",
+            "action": {
+                "call": "Appeler",
+                "whatsapp": "WhatsApp",
+                "email": "Email",
+                "visit-site": "Site web"
+            }
+        },
+        "contact-us": {
             "title": "Contactez-nous",
             "description": "Pour nous contacter, utilisez le formulaire ci-dessous. Veuillez remplir tous les champs obligatoires et nous vous répondrons dans les plus brefs délais.",
             "fullname": "Nom complet",
-            "subject":"Objet",
-            "phone-number":"Numéro de téléphone",
-            "button-send":"Envoyer",
-            "message":{
-                "error":{
-                    "fullname": "le nom complet est requis.",
-                    "message":"Veuillez entrer un message.",
-                    "subject":"Veuillez remplir ce champs.",
-                    "email-1":"L'email est requis.",
-                    "email-2":"L'email ne respect pas le bon format.",
-                    "phone-number":"Veuillez entrer votre numéro de téléphone"
+            "subject": "Objet",
+            "phone-number": "Numéro de téléphone",
+            "message-label": "Message",
+            "button-send": "Envoyer",
+            "message": {
+                "error": {
+                    "fullname": "Le nom complet est requis.",
+                    "message": "Veuillez entrer un message.",
+                    "subject": "Veuillez remplir ce champ.",
+                    "email-1": "L'email est requis.",
+                    "email-2": "L'email ne respecte pas le bon format.",
+                    "phone-number": "Veuillez entrer votre numéro de téléphone."
                 },
-                "notif":{
+                "notif": {
                     "success": "Votre mail a été envoyé avec succès !!",
-                    "warning": "Une erreur est survenu lors de l'opération"
+                    "warning": "Une erreur est survenue lors de l'opération."
                 }
             }
         },
-        "signup":{
-            "password":"Mot de passe",
-            "confirm-password":"Confirmer votre mot de passe",
-            "username":"Nom d'utilisateur",
+        "signup": {
+            "password": "Mot de passe",
+            "confirm-password": "Confirmer votre mot de passe",
+            "username": "Nom d'utilisateur",
             "name": "Nom(s)",
             "first-name": "Prénom(s)",
-            "country":"Pays",
-            "city":"Ville",
+            "country": "Pays",
+            "city": "Ville",
             "neighborhood": "Quartier",
-            "email":"E-mail",
-            "whatsapp-number":"Téléphone(Whatsapp)",
-            "title":"S'inscrire",
-            "text-account":"Vous avez déjà compte",
-            "login-text":"Se connecter",
-            "text-line-1":"Je rejoins Bailleurnet",
-            "text-line-2":"ma boussole de poche",
-            "text-line-3":"",
-            "message":{
-                "error":{
-                    "password":"le mot de passe est requis.",
-                    "password-1":"le mot de passe doit comporter au moins 6 caractères.",
-                    "confirm-password":"le mot de passe est requis.",
-                    "confirm-password-1":"les mots de passe ne correspondent pas.",
-                    "username":"le nom d'utilisateur est requis.",
-                    "name": "le nom(s) est requis.",
-                    "first-name": "le prénom est requis",
-                    "country":"Veuillez choisir un pays.",
-                    "city":"Veuillez choisir votre ville.",
+            "email": "E-mail",
+            "whatsapp-number": "Téléphone (WhatsApp)",
+            "title": "S'inscrire",
+            "text-account": "Vous avez déjà un compte",
+            "login-text": "Se connecter",
+            "text-line-1": "Je rejoins Bailleurnet",
+            "text-line-2": "ma boussole de poche",
+            "text-line-3": "",
+            "message": {
+                "error": {
+                    "password": "Le mot de passe est requis.",
+                    "password-1": "Le mot de passe doit comporter au moins 6 caractères.",
+                    "confirm-password": "La confirmation du mot de passe est requise.",
+                    "confirm-password-1": "Les mots de passe ne correspondent pas.",
+                    "username": "Le nom d'utilisateur est requis.",
+                    "name": "Le nom est requis.",
+                    "first-name": "Le prénom est requis.",
+                    "country": "Veuillez choisir un pays.",
+                    "city": "Veuillez choisir votre ville.",
                     "neighborhood": "Veuillez choisir votre quartier.",
-                    "email-1":"L'email est requis.",
-                    "email-2":"L'email ne respect pas le bon format.",
-                    "whatsapp-number":"Téléphone(Whatsapp)"
+                    "email-1": "L'email est requis.",
+                    "email-2": "L'email ne respecte pas le bon format.",
+                    "whatsapp-number": "Le numéro WhatsApp est requis."
                 },
-                "notif":{
-                    "success": "Votre compte a été enregistrée avec succès !!",
-                    "warning": "Une erreur est survenu lors de l'opération"
+                "notif": {
+                    "success": "Votre compte a été enregistré avec succès !",
+                    "warning": "Une erreur est survenue lors de l'opération."
                 }
             }
         },
-        "signin":{
+        "signin": {
             "login-description": "Bienvenue chez Bailleurnet, la location à portée de main.",
             "form-title": "Se connecter",
-            "text-login": "Si vous n’avez pas de compte",
-            "title-signup": "s'inscrire",
-            "email": "E-mail ou Tel",
-            "password": "Mot de passe"
-        },
-        "product-detail":{
-            "cat": "Catégories",
-            "description":"Description",
-            "others": "autres",
-            "no-announce": "Aucune annonce(s)",
-            "no-content": "Annonce introuvable",
-            "view-all": "Voir tout"
+            "text-login": "Si vous n'avez pas de compte",
+            "title-signup": "S'inscrire",
+            "email": "E-mail ou Téléphone",
+            "password": "Mot de passe",
+            "error": {
+                "email-required": "L'email est requis.",
+                "password-required": "Le mot de passe est requis.",
+                "email-invalid-format": "L'email ne respecte pas le bon format."
+            }
         }
     },
-    "admin":{
+    "admin": {
         "profile": {
             "title": "Mon compte",
             "form": {
@@ -190,15 +235,15 @@
                 "username": "Le nom d'utilisateur est requis.",
                 "email": "Email invalide ou manquant.",
                 "phone": "Le numéro de téléphone est requis.",
-                "whatsapp": "Le numéro de téléphone whatsapp est requis.",
-                "sex": "Veuillez choisir votre sexe"
+                "whatsapp": "Le numéro WhatsApp est requis.",
+                "sex": "Veuillez choisir votre sexe."
             }
         },
-        "ads":{
+        "ads": {
             "title": "Annonces",
             "title-2": "Formulaire de création d'une annonce",
             "title-3": "Titre",
-            "no-content": "Aucune annonce(s)",
+            "no-content": "Aucune annonce",
             "no-announce": "Aucune annonce trouvée",
             "search": "Rechercher une annonce",
             "search-no-content": "Aucun résultat trouvé pour",
@@ -217,7 +262,7 @@
             "error-message": {
                 "title": "Le titre est requis.",
                 "description": "La description est requise.",
-                "description-2": "La taille maximale de caractère autorisée est de 256.",
+                "description-2": "La taille maximale autorisée est de 256 caractères.",
                 "category": "La catégorie est requise.",
                 "country": "Le pays est requis.",
                 "city": "La ville est requise.",
@@ -225,34 +270,220 @@
                 "picture": "L'image est requise."
             },
             "select-payment": "Choisissez un mode de paiement",
-            "select-package": "Choisissez un forfait"
+            "select-package": "Choisissez un forfait",
+            "placeholder": {
+                "title": "ex: Appartement T3 meublé, Yaoundé",
+                "description": "Décrivez votre annonce en détail : état, caractéristiques, avantages…"
+            },
+            "category-hint": "Maintenez Ctrl pour sélectionner plusieurs catégories",
+            "add-photo": "Ajouter",
+            "checking-photo": "Vérification…",
+            "image-hint": {
+                "count": "Maximum 8 photos",
+                "size": "Max 5 Mo/photo",
+                "dimension": "Min 200×200 px"
+            },
+            "image-error": {
+                "type": "Format non supporté. Utilisez JPEG, PNG, WebP ou GIF.",
+                "size": "L'image dépasse la limite de {{max}} Mo.",
+                "too-small": "Image trop petite (min. {{min}}×{{min}} px).",
+                "too-large": "Image trop grande (max. {{max}}×{{max}} px).",
+                "max-count": "Maximum {{max}} images autorisées.",
+                "invalid": "Impossible de lire ce fichier image."
+            }
         },
-        "dashboard":{
+        "annouce-details": {
+            "page-title": "Détails de l'annonce",
+            "section": {
+                "images": "Images",
+                "categories": "Catégories"
+            },
+            "field": {
+                "title": "Titre",
+                "price": "Prix",
+                "country": "Pays",
+                "city": "Ville",
+                "location": "Lieu dit",
+                "description": "Description"
+            },
+            "action": {
+                "publish": "Publier",
+                "delete": "Supprimer",
+                "republish": "Republier",
+                "pause": "Mettre en pause",
+                "relaunch": "Relancer",
+                "block": "Bloquer",
+                "unblock": "Débloquer"
+            }
+        },
+        "dashboard": {
             "title": "Tableau de bord",
+            "loading": "Chargement du tableau de bord…",
+            "no-data": "Aucune donnée",
+            "no-blocked-users": "Aucun utilisateur bloqué.",
+            "no-payment-recorded": "Aucun paiement enregistré.",
+            "transactions-label": "transaction(s)",
             "total-ads": "Total des annonces",
             "total-ads-published": "Total des annonces publiées",
             "total-ads-inprogress": "Total des annonces en cours",
             "total-ads-expired": "Total des annonces expirées",
             "total-ads-pause": "Total des annonces en pause",
             "total-users": "Total des utilisateurs",
+            "total-categories": "Total des catégories",
             "total-payments": "Total des paiements",
             "total-packages": "Total des forfaits",
             "ads-published": "Annonces publiées",
             "ads-inprogress": "Annonces en cours",
             "ads-expired": "Annonces expirées",
             "ads-pause": "Annonces en pause",
-            "top-5":"Les 5 annonces les plus demandées du mois"
+            "welcome": "Bonjour",
+            "welcome-sub": "Gérez vos annonces et suivez leur état en temps réel.",
+            "cta-create": "Créer une annonce",
+            "see-all": "Voir tout",
+            "no-ads-yet": "Vous n'avez pas encore d'annonce. Commencez dès maintenant !",
+            "top-5": "Les 5 annonces les plus demandées du mois",
+            "kpi": {
+                "users-label": "Utilisateurs",
+                "ads-label": "Annonces",
+                "revenue-label": "Chiffre d'affaires",
+                "current-month": "Ce mois :"
+            },
+            "chart": {
+                "user-registrations-6-months": "Inscriptions — 6 derniers mois",
+                "ads-created-6-months": "Annonces créées — 6 derniers mois",
+                "package-popularity": "Popularité des forfaits",
+                "ads-by-status": "Annonces par statut",
+                "revenue-by-payment-method": "Revenus par mode de paiement",
+                "monthly-revenue-6-months": "Revenus mensuels — 6 derniers mois (XAF)"
+            },
+            "table": {
+                "top-advertisers": "Top annonceurs",
+                "latest-ads": "Dernières annonces",
+                "latest-registrations": "Dernières inscriptions",
+                "geographic-breakdown": "Répartition géographique",
+                "popular-categories": "Catégories populaires",
+                "blocked-users": "Utilisateurs bloqués"
+            },
+            "column": {
+                "advertiser": "Annonceur",
+                "country": "Pays",
+                "total-ads": "Total ann.",
+                "published-ads": "Publiées",
+                "ad-title": "Titre",
+                "status": "Statut",
+                "date": "Date",
+                "user": "Utilisateur",
+                "email": "Email",
+                "profile": "Profil",
+                "registered-on": "Inscrit le",
+                "category": "Catégorie",
+                "usages": "Utilisations",
+                "duration": "Durée",
+                "action": "Action"
+            },
+            "geo": {
+                "advertisers": "Annonceurs",
+                "ads-label": "Annonces"
+            }
         },
-        "payment":{
+        "user-index": {
+            "page-title": "Annonceurs",
+            "total-count": "au total",
+            "search-placeholder": "Rechercher un annonceur…",
+            "per-page-suffix": "/ page",
+            "search-results-for": "Résultats pour",
+            "no-results-for": "Aucun résultat pour",
+            "clear-search": "Effacer",
+            "column": {
+                "advertiser": "Annonceur",
+                "email": "Email",
+                "status": "Statut",
+                "country": "Pays",
+                "published-ads": "Ann. publiées",
+                "expired-ads": "Ann. expirées",
+                "actions": "Actions"
+            },
+            "action": {
+                "view-profile": "Voir le profil",
+                "block": "Bloquer",
+                "unblock": "Débloquer"
+            },
+            "no-advertiser-found": "Aucun annonceur trouvé",
+            "try-different-search": "Essayez avec un autre terme de recherche."
+        },
+        "user-show": {
+            "section": {
+                "personal-info": "Informations personnelles",
+                "contact": "Contact",
+                "location": "Localisation",
+                "online-presence": "Présence en ligne"
+            },
+            "field": {
+                "last-name": "Nom(s)",
+                "first-name": "Prénom(s)",
+                "username": "Nom d'utilisateur",
+                "gender": "Sexe",
+                "email": "Email",
+                "phone": "Téléphone",
+                "whatsapp": "WhatsApp",
+                "country": "Pays",
+                "city": "Ville",
+                "neighborhood": "Quartier",
+                "website": "Site web"
+            },
+            "gender": {
+                "male": "Homme",
+                "female": "Femme"
+            },
+            "status": {
+                "active": "Actif",
+                "blocked": "Bloqué"
+            },
+            "action": {
+                "block": "Bloquer",
+                "unblock": "Débloquer"
+            },
+            "loading": "Chargement du profil…"
+        },
+        "package-index": {
+            "page-title": "Gestion des forfaits",
+            "search-placeholder": "Rechercher un forfait…",
+            "display-by": "Afficher par",
+            "search-result-prefix": "Résultat de recherche pour :",
+            "no-result-prefix": "Aucun résultat pour :",
+            "column": {
+                "name": "Nom du forfait",
+                "price": "Prix",
+                "duration": "Durée",
+                "actions": "Actions"
+            },
+            "action": {
+                "pause-title": "Mettre en pause",
+                "republish-title": "Republier",
+                "delete-title": "Supprimer",
+                "edit-title": "Modifier"
+            }
+        },
+        "payment-config": {
+            "page-title": "Gestion des modes de paiement",
+            "save-changes": "Enregistrer les modifications"
+        },
+        "payment": {
             "number": "Numéro de téléphone",
             "card-number": "Numéro de carte",
             "date-expired": "Date d'expiration",
             "cvv": "CVV",
             "error-number": "Numéro invalide (doit commencer par 6 et contenir 9 chiffres)."
+        },
+        "notification": {
+            "page-title": "Notifications",
+            "mark-all-read": "Marquer tout comme lu",
+            "ad-expiration-title": "Expiration d'annonce",
+            "ad-expiration-approaching-title": "Approche d'expiration"
         }
     },
-    "aside":{
-        "ads": "Annonce",
+    "aside": {
+        "ads": "Annonces",
         "dashboard": "Tableau de bord",
         "categories": "Catégories",
         "users": "Utilisateurs",
@@ -261,6 +492,41 @@
         "settings": "Paramètres",
         "logout": "Se déconnecter",
         "profile": "Mon profil"
+    },
+    "settings": {
+        "page-title": "Paramètres",
+        "saving": "Enregistrement…",
+        "notifications": {
+            "title": "Notifications",
+            "sub": "Choisissez comment vous souhaitez être informé.",
+            "email-label": "Notifications par e-mail",
+            "email-desc": "Recevez un e-mail lors d'actions importantes sur votre compte.",
+            "platform-label": "Notifications sur la plateforme",
+            "platform-desc": "Recevez des alertes directement dans l'application.",
+            "newsletter-label": "Newsletter",
+            "newsletter-desc": "Restez informé des nouveautés et offres de la plateforme.",
+            "saved": "Préférences de notification enregistrées."
+        },
+        "language": {
+            "title": "Langue",
+            "sub": "Choisissez la langue d'affichage de l'interface.",
+            "fr": "Français",
+            "en": "English"
+        },
+        "account": {
+            "title": "Mon compte",
+            "sub": "Consultez et modifiez vos informations personnelles.",
+            "name": "Nom",
+            "email": "Email",
+            "edit": "Modifier mon profil"
+        },
+        "danger": {
+            "title": "Zone de danger",
+            "sub": "Ces actions sont irréversibles. Procédez avec prudence.",
+            "delete-btn": "Supprimer mon compte",
+            "confirm-text": "Pour confirmer, saisissez le mot",
+            "confirm-text-2": "dans le champ ci-dessous :",
+            "confirm-delete": "Confirmer la suppression"
+        }
     }
-
 }

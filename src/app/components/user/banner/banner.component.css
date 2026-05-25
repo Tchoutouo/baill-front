@@ -1,56 +1,158 @@
-.banner-container{
-    background-image: linear-gradient(180deg, #FDE9B6 36%, rgba(250, 200, 78, 0.56) 100%);
+/* ═══════════════════════════════════════
+   HERO / BANNER
+═══════════════════════════════════════ */
+.hero-section {
+    background: linear-gradient(135deg, #FDE9B6 0%, rgba(250, 200, 78, .45) 100%);
+    padding: 56px 0 48px;
+    overflow: hidden;
+    margin-bottom: 36px;
 }
 
-.banner-title{
-     font-size: 30px;
-    /* font-size: var(--main-h2-font-size ); */
+.hero-inner {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+}
+
+/* ── Texte ── */
+.hero-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.hero-title {
+    font-family: var(--main-font-Quicksand);
+    font-size: clamp(24px, 3.5vw, 44px);
     font-weight: var(--main-xl-font-weiht);
-    line-height: 60px;
-    text-align: center;
-    margin-bottom: 15px;
-    margin-top: 0;
+    line-height: 1.25;
     color: var(--main-color-blackgreen);
+    margin: 0 0 14px;
 }
 
-.banner-description{
-    line-height: var(--main-lg-line-height);
+.hero-desc {
+    font-family: var(--main-font-Mulish);
+    font-size: var(--main-h4-font-size);
     font-weight: var(--main-md-font-weiht);
-    font-size: var(--main-h3-font-size);
-    margin-bottom: 29px;
+    color: var(--main-color-dark);
+    line-height: 1.6;
+    margin: 0 0 28px;
+    max-width: 520px;
 }
 
-.btn_yango{
-    padding: var(--main-btn-sm-padd);
-    background-color: #f00;
-    color: var(--main-color-white);
+/* ── Boutons CTA ── */
+.hero-ctas {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.hero-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 13px 26px;
     border-radius: var(--main-radius-value-8);
-    width: fit-content;
-    margin-right: 20px;
-    font-weight: var(--main-md-font-weiht);
+    font-family: var(--main-font-Quicksand);
+    font-weight: var(--main-xl-font-weiht);
+    font-size: var(--main-h5-font-size);
+    text-decoration: none;
+    min-height: 48px;
+    transition: opacity .2s, transform .15s;
 }
 
-.btn_publish{
-    padding: var(--main-btn-sm-padd);
-    background-color: var(--main-color);
-    color: var(--main-color-white);
-    border-radius: var(--main-radius-value-8);
-    width: fit-content;
+.hero-btn:hover {
+    opacity: .88;
+    transform: translateY(-1px);
 }
 
-.btn_publish:hover{
-    background: rgba(76, 152, 19, 1);
+.btn-yango {
+    background: #cc0000;
+    color: #fff;
 }
 
+.btn-publish {
+    background: var(--main-color);
+    color: var(--main-color-dark);
+}
 
-.banner-image{
-    height: 309px;
+/* ── Image ── */
+.hero-visual {
+    flex: 0 0 400px;
+    max-width: 400px;
+}
+
+.hero-img {
+    height: 300px;
     background-image: url('../../../../assets/banner-image.png');
-    background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
+    border-radius: var(--main-radius-value-20);
+    box-shadow: var(--main-shadow-black);
 }
 
-/* @media screen and (max-width : 1200px) {
+/* ═══════════════════════════════════════
+   RESPONSIVE TABLETTE (≤ 900px)
+═══════════════════════════════════════ */
+@media (max-width: 900px) {
+    .hero-section {
+        padding: 40px 0 32px;
+    }
 
-} */
+    /* Texte en premier sur mobile, image en dessous */
+    .hero-inner {
+        flex-direction: column;
+        gap: 24px;
+        text-align: center;
+    }
+
+    .hero-desc {
+        margin: 0 auto 24px;
+    }
+
+    .hero-ctas {
+        justify-content: center;
+    }
+
+    .hero-visual {
+        flex: none;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .hero-img {
+        height: 220px;
+        border-radius: var(--main-radius-value-10);
+    }
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE MOBILE (≤ 576px)
+═══════════════════════════════════════ */
+@media (max-width: 576px) {
+    .hero-section {
+        padding: 28px 0 24px;
+        margin-bottom: 20px;
+    }
+
+    .hero-title {
+        font-size: clamp(22px, 7vw, 32px);
+    }
+
+    /* Masquer l'image sur petit mobile pour aller à l'essentiel */
+    .hero-visual { display: none; }
+
+    /* Boutons pleine largeur pour faciliter le tap */
+    .hero-ctas {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .hero-btn {
+        width: 100%;
+        font-size: 16px;
+        min-height: 52px;
+        padding: 14px 20px;
+    }
+}

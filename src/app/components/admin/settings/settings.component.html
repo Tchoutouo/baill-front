@@ -1,1 +1,141 @@
+<div class="settings-page">
 
+    <h1 class="settings-title">{{'settings.page-title' | translate}}</h1>
+
+    <!-- ── Section : Notifications ── -->
+    <div class="settings-card">
+        <div class="settings-card-header">
+            <i class="fa-solid fa-bell settings-section-icon"></i>
+            <div>
+                <h2 class="settings-card-title">{{'settings.notifications.title' | translate}}</h2>
+                <p class="settings-card-sub">{{'settings.notifications.sub' | translate}}</p>
+            </div>
+        </div>
+        <div class="settings-card-body">
+            <div class="toggle-row">
+                <div class="toggle-info">
+                    <span class="toggle-label">{{'settings.notifications.email-label' | translate}}</span>
+                    <span class="toggle-desc">{{'settings.notifications.email-desc' | translate}}</span>
+                </div>
+                <label for="notifEmail" class="toggle-switch">
+                    <span class="sr-only">{{'settings.notifications.email-label' | translate}}</span>
+                    <input type="checkbox" id="notifEmail" [(ngModel)]="notifEmail">
+                    <span class="toggle-track" aria-hidden="true"></span>
+                </label>
+            </div>
+            <div class="toggle-row">
+                <div class="toggle-info">
+                    <span class="toggle-label">{{'settings.notifications.platform-label' | translate}}</span>
+                    <span class="toggle-desc">{{'settings.notifications.platform-desc' | translate}}</span>
+                </div>
+                <label for="notifPlatform" class="toggle-switch">
+                    <span class="sr-only">{{'settings.notifications.platform-label' | translate}}</span>
+                    <input type="checkbox" id="notifPlatform" [(ngModel)]="notifPlatform">
+                    <span class="toggle-track" aria-hidden="true"></span>
+                </label>
+            </div>
+            <div class="toggle-row">
+                <div class="toggle-info">
+                    <span class="toggle-label">{{'settings.notifications.newsletter-label' | translate}}</span>
+                    <span class="toggle-desc">{{'settings.notifications.newsletter-desc' | translate}}</span>
+                </div>
+                <label for="notifNewsletter" class="toggle-switch">
+                    <span class="sr-only">{{'settings.notifications.newsletter-label' | translate}}</span>
+                    <input type="checkbox" id="notifNewsletter" [(ngModel)]="notifNewsletter">
+                    <span class="toggle-track" aria-hidden="true"></span>
+                </label>
+            </div>
+            <div class="settings-actions">
+                <button class="settings-btn settings-btn-primary" (click)="saveNotifPrefs()" [disabled]="isSaving">
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    {{ isSaving ? ('settings.saving' | translate) : ('button.save' | translate) }}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Section : Langue ── -->
+    <div class="settings-card">
+        <div class="settings-card-header">
+            <i class="fa-solid fa-globe settings-section-icon"></i>
+            <div>
+                <h2 class="settings-card-title">{{'settings.language.title' | translate}}</h2>
+                <p class="settings-card-sub">{{'settings.language.sub' | translate}}</p>
+            </div>
+        </div>
+        <div class="settings-card-body">
+            <div class="lang-options">
+                <button class="lang-btn" [class.lang-btn-active]="lang === 'fr'" (click)="changeLanguage('fr')">
+                    <span class="lang-flag">🇫🇷</span>
+                    <span>{{'settings.language.fr' | translate}}</span>
+                </button>
+                <button class="lang-btn" [class.lang-btn-active]="lang === 'en'" (click)="changeLanguage('en')">
+                    <span class="lang-flag">🇬🇧</span>
+                    <span>{{'settings.language.en' | translate}}</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Section : Mon compte ── -->
+    <div class="settings-card">
+        <div class="settings-card-header">
+            <i class="fa-solid fa-user settings-section-icon"></i>
+            <div>
+                <h2 class="settings-card-title">{{'settings.account.title' | translate}}</h2>
+                <p class="settings-card-sub">{{'settings.account.sub' | translate}}</p>
+            </div>
+        </div>
+        <div class="settings-card-body">
+            <div class="account-info-row">
+                <span class="account-info-label">{{'settings.account.name' | translate}}</span>
+                <span class="account-info-value">{{userName}}</span>
+            </div>
+            <div class="account-info-row">
+                <span class="account-info-label">{{'settings.account.email' | translate}}</span>
+                <span class="account-info-value">{{email}}</span>
+            </div>
+            <div class="settings-actions">
+                <a [routerLink]="['/admin/myAccount']" class="settings-btn settings-btn-outline">
+                    <i class="fa-solid fa-pen"></i>
+                    {{'settings.account.edit' | translate}}
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Section : Zone danger ── -->
+    <div class="settings-card settings-card-danger">
+        <div class="settings-card-header">
+            <i class="fa-solid fa-triangle-exclamation settings-section-icon danger-icon"></i>
+            <div>
+                <h2 class="settings-card-title danger-text">{{'settings.danger.title' | translate}}</h2>
+                <p class="settings-card-sub">{{'settings.danger.sub' | translate}}</p>
+            </div>
+        </div>
+        <div class="settings-card-body">
+            <button class="settings-btn settings-btn-danger" (click)="showDeleteConfirm = !showDeleteConfirm">
+                <i class="fa-solid fa-trash"></i>
+                {{'settings.danger.delete-btn' | translate}}
+            </button>
+
+            <div class="delete-confirm-box" *ngIf="showDeleteConfirm">
+                <p class="delete-confirm-text">
+                    {{'settings.danger.confirm-text' | translate}}
+                    <strong>{{DELETE_PHRASE}}</strong>
+                    {{'settings.danger.confirm-text-2' | translate}}
+                </p>
+                <input type="text" class="delete-confirm-input"
+                       [(ngModel)]="deleteConfirmText"
+                       [placeholder]="DELETE_PHRASE">
+                <button class="settings-btn settings-btn-danger-solid"
+                        [disabled]="!canDelete || isDeleting"
+                        (click)="deleteAccount()">
+                    <i class="fa-solid fa-skull"></i>
+                    {{'settings.danger.confirm-delete' | translate}}
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>

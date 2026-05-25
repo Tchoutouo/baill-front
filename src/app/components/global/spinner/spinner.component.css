@@ -1,65 +1,59 @@
-.cssload-container {
+/* Full-screen overlay — triggered by HTTP interceptor via LoaderService */
+.baill-spinner-overlay {
     position: fixed;
-    width: 100%;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.356);
+    inset: 0;
     z-index: 9999;
+    background: rgba(255, 255, 255, .88);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.cssload-speeding-wheel {
-    content: "";
-    display: block;
+/* ── Rings container ─────────────────── */
+.sp-rings {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+}
+
+/* ── Rings ───────────────────────────── */
+.sp-ring {
     position: absolute;
-    left: 48%;
-    top: 40%;
-    width: 63px;
-    height: 63px;
-    margin: 0 auto;
-    border: 4px solid var(--main-color-white);
     border-radius: 50%;
-    border-left-color: transparent;
-    border-right-color: transparent;
-    animation: cssload-spin 500ms infinite linear;
-    -o-animation: cssload-spin 500ms infinite linear;
-    -ms-animation: cssload-spin 500ms infinite linear;
-    -webkit-animation: cssload-spin 500ms infinite linear;
-    -moz-animation: cssload-spin 500ms infinite linear;
+    border: 4px solid transparent;
 }
 
-@keyframes cssload-spin {
-    100% {
-        transform: rotate(360deg);
-        transform: rotate(360deg);
-    }
+.sp-ring-outer {
+    inset: 0;
+    border-top-color:   var(--main-color);
+    border-right-color: var(--main-color-green-15);
+    animation: sp-spin-cw 1.1s cubic-bezier(.6, .2, .4, .8) infinite;
 }
 
-@-o-keyframes cssload-spin {
-    100% {
-        -o-transform: rotate(360deg);
-        transform: rotate(360deg);
-    }
+.sp-ring-inner {
+    inset: 12px;
+    border-bottom-color: var(--main-color);
+    border-left-color:   var(--main-color-green-15);
+    animation: sp-spin-ccw .85s cubic-bezier(.6, .2, .4, .8) infinite;
 }
 
-@-ms-keyframes cssload-spin {
-    100% {
-        -ms-transform: rotate(360deg);
-        transform: rotate(360deg);
-    }
+/* ── Core dot ────────────────────────── */
+.sp-core {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--main-color);
+    animation: sp-pulse 1.1s ease-in-out infinite;
 }
 
-@-webkit-keyframes cssload-spin {
-    100% {
-        -webkit-transform: rotate(360deg);
-        transform: rotate(360deg);
-    }
-}
+/* ── Keyframes ───────────────────────── */
+@keyframes sp-spin-cw  { to { transform: rotate(360deg);  } }
+@keyframes sp-spin-ccw { to { transform: rotate(-360deg); } }
 
-@-moz-keyframes cssload-spin {
-    100% {
-        -moz-transform: rotate(360deg);
-        transform: rotate(360deg);
-    }
+@keyframes sp-pulse {
+    0%, 100% { transform: scale(.65); opacity: .55; }
+    50%       { transform: scale(1.25); opacity: 1;  }
 }

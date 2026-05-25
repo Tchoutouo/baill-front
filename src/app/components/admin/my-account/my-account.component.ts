@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 import { Notification } from '../../../models/notification';  
 import { is_image } from '../../../helpers/helper';  
 import { NoficationsService } from '../../../services/nofications.service';  
-import { environment } from '../../../../environments/environment.development';  
+import { environment } from '../../../../environments/environment';  
 import { Subscription } from 'rxjs';  
 
 @Component({  

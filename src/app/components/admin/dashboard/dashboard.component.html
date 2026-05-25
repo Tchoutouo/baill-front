@@ -1,315 +1,514 @@
 <div class="container-fluid pos_relative">
-    <div class="row px-4 pos_relative "  *ngIf="!isAdmin">
-        <div class="col-md-3 py-4">
-            <div class="item-dash bg-green-15 px-4 py-3">
-                <div class="height-121">
-                    <div class="dash-title">
-                        <h2>{{'admin.dashboard.ads-inprogress'|translate}}</h2>
+
+    <!-- ══════════════════════════════════════════════════════
+         VUE ANNONCEUR
+    ══════════════════════════════════════════════════════ -->
+    <div class="adv-dashboard" *ngIf="!isAdmin">
+
+        <!-- Loader -->
+        <div *ngIf="isLoading" class="d-flex justify-content-center py-5">
+            <app-loader size="lg" [text]="'admin.dashboard.loading' | translate"></app-loader>
+        </div>
+
+        <ng-container *ngIf="!isLoading">
+
+        <!-- Bandeau de bienvenue + CTA -->
+        <div class="adv-welcome-bar">
+            <div class="adv-welcome-text">
+                <h2 class="adv-welcome-title">{{'admin.dashboard.welcome' | translate}}, {{advertiserUserName}} 👋</h2>
+                <p class="adv-welcome-sub">{{'admin.dashboard.welcome-sub' | translate}}</p>
+            </div>
+            <a [routerLink]="['/admin/announces/create']" class="adv-cta-btn">
+                <i class="fa-solid fa-plus"></i>
+                {{'admin.dashboard.cta-create' | translate}}
+            </a>
+        </div>
+
+        <!-- KPI Cards -->
+        <div class="row g-3 mb-4">
+            <div class="col-12 col-sm-4">
+                <div class="adv-kpi-card adv-kpi-green">
+                    <div class="adv-kpi-icon"><i class="fa-solid fa-bullhorn"></i></div>
+                    <div class="adv-kpi-body">
+                        <p class="adv-kpi-label">{{'admin.dashboard.ads-inprogress' | translate}}</p>
+                        <h2 class="adv-kpi-value">{{totalEncours}}</h2>
                     </div>
-                    <div class="dash-value">
-                        <h1>{{totalEncours}}<span class="mx-2"></span></h1> 
-                    </div>
+                    <a [routerLink]="['/admin/announces/announces-list']" class="adv-kpi-link">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
                 </div>
-                <div class="text-end">
-                    <i class="fa fa-arrow-right text_green h4"></i>
+            </div>
+            <div class="col-12 col-sm-4">
+                <div class="adv-kpi-card adv-kpi-orange">
+                    <div class="adv-kpi-icon"><i class="fa-solid fa-pause"></i></div>
+                    <div class="adv-kpi-body">
+                        <p class="adv-kpi-label">{{'admin.dashboard.ads-pause' | translate}}</p>
+                        <h2 class="adv-kpi-value">{{totalEnvoiDExp}}</h2>
+                    </div>
+                    <a [routerLink]="['/admin/announces/announces-list']" class="adv-kpi-link">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-12 col-sm-4">
+                <div class="adv-kpi-card adv-kpi-red">
+                    <div class="adv-kpi-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                    <div class="adv-kpi-body">
+                        <p class="adv-kpi-label">{{'admin.dashboard.ads-expired' | translate}}</p>
+                        <h2 class="adv-kpi-value">{{totalExpired}}</h2>
+                    </div>
+                    <a [routerLink]="['/admin/announces/announces-list']" class="adv-kpi-link">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-3 py-4">
-            <div class="item-dash bg-orange-k5 px-4 py-3">
-                <div class="height-121">
-                    <div class="dash-title">
-                        <!-- <h2>Annonces en voie d’expiration</h2> -->
-                        <h2>{{'admin.dashboard.ads-pause'|translate}}</h2>
-                    </div>
-                    <div class="dash-value">
-                        <h1>{{totalEnvoiDExp}}<span class="mx-2"></span></h1> 
-                    </div>
-                </div>
-                <div class="text-end">
-                    <i class="fa fa-arrow-right text_orange h4"></i>
-                </div>
+        <!-- Annonces récentes -->
+        <div class="adv-section">
+            <div class="adv-section-header">
+                <h3 class="adv-section-title">{{'admin.dashboard.table.latest-ads' | translate}}</h3>
+                <a [routerLink]="['/admin/announces/announces-list']" class="adv-see-all">
+                    {{'admin.dashboard.see-all' | translate}} <i class="fa-solid fa-arrow-right"></i>
+                </a>
             </div>
-        </div>
-        <div class="col-md-3 py-4">
-            <div class="item-dash bg-red-10 px-4 py-3">
-                <div class="height-121">
-                    <div class="dash-title">
-                        <h2>{{'admin.dashboard.ads-expired'|translate}}</h2>
-                    </div>
-                    <div class="dash-value">
-                        <h1>{{totalExpired}}
-                            <!-- <span class="mx-2">KL</span> -->
-                        </h1> 
-                    </div>
-                </div>
-                <div class="text-end">
-                    <i class="fa fa-arrow-right text_red h4"></i>
-                </div>
-            </div>
-        </div>
-        <div class="green-side d-none">
-            <div class="relatives-imges">
-                <img src="../../../../assets/dashboard/chariot.png" id="chariot" height="364"  alt="">
-                <img src="../../../../assets/dashboard/voiture.png" id="voiture" height="291"  alt="">
-            </div>
-        </div>
 
-        <div class="row">
-            <h3 class="table-title mb-3 mt-5">
-                {{'admin.dashboard.top-5'|translate}}
-            </h3>
-            <div class="col-7">
-                <!-- tableau
-                <table class="table" id="dashboard_table">
+            <!-- Liste vide -->
+            <div *ngIf="advertiserRecentAnnonces.length === 0 && totalEncours === 0 && totalEnvoiDExp === 0 && totalExpired === 0" class="adv-empty">
+                <i class="fa-solid fa-rectangle-ad adv-empty-icon"></i>
+                <p class="adv-empty-title">{{'admin.dashboard.no-ads-yet' | translate}}</p>
+                <a [routerLink]="['/admin/announces/create']" class="adv-cta-btn">
+                    <i class="fa-solid fa-plus"></i> {{'admin.dashboard.cta-create' | translate}}
+                </a>
+            </div>
+
+            <!-- Tableau des annonces récentes -->
+            <div class="adv-table-wrap" *ngIf="advertiserRecentAnnonces.length > 0">
+                <table class="adv-table">
                     <thead>
-                        <tr class="border-bottom-1-green">
-                            <th scope="col">No</th>
-                            <th scope="col " class="bord">Categorie</th>
-                            <th scope="col " class="bord">Nom</th>
-                            <th scope="col " class="bord">Nbr demandes</th>
+                        <tr>
+                            <th>{{'admin.dashboard.column.ad-title' | translate}}</th>
+                            <th>{{'admin.dashboard.column.status' | translate}}</th>
+                            <th>{{'admin.dashboard.column.date' | translate}}</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let item of anounceList track item; let  i = index">
-                            <th scope="row">{{i + 1 }}</th>
-                            <td class="bord-black">Categorie</td>
-                            <td class="bord-black">Nom</td>
-                            <td class="bord-black">345K</td>
-                        </tr>
-                    </tbody>
-                </table>
-                -->
-            </div>
-        </div>
-    </div> 
-    
-    <div class="row my-4" *ngIf="isAdmin">
-        <div class="col-lg-6">
-            <div class="row px-3">
-                <div class="col-lg-6 pb-3">
-                    <div class="item-dash bg-green-15 px-4 py-3">
-                        <div class="height-121">
-                            <div class="dash-title">
-                                <h2>Nombre d’utilisateur</h2>
-                            </div>
-                            <div class="dash-value">
-                                <h1 class="green-main">{{total_users}}<span class="mx-2"></span></h1> 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 pb-3">
-                    <div class="item-dash bg-green-15 px-4 py-3">
-                        <div class="height-121">
-                            <div class="dash-title">
-                                <h2>Total d’annonces</h2>
-                            </div>
-                            <div class="dash-value">
-                                <h1 class="green-main">{{total_annonces}}<span class="mx-2"></span></h1> 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row pt-4 px-3">
-                <div class="col-12">
-                    <div class="item-dash bg-blue-new px-4 py-3">
-                        <div class="height-121">
-                            <div class="dash-title">
-                                <h2>Chiffre d’affaire</h2>
-                            </div>
-                            <div class="dash-value">
-                                <h1 class="blue-new h1-Quicksand fw-baill-bold">{{total_montant | currency:'XAF':'symbol':'1.0-0':'fr-CM'}} <span class="mx-2"></span></h1> 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row px-4 mt-5">
-                <h1 class="h3-baill pb-4 pt-5 px-0 black fw-baill-bold">Categorie populaires</h1>
-                <table class="table" id="dashboard_table">
-                    <thead>
-                        <tr class="border-bottom-1-green">
-                            <th scope="col " class="bord">Catégorie(s)</th>
-                            <th scope="col " class="bord">Nombre d'utilisation</th>
-                            <th scope="col " class="bord">Nombre d'annonces</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let item of popular_categories track item; let  i = index">
-                            <td class="bord-black">{{item?.nom}} </td>
-                            <td class="bord-black">{{item?.total_users}}</td>
-                            <td class="bord-black">{{item?.total_annonces}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="col-lg-5 offset-lg-1">
-            <div class="row px-4">
-                <h1 class="h3-baill black fw-baill-bold mb-4 pt-4 pt-lg-0">Popularite des forfaits</h1>
-                <div class="col-12 my-2" *ngFor="let abonnement_item of progress_abonnement track abonnement_item; let  i = index">
-                    <div  class="alert-container shadow">
-                        <div class="p-relative bg-white radius-8">
-                            <div class="alert-content d-flex gap-4 px-3 align-items-center pt-2 pb-1">
-                                <span class="text-alert black title-h4 fw-baill-bold">{{abonnement_item?.name}} </span>
-
-                            </div>
-
-                            <div class="price-duration pb-0 d-flex px-3 gap-10">
-                                <h5 class="h5-baill gray-20">{{abonnement_item?.type_time}}</h5>
-                                <h5 class="h5-baill gray-20">{{abonnement_item?.price | currency:'XAF':'symbol':'1.0-0':'fr-CM'}}</h5>
-                            </div>
-
-                            <h6 class="text-end small-text px-3 main-font main-font-quick"> {{abonnement_item?.progress}}%</h6>
-                            <div *ngIf="abonnement_item.type == 'Free'" class="progress bg-orange-k5" role="progressbar" aria-label="Warning example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                                <div class="progress-bar orange-30 w-25" ></div>
-                            </div>
-                            <div *ngIf="abonnement_item.type == 'Standard'" class="progress bg-blue-new" role="progressbar" aria-label="Warning example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                                <div class="progress-bar bg-blue w-25" ></div>
-                            </div>
-                            <div *ngIf="abonnement_item.type == 'Premium'" class="progress bg-green-15" role="progressbar" aria-label="Warning example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                                <div class="progress-bar bg-green-main w-50 radius-left-8" ></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- <div class="col-12 my-2">
-                    <div  class="alert-container shadow">
-                        <div class="p-relative bg-white radius-8">
-                            <div class="alert-content d-flex gap-4 px-3 align-items-center pt-2 pb-1">
-                                <span class="text-alert black title-h4 fw-baill-bold">Free</span>
-
-                            </div>
-
-                            <div class="price-duration pb-0 d-flex px-3 gap-10">
-                                <h5 class="h5-baill gray-20">6 mois</h5>
-                                <h5 class="h5-baill gray-20">75000 FCFA</h5>
-                            </div>
-
-                            <h6 class="text-end small-text px-3 main-font main-font-quick">25%</h6>
-                            <div class="progress bg-orange-k5" role="progressbar" aria-label="Warning example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                                <div class="progress-bar orange-30 w-25" ></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 my-2">
-                    <div  class="alert-container shadow">
-                        <div class="p-relative bg-white radius-8">
-                            <div class="alert-content d-flex gap-4 px-3 align-items-center pt-2 pb-1">
-                                <span class="text-alert black title-h4 fw-baill-bold">Standard</span>
-                            </div>
-
-                            <div class="price-duration pb-0 d-flex px-3 gap-10">
-                                <h5 class="h5-baill gray-20">6 mois</h5>
-                                <h5 class="h5-baill gray-20">75000 FCFA</h5>
-                            </div>
-                            
-                            <h6 class="text-end small-text px-3 main-font-quick">25%</h6>
-                            <div class="progress bg-blue-new" role="progressbar" aria-label="Warning example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                                <div class="progress-bar bg-blue w-25" ></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 my-2">
-                    <div  class="alert-container shadow">
-                        <div class="p-relative bg-white radius-8">
-                            <div class="alert-content d-flex gap-4 px-3 align-items-center pt-2 pb-1">
-                                <span class="text-alert black title-h4 fw-baill-bold">Premium</span>
-                            </div>
-
-                            <div class="price-duration pb-0 d-flex px-3 gap-10">
-                                <h5 class="h5-baill gray-20">6 mois</h5>
-                                <h5 class="h5-baill gray-20">75000 FCFA</h5>
-                            </div>
-
-                            <h6 class="text-end small-text px-3 main-font-quick">50%</h6>
-                            <div class="progress bg-green-15" role="progressbar" aria-label="Warning example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                                <div class="progress-bar bg-green-main w-50 radius-left-8" ></div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-            </div>
-
-            <div class="row px-3">
-                <h1 class="h3-baill  pb-4 pt-5  black fw-baill-bold">Annonces par statuts</h1>
-
-                <div class="status-item">
-                    <h4 class="title-h4 green-main fw-baill-bold"> Publiées </h4>
-                    
-                    <h6 class="text-end small-text main-font-quick px-3">50%</h6>
-                    <div class="h-8 radius-8 bg-green-15" role="progressbar" aria-label="Warning example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                        <div class="progress-bar h-8 bg-green-main w-50 radius-left-8" ></div>
-                    </div>
-                </div>
-
-                <div class="status-item">
-                    <h4 class="title-h4 green-main fw-baill-bold"> Publiées </h4>
-                    
-                    <h6 class="text-end small-text main-font-quick px-3">50%</h6>
-                    <div class="h-8 radius-8 bg-blue-new" role="progressbar" aria-label="Warning example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                        <div class="progress-bar h-8 bg-blue w-50 radius-left-8" ></div>
-                    </div>
-                </div>
-                <div class="status-item">
-                    <h4 class="title-h4 green-main fw-baill-bold"> Publiées </h4>
-                    
-                    <h6 class="text-end small-text main-font-quick px-3">50%</h6>
-                    <div class="h-8 radius-8 bg-orange-k5" role="progressbar" aria-label="Warning example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                        <div class="progress-bar h-8 orange-30 w-50 radius-left-8" ></div>
-                    </div>
-                </div>
-                
-                <div class="status-item">
-                    <h4 class="title-h4 green-main fw-baill-bold"> Publiées </h4>
-                    
-                    <h6 class="text-end small-text main-font-quick px-3">50%</h6>
-                    <div class="h-8 radius-8  bg-gray-15 " role="progressbar" aria-label="Warning example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                        <div class="progress-bar h-8 bg-dark w-50 radius-left-8" ></div>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-
-
-        <div class="row px-3">
-            <h1 class="h3-baill  pb-4 pt-5 px-2 black fw-baill-bold">Utilisateurs bloqués</h1>
-
-            <!-- tableau -->
-            <div class="col-lg-7 scroll_x_table">
-                <table class="table " id="dashboard_table">
-                    <thead>
-                        <tr class="border-bottom-1-green">
-                            <th scope="col " class="bord">Nom utilisateur</th>
-                            <th scope="col " class="bord">Durée du blocage</th>
-                            <th scope="col " class="bord">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let user of tab_user_lock track user; let  i = index">
-                            <td class="bord-black">{{user?.username}} </td>
-                            <td class="bord-black">{{user?.time_lock}}</td>
-                            <td class="bord-black px-5">
-                                <div class="bg-blue text-white px-2 py-1 rounded">Débloquer</div>
+                        <tr *ngFor="let ann of advertiserRecentAnnonces">
+                            <td class="adv-td-title">{{ann?.title}}</td>
+                            <td>
+                                <span class="adv-status-badge"
+                                      [class.adv-badge-published]="ann?.status == 3"
+                                      [class.adv-badge-waiting]="ann?.status == 1"
+                                      [class.adv-badge-paused]="ann?.status == 2"
+                                      [class.adv-badge-expired]="ann?.status == 0">
+                                    {{statusLabels[ann?.status]}}
+                                </span>
                             </td>
+                            <td class="adv-td-date">{{ann?.created_at | date:'dd/MM/yy'}}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            
         </div>
 
+        </ng-container>
     </div>
+
+    <!-- ══════════════════════════════════════════════════════
+         VUE ADMIN / SUPER ADMIN
+    ══════════════════════════════════════════════════════ -->
+    <div *ngIf="isAdmin" class="admin-dashboard px-2 py-3">
+
+        <!-- Loader -->
+        <div *ngIf="isLoading" class="d-flex justify-content-center py-5">
+            <app-loader size="lg" [text]="'admin.dashboard.loading' | translate"></app-loader>
+        </div>
+
+        <ng-container *ngIf="!isLoading">
+
+        <!-- ── LIGNE 1 : KPI GLOBAUX ─────────────────────────────── -->
+        <div class="row g-3 mb-4">
+
+            <div class="col-12 col-sm-6 col-xl-4">
+                <div class="kpi-card kpi-green">
+                    <div class="kpi-icon"><i class="fa fa-users"></i></div>
+                    <div class="kpi-body">
+                        <p class="kpi-label">{{'admin.dashboard.kpi.users-label' | translate}}</p>
+                        <h2 class="kpi-value">{{total_users}}</h2>
+                        <div class="kpi-sub">
+                            <span class="kpi-sub-text">{{'admin.dashboard.kpi.current-month' | translate}} <strong>{{growth?.users?.this_month}}</strong></span>
+                            <span [class]="growthBadgeClass(growth?.users?.rate)">
+                                {{growthIcon(growth?.users?.rate)}} {{growth?.users?.rate}}%
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-xl-4">
+                <div class="kpi-card kpi-blue">
+                    <div class="kpi-icon"><i class="fa fa-bullhorn"></i></div>
+                    <div class="kpi-body">
+                        <p class="kpi-label">{{'admin.dashboard.kpi.ads-label' | translate}}</p>
+                        <h2 class="kpi-value">{{total_annonces}}</h2>
+                        <div class="kpi-sub">
+                            <span class="kpi-sub-text">{{'admin.dashboard.kpi.current-month' | translate}} <strong>{{growth?.annonces?.this_month}}</strong></span>
+                            <span [class]="growthBadgeClass(growth?.annonces?.rate)">
+                                {{growthIcon(growth?.annonces?.rate)}} {{growth?.annonces?.rate}}%
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-xl-4">
+                <div class="kpi-card kpi-orange">
+                    <div class="kpi-icon"><i class="fa fa-money-bill-wave"></i></div>
+                    <div class="kpi-body">
+                        <p class="kpi-label">{{'admin.dashboard.kpi.revenue-label' | translate}}</p>
+                        <h2 class="kpi-value kpi-value-sm">{{total_montant | currency:'XAF':'symbol':'1.0-0':'fr-CM'}}</h2>
+                        <div class="kpi-sub">
+                            <span class="kpi-sub-text">{{'admin.dashboard.kpi.current-month' | translate}} <strong>{{growth?.revenue?.this_month | currency:'XAF':'symbol':'1.0-0':'fr-CM'}}</strong></span>
+                            <span [class]="growthBadgeClass(growth?.revenue?.rate)">
+                                {{growthIcon(growth?.revenue?.rate)}} {{growth?.revenue?.rate}}%
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ── LIGNE 2 : TENDANCES 6 MOIS ───────────────────────── -->
+        <div class="row g-3 mb-4">
+
+            <div class="col-12 col-lg-6">
+                <div class="card-section">
+                    <h3 class="section-title">{{'admin.dashboard.chart.user-registrations-6-months' | translate}}</h3>
+                    <div class="trend-chart">
+                        <div class="trend-bar-wrap" *ngFor="let m of trend_users">
+                            <div class="trend-bar-track">
+                                <div class="trend-bar trend-bar-green"
+                                     [style.height.%]="(m.count / trendMax(trend_users, 'count')) * 100">
+                                </div>
+                            </div>
+                            <span class="trend-label">{{m.label}}</span>
+                            <span class="trend-val">{{m.count}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-6">
+                <div class="card-section">
+                    <h3 class="section-title">{{'admin.dashboard.chart.ads-created-6-months' | translate}}</h3>
+                    <div class="trend-chart">
+                        <div class="trend-bar-wrap" *ngFor="let m of trend_annonces">
+                            <div class="trend-bar-track">
+                                <div class="trend-bar trend-bar-blue"
+                                     [style.height.%]="(m.count / trendMax(trend_annonces, 'count')) * 100">
+                                </div>
+                            </div>
+                            <span class="trend-label">{{m.label}}</span>
+                            <span class="trend-val">{{m.count}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ── LIGNE 3 : RÉPARTITIONS ────────────────────────────── -->
+        <div class="row g-3 mb-4">
+
+            <!-- Popularité forfaits -->
+            <div class="col-12 col-lg-4">
+                <div class="card-section h-100">
+                    <h3 class="section-title">{{'admin.dashboard.chart.package-popularity' | translate}}</h3>
+                    <div *ngFor="let ab of progress_abonnement" class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span class="fw-bold small">{{ab?.name}}</span>
+                            <span class="small text-muted">{{ab?.total_annonces}} · {{ab?.progress | number:'1.0-1'}}%</span>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-fill"
+                                 [class.fill-orange]="ab?.type === 'Free'"
+                                 [class.fill-blue]="ab?.type === 'Standard'"
+                                 [class.fill-green]="ab?.type === 'Premium'"
+                                 [style.width.%]="ab?.progress">
+                            </div>
+                        </div>
+                        <small class="text-muted">{{ab?.type_time}}</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statuts annonces -->
+            <div class="col-12 col-lg-4">
+                <div class="card-section h-100">
+                    <h3 class="section-title">{{'admin.dashboard.chart.ads-by-status' | translate}}</h3>
+                    <div *ngFor="let s of progress_status" class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span class="fw-bold small">{{statusLabels[s?.status] || (('admin.dashboard.column.status' | translate) + ' ' + s?.status)}}</span>
+                            <span class="small text-muted">{{s?.total | number:'1.0-1'}}%</span>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-fill"
+                                 [class.fill-green]="s?.status == 3"
+                                 [class.fill-blue]="s?.status == 1"
+                                 [class.fill-orange]="s?.status == 2"
+                                 [class.fill-red]="s?.status == 0"
+                                 [style.width.%]="s?.total">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Revenus par mode -->
+            <div class="col-12 col-lg-4">
+                <div class="card-section h-100">
+                    <h3 class="section-title">{{'admin.dashboard.chart.revenue-by-payment-method' | translate}}</h3>
+                    <div *ngIf="revenue_by_mode.length === 0" class="text-muted small">{{'admin.dashboard.no-payment-recorded' | translate}}</div>
+                    <div *ngFor="let r of revenue_by_mode" class="revenue-mode-item mb-3">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <span class="mode-badge mode-badge-{{r?.mode_paiement}}">
+                                <i class="fa" [class.fa-credit-card]="r?.mode_paiement === 'stripe'"
+                                              [class.fa-mobile-alt]="r?.mode_paiement !== 'stripe'"></i>
+                                {{r?.mode_paiement | uppercase}}
+                            </span>
+                            <span class="fw-bold small">{{r?.total | currency:'XAF':'symbol':'1.0-0':'fr-CM'}}</span>
+                        </div>
+                        <small class="text-muted">{{r?.count}} {{'admin.dashboard.transactions-label' | translate}}</small>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ── LIGNE 4 : TENDANCE REVENUS ───────────────────────── -->
+        <div class="row g-3 mb-4">
+            <div class="col-12">
+                <div class="card-section">
+                    <h3 class="section-title">{{'admin.dashboard.chart.monthly-revenue-6-months' | translate}}</h3>
+                    <div class="trend-chart">
+                        <div class="trend-bar-wrap" *ngFor="let m of trend_revenue">
+                            <div class="trend-bar-track">
+                                <div class="trend-bar trend-bar-orange"
+                                     [style.height.%]="(m.total / trendMax(trend_revenue, 'total')) * 100">
+                                </div>
+                            </div>
+                            <span class="trend-label">{{m.label}}</span>
+                            <span class="trend-val">{{m.total | currency:'XAF':'symbol':'1.0-0':'fr-CM'}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── LIGNE 5 : TOP + RÉCENTS ───────────────────────────── -->
+        <div class="row g-3 mb-4">
+
+            <!-- Top annonceurs -->
+            <div class="col-12 col-lg-6">
+                <div class="card-section">
+                    <h3 class="section-title">{{'admin.dashboard.table.top-advertisers' | translate}}</h3>
+                    <div class="scroll_x_table">
+                        <table class="table table-sm" class="dash-table">
+                            <thead>
+                                <tr class="border-bottom-1-green">
+                                    <th>#</th>
+                                    <th class="bord">{{'admin.dashboard.column.advertiser' | translate}}</th>
+                                    <th class="bord">{{'admin.dashboard.column.country' | translate}}</th>
+                                    <th class="bord">{{'admin.dashboard.column.total-ads' | translate}}</th>
+                                    <th class="bord">{{'admin.dashboard.column.published-ads' | translate}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let adv of top_advertisers; let i = index">
+                                    <td>{{i+1}}</td>
+                                    <td class="bord-black">{{adv?.users?.username}}</td>
+                                    <td class="bord-black">{{adv?.users?.country}}</td>
+                                    <td class="bord-black">{{adv?.total_annonces}}</td>
+                                    <td class="bord-black">
+                                        <span class="badge-published">{{adv?.published}}</span>
+                                    </td>
+                                </tr>
+                                <tr *ngIf="top_advertisers.length === 0">
+                                    <td colspan="5" class="text-center text-muted">{{'admin.dashboard.no-data' | translate}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dernières annonces -->
+            <div class="col-12 col-lg-6">
+                <div class="card-section">
+                    <h3 class="section-title">{{'admin.dashboard.table.latest-ads' | translate}}</h3>
+                    <div class="scroll_x_table">
+                        <table class="table table-sm" class="dash-table">
+                            <thead>
+                                <tr class="border-bottom-1-green">
+                                    <th class="bord">{{'admin.dashboard.column.ad-title' | translate}}</th>
+                                    <th class="bord">{{'admin.dashboard.column.advertiser' | translate}}</th>
+                                    <th class="bord">{{'admin.dashboard.column.status' | translate}}</th>
+                                    <th class="bord">{{'admin.dashboard.column.date' | translate}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let ann of recent_annonces">
+                                    <td class="bord-black text-truncate" style="max-width:140px">{{ann?.title}}</td>
+                                    <td class="bord-black">{{ann?.users?.username}}</td>
+                                    <td class="bord-black">
+                                        <span class="status-dot" [ngClass]="statusColors[ann?.status]">
+                                            {{statusLabels[ann?.status]}}
+                                        </span>
+                                    </td>
+                                    <td class="bord-black small">{{ann?.created_at | date:'dd/MM/yy'}}</td>
+                                </tr>
+                                <tr *ngIf="recent_annonces.length === 0">
+                                    <td colspan="4" class="text-center text-muted">{{'admin.dashboard.no-data' | translate}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ── LIGNE 6 : INSCRITS RÉCENTS + GÉO ─────────────────── -->
+        <div class="row g-3 mb-4">
+
+            <!-- Derniers inscrits -->
+            <div class="col-12 col-lg-7">
+                <div class="card-section">
+                    <h3 class="section-title">{{'admin.dashboard.table.latest-registrations' | translate}}</h3>
+                    <div class="scroll_x_table">
+                        <table class="table table-sm" class="dash-table">
+                            <thead>
+                                <tr class="border-bottom-1-green">
+                                    <th class="bord">{{'admin.dashboard.column.user' | translate}}</th>
+                                    <th class="bord">{{'admin.dashboard.column.email' | translate}}</th>
+                                    <th class="bord">{{'admin.dashboard.column.country' | translate}}</th>
+                                    <th class="bord">{{'admin.dashboard.column.profile' | translate}}</th>
+                                    <th class="bord">{{'admin.dashboard.column.registered-on' | translate}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let u of recent_users">
+                                    <td class="bord-black fw-bold">{{u?.username}}</td>
+                                    <td class="bord-black small">{{u?.email}}</td>
+                                    <td class="bord-black">{{u?.country}}</td>
+                                    <td class="bord-black">
+                                        <span class="profil-badge" [class.profil-admin]="u?.profil_id <= 2">
+                                            {{u?.profils?.name ?? '—'}}
+                                        </span>
+                                    </td>
+                                    <td class="bord-black small">{{u?.created_at | date:'dd/MM/yy'}}</td>
+                                </tr>
+                                <tr *ngIf="recent_users.length === 0">
+                                    <td colspan="5" class="text-center text-muted">{{'admin.dashboard.no-data' | translate}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Répartition géographique -->
+            <div class="col-12 col-lg-5">
+                <div class="card-section h-100">
+                    <h3 class="section-title">{{'admin.dashboard.table.geographic-breakdown' | translate}}</h3>
+                    <div class="row">
+                        <div class="col-6">
+                            <p class="geo-subtitle">{{'admin.dashboard.geo.advertisers' | translate}}</p>
+                            <div *ngFor="let g of geo_users" class="geo-item">
+                                <span class="geo-country">{{g?.country || '—'}}</span>
+                                <span class="geo-count">{{g?.total}}</span>
+                            </div>
+                            <div *ngIf="geo_users.length === 0" class="text-muted small">—</div>
+                        </div>
+                        <div class="col-6 border-left-1-gray">
+                            <p class="geo-subtitle">{{'admin.dashboard.geo.ads-label' | translate}}</p>
+                            <div *ngFor="let g of geo_annonces" class="geo-item">
+                                <span class="geo-country">{{g?.country || '—'}}</span>
+                                <span class="geo-count">{{g?.total}}</span>
+                            </div>
+                            <div *ngIf="geo_annonces.length === 0" class="text-muted small">—</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ── LIGNE 7 : CATÉGORIES + BLOQUÉS ────────────────────── -->
+        <div class="row g-3 mb-4">
+
+            <!-- Catégories populaires -->
+            <div class="col-12 col-lg-7">
+                <div class="card-section">
+                    <h3 class="section-title">{{'admin.dashboard.table.popular-categories' | translate}}</h3>
+                    <div class="scroll_x_table">
+                        <table class="table table-sm" class="dash-table">
+                            <thead>
+                                <tr class="border-bottom-1-green">
+                                    <th class="bord">{{'admin.dashboard.column.category' | translate}}</th>
+                                    <th class="bord">{{'admin.dashboard.column.usages' | translate}}</th>
+                                    <th class="bord">{{'admin.dashboard.kpi.ads-label' | translate}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let cat of popular_categories">
+                                    <td class="bord-black fw-bold">{{cat?.nom}}</td>
+                                    <td class="bord-black">{{cat?.total_users}}</td>
+                                    <td class="bord-black">{{cat?.total_annonces}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Utilisateurs bloqués -->
+            <div class="col-12 col-lg-5">
+                <div class="card-section h-100">
+                    <h3 class="section-title">
+                        {{'admin.dashboard.table.blocked-users' | translate}}
+                        <span class="badge-count">{{tab_user_lock.length}}</span>
+                    </h3>
+                    <div *ngIf="tab_user_lock.length === 0" class="text-muted small py-2">
+                        {{'admin.dashboard.no-blocked-users' | translate}}
+                    </div>
+                    <div class="scroll_x_table" *ngIf="tab_user_lock.length > 0">
+                        <table class="table table-sm" class="dash-table">
+                            <thead>
+                                <tr class="border-bottom-1-green">
+                                    <th class="bord">{{'admin.dashboard.column.user' | translate}}</th>
+                                    <th class="bord">{{'admin.dashboard.column.duration' | translate}}</th>
+                                    <th class="bord">{{'admin.dashboard.column.action' | translate}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let u of tab_user_lock">
+                                    <td class="bord-black">{{u?.username}}</td>
+                                    <td class="bord-black">{{u?.time_lock}}</td>
+                                    <td class="bord-black">
+                                        <span class="btn-unblock">{{'button.unlock' | translate}}</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        </ng-container>
+    </div>
+
 </div>

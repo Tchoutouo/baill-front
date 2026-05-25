@@ -1,106 +1,42 @@
-<div class="footer-content">
-    <div class="content container">
-        <div class="row footer-list">
-            <div class="col-lg-4 col-md-4 col-sm-12 element_1">
-                <div class="row">
-                    <div class="col-12 label-site">
-                        <a href="#" class="navbar-brand relative d-flex align-items-center">
-                            <img class="brand-logo mx-0" src="../../../../assets/baill-logo.ico" alt="">
-                            <span class="site_name">{{siteName}}</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="row all-right-line">
-                    <div class="col-12">
-                        <p class="all-right">©{{currentYear}} Bailleurnet. {{'footer.access-right'| translate}} </p>
-                    </div>
-                </div>
-            </div>
-            <!-- <div class="col-lg-4 col-lg-4 col-md-4 col-sm-12 element_2">
-                <div class="title-list">
-                    <p>Catégories</p>
-                </div>
-                <ul class="categories mb-4">
-                    <li class="category-item active_category py-2">
-                        Habitation et Hébergement
-                    </li>
-                    <li class="category-item py-2">
-                        Services Professionnels
-                    </li>
-                    <li class="category-item py-2">
-                        Matériel et Équipements
-                    </li>
-                    <li class="category-item py-2">
-                        Événements et Services
-                    </li>
-                    <li class="category-item py-2">
-                        Véhicules et Transport
-                    </li>
-                </ul>
-            </div> -->
-            <div class="col-lg-4 col-lg-4 col-md-4 col-sm-12 element_3 text-center">
-                <div class="title-list">
-                    <a href="#"  class="link-contact"><p>{{'footer.contact'| translate}} </p></a> 
-                </div>
-                <div class="row align-items-center">
-                    <div class="col-7 text-start ps-4">
-                        <a href="#" [routerLink]="['/contact-us']" class="fs-4 fw-bold text-white "><p> Courriel </p></a> 
-                        
-                        <a [href]="'https://api.whatsapp.com/send?phone='+237694798186+'&text=Hello Bailleurnet&source=&data='" class="fs-5 fw-bold text-white" target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-whatsapp" style="font-size: 24px;"></i> : + 237 694 798 186
-                        </a>
-                    </div>
-                    <div class="col-5">
-                        <div #canvas id="canvas"></div>
-                        <!--<div class="container">
-                            <h2>Générateur de QR Code Personnalisé</h2>
-                            <div class="form-group">
-                                <label for="qrInput">Lien du site :</label>
-                                <input id="qrInput" [(ngModel)]="qrCodeData" placeholder="https://bailleurnet.com" (input)="updateQRCode()">
-                            </div>
+<footer class="site-footer">
+    <div class="footer-inner container">
 
-                            <div class="form-group">
-                                <label for="dotColor">Couleur des points :</label>
-                                <input id="dotColor" type="color" [(ngModel)]="dotColor" (change)="updateQRCode()">
-                            </div>
+        <!-- Brand -->
+        <div class="footer-brand">
+            <a href="#" class="brand-link">
+                <img class="brand-logo" src="../../../../assets/baill-logo.ico" alt="{{siteName}} logo">
+                <span class="site-name">{{siteName}}</span>
+            </a>
+            <p class="footer-copy">©{{currentYear}} Bailleurnet. {{'footer.access-right' | translate}}</p>
+        </div>
 
-                            <div class="form-group">
-                                <label for="backgroundColor">Couleur de fond :</label>
-                                <input id="backgroundColor" type="color" [(ngModel)]="backgroundColor" (change)="updateQRCode()">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="dotType">Forme des points :</label>
-                                <select id="dotType" [(ngModel)]="dotType" (change)="updateQRCode()">
-                                <option value="square">Carré</option>
-                                <option value="rounded">Arrondi</option>
-                                <option value="dots">Points</option>
-                                <option value="classy">Classique</option>
-                                <option value="classy-rounded">Classique arrondi</option>
-                                <option value="extra-rounded">Extra arrondi</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="logoUrl">URL du logo :</label>
-                                <input id="logoUrl" [(ngModel)]="logoUrl" placeholder="URL du logo" (input)="updateQRCode()">
-                            </div>
-                            
-                            <button (click)="downloadQRCode()">Télécharger le QR Code</button>
-                            
-                        </div>-->
-
-                    </div>
-                </div>
-                <div class="icon-content gap-2 d-flex text-white justify-content-center">
-                    <ul class="icon-list d-flex gap-2">
-                        <li class="px-2 icon-item text-center"><i class="icon fa-solid fa-comment"></i> </li>
-                        <li class="px-2 icon-item"><i class="icon fa-brands fa-x-twitter"></i></li>
-                        <li class="px-2 icon-item"><i class="icon fa-brands fa-linkedin-in"></i></li>
-                        <li class="px-2 icon-item"><i class="icon fa-brands fa-facebook-f"></i></li>
-                    </ul>
-                </div>
+        <!-- Contact -->
+        <div class="footer-contact">
+            <p class="footer-section-title">{{'footer.contact' | translate}}</p>
+            <div class="contact-list">
+                <a [routerLink]="['/contact-us']" class="footer-link">
+                    <i class="fa-regular fa-envelope"></i>
+                    {{'footer.contact-by-email' | translate}}
+                </a>
+                <a [href]="'https://api.whatsapp.com/send?phone=237694798186&text=Hello Bailleurnet&source=&data='"
+                    class="footer-link" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-whatsapp"></i>
+                    +237 694 798 186
+                </a>
             </div>
         </div>
+
+        <!-- Social + QR -->
+        <div class="footer-social">
+            <p class="footer-section-title">{{'footer.follow-us' | translate}}</p>
+            <div class="social-row">
+                <a href="#" class="social-icon" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" class="social-icon" aria-label="Twitter/X"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#" class="social-icon" aria-label="Chat"><i class="fa-solid fa-comment"></i></a>
+            </div>
+            <div #canvas id="canvas" class="qr-canvas"></div>
+        </div>
+
     </div>
-</div>
+</footer>

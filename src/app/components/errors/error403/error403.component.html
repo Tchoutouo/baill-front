@@ -3,18 +3,16 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-5 text-side">
-                <h1 class="error-title title-h1 main-font-quick green-black">Oups !</h1>
-                <div class="h4 error-description pt-3 main-font-quick title-h1">Accès refusé</div>
+                <h1 class="error-title title-h1 main-font-quick green-black">{{'error.page-403.oops-title' | translate}}</h1>
+                <div class="h4 error-description pt-3 main-font-quick title-h1">{{'error.page-403.access-denied-message' | translate}}</div>
                 <div class="erro-text h4-baill main-font-quick pt-4 pb-5">
-                    Une erreur 403 empêche l’accès à [préciser la page ou la ressource. Il serait utile de vérifier les permissions associées.
+                    {{'error.page-403.permission-check-description' | translate}}
                 </div>
-                <a [routerLink]="['/']" class="btn_publish link">Retourner a l’acceuil</a>
+                <a [routerLink]="['/']" class="btn_publish link">{{'error.page-403.back-to-home-button' | translate}}</a>
             </div>
             <div class="col-lg-6 offset-lg-1">
-                <div class="bg-img" style="background-image: url('../../../../assets/403.svg');">
-
-                </div>
-            </div> 
+                <div class="bg-img" style="background-image: url('../../../../assets/403.svg');"></div>
+            </div>
         </div>
     </div>
 </div>

@@ -1,0 +1,8 @@
+<div class="baill-loader" [ngClass]="['size-' + size, overlay ? 'loader-overlay' : '']">
+  <div class="loader-rings">
+    <div class="ring ring-outer"></div>
+    <div class="ring ring-inner"></div>
+    <div class="ring-core"></div>
+  </div>
+  <p class="loader-text" *ngIf="text">{{text}}</p>
+</div>

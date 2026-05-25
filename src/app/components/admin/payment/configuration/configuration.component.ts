@@ -5,12 +5,13 @@ import { EntityServiceService } from '../../../../services/admin/entity-service.
 import { Subscription } from 'rxjs';
 import { Notification } from '../../../../models/notification';
 import { NoficationsService } from '../../../../services/nofications.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
   selector: 'app-configuration',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, TranslateModule],
   templateUrl: './configuration.component.html',
   styleUrl: './configuration.component.css'
 })

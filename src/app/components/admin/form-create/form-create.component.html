@@ -1,207 +1,163 @@
-<div class="contaner-fluid px-4">
-    <div class="page-title">
-        <h1>{{'admin.ads.title'|translate}}</h1>
+<div class="fc-page">
+
+    <div class="fc-page-header">
+        <h1 class="fc-page-title">{{'admin.ads.title' | translate}}</h1>
+        <p class="fc-page-sub">{{'admin.ads.title-2' | translate}}</p>
     </div>
 
-    <div class="title-form py-4">
-        <h4>{{'admin.ads.title-2'|translate}}</h4>
-    </div>
+    <form [formGroup]="anounces_form_datas" *ngIf="anounces_form_datas" class="fc-form">
 
-    <div class="row">
-        <form action="" class="px-lg-5" [formGroup]="anounces_form_datas" *ngIf="anounces_form_datas">
-            <div class="row">
-                <div class="col-md-5">
-                    <div class="form_group gap-1 mb-4">
-                        <label for="title" class="label-form mb-2">{{'admin.ads.title-3'|translate}}<span class="text-danger mx-2">*</span></label> 
-                        <input type="text" [formControl]="title" class=" input_field input-field" required name="title" id="title" placeholder="voture toyota">
-                        <div *ngIf="title.dirty && !title.valid">
-                            <div class="" class="error" *ngIf="title.hasError('required')">
-                                {{'admin.ads.error-message.title'|translate}}
-                            </div>
-                        </div>
-                    </div>
+        <div class="row g-4">
 
-                    <div class="form_group mb-4">
-                        <label class="label-form mb-2" for="categorie">{{'admin.ads.category'|translate}}<span class="text-danger mx-2">*</span></label>
-                        <select multiple name="categorie" id="categorie[]" class="input_field input-field" [formControl]="categorie" required="required">
-                            <option *ngFor="let cast_item of categoriesList" [value]="cast_item.id">{{cast_item.title}}</option>
-                        </select>
-                        <div *ngIf="categorie.dirty && !categorie.valid">
-                            <div class="" class="error" *ngIf="categorie.hasError('required')">
-                                {{'admin.ads.error-message.category'|translate}} 
-                            </div>
-                        </div>
-                    </div>
+            <!-- ── Colonne 1 : Infos principales ── -->
+            <div class="col-lg-6">
 
-                    <div class="form_group gap-1 mb-4">
-                        <label for="price" class="label-form mb-2">{{'admin.ads.price'|translate}} (XAF)<span class="text-danger mx-2">*</span></label> 
-                        <input type="number" class=" input_field input-field"  [formControl]="price" name="price" id="price" placeholder="voture toyota">
-                        <div *ngIf="price.dirty && !price.valid">
-                            <div class="" class="error" *ngIf="price.hasError('required')">
-                                {{'admin.ads.error-message.price'|translate}}
-                            </div>
-                        </div>
+                <div class="form_group mb-4">
+                    <label for="title" class="label-form mb-1">
+                        {{'admin.ads.title-3' | translate}} <span class="req">*</span>
+                    </label>
+                    <input type="text" id="title" [formControl]="title" class="input_field" name="title"
+                           placeholder="{{'admin.ads.placeholder.title' | translate}}">
+                    <div *ngIf="title.dirty && title.invalid" class="fc-error">
+                        {{'admin.ads.error-message.title' | translate}}
                     </div>
-
-                    <div class="form_group gap-1 mb-4">
-                        <label for="description" class="label-form mb-2">{{'admin.ads.description'|translate}}<span class="text-danger mx-2">*</span></label> 
-                        <textarea name="description"  [formControl]="description" class="input_field input-field" required id="description" rows="5" cols="10"></textarea>
-                        <div *ngIf="description.dirty && !description.valid">
-                            <div class="" class="error" *ngIf="description.hasError('required')">
-                                {{'admin.ads.error-message.description'|translate}} 
-                            </div>
-                            <div class="" class="error" *ngIf="!description.hasError('required')">
-                                {{'admin.ads.error-message.description-2'|translate}} 
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- <div class="form_group gap-1 mb-4">
-                        <label for="country" class="label-form mb-2">Pays<span class="text-danger mx-2">*</span></label> 
-                        <input type="text" class=" input_field input-field"  [formControl]="country" name="country" id="country" placeholder="voture toyota">
-                        <div *ngIf="country.dirty && !country.valid">
-                            <div class="" class="error" *ngIf="country.hasError('required')">
-                                veuiller renseigner ce champ 
-                            </div>
-                        </div>
-                    </div> -->
-                    <div class="form_group gap-1 mb-4">
-                        <label for="country" class="label-form mb-2">{{'admin.ads.country'|translate}}<span class="text-danger mx-2">*</span></label> 
-                        <select id="country"  (change)="onCountryChange($event)" [(ngModel)]="selectedCountry" [formControl]="country" name="country" class="input_field" required="required">
-                            <option *ngFor="let country of countries" [value]="country.isoCode">{{ country.name }}</option>
-                        </select>
-                        <div *ngIf="country.dirty && !country.valid">
-                            <div class="" class="error" *ngIf="country.hasError('required')">
-                                {{'admin.ads.error-message.country'|translate}} 
-                            </div>
-                        </div>
-                    </div>
-                    <!-- <div class="form_group">
-                        <label for="country">{{'user.signup.country'|translate}}</label><span>*</span>
-                        <select id="country" [(ngModel)]="selectedCountry" (change)="onCountryChange($event)" [formControl]="country" name="country" class="input_field" required="required">
-                            <option *ngFor="let country of countries" [value]="country.isoCode">{{ country.name }}</option>
-                        </select>
-                    </div> -->
                 </div>
 
-                <div class="offset-md-2 col-md-5">
-                    <div class="form_group gap-1 mb-4">
-                        <label for="location" class="label-form mb-2">{{'admin.ads.city'|translate}}<span class="text-danger mx-2">*</span></label> 
-                        <!-- <input type="text" class=" input_field input-field"  name="location" [formControl]="location" required id="location" placeholder="voture toyota"> -->
-                        <select [(ngModel)]="selectedCity" [formControl]="location" name="location" id="location" class="input_field" required="required">
-                            <option *ngFor="let city of cities" [value]="city.name">
-                                {{ city.name }}
-                            </option>
-                        </select>
-                        <div *ngIf="location.dirty && !location.valid">
-                            <div class="" class="error" *ngIf="location.hasError('required')">
-                                {{'admin.ads.error-message.city'|translate}} 
-                            </div>
-                        </div>
+                <div class="form_group mb-4">
+                    <label for="categorie" class="label-form mb-1">
+                        {{'admin.ads.category' | translate}} <span class="req">*</span>
+                    </label>
+                    <select multiple id="categorie" [formControl]="categorie" name="categorie[]" class="input_field fc-select-multi">
+                        <option *ngFor="let c of categoriesList" [value]="c.id">{{c.title}}</option>
+                    </select>
+                    <small class="fc-hint">{{'admin.ads.category-hint' | translate}}</small>
+                    <div *ngIf="categorie.dirty && categorie.invalid" class="fc-error">
+                        {{'admin.ads.error-message.category' | translate}}
                     </div>
-
-                    <div class="form_group gap-1 mb-4">
-                        <label for="neighborhood" class="label-form mb-2">{{'admin.ads.location'|translate}}<span class="text-danger mx-2">*</span></label> 
-                        <input type="text" class=" input_field input-field" name="neighborhood" required id="neighborhood" [formControl]="neighborhood" placeholder="Yde, Damas 423">
-                        <div *ngIf="neighborhood.dirty && !neighborhood.valid">
-                            <div class="" class="error" *ngIf="neighborhood.hasError('required')">
-                                {{'admin.ads.error-message.location'|translate}} 
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- <div class="error" *ngIf="email.dirty && !email.valid">
-                        <p *ngIf="email.hasError('required')">
-                            l'email est obligatoire
-                        </p>
-                        <p *ngIf="!email.hasError('required')">
-                            l'email n'est ne respecte pas le bon format.
-                        </p>
-                    </div> -->
-
-                    <!-- <div class="form_group gap-1 mb-4">
-                        <label for="caract" class="label-form mb-2">Caractéristiques<span class="text-danger mx-2">*</span></label> 
-                        <div class="cateristics">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <button class="add_caract my-2" >
-                                        <i class="fa-solid fa-plus"></i>
-                                    </button>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="text" class="input_field input-field my-2 "  name="categories" id="categories"  placeholder="Ajouter une catgorie">
-                                </div>
-                            </div>
-
-                            <ng-container *NgFor="category of categoriesList track image; let  i = index">
-                                <div *ngIf="i < 2" class="row py-2 align-items-center category_row">
-                                    <div class="col-3">
-                                        <div class="tag-caract">
-                                            Taille
-                                        </div>
-                                    </div>
-                                    <div class="col-8">
-                                        <input type="text" class="input_field input-field"  name="sub-categories" id="sub-categories" value="1567 x 123" placeholder="valeur">
-                                    </div>
-                                    <div class="col-1">
-                                        <i class="fa-solid fa-xmark"></i>
-                                    </div>
-                                </div>
-                            </ng-container>
-                        </div>
-                    </div> -->
-
-                    <div class="form_group gap-1 mb-4">
-                        <app-image-view (imageList_)="getImagesList($event)"></app-image-view >
-                        <p class="error" *ngIf="errorMessages">
-                            {{errorMessages}}
-                        </p>
-                    </div>
-
                 </div>
+
+                <div class="form_group mb-4">
+                    <label for="price" class="label-form mb-1">
+                        {{'admin.ads.price' | translate}} (XAF) <span class="req">*</span>
+                    </label>
+                    <input type="number" id="price" [formControl]="price" class="input_field" name="price"
+                           placeholder="ex: 50000" min="0">
+                    <div *ngIf="price.dirty && price.invalid" class="fc-error">
+                        {{'admin.ads.error-message.price' | translate}}
+                    </div>
+                </div>
+
+                <div class="form_group mb-4">
+                    <label for="description" class="label-form mb-1">
+                        {{'admin.ads.description' | translate}} <span class="req">*</span>
+                    </label>
+                    <textarea id="description" [formControl]="description" class="input_field fc-textarea"
+                              name="description" rows="5" [placeholder]="'admin.ads.placeholder.description' | translate"></textarea>
+                    <div *ngIf="description.dirty && description.invalid" class="fc-error">
+                        <span *ngIf="description.hasError('required')">{{'admin.ads.error-message.description' | translate}}</span>
+                        <span *ngIf="!description.hasError('required')">{{'admin.ads.error-message.description-2' | translate}}</span>
+                    </div>
+                </div>
+
             </div>
-            <div class="row mx-0 gap-4 py-4 align-items-center fixe_btn_actions">
-                <!--<button type="button" class="btn btn-primary col-6"  [disabled]="!this.anounces_form_datas.valid && !valiData" id="create" (ngSubmit)="handleSubmit()" data-bs-toggle="modal"   data-bs-target="#forfaitList" class="btn-form bg_green">-->
-                <!-- <button type="button" class="btn btn-primary col-6"  [disabled]="!this.anounces_form_datas.valid && !valiData" id="create" data-bs-toggle="modal"   data-bs-target="#forfaitList" class="btn-form bg_green">
-                    {{'button.create-and-publish'|translate}}
-                </button> -->
-                <button type="button" class="btn btn-primary col-6"  [disabled]="this.anounces_form_datas.valid && valiData" id="create" data-bs-toggle="modal"   data-bs-target="#forfaitList" class="btn-form bg_green">
-                    {{'button.create-and-publish'|translate}}
-                </button>
-                <button type="submit" (click)="handleSubmit(null)"  [disabled]="!this.anounces_form_datas.valid && !valiData" class="btn-form bg_blue my-4 col-6" >{{'button.save'|translate}}</button>
+
+            <!-- ── Colonne 2 : Localisation + Photos ── -->
+            <div class="col-lg-6">
+
+                <div class="row g-3 mb-4">
+                    <div class="col-sm-6">
+                        <div class="form_group">
+                            <label for="country" class="label-form mb-1">
+                                {{'admin.ads.country' | translate}} <span class="req">*</span>
+                            </label>
+                            <select id="country" [formControl]="country" (change)="onCountryChange($event)"
+                                    [(ngModel)]="selectedCountry" name="country" class="input_field">
+                                <option *ngFor="let c of countries" [value]="c.isoCode">{{c.name}}</option>
+                            </select>
+                            <div *ngIf="country.dirty && country.invalid" class="fc-error">
+                                {{'admin.ads.error-message.country' | translate}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form_group">
+                            <label for="location" class="label-form mb-1">
+                                {{'admin.ads.city' | translate}} <span class="req">*</span>
+                            </label>
+                            <select id="location" [formControl]="location" [(ngModel)]="selectedCity"
+                                    name="location" class="input_field">
+                                <option *ngFor="let city of cities" [value]="city.name">{{city.name}}</option>
+                            </select>
+                            <div *ngIf="location.dirty && location.invalid" class="fc-error">
+                                {{'admin.ads.error-message.city' | translate}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form_group mb-4">
+                    <label for="neighborhood" class="label-form mb-1">
+                        {{'admin.ads.location' | translate}} <span class="req">*</span>
+                    </label>
+                    <input type="text" id="neighborhood" [formControl]="neighborhood" class="input_field"
+                           name="neighborhood" placeholder="ex: Yaoundé, Damas 423">
+                    <div *ngIf="neighborhood.dirty && neighborhood.invalid" class="fc-error">
+                        {{'admin.ads.error-message.location' | translate}}
+                    </div>
+                </div>
+
+                <!-- Zone photos -->
+                <div class="form_group mb-4">
+                    <app-image-view (imageList_)="getImagesList($event)"></app-image-view>
+                    <div *ngIf="errorMessages" class="fc-error mt-2">{{errorMessages}}</div>
+                </div>
+
             </div>
-        </form>
-    </div>
+        </div>
+
+        <!-- ── Barre d'actions sticky ── -->
+        <div class="fc-actions">
+            <button type="button"
+                    class="fc-btn fc-btn-primary"
+                    [disabled]="!anounces_form_datas.valid || images_annouces_list.length < 1"
+                    data-bs-toggle="modal"
+                    data-bs-target="#forfaitList">
+                <i class="fa-solid fa-paper-plane"></i>
+                {{'button.create-and-publish' | translate}}
+            </button>
+            <button type="button"
+                    class="fc-btn fc-btn-secondary"
+                    [disabled]="!anounces_form_datas.valid || images_annouces_list.length < 1"
+                    (click)="handleSubmit(null)">
+                <i class="fa-solid fa-floppy-disk"></i>
+                {{'button.save' | translate}}
+            </button>
+        </div>
+
+    </form>
 </div>
-<!-- Button trigger modal -->
-<div class="modal fade" id="forfaitList" data-bs-backdrop="static"  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" >
-    <div class="modal-dialog m_auto modal-dialog-centered modal-dialog  modal-xl modal-dialog-centered" id="my-model-forfait">
-        <app-forfait-list (hasSubmit)="handleSubmit($event)" class="m_auto w-100"></app-forfait-list>
+
+<!-- Modal forfaits -->
+<div class="modal fade" id="forfaitList" data-bs-backdrop="static" data-bs-keyboard="false"
+     tabindex="-1" aria-labelledby="forfaitListLabel">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <app-forfait-list (hasSubmit)="handleSubmit($event)" class="w-100"></app-forfait-list>
     </div>
 </div>
 
-<div class="payment-method-container" [ngClass]="{'d-none' : !showPayForm}" *ngIf="paymentList?.length >= 1">
-    <div class="container">
-        <div class="content">
-            <div class="row">
-                <div class="col-12 mx-auto">
-                    <div class="payment-list pb-5">
-                        <div class="title-list">
-                            <h3 class="mb-0 pb-lg-5 pb-md-4 pb-3 text-secondary">{{'admin.ads.select-payment'|translate}}</h3>
-                        </div>
-                        <!--
-                        <div class="title-list">
-                            <h3 class="mb-0 pb-lg-5 pb-md-4 pb-3">{{'admin.ads.select-payment'|translate}}</h3>
-                        </div>
-                        -->
-                        <div class="list-body pt-md-4 pt-3">
-                            <ng-container *ngFor="let itemPay of paymentList">
-                                <app-payment-item (payDatas)="storeAndPayAnnouce($event)" [itemPay] = "itemPay" class="w-95"></app-payment-item>
-                            </ng-container>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!-- Overlay paiement -->
+<div class="fc-payment-overlay" [ngClass]="{'d-none': !showPayForm}" *ngIf="paymentList?.length >= 1">
+    <div class="fc-payment-panel">
+        <div class="fc-payment-header">
+            <h3 class="fc-payment-title">{{'admin.ads.select-payment' | translate}}</h3>
+            <button type="button" class="fc-payment-close" (click)="closePopUp()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="fc-payment-body">
+            <ng-container *ngFor="let itemPay of paymentList">
+                <app-payment-item (payDatas)="storeAndPayAnnouce($event)" [itemPay]="itemPay" class="w-100"></app-payment-item>
+            </ng-container>
         </div>
     </div>
 </div>

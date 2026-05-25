@@ -1,21 +1,16 @@
-import { Component, inject } from '@angular/core';
-import { AsideComponent } from "../layouts/aside/aside.component";
-import { NavBarComponent } from '../layouts/nav-bar/nav-bar.component';
-import { RouterLink, RouterLinkActive, RouterModule, RouterOutlet } from '@angular/router';
-import { HeaderComponent } from "../../user/header/header.component";
-import { FooterComponent } from "../../user/footer/footer.component";
-import { getSiteName, isAdmin } from '../../../helpers/helper';
+import { Component, OnInit } from '@angular/core';
+import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
+import { getSiteName } from '../../../helpers/helper';
 import { LocalStorageService } from '../../../services/admin/local-storage.service';
-import { NotificationsComponent } from "../notifications/notifications.component";
+import { NotificationsComponent } from '../notifications/notifications.component';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
-import { AlertComponent } from "../alert/alert.component";
 import { AuthenticatorService } from '../../../services/admin/authenticator.service';
 import { AlertConfirmComponent } from '../../alert-confirm/alert-confirm.component';
 import { Alert } from '../../../models/alert';
 import { AlertConfirmService } from '../../../services/alert-confirm.service';
-import { environment } from '../../../../environments/environment.development';
+import { environment } from '../../../../environments/environment';
 import { CheckProfilService } from '../../../services/check-profil.service';
 
 @Component({
@@ -26,156 +21,119 @@ import { CheckProfilService } from '../../../services/check-profil.service';
   templateUrl: './content.component.html',
   styleUrl: './content.component.css'
 })
-export class ContentComponent {
-  
-  sizeExpandMain : string | null = null ;
-    
-  lang: string = "";
+export class ContentComponent implements OnInit {
 
-  userName: string ="";
-  siteName: string ="";
-  email: string ="";
-  user_picture : string = ''
+  lang: string = '';
+  userName: string = '';
+  siteName: string = '';
+  email: string = '';
+  user_picture: string = '';
 
-  sizeSideBar : string | null = null ;
+  isDiplayedNotification = false;
+  display: any;
+  isAdmin = false;
 
-  sideBarIsOpen_ : boolean = false;
-  isDiplayedNotification : boolean  = false ;
-  display: any ;
-  isAdmin: boolean = false;
+  constructor(
+    private readonly localStorage: LocalStorageService,
+    private readonly route: Router,
+    private readonly translateService: TranslateService,
+    private readonly authent: AuthenticatorService,
+    private readonly alertConfirm: AlertConfirmService,
+    private readonly checkProfil: CheckProfilService,
+  ) {}
 
-  constructor(private localStorage : LocalStorageService, private route : Router ,
-              private translateService: TranslateService, private authent : AuthenticatorService, 
-              private alertConfirm : AlertConfirmService, private checkProfil: CheckProfilService){
-  }
-
-  ngOnInit(){
-    this.sizeSideBar = null;
-    this.sizeExpandMain = null;
-    this.sideBarIsOpen_ = false ;
+  ngOnInit(): void {
     this.siteName = getSiteName();
     const user = this.localStorage.getItem('user');
-    this.userName = user ? user.first_name : null;
+    this.userName = user ? (user.first_name || user.username || '') : '';
     this.email = user ? user.email : '';
     this.lang = localStorage.getItem('lang') || 'fr';
-    this.user_picture = user.picture ?  environment.apiUrlRessources + '/' + user.picture : 'false' ;  
-    // this.isAdmin = isAdmin();
+    this.user_picture = user?.picture
+      ? environment.apiUrlRessources + '/' + user.picture
+      : 'false';
     this.isAdmin = this.checkProfil.isAdmin();
-    console.log("this.isAdmin",this.isAdmin)
   }
 
-  exendSideBar(){
-    this.sizeSideBar = "sizeSideBar";
-    this.sizeExpandMain = "sizeExpandMain";
-    this.sideBarIsOpen_ = true ;
-  }
-  
-  reduiseSideBar(){
-    this.sizeSideBar = null;
-    this.sizeExpandMain = null;
-    this.sideBarIsOpen_ = false ;
-  }
-
-  closeSideBar(){
-    this.sizeSideBar = null;
-    this.sizeExpandMain = null;
-    this.sideBarIsOpen_ = false ;
-  }
-
-  openSideBar(open : boolean){
-    let sideBar = document.getElementById('sideBar') ;
-    let textsToShow = document.getElementsByClassName('text-hover') ;
-    let sideFixed = document.getElementById('fixedParent') ;
-    let text_pro = document.getElementById('profil-text') ;
-    let img_prof = document.getElementById('profil-picture') ;
-    let prent = document.getElementById('pict_parent') ;
-    let enf = document.getElementById('picture_child') ;
-
+  openSideBar(open: boolean): void {
+    const sideBar = document.getElementById('sideBar');
+    const sideFixed = document.getElementById('fixedParent');
+    const textPro = document.getElementById('profil-text');
+    const imgProf = document.getElementById('profil-picture');
+    const parent = document.getElementById('pict_parent');
+    const child = document.getElementById('picture_child');
+    const texts = document.getElementsByClassName('text-hover');
 
     if (open) {
-      for (let i = 0; i < textsToShow.length; i++) {  
-          textsToShow[i].classList.remove('d-md-none'); // Remplacez 'nouvelle-classe' par le nom de la classe à ajouter  
-      }  
-      text_pro?.classList.remove('col-md-12')
-      img_prof?.classList.remove('col-md-12')
+      for (const el of Array.from(texts)) el.classList.remove('d-md-none');
+      textPro?.classList.remove('col-md-12');
+      imgProf?.classList.remove('col-md-12');
       sideBar?.classList.add('sideOpen');
       sideFixed?.classList.add('sideOpen');
-      enf?.classList.remove('my_acc_shadow_pic')
-    prent?.classList.remove('my_acc_shadow')
-    enf?.classList.add('my_acc_shadow_pic_mob')
-      prent?.classList.add('my_acc_shadow_mob')
-      prent?.classList.add('bg-profile_')
-    }else{
-      for (let i = 0; i < textsToShow.length; i++) {  
-          textsToShow[i].classList.add('d-md-none'); // Remplacez 'nouvelle-classe' par le nom de la classe à ajouter  
-      }  
-      enf?.classList.add('my_acc_shadow_pic')
-      prent?.classList.add('my_acc_shadow')
-    text_pro?.classList.add('col-md-12')
-    img_prof?.classList.add('col-md-12')
+      child?.classList.remove('my_acc_shadow_pic');
+      child?.classList.add('my_acc_shadow_pic_mob');
+      parent?.classList.remove('my_acc_shadow');
+      parent?.classList.add('my_acc_shadow_mob', 'bg-profile_');
+    } else {
+      for (const el of Array.from(texts)) el.classList.add('d-md-none');
+      child?.classList.add('my_acc_shadow_pic');
+      child?.classList.remove('my_acc_shadow_pic_mob');
+      parent?.classList.add('my_acc_shadow');
+      parent?.classList.remove('my_acc_shadow_mob', 'bg-profile_');
+      textPro?.classList.add('col-md-12');
+      imgProf?.classList.add('col-md-12');
       sideBar?.classList.remove('sideOpen');
       sideFixed?.classList.remove('sideOpen');
-      enf?.classList.remove('my_acc_shadow_pic_mob')
-      prent?.classList.remove('my_acc_shadow_mob')
-      prent?.classList.remove('bg-profile_')
     }
   }
 
-  OpenMobileAside(value : boolean){
-    let sideBar = document.getElementById('sideBar');
-    let prent = document.getElementById('pict_parent') ;
-
+  OpenMobileAside(value: boolean): void {
+    const sideBar = document.getElementById('sideBar');
+    const parent = document.getElementById('pict_parent');
     if (value) {
-      sideBar?.classList.add('mobileSideOpen');
-      sideBar?.classList.add('shadow-end');
-      prent?.classList.add('bg-profile_')
-    }else{
-      sideBar?.classList.remove('mobileSideOpen');
-      prent?.classList.remove('bg-profile_')
-      sideBar?.classList.remove('shadow-end');
+      sideBar?.classList.add('mobileSideOpen', 'shadow-end');
+      parent?.classList.add('bg-profile_');
+    } else {
+      sideBar?.classList.remove('mobileSideOpen', 'shadow-end');
+      parent?.classList.remove('bg-profile_');
     }
   }
 
-  hanndleShowNotifications(){
-    this.isDiplayedNotification = !this.isDiplayedNotification
+  hanndleShowNotifications(): void {
+    this.isDiplayedNotification = !this.isDiplayedNotification;
   }
 
-  handleClose(){
+  handleClose(): void {
     this.isDiplayedNotification = false;
   }
 
-  ChangeLanguage(lang: any){
-    const selectedLanguage = lang.target.value;
-    localStorage.setItem('lang',selectedLanguage);
-    this.translateService.use(selectedLanguage);
+  ChangeLanguage(lang: any): void {
+    const selected = lang.target.value;
+    localStorage.setItem('lang', selected);
+    this.translateService.use(selected);
   }
 
-  logOut(event : any){
-    let alert = new Alert();
-    alert.message = " "
-    alert.cancel_label = " "
-    alert.success_label =  " "
-    alert.display =  false;
-    console.log(alert.display);
-    this.alertConfirm.emitAlert(alert)
+  logOut(event: any): void {
+    const alert = new Alert();
+    alert.message = ' ';
+    alert.cancel_label = ' ';
+    alert.success_label = ' ';
+    alert.display = false;
+    this.alertConfirm.emitAlert(alert);
     this.display = false;
-    console.log(alert, event);
     if (event) {
       this.authent.logOut().subscribe({
         error: () => this.route.navigate(['/signin']),
         complete: () => this.route.navigate(['/signin']),
       });
-      return;
     }
-    return;
   }
 
-  handleConfirmLogOut(value : boolean){
-    let alert = new Alert();
-    alert.message = "Voulez-vous vraiment vous déconnecter ?"
-    alert.cancel_label = "non"
-    alert.success_label =  "oui"
-    alert.display =  value;
+  handleConfirmLogOut(value: boolean): void {
+    const alert = new Alert();
+    alert.message = 'Voulez-vous vraiment vous déconnecter ?';
+    alert.cancel_label = 'Non';
+    alert.success_label = 'Oui';
+    alert.display = value;
     this.display = true;
     this.alertConfirm.emitAlert(alert);
   }

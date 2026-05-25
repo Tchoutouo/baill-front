@@ -1,19 +1,20 @@
 <div class="contianer-fluid">
     <div class="page-title px-3">
-        <h1>Gestion des forfaits</h1>
+        <h1>{{'admin.package-index.page-title' | translate}}</h1>
     </div>
 
     <div class="alert-message">
-        <app-alert *ngIf="display_message" (timeOut) ="closeAlert($event)" [message] = "message_alert"></app-alert>
+        <app-alert *ngIf="display_message" (timeOut)="closeAlert($event)" [message]="message_alert"></app-alert>
     </div>
 
     <div class="row overflow_x_scroll justify-content-end p-5">
         <div class="col-md-4 d-flex justify-content-end">
             <form class="d-flex w-100 nav_item position-relative">
-                <input class="form-control me-2 py-1 px-5" id="search_field" 
-                    type="search" placeholder="Recherche ...." 
-                    aria-label="chercher"
-                    (keyup)="searchValue($event)" 
+                <input class="form-control me-2 py-1 px-5" id="search_field"
+                    type="search"
+                    [placeholder]="'admin.package-index.search-placeholder' | translate"
+                    [attr.aria-label]="'button.search' | translate"
+                    (keyup)="searchValue($event)"
                     (search)="searchValue($event)"
                 >
                 <i class="fa-solid fa-magnifying-glass position-absolute search_icon"
@@ -21,31 +22,30 @@
                 </i>
             </form>
         </div>
-        
+
         <div class="col-12 d-flex justify-content-start gap-2 align-items-center py-3">
-            <h3 class="label-filter m-0">Afficher par</h3>
-            <select class="form-select w-25" id="" aria-label="Floating label select example" (change)="setPageLimit($event)">
+            <h3 class="label-filter m-0">{{'admin.package-index.display-by' | translate}}</h3>
+            <select class="form-select w-25" [attr.aria-label]="'admin.package-index.display-by' | translate" (change)="setPageLimit($event)">
                 <option value="{{itemRange}}" *ngFor="let itemRange of rangeList">{{itemRange}}</option>
             </select>
         </div>
-    
+
         <div class="result-message text-center fw-bold" *ngIf="query.length >= 2 && abonment_list">
-            Resultat de recherche pour : <span class="search_data">{{query}}</span>
+            {{'admin.package-index.search-result-prefix' | translate}} <span class="search_data">{{query}}</span>
         </div>
         <div class="result-message fw-bold text-center" *ngIf="query.length >= 2 && !abonment_list">
-            Aucun resultat pour : <span class="search_data">{{query}}</span>
+            {{'admin.package-index.no-result-prefix' | translate}} <span class="search_data">{{query}}</span>
         </div>
-        
+
         <div class="col-12">
             <table class="table px-4 m-auto" id="dashboard_table">
                 <thead>
                     <tr class="border-bottom-1-green">
                         <th scope="col" class="border-top-1-gray border-left-1-gray">No</th>
-                        <th scope="col " class="bord">Nom forfait </th>
-                        <th scope="col " class="bord">Prix</th>
-                        <th scope="col " class="bord">Durée</th>
-                        <!-- <th scope="col " class="bord border-right-1-gray">Utilisation</th> -->
-                        <th scope="col " class="bord">Actions</th>
+                        <th scope="col" class="bord">{{'admin.package-index.column.name' | translate}}</th>
+                        <th scope="col" class="bord">{{'admin.package-index.column.price' | translate}}</th>
+                        <th scope="col" class="bord">{{'admin.package-index.column.duration' | translate}}</th>
+                        <th scope="col" class="bord">{{'admin.package-index.column.actions' | translate}}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -60,49 +60,44 @@
                             </td>
                             <td class="bord-black">
                                 {{abonnement.type_value}}
-                                <!-- {{abonnement.time | formatTime:abonnement.type_time}} -->
                             </td>
-                            <!-- <td class="bord-black">
-                                {{abonnement.type}}
-                            </td> -->
                             <!-- Les actions -->
                             <td class="bord-black">
                                 <div class="icon-list d-flex gap-2 justify-content-center">
-                                    <a  title="Mettre en pause" *ngIf="abonnement.is_actived == 1" (click)="handleConfirmDisabled(true)">
+                                    <a [title]="'admin.package-index.action.pause-title' | translate" *ngIf="abonnement.is_actived == 1" (click)="handleConfirmDisabled(true)">
                                         <i class="fa-solid fa-pause bg_grey radius-3 text-dark p-1"></i>
                                     </a>
                                     <app-alert-confirm *ngIf="showAlert" (confirmAction)="changeStatusAbonnement($event , abonnement)"></app-alert-confirm>
-                                    <a title="Republier" *ngIf="abonnement.is_actived == 0" (click)="handleConfirmDisabled(true)">
+                                    <a [title]="'admin.package-index.action.republish-title' | translate" *ngIf="abonnement.is_actived == 0" (click)="handleConfirmDisabled(true)">
                                         <i class="fa-solid fa-play bg-white radius-3 text_green p-1 border-top-1-green border-bottom-1-green border-left-1-green border-right-1-green">
                                         </i>
                                     </a>
                                     <app-alert-confirm *ngIf="showAlert" (confirmAction)="deleteAbonnement($event , abonnement.id)"></app-alert-confirm>
 
-                                    <a title="Supprimer" (click)="handleConfirmDelete(true)">
-                                        <i class="fa-solid fa-trash radius-3 bg_red text-white p-1" ></i>
+                                    <a [title]="'admin.package-index.action.delete-title' | translate" (click)="handleConfirmDelete(true)">
+                                        <i class="fa-solid fa-trash radius-3 bg_red text-white p-1"></i>
                                     </a>
-                                    <a title="Modifier">
+                                    <a [title]="'admin.package-index.action.edit-title' | translate">
                                         <i class="fa-solid fa-pen bg_blue radius-3 text-white p-1" (click)="updateModal(abonnement)" data-bs-toggle="modal" data-bs-target="#package"></i>
-                                    </a> 
+                                    </a>
                                 </div>
-                            </td>        
+                            </td>
                         </tr>
                         <div class="col-12 py-3 d-flex justify_content" *ngIf="abonment_list">
                             <app-paginator
-                                [current] = "paginationDAtas?.current" 
-                                [allcount] = "paginationDAtas?.allcount" 
-                                [next] = "paginationDAtas?.next" 
-                                [previous] = "paginationDAtas?.previous" 
-                                [paginateLength] = "paginationDAtas?.paginateLength" 
-                                [pageLimit] = "pageLImit"
-                                (pageSelected)="setPage($event)"
-                            >
-                            </app-paginator> 
-                        </div>    
+                                [current]="paginationDAtas?.current"
+                                [allcount]="paginationDAtas?.allcount"
+                                [next]="paginationDAtas?.next"
+                                [previous]="paginationDAtas?.previous"
+                                [paginateLength]="paginationDAtas?.paginateLength"
+                                [pageLimit]="pageLImit"
+                                (pageSelected)="setPage($event)">
+                            </app-paginator>
+                        </div>
                     </ng-container>
                 </tbody>
             </table>
-            
+
             <!-- Modal -->
             <div class="modal fade" id="package" data-bs-backdrop="static" data-bs-keyboard="false"
                 tabindex="-1" aria-labelledby="packageLabel" aria-hidden="true">

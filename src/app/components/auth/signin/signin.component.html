@@ -43,8 +43,8 @@
                             <label for="exampleInputEmail1" class="form-label">{{'user.signin.email'|translate}} </label>
                             <input type="identifiant" formControlName="identifiant" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                             <div *ngIf="identifiant.dirty && !identifiant.valid">
-                                <div class="" class="error" *ngIf="identifiant.hasError('required')">
-                                    {{email_error_message}}
+                                <div class="error" *ngIf="identifiant.hasError('required')">
+                                    {{'user.signin.email-required' | translate}}
                                 </div>
                                 <div class="error" *ngIf="!identifiant.hasError('required')">
                                     l'e-mail n'est ne respecte pas le bon format.
@@ -60,10 +60,10 @@
                         <div class="" id="password_field">
                             <label for="exampleInputPassword1" class="form-label">{{'user.signin.password'|translate}}</label>
                             <input type="{{typeField}}" formControlName="password" class="form-control" (keyup)="showIcon($event)" id="exampleInputPassword1">
-                            <i class="fa-solid fa-eye{{icon_eyes}} d-{{display}}" (click)="toggleIconClass($event)" id="icon_eyes" ></i>
+                            <i class="fa-solid fa-eye{{icon_eyes}} d-{{display}}" (click)="toggleIconClass()" id="icon_eyes"></i>
                             <div *ngIf="password.dirty && !password.valid">
-                                <div class="error" *ngIf="formControls.password.errors.required">
-                                    {{password_error_message}}
+                                <div class="error" *ngIf="formControls.password.errors?.['required']">
+                                    {{'user.signin.password-required' | translate}}
                                 </div>
                             </div>
                             

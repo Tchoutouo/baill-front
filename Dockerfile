@@ -1,9 +1,10 @@
-FROM node:20-alpine AS builder
+FROM node:22-alpine AS builder
+ARG BUILD_CONFIG=production
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci
+RUN npm install -g npm@11 && npm ci
 COPY . .
-RUN npm run build
+RUN npm run build -- --configuration=${BUILD_CONFIG}
 
 FROM nginx:alpine
 COPY --from=builder /app/dist/baill-front/browser /usr/share/nginx/html

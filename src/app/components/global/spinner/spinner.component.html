@@ -1,3 +1,7 @@
-<div *ngIf="this.loader.getLoading()" class="cssload-container">
-    <div class="cssload-speeding-wheel"></div>
+<div *ngIf="loader.getLoading()" class="baill-spinner-overlay">
+    <div class="sp-rings">
+        <div class="sp-ring sp-ring-outer"></div>
+        <div class="sp-ring sp-ring-inner"></div>
+        <div class="sp-core"></div>
+    </div>
 </div>

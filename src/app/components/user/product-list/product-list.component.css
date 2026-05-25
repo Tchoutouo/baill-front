@@ -1,13 +1,72 @@
-
-.list-product{
-    overflow-y: hidden;
-    overflow-x: hidden;
+/* ═══════════════════════════════════════
+   GRILLE DES ANNONCES
+═══════════════════════════════════════ */
+.product-list {
+    padding-bottom: 20px;
 }
 
-.annonces-not-found .text{
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+/* ── État vide ── */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.empty-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--main-color-green-15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    font-size: 30px;
     color: var(--main-color);
-    font-size: 48px;
-    font-weight: 500;
-    padding: 100px 0px;
+}
+
+.empty-title {
     font-family: var(--main-font-Quicksand);
+    font-size: var(--main-h3-font-size);
+    font-weight: var(--main-xl-font-weiht);
+    color: var(--main-color);
+    margin: 0;
+}
+
+/* ═══════════════════════════════════════
+   TABLETTE (≤ 1100px)
+═══════════════════════════════════════ */
+@media (max-width: 1100px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ═══════════════════════════════════════
+   MOBILE PAYSAGE / GRANDE POCHE (≤ 700px)
+═══════════════════════════════════════ */
+@media (max-width: 700px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+    }
+}
+
+/* ═══════════════════════════════════════
+   MOBILE PORTRAIT (≤ 480px)
+═══════════════════════════════════════ */
+@media (max-width: 480px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
 }

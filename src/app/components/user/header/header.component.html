@@ -1,66 +1,97 @@
-
-<nav class="navbar navbar-light nav_top"  aria-label="true">
-    <div class="container-fluid">
-        <div class="d-flex justify-content-between px-3 align-items-center w-100">
-            <a class="nav-link d-flex align-items-center gap-1 text-white contact" href="#">
+<!-- ── Barre info (masquée sur mobile) ── -->
+<div class="top-bar">
+    <div class="container-fluid px-3 px-md-4">
+        <div class="top-bar-inner">
+            <a class="top-bar-email" href="mailto:{{emailContact}}">
                 <i class="fa-regular fa-envelope"></i>
                 {{emailContact}}
             </a>
-            <div class="icon-list gap-2 d-flex text-white">
-                <i class="fa-brands fa-facebook-f"></i>
-                <i class="fa-brands fa-x-twitter"></i>
-                <i class="fa-brands fa-linkedin-in"></i>
+            <div class="top-bar-socials">
+                <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
+                <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
+                <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
             </div>
         </div>
     </div>
-</nav>
+</div>
 
-<nav class="navbar shadow navbar-light bg-white navbar-expand-xl sticky-top nav_bottom" aria-label="true">
-    <div class="container-fluid justify-content-between px-md-4 padd-md bg-white gap-xl-5">
-        <div class="row">
-            <div class="col-md-3 d-flex">
-                <button 
-                    *ngIf="showBackButton" 
-                    class="back-button"
-                    (click)="goBack()"
-                    aria-label="Retour à l'accueil">
-                    <i class="fa fa-arrow-left"></i>
-                    {{'button.back'| translate}}
-                </button> 
-                <a href="#" class="navbar-brand relative d-flex align-items-center">
-                    <img class="brand-logo mx-0" src="../../../../assets/baill-logo.ico" alt="">
-                    <span class="site_name">{{siteName}}</span>
-                </a>
-            </div>
+<!-- ── Navigation principale ── -->
+<nav class="main-nav" role="navigation" aria-label="Navigation principale">
+    <div class="nav-inner container-fluid px-3 px-md-4">
+
+        <!-- Gauche : retour + marque -->
+        <div class="nav-brand">
+            <button
+                *ngIf="showBackButton"
+                class="back-button"
+                type="button"
+                (click)="goBack()"
+                aria-label="Retour à l'accueil">
+                <i class="fa fa-arrow-left"></i>
+                <span class="back-text">{{'button.back' | translate}}</span>
+            </button>
+            <a routerLink="/" class="brand-link" [attr.aria-label]="('header.home-aria-label' | translate) + ' ' + siteName">
+                <img class="brand-logo" src="../../../../assets/baill-logo.ico" alt="">
+                <span class="site_name">{{siteName}}</span>
+            </a>
         </div>
-    
-        <button class="navbar-toggler border-0" type="button" (click)="toggleMenu()" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+
+        <!-- Droite : actions desktop -->
+        <div class="nav-actions">
+            <a [routerLink]="['/admin/announces/create']" class="nav-btn btn-publish">
+                <i class="fas fa-plus"></i>
+                {{'header.publish-post' | translate}}
+            </a>
+            <a [routerLink]="['/signin']" class="nav-btn btn-auth" *ngIf="!is_auth">
+                <i class="fa-regular fa-user"></i>
+                {{'header.login-text' | translate}}
+            </a>
+            <a [routerLink]="['/admin']" class="nav-btn btn-auth" *ngIf="is_auth">
+                <i class="fa-regular fa-user"></i>
+                {{'header.espace-text' | translate}}
+            </a>
+            <select class="lang-select" (change)="ChangeLanguage($event)" [attr.aria-label]="'header.language-label' | translate">
+                <option [selected]="lang==='fr'" value="fr">{{'header.lang-french' | translate}}</option>
+                <option [selected]="lang==='en'" value="en">{{'header.lang-english' | translate}}</option>
+            </select>
+        </div>
+
+        <!-- Bouton hamburger (mobile uniquement) -->
+        <button
+            class="menu-toggle"
+            type="button"
+            (click)="toggleMenu()"
+            [attr.aria-expanded]="isMenuOpen"
+            aria-label="Ouvrir le menu">
+            <span class="toggle-icon" [class.is-open]="isMenuOpen">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
         </button>
 
-        <div class="collapse navbar-collapse bg-white justify-content-end ps-xl-5 gap-xl-0 gap-md-3" [ngClass]="{'show': isMenuOpen}" id="navbarSupportedContent">
-            <!-- <form class="d-flex nav_item position-relative w-50">
-                <input class="form-control me-2 py-2 px-5 rounded" id="search_field" type="search" placeholder="{{'header.search'| translate}}" aria-label="Search">
-                <i class="fa-solid fa-magnifying-glass position-absolute search_icon"></i>
-            </form> -->
-            <div class="d-flex gap-3 two_btn">
-                <a [routerLink]="['/admin/announces/create']" class="nav-link btn_publish nav_item_" href="">
-                    <i class="fas fa-plus "></i>
-                    {{'header.publish-post'| translate}}
-                </a>
-                <a class="nav-link btn_login nav_item_ md_text d-flex gap-2 align-items-center" [routerLink]="['/signin']" *ngIf="!is_auth">
-                    <i class="fa-regular fa-user"></i>
-                    {{'header.login-text'| translate}}
-                </a>
-                <a class="nav-link btn_space nav_item_ md_text d-flex gap-2 align-items-center" [routerLink]="['/admin']" *ngIf="is_auth">
-                    <i class="fa-regular fa-user"></i>
-                    {{'header.espace-text'| translate}}
-                </a>
-            </div>
-            <div class="form-group px-3 d-flex justify-content-center">
-                <select class="form-control text-center" (change)="ChangeLanguage($event)" name="">
-                    <option [selected]="lang==='fr'" value="fr">FR</option>
-                    <option [selected]="lang==='en'" value="en">EN</option>
+    </div>
+
+    <!-- Menu mobile déroulant -->
+    <div class="mobile-menu" [class.is-open]="isMenuOpen">
+        <div class="mobile-menu-body">
+            <a [routerLink]="['/admin/announces/create']" class="mobile-btn btn-publish-mobile" (click)="toggleMenu()">
+                <i class="fas fa-plus"></i>
+                {{'header.publish-post' | translate}}
+            </a>
+            <a [routerLink]="['/signin']" class="mobile-btn btn-auth-mobile" *ngIf="!is_auth" (click)="toggleMenu()">
+                <i class="fa-regular fa-user"></i>
+                {{'header.login-text' | translate}}
+            </a>
+            <a [routerLink]="['/admin']" class="mobile-btn btn-auth-mobile" *ngIf="is_auth" (click)="toggleMenu()">
+                <i class="fa-regular fa-user"></i>
+                {{'header.espace-text' | translate}}
+            </a>
+            <div class="mobile-lang-wrap">
+                <label class="mobile-lang-label" for="lang-mobile">{{'header.language-label' | translate}}</label>
+                <select id="lang-mobile" class="lang-select-mobile" (change)="ChangeLanguage($event)" [attr.aria-label]="'header.language-label' | translate">
+                    <option [selected]="lang==='fr'" value="fr">{{'header.lang-french' | translate}}</option>
+                    <option [selected]="lang==='en'" value="en">{{'header.lang-english' | translate}}</option>
                 </select>
             </div>
         </div>

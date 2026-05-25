@@ -1,69 +1,94 @@
 {
-    "button":{
+    "button": {
         "next": "Next",
         "previous": "Previous",
         "save": "Save",
+        "save-changes": "Save changes",
         "cancel": "Cancel",
         "publish": "Publish",
         "back": "Back",
-        "validate":"Validate",
+        "validate": "Validate",
         "create-and-publish": "Create & Publish",
         "create": "Create",
         "edit": "Edit",
         "delete": "Delete",
         "search": "Search",
         "view": "View",
-        "view-all": "View All",
+        "view-all": "View all",
         "close": "Close",
-        "throw": "Send",
+        "send": "Send",
         "add": "Add",
-        "add-category": "Add Category",
-        "lock": "Lock",
-        "unlock": "Unlock",
+        "add-category": "Add category",
+        "lock": "Block",
+        "unlock": "Unblock",
         "category": "Categories",
         "anounce": "Ads",
-        "pay": "Pay"
+        "pay": "Pay",
+        "enable-editing": "Enable editing",
+        "ok": "OK"
     },
-    "status":{
+    "status": {
         "active": "Active",
+        "blocked": "Blocked",
         "inactive": "Inactive",
         "expired": "Expired",
         "pending": "Pending",
-        "progress": "In Progress",
-        "stop": "On break",
+        "progress": "In progress",
+        "stop": "On hold",
         "published": "Published",
         "unpublished": "Unpublished",
         "draft": "Draft",
         "deleted": "Deleted"
     },
-    "banner":{
-        "title":"Rent with ease",
-        "title-2": "Renting goods and services on bailleurnet is easy",
+    "banner": {
+        "title": "Rent with ease",
+        "title-2": "Renting goods and services on Bailleurnet is easy",
         "title-3": "My pocket compass",
         "description": "Bailleurnet is the ultimate platform for renting goods and services with ease",
-        "btn-publish": "Publish an ad"
+        "btn-publish": "Post an ad"
     },
-    "header":{
+    "header": {
         "publish-post": "Post an ad",
-        "login-text":"Log in",
-        "search": "Research ...",
-        "espace-text":"My space"
+        "login-text": "Log in",
+        "search": "Search...",
+        "espace-text": "My space",
+        "home-aria-label": "Home",
+        "language-label": "Language",
+        "lang-french": "French",
+        "lang-english": "English"
     },
-    "footer":{
+    "footer": {
         "contact": "Contact us",
-        "access-right": "All rights reserved"
+        "access-right": "All rights reserved",
+        "contact-by-email": "Email",
+        "follow-us": "Follow us"
+    },
+    "error": {
+        "page-404": {
+            "oops-title": "Oops!",
+            "not-found-message": "The page you are looking for does not exist.",
+            "lost-in-site-description": "It looks like you got lost on our site. Let's go back to a more familiar place!",
+            "back-to-home-button": "Back to home"
+        },
+        "page-403": {
+            "oops-title": "Oops!",
+            "access-denied-message": "Access denied",
+            "permission-check-description": "A 403 error is preventing access to this resource. Please check the associated permissions.",
+            "back-to-home-button": "Back to home"
+        }
     },
     "user": {
-        "hightlight":{
-            "title": "On the front page!",
-            "no-content": "No headline announcement at the moment."
+        "hightlight": {
+            "title": "Featured!",
+            "no-content": "No featured ad at the moment."
         },
-        "tags-list":{
+        "tags-list": {
             "cat": "Select a category",
             "country": "Select a country",
-            "city": "Select a city"
+            "city": "Select a city",
+            "reset-filter": "All"
         },
-        "cat-list":{
+        "cat-list": {
             "title": "Categories",
             "ascending": "Ascending",
             "descending": "Descending",
@@ -71,90 +96,110 @@
             "and": "And",
             "between": "Between"
         },
-        "contact-us":{
-            "title":"Contact us",
-            "description": "The best way to contact us is to use our contact form below. Please fill out all of the required fields and we will get back to you as soon as possible.",
-            "fullname": "Full Name",
+        "product-card": {
+            "action": {
+                "call-title": "Call",
+                "send-email-title": "Send an email",
+                "view-ad-title": "View ad"
+            }
+        },
+        "product-detail": {
+            "cat": "Categories",
+            "description": "Description",
+            "no-announce": "No ads",
+            "no-content": "Ad not found",
+            "view-all": "See all",
+            "advertiser": "Advertiser",
+            "similar-ads": "Similar ads",
+            "action": {
+                "call": "Call",
+                "whatsapp": "WhatsApp",
+                "email": "Email",
+                "visit-site": "Website"
+            }
+        },
+        "contact-us": {
+            "title": "Contact us",
+            "description": "The best way to contact us is to use our contact form below. Please fill out all required fields and we will get back to you as soon as possible.",
+            "fullname": "Full name",
             "subject": "Subject",
-            "phone-number": "Phone Number",
-            "button-send":"Send",   
-            "message":{
-                "error":{
-                    "name": "Full Name is required.",
+            "phone-number": "Phone number",
+            "message-label": "Message",
+            "button-send": "Send",
+            "message": {
+                "error": {
+                    "fullname": "Full name is required.",
                     "message": "Please enter a message.",
                     "subject": "Please fill in this field.",
                     "email-1": "Email is required.",
                     "email-2": "Email is not in the correct format.",
-                    "phone-number": "Please enter your phone number"
+                    "phone-number": "Please enter your phone number."
                 },
-                "notif":{
-                    "success": "Your email has been sent successfully!!",
+                "notif": {
+                    "success": "Your email has been sent successfully!",
                     "warning": "An error occurred during the operation."
                 }
             }
         },
-        "signup":{
-            "password":"Password",
-            "confirm-password":"Confirm your password",
-            "username":"User name",
-            "name": "Names",
-            "first-name": "First names",
-            "country":"Country",
-            "city":"City",
+        "signup": {
+            "password": "Password",
+            "confirm-password": "Confirm your password",
+            "username": "Username",
+            "name": "Last name(s)",
+            "first-name": "First name(s)",
+            "country": "Country",
+            "city": "City",
             "neighborhood": "Neighborhood",
-            "email":"Email",
-            "whatsapp-number":"Phone(Whatsapp)",
-            "title":"Register",
-            "text-account":"You already have an account",
-            "login-text":"Log in",
-            "text-line-1":"I join Bailleurnet",
-            "text-line-2":"with my pocket compass",
-            "text-line-3":"",
-            "message":{
-                "error":{
-                    "password":"password is required.",
-                    "password-1":"password must be at least 6 characters long.",
-                    "confirm-password":"password is required.",
-                    "confirm-password-1":"passwords do not match.",
-                    "username":"username is required.",
-                    "name": "last name(s) is required.",
-                    "first-name": "first name is required",
-                    "country":"Please choose a country.",
-                    "city":"Please choose your city.",
+            "email": "Email",
+            "whatsapp-number": "Phone (WhatsApp)",
+            "title": "Register",
+            "text-account": "You already have an account",
+            "login-text": "Log in",
+            "text-line-1": "I join Bailleurnet",
+            "text-line-2": "with my pocket compass",
+            "text-line-3": "",
+            "message": {
+                "error": {
+                    "password": "Password is required.",
+                    "password-1": "Password must be at least 6 characters long.",
+                    "confirm-password": "Password confirmation is required.",
+                    "confirm-password-1": "Passwords do not match.",
+                    "username": "Username is required.",
+                    "name": "Last name is required.",
+                    "first-name": "First name is required.",
+                    "country": "Please choose a country.",
+                    "city": "Please choose your city.",
                     "neighborhood": "Please choose your neighborhood.",
-                    "email-1":"Email is required.",
-                    "email-2":"Email is not in the correct format.",
-                    "whatsapp-number":"Phone(Whatsapp)"
+                    "email-1": "Email is required.",
+                    "email-2": "Email is not in the correct format.",
+                    "whatsapp-number": "WhatsApp number is required."
                 },
-                "notif":{
-                    "success": "Your account has been successfully registered !!",
-                    "warning": "An error occurred during the operation"
+                "notif": {
+                    "success": "Your account has been successfully registered!",
+                    "warning": "An error occurred during the operation."
                 }
             }
         },
-        "signin":{
+        "signin": {
             "login-description": "Welcome to Bailleurnet, rental at your fingertips.",
             "form-title": "Log in",
             "text-login": "If you don't have an account",
             "title-signup": "Register",
-            "email": "E-mail or Phone",
-            "password": "Password"
-        },
-        "product-detail":{
-            "cat": "Categories",
-            "description": "Description",
-            "others": "others",
-            "no-announce": "No ad",
-            "no-content": "Ad not found",
-            "view-all": "See all"
+            "email": "Email or Phone",
+            "password": "Password",
+            "error": {
+                "email-required": "Email is required.",
+                "password-required": "Password is required.",
+                "email-invalid-format": "Email is not in the correct format."
+            }
         }
     },
-    "admin":{
+    "admin": {
         "profile": {
-            "title": "My Account",
+            "title": "My account",
             "form": {
-                "last_name": "Last Name(s)",
-                "first_name": "First Name(s)",
+                "last_name": "Last name(s)",
+                "first_name": "First name(s)",
                 "username": "Username",
                 "email": "Email",
                 "phone": "Phone",
@@ -176,13 +221,13 @@
                 "password": "Password"
             },
             "button": {
-                "update": "Update Fields",
+                "update": "Update fields",
                 "save": "Save"
             },
             "modal": {
-                "title": "Password Change",
-                "old_password": "Old Password",
-                "new_password": "New Password"
+                "title": "Password change",
+                "old_password": "Old password",
+                "new_password": "New password"
             },
             "error": {
                 "last_name": "Last name is required.",
@@ -190,14 +235,14 @@
                 "username": "Username is required.",
                 "email": "Invalid or missing email.",
                 "phone": "Phone number is required.",
-                "whatsapp": "WhatsApp phone number is required.",
-                "sex": "Please select your gender"
+                "whatsapp": "WhatsApp number is required.",
+                "sex": "Please select your gender."
             }
         },
         "ads": {
             "title": "Ads",
             "title-2": "Ad creation form",
-            "title-3": "Titre",
+            "title-3": "Title",
             "no-content": "No ads",
             "no-announce": "No ads found",
             "search": "Search for an ad",
@@ -213,54 +258,275 @@
             "location": "Location",
             "description": "Description",
             "price": "Price",
-            "picture": "Picture",
+            "picture": "Images",
             "error-message": {
                 "title": "Title is required.",
                 "description": "Description is required.",
-                "description-2": "The maximum character size allowed is 256.",
+                "description-2": "The maximum allowed size is 256 characters.",
                 "category": "Category is required.",
                 "country": "Country is required.",
                 "city": "City is required.",
                 "price": "Price is required.",
-                "picture": "Picture is required."
+                "picture": "Image is required."
             },
-            "select-payment": "Choose a payment method"
+            "select-payment": "Choose a payment method",
+            "placeholder": {
+                "title": "e.g. Furnished 3-bedroom apartment, Yaoundé",
+                "description": "Describe your ad in detail: condition, features, benefits…"
+            },
+            "category-hint": "Hold Ctrl to select multiple categories",
+            "add-photo": "Add",
+            "checking-photo": "Checking…",
+            "image-hint": {
+                "count": "Maximum 8 photos",
+                "size": "Max 5 MB/photo",
+                "dimension": "Min 200×200 px"
+            },
+            "image-error": {
+                "type": "Unsupported format. Use JPEG, PNG, WebP or GIF.",
+                "size": "Image exceeds the {{max}} MB limit.",
+                "too-small": "Image too small (min. {{min}}×{{min}} px).",
+                "too-large": "Image too large (max. {{max}}×{{max}} px).",
+                "max-count": "Maximum {{max}} images allowed.",
+                "invalid": "Cannot read this image file."
+            },
+            "select-package": "Choose a package"
+        },
+        "annouce-details": {
+            "page-title": "Ad details",
+            "section": {
+                "images": "Images",
+                "categories": "Categories"
+            },
+            "field": {
+                "title": "Title",
+                "price": "Price",
+                "country": "Country",
+                "city": "City",
+                "location": "Location",
+                "description": "Description"
+            },
+            "action": {
+                "publish": "Publish",
+                "delete": "Delete",
+                "republish": "Republish",
+                "pause": "Pause",
+                "relaunch": "Relaunch",
+                "block": "Block",
+                "unblock": "Unblock"
+            }
         },
         "dashboard": {
             "title": "Dashboard",
+            "loading": "Loading dashboard…",
+            "no-data": "No data",
+            "no-blocked-users": "No blocked users.",
+            "no-payment-recorded": "No payment recorded.",
+            "transactions-label": "transaction(s)",
             "total-ads": "Total ads",
-            "total-ads-published": "Total ads published",
+            "total-ads-published": "Total published ads",
             "total-ads-inprogress": "Total ads in progress",
-            "total-ads-expired": "Total ads expired",
-            "total-ads-pause": "Total ads on break",
+            "total-ads-expired": "Total expired ads",
+            "total-ads-pause": "Total ads on hold",
             "total-users": "Total users",
             "total-categories": "Total categories",
             "total-payments": "Total payments",
-            "ads-published": "Ads published",
+            "total-packages": "Total packages",
+            "ads-published": "Published ads",
             "ads-inprogress": "Ads in progress",
-            "ads-expired": "Ads expired",
-            "ads-pause": "Ads on break",
-            "top-5":"The 5 most requested ads of the month"
-            
+            "ads-expired": "Expired ads",
+            "ads-pause": "Ads on hold",
+            "welcome": "Hello",
+            "welcome-sub": "Manage your ads and track their status in real time.",
+            "cta-create": "Create an ad",
+            "see-all": "See all",
+            "no-ads-yet": "You have no ads yet. Start now!",
+            "top-5": "The 5 most requested ads of the month",
+            "kpi": {
+                "users-label": "Users",
+                "ads-label": "Ads",
+                "revenue-label": "Revenue",
+                "current-month": "This month:"
+            },
+            "chart": {
+                "user-registrations-6-months": "Registrations — last 6 months",
+                "ads-created-6-months": "Ads created — last 6 months",
+                "package-popularity": "Package popularity",
+                "ads-by-status": "Ads by status",
+                "revenue-by-payment-method": "Revenue by payment method",
+                "monthly-revenue-6-months": "Monthly revenue — last 6 months (XAF)"
+            },
+            "table": {
+                "top-advertisers": "Top advertisers",
+                "latest-ads": "Latest ads",
+                "latest-registrations": "Latest registrations",
+                "geographic-breakdown": "Geographic breakdown",
+                "popular-categories": "Popular categories",
+                "blocked-users": "Blocked users"
+            },
+            "column": {
+                "advertiser": "Advertiser",
+                "country": "Country",
+                "total-ads": "Total ads",
+                "published-ads": "Published",
+                "ad-title": "Title",
+                "status": "Status",
+                "date": "Date",
+                "user": "User",
+                "email": "Email",
+                "profile": "Profile",
+                "registered-on": "Registered on",
+                "category": "Category",
+                "usages": "Usages",
+                "duration": "Duration",
+                "action": "Action"
+            },
+            "geo": {
+                "advertisers": "Advertisers",
+                "ads-label": "Ads"
+            }
         },
-        "payment":{
+        "user-index": {
+            "page-title": "Advertisers",
+            "total-count": "in total",
+            "search-placeholder": "Search for an advertiser…",
+            "per-page-suffix": "/ page",
+            "search-results-for": "Results for",
+            "no-results-for": "No results for",
+            "clear-search": "Clear",
+            "column": {
+                "advertiser": "Advertiser",
+                "email": "Email",
+                "status": "Status",
+                "country": "Country",
+                "published-ads": "Published ads",
+                "expired-ads": "Expired ads",
+                "actions": "Actions"
+            },
+            "action": {
+                "view-profile": "View profile",
+                "block": "Block",
+                "unblock": "Unblock"
+            },
+            "no-advertiser-found": "No advertiser found",
+            "try-different-search": "Try a different search term."
+        },
+        "user-show": {
+            "section": {
+                "personal-info": "Personal information",
+                "contact": "Contact",
+                "location": "Location",
+                "online-presence": "Online presence"
+            },
+            "field": {
+                "last-name": "Last name(s)",
+                "first-name": "First name(s)",
+                "username": "Username",
+                "gender": "Gender",
+                "email": "Email",
+                "phone": "Phone",
+                "whatsapp": "WhatsApp",
+                "country": "Country",
+                "city": "City",
+                "neighborhood": "Neighborhood",
+                "website": "Website"
+            },
+            "gender": {
+                "male": "Male",
+                "female": "Female"
+            },
+            "status": {
+                "active": "Active",
+                "blocked": "Blocked"
+            },
+            "action": {
+                "block": "Block",
+                "unblock": "Unblock"
+            },
+            "loading": "Loading profile…"
+        },
+        "package-index": {
+            "page-title": "Package management",
+            "search-placeholder": "Search for a package…",
+            "display-by": "Show by",
+            "search-result-prefix": "Search result for:",
+            "no-result-prefix": "No result for:",
+            "column": {
+                "name": "Package name",
+                "price": "Price",
+                "duration": "Duration",
+                "actions": "Actions"
+            },
+            "action": {
+                "pause-title": "Pause",
+                "republish-title": "Republish",
+                "delete-title": "Delete",
+                "edit-title": "Edit"
+            }
+        },
+        "payment-config": {
+            "page-title": "Payment method management",
+            "save-changes": "Save changes"
+        },
+        "payment": {
             "number": "Phone number",
             "card-number": "Card number",
             "date-expired": "Expiration date",
             "cvv": "CVV",
             "error-number": "Invalid number (must start with 6 and contain 9 digits)."
+        },
+        "notification": {
+            "page-title": "Notifications",
+            "mark-all-read": "Mark all as read",
+            "ad-expiration-title": "Ad expiration",
+            "ad-expiration-approaching-title": "Expiration approaching"
         }
     },
-    "aside":{
+    "aside": {
         "ads": "Ads",
-        "users": "Users",
-        "categories": "Categories",
-        "forfaits": "Packages",
-        "payments": "Payments",
-        "settings": "Settings",
         "dashboard": "Dashboard",
+        "categories": "Categories",
+        "users": "Users",
+        "payments": "Payments",
+        "forfaits": "Packages",
+        "settings": "Settings",
         "logout": "Logout",
-        "profile": "My Profile"
+        "profile": "My profile"
+    },
+    "settings": {
+        "page-title": "Settings",
+        "saving": "Saving…",
+        "notifications": {
+            "title": "Notifications",
+            "sub": "Choose how you want to be notified.",
+            "email-label": "Email notifications",
+            "email-desc": "Receive an email when important actions occur on your account.",
+            "platform-label": "In-app notifications",
+            "platform-desc": "Get alerts directly inside the application.",
+            "newsletter-label": "Newsletter",
+            "newsletter-desc": "Stay informed about platform news and offers.",
+            "saved": "Notification preferences saved."
+        },
+        "language": {
+            "title": "Language",
+            "sub": "Choose the display language for the interface.",
+            "fr": "Français",
+            "en": "English"
+        },
+        "account": {
+            "title": "My account",
+            "sub": "View and edit your personal information.",
+            "name": "Name",
+            "email": "Email",
+            "edit": "Edit my profile"
+        },
+        "danger": {
+            "title": "Danger zone",
+            "sub": "These actions are irreversible. Proceed with caution.",
+            "delete-btn": "Delete my account",
+            "confirm-text": "To confirm, type the word",
+            "confirm-text-2": "in the field below:",
+            "confirm-delete": "Confirm deletion"
+        }
     }
-    
 }

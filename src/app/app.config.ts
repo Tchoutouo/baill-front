@@ -9,7 +9,7 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { CorsInterceptor } from './interceptors/cors.interceptor';
 import { provideNgxStripe } from 'ngx-stripe';
 import { registerLocaleData } from '@angular/common';
-import { environment } from '../environments/environment.development';
+import { environment } from '../environments/environment';
 
 import localeFrCM from '@angular/common/locales/fr-CM';
 

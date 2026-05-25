@@ -1,99 +1,167 @@
-<div class="container-fluid p-0">
-    <div class="alert-message">
-        <app-alert *ngIf="display_message" (timeOut) ="closeAlert($event)" [message] = "message_alert"></app-alert>
-    </div>
-    <form  class="px-5">
-        <div class="row">
-            <h2 class="title-h2 mb-4">Détails du compte utilisateur : {{advertiser?.last_name}} </h2>
-            <div class="col-md-3">
-                <div class="form_group mb-3">
-                    <label for="name" class="label-form mb-1">Nom(s)</label>
-                    <input  readonly type="text" [value]="advertiser?.last_name" name="last_name" class="input_field" formControlName="last_name"   id="last_name">
-                </div>
-                
-                <div class="form_group mb-3">
-                    <label for="name" class="label-form mb-1">Prénom(s)</label>
-                    <input  readonly type="text" [value]="advertiser?.first_name" name="first_name" class="input_field" formControlName="first_name" id="first_name">
-                </div>
-                <div class="form_group mb-3">
-                    <label for="userName" class="label-form mb-1">Nom d’utilisateur</label>
-                    <input  readonly type="text" [value]="advertiser?.username" name="username" class="input_field" formControlName="username" id="userName"/>
-                </div>
-                <div class="form_group mb-3">
-                    <label for="email" class="label-form mb-1">Email</label>
-                    <input  readonly type="email" [value]="advertiser?.email" name="email" class="input_field" formControlName="email"   id="email"/>
-                </div>
-                <div class="form_group mb-3">
-                    <label for="phone" class="label-form mb-1">Téléphone</label>
-                    <input  readonly type="tel" name="number" [value]="advertiser?.number" class="input_field" formControlName="number"  id="number"/>
-                </div>
-                <div class="form_group mb-3">
-                    <label for="phone" class="label-form mb-1">Téléphone (WhatsApp)</label>
-                    <input  readonly type="tel" name="phone" [value]="advertiser?.whatsapp_number"  class="input_field" formControlName="whatsapp_number" id="phone"/>
-                </div>
-                <div class="checkbox-input">
-                    <label for="" class="label-form mb-1">Sexe</label>
-                    <div class="form-check d-flex gap-3">
-                        <div class="check-item d-flex gap-1">
-                            <input type="radio" class="form-check rounded-circle" formControlName="sex" value="1"  name="sex" id="H" [checked]="advertiser?.sex == true">
-                            <label for="H" class="fs-6" >H</label>
-                        </div>
-                        <div class="check-item d-flex gap-1">
-                            <input type="radio"  class="form-check"  name="sex" id="F" formControlName="sex"  value="0"[checked]="advertiser?.sex == false">
-                            <label for="F" class="fs-6" >F</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 offset-md-1">
-                <div class="form_group mb-3">
-                    <label for="country" class="label-form mb-1">Pays</label>
-                    <input  readonly type="text" name="country" [value]="advertiser?.country | getContryByCode"  class="input_field" formControlName="country" id="country"/>
-                </div>
-                <div class="form_group mb-3">
-                    <label for="city" class="label-form mb-1">Ville</label>
-                    <input  readonly type="text" name="city" [value]="advertiser?.city"  class="input_field" formControlName="city" id="city"/>
-                </div>
-                <div class="form_group mb-3">
-                    <label for="neighborhood" class="label-form mb-1">Quartier</label>
-                    <input  readonly type="text" name="neighborhood" [value]="advertiser?.neighborhood" class="input_field" formControlName="neighborhood"  id="neighborhood">
-                </div>
-                <div class="form_group mb-3">
-                    <label for="site_url" class="label-form mb-1">Lien du site web</label>
-                    <input  readonly type="text" name="site_url" [value]="advertiser?.site_url"  class="input_field" formControlName="site_url" id="site_url">
-                </div>
-                <!-- <div class="form_group mb-3">
-                    <label for="cni" class="label-form mb-1">Numero CNI</label>
-                    <input  readonly type="text" name="cni" class="input_field" [(ngModel)]="user.cni" #cni="ngModel" id="cni">
-                    <div *ngIf="cni.invalid && cni.touched" class="text-danger">
-                        Veuillez saisir votre numéro d'identifiant
-                    </div>
-                </div> -->
-            </div>
+<div class="show-wrapper">
 
-            <div class="col-md-3  text-center offset-md-1">
-                <div *ngIf="advertiser?.picture == null; else loadPicture">
-                    <i class="fa-solid fa-user profil-user"></i>
-                </div>
-                <ng-template #loadPicture>
-                    <div class=" row d-flex justify-content-center">
-                        <div class="load-image" style="background-image: url('{{advertiser?.picture}}');"></div>
+    <!-- Alertes -->
+    <div class="alert-zone" *ngIf="display_message">
+        <app-alert (timeOut)="closeAlert($event)" [message]="message_alert"></app-alert>
+    </div>
+    <app-alert-confirm *ngIf="showAlert" (confirmAction)="disabledAdvertiser($event, advertiser)"></app-alert-confirm>
+
+    <div class="show-layout" *ngIf="advertiser; else loading">
+
+        <!-- ── Colonne gauche : carte profil ──────────────── -->
+        <aside class="profile-card">
+            <div class="profile-avatar-wrap">
+                <ng-container *ngIf="advertiser?.picture; else defaultAvatar">
+                    <div class="profile-avatar profile-avatar-img"
+                         [style.backgroundImage]="'url(' + advertiser.picture + ')'">
+                    </div>
+                </ng-container>
+                <ng-template #defaultAvatar>
+                    <div class="profile-avatar profile-avatar-initials"
+                         [style.background]="avatarBg(advertiser?.username)">
+                        {{initials(advertiser?.username)}}
                     </div>
                 </ng-template>
             </div>
-        </div>
-        <!-- <div class="row mt-5">
-            <div class="col-md-12">
-                <div *ngIf="advertiser?.status == 1"  class="bg-danger text-white px-2 py-1 rounded" (click)="handleConfirm(true)">Bloquer</div>
-                <div *ngIf="advertiser?.status == 0"  class="bg-secondary text-white px-2 py-1 rounded" (click)="handleConfirm(true)">Débloquer</div>
-                <app-alert-confirm *ngIf="showAlert" (confirmAction)="disabledAdvertiser($event , advertiser)"></app-alert-confirm>
-            </div>
-        </div> -->
-        <app-alert-confirm *ngIf="showAlert" (confirmAction)="disabledAdvertiser($event , advertiser)"></app-alert-confirm>
 
-        <div class="row mx-0 gap-4 pb-5 align-items-center justify-content-center fixe_btn_actions">
-            <div *ngIf="advertiser?.status == 1"  class="bg-danger text-white w-auto px-2 py-1 rounded btn-lg btn" (click)="handleConfirm(true)">Bloquer</div>
-            <div *ngIf="advertiser?.status == 0"  class="bg-secondary text-white px-2 w-auto py-1 rounded btn-lg btn" (click)="handleConfirm(true)">Débloquer</div>
+            <h2 class="profile-name">{{advertiser?.username}}</h2>
+            <p class="profile-email">{{advertiser?.email}}</p>
+
+            <div class="profile-status-row">
+                <span class="status-chip" [class.chip-active]="advertiser?.status == 1" [class.chip-blocked]="advertiser?.status == 0">
+                    <i class="fa-solid" [class.fa-circle-check]="advertiser?.status == 1" [class.fa-ban]="advertiser?.status == 0"></i>
+                    {{advertiser?.status == 1 ? ('admin.user-show.status.active' | translate) : ('admin.user-show.status.blocked' | translate)}}
+                </span>
+            </div>
+
+            <div class="profile-meta">
+                <div class="meta-item" *ngIf="advertiser?.country">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>{{advertiser?.country | getContryByCode}}<ng-container *ngIf="advertiser?.city">, {{advertiser?.city}}</ng-container></span>
+                </div>
+                <div class="meta-item" *ngIf="advertiser?.whatsapp_number">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>{{advertiser?.whatsapp_number}}</span>
+                </div>
+                <div class="meta-item" *ngIf="advertiser?.site_url">
+                    <i class="fa-solid fa-globe"></i>
+                    <span class="truncate">{{advertiser?.site_url}}</span>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="profile-actions">
+                <button class="action-btn btn-block-user"
+                        *ngIf="advertiser?.status == 1"
+                        (click)="handleConfirm(true)">
+                    <i class="fa-solid fa-lock"></i> {{'admin.user-show.action.block' | translate}}
+                </button>
+                <button class="action-btn btn-unblock-user"
+                        *ngIf="advertiser?.status == 0"
+                        (click)="handleConfirm(true)">
+                    <i class="fa-solid fa-lock-open"></i> {{'admin.user-show.action.unblock' | translate}}
+                </button>
+            </div>
+        </aside>
+
+        <!-- ── Colonne droite : informations ──────────────── -->
+        <main class="profile-details">
+
+            <div class="details-section">
+                <h3 class="section-label">
+                    <i class="fa-solid fa-user-circle"></i> {{'admin.user-show.section.personal-info' | translate}}
+                </h3>
+                <div class="info-grid">
+                    <div class="info-field">
+                        <span class="info-label">{{'admin.user-show.field.last-name' | translate}}</span>
+                        <span class="info-value">{{advertiser?.last_name || '—'}}</span>
+                    </div>
+                    <div class="info-field">
+                        <span class="info-label">{{'admin.user-show.field.first-name' | translate}}</span>
+                        <span class="info-value">{{advertiser?.first_name || '—'}}</span>
+                    </div>
+                    <div class="info-field">
+                        <span class="info-label">{{'admin.user-show.field.username' | translate}}</span>
+                        <span class="info-value fw-bold">{{advertiser?.username || '—'}}</span>
+                    </div>
+                    <div class="info-field">
+                        <span class="info-label">{{'admin.user-show.field.gender' | translate}}</span>
+                        <span class="info-value">
+                            <span class="gender-chip" *ngIf="advertiser?.sex == 1">
+                                <i class="fa-solid fa-mars"></i> {{'admin.user-show.gender.male' | translate}}
+                            </span>
+                            <span class="gender-chip gender-f" *ngIf="advertiser?.sex == 0">
+                                <i class="fa-solid fa-venus"></i> {{'admin.user-show.gender.female' | translate}}
+                            </span>
+                            <span *ngIf="advertiser?.sex == null">—</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="details-section">
+                <h3 class="section-label">
+                    <i class="fa-solid fa-envelope"></i> {{'admin.user-show.section.contact' | translate}}
+                </h3>
+                <div class="info-grid">
+                    <div class="info-field info-field-wide">
+                        <span class="info-label">{{'admin.user-show.field.email' | translate}}</span>
+                        <span class="info-value">{{advertiser?.email || '—'}}</span>
+                    </div>
+                    <div class="info-field">
+                        <span class="info-label">{{'admin.user-show.field.phone' | translate}}</span>
+                        <span class="info-value">{{advertiser?.number || '—'}}</span>
+                    </div>
+                    <div class="info-field">
+                        <span class="info-label">{{'admin.user-show.field.whatsapp' | translate}}</span>
+                        <span class="info-value">{{advertiser?.whatsapp_number || '—'}}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="details-section">
+                <h3 class="section-label">
+                    <i class="fa-solid fa-map-location-dot"></i> {{'admin.user-show.section.location' | translate}}
+                </h3>
+                <div class="info-grid">
+                    <div class="info-field">
+                        <span class="info-label">{{'admin.user-show.field.country' | translate}}</span>
+                        <span class="info-value">{{(advertiser?.country | getContryByCode) || '—'}}</span>
+                    </div>
+                    <div class="info-field">
+                        <span class="info-label">{{'admin.user-show.field.city' | translate}}</span>
+                        <span class="info-value">{{advertiser?.city || '—'}}</span>
+                    </div>
+                    <div class="info-field info-field-wide">
+                        <span class="info-label">{{'admin.user-show.field.neighborhood' | translate}}</span>
+                        <span class="info-value">{{advertiser?.neighborhood || '—'}}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="details-section" *ngIf="advertiser?.site_url">
+                <h3 class="section-label">
+                    <i class="fa-solid fa-globe"></i> {{'admin.user-show.section.online-presence' | translate}}
+                </h3>
+                <div class="info-grid">
+                    <div class="info-field info-field-wide">
+                        <span class="info-label">{{'admin.user-show.field.website' | translate}}</span>
+                        <span class="info-value">
+                            <a [href]="advertiser.site_url" target="_blank" class="site-link">
+                                {{advertiser.site_url}} <i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i>
+                            </a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <ng-template #loading>
+        <div class="loading-center">
+            <app-loader size="lg" [text]="'admin.user-show.loading' | translate"></app-loader>
         </div>
-    </form>
+    </ng-template>
+
 </div>
