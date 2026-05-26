@@ -21,7 +21,7 @@ export class AuthenticatorService {
     }
   }
 
-  signin(user: any): Observable<boolean> {
+  signin(user: any): Observable<{ success: boolean; reason?: string }> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Accept': 'application/json'
@@ -30,13 +30,12 @@ export class AuthenticatorService {
     return this.http.post<any>(environment.apiUrl + 'login', user, { headers }).pipe(
       tap((result) => {
         if (result.success) {
-          // Token is stored in HttpOnly cookie by the backend — not in localStorage
           this.localStorage.setItem('user', result.data);
           this.authUser = true;
           this.router.navigate(['/admin']);
         }
       }),
-      map((result) => result.success === true)
+      map((result) => ({ success: result.success === true, reason: result.reason }))
     );
   }
 
@@ -61,5 +60,21 @@ export class AuthenticatorService {
   isLoggedIn(): any {
     const user = this.localStorage.getItem('user');
     return user ? user : false;
+  }
+
+  forgotPassword(email: string): Observable<{ success: boolean; message: string }> {
+    return this.http.post<any>(environment.apiUrl + 'forget-password', { email });
+  }
+
+  verifyResetToken(token: string, email: string): Observable<{ success: boolean }> {
+    return this.http.get<any>(`${environment.apiUrl}reset-password/${token}/${email}`);
+  }
+
+  resetPassword(payload: { token: string; email: string; password: string; password_confirmation: string }): Observable<{ success: boolean; message: string }> {
+    return this.http.post<any>(environment.apiUrl + 'reset-password', payload);
+  }
+
+  verifyEmail(token: string, email: string): Observable<{ success: boolean; already_verified?: boolean; reason?: string }> {
+    return this.http.get<any>(`${environment.apiUrl}verify-email/${token}/${email}`);
   }
 }

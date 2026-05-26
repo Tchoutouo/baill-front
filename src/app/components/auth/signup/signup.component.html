@@ -1,158 +1,343 @@
-<div class="signup-content">
-    <div class="alert-message">
-        <app-alert *ngIf="display_message" (timeOut) ="closeAlert($event)" [message] = "message_alert"></app-alert>
+<!-- ── Écran succès (après inscription) ────────────────────────────────────── -->
+<div class="auth-page" *ngIf="isSuccess">
+  <div class="auth-panel auth-panel--left" aria-hidden="true">
+    <div class="panel-brand">
+      <img src="../../../../assets/baill-logo.ico" class="panel-logo" alt="">
+      <span class="panel-site-name">{{ siteName }}</span>
     </div>
-    <div class="content">
-        <div class="row signup ">
-            <div class="col-md-8 content-left">
-                <form action="" method="post" [formGroup]="signupForm">
-                    <div class="row">
-                        <div class="title text-center">
-                            <h2>{{'user.signup.title'|translate}}</h2>
-                            <p>{{'user.signup.text-account'|translate}}, <a class="" [routerLink]="['/signin']">{{'user.signup.login-text'|translate}}</a></p>
-                        </div>
-                    </div>
-                    <div class="row tab">
-                        <div class="col-md-6 tab_1">
-                            <div class="form-group">
-                                <label for="username">{{'user.signup.username'|translate}}</label> <span>*</span>
-                                <input id="username" class="form-control" type="text" [formControl]="username" name="username">
-                            </div>
-                            <div class="error" *ngIf="username.dirty">
-                                <p *ngIf="username.hasError('required')">
-                                    {{'user.signup.message.error.username'|translate}}
-                                </p>
-                            </div>
-                            <div class="form-group">
-                                <label for="name">{{'user.signup.name'|translate}}</label><span>*</span>
-                                <input id="name" class="form-control" type="text" [formControl]="last_name" name="last_name">
-                            </div>
-                            <div class="error" *ngIf="last_name.dirty">
-                                <p *ngIf="last_name.hasError('required')">
-                                    {{'user.signup.message.error.name'|translate}}
-                                </p>
-                            </div>
-                            <div class="form-group">
-                                <label for="first_name">{{'user.signup.first-name'|translate}}</label><span>*</span>
-                                <input id="first_name" class="form-control" type="text" [formControl]="first_name" name="first_name">
-                            </div>
-                            <div class="error" *ngIf="first_name.dirty">
-                                <p *ngIf="last_name.hasError('required')">
-                                    {{'user.signup.message.error.first-name'|translate}}
-                                </p>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">{{'user.signup.email'|translate}}</label><span>*</span>
-                                <input id="email" class="form-control" type="email" [formControl]="email" name="email">
-                            </div>
-                            <div class="error" *ngIf="email.dirty && !email.valid">
-                                <p *ngIf="email.hasError('required')">
-                                    {{'user.signup.message.error.email-1'|translate}}
-                                </p>
-                                <p *ngIf="!email.hasError('required')">
-                                    {{'user.signup.message.error.email-2'|translate}}
-                                </p>
-                            </div>
-                            <div class="form-group">
-                                <label for="phone">{{'user.signup.whatsapp-number'|translate}}</label><span>*</span>
-                                <div class="d-flex justify-content-center">
-                                    <input type="text" [value]="'+'+phoneCode" disabled style="width: 15%; border-top-right-radius: 0; border-bottom-right-radius: 0; padding: 0px !important;" class="form-control" readonly>
-                                    <input id="phone" class="form-control" type="number" [formControl]="whatsapp_number" name="whatsapp_number" style="width: 85%; border-top-left-radius: 0; border-bottom-left-radius: 0;">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 tab_2">
-                            <div class="form-group">
-                                <label for="country">{{'user.signup.country'|translate}}</label><span>*</span>
-                                <select id="country" [(ngModel)]="selectedCountry" (change)="onCountryChange($event)" [formControl]="country" name="country" class="form-control" required="required">
-                                    <option *ngFor="let country of countries" [value]="country.isoCode">{{ country.name }}</option>
-                                </select>
-                            </div>
-                            <div class="error" *ngIf="country.dirty">
-                                <p *ngIf="country.hasError('required')">
-                                    {{'user.signup.message.error.country'|translate}}
-                                </p>
-                            </div>
-                            <div class="form-group">
-                                <label for="city">{{'user.signup.city'|translate}}</label>
-                                <select [(ngModel)]="selectedCity" [formControl]="city" name="city" id="city" class="form-control" required="required">
-                                    <option *ngFor="let city of cities" [value]="city.name">
-                                        {{ city.name }}
-                                    </option>
-                                </select>
-                            </div>
-                            <div class="error" *ngIf="city.dirty">
-                                <p *ngIf="city.hasError('required')">
-                                    {{'user.signup.message.error.city'|translate}}
-                                </p>
-                            </div>
-                            <div class="form-group">
-                                <label for="neighborhood">{{'user.signup.neighborhood'|translate}}</label>
-                                <input id="neighborhood" class="form-control" type="text" [formControl]="neighborhood" name="neighborhood">
-                                
-                            </div>
-                            <div class="error" *ngIf="neighborhood.dirty">
-                                <p *ngIf="city.hasError('required')">
-                                    {{'user.signup.message.error.neighborhood'|translate}}
-                                </p>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="password">{{'user.signup.password'|translate}}</label><span>*</span>
-                                <input id="password" class="form-control" type="password" [formControl]="password" formControlName="password"name="password">
-                            </div>
-                            <div class="error" *ngIf="password.dirty && !password.valid">
-                                <p *ngIf="password.hasError('required')">
-                                    {{'user.signup.message.error.password'|translate}}
-                                </p>
-                                
-                                <p *ngIf="password.hasError('minlength')">
-                                    {{'user.signup.message.error.password-1'|translate}}
-                                </p>
-                            </div>
-                            <div class="form-group">
-                                <label for="confimpassword">{{'user.signup.confirm-password'|translate}}</label><span>*</span>
-                                <input id="confimpassword" class="form-control" type="password" [formControl]="passwordConfirm" formControlName="passwordConfirm" name="passwordConfirm">
-                            </div>
-                            <div class="error" *ngIf="passwordConfirm.dirty && !passwordConfirm.valid">
-                                <p *ngIf="passwordConfirm.hasError('required')">
-                                    {{'user.signup.message.error.confirm-password'|translate}}
-                                </p>
-                                <p *ngIf="signupForm.errors?.['passwordsDoNotMatch'] && passwordConfirm?.touched">
-                                    {{'user.signup.message.error.confirm-password-1'|translate}}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row signup-button mb-3">
-                        <div class="col-12">
-                            <button type="submit" [disabled]="!this.signupForm.valid" (click)="handleSubmit()" class=" text-center d-flex justify-content-center align-items-center m-auto">
-                                <p class="m-0">{{'user.signup.login-text'|translate}}</p>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="col-md-4 content-right">
-                <div class="row label-site">
-                    <div class="col-12 d-flex justify-content-end">
-                        <a href="#" class="navbar-brand relative d-flex align-items-center">
-                            <img class="brand-logo mx-0" src="../../../../assets/baill-logo.ico" alt="">
-                            <span class="site_name">{{siteName}}</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="row d-flex justify-content-center signup-text">
-                    <div class="col-md-12">
-                        <P class="text-end signup-text-right">{{'user.signup.text-line-1'|translate}} <br> {{'user.signup.text-line-2'|translate}} <br>{{'user.signup.text-line-3'|translate}}</P>
-                    </div>
-                </div>
-                <div class="row d-flex justify-content-start signup-image-content">
-                    <div class="col-md-12 signup-image">
-                        <img class="image mx-0" src="../../../../assets/images/image-signup.png" alt="">
-                    </div>
-                </div>
-            </div>
+    <p class="panel-tagline">{{ 'user.signup.panel-tagline' | translate }}</p>
+    <div class="panel-circles">
+      <div class="circle circle--lg"></div>
+      <div class="circle circle--md"></div>
+      <div class="circle circle--sm"></div>
+    </div>
+  </div>
+  <div class="auth-panel auth-panel--right">
+    <div class="auth-card">
+      <div class="card-brand-mobile">
+        <img src="../../../../assets/baill-logo.ico" class="card-logo-mobile" alt="">
+        <span class="card-site-name-mobile">{{ siteName }}</span>
+      </div>
+      <div class="success-state">
+        <div class="success-icon"><i class="fa-solid fa-envelope-circle-check"></i></div>
+        <h1 class="card-title">{{ 'user.signup.success-title' | translate }}</h1>
+        <p class="card-subtitle">{{ 'user.signup.success-message' | translate }}</p>
+        <p class="success-email">{{ registeredEmail }}</p>
+        <a [routerLink]="['/signin']" class="btn-submit-link">
+          {{ 'user.signup.success-go-signin' | translate }}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Formulaire d'inscription ────────────────────────────────────────────── -->
+<div class="auth-page" *ngIf="!isSuccess">
+
+  <!-- Panneau gauche — illustration (masqué sur mobile) -->
+  <div class="auth-panel auth-panel--left" aria-hidden="true">
+    <div class="panel-brand">
+      <img src="../../../../assets/baill-logo.ico" class="panel-logo" alt="">
+      <span class="panel-site-name">{{ siteName }}</span>
+    </div>
+    <p class="panel-tagline">{{ 'user.signup.panel-tagline' | translate }}</p>
+    <div class="panel-circles">
+      <div class="circle circle--lg"></div>
+      <div class="circle circle--md"></div>
+      <div class="circle circle--sm"></div>
+    </div>
+  </div>
+
+  <!-- Panneau droit — formulaire -->
+  <div class="auth-panel auth-panel--right">
+    <div class="auth-card">
+
+      <!-- Logo mobile -->
+      <div class="card-brand-mobile">
+        <img src="../../../../assets/baill-logo.ico" class="card-logo-mobile" alt="">
+        <span class="card-site-name-mobile">{{ siteName }}</span>
+      </div>
+
+      <h1 class="card-title">{{ 'user.signup.title' | translate }}</h1>
+      <p class="card-subtitle">
+        {{ 'user.signup.text-account' | translate }}
+        <a [routerLink]="['/signin']">{{ 'user.signup.login-text' | translate }}</a>
+      </p>
+
+      <!-- Indicateur d'étapes -->
+      <div class="step-indicator">
+        <div
+          *ngFor="let step of steps; let i = index"
+          class="step-item"
+          [class.step-item--active]="i === currentStep"
+          [class.step-item--done]="i < currentStep"
+        >
+          <div class="step-bubble">
+            <i *ngIf="i < currentStep" class="fa-solid fa-check"></i>
+            <span *ngIf="i >= currentStep">{{ i + 1 }}</span>
+          </div>
+          <span class="step-label">{{ 'user.signup.step.' + step | translate }}</span>
         </div>
+        <div class="step-line">
+          <div class="step-line-fill" [style.width.%]="progressPercent"></div>
+        </div>
+      </div>
+
+      <form [formGroup]="signupForm" novalidate>
+
+        <!-- ── Étape 1 : Identité ──────────────────────────────────────────── -->
+        <div *ngIf="currentStep === 0" class="step-panel">
+
+          <div class="field-group">
+            <label class="field-label" for="username">{{ 'user.signup.username' | translate }}</label>
+            <input
+              id="username"
+              type="text"
+              formControlName="username"
+              class="field-input"
+              [class.field-input--error]="showErrors(username)"
+              autocomplete="username"
+              autocapitalize="none"
+            >
+            <span class="field-error" *ngIf="showErrors(username) && username.hasError('required')">
+              {{ 'user.signup.message.error.username' | translate }}
+            </span>
+            <span class="field-error" *ngIf="showErrors(username) && username.hasError('minlength')">
+              {{ 'user.signup.message.error.username-length' | translate }}
+            </span>
+          </div>
+
+          <div class="field-row">
+            <div class="field-group">
+              <label class="field-label" for="last_name">{{ 'user.signup.name' | translate }}</label>
+              <input
+                id="last_name"
+                type="text"
+                formControlName="last_name"
+                class="field-input"
+                [class.field-input--error]="showErrors(last_name)"
+                autocomplete="family-name"
+              >
+              <span class="field-error" *ngIf="showErrors(last_name)">
+                {{ 'user.signup.message.error.name' | translate }}
+              </span>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="first_name">{{ 'user.signup.first-name' | translate }}</label>
+              <input
+                id="first_name"
+                type="text"
+                formControlName="first_name"
+                class="field-input"
+                [class.field-input--error]="showErrors(first_name)"
+                autocomplete="given-name"
+              >
+              <span class="field-error" *ngIf="showErrors(first_name)">
+                {{ 'user.signup.message.error.first-name' | translate }}
+              </span>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="email">{{ 'user.signup.email' | translate }}</label>
+            <input
+              id="email"
+              type="email"
+              formControlName="email"
+              class="field-input"
+              [class.field-input--error]="showErrors(email)"
+              autocomplete="email"
+              inputmode="email"
+            >
+            <span class="field-error" *ngIf="showErrors(email) && email.hasError('required')">
+              {{ 'user.signup.message.error.email-1' | translate }}
+            </span>
+            <span class="field-error" *ngIf="showErrors(email) && email.hasError('email')">
+              {{ 'user.signup.message.error.email-2' | translate }}
+            </span>
+          </div>
+
+        </div>
+
+        <!-- ── Étape 2 : Localisation ─────────────────────────────────────── -->
+        <div *ngIf="currentStep === 1" class="step-panel">
+
+          <div class="field-group">
+            <label class="field-label" for="country">{{ 'user.signup.country' | translate }}</label>
+            <select
+              id="country"
+              formControlName="country"
+              class="field-input field-select"
+              [class.field-input--error]="showErrors(country)"
+              (change)="onCountryChange($event)"
+            >
+              <option *ngFor="let c of countries" [value]="c.isoCode">{{ c.name }}</option>
+            </select>
+            <span class="field-error" *ngIf="showErrors(country)">
+              {{ 'user.signup.message.error.country' | translate }}
+            </span>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="city">{{ 'user.signup.city' | translate }}</label>
+            <select
+              id="city"
+              formControlName="city"
+              class="field-input field-select"
+              [class.field-input--error]="showErrors(city)"
+            >
+              <option value="">{{ 'user.signup.city-placeholder' | translate }}</option>
+              <option *ngFor="let c of cities" [value]="c.name">{{ c.name }}</option>
+            </select>
+            <span class="field-error" *ngIf="showErrors(city)">
+              {{ 'user.signup.message.error.city' | translate }}
+            </span>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="neighborhood">{{ 'user.signup.neighborhood' | translate }}</label>
+            <input
+              id="neighborhood"
+              type="text"
+              formControlName="neighborhood"
+              class="field-input"
+              [class.field-input--error]="showErrors(neighborhood)"
+            >
+            <span class="field-error" *ngIf="showErrors(neighborhood)">
+              {{ 'user.signup.message.error.neighborhood' | translate }}
+            </span>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="whatsapp_number">{{ 'user.signup.whatsapp-number' | translate }}</label>
+            <div class="field-phone-wrap">
+              <span class="phone-prefix">+{{ phoneCode }}</span>
+              <input
+                id="whatsapp_number"
+                type="tel"
+                formControlName="whatsapp_number"
+                class="field-input field-input--phone"
+                [class.field-input--error]="showErrors(whatsapp_number)"
+                inputmode="numeric"
+                autocomplete="tel-national"
+              >
+            </div>
+            <span class="field-error" *ngIf="showErrors(whatsapp_number) && whatsapp_number.hasError('required')">
+              {{ 'user.signup.message.error.whatsapp-required' | translate }}
+            </span>
+            <span class="field-error" *ngIf="showErrors(whatsapp_number) && whatsapp_number.hasError('pattern')">
+              {{ 'user.signup.message.error.whatsapp-pattern' | translate }}
+            </span>
+          </div>
+
+        </div>
+
+        <!-- ── Étape 3 : Sécurité ─────────────────────────────────────────── -->
+        <div *ngIf="currentStep === 2" class="step-panel">
+
+          <div class="field-group">
+            <label class="field-label" for="password">{{ 'user.signup.password' | translate }}</label>
+            <div class="field-password-wrap">
+              <input
+                id="password"
+                [type]="showPassword ? 'text' : 'password'"
+                formControlName="password"
+                class="field-input"
+                [class.field-input--error]="showErrors(password)"
+                autocomplete="new-password"
+              >
+              <button
+                type="button"
+                class="password-toggle"
+                (click)="showPassword = !showPassword"
+                [attr.aria-label]="showPassword ? 'Masquer' : 'Afficher'"
+              >
+                <i class="fa-solid" [class.fa-eye]="!showPassword" [class.fa-eye-slash]="showPassword"></i>
+              </button>
+            </div>
+            <span class="field-error" *ngIf="showErrors(password) && password.hasError('required')">
+              {{ 'user.signup.message.error.password' | translate }}
+            </span>
+            <span class="field-error" *ngIf="showErrors(password) && password.hasError('minlength')">
+              {{ 'user.signup.message.error.password-1' | translate }}
+            </span>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="passwordConfirm">{{ 'user.signup.confirm-password' | translate }}</label>
+            <div class="field-password-wrap">
+              <input
+                id="passwordConfirm"
+                [type]="showPasswordConfirm ? 'text' : 'password'"
+                formControlName="passwordConfirm"
+                class="field-input"
+                [class.field-input--error]="showErrors(passwordConfirm) || (isStepSubmitted && signupForm.errors?.['passwordsDoNotMatch'])"
+                autocomplete="new-password"
+              >
+              <button
+                type="button"
+                class="password-toggle"
+                (click)="showPasswordConfirm = !showPasswordConfirm"
+                [attr.aria-label]="showPasswordConfirm ? 'Masquer' : 'Afficher'"
+              >
+                <i class="fa-solid" [class.fa-eye]="!showPasswordConfirm" [class.fa-eye-slash]="showPasswordConfirm"></i>
+              </button>
+            </div>
+            <span class="field-error" *ngIf="showErrors(passwordConfirm) && passwordConfirm.hasError('required')">
+              {{ 'user.signup.message.error.confirm-password' | translate }}
+            </span>
+            <span class="field-error" *ngIf="isStepSubmitted && signupForm.errors?.['passwordsDoNotMatch']">
+              {{ 'user.signup.message.error.confirm-password-1' | translate }}
+            </span>
+          </div>
+
+          <!-- Erreur serveur -->
+          <div class="server-error" *ngIf="serverError" role="alert">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            {{ serverError | translate }}
+          </div>
+
+        </div>
+
+        <!-- ── Navigation ─────────────────────────────────────────────────── -->
+        <div class="step-nav">
+          <button
+            type="button"
+            class="btn-back"
+            *ngIf="currentStep > 0"
+            (click)="prevStep()"
+          >
+            <i class="fa-solid fa-arrow-left"></i>
+            {{ 'user.signup.btn-back' | translate }}
+          </button>
+
+          <button
+            type="button"
+            class="btn-next"
+            *ngIf="currentStep < totalSteps - 1"
+            (click)="nextStep()"
+          >
+            {{ 'user.signup.btn-next' | translate }}
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+
+          <button
+            type="button"
+            class="btn-submit"
+            *ngIf="currentStep === totalSteps - 1"
+            [disabled]="isLoading"
+            (click)="handleSubmit()"
+          >
+            <span *ngIf="!isLoading">{{ 'user.signup.btn-submit' | translate }}</span>
+            <span *ngIf="isLoading" class="btn-spinner">
+              <i class="fa-solid fa-circle-notch fa-spin"></i>
+            </span>
+          </button>
+        </div>
+
+      </form>
     </div>
+  </div>
+
 </div>

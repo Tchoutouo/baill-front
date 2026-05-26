@@ -1,0 +1,27 @@
+<article class="ac-card">
+
+  <div class="ac-photo">
+    <img *ngIf="photoUrl" [src]="photoUrl" [alt]="annonce.title" loading="lazy" />
+    <div *ngIf="!photoUrl" class="ac-photo-placeholder">
+      <i class="fa-solid fa-image"></i>
+    </div>
+    <span *ngIf="annonce.is_forward" class="ac-badge-forward">Vedette</span>
+  </div>
+
+  <div class="ac-body">
+    <span class="ac-category" *ngIf="primaryCategory">{{ primaryCategory }}</span>
+    <p class="ac-title">{{ annonce.title }}</p>
+    <p class="ac-price">{{ formattedPrice }}</p>
+    <p class="ac-location" *ngIf="annonce.location">
+      <i class="fa-solid fa-location-dot"></i>
+      {{ annonce.location }}
+    </p>
+  </div>
+
+  <a class="ac-link"
+     [routerLink]="['/product-details', annonce.id]"
+     title="Voir l'annonce {{ annonce.title }}">
+    <i class="fa-solid fa-arrow-right"></i>
+  </a>
+
+</article>

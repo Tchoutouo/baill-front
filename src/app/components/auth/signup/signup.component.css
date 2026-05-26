@@ -1,234 +1,551 @@
-.signup-content{
-    background-image: url('../../../../assets/images/signup-background.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+/* ── Layout page ─────────────────────────────────────────────────────────── */
+.auth-page {
+  display: flex;
+  min-height: 100vh;
 }
 
-.signup{
-    width: 1177px;
-    height: 710px;
-    border-radius: var(--main-radius-value-30);
-    margin: auto;
-    box-shadow: 0px 4px 4px 0px #00000040;
-    background-color: #2323236E;
-    
+/* ── Panneau gauche ──────────────────────────────────────────────────────── */
+.auth-panel--left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem 4rem;
+  background: radial-gradient(ellipse at 36% 48%, var(--main-color-green-15) 0%, var(--main-color-white) 85%);
+  position: relative;
+  overflow: hidden;
 }
 
-.content{
-    padding-top: 100px;
-    padding-bottom: 100px;
-
+.panel-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 2rem;
 }
 
-.content-left{
-    background-color: white;
-    border-radius: var(--main-radius-value-30);
-
+.panel-logo {
+  width: 72px;
+  height: 72px;
 }
 
-.title {
-    margin-top: 30px;
-    margin-bottom: 10px;
+.panel-site-name {
+  font-family: var(--main-font-Bree-Serif);
+  font-size: var(--main-h1-font-size);
+  color: var(--main-color);
+  line-height: 1;
 }
 
-.title p{
-    font-family: var(--main-font-Quicksand);
-    font-size: var(--main-h4-font-size);
-    font-weight: var(--main-md-font-weiht);
-    line-height: var(--main-lg-line-height);
+.panel-tagline {
+  font-family: var(--main-font-Quicksand);
+  font-size: var(--main-h3-font-size);
+  font-weight: var(--main-md-font-weiht);
+  color: var(--main-color-blackgreen);
+  line-height: var(--main-lg-line-height);
+  max-width: 380px;
+  margin-bottom: 2.5rem;
 }
 
-.title p a{
-    font-weight: var(--main-md-font-weiht);
-    text-decoration: none;
-    color: var(--main-color);
+/* Cercles décoratifs */
+.panel-circles {
+  position: relative;
+  height: 160px;
 }
 
-.title h2{
-    color: var(--main-color);
-    font-size: var(--main-h2-font-size);
-    font-family: var(--main-font-Quicksand);
-    font-weight: var(--main-xl-font-weiht);
-    line-height: var(--main-xxl-line-height);
+.circle {
+  border-radius: var(--main-radius-value-50);
+  position: absolute;
 }
 
-form .form-group{
-    margin-bottom: 10px;
+.circle--lg {
+  width: 134px;
+  height: 134px;
+  border: 10px solid var(--main-color-grenn-opa-53);
+  left: 0;
+  top: 0;
 }
 
-form .form-group label{
-    font-size: var(--main-h5-font-size);
-    font-family: var(--main-font-Quicksand);
-    font-weight: var(--main-xl-font-weiht);
-    line-height: var(--main-md-2-line-height);
-    color: var(--main-color-blackgreen);
-    margin: 10px 0px;
+.circle--md {
+  width: 65px;
+  height: 65px;
+  background-color: var(--main-color-grenn-opa-53);
+  top: 75%;
+  left: 80%;
 }
 
-form .form-group span{
-    color: red;
+.circle--sm {
+  width: 24px;
+  height: 24px;
+  background-color: var(--main-color-orange);
+  left: 80px;
+  top: 100px;
 }
 
-form .form-group .form-control{
-    background-color: var(--main-color-green-5);
-    width: 306px;
-    height: 43px;
-    border-radius: 6px;
+/* ── Panneau droit ───────────────────────────────────────────────────────── */
+.auth-panel--right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  background-color: var(--main-color-white);
 }
 
-.error p{
-    font-size: 10px;
-    color: red;
-    margin-bottom: 0px;
+/* ── Carte formulaire ───────────────────────────────────────────────────── */
+.auth-card {
+  width: 100%;
+  max-width: 480px;
+  padding: 2.5rem 2rem;
+  border-radius: var(--main-radius-value-30);
+  box-shadow: var(--main-shadow-black);
 }
 
-.signup-button{
-    padding-top: 40px;
-    text-align: center;
+/* Brand mobile */
+.card-brand-mobile {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 1.5rem;
 }
 
-.signup-button div button{
-    width: 256px;
-    height: 50px;
-    border-radius: var(--main-radius-value-30);
-    color: white;
-    background-color: var(--main-color);
-    font-family: var(--main-font-Quicksand);
-    font-size: var(--main-h4-font-size);
-    font-weight: var(--main-sm-font-weiht);
-    line-height: var(--main-md-line-height);
+.card-logo-mobile {
+  width: 48px;
+  height: 48px;
 }
 
-.signup-button div button:hover{
-    background-color: var(--main-color-orange);
-    border-style: hidden;
+.card-site-name-mobile {
+  font-family: var(--main-font-Bree-Serif);
+  font-size: var(--main-h2-font-size);
+  color: var(--main-color);
+  line-height: 1;
 }
 
-.signup-button div button p {
+/* ── Titre / sous-titre ─────────────────────────────────────────────────── */
+.card-title {
+  font-family: var(--main-font-Quicksand);
+  font-size: var(--main-h2-font-size);
+  font-weight: var(--main-xl-font-weiht);
+  color: var(--main-color);
+  text-align: center;
+  margin: 0 0 0.5rem;
+}
+
+.card-subtitle {
+  font-family: var(--main-font-Quicksand);
+  font-size: var(--main-h5-font-size);
+  color: var(--main-color-dark);
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.card-subtitle a {
+  color: var(--main-color);
+  font-weight: var(--main-xl-font-weiht);
+  text-decoration: none;
+}
+
+.card-subtitle a:hover {
+  text-decoration: underline;
+}
+
+/* ── Indicateur d'étapes ────────────────────────────────────────────────── */
+.step-indicator {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.step-line {
+  position: absolute;
+  top: 18px;
+  left: calc(16.67% + 8px);
+  right: calc(16.67% + 8px);
+  height: 3px;
+  background-color: var(--main-color-green-15);
+  border-radius: 2px;
+  z-index: 0;
+}
+
+.step-line-fill {
+  height: 100%;
+  background-color: var(--main-color);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+  max-width: 100%;
+}
+
+.step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  z-index: 1;
+  flex: 1;
+}
+
+.step-bubble {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--main-radius-value-50);
+  border: 2.5px solid var(--main-color-green-15);
+  background-color: var(--main-color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--main-font-Quicksand);
+  font-size: var(--main-h5-font-size);
+  font-weight: var(--main-xl-font-weiht);
+  color: var(--main-color-gray);
+  transition: border-color 0.2s, background-color 0.2s, color 0.2s;
+}
+
+.step-item--active .step-bubble {
+  border-color: var(--main-color);
+  background-color: var(--main-color);
+  color: var(--main-color-white);
+}
+
+.step-item--done .step-bubble {
+  border-color: var(--main-color);
+  background-color: var(--main-color-white);
+  color: var(--main-color);
+}
+
+.step-label {
+  font-family: var(--main-font-Quicksand);
+  font-size: 11px;
+  font-weight: var(--main-md-font-weiht);
+  color: var(--main-color-gray);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.step-item--active .step-label,
+.step-item--done .step-label {
+  color: var(--main-color);
+  font-weight: var(--main-xl-font-weiht);
+}
+
+/* ── Panneaux d'étape ───────────────────────────────────────────────────── */
+.step-panel {
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Champs ─────────────────────────────────────────────────────────────── */
+.field-group {
+  margin-bottom: 1.1rem;
+  flex: 1;
+}
+
+.field-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.field-label {
+  display: block;
+  font-family: var(--main-font-Quicksand);
+  font-size: var(--main-h5-font-size);
+  font-weight: var(--main-xl-font-weiht);
+  color: var(--main-color-blackgreen);
+  margin-bottom: 6px;
+}
+
+.field-input {
+  width: 100%;
+  height: 52px;
+  padding: 0 1rem;
+  background-color: var(--main-color-green-5);
+  border: 1.5px solid transparent;
+  border-radius: var(--main-radius-value-8);
+  font-family: var(--main-font-Quicksand);
+  font-size: var(--main-h5-font-size);
+  color: var(--main-color-dark);
+  transition: border-color 0.2s;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.field-input:focus {
+  border-color: var(--main-color);
+}
+
+.field-input--error {
+  border-color: var(--main-color-red);
+}
+
+/* Sélect */
+.field-select {
+  appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23999' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+}
+
+/* Champ téléphone avec préfixe */
+.field-phone-wrap {
+  display: flex;
+  align-items: center;
+  background-color: var(--main-color-green-5);
+  border: 1.5px solid transparent;
+  border-radius: var(--main-radius-value-8);
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.field-phone-wrap:focus-within {
+  border-color: var(--main-color);
+}
+
+.phone-prefix {
+  padding: 0 0.75rem;
+  font-family: var(--main-font-Quicksand);
+  font-size: var(--main-h5-font-size);
+  font-weight: var(--main-xl-font-weiht);
+  color: var(--main-color);
+  white-space: nowrap;
+  border-right: 1.5px solid var(--main-color-green-15);
+  height: 52px;
+  display: flex;
+  align-items: center;
+}
+
+.field-input--phone {
+  border: none;
+  border-radius: 0;
+  background-color: transparent;
+}
+
+.field-input--phone:focus {
+  border-color: transparent;
+}
+
+/* Champ mot de passe avec bouton œil */
+.field-password-wrap {
+  position: relative;
+}
+
+.field-password-wrap .field-input {
+  padding-right: 3rem;
+}
+
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 0.9rem;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--main-color-gray);
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.password-toggle:hover {
+  color: var(--main-color);
+}
+
+/* Messages d'erreur */
+.field-error {
+  display: block;
+  margin-top: 4px;
+  font-family: var(--main-font-Quicksand);
+  font-size: 12px;
+  color: var(--main-color-red);
+}
+
+/* Erreur serveur */
+.server-error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.75rem 1rem;
+  background-color: var(--main-color-red-10);
+  border-radius: var(--main-radius-value-8);
+  font-family: var(--main-font-Quicksand);
+  font-size: var(--main-h5-font-size);
+  color: var(--main-color-red);
+  margin-top: 1rem;
+}
+
+/* ── Navigation entre étapes ────────────────────────────────────────────── */
+.step-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.75rem;
+  gap: 1rem;
+}
+
+.btn-back {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 52px;
+  padding: 0 1.5rem;
+  border: 1.5px solid var(--main-color-green-15);
+  border-radius: var(--main-radius-value-100);
+  background-color: var(--main-color-white);
+  color: var(--main-color);
+  font-family: var(--main-font-Quicksand);
+  font-size: var(--main-h5-font-size);
+  font-weight: var(--main-xl-font-weiht);
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.btn-back:hover {
+  border-color: var(--main-color);
+  background-color: var(--main-color-green-5);
+}
+
+.btn-next,
+.btn-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 52px;
+  padding: 0 1.5rem;
+  margin-left: auto;
+  border: none;
+  border-radius: var(--main-radius-value-100);
+  background-color: var(--main-color);
+  color: var(--main-color-white);
+  font-family: var(--main-font-Quicksand);
+  font-size: var(--main-h5-font-size);
+  font-weight: var(--main-xl-font-weiht);
+  cursor: pointer;
+  transition: background-color 0.2s, opacity 0.2s;
+  min-width: 140px;
+}
+
+.btn-next:hover,
+.btn-submit:hover:not(:disabled) {
+  background-color: var(--main-color-orange);
+  color: var(--main-color-blackgreen);
+}
+
+.btn-submit:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* Quand il n'y a pas de bouton retour, le bouton suivant prend toute la largeur */
+.step-nav:has(.btn-next:only-child),
+.step-nav:has(.btn-submit:only-child) {
+  justify-content: stretch;
+}
+
+.step-nav:has(.btn-next:only-child) .btn-next,
+.step-nav:has(.btn-submit:only-child) .btn-submit {
+  width: 100%;
+}
+
+.btn-spinner {
+  font-size: 1.2rem;
+}
+
+/* ── Écran succès ───────────────────────────────────────────────────────── */
+.success-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.success-icon {
+  font-size: 3.5rem;
+  color: var(--main-color);
+  margin-bottom: 1.25rem;
+}
+
+.success-email {
+  font-family: var(--main-font-Quicksand);
+  font-size: var(--main-h5-font-size);
+  font-weight: var(--main-xl-font-weiht);
+  color: var(--main-color);
+  background-color: var(--main-color-green-5);
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--main-radius-value-100);
+  margin-bottom: 1.75rem;
+}
+
+.btn-submit-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 52px;
+  border-radius: var(--main-radius-value-100);
+  background-color: var(--main-color);
+  color: var(--main-color-white);
+  font-family: var(--main-font-Quicksand);
+  font-size: var(--main-h4-font-size);
+  font-weight: var(--main-xl-font-weiht);
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.btn-submit-link:hover {
+  background-color: var(--main-color-orange);
+  color: var(--main-color-blackgreen);
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .auth-page {
+    flex-direction: column;
+  }
+
+  .auth-panel--left {
+    display: none;
+  }
+
+  .auth-panel--right {
+    align-items: flex-start;
+    padding: 2rem 1rem;
+    min-height: 100vh;
+  }
+
+  .auth-card {
+    box-shadow: none;
+    padding: 1.5rem 0;
+    max-width: 100%;
+  }
+
+  .card-brand-mobile {
     display: flex;
-    align-items: center;
-    margin-bottom: 0px;
+  }
+
+  .field-row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .step-label {
+    font-size: 10px;
+  }
 }
 
-.tab{
-    padding: 0 55px;
-}
+@media (min-width: 768px) and (max-width: 1024px) {
+  .auth-panel--left {
+    padding: 2rem;
+  }
 
-
-.site_name{
-    font-family: var(--main-font-Bree-Serif);
-    font-size: 48px;
-    font-weight: var(--main-md-font-weiht);
-    line-height: var(--main-3xl-line-height);
-    color: var(--main-color);
-    user-select: none;
-}
-
-.brand-logo{
-    height: 60px;
-    width: 60px;
-}
-
-.signup-text-right{
-    font-family: var(--main-font-Quicksand);
-    font-size: var(--main-h3-font-size);
-    font-weight: var(--main-md-font-weiht);
-    line-height: var(--main-lg-line-height);
-    color: var(--main-color-white);
-}
-
-.signup-image img{
-    width: 364px;
-    height: 265px;
-    position: relative;
-    right: 45%;
-}
-
-.label-site{
-    padding-top: 87px;
-}
-
-.signup-text, .signup-image-content{
-    padding-top: 61px;
-}
-
-.content-right{
-    padding-right: 55px;
-}
-
-.alert-message{
-    z-index: 100;
-}
-
-/* mobile */
-
-@media screen and (max-width : 767px) {
-    .signup{
-        width: auto;
-        height: auto;
-        margin: auto 10px;
-        flex-direction: column-reverse;
-    }
-
-    .tab{
-        /* padding: 0px 0px 0px 20px; */
-        margin: auto;
-    }
-
-    .tab_1, .tab_2{
-        display: grid;
-        justify-content: center;
-    }
-
-    .signup-button .col-12{
-        padding-bottom: 40px;
-    }
-
-    form .form-group .form-control{
-        width: 290px;
-    }
-
-    .title p{
-        font-size: var(--main-h5-font-size);
-    }
-
-    .signup-button div button{
-        width: 220px;
-    }
-
-    .signup-image img{
-        width: 150px;
-        height: 119px;
-        position: relative;
-        left: 70%;
-        bottom: 20%;
-    }
-
-    .signup-text-right{
-        font-size: var(--main-h4-font-size);
-        color: var(--main-color-white);
-    }
-
-    .label-site{
-        padding-top: 17px;
-    }
-    
-    .signup-text{
-        padding-top:21px;
-    }
-
-    .content{
-        padding-top: 10px;
-    }
-
-    .content-right{
-        padding-right: 25px;
-    }
-
-    .signup-image-content{
-        padding: 0px;
-        height: 30px;
-    }
+  .auth-card {
+    padding: 2rem 1.5rem;
+  }
 }

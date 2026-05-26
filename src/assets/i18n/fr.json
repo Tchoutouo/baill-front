@@ -142,37 +142,49 @@
             }
         },
         "signup": {
+            "panel-tagline": "Rejoignez Bailleurnet, la plateforme de location à portée de main.",
             "password": "Mot de passe",
-            "confirm-password": "Confirmer votre mot de passe",
+            "confirm-password": "Confirmer le mot de passe",
             "username": "Nom d'utilisateur",
             "name": "Nom(s)",
             "first-name": "Prénom(s)",
             "country": "Pays",
             "city": "Ville",
+            "city-placeholder": "Sélectionner une ville",
             "neighborhood": "Quartier",
             "email": "E-mail",
             "whatsapp-number": "Téléphone (WhatsApp)",
-            "title": "S'inscrire",
-            "text-account": "Vous avez déjà un compte",
+            "title": "Créer un compte",
+            "text-account": "Vous avez déjà un compte ?",
             "login-text": "Se connecter",
-            "text-line-1": "Je rejoins Bailleurnet",
-            "text-line-2": "ma boussole de poche",
-            "text-line-3": "",
+            "btn-back": "Retour",
+            "btn-next": "Suivant",
+            "btn-submit": "S'inscrire",
+            "success-title": "Vérifiez vos emails !",
+            "success-message": "Votre compte a été créé. Un lien d'activation a été envoyé à :",
+            "success-go-signin": "Aller à la connexion",
+            "step": {
+                "identity": "Identité",
+                "location": "Localisation",
+                "security": "Sécurité"
+            },
             "message": {
                 "error": {
                     "password": "Le mot de passe est requis.",
-                    "password-1": "Le mot de passe doit comporter au moins 6 caractères.",
+                    "password-1": "Le mot de passe doit comporter au moins 8 caractères.",
                     "confirm-password": "La confirmation du mot de passe est requise.",
                     "confirm-password-1": "Les mots de passe ne correspondent pas.",
                     "username": "Le nom d'utilisateur est requis.",
+                    "username-length": "Le nom d'utilisateur doit comporter au moins 3 caractères.",
                     "name": "Le nom est requis.",
                     "first-name": "Le prénom est requis.",
                     "country": "Veuillez choisir un pays.",
                     "city": "Veuillez choisir votre ville.",
-                    "neighborhood": "Veuillez choisir votre quartier.",
+                    "neighborhood": "Veuillez indiquer votre quartier.",
                     "email-1": "L'email est requis.",
                     "email-2": "L'email ne respecte pas le bon format.",
-                    "whatsapp-number": "Le numéro WhatsApp est requis."
+                    "whatsapp-required": "Le numéro WhatsApp est requis.",
+                    "whatsapp-pattern": "Saisissez uniquement les chiffres (sans l'indicatif)."
                 },
                 "notif": {
                     "success": "Votre compte a été enregistré avec succès !",
@@ -187,10 +199,65 @@
             "title-signup": "S'inscrire",
             "email": "E-mail ou Téléphone",
             "password": "Mot de passe",
+            "forgot-password": "Mot de passe oublié ?",
             "error": {
-                "email-required": "L'email est requis.",
+                "email-required": "L'identifiant est requis.",
                 "password-required": "Le mot de passe est requis.",
-                "email-invalid-format": "L'email ne respecte pas le bon format."
+                "email-invalid-format": "L'email ne respecte pas le bon format.",
+                "invalid-credentials": "Identifiant ou mot de passe incorrect.",
+                "email-not-verified": "Votre adresse e-mail n'a pas encore été vérifiée.",
+                "email-not-verified-link": "Créer un nouveau compte"
+            }
+        },
+        "forgot-password": {
+            "panel-tagline": "Retrouvez l'accès à votre compte en quelques secondes.",
+            "title": "Mot de passe oublié ?",
+            "subtitle": "Saisissez votre adresse e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe.",
+            "email-label": "Adresse e-mail",
+            "submit": "Envoyer le lien",
+            "back-to-signin": "Retour à la connexion",
+            "success-title": "E-mail envoyé !",
+            "success-message": "Si cette adresse est associée à un compte, vous recevrez un e-mail avec les instructions de réinitialisation.",
+            "error": {
+                "email-required": "L'adresse e-mail est requise.",
+                "email-invalid": "L'adresse e-mail n'est pas valide.",
+                "server": "Une erreur est survenue. Veuillez réessayer."
+            }
+        },
+        "verify-email": {
+            "panel-tagline": "Une dernière étape pour accéder à votre compte.",
+            "verifying": "Vérification en cours…",
+            "success-title": "Compte activé !",
+            "success-message": "Votre adresse e-mail a été vérifiée avec succès. Vous pouvez maintenant vous connecter.",
+            "already-verified-title": "Déjà vérifié",
+            "already-verified-message": "Ce compte est déjà actif. Vous pouvez vous connecter directement.",
+            "expired-title": "Lien expiré",
+            "expired-message": "Ce lien d'activation a expiré (valable 24 heures). Veuillez créer un nouveau compte.",
+            "invalid-title": "Lien invalide",
+            "invalid-message": "Ce lien d'activation n'est pas valide. Veuillez créer un nouveau compte.",
+            "go-to-signin": "Se connecter",
+            "create-new-account": "Créer un nouveau compte"
+        },
+        "reset-password": {
+            "panel-tagline": "Choisissez un nouveau mot de passe sécurisé.",
+            "title": "Nouveau mot de passe",
+            "subtitle": "Saisissez votre nouveau mot de passe ci-dessous.",
+            "password-label": "Nouveau mot de passe",
+            "confirm-label": "Confirmer le mot de passe",
+            "submit": "Réinitialiser le mot de passe",
+            "verifying": "Vérification du lien…",
+            "invalid-token-title": "Lien invalide ou expiré",
+            "invalid-token-message": "Ce lien de réinitialisation n'est plus valide. Demandez un nouveau lien.",
+            "request-new-link": "Demander un nouveau lien",
+            "success-title": "Mot de passe mis à jour !",
+            "success-message": "Votre mot de passe a été réinitialisé avec succès. Vous pouvez maintenant vous connecter.",
+            "go-to-signin": "Se connecter",
+            "error": {
+                "password-required": "Le mot de passe est requis.",
+                "password-minlength": "Le mot de passe doit comporter au moins 8 caractères.",
+                "confirm-required": "La confirmation du mot de passe est requise.",
+                "passwords-mismatch": "Les mots de passe ne correspondent pas.",
+                "server": "Une erreur est survenue. Veuillez réessayer."
             }
         }
     },

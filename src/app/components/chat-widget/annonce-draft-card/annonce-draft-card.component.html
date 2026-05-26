@@ -1,0 +1,41 @@
+<div class="draft-card">
+
+  <div class="draft-card__header">
+    <div class="draft-card__header-left">
+      <div class="draft-card__icon">
+        <i class="fa-solid fa-pen-to-square"></i>
+      </div>
+      <span class="draft-card__title">Brouillon d'annonce</span>
+    </div>
+    <span class="draft-card__count">{{ progressPercent }}%</span>
+  </div>
+
+  <div class="draft-card__progress-bar">
+    <div class="draft-card__progress-fill" [style.width.%]="progressPercent"></div>
+  </div>
+
+  <ul class="draft-card__fields">
+    <li
+      *ngFor="let field of visibleFields"
+      class="draft-card__field"
+      [class.draft-card__field--done]="isFilled(field.key)"
+      [class.draft-card__field--missing]="isMissing(field.key)">
+      <i class="fa-solid"
+         [ngClass]="isFilled(field.key) ? 'fa-circle-check' : 'fa-circle'">
+      </i>
+      <div class="draft-card__field-content">
+        <span class="draft-card__field-label">{{ field.label }}<span *ngIf="field.required" class="draft-card__required">*</span></span>
+        <span class="draft-card__field-value" *ngIf="isFilled(field.key)">{{ formatValue(field.key) }}</span>
+      </div>
+    </li>
+  </ul>
+
+  <button
+    *ngIf="draft.is_complete"
+    class="draft-card__confirm"
+    (click)="confirm.emit()">
+    <i class="fa-solid fa-paper-plane"></i>
+    Confirmer et publier
+  </button>
+
+</div>

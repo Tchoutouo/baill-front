@@ -16,6 +16,18 @@ export const routes: Routes = [
         loadComponent: () => import('./components/auth/signup/signup.component').then(c => c.SignupComponent),
     },
     {
+        path: 'forgot-password',
+        loadComponent: () => import('./components/auth/forgot-password/forgot-password.component').then(c => c.ForgotPasswordComponent),
+    },
+    {
+        path: 'verify-email/:token/:email',
+        loadComponent: () => import('./components/auth/verify-email/verify-email.component').then(c => c.VerifyEmailComponent),
+    },
+    {
+        path: 'reset-password/:token/:email',
+        loadComponent: () => import('./components/auth/reset-password/reset-password.component').then(c => c.ResetPasswordComponent),
+    },
+    {
         path: 'product-details/:id',
         loadComponent: () => import('./components/user/product-details/product-details.component').then(c => c.ProductDetailsComponent),
     },

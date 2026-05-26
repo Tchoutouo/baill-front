@@ -142,37 +142,49 @@
             }
         },
         "signup": {
+            "panel-tagline": "Join Bailleurnet, the rental platform at your fingertips.",
             "password": "Password",
-            "confirm-password": "Confirm your password",
+            "confirm-password": "Confirm password",
             "username": "Username",
             "name": "Last name(s)",
             "first-name": "First name(s)",
             "country": "Country",
             "city": "City",
+            "city-placeholder": "Select a city",
             "neighborhood": "Neighborhood",
             "email": "Email",
             "whatsapp-number": "Phone (WhatsApp)",
-            "title": "Register",
-            "text-account": "You already have an account",
+            "title": "Create an account",
+            "text-account": "Already have an account?",
             "login-text": "Log in",
-            "text-line-1": "I join Bailleurnet",
-            "text-line-2": "with my pocket compass",
-            "text-line-3": "",
+            "btn-back": "Back",
+            "btn-next": "Next",
+            "btn-submit": "Sign up",
+            "success-title": "Check your emails!",
+            "success-message": "Your account has been created. An activation link has been sent to:",
+            "success-go-signin": "Go to login",
+            "step": {
+                "identity": "Identity",
+                "location": "Location",
+                "security": "Security"
+            },
             "message": {
                 "error": {
                     "password": "Password is required.",
-                    "password-1": "Password must be at least 6 characters long.",
+                    "password-1": "Password must be at least 8 characters long.",
                     "confirm-password": "Password confirmation is required.",
                     "confirm-password-1": "Passwords do not match.",
                     "username": "Username is required.",
+                    "username-length": "Username must be at least 3 characters long.",
                     "name": "Last name is required.",
                     "first-name": "First name is required.",
                     "country": "Please choose a country.",
                     "city": "Please choose your city.",
-                    "neighborhood": "Please choose your neighborhood.",
+                    "neighborhood": "Please enter your neighborhood.",
                     "email-1": "Email is required.",
                     "email-2": "Email is not in the correct format.",
-                    "whatsapp-number": "WhatsApp number is required."
+                    "whatsapp-required": "WhatsApp number is required.",
+                    "whatsapp-pattern": "Enter digits only (without country code)."
                 },
                 "notif": {
                     "success": "Your account has been successfully registered!",
@@ -187,10 +199,65 @@
             "title-signup": "Register",
             "email": "Email or Phone",
             "password": "Password",
+            "forgot-password": "Forgot password?",
             "error": {
-                "email-required": "Email is required.",
+                "email-required": "Identifier is required.",
                 "password-required": "Password is required.",
-                "email-invalid-format": "Email is not in the correct format."
+                "email-invalid-format": "Email is not in the correct format.",
+                "invalid-credentials": "Incorrect identifier or password.",
+                "email-not-verified": "Your email address has not been verified yet.",
+                "email-not-verified-link": "Create a new account"
+            }
+        },
+        "forgot-password": {
+            "panel-tagline": "Regain access to your account in seconds.",
+            "title": "Forgot password?",
+            "subtitle": "Enter your email address and we'll send you a link to reset your password.",
+            "email-label": "Email address",
+            "submit": "Send reset link",
+            "back-to-signin": "Back to login",
+            "success-title": "Email sent!",
+            "success-message": "If this address is linked to an account, you will receive an email with reset instructions.",
+            "error": {
+                "email-required": "Email address is required.",
+                "email-invalid": "Email address is not valid.",
+                "server": "An error occurred. Please try again."
+            }
+        },
+        "verify-email": {
+            "panel-tagline": "One last step to access your account.",
+            "verifying": "Verifying…",
+            "success-title": "Account activated!",
+            "success-message": "Your email address has been successfully verified. You can now log in.",
+            "already-verified-title": "Already verified",
+            "already-verified-message": "This account is already active. You can log in directly.",
+            "expired-title": "Link expired",
+            "expired-message": "This activation link has expired (valid for 24 hours). Please create a new account.",
+            "invalid-title": "Invalid link",
+            "invalid-message": "This activation link is not valid. Please create a new account.",
+            "go-to-signin": "Log in",
+            "create-new-account": "Create a new account"
+        },
+        "reset-password": {
+            "panel-tagline": "Choose a new secure password.",
+            "title": "New password",
+            "subtitle": "Enter your new password below.",
+            "password-label": "New password",
+            "confirm-label": "Confirm password",
+            "submit": "Reset password",
+            "verifying": "Verifying link…",
+            "invalid-token-title": "Invalid or expired link",
+            "invalid-token-message": "This reset link is no longer valid. Please request a new one.",
+            "request-new-link": "Request a new link",
+            "success-title": "Password updated!",
+            "success-message": "Your password has been successfully reset. You can now log in.",
+            "go-to-signin": "Log in",
+            "error": {
+                "password-required": "Password is required.",
+                "password-minlength": "Password must be at least 8 characters long.",
+                "confirm-required": "Password confirmation is required.",
+                "passwords-mismatch": "Passwords do not match.",
+                "server": "An error occurred. Please try again."
             }
         }
     },

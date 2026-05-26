@@ -7,37 +7,32 @@ import { AuthenticatorService } from '../../../services/admin/authenticator.serv
 import { getSiteName } from '../../../helpers/helper';
 
 @Component({
-  selector: 'app-signin',
+  selector: 'app-forgot-password',
   standalone: true,
   imports: [CommonModule, RouterLink, ReactiveFormsModule, TranslateModule],
-  templateUrl: './signin.component.html',
-  styleUrl: './signin.component.css'
+  templateUrl: './forgot-password.component.html',
+  styleUrl: './forgot-password.component.css'
 })
-export class SigninComponent implements OnInit {
+export class ForgotPasswordComponent implements OnInit {
   siteName = '';
-  showPassword = false;
   isLoading = false;
   isSubmitted = false;
+  isSuccess = false;
   serverError = '';
 
-  loginForm!: FormGroup;
-  identifiant!: FormControl;
-  password!: FormControl;
+  forgotForm!: FormGroup;
+  email!: FormControl;
 
   constructor(
-    private readonly authService: AuthenticatorService,
     private readonly fb: FormBuilder,
+    private readonly authService: AuthenticatorService,
   ) {}
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
     this.siteName = getSiteName();
-    this.identifiant = this.fb.control('', [Validators.required]);
-    this.password    = this.fb.control('', [Validators.required]);
-    this.loginForm   = this.fb.group({ identifiant: this.identifiant, password: this.password });
-  }
-
-  togglePassword(): void {
-    this.showPassword = !this.showPassword;
+    this.email = this.fb.control('', [Validators.required, Validators.email]);
+    this.forgotForm = this.fb.group({ email: this.email });
   }
 
   showErrors(ctrl: FormControl): boolean {
@@ -48,21 +43,21 @@ export class SigninComponent implements OnInit {
     this.isSubmitted = true;
     this.serverError = '';
 
-    if (this.loginForm.invalid) return;
+    if (this.forgotForm.invalid) return;
 
     this.isLoading = true;
-    this.authService.signin(this.loginForm.value).subscribe({
-      next: (result) => {
+    this.authService.forgotPassword(this.email.value).subscribe({
+      next: (res) => {
         this.isLoading = false;
-        if (!result.success) {
-          this.serverError = result.reason === 'email_not_verified'
-            ? 'user.signin.error.email-not-verified'
-            : 'user.signin.error.invalid-credentials';
+        if (res.success) {
+          this.isSuccess = true;
+        } else {
+          this.serverError = 'user.forgot-password.error.server';
         }
       },
       error: () => {
         this.isLoading = false;
-        this.serverError = 'user.signin.error.invalid-credentials';
+        this.serverError = 'user.forgot-password.error.server';
       },
     });
   }

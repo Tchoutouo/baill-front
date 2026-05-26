@@ -1,0 +1,150 @@
+/* ── Carte brouillon d'annonce ─────────────────────────────────────────────── */
+
+.draft-card {
+  width: 100%;
+  max-width: 300px;
+  margin-top: 6px;
+  background: var(--main-color-white);
+  border: 1px solid var(--main-color-gray-15);
+  border-radius: var(--main-radius-value-10);
+  overflow: hidden;
+}
+
+/* ── En-tête ──────────────────────────────────────────────────────────────── */
+
+.draft-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 11px 6px;
+}
+
+.draft-card__header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-6);
+}
+
+.draft-card__icon {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--main-radius-value-50);
+  background: var(--main-color-green-5);
+  color: var(--main-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  flex-shrink: 0;
+}
+
+.draft-card__title {
+  font-family: var(--main-font-Quicksand), sans-serif;
+  font-weight: var(--main-xl-font-weiht);
+  font-size: 12px;
+  color: var(--main-color-dark);
+}
+
+.draft-card__count {
+  font-family: var(--main-font-Quicksand), sans-serif;
+  font-size: 11px;
+  font-weight: var(--main-xl-font-weiht);
+  color: var(--main-color);
+}
+
+/* ── Barre de progression ─────────────────────────────────────────────────── */
+
+.draft-card__progress-bar {
+  height: 3px;
+  background: var(--main-color-gray-15);
+  margin: 0 11px 8px;
+  border-radius: var(--main-radius-value-100);
+  overflow: hidden;
+}
+
+.draft-card__progress-fill {
+  height: 100%;
+  background: var(--main-color);
+  border-radius: var(--main-radius-value-100);
+  transition: width .35s ease;
+}
+
+/* ── Liste des champs ─────────────────────────────────────────────────────── */
+
+.draft-card__fields {
+  list-style: none;
+  margin: 0;
+  padding: 0 11px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.draft-card__field {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  font-size: 11px;
+  font-family: var(--main-font-Quicksand), sans-serif;
+}
+
+.draft-card__field i {
+  font-size: 12px;
+  margin-top: 1px;
+  flex-shrink: 0;
+  color: var(--main-color-gray-15);
+}
+
+.draft-card__field--done i { color: var(--main-color); }
+.draft-card__field--missing i { color: var(--main-color-red); }
+
+.draft-card__field-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.draft-card__field-label {
+  color: var(--main-color-dark);
+  font-weight: var(--main-xl-font-weiht);
+}
+
+.draft-card__required {
+  color: var(--main-color-red);
+  margin-left: 2px;
+}
+
+.draft-card__field-value {
+  color: var(--main-color-dark);
+  font-size: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 220px;
+  opacity: .75;
+}
+
+/* ── Bouton confirmer ─────────────────────────────────────────────────────── */
+
+.draft-card__confirm {
+  width: 100%;
+  padding: 9px 12px;
+  border: none;
+  border-top: 1px solid var(--main-color-gray-15);
+  background: var(--main-color);
+  color: var(--main-color-white);
+  font-family: var(--main-font-Quicksand), sans-serif;
+  font-size: 12px;
+  font-weight: var(--main-xl-font-weiht);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  transition: background .15s ease;
+}
+
+.draft-card__confirm:hover {
+  background: var(--main-color-blackgreen);
+}

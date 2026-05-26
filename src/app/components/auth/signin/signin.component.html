@@ -1,99 +1,115 @@
-<div class="container">
-    <div class="login-container">
-        <div class="row align-items-center py-5 px-2">
-            <div class="col-lg-6 mb-3" id="col-text">
-                <div class="login-text">
-                    <div class="siteName">
-                        <a href="" class="logo ">
-                            <img class="brand_size mx-0" src="../../../../assets/baill-logo.ico" alt="">
-                            <span class="site_name">{{site_name}}</span>
-                        </a>
-                    </div>
-                    <div class="login-description py-4">
-                        <p class="">{{'user.signin.login-description'|translate}}</p>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="circles-content">
-                                <div class="large-cicle">
-                                    <div class="medium-cicle">
-        
-                                    </div>
-                                </div>
-                                <div class="small-cirle">
-                                    
-                                </div>
-                            </div>
+<div class="auth-page">
 
-                        </div>
-                        <div class="col-6"> 
-                            <img class="image-password" src="../../../../assets/images/forgit-pass.svg  " alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 mb-3">
-                <div class="form-container py-4" id="loginForm">
-                    <h2 class="form-title">
-                        {{'user.signin.form-title'|translate}}
-                    </h2>
-                    <p class="text-login pt-2 pb-4">{{'user.signin.text-login'|translate}} <a class="" [routerLink]="['/signup']">{{'user.signin.title-signup'|translate}}</a></p>
-                    <form id="form" [formGroup]="loginForm" *ngIf="loginForm" (ngSubmit)="handleSubmite()">
-                        <div class="mb-4">
-                            <label for="exampleInputEmail1" class="form-label">{{'user.signin.email'|translate}} </label>
-                            <input type="identifiant" formControlName="identifiant" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                            <div *ngIf="identifiant.dirty && !identifiant.valid">
-                                <div class="error" *ngIf="identifiant.hasError('required')">
-                                    {{'user.signin.email-required' | translate}}
-                                </div>
-                                <div class="error" *ngIf="!identifiant.hasError('required')">
-                                    l'e-mail n'est ne respecte pas le bon format.
-                                </div>
-                            </div>
-                            <div *ngIf="message_back">
-                                <div class="error" >
-                                    {{message_back}}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="" id="password_field">
-                            <label for="exampleInputPassword1" class="form-label">{{'user.signin.password'|translate}}</label>
-                            <input type="{{typeField}}" formControlName="password" class="form-control" (keyup)="showIcon($event)" id="exampleInputPassword1">
-                            <i class="fa-solid fa-eye{{icon_eyes}} d-{{display}}" (click)="toggleIconClass()" id="icon_eyes"></i>
-                            <div *ngIf="password.dirty && !password.valid">
-                                <div class="error" *ngIf="formControls.password.errors?.['required']">
-                                    {{'user.signin.password-required' | translate}}
-                                </div>
-                            </div>
-                            
-                        </div>
-
-                        <div class="d-flex justify-content-center mt-5 mb-4">
-                            <button type="submit" id="submit-button" class="btn btn-primary">{{'user.signin.form-title'|translate}}</button>
-                        </div>
-
-                        <!-- <div class="other-login-form">
-                            <div class="d-flex align-items-center justify-content-center gap-2" id="or_underline">
-                                <hr class="w-25"/> ou <hr class="w-25"/>
-                            </div>
-
-                            <div class="medias-login d-flex justify-content-center gap-3 mt-2 mb-0">
-                                <a href="#">
-                                    <img src="../../../../assets/brands/google-brand.png" height="46" width="46" alt="">
-                                </a>
-                                <a href="#">
-                                    <i class="fa-brands fa-facebook text-primary h1 fab-icon"></i>
-                                </a>
-                            </div>
-                        </div> -->
-                    </form>
-                </div>
-            </div>
-        </div>
+  <!-- Panneau gauche — illustration (masqué sur mobile) -->
+  <div class="auth-panel auth-panel--left" aria-hidden="true">
+    <div class="panel-brand">
+      <img src="../../../../assets/baill-logo.ico" class="panel-logo" alt="">
+      <span class="panel-site-name">{{ siteName }}</span>
     </div>
+    <p class="panel-tagline">{{ 'user.signin.login-description' | translate }}</p>
+    <div class="panel-circles">
+      <div class="circle circle--lg"><div class="circle circle--md"></div></div>
+      <div class="circle circle--sm"></div>
+    </div>
+  </div>
+
+  <!-- Panneau droit — formulaire -->
+  <div class="auth-panel auth-panel--right">
+    <div class="auth-card">
+
+      <!-- Logo mobile (visible uniquement sur mobile) -->
+      <div class="card-brand-mobile">
+        <img src="../../../../assets/baill-logo.ico" class="card-logo-mobile" alt="">
+        <span class="card-site-name-mobile">{{ siteName }}</span>
+      </div>
+
+      <h1 class="card-title">{{ 'user.signin.form-title' | translate }}</h1>
+      <p class="card-subtitle">
+        {{ 'user.signin.text-login' | translate }}
+        <a [routerLink]="['/signup']">{{ 'user.signin.title-signup' | translate }}</a>
+      </p>
+
+      <form [formGroup]="loginForm" (ngSubmit)="handleSubmit()" novalidate>
+
+        <!-- Identifiant -->
+        <div class="field-group">
+          <label class="field-label" for="identifiant">
+            {{ 'user.signin.email' | translate }}
+          </label>
+          <input
+            id="identifiant"
+            type="text"
+            formControlName="identifiant"
+            class="field-input"
+            [class.field-input--error]="showErrors(identifiant)"
+            autocomplete="username"
+            autocapitalize="none"
+          >
+          <span class="field-error" *ngIf="showErrors(identifiant)">
+            {{ 'user.signin.error.email-required' | translate }}
+          </span>
+        </div>
+
+        <!-- Mot de passe -->
+        <div class="field-group">
+          <div class="field-label-row">
+            <label class="field-label" for="password">
+              {{ 'user.signin.password' | translate }}
+            </label>
+            <a class="forgot-link" [routerLink]="['/forgot-password']">
+              {{ 'user.signin.forgot-password' | translate }}
+            </a>
+          </div>
+          <div class="field-password-wrap">
+            <input
+              id="password"
+              [type]="showPassword ? 'text' : 'password'"
+              formControlName="password"
+              class="field-input"
+              [class.field-input--error]="showErrors(password)"
+              autocomplete="current-password"
+            >
+            <button
+              type="button"
+              class="password-toggle"
+              (click)="togglePassword()"
+              [attr.aria-label]="showPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe'"
+            >
+              <i class="fa-solid" [class.fa-eye]="!showPassword" [class.fa-eye-slash]="showPassword"></i>
+            </button>
+          </div>
+          <span class="field-error" *ngIf="showErrors(password)">
+            {{ 'user.signin.error.password-required' | translate }}
+          </span>
+        </div>
+
+        <!-- Erreur serveur -->
+        <div class="server-error" *ngIf="serverError" role="alert">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <span>
+            {{ serverError | translate }}
+            <a
+              *ngIf="serverError === 'user.signin.error.email-not-verified'"
+              [routerLink]="['/signup']"
+              class="server-error-link"
+            >{{ 'user.signin.error.email-not-verified-link' | translate }}</a>
+          </span>
+        </div>
+
+        <!-- Bouton -->
+        <button
+          type="submit"
+          class="btn-submit"
+          [disabled]="isLoading"
+        >
+          <span *ngIf="!isLoading">{{ 'user.signin.form-title' | translate }}</span>
+          <span *ngIf="isLoading" class="btn-spinner">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+          </span>
+        </button>
+
+      </form>
+    </div>
+  </div>
+
 </div>
-<!-- 
-<div class="shadow-grediant">
-    
-</div> -->

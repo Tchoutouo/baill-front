@@ -1,0 +1,147 @@
+<ng-container *ngIf="isVisible">
+
+  <!-- ── Bouton flottant ────────────────────────────────────────────────── -->
+  <button
+    class="cw-toggle"
+    [class.cw-toggle--open]="isOpen"
+    (click)="toggle()"
+    [attr.aria-label]="isOpen ? 'Fermer l\'assistant' : 'Ouvrir l\'assistant BailleurNet'"
+    [attr.aria-expanded]="isOpen">
+    <i class="fa-solid" [ngClass]="isOpen ? 'fa-xmark' : 'fa-comments'"></i>
+    <span class="cw-badge" *ngIf="unread > 0 && !isOpen">{{ unread > 9 ? '9+' : unread }}</span>
+  </button>
+
+  <!-- ── Panneau ────────────────────────────────────────────────────────── -->
+  <div
+    class="cw-panel"
+    [class.cw-panel--open]="isOpen"
+    role="dialog"
+    aria-label="Assistant BailleurNet"
+    aria-modal="false">
+
+    <!-- En-tête -->
+    <div class="cw-header" [class.cw-header--admin]="isAdminMode">
+      <div class="cw-header-info">
+        <div class="cw-avatar">
+          <i class="fa-solid" [ngClass]="isAdminMode ? 'fa-shield-halved' : 'fa-robot'"></i>
+        </div>
+        <div class="cw-header-text">
+          <div class="cw-agent-name-row">
+            <span class="cw-agent-name">Assistant BailleurNet</span>
+            <span class="cw-admin-badge" *ngIf="isAdminMode">Admin</span>
+          </div>
+          <span class="cw-agent-status">
+            <span class="cw-dot" [class.cw-dot--loading]="isLoading"></span>
+            {{ isLoading ? 'En train de répondre…' : 'En ligne' }}
+          </span>
+        </div>
+      </div>
+      <div class="cw-header-actions">
+        <button class="cw-icon-btn" (click)="clearConversation()" title="Nouvelle conversation" aria-label="Effacer la conversation">
+          <i class="fa-solid fa-rotate-left"></i>
+        </button>
+        <button class="cw-icon-btn" (click)="toggle()" aria-label="Fermer">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Zone messages -->
+    <div class="cw-messages" #messagesContainer>
+
+      <!-- Accueil (avant le premier message) -->
+      <div class="cw-welcome" *ngIf="messages.length === 0">
+        <div class="cw-welcome-icon">
+          <i class="fa-solid fa-house-chimney"></i>
+        </div>
+        <p class="cw-welcome-text">
+          Bonjour ! Je suis l'assistant BailleurNet.<br>
+          Comment puis-je vous aider à trouver votre bien idéal au Cameroun ?
+        </p>
+      </div>
+
+      <!-- Messages -->
+      <div *ngFor="let msg of messages; trackBy: trackMessage"
+           class="cw-msg"
+           [ngClass]="'cw-msg--' + msg.role">
+
+        <!-- Indicateur d'outil en cours (tool_use) -->
+        <div class="cw-tool-progress" *ngIf="msg.toolInProgress">
+          <i class="fa-solid fa-circle-notch fa-spin"></i>
+          {{ getToolLabel(msg.toolInProgress) }}
+        </div>
+
+        <!-- Indicateur de frappe (premier token pas encore arrivé) -->
+        <div class="cw-typing" *ngIf="msg.isStreaming && !msg.content && !msg.toolInProgress">
+          <span></span><span></span><span></span>
+        </div>
+
+        <!-- Bulle de message avec curseur clignotant en streaming -->
+        <div class="cw-bubble"
+             *ngIf="msg.content"
+             [class.cw-bubble--streaming]="msg.isStreaming"
+             [innerHTML]="formatMessage(msg.content)">
+        </div>
+
+        <!-- Cartes annonces -->
+        <div class="cw-cards" *ngIf="msg.data?.annonces?.length">
+          <app-agent-annonce-card
+            *ngFor="let a of msg.data!.annonces; trackBy: trackAnnonce"
+            [annonce]="a">
+          </app-agent-annonce-card>
+        </div>
+
+        <!-- Brouillon d'annonce (création guidée) -->
+        <app-annonce-draft-card
+          *ngIf="asDraft(msg.data) as draft"
+          [draft]="draft"
+          (confirm)="confirmDraft()">
+        </app-annonce-draft-card>
+
+        <!-- Confirmation de soumission -->
+        <div class="cw-submission" *ngIf="msg.data?.submission as sub">
+          <i class="fa-solid fa-circle-check"></i>
+          <div class="cw-submission-info">
+            <span class="cw-submission-title">{{ sub.title }}</span>
+            <span class="cw-submission-ref">Réf : {{ sub.reference }}</span>
+          </div>
+          <a class="cw-submission-link" [attr.href]="'/annonce/' + sub.id">Voir</a>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Suggestions (avant le 1er message) -->
+    <div class="cw-suggestions" *ngIf="messages.length === 0 && !isLoading">
+      <button
+        *ngFor="let s of suggestions"
+        class="cw-chip"
+        (click)="sendSuggestion(s)">
+        {{ s }}
+      </button>
+    </div>
+
+    <!-- Zone de saisie -->
+    <div class="cw-input-area">
+      <textarea
+        class="cw-input"
+        [(ngModel)]="inputText"
+        (keydown.enter)="onEnterKey($event)"
+        placeholder="Posez votre question…"
+        rows="1"
+        [disabled]="isLoading"
+        aria-label="Votre message">
+      </textarea>
+      <button
+        class="cw-send"
+        (click)="send()"
+        [disabled]="!inputText.trim() || isLoading"
+        aria-label="Envoyer">
+        <i class="fa-solid fa-paper-plane"></i>
+      </button>
+    </div>
+
+  </div>
+
+</ng-container>
